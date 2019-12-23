@@ -32,8 +32,11 @@
                     <div class="form-input-content">
                         <div class="card login-form mb-0">
                             <div class="card-body pt-5">
-                                <a class="text-center" href="index.jsp"> <h4>Rosella</h4></a>
-        
+                                <div style="">
+                                	<a class="" href="index.jsp">
+                                		<img class="img-responsive center-block"alt="Scoop로고" src="images/logo/scooplogo.png" style="padding-right:15%;padding-left:15%;"/>
+                                	</a>
+                                </div>
                                 <form class="mt-5 mb-5 login-input">
                                     <div class="form-group">
                                         <input type="email" class="form-control" placeholder="Email">
