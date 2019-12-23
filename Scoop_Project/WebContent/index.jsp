@@ -30,7 +30,7 @@
   naver_id_login.get_naver_userprofile("naverSignInCallback()");
   // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
   function naverSignInCallback() {
-    alert(naver_id_login.getProfileData('email'));
+    console.log(naver_id_login.getProfileData('email'));
   }
 </script>
 <body>
