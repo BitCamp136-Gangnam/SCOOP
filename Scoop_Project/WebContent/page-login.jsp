@@ -15,10 +15,14 @@
     <link href="css/style.css" rel="stylesheet">
     
 </head>
-
+ <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <body class="h-100">
     
     <jsp:include page="/WEB-INF/views/commons/preloader.jsp"></jsp:include>
+
+    
+
 
 
     <div class="login-form-bg h-100">
@@ -28,11 +32,8 @@
                     <div class="form-input-content">
                         <div class="card login-form mb-0">
                             <div class="card-body pt-5">
-                                <div style="">
-                                	<a class="" href="index.jsp">
-                                		<img class="img-responsive center-block"alt="Scoop로고" src="images/logo/scooplogo.png" style="padding-right:15%;padding-left:15%;"/>
-                                	</a>
-                                </div>
+                                <a class="text-center" href="index.jsp"> <h4>Rosella</h4></a>
+        
                                 <form class="mt-5 mb-5 login-input">
                                     <div class="form-group">
                                         <input type="email" class="form-control" placeholder="Email">
@@ -42,6 +43,18 @@
                                     </div>
                                     <button class="btn login-form__btn submit w-100">Sign In</button>
                                 </form>
+                                <!-- 네이버아이디로로그인 버튼 노출 영역 -->
+								  <div id="naver_id_login"></div>
+								  <!-- //네이버아이디로로그인 버튼 노출 영역 -->
+								  <script type="text/javascript">
+								  	var naver_id_login = new naver_id_login("UQIzvQsqqo7IfCBE1GH1", "http://localhost:8090/Scoop_Project/index.jsp");
+								  	var state = naver_id_login.getUniqState();
+								  	naver_id_login.setButton("white", 2,40);
+								  	naver_id_login.setDomain("http://localhost:8090/");
+								  	naver_id_login.setState(state);
+								  	naver_id_login.setPopup();
+								  	naver_id_login.init_naver_id_login();
+								  </script>
                                 <p class="mt-5 login-form__footer">Dont have account? <a href="page-register.jsp" class="text-primary">Sign Up</a> now</p>
                             </div>
                         </div>
