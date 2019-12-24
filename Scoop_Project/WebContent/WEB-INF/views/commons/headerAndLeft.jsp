@@ -6,10 +6,10 @@
         <div class="nav-header">
             <div class="brand-logo">
                 <a href="index.jsp">
-                    <b class="logo-abbr"><img src="images/logo.png" alt=""> </b>
-                    <span class="logo-compact"><img src="./images/logo-compact.png" alt=""></span>
+                    <b class="logo-abbr"><img class="img-responsive center-block" src="images/logo/rabbit.png" alt="mini" style="width:100px;height: auto; "> </b>
+                    <span class="logo-compact"><img class="img-responsive center-block"src="images/logo/brownlogo.png" alt=""></span>
                     <span class="brand-title">
-                        <img src="images/logo-text.png" alt="">
+                        <img class="img-responsive center-block" src="images/logo/brownlogo.png" alt="">
                     </span>
                 </a>
             </div>
