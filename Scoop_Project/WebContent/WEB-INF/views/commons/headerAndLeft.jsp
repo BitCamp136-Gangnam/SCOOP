@@ -5,8 +5,8 @@
         ***********************************-->
         <div class="nav-header">
             <div class="brand-logo">
-                <a href="index.jsp">
-                    <b class="logo-abbr"><img class="img-responsive center-block" src="images/logo/rabbit.png" alt="mini" style="width:100px;height: auto; "> </b>
+                <a href="index.jsp" style="padding-top: 5%">
+                    <b class="logo-abbr"><img class="img-responsive center-block" src="images/logo/rabbit.png" alt="mini" style="width:100px;height: auto;padding-top:0;margin-top: 30px; "> </b>
                     <span class="logo-compact"><img class="img-responsive center-block"src="images/logo/brownlogo.png" alt=""></span>
                     <span class="brand-title">
                         <img class="img-responsive center-block" src="images/logo/brownlogo.png" alt="">
