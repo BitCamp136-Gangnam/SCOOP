@@ -6,7 +6,7 @@
         <div class="nav-header">
             <div class="brand-logo">
                 <a href="index.jsp" style="padding-top: 5%">
-                    <b class="logo-abbr"><img class="img-responsive center-block" src="images/logo/rabbit.png" alt="mini" style="width:100px;height: auto;padding-top:0;margin-top: 30px; "> </b>
+                    <b class="logo-abbr"><img class="img-responsive center-block" src="images/logo/smalllogo.png" alt="mini" style="width:100px;height: auto;padding-top:0;margin-top: 30px; "> </b>
                     <span class="logo-compact"><img class="img-responsive center-block"src="images/logo/brownlogo.png" alt="" style="margin-top: 20px;"></span>
                     <span class="brand-title">
                         <img class="img-responsive center-block" src="images/logo/brownlogo.png" alt="" >
