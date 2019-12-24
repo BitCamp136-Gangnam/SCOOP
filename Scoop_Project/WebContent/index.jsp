@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <jsp:include page="/WEB-INF/views/commons/title.jsp"></jsp:include>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
     <!-- Pignose Calender -->
     <link href="./plugins/pg-calendar/css/pignose.calendar.min.css" rel="stylesheet">
     <!-- Chartist -->
