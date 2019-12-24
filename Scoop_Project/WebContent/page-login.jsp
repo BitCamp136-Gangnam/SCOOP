@@ -8,6 +8,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="47797892299-i06tt9qhbs15g8mn89ncu1isa1eneql8.apps.googleusercontent.com">
     <title>Quixlab - Bootstrap Admin Dashboard Template by Themefisher.com</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
@@ -17,6 +19,7 @@
 </head>
  <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
   <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 <body class="h-100">
     
     <jsp:include page="/WEB-INF/views/commons/preloader.jsp"></jsp:include>
@@ -47,7 +50,7 @@
                                     <button class="btn login-form__btn submit w-100">Sign In</button>
                                 </form>
                                 
-                                <!-- 네이버아이디로로그인 버튼 노출 영역 -->
+                                   <!-- 네이버아이디로로그인 버튼 노출 영역 -->
 								  <div id="naver_id_login"></div>
 								  <!-- //네이버아이디로로그인 버튼 노출 영역 -->
 								  <script type="text/javascript">
@@ -59,6 +62,24 @@
 								  	naver_id_login.setPopup();
 								  	naver_id_login.init_naver_id_login();
 								  </script>
+								  <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+								  <script>
+							      function onSignIn(googleUser) {
+							        // Useful data for your client-side scripts:
+							        var profile = googleUser.getBasicProfile();
+							        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+							        console.log('Full Name: ' + profile.getName());
+							        console.log('Given Name: ' + profile.getGivenName());
+							        console.log('Family Name: ' + profile.getFamilyName());
+							        console.log("Image URL: " + profile.getImageUrl());
+							        console.log("Email: " + profile.getEmail());
+							
+							        // The ID token you need to pass to your backend:
+							        var id_token = googleUser.getAuthResponse().id_token;
+							        console.log("ID Token: " + id_token);
+							        //location.href="http://localhost:8090/Scoop_Project/index.jsp";
+							      }
+							    </script>
                                 <p class="mt-5 login-form__footer">Dont have account? <a href="page-register.jsp" class="text-primary">Sign Up</a> now</p>
                             </div>
                         </div>
