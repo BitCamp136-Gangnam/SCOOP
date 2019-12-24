@@ -210,7 +210,9 @@
             <div class="nk-nav-scroll">
                 <ul class="metismenu" id="menu">
                     <li>
-                           <a href="./index.jsp">새로운소식</a>
+                        <a href="./index.jsp" aria-expanded="false">
+                            <i class="icon-speedometer menu-icon"></i><span class="nav-text">새로운 소식</span>
+                        </a>
                     </li>
                     <li class="mega-menu mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
