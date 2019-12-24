@@ -35,6 +35,7 @@
                             <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
                         </div>
                         <input type="search" class="form-control" placeholder="Search Dashboard" aria-label="Search Dashboard">
+                        <input type="button" value="이슈작성" class="btn btn-outline-secondary" style="background-color: #fff5a5; border-color: #CCCCCC; margin-left: 2%">
                         <div class="drop-down animated flipInX d-md-none">
                             <form action="#">
                                 <input type="text" class="form-control" placeholder="Search">
@@ -209,12 +210,19 @@
         <div class="nk-sidebar">           
             <div class="nk-nav-scroll">
                 <ul class="metismenu" id="menu">
+                	<li class="nav-label">전체 정보</li>
                     <li>
                         <a href="./index.jsp" aria-expanded="false">
-                            <i class="icon-speedometer menu-icon"></i><span class="nav-text">새로운 소식</span>
+                            <i class="icon-globe-alt menu-icon"></i><span class="nav-text">새로운 소식</span>
+                            <!-- <i class="icon-speedometer menu-icon"> -->
                         </a>
                     </li>
-                    <li class="mega-menu mega-menu-sm">
+                    <li>
+                        <a href="./app-calender.jsp" aria-expanded="false">
+                            <i class="icon-globe-alt menu-icon"></i><span class="nav-text">캘린더</span>
+                        </a>
+                    </li>
+                    <!-- <li class="mega-menu mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-globe-alt menu-icon"></i><span class="nav-text">Layouts</span>
                         </a>
@@ -232,8 +240,18 @@
                             <li><a href="./layout-fixed-header.jsp">Fixed Header</a></li>
                             <li><a href="layout-fixed-sidebar.jsp">Fixed Sidebar</a></li>
                         </ul>
+                    </li> -->
+                    <li class="nav-label">개인 공간</li>
+                    <li>
+                        <a href="./private-place.jsp" aria-expanded="false">
+                            <i class="icon-globe-alt menu-icon"></i><span class="nav-text">프라이빗 공간</span>
+                        </a>
                     </li>
-                    <li class="nav-label">Apps</li>
+                    <li>
+                        <a href="./private-bookmark.jsp" aria-expanded="false">
+                            <i class="icon-globe-alt menu-icon"></i><span class="nav-text">북마크</span>
+                        </a>
+                    </li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-envelope menu-icon"></i> <span class="nav-text">Email</span>

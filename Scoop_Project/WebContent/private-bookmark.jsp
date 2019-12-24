@@ -44,40 +44,17 @@
         ***********************************-->
         <div class="content-body">
 		<div class="row" style="margin: 2%">
-			<div class="col-sm-6">
-				<h3>새로운 소식</h3>
+			<div class="col-sm-12">
+				<h3>북마크</h3>
 			</div>
-			<div class="col-sm-6" align="right">
-				<input type="button" value="이슈작성" class="btn btn-outline-secondary" style="background-color: #fff5a5; border-color: #7393a7">
-			</div>
-			<br>
 		</div>
-		<div class="row" style="margin: 2%">
-			<ul class="nav nav-pills">
-			    <li class="nav-item">
-			      <a class="nav-link" href="#">이슈 업데이트</a>
-			    </li>
-			    <li class="nav-item">
-			      <a class="nav-link" href="#">@멘션</a>
-			    </li>
-			    <li class="nav-item dropdown">
-			      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">정렬</a>
-			      <div class="dropdown-menu">
-			        <a class="dropdown-item" href="#">안읽음</a>
-			        <a class="dropdown-item" href="#">읽음</a>
-			      </div>
-			    </li>
-		    </ul>
-		</div>
-		<div class="row" style="margin-left: 2%">
-			<div class="col-sm-2 newissue" >
-			이슈 제목 들어갈곳
+		<div class="row" style="margin-left: 2%; margin-right: 2%">
+			<div class="col-sm-11 newissue" >
+			아이콘 + 이슈 제목 들어갈곳<br>
+			여기에 프로젝트명 그리고 작성자
 			</div>
-			<div class="col-sm-8 newissue">
-			여기에 내용들어가는데 나중엔 append하면 될듯??
-			</div>
-			<div class="col-sm-2 newissue">
-			여기에 시간넣으면됨
+			<div class="col-sm-1 newissue" >
+			북마크아이콘자리
 			</div>
 		</div>
             <!-- #/ container -->

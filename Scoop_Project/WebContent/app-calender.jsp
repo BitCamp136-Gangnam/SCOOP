@@ -30,42 +30,22 @@
             Content body start
         ***********************************-->
         <div class="content-body">
-
-            <div class="row page-titles mx-0">
-                <div class="col p-md-0">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
-                    </ol>
-                </div>
-            </div>
-            <!-- row -->
-
+        <br>
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
                                 <div class="card-title">
-                                    <h4>Calendar</h4>
+                                    <h3>일정 관리</h3>
                                 </div>
                                 <div class="row">
-                                    <div class="col-lg-4 mt-5">
-                                        <a href="#" data-toggle="modal" data-target="#add-category" class="btn btn-primary btn-block"><i class="ti-plus f-s-12 m-r-5"></i> Create New</a>
+                                    <div class="col-lg-2 mt-5">
+                                        <a href="#" data-toggle="modal" data-target="#add-category" class="btn btn-primary btn-block"><i class="ti-plus f-s-12 m-r-5"></i> 일정추가</a>
                                         <div id="external-events" class="m-t-20">
-                                            <p>Drag and drop your event or click in the calendar</p>
-                                            <div class="external-event bg-primary text-white" data-class="bg-primary"><i class="fa fa-move"></i>New Theme Release</div>
-                                            <div class="external-event bg-success text-white" data-class="bg-success"><i class="fa fa-move"></i>My Event</div>
-                                            <div class="external-event bg-warning text-white" data-class="bg-warning"><i class="fa fa-move"></i>Meet manager</div>
-                                            <div class="external-event bg-dark text-white" data-class="bg-dark"><i class="fa fa-move"></i>Create New theme</div>
-                                        </div>
-                                        <!-- checkbox -->
-                                        <div class="checkbox m-t-40">
-                                            <input id="drop-remove" type="checkbox">
-                                            <label for="drop-remove">Remove after drop</label>
                                         </div>
                                     </div>
-                                    <div class="col-md-8">
+                                    <div class="col-md-10">
                                         <div class="card-box m-b-50">
                                             <div id="calendar"></div>
                                         </div>

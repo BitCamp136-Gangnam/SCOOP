@@ -8,7 +8,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <jsp:include page="/WEB-INF/views/commons/title.jsp"></jsp:include>
-    <!-- Favicon icon -->
     <!-- Pignose Calender -->
     <link href="./plugins/pg-calendar/css/pignose.calendar.min.css" rel="stylesheet">
     <!-- Chartist -->
@@ -19,19 +18,7 @@
 
 </head>
 
-<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script type="text/javascript">
-  var naver_id_login = new naver_id_login("UQIzvQsqqo7IfCBE1GH1", "http://localhost:8090/Scoop_Project/index.jsp");
-  // 접근 토큰 값 출력
-  console.log("토큰값 : "+ naver_id_login.oauthParams.access_token);
-  // 네이버 사용자 프로필 조회
-  naver_id_login.get_naver_userprofile("naverSignInCallback()");
-  // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
-  function naverSignInCallback() {
-    console.log(naver_id_login.getProfileData('email'));
-  }
-</script>
 <style>
 .newissue{
 	border-top: 1px solid gray;
@@ -58,23 +45,17 @@
         <div class="content-body">
 		<div class="row" style="margin: 2%">
 			<div class="col-sm-12">
-				<h3>새로운 소식</h3>
+				<h3>프라이빗 공간</h3>
+				나만을 위한 공간에서 아이디어를 마음껏 펼쳐 보세요. 특정 파트너에게 나의 이슈를 공유할 수도 있습니다.
 			</div>
 		</div>
 		<div class="row" style="margin-left: 2%;">
 			<ul class="nav nav-pills">
-			    <li class="nav-item dropdown">
-			      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">정렬</a>
-			      <div class="dropdown-menu">
-			        <a class="dropdown-item" href="#">안읽음</a>
-			        <a class="dropdown-item" href="#">읽음</a>
-			      </div>
+			    <li class="nav-item">
+			      <a class="nav-link" href="./private-place.jsp">프라이빗 이슈</a>
 			    </li>
 			    <li class="nav-item">
-			      <a class="nav-link" href="#">이슈 업데이트</a>
-			    </li>
-			    <li class="nav-item">
-			      <a class="nav-link" href="#">@멘션</a>
+			      <a class="nav-link" href="./app-calender.jsp">캘린더-비동기로 아래 뿌려주기 가능?</a>
 			    </li>
 		    </ul>
 		</div>
@@ -83,7 +64,7 @@
 			이슈 제목 들어갈곳
 			</div>
 			<div class="col-sm-8 newissue">
-			아이콘도 넣고 여기에 내용들어가는데 나중엔 append하면 될듯?? 정렬이랑 @멘션은 비동기로?
+			여기에 내용들어가는데 나중엔 append하면 될듯??
 			</div>
 			<div class="col-sm-2 newissue">
 			여기에 시간넣으면됨

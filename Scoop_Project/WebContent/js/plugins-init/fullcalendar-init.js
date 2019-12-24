@@ -54,20 +54,7 @@
         this.enableDrag();
         var t = new Date,
             n = (t.getDate(), t.getMonth(), t.getFullYear(), new Date(e.now())),
-            a = [{
-                title: "Hey!",
-                start: new Date(e.now() + 158e6),
-                className: "bg-dark"
-            }, {
-                title: "See John Deo",
-                start: n,
-                end: n,
-                className: "bg-danger"
-            }, {
-                title: "Buy a Theme",
-                start: new Date(e.now() + 338e6),
-                className: "bg-primary"
-            }],
+            a = [], //여기에 제이슨형식으로 넣는건가??
             o = this;
         o.$calendarObj = o.$calendar.fullCalendar({
             slotDuration: "00:15:00",
