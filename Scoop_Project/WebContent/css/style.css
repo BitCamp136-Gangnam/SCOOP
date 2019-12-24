@@ -13963,7 +13963,7 @@ html[dir="rtl"] .card-body.contact-card {
 html[dir="rtl"] .default-accordion-style .card .card-header h5 i {
   margin-left: 1.5rem; }
 
-html[dir="rtl"] [direction="rtl"] .btn-icon-left {
+html[dir="rtl"] [direction="rtl"] .btn--left {
   margin: -.5rem -1.3rem -.5rem 1.5rem; }
 
 html[dir="rtl"] [direction="rtl"] .btn-icon-right {
