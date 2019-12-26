@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Home</title>
+<jsp:include page="/WEB-INF/views/commons/title.jsp"></jsp:include>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="all,follow">
@@ -40,13 +40,10 @@
      <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right">Menu<i class="icon ion-md-list ml-2"></i></button>
      <div id="navbarSupportedContent" class="collapse navbar-collapse">
       <ul class="navbar-nav mx-auto ml-auto">
-         
+         <!-- 여기 지우면 죽음뿐 -->
       </ul>
       <ul class="navbar-nav">
       <li class="nav-item dropdown"><a id="pages" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">세부기능</a>
-<<<<<<< HEAD
-            <div class="dropdown-menu"><a href="index.html" class="dropdown-item">Home</a><a href="schedule.html" class="dropdown-item">칸반</a><a href="text.html" class="dropdown-item">채팅</a></div>
-=======
       <div class="dropdown-menu">
       <div id="tabledrop">
       <div class="rowdrop">
@@ -66,7 +63,6 @@
          <br>
       </div>
            </div>
->>>>>>> 1dc1857ed552f832d3fc582bc4a619262b91c992
            </li>
            <!-- Link-->
            <li class="nav-item"> <a href="schedule.html" class="nav-link">가격</a></li>
