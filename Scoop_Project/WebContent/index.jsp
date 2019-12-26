@@ -55,6 +55,9 @@
             Content body start
         ***********************************-->
         <div class="content-body">
+        <br>
+            <div class="container-fluid">
+        <div class="card" style="min-height: 1080px">
 		<div class="row" style="margin: 2%">
 			<div class="col-sm-12">
 				<h3>새로운 소식</h3>
@@ -89,6 +92,8 @@
 			</div>
 		</div>
             <!-- #/ container -->
+            </div>
+            </div>
         </div>
         <!--**********************************
             Content body end

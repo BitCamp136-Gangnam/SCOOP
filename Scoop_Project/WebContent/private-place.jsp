@@ -43,6 +43,9 @@
             Content body start
         ***********************************-->
         <div class="content-body">
+        <br>
+            <div class="container-fluid">
+        <div class="card" style="min-height: 1080px">
 		<div class="row" style="margin: 2%">
 			<div class="col-sm-12">
 				<h3>프라이빗 공간</h3>
@@ -71,6 +74,8 @@
 			</div>
 		</div>
             <!-- #/ container -->
+            </div>
+            </div>
         </div>
         <!--**********************************
             Content body end

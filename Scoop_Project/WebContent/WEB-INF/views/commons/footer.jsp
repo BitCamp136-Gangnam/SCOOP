@@ -30,7 +30,7 @@
                 <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
             </div>
         </div>
-        <img src="./images/chat/chatopen.png" id="chatopen" name="on" width="50px" height="50px" style="cursor: pointer;">
+        <img src="./images/chat/chatopen.png" id="chatopen" name="on" width=75px height=auto style="cursor: pointer;">
         <!--**********************************
             Footer end
         ***********************************-->

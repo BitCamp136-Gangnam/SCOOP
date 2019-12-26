@@ -35,7 +35,7 @@
                             <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
                         </div>
                         <input type="search" class="form-control" placeholder="Search Dashboard" aria-label="Search Dashboard">
-                        <input type="button" value="이슈작성" class="btn btn-outline-secondary" style="background-color: #fff5a5; border-color: #CCCCCC; margin-left: 2%">
+                        <input type="button" class="form-control" style="background-color: #fff5a5; border-color: #CCCCCC; margin-left: 2%; color: gray; cursor: pointer;" value="이슈작성">
                         <div class="drop-down animated flipInX d-md-none">
                             <form action="#">
                                 <input type="text" class="form-control" placeholder="Search">
@@ -210,7 +210,7 @@
         <div class="nk-sidebar">           
             <div class="nk-nav-scroll">
                 <ul class="metismenu" id="menu">
-                	<li class="nav-label">전체 정보</li>
+                	<li class="nav-label"><b>전체 정보</b></li>
                     <li>
                         <a href="./index.jsp" aria-expanded="false">
                             <i class="icon-globe-alt menu-icon"></i><span class="nav-text">새로운 소식</span>
@@ -241,7 +241,7 @@
                             <li><a href="layout-fixed-sidebar.jsp">Fixed Sidebar</a></li>
                         </ul>
                     </li> -->
-                    <li class="nav-label">개인 공간</li>
+                    <li class="nav-label"><b>개인 공간</b></li>
                     <li>
                         <a href="./private-place.jsp" aria-expanded="false">
                             <i class="icon-globe-alt menu-icon"></i><span class="nav-text">프라이빗 공간</span>
