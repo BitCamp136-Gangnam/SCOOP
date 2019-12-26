@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,30 +47,22 @@
             <div class="container-fluid">
         <div class="card" style="min-height: 1080px">
 		<div class="row" style="margin: 2%">
-			<div class="col-sm-12" style="padding-left: 0">
-				<h3>프라이빗 공간</h3>
-				나만을 위한 공간에서 아이디어를 마음껏 펼쳐 보세요. 특정 파트너에게 나의 이슈를 공유할 수도 있습니다.
-			</div>
+				<h3>���� �ۼ��� �̽�</h3>
 		</div>
 		<div class="row" style="margin-left: 2%;">
 			<ul class="nav nav-pills">
 			    <li class="nav-item">
-			      <a class="nav-link" href="./private-place.jsp">프라이빗 이슈</a>
+			      <a class="nav-link" href="#">���� �ۼ��� �̽�</a>
 			    </li>
 			    <li class="nav-item">
-			      <a class="nav-link" href="./app-calender.jsp">캘린더-비동기로 아래 뿌려주기 가능?</a>
+			      <a class="nav-link" href="#">���� �ۼ��� ���</a>
 			    </li>
 		    </ul>
 		</div>
 		<div class="row" style="margin-left: 2%; margin-right: 2%">
-			<div class="col-sm-2 newissue" >
-			이슈 제목 들어갈곳
-			</div>
-			<div class="col-sm-8 newissue">
-			여기에 내용들어가는데 나중엔 append하면 될듯??
-			</div>
-			<div class="col-sm-2 newissue">
-			여기에 시간넣으면됨
+			<div class="col-sm-12 newissue" >
+			������ + �̽� ���� ����<br>
+			���⿡ ������Ʈ�� �׸��� �ۼ��ð�
 			</div>
 		</div>
             <!-- #/ container -->
