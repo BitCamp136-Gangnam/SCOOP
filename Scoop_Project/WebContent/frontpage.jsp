@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<jsp:include page="/WEB-INF/views/commons/title.jsp"></jsp:include>
+<title>Home</title>
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="all,follow">
@@ -45,10 +45,19 @@
       <ul class="navbar-nav">
       <li class="nav-item dropdown"><a id="pages" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">세부기능</a>
       <div class="dropdown-menu">
-      <div id="tabledrop">
+      <div id="table">
       <div class="rowdrop">
-         <span class="celldrop col1drop"><a href="" class="dropdown-item">협업공간</a></span>
-         <span class="celldrop col2drop"><a href="" class="dropdown-item">이슈</a></span>
+         <span class="celldrop col1drop"><a href="" class="dropdown-item">
+         	협업공간<br>
+         	<span style="color: gray;font-size:13px">동료와 함께 자유롭게 <br>협업하는 공간</span>
+         	<br>
+         	</a></span>
+      
+         <span class="celldrop col2drop"><a href="" class="dropdown-item">
+         	이슈<br>
+         	<span style="color: gray;font-size:13px">협업을 시작하는 실시간 <br> 동시 편집 문서</span>
+         
+         </a></span>
       </div>
       <div class="rowdrop">
          <span class="celldrop col1drop"><a href="index.html" class="dropdown-item">실시간 대화</a></span>
@@ -58,9 +67,11 @@
          <span class="celldrop col1drop"><a href="" class="dropdown-item">컨텐츠 모음</a></span>
          <span class="celldrop col2drop"><a href="" class="dropdown-item">관리자 기능</a></span>
       </div>
+      
          <hr>
-         <a href="" class="dropdown-item" >스쿱의 보안</a>
+         <a href="" class="dropdown-item" style="text-align: center;">스쿱의 보안</a>
          <br>
+        
       </div>
            </div>
            </li>
