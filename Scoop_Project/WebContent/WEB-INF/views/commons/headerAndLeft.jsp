@@ -210,11 +210,16 @@
         <div class="nk-sidebar">           
             <div class="nk-nav-scroll">
                 <ul class="metismenu" id="menu">
-                	<li class="nav-label"><b>전체 정보</b></li>
+                	<li class="nav-label" style="padding-bottom: 0"><b>전체 정보</b></li>
                     <li>
                         <a href="./index.jsp" aria-expanded="false">
                             <i class="icon-globe-alt menu-icon"></i><span class="nav-text">새로운 소식</span>
                             <!-- <i class="icon-speedometer menu-icon"> -->
+                        </a>
+                    </li>
+                    <li>
+                        <a href="./app-myissue.jsp" aria-expanded="false">
+                            <i class="icon-globe-alt menu-icon"></i><span class="nav-text">내가 작성한 이슈</span>
                         </a>
                     </li>
                     <li>
@@ -241,7 +246,7 @@
                             <li><a href="layout-fixed-sidebar.jsp">Fixed Sidebar</a></li>
                         </ul>
                     </li> -->
-                    <li class="nav-label"><b>개인 공간</b></li>
+                    <li class="nav-label" style="padding-bottom: 0"><b>개인 공간</b></li>
                     <li>
                         <a href="./private-place.jsp" aria-expanded="false">
                             <i class="icon-globe-alt menu-icon"></i><span class="nav-text">프라이빗 공간</span>
@@ -252,6 +257,9 @@
                             <i class="icon-globe-alt menu-icon"></i><span class="nav-text">북마크</span>
                         </a>
                     </li>
+                    <li class="nav-label" style="padding-bottom: 0"><b>협업 공간</b></li>
+                    <li class="nav-label"><button type="button" class="btn" style="background-color: #fff5a5; border-color: #CCCCCC; color: gray; cursor: pointer;"><i class="icon-note menu-icon"></i> 새 협업공간 만들기</button></li>
+                    <li class="nav-label" style="padding-top: 0"><input type="search" class="form-control" style="border-radius: 0.25rem; height: 20px" placeholder="협업공간 검색"></li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-envelope menu-icon"></i> <span class="nav-text">Email</span>
