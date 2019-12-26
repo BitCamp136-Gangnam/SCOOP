@@ -39,17 +39,17 @@
 	  <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right">Menu<i class="icon ion-md-list ml-2"></i></button>
 	  <div id="navbarSupportedContent" class="collapse navbar-collapse">
 		<ul class="navbar-nav mx-auto ml-auto">
-			
-		</ul>
-		<ul class="navbar-nav">
-		<li class="nav-item dropdown"><a id="pages" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">세부기능</a>
-				<div class="dropdown-menu"><a href="index.html" class="dropdown-item">Home</a><a href="schedule.html" class="dropdown-item">칸반</a><a href="text.html" class="dropdown-item">채팅</a></div>
-		  	</li>
 			  <!-- Link-->
-			  <li class="nav-item"> <a href="schedule.html" class="nav-link">가격</a></li>
+			  <li class="nav-item"> <a href="schedule.html" class="nav-link">What's on</a></li>
+			  <!-- Link-->
+			  <li class="nav-item"> <a href="text.html" class="nav-link">Text Page</a></li>
 			  <!-- Link-->
 			  <li class="nav-item"> <a href="#" class="nav-link">Get started</a></li>
-		 
+		  <li class="nav-item dropdown"><a id="pages" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Pages</a>
+			<div class="dropdown-menu"><a href="index.html" class="dropdown-item">Home</a><a href="schedule.html" class="dropdown-item">What's on</a><a href="text.html" class="dropdown-item">Text Page</a></div>
+		  </li>
+		</ul>
+		<ul class="navbar-nav">
 		  <li class="nav-item"><a href="#" data-toggle="modal" data-target="#login" class="nav-link font-weight-bold mr-3">Login</a></li>
 		  <li class="nav-item"><a href="#" class="navbar-btn btn btn-primary">무료로 시작하기</a></li>
 		</ul>
