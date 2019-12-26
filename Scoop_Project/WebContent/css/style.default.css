@@ -936,10 +936,10 @@ STYLE SWITCHER FOR DEMO
 }
 
 .btn-primary:hover {
-  color: #fff;
-  background-color: #cf455c;
-  border-color: #971549;
-  border-width:3px; 
+  color: #3a04b6;
+  background-color: #fddd8a;
+  border-color: #3a04b6;
+  border-width:1px; 
 }
 
 .btn-primary:focus, .btn-primary.focus {
