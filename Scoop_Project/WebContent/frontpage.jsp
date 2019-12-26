@@ -44,7 +44,29 @@
       </ul>
       <ul class="navbar-nav">
       <li class="nav-item dropdown"><a id="pages" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">세부기능</a>
+<<<<<<< HEAD
             <div class="dropdown-menu"><a href="index.html" class="dropdown-item">Home</a><a href="schedule.html" class="dropdown-item">칸반</a><a href="text.html" class="dropdown-item">채팅</a></div>
+=======
+      <div class="dropdown-menu">
+      <div id="tabledrop">
+      <div class="rowdrop">
+         <span class="celldrop col1drop"><a href="" class="dropdown-item">협업공간</a></span>
+         <span class="celldrop col2drop"><a href="" class="dropdown-item">이슈</a></span>
+      </div>
+      <div class="rowdrop">
+         <span class="celldrop col1drop"><a href="index.html" class="dropdown-item">실시간 대화</a></span>
+         <span class="celldrop col2drop"><a href="l" class="dropdown-item">이슈 업데이트</a></span>
+      </div>
+      <div class="rowdrop">
+         <span class="celldrop col1drop"><a href="" class="dropdown-item">컨텐츠 모음</a></span>
+         <span class="celldrop col2drop"><a href="" class="dropdown-item">관리자 기능</a></span>
+      </div>
+         <hr>
+         <a href="" class="dropdown-item" >스쿱의 보안</a>
+         <br>
+      </div>
+           </div>
+>>>>>>> 1dc1857ed552f832d3fc582bc4a619262b91c992
            </li>
            <!-- Link-->
            <li class="nav-item"> <a href="schedule.html" class="nav-link">가격</a></li>
@@ -96,10 +118,10 @@
          <div class="form-group">
            <label>Email</label>
            <input type="email" name="email" placeholder="your@email.com" class="form-control">
-           <button type="submit" class="btn btn-primary">Start tracking</button>  	
+           <button type="submit" class="btn btn-primary">Start tracking</button>     
          </div>
-         	<span>이미 가입하셨나요?</span>
-         	<a href="" style="color:#cf455c;">로그인 하기</a>    
+            <span>이미 가입하셨나요?</span>
+            <a href="" style="color:#cf455c;">로그인 하기</a>    
         </form>
         <!-- Platforms-->
         <div class="platforms d-none d-lg-block"><span class="platforms-title">Compatible with</span>

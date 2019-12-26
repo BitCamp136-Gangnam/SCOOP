@@ -2558,9 +2558,8 @@ code {
 .dropdown-item.disabled, .dropdown-item:disabled {
   color: #6c757d;
 }
-
-<!-- 드롭다운 수정 : 도연-->
-#table {
+ 
+#tabledrop {
   display: table; 
   width: 100%;
   min-width: 10rem;
@@ -2573,10 +2572,9 @@ code {
   border-radius: 0.25rem;
 
   }
-.row {display: table-row;}
-.cell {display: table-cell; padding: 3px; border-bottom: 1px solid #fff;}
-.col1 { width: 20%;}
-.col2 {width: 20%;}
-.col3 {width: 100%;}
-.col4 {width: 20%;}
-<!-- 드롭다운 수정 여기서 끝 -->
+.rowdrop {display: table-row;}
+.celldrop {display: table-cell; padding: 3px; border-bottom: 1px solid #fff;}
+.col1drop { width: 20%;}
+.col2drop {width: 20%;}
+.col3drop {width: 40%;}
+.col4drop {width: 20%;}
