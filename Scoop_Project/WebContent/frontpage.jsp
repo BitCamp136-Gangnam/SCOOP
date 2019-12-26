@@ -60,16 +60,41 @@
          </a></span>
       </div>
       <div class="rowdrop">
-         <span class="celldrop col1drop"><a href="index.html" class="dropdown-item">실시간 대화</a></span>
-         <span class="celldrop col2drop"><a href="l" class="dropdown-item">이슈 업데이트</a></span>
+         <span class="celldrop col1drop"><a href="index.html" class="dropdown-item">
+         	실시간 대화<br>
+         	<span style="color: gray;font-size:13px">모든 이슈,할 일,파일에서 <br>나누는 실시간 커뮤니케이션</span>
+         	</a></span>
+         <span class="celldrop col2drop"><a href="" class="dropdown-item">
+         	이슈 업데이트<br>
+         	<span style="color: gray;font-size:13px">나에게 필요한 소식을 이슈별로<br>알려주는 알림 리스트</span>
+         	</a></span>
+      </div>
+       <div class="rowdrop">
+         <span class="celldrop col1drop"><a href="index.html" class="dropdown-item">
+         	캘린더<br>
+         	<span style="color: gray;font-size:13px">나와 동료의 일정/할 일<br>파악 및 스케쥴 관리</span>
+         	</a></span>
+         <span class="celldrop col2drop"><a href="" class="dropdown-item">
+         	칸반<br>
+         	<span style="color: gray;font-size:13px">업무의 진행사항을 파악<br> 및 설정으로 프로젝트를 관리</span>
+         	</a></span>
       </div>
       <div class="rowdrop">
-         <span class="celldrop col1drop"><a href="" class="dropdown-item">컨텐츠 모음</a></span>
-         <span class="celldrop col2drop"><a href="" class="dropdown-item">관리자 기능</a></span>
+         <span class="celldrop col1drop"><a href="" class="dropdown-item">
+         	컨텐츠 모음<br>
+         	<span style="color: gray;font-size:13px">파일,할 일,의사결정,링크를 <br>쉽고 빠르게 찾을 수 있는 공간</span>
+         </a></span>
+         <span class="celldrop col2drop"><a href="" class="dropdown-item">
+         	관리자 기능<br>
+         	<span style="color: gray;font-size:13px">동료 관리 ,<br> 협업공간 관리</span>
+         </a></span>
       </div>
       
          <hr>
-         <a href="" class="dropdown-item" style="text-align: center;">스쿱의 보안</a>
+         <a href="" class="dropdown-item" style="text-align: center;">
+         	스쿱의 보안<br>
+         	<span style="color: gray;font-size:13px">최우선적인 데이터 보호, 개인정보보호 유지</span>
+         </a>
          <br>
         
       </div>
