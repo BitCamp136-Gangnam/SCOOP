@@ -28,6 +28,7 @@
 <!-- Tweaks for older IEs--><!--[if lt IE 9]>
    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+
 </head>
 <body>
 <!-- navbar-->
@@ -95,8 +96,10 @@
          <div class="form-group">
            <label>Email</label>
            <input type="email" name="email" placeholder="your@email.com" class="form-control">
-           <button type="submit" class="btn btn-primary">Start tracking</button>
+           <button type="submit" class="btn btn-primary">Start tracking</button>  	
          </div>
+         	<span>이미 가입하셨나요?</span>
+         	<a href="" style="color:#cf455c;">로그인 하기</a>    
         </form>
         <!-- Platforms-->
         <div class="platforms d-none d-lg-block"><span class="platforms-title">Compatible with</span>
