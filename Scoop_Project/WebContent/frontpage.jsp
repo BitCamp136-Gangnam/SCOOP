@@ -28,8 +28,12 @@
 <!-- Tweaks for older IEs--><!--[if lt IE 9]>
    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
-
+	<meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="47797892299-i06tt9qhbs15g8mn89ncu1isa1eneql8.apps.googleusercontent.com">
 </head>
+ <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 <body>
 <!-- navbar-->
 <header class="header">
@@ -120,6 +124,7 @@
       <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
      </div>
      <div class="modal-body p-4 p-lg-5">
+      <img class="img-responsive center-block" alt="Scoop로고" src="images/logo/brownlogo.png" style="width:100%;height:auto;padding-right:15%;padding-left:15%;"/>
       <form action="#" class="login-form text-left">
         <div class="form-group mb-4">
          <label>Email address</label>
@@ -130,9 +135,43 @@
          <input type="password" name="password" placeholder="Min 8 characters" class="form-control">
         </div>
         <div class="form-group">
-         <input type="submit" value="Login" class="btn btn-primary">
+        	<input type="submit" value="Login" class="btn btn-primary" style="width: 190px;height:38px;text-align: center;padding-top: 5px;">
+        	<div id="my-signin2"style="float: right;"></div>
+        	<div id="naver_id_login" style="float:right;margin-right: 5px;margin-left: 0px;width: 210px;border-left-width: 20px;padding-left: 15px;"></div>
         </div>
-      </form>
+      	</form>
+		<!-- 네이버아이디로로그인 버튼 노출 영역 -->
+								  <script type="text/javascript">
+								  	var naver_id_login = new naver_id_login("UQIzvQsqqo7IfCBE1GH1", "http://localhost:8090/Scoop_Project/index.jsp");
+								  	var state = naver_id_login.getUniqState();
+								  	naver_id_login.setButton("white", 3,40);
+								  	naver_id_login.setDomain("http://localhost:8090/");
+								  	naver_id_login.setState(state);
+								  	naver_id_login.setPopup();
+								  	naver_id_login.init_naver_id_login();
+								  </script>
+									
+							      <script>
+							        function onSuccess(googleUser) {
+							          console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+							        }
+							        function onFailure(error) {
+							          console.log(error);
+							        }
+							        function renderButton() {
+							          gapi.signin2.render('my-signin2', {
+							            'scope': 'profile email',
+							            'width': 190,
+							            'height': 38,
+							            'longtitle': true,
+							            'theme': 'dark',
+							            'onsuccess': onSuccess,
+							            'onfailure': onFailure
+							          });
+							        }
+							      </script>
+							      <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+							   
      </div>
    </div>
   </div>
@@ -150,7 +189,7 @@
          <div class="form-group">
            <label>Email</label>
            <input type="email" name="email" placeholder="your@email.com" class="form-control">
-           <button type="submit" class="btn btn-primary">Start tracking</button>     
+           <button type="submit" class="btn btn-primary">무료로 시작하기</button>     
          </div>
             <span>이미 가입하셨나요?</span>
             <a href="" style="color:#cf455c;">로그인 하기</a>    

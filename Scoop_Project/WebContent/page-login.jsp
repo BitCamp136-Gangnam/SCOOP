@@ -29,7 +29,7 @@
                     <div class="form-input-content">
                         <div class="card login-form mb-0">
                             <div class="card-body pt-5">
-                                <div style="">
+                                <div>
                                 	<a class="" href="index.jsp">
                                 		<img class="img-responsive center-block"alt="Scoop로고" src="images/logo/scooplogo.png" style="padding-right:15%;padding-left:15%;"/>
                                 	</a>
