@@ -28,7 +28,7 @@
 <!-- Tweaks for older IEs--><!--[if lt IE 9]>
    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
-<meta name="google-signin-scope" content="profile email">
+	<meta name="google-signin-scope" content="profile email">
     <meta name="google-signin-client_id" content="47797892299-i06tt9qhbs15g8mn89ncu1isa1eneql8.apps.googleusercontent.com">
 </head>
  <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
@@ -135,39 +135,43 @@
          <input type="password" name="password" placeholder="Min 8 characters" class="form-control">
         </div>
         <div class="form-group">
-         <input type="submit" value="Login" class="btn btn-primary">
+        	<input type="submit" value="Login" class="btn btn-primary" style="width: 190px;height:38px;text-align: center;padding-top: 5px;">
+        	<div id="my-signin2"style="float: right;"></div>
+        	<div id="naver_id_login" style="float:right;margin-right: 5px;margin-left: 0px;width: 210px;border-left-width: 20px;padding-left: 15px;"></div>
         </div>
-      </form>
-       <!-- 네이버아이디로로그인 버튼 노출 영역 -->
-								  <div id="naver_id_login"></div>
-								  <!-- //네이버아이디로로그인 버튼 노출 영역 -->
+      	</form>
+		<!-- 네이버아이디로로그인 버튼 노출 영역 -->
 								  <script type="text/javascript">
 								  	var naver_id_login = new naver_id_login("UQIzvQsqqo7IfCBE1GH1", "http://localhost:8090/Scoop_Project/index.jsp");
 								  	var state = naver_id_login.getUniqState();
-								  	naver_id_login.setButton("white", 2,40);
+								  	naver_id_login.setButton("white", 3,40);
 								  	naver_id_login.setDomain("http://localhost:8090/");
 								  	naver_id_login.setState(state);
 								  	naver_id_login.setPopup();
 								  	naver_id_login.init_naver_id_login();
 								  </script>
-								  <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"style="float: left;"></div>
-								  <script>
-							      function onSignIn(googleUser) {
-							        // Useful data for your client-side scripts:
-							        var profile = googleUser.getBasicProfile();
-							        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-							        console.log('Full Name: ' + profile.getName());
-							        console.log('Given Name: ' + profile.getGivenName());
-							        console.log('Family Name: ' + profile.getFamilyName());
-							        console.log("Image URL: " + profile.getImageUrl());
-							        console.log("Email: " + profile.getEmail());
-							
-							        // The ID token you need to pass to your backend:
-							        var id_token = googleUser.getAuthResponse().id_token;
-							        console.log("ID Token: " + id_token);
-							        //location.href="http://localhost:8090/Scoop_Project/index.jsp";
-							      }
-							    </script>
+									
+							      <script>
+							        function onSuccess(googleUser) {
+							          console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+							        }
+							        function onFailure(error) {
+							          console.log(error);
+							        }
+							        function renderButton() {
+							          gapi.signin2.render('my-signin2', {
+							            'scope': 'profile email',
+							            'width': 190,
+							            'height': 38,
+							            'longtitle': true,
+							            'theme': 'dark',
+							            'onsuccess': onSuccess,
+							            'onfailure': onFailure
+							          });
+							        }
+							      </script>
+							      <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+							   
      </div>
    </div>
   </div>
@@ -185,7 +189,7 @@
          <div class="form-group">
            <label>Email</label>
            <input type="email" name="email" placeholder="your@email.com" class="form-control">
-           <button type="submit" class="btn btn-primary">Start tracking</button>     
+           <button type="submit" class="btn btn-primary">무료로 시작하기</button>     
          </div>
             <span>이미 가입하셨나요?</span>
             <a href="" style="color:#cf455c;">로그인 하기</a>    
