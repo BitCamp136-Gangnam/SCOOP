@@ -123,10 +123,8 @@
      <div class="modal-header border-bottom-0">
       <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
      </div>
-     <div>
-    	<img class="img-responsive center-block"alt="Scoop로고" src="images/logo/brownlogo.png" style="padding-right:15%;padding-left:15%;"/>
-     </div>
      <div class="modal-body p-4 p-lg-5">
+      <img class="img-responsive center-block" alt="Scoop로고" src="images/logo/brownlogo.png" style="width:100%;height:auto;padding-right:15%;padding-left:15%;"/>
       <form action="#" class="login-form text-left">
         <div class="form-group mb-4">
          <label>Email address</label>
@@ -152,7 +150,7 @@
 								  	naver_id_login.setPopup();
 								  	naver_id_login.init_naver_id_login();
 								  </script>
-								  <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+								  <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"style="float: left;"></div>
 								  <script>
 							      function onSignIn(googleUser) {
 							        // Useful data for your client-side scripts:
