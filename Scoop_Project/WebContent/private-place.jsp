@@ -57,7 +57,7 @@
 			      <a class="nav-link" href="./private-place.jsp">프라이빗 이슈</a>
 			    </li>
 			    <li class="nav-item">
-			      <a class="nav-link" href="./app-calender.jsp">캘린더-비동기로 아래 뿌려주기 가능?</a>
+			      <a class="nav-link" href="./private-cal.jsp">캘린더</a>
 			    </li>
 		    </ul>
 		</div>
