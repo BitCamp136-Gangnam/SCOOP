@@ -34,7 +34,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
                         </div>
-                        <input type="search" class="form-control" placeholder="Search Dashboard" aria-label="Search Dashboard">
+                        <input type="search" class="form-control" placeholder="검색하세요" aria-label="Search">
                         <input type="button" class="form-control" style="background-color: #fff5a5; border-color: #CCCCCC; margin-left: 2%; color: gray; cursor: pointer;" value="이슈작성">
                         <div class="drop-down animated flipInX d-md-none">
                             <form action="#">
@@ -157,20 +157,22 @@
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
                                 <span class="activity active"></span>
-                                <img src="images/user/1.png" height="40" width="40" alt="">
+                                <img src="images/avatar/avatar.png" height="40" width="40" alt="">
                             </div>
                             <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
                                 <div class="dropdown-content-body">
                                     <ul>
                                         <li>
-                                            <a href="app-profile.jsp"><i class="icon-user"></i> <span>Profile</span></a>
+                                            <a href="app-profile.jsp"><i class="icon-user"></i> <span>내 정보</span></a>
                                         </li>
-                                        
+                                        <li>
+                                            <a href="app-file.jsp"><span class="iconify" data-icon="ion:folder-open-outline" data-inline="false" style="font-size: 15px"></span> <span> &nbsp;&nbsp;파일함</span></a>
+                                        </li>
                                         <hr class="my-2">
                                         <li>
-                                            <a href="page-lock.jsp"><i class="icon-lock"></i> <span>Lock Screen</span></a>
+                                            <a href="page-lock.jsp"><i class="icon-lock"></i> <span>잠금모드</span></a>
                                         </li>
-                                        <li><a href="page-login.jsp"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                        <li><a href="page-login.jsp"><i class="icon-key"></i> <span>로그아웃</span></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -220,6 +222,11 @@
                     <li class="nav-label" style="padding-bottom: 0"><b>협업 공간</b></li>
                     <li class="nav-label"><button type="button" class="btn" style="background-color: #fff5a5; border-color: #CCCCCC; color: gray; cursor: pointer;"><i class="icon-note menu-icon"></i> 새 협업공간 만들기</button></li>
                     <li class="nav-label" style="padding-top: 0"><input type="search" class="form-control" style="border-radius: 0.25rem; height: 20px" placeholder="협업공간 검색"></li>
+                    <li>
+                        <a href="./cooperation-issue.jsp" aria-expanded="false">
+                            <span class="iconify" data-icon="bx:bxs-flag-alt" data-inline="false" style="width: 20px;height: auto;"> </span><span class="nav-text"> &nbsp;쫀쬬니(append로..)</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

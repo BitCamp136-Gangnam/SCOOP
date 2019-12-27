@@ -21,8 +21,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <style>
 .newissue{
-	border-top: 1px solid gray;
-	border-bottom: 1px solid gray;
+	border-bottom: 1px solid #c8c8c8;
 	padding-top: 0.7%;
 	padding-bottom: 0.7%;
 }
@@ -62,6 +61,7 @@
 			    </li>
 		    </ul>
 		</div>
+		<hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
 		<div class="row" style="margin-left: 2%; margin-right: 2%">
 			<div class="col-sm-2 newissue" >
 			이슈 제목 들어갈곳

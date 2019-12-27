@@ -64,45 +64,18 @@
 		</div>
 		<hr style="margin-top: 0">
 		<div class="row" style="margin-left: 4%; margin-right: 2%; margin-top: 1%">
-			<div class="media align-items-center mb-4">
-                                    <img class="mr-3" src="images/avatar/11.png" width="120" height="120" alt="">
-                                    <div class="media-body">
-                                        <h3 class="mb-0">이름들어갈 자리</h3>
-                                        <p class="text-muted mb-0" style="margin-left: 2%">이메일@example.com</p>
-                                    </div>
-                                </div>
+			<div class="col-sm-8" style="padding-left: 0; border-bottom: 1px solid #c8c8c8; padding-bottom: 2%">
+				<h4>외부 서비스 연결</h4>
+				사용하고 계신 서비스와 스쿱 연결하면 더욱 효율적인 협업이 가능해 집니다.<br>
+				지금, 스쿱 안에서 모든것이 가능한 환경을 만들어 보세요.
+			</div>
+			<hr>
+			<div class="col-sm-12" style="padding-left: 0; padding-top: 2%">
+				<button class="btn btn-outline-secondary" style="margin-bottom:1%; width: 60%; background-color: white; text-align: left;font-size: 18px"><span class="iconify" data-icon="ant-design:github-filled" data-inline="false" style="width: 20px;height: auto;"></span> Github <span style="float: right"><span class="iconify" data-icon="dashicons:admin-plugins" data-inline="false" style="width: 20px;height: auto;"></span> 연결하기</span></button>
+				<button class="btn btn-outline-secondary" style="margin-bottom:1%; width: 60%; background-color: white; text-align: left;font-size: 18px"><span class="iconify" data-icon="whh:googledrive" data-inline="false" style="width: 20px;height: auto;"></span> Google Drive <span style="float: right"><span class="iconify" data-icon="dashicons:admin-plugins" data-inline="false" style="width: 20px;height: auto;"></span> 연결하기</span></button>
+				<button class="btn btn-outline-secondary" style="margin-bottom:1%; width: 60%; background-color: white; text-align: left;font-size: 18px"><span class="iconify" data-icon="mdi:gmail" data-inline="false" style="width: 20px;height: auto;"></span> Gmail <span style="float: right"><span class="iconify" data-icon="dashicons:admin-plugins" data-inline="false" style="width: 20px;height: auto;"></span> 연결하기</span></button>
+			</div>
 		</div>
-		<div class="row" style="margin-left: 4%; margin-top: 2%">
-		<div class="form-group" style="width: 100%">
-			<form action="">
-    		<label for="email">이메일</label>
-    		<input class="form-control myinfo" type="text" id="email" style="width: 60%" readonly="readonly">
-    		<br>
-    		<label for="pwd">비밀번호</label>
-    		<input class="form-control myinfo" type="text" id="pwd" style="width: 60%">
-    		<br>
-    		<label for="name">이름</label>
-    		<input class="form-control myinfo" type="text" id="name" style="width: 60%" readonly="readonly">
-    		<br>
-    		<label for="birth">생년월일</label>
-    		<input class="form-control myinfo" type="text" id="birth" style="width: 60%" readonly="readonly">
-    		<br>
-    		<label for="gender">성별</label>
-    		<input class="form-control myinfo" type="text" id="gender" style="width: 60%" readonly="readonly">
-    		<br>
-    		<label for="dname">부서</label>
-    		<input class="form-control myinfo" type="text" id="dname" style="width: 60%">
-    		<br>
-    		<label for="drank">직함</label>
-    		<input class="form-control myinfo" type="text" id="drank" style="width: 60%">
-    		<br>
-    		<label for="address">주소</label>
-    		<input class="form-control myinfo" type="text" id="address" style="width: 60%">
-    		<br>
-    		<input type="submit" class="btn" style="background-color: #fff5a5; border-color: #CCCCCC; color: gray; cursor: pointer;" value="수정완료">
-    		</form>	
-    	</div>
-    	</div>
             <!-- #/ container -->
             </div>
             </div>
