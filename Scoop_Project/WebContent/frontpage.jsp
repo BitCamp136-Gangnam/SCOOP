@@ -28,8 +28,12 @@
 <!-- Tweaks for older IEs--><!--[if lt IE 9]>
    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
-
+<meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="47797892299-i06tt9qhbs15g8mn89ncu1isa1eneql8.apps.googleusercontent.com">
 </head>
+ <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 <body>
 <!-- navbar-->
 <header class="header">
@@ -119,6 +123,9 @@
      <div class="modal-header border-bottom-0">
       <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
      </div>
+     <div>
+    	<img class="img-responsive center-block"alt="Scoop로고" src="images/logo/brownlogo.png" style="padding-right:15%;padding-left:15%;"/>
+     </div>
      <div class="modal-body p-4 p-lg-5">
       <form action="#" class="login-form text-left">
         <div class="form-group mb-4">
@@ -133,6 +140,36 @@
          <input type="submit" value="Login" class="btn btn-primary">
         </div>
       </form>
+       <!-- 네이버아이디로로그인 버튼 노출 영역 -->
+								  <div id="naver_id_login"></div>
+								  <!-- //네이버아이디로로그인 버튼 노출 영역 -->
+								  <script type="text/javascript">
+								  	var naver_id_login = new naver_id_login("UQIzvQsqqo7IfCBE1GH1", "http://localhost:8090/Scoop_Project/index.jsp");
+								  	var state = naver_id_login.getUniqState();
+								  	naver_id_login.setButton("white", 2,40);
+								  	naver_id_login.setDomain("http://localhost:8090/");
+								  	naver_id_login.setState(state);
+								  	naver_id_login.setPopup();
+								  	naver_id_login.init_naver_id_login();
+								  </script>
+								  <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+								  <script>
+							      function onSignIn(googleUser) {
+							        // Useful data for your client-side scripts:
+							        var profile = googleUser.getBasicProfile();
+							        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+							        console.log('Full Name: ' + profile.getName());
+							        console.log('Given Name: ' + profile.getGivenName());
+							        console.log('Family Name: ' + profile.getFamilyName());
+							        console.log("Image URL: " + profile.getImageUrl());
+							        console.log("Email: " + profile.getEmail());
+							
+							        // The ID token you need to pass to your backend:
+							        var id_token = googleUser.getAuthResponse().id_token;
+							        console.log("ID Token: " + id_token);
+							        //location.href="http://localhost:8090/Scoop_Project/index.jsp";
+							      }
+							    </script>
      </div>
    </div>
   </div>
