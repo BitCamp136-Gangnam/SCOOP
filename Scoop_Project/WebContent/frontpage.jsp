@@ -105,7 +105,7 @@
            </div>
            </li>
            <!-- Link-->
-           <li class="nav-item"> <a href="schedule.html" class="nav-link">가격</a></li>
+           <li class="nav-item"> <a href="pricing.jsp" class="nav-link">가격</a></li>
            <!-- Link-->
            <li class="nav-item"> <a href="#" class="nav-link">Get started</a></li>
        
