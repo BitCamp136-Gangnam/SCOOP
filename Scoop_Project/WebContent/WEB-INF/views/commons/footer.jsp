@@ -30,12 +30,14 @@
 		  bottom: 16px;
 		  right: 16px;
 		  font-size: 18px;
+		  z-index: 1;
 		}
 		#divopen {
 		  position: fixed;
 		  bottom: 100px;
 		  right: 16px;
 		  font-size: 18px;
+		  z-index: 1;
 		}
 		</style>
         <div class="footer">
