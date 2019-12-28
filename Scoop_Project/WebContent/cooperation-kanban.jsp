@@ -28,13 +28,17 @@
   margin:2%;
   border: 1px solid #c8c8c8;
   min-height: 400px;
+  height:400px;
   padding: 4%;
+  border-radius: 0.625rem;
+  overflow: auto;
 }
 .drags{
   border: 1px solid #c8c8c8;
   height: 40px;
   font-size: 14px;
   padding: 10px;
+  border-radius: 0.625rem;
 }
 h5{
   margin-bottom: 10%;
@@ -97,7 +101,19 @@ function drop(ev) {
 			<div id="div1" class="col-sm-3 kanban">
 			<div class="realkan" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #888">
 			<h5>발의됨</h5>
-			  <div draggable="true" ondragstart="drag(event)" id="drag1" class="drags">발의안건 1</div>
+			  <div draggable="true" ondragstart="drag(event)" id="drag1" class="drags">발의안건 for each뿌리기로</div>
+			  <div draggable="true" ondragstart="drag(event)" id="drag1" class="drags">발의안건 for each뿌리기로</div>
+			  <div draggable="true" ondragstart="drag(event)" id="drag1" class="drags">발의안건 for each뿌리기로</div>
+			  <div draggable="true" ondragstart="drag(event)" id="drag1" class="drags">발의안건 for each뿌리기로</div>
+			  <div draggable="true" ondragstart="drag(event)" id="drag1" class="drags">발의안건 for each뿌리기로</div>
+			  <div draggable="true" ondragstart="drag(event)" id="drag1" class="drags">발의안건 for each뿌리기로</div>
+			  <div draggable="true" ondragstart="drag(event)" id="drag1" class="drags">발의안건 for each뿌리기로</div>
+			  <div draggable="true" ondragstart="drag(event)" id="drag1" class="drags">발의안건 for each뿌리기로</div>
+			  <div draggable="true" ondragstart="drag(event)" id="drag1" class="drags">발의안건 for each뿌리기로</div>
+			  <div draggable="true" ondragstart="drag(event)" id="drag1" class="drags">발의안건 for each뿌리기로</div>
+			  <div draggable="true" ondragstart="drag(event)" id="drag1" class="drags">발의안건 for each뿌리기로</div>
+			  <div draggable="true" ondragstart="drag(event)" id="drag1" class="drags">발의안건 for each뿌리기로</div>
+			  <div draggable="true" ondragstart="drag(event)" id="drag1" class="drags">발의안건 for each뿌리기로</div>
 			</div>
 			</div>
 			<div id="div2" class="col-sm-3 kanban">

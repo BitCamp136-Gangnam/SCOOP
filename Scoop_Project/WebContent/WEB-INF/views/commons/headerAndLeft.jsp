@@ -220,7 +220,7 @@
                         </a>
                     </li>
                     <li class="nav-label" style="padding-bottom: 0"><b>협업 공간</b></li>
-                    <li class="nav-label"><button type="button" class="btn" style="background-color: #fff5a5; border-color: #CCCCCC; color: gray; cursor: pointer;"><i class="icon-note menu-icon"></i> 새 협업공간 만들기</button></li>
+                    <li class="nav-label"><button type="button" class="btn" style="background-color: #fff5a5; border-color: #CCCCCC; color: gray; cursor: pointer;" data-toggle="modal" data-target="#myModal"><i class="icon-note menu-icon"></i> 새 협업공간 만들기</button></li>
                     <li class="nav-label" style="padding-top: 0"><input type="search" class="form-control" style="border-radius: 0.25rem; height: 20px" placeholder="협업공간 검색"></li>
                     <li>
                         <a href="./cooperation-issue.jsp" aria-expanded="false">
@@ -233,3 +233,44 @@
         <!--**********************************
             Sidebar end
         ***********************************-->
+        <!-- 
+        		협업공간 만들기 모달 생성
+         -->
+ <style>
+ .createmodal{
+ border: 1px solid #c8c8c8;
+ background-color: white;
+}
+</style>
+
+           <!-- The Modal -->
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h3 class="modal-title">새 협업공간 만들기</h3>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <form action="">
+        <!-- Modal body -->
+        <div class="modal-body">
+        <p style="font-size: 12px">협업공간은 함께 일하는 멤버들끼리만 자료를 공유하고 협업할 수 있는 공간입니다.<br>
+          	협업공간을 만들고 함께 일할 멤버들을 초대해보세요.</p>
+          <label for="title">협업공간 이름</label>
+    		<input class="form-control createmodal" type="text" id="title" style="width: 100%">
+    		<br>
+          <label for="content">협업공간 설명</label>
+    		<textarea class="form-control createmodal" rows="3" id="content" style="width: 100%"></textarea>
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-secondary" style="background-color: #fff5a5; border-color: #CCCCCC; color: gray; cursor: pointer;" data-dismiss="modal">만들기</button>
+          <button type="button" class="btn btn-secondary" style="background-color: #fff5a5; border-color: #CCCCCC; color: gray; cursor: pointer;" data-dismiss="modal">취소</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
