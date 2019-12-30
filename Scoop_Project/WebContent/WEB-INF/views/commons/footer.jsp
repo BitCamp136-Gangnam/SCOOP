@@ -15,13 +15,39 @@
             	if($(this).attr('name')=='on'){
             		$(this).attr('src','./images/chat/chatclose.png');
             		$(this).attr('name','off');
-            		$('#divopen').attr('style','height: 70%; width: 20%;');
+            		$('#chatdivopen').attr('style','height: 70%; width: 20%;');
                	}else{
                		$(this).attr('src','./images/chat/chatopen.png');
                		$(this).attr('name','on');
-               		$('#divopen').attr('style','height: 70%; width: 20%; display: none;');
+               		$('#chatdivopen').attr('style','height: 70%; width: 20%; display: none;');
                    	}
             });
+        	$('#helpopen').click(function(){
+        		if($(this).attr('name')=='on'){
+        			$(this).attr('name','off');
+        			$('#helpdivopen').attr('style','height: 100%; width: 16%; z-index: 2;background-color:gray;');
+        			$('#closeopen').show();
+        		}
+        	});
+        	$('#closeopen').click(function(){
+            	$('#helpopen').attr('name','on');
+        		$('#helpdivopen').attr('style','height: 100%; width: 16%; display: none; z-index: 2;background-color:gray;');
+           		$('#closeopen').hide();
+            	})
+           	$(document).keydown(function(event) {
+				  if (event.ctrlKey && event.keyCode==191) {
+					  console.log("됏냐?");
+					  if($('#helpopen').attr('name')=='on'){
+		        			$('#helpopen').attr('name','off');
+		        			$('#helpdivopen').attr('style','height: 100%; width: 16%; z-index: 2;background-color:gray;');
+		        			$('#closeopen').show();
+		        		}else{
+		        			$('#helpopen').attr('name','on');
+		            		$('#helpdivopen').attr('style','height: 100%; width: 16%; display: none; z-index: 2;background-color:gray;');
+		               		$('#closeopen').hide();
+			        		}
+				  }
+				});
         });
 		</script>
         <style>
@@ -32,12 +58,56 @@
 		  font-size: 18px;
 		  z-index: 1;
 		}
-		#divopen {
+		#chatdivopen {
 		  position: fixed;
 		  bottom: 100px;
 		  right: 16px;
 		  font-size: 18px;
 		  z-index: 1;
+		}
+		#helpopen {
+		  position: fixed;
+		  bottom: 16px;
+		  left: 16px;
+		  font-size: 18px;
+		  z-index: 1;
+		}
+		#helpdivopen {
+		  position: fixed;
+		  bottom: 0;
+		  left: 0;
+		  font-size: 18px;
+		  z-index: 1;
+		}
+		#closeopen {
+		  position: fixed;
+		  bottom: 96%;
+		  left: 14%;
+		  font-size: 18px;
+		  z-index: 2;
+		}
+		.accordion {
+		  background-color: gray;
+		  color: white;
+		  cursor: pointer;
+		  padding: 18px;
+		  width: 100%;
+		  border: none;
+		  text-align: left;
+		  outline: none;
+		  font-size: 12px;
+		  transition: 0.4s;
+		}
+		.activeacc, .accordion:hover {
+		  background-color: #ccc;
+		}
+		
+		.panel {
+		  padding: 0 18px;
+		  display: none;
+		  background-color: white;
+		  overflow: hidden;
+		  font-size: 12px;
 		}
 		</style>
         <div class="footer">
@@ -45,7 +115,8 @@
                 <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
             </div>
         </div>
-        <div id="divopen" style="height: 70%; width: 20%; display: none;">
+        <!-- chat 시작 -->
+        <div id="chatdivopen" style="height: 70%; width: 20%; display: none;">
         <div class="card_chat card">
 						<div class="card-header msg_head">
 							<div class="d-flex bd-highlight">
@@ -150,8 +221,45 @@
 						</div>
 					</div>
 					</div>
-        </div>
-        <img src="./images/chat/chatopen.png" id="chatopen" name="on" width=75px height=auto style="cursor: pointer;">
+					<!-- chat 끝 -->
+					<div id="helpdivopen" style="height: 100%; width: 16%; display: none; z-index: 2;background-color: gray">
+						<h4 style="text-align: center; margin-top: 5%; color: white">도움센터(ctrl+/)</h4>
+						<button class="accordion">Section 1</button>
+						<div class="panel">
+						  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+						</div>
+						
+						<button class="accordion">Section 2</button>
+						<div class="panel">
+						  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+						</div>
+						
+						<button class="accordion">Section 3</button>
+						<div class="panel">
+						  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+						</div>
+						
+						<script>
+						var acc = document.getElementsByClassName("accordion");
+						var i;
+						
+						for (i = 0; i < acc.length; i++) {
+						  acc[i].addEventListener("click", function() {
+						    this.classList.toggle("activeacc");
+						    var panel = this.nextElementSibling;
+						    if (panel.style.display === "block") {
+						      panel.style.display = "none";
+						    } else {
+						      panel.style.display = "block";
+						    }
+						  });
+						}
+						</script>
+						
+					</div>
+        <img src="./images/chat/chatopen.png" id="chatopen" name="on" width=50px height=auto style="cursor: pointer;">
+        <img src="./images/chat/questionmark.png" id="helpopen" name="on" width=50px height=auto style="cursor: pointer;">
+        <img src="./images/chat/close.png" id="closeopen" name="on" width=20px height=auto style="cursor: pointer; display: none">
         <!--**********************************
             Footer end
         ***********************************-->
