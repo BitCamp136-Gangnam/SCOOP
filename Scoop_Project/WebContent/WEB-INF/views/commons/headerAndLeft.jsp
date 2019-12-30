@@ -188,7 +188,7 @@
         <!--**********************************
             Sidebar start
         ***********************************-->
-        <div class="nk-sidebar">           
+        <div class="nk-sidebar" style="z-index: 0">           
             <div class="nk-nav-scroll">
                 <ul class="metismenu" id="menu">
                 	<li class="nav-label" style="padding-bottom: 0"><b>전체 정보</b></li>
