@@ -46,7 +46,15 @@
 $(document).ready(function($) {
 	$("#pricing_area").click(function(event){
 		 var offset = $("#pricing").offset();
-         $('html').animate({scrollTop : offset.top}, 500);
+         $('html').animate({scrollTop : offset.top}, 1000);
+	});
+
+	//이메일 아웃풋
+	$("#scoop_input").click(function(){
+
+		$("#scoop_out").val($("#scoop_in").val());
+			
+
 	});
 	
 });
@@ -124,11 +132,9 @@ $(document).ready(function($) {
            </li>
            <!-- Link-->
            <li class="nav-item"> <a href="#pricing" id="pricing_area" class="nav-link">가격</a></li>
-           <!-- Link-->
-           <li class="nav-item"> <a href="#" class="nav-link">Get started</a></li>
        
         <li class="nav-item"><a href="#" data-toggle="modal" data-target="#login" class="nav-link font-weight-bold mr-3">Login</a></li>
-        <li class="nav-item"><a href="#" class="navbar-btn btn btn-primary">무료로 시작하기</a></li>
+        <li class="nav-item"><a href="#" data-toggle="modal" data-target="#signUp" class="navbar-btn btn btn-primary">무료로 시작하기</a></li>
       </ul>
      </div>
    </div>
@@ -200,6 +206,42 @@ $(document).ready(function($) {
    </div>
   </div>
 </div>
+
+<!-- SignUp Modal-->
+<div id="signUp" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade bd-example-modal-lg">
+  <div role="document" class="modal-dialog modal-dialog-centered modal-lg">
+   <div class="modal-content">
+     <div class="modal-header border-bottom-0">
+      <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+     </div>
+     <div class="modal-body p-4 p-lg-5">
+      <img class="img-responsive center-block" alt="Scoop로고" src="images/logo/brownlogo.png" style="width:100%;height:auto;padding-right:15%;padding-left:15%;"/>
+      <form action="#" class="login-form text-left">
+        <div class="form-group mb-4">
+         <label>Email address</label>
+         <input type="text" class="form-control" id="scoop_out" placeholder="E-mail@company.com" required>
+        </div>
+        <div class="form-group mb-4">
+         <label>Name</label>
+         <input type="text" class="form-control"  placeholder="Name" required>
+        </div>
+        <div class="form-group mb-4">
+         <label>Password</label>
+         <input type="password" class="form-control" placeholder="Password" required>
+        </div>
+        <div class="form-group">
+        	<center>
+        		<input type="submit" value="스쿱 시작하기" class="btn btn-primary" style="width: 300px;height:38px;text-align: center;padding-top: 5px;">
+    		</center>
+        </div>
+        <div>
+        </div>
+      	</form>								   
+     </div>
+   </div>
+  </div>
+</div>
+
 <div class="container">
   <!-- Hero Section-->
   <section class="hero shape-1">
@@ -212,11 +254,11 @@ $(document).ready(function($) {
         <form action="#" class="subscription-form mt-5">
          <div class="form-group">
            <label>Email</label>
-           <input type="email" name="email" placeholder="your@email.com" class="form-control">
-           <button type="submit" class="btn btn-primary">무료로 시작하기</button>     
+           <input type="email" name="email" id="scoop_in" placeholder="E-mail@company.com" class="form-control">
+        <button type="button" id="scoop_input" data-toggle="modal" data-target="#signUp"class="btn btn-primary">무료로 시작하기</button>     
          </div>
             <span>이미 가입하셨나요?</span>
-            <a href="" style="color:#cf455c;">로그인 하기</a>    
+            <a href="" data-toggle="modal" data-target="#login"style="color:#cf455c;">로그인 하기</a>    
         </form>
         <!-- Platforms-->
         <div class="platforms d-none d-lg-block"><span class="platforms-title">Compatible with</span>
