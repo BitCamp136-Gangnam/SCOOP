@@ -6,32 +6,29 @@
         <link href="./css/chat.css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-        <!-- 
-                  여기 수정해야됨 온 오프랑 에러 하나 뜸 12.24 이용욱
-		-->
         <script type="text/javascript">
         $(function(){
         	$('#chatopen').click(function(){
             	if($(this).attr('name')=='on'){
             		$(this).attr('src','./images/chat/chatclose.png');
             		$(this).attr('name','off');
-            		$('#chatdivopen').attr('style','height: 70%; width: 20%;');
+            		$('#chatdivopen').show();
                	}else{
                		$(this).attr('src','./images/chat/chatopen.png');
                		$(this).attr('name','on');
-               		$('#chatdivopen').attr('style','height: 70%; width: 20%; display: none;');
+               		$('#chatdivopen').hide();
                    	}
             });
         	$('#helpopen').click(function(){
         		if($(this).attr('name')=='on'){
         			$(this).attr('name','off');
-        			$('#helpdivopen').attr('style','height: 100%; width: 16%; z-index: 2;background-color:gray;');
+        			$('#helpdivopen').show();
         			$('#closeopen').show();
         		}
         	});
         	$('#closeopen').click(function(){
             	$('#helpopen').attr('name','on');
-        		$('#helpdivopen').attr('style','height: 100%; width: 16%; display: none; z-index: 2;background-color:gray;');
+        		$('#helpdivopen').hide();
            		$('#closeopen').hide();
             	})
            	$(document).keydown(function(event) {
@@ -39,11 +36,11 @@
 					  console.log("됏냐?");
 					  if($('#helpopen').attr('name')=='on'){
 		        			$('#helpopen').attr('name','off');
-		        			$('#helpdivopen').attr('style','height: 100%; width: 16%; z-index: 2;background-color:gray;');
+		        			$('#helpdivopen').show();
 		        			$('#closeopen').show();
 		        		}else{
 		        			$('#helpopen').attr('name','on');
-		            		$('#helpdivopen').attr('style','height: 100%; width: 16%; display: none; z-index: 2;background-color:gray;');
+		            		$('#helpdivopen').hide();
 		               		$('#closeopen').hide();
 			        		}
 				  }
@@ -59,6 +56,9 @@
 		  z-index: 1;
 		}
 		#chatdivopen {
+		  display:none;
+		  height:70%;
+		  width:20%;
 		  position: fixed;
 		  bottom: 100px;
 		  right: 16px;
@@ -73,16 +73,20 @@
 		  z-index: 1;
 		}
 		#helpdivopen {
+		  background-color:gray;
+		  width:15.4%;
+		  height:100%;
+		  display:none;
 		  position: fixed;
 		  bottom: 0;
 		  left: 0;
 		  font-size: 18px;
-		  z-index: 1;
+		  z-index: 2;
 		}
 		#closeopen {
 		  position: fixed;
 		  bottom: 96%;
-		  left: 14%;
+		  left: 13%;
 		  font-size: 18px;
 		  z-index: 2;
 		}
@@ -116,7 +120,7 @@
             </div>
         </div>
         <!-- chat 시작 -->
-        <div id="chatdivopen" style="height: 70%; width: 20%; display: none;">
+        <div id="chatdivopen">
         <div class="card_chat card">
 						<div class="card-header msg_head">
 							<div class="d-flex bd-highlight">
@@ -222,7 +226,7 @@
 					</div>
 					</div>
 					<!-- chat 끝 -->
-					<div id="helpdivopen" style="height: 100%; width: 16%; display: none; z-index: 2;background-color: gray">
+					<div id="helpdivopen">
 						<h4 style="text-align: center; margin-top: 5%; color: white">도움센터(ctrl+/)</h4>
 						<button class="accordion">Section 1</button>
 						<div class="panel">

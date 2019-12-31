@@ -1,9 +1,45 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+  <script type="text/javascript">
+        $(function(){
+            $('#fileopen').click(function(){
+                console.log("open")
+            	$('#filediv').show();
+            	$('#fileclose').show();
+            	$('#pagelogo').attr('style','opacity:0.5');
+            	$('#scnav').attr('style','opacity:0.5');
+            });
+            $('#fileclose').click(function(){
+            	console.log("close")
+				$('#filediv').hide();
+				$('#fileclose').hide();
+				$('#pagelogo').attr('style','opacity:1');
+            	$('#scnav').attr('style','opacity:1');
+            });
+        });
+  </script>
+    <style>
+  #filediv {
+		  position: fixed;
+		  bottom: 0;
+		  right: 0;
+		  font-size: 18px;
+		  z-index: 1;
+		  width: 84.6%;
+		  height: 100%;
+		}
+  #fileclose {
+		  position: fixed;
+		  bottom: 96%;
+		  left: 13%;
+		  font-size: 18px;
+		  z-index: 2;
+		}
+</style>
 <!--**********************************
             Nav header start
         ***********************************-->
-        <div class="nav-header">
+        <div id="pagelogo" class="nav-header">
             <div class="brand-logo">
                 <a href="index.jsp" style="padding-top: 5%">
                     <b class="logo-abbr"><img class="img-responsive center-block" src="images/logo/smalllogo.png" alt="mini" style="width:100px;height: auto;padding-top:0;margin-top: 30px; "> </b>
@@ -166,7 +202,7 @@
                                             <a href="app-profile.jsp"><i class="icon-user"></i> <span>내 정보</span></a>
                                         </li>
                                         <li>
-                                            <a href="app-file.jsp"><span class="iconify" data-icon="ion:folder-open-outline" data-inline="false" style="font-size: 15px"></span> <span> &nbsp;&nbsp;파일함</span></a>
+                                            <a href="#" id="fileopen"><span class="iconify" data-icon="ion:folder-open-outline" data-inline="false" style="font-size: 15px"></span> <span> &nbsp;&nbsp;파일함</span></a>
                                         </li>
                                         <hr class="my-2">
                                         <li>
@@ -189,7 +225,7 @@
             Sidebar start
         ***********************************-->
         <div class="nk-sidebar" style="z-index: 0">           
-            <div class="nk-nav-scroll">
+            <div id="scnav" class="nk-nav-scroll">
                 <ul class="metismenu" id="menu">
                 	<li class="nav-label" style="padding-bottom: 0"><b>전체 정보</b></li>
                     <li>
@@ -274,3 +310,7 @@
       </div>
     </div>
   </div>
+  <div id="filediv" style="display: none;background-color: blue;">
+  	
+  </div>
+  <img src="./images/chat/grayclose.png" id="fileclose" name="on" width=20px height=auto style="cursor: pointer; display: none;">
