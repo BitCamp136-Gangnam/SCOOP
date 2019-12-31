@@ -1,13 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
   <script type="text/javascript">
         $(function(){
             $('#fileopen').click(function(){
                 console.log("open")
             	$('#filediv').show();
             	$('#fileclose').show();
+            	$('#fileclose').attr('name','on');
             	$('#pagelogo').attr('style','opacity:0.5');
             	$('#scnav').attr('style','opacity:0.5');
+            	$('.content-body').attr('style','opacity:0.5');
+            	$('.header').attr('style','opacity:0.5');
+            	$('#helpopen').hide();
+            	$('#filediv2').show();
             });
             $('#fileclose').click(function(){
             	console.log("close")
@@ -15,7 +21,22 @@
 				$('#fileclose').hide();
 				$('#pagelogo').attr('style','opacity:1');
             	$('#scnav').attr('style','opacity:1');
+            	$('.content-body').attr('style','opacity:1');
+            	$('.header').attr('style','opacity:1');
+            	$('#helpopen').show();
+            	$('#filediv2').hide();
             });
+            $('#filediv2').click(function(){
+            	console.log("close")
+				$('#filediv').hide();
+				$('#fileclose').hide();
+				$('#pagelogo').attr('style','opacity:1');
+            	$('#scnav').attr('style','opacity:1');
+            	$('.content-body').attr('style','opacity:1');
+            	$('.header').attr('style','opacity:1');
+            	$('#helpopen').show();
+            	$('#filediv2').hide();
+                });    
         });
   </script>
     <style>
@@ -24,16 +45,27 @@
 		  bottom: 0;
 		  right: 0;
 		  font-size: 18px;
-		  z-index: 1;
+		  z-index: 2;
 		  width: 84.6%;
 		  height: 100%;
 		}
-  #fileclose {
+  #filediv2 {
 		  position: fixed;
-		  bottom: 96%;
-		  left: 13%;
+		  bottom: 0;
+		  right: left;
 		  font-size: 18px;
 		  z-index: 2;
+		  width: 15.4%;
+		  height: 100%;
+		  background-color: black;
+		  opacity: 0.5;
+		}
+  #fileclose {
+		  position: fixed;
+		  bottom: 95%;
+		  left: 1%;
+		  font-size: 18px;
+		  z-index: 3;
 		}
 </style>
 <!--**********************************
@@ -310,7 +342,41 @@
       </div>
     </div>
   </div>
-  <div id="filediv" style="display: none;background-color: blue;">
-  	
+  <div id="filediv" class="fileclass" style="display: none;background-color: white;">
+  	<div class="row"  style="margin: 2%;">
+  		<div class="col-sm-12">
+  			<h3>파일함</h3>
+  			<h6>어디서든 Drag & Drop으로 파일을 업로드할 수 있습니다.</h6>
+  		</div>
+  	</div>
+  	<div class="row" style="margin: 2%;">
+			<ul class="nav nav-pills">
+			    <li class="nav-item">
+			      <a class="nav-link" href="#">내 파일</a>
+			    </li>
+			    <li class="nav-item">
+			      <a class="nav-link" href="#">전체 파일</a>
+			    </li>
+			    <li class="nav-item dropdown">
+			      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">프로젝트</a>
+			      <div class="dropdown-menu">
+			        <a class="dropdown-item" href="#">쫀쬬니</a>
+			        <a class="dropdown-item" href="#">스쿱</a>
+			      </div>
+			    </li>
+			    <li class="nav-item">
+			    <input type="search" class="form-control" style="border-radius: 0.25rem; height: 20px" placeholder="파일 검색">
+			    </li>
+		    </ul>
+	</div>
+	<div class="row" style="margin: 2%;">
+		<div style="width: 12.5%">
+		<img width="100%" height="auto" src="./images/chat/questionmark.png"><br>
+		<p style="font-size: 15px; text-align: center">이미지이름.jpg<br>
+		프로젝트 이름
+		</p>
+		</div>
+	</div>
   </div>
-  <img src="./images/chat/grayclose.png" id="fileclose" name="on" width=20px height=auto style="cursor: pointer; display: none;">
+  <div id="filediv2" style="display:none;"></div>
+  <img src="./images/chat/close.png" id="fileclose" name="on" width=20px height=auto style="cursor: pointer; display: none;">
