@@ -73,7 +73,7 @@
 		  z-index: 1;
 		}
 		#helpdivopen {
-		  background-color:gray;
+		  background-color:#222;
 		  width:15.4%;
 		  height:100%;
 		  display:none;
@@ -91,7 +91,7 @@
 		  z-index: 2;
 		}
 		.accordion {
-		  background-color: gray;
+		  background-color: #222;
 		  color: white;
 		  cursor: pointer;
 		  padding: 18px;
@@ -227,12 +227,11 @@
 					</div>
 					<!-- chat 끝 -->
 					<div id="helpdivopen">
-						<h4 style="text-align: center; margin-top: 5%; color: white">도움센터(ctrl+/)</h4>
+						<h4 style="margin:15%; margin-bottom:5%; color: white">도움센터(Ctrl+/)</h4>
 						<button class="accordion">Section 1</button>
 						<div class="panel">
 						  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 						</div>
-						
 						<button class="accordion">Section 2</button>
 						<div class="panel">
 						  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>

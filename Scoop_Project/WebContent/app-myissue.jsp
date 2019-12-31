@@ -51,10 +51,10 @@
 		<div class="row" style="margin-left: 2%;">
 			<ul class="nav nav-pills">
 			    <li class="nav-item">
-			      <a class="nav-link" href="#">내가 작성한 이슈</a>
+			      <a class="nav-link" data-toggle="tab" href="#">내가 작성한 이슈</a>
 			    </li>
 			    <li class="nav-item">
-			      <a class="nav-link" href="#">내가 작성한 댓글</a>
+			      <a class="nav-link" data-toggle="tab" href="#">내가 작성한 댓글</a>
 			    </li>
 		    </ul>
 		</div>

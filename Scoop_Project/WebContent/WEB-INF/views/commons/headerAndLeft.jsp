@@ -4,7 +4,6 @@
   <script type="text/javascript">
         $(function(){
             $('#fileopen').click(function(){
-                console.log("open")
             	$('#filediv').show();
             	$('#fileclose').show();
             	$('#fileclose').attr('name','on');
@@ -16,7 +15,6 @@
             	$('#filediv2').show();
             });
             $('#fileclose').click(function(){
-            	console.log("close")
 				$('#filediv').hide();
 				$('#fileclose').hide();
 				$('#pagelogo').attr('style','opacity:1');
@@ -27,7 +25,6 @@
             	$('#filediv2').hide();
             });
             $('#filediv2').click(function(){
-            	console.log("close")
 				$('#filediv').hide();
 				$('#fileclose').hide();
 				$('#pagelogo').attr('style','opacity:1');
@@ -36,7 +33,33 @@
             	$('.header').attr('style','opacity:1');
             	$('#helpopen').show();
             	$('#filediv2').hide();
-                });    
+                });
+           	$(document).keydown(function(event) {
+				  if (event.ctrlKey && event.keyCode==190) {
+					  if($('.fileon').attr('class')=='fileon'){
+		        			$('#filediv').attr('class','fileoff');
+		        			$('#filediv').show();
+		                	$('#fileclose').show();
+		                	$('#fileclose').attr('name','on');
+		                	$('#pagelogo').attr('style','opacity:0.5');
+		                	$('#scnav').attr('style','opacity:0.5');
+		                	$('.content-body').attr('style','opacity:0.5');
+		                	$('.header').attr('style','opacity:0.5');
+		                	$('#helpopen').hide();
+		                	$('#filediv2').show();
+		        		}else{
+		        			$('#filediv').attr('class','fileon');
+		        			$('#filediv').hide();
+		    				$('#fileclose').hide();
+		    				$('#pagelogo').attr('style','opacity:1');
+		                	$('#scnav').attr('style','opacity:1');
+		                	$('.content-body').attr('style','opacity:1');
+		                	$('.header').attr('style','opacity:1');
+		                	$('#helpopen').show();
+		                	$('#filediv2').hide();
+			        		}
+				  }
+				});  
         });
   </script>
     <style>
@@ -103,7 +126,7 @@
                             <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
                         </div>
                         <input type="search" class="form-control" placeholder="검색하세요" aria-label="Search">
-                        <input type="button" class="form-control" style="background-color: #fff5a5; border-color: #CCCCCC; margin-left: 2%; color: gray; cursor: pointer;" value="이슈작성">
+                        <input type="button" class="form-control" style="background-color: #fff5a5; border-color: #CCCCCC; margin-left: 2%; color: gray; cursor: pointer;" value="이슈 작성" data-toggle="modal" data-target="#makeissue">
                         <div class="drop-down animated flipInX d-md-none">
                             <form action="#">
                                 <input type="text" class="form-control" placeholder="Search">
@@ -113,54 +136,6 @@
                 </div>
                 <div class="header-right">
                     <ul class="clearfix">
-                        <li class="icons dropdown"><a href="javascript:void(0)" data-toggle="dropdown">
-                                <i class="mdi mdi-email-outline"></i>
-                                <span class="badge badge-pill gradient-1">0</span>
-                            </a>
-                            <div class="drop-down animated fadeIn dropdown-menu">
-                                <div class="dropdown-content-body">
-                                    <ul>
-                                        <li class="notification-unread">
-                                            <a href="javascript:void()">
-                                                <div class="notification-content">
-                                                    <div class="notification-heading">제목</div>
-                                                    <div class="notification-timestamp">시간</div>
-                                                    <div class="notification-text">내용나오다가 생략...</div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="notification-unread">
-                                            <a href="javascript:void()">
-                                                <div class="notification-content">
-                                                    <div class="notification-heading">Adam Smith</div>
-                                                    <div class="notification-timestamp">08 Hours ago</div>
-                                                    <div class="notification-text">Can you do me a favour?</div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void()">
-                                                <div class="notification-content">
-                                                    <div class="notification-heading">Barak Obama</div>
-                                                    <div class="notification-timestamp">08 Hours ago</div>
-                                                    <div class="notification-text">Hi Teddy, Just wanted to let you ...</div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void()">
-                                                <div class="notification-content">
-                                                    <div class="notification-heading">Hilari Clinton</div>
-                                                    <div class="notification-timestamp">08 Hours ago</div>
-                                                    <div class="notification-text">Hello</div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    
-                                </div>
-                            </div>
-                        </li>
                         <li class="icons dropdown"><a href="javascript:void(0)" data-toggle="dropdown">
                                 <i class="mdi mdi-bell-outline"></i>
                                 <span class="badge badge-pill gradient-2">0</span>
@@ -342,10 +317,10 @@
       </div>
     </div>
   </div>
-  <div id="filediv" class="fileclass" style="display: none;background-color: white;">
+  <div id="filediv" class="fileon" style="display: none;background-color: white;">
   	<div class="row"  style="margin: 2%;">
   		<div class="col-sm-12">
-  			<h3>파일함</h3>
+  			<h3>파일함(Ctrl + .)</h3>
   			<h6>어디서든 Drag & Drop으로 파일을 업로드할 수 있습니다.</h6>
   		</div>
   	</div>
@@ -369,10 +344,11 @@
 			    </li>
 		    </ul>
 	</div>
-	<div class="row" style="margin: 2%;">
-		<div style="width: 12.5%">
+	<div class="row" style="margin: 2%; overflow: auto; height: 600px">
+		<div style="width: 10%; margin: 1%; cursor: pointer;">
 		<img width="100%" height="auto" style="margin: 1%" src="./images/chat/questionmark.png"><br>
-		<p style="font-size: 15px; text-align: center">이미지이름.jpg<br>
+		<p style="font-size: 15px; text-align: center">
+		이미지이름.jpg<br>
 		프로젝트 이름
 		</p>
 		</div>
@@ -380,3 +356,34 @@
   </div>
   <div id="filediv2" style="display:none;"></div>
   <img src="./images/chat/close.png" id="fileclose" name="on" width=20px height=auto style="cursor: pointer; display: none;">
+  
+  <div class="modal fade" id="makeissue">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h3 class="modal-title">이슈 작성</h3>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <form action="">
+        <!-- Modal body -->
+        <div class="modal-body">
+        <!-- <p style="font-size: 12px">협업공간은 함께 일하는 멤버들끼리만 자료를 공유하고 협업할 수 있는 공간입니다.<br>
+          	협업공간을 만들고 함께 일할 멤버들을 초대해보세요.</p> -->
+            <label for="title">이슈 제목</label>
+    		<input class="form-control createmodal" type="text" id="issuetitle" style="width: 100%" placeholder="제목을 입력해 주세요.">
+    		<br>
+            <label for="content">이슈 설명</label>
+    		<textarea class="form-control createmodal" rows="5" id="issuecontent" style="width: 100%" placeholder="@를 입력하여 멘션, 할 일, 파일 등을 추가해 보세요."></textarea>
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-secondary" style="background-color: #fff5a5; border-color: #CCCCCC; color: gray; cursor: pointer;" data-dismiss="modal">만들기</button>
+          <button type="button" class="btn btn-secondary" style="background-color: #fff5a5; border-color: #CCCCCC; color: gray; cursor: pointer;" data-dismiss="modal">취소</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
