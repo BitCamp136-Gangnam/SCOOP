@@ -74,6 +74,8 @@
 							        //location.href="http://localhost:8090/Scoop_Project/index.jsp";
 							      }
 							    </script>
+							 
+
                                 <p class="mt-5 login-form__footer">Dont have account? <a href="page-register.jsp" class="text-primary">Sign Up</a> now</p>
                             </div>
                         </div>
