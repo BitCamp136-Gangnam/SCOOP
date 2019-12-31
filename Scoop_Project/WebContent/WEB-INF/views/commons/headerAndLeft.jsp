@@ -371,7 +371,7 @@
 	</div>
 	<div class="row" style="margin: 2%;">
 		<div style="width: 12.5%">
-		<img width="100%" height="auto" src="./images/chat/questionmark.png"><br>
+		<img width="100%" height="auto" style="margin: 1%" src="./images/chat/questionmark.png"><br>
 		<p style="font-size: 15px; text-align: center">이미지이름.jpg<br>
 		프로젝트 이름
 		</p>
