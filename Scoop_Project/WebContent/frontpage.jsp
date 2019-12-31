@@ -238,16 +238,24 @@
 					<div class="card-deck pricing-table">
 						<div class="card text-center" style="border-color:#fff">
 							<div class="card-body">
-								<h4 class="card-title pt-3">Premium</h4>
-								<h2 class="card-title text-primary pt-4"> </h2>
-								<div class="text-muted mt-4"></div>
+								<h4 class="card-title pt-3"  style="color:#f38181">CHOICE</h4>
+								<h2 class="card-title pt-4"  style="color:#f38181">PRICE</h2>
+								<div class="text-muted mt-4">기한</div>
 								<ul class="list-unstyled pricing-list">
-									<li>Unlimited devices</li>
-									<li>Unlimited media sources</li>
-									<li>10 private channel</li>
-									<li>Premium support</li>
+									<li>알림을 가질 수 있는 협업 공간</li>
+									<li>완료된 협업 공간</li>
+									<li>1회 업로드 용량</li>
+									<li>퇴사자 관리</li>
+									<li>회사/팀 통합 관리</li>
+									<li>협업공간 관리</li>
+									<li>공용공간 관리</li>
+									<li>멤버수</li>
+									<li>외부 협업자 수</li>
+									<li>CS(1:1문의)</li>
+									<li>외부 서비스 연동</li>
+									<li>이메일 연동(준비중)</li>
 								</ul>
-								<a href="#" class="btn btn-primary"> Get Started </a>
+								<h5> 지금 바로 시작해보세요. </h5>
 							</div>
 						</div>
 				
@@ -261,6 +269,7 @@
 								</div>
 								<ul class="list-unstyled pricing-list">
 									<li>3개</li>
+									<li>무제한</li>
 									<li>무제한</li>
 									<li>20MB</li>
 									<li>-</li>
@@ -282,6 +291,7 @@
 								<h2 class="card-title text-primary pt-4">$4</h2>
 								<div class="text-muted mt-4">per month</div>
 								<ul class="list-unstyled pricing-list">
+									<li>무제한</li>
 									<li>무제한</li>
 									<li>50MB</li>
 									<li><span class="iconify" data-icon="bx:bx-check"
