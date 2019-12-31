@@ -42,6 +42,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <script src="https://code.iconify.design/1/1.0.3/iconify.min.js"></script>
+
 <body>
 <!-- navbar-->
 <header class="header">
@@ -113,7 +114,7 @@
            </div>
            </li>
            <!-- Link-->
-           <li class="nav-item"> <a href="pricing.jsp" class="nav-link">가격</a></li>
+           <li class="nav-item"> <a href="#pricing" class="nav-link">가격</a></li>
            <!-- Link-->
            <li class="nav-item"> <a href="#" class="nav-link">Get started</a></li>
        
@@ -147,6 +148,11 @@
         	<div id="my-signin2"style="float: right;"></div>
         	<div id="naver_id_login" style="float:right;margin-right: 5px;margin-left: 0px;width: 210px;border-left-width: 20px;padding-left: 15px;"></div>
         </div>
+        <div>
+	        	   <a href="" style="padding-right:45%;">아직 회원이 아니신가요?</a>
+	        	   
+	        	   <a href="">비밀번호를 잃어버리셨나요?</a>
+        </div>
       	</form>
 		<!-- 네이버아이디로로그인 버튼 노출 영역 -->
 								  <script type="text/javascript">
@@ -179,6 +185,7 @@
 							        }
 							      </script>
 							      <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+						
 							   
      </div>
    </div>
@@ -223,7 +230,7 @@
   
   <!--pricing section-->
 	<section class="pt-7" id="pricing">
-		<div class="container">
+		<div class="container">	
 			<div class="row">
 				<div class="col-md-7 mx-auto text-center">
 					<h2>스쿱을 무료로 사용해 보세요</h2>

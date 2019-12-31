@@ -1533,7 +1533,7 @@ body {
 }
 
 a {
-  color: #fddd8a;
+  color: #000000;
   text-decoration: none;
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
@@ -1541,7 +1541,7 @@ a {
 }
 
 a:hover, a:focus {
-  color: #3a04b6;
+  color: #e23e57;
   text-decoration: underline;
 }
 
