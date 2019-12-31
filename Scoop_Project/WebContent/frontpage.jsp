@@ -42,7 +42,16 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <script src="https://code.iconify.design/1/1.0.3/iconify.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function($) {
+	$("#pricing_area").click(function(event){
+		 var offset = $("#pricing").offset();
+         $('html').animate({scrollTop : offset.top}, 500);
+	});
+	
+});
 
+</script>
 <body>
 <!-- navbar-->
 <header class="header">
@@ -114,7 +123,7 @@
            </div>
            </li>
            <!-- Link-->
-           <li class="nav-item"> <a href="#pricing" class="nav-link">가격</a></li>
+           <li class="nav-item"> <a href="#pricing" id="pricing_area" class="nav-link">가격</a></li>
            <!-- Link-->
            <li class="nav-item"> <a href="#" class="nav-link">Get started</a></li>
        
@@ -230,6 +239,7 @@
   
   <!--pricing section-->
 	<section class="pt-7" id="pricing">
+	<div id="pricing_area"> </div>
 		<div class="container">	
 			<div class="row">
 				<div class="col-md-7 mx-auto text-center">
