@@ -9,8 +9,15 @@
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="all,follow">
+<!--vendors styles-->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Bootstrap CSS / Color Scheme -->
+<link rel="stylesheet" href="css/default.css" id="theme-color">
+
 <!-- Bootstrap CSS-->
 <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+
 <!-- Ionicons CSS-->
 <link rel="stylesheet" href="css/ionicons.min.css">
 <!-- Device mockups CSS-->
@@ -31,9 +38,10 @@
 	<meta name="google-signin-scope" content="profile email">
     <meta name="google-signin-client_id" content="47797892299-i06tt9qhbs15g8mn89ncu1isa1eneql8.apps.googleusercontent.com">
 </head>
- <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-  <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script src="https://code.iconify.design/1/1.0.3/iconify.min.js"></script>
 <body>
 <!-- navbar-->
 <header class="header">
@@ -212,42 +220,146 @@
    </div>
   </section>
   <br>
-  <!-- Features Section-->
-  <section class="features shape-2">         
-   <div class="container">
-     <div class="section-header text-center"><span class="section-header-title"></span>
-      <h2 class="h1">Built and customized</h2>
-      <div class="row">
-        <div class="col-lg-8 mx-auto">
-         <p class="lead">ShowTrackr’s built-in machine learning and context-aware features guarantee that all the notifications and recommendations are always delivered to you in the perfect moment.</p>
-        </div>
-      </div>
-     </div>
-     <div class="row mt-5 text-center">
-      <div class="col-lg-4">
-        <div class="features-item mb-5 mb-lg-0">
-         <div class="gradient-icon gradient-1"><i class="icon ion-ios-play"></i></div>
-         <h3 class="h5">Automated tracking</h3>
-         <p>Track your favorite shows automatically without switching between apps.</p><a href="#" class="features-link">Learn more<i class="icon ion-ios-arrow-forward ml-2"></i></a>
-        </div>
-      </div>
-      <div class="col-lg-4">
-        <div class="features-item mb-5 mb-lg-0">
-         <div class="gradient-icon gradient-2"><i class="icon ion-ios-cog"></i></div>
-         <h3 class="h5">Machine learning</h3>
-         <p>Get recommendations like never before, which are truly customized for your taste.</p><a href="#" class="features-link">Learn more<i class="icon ion-ios-arrow-forward ml-2"></i></a>
-        </div>
-      </div>
-      <div class="col-lg-4">
-        <div class="features-item mb-5 mb-lg-0">
-         <div class="gradient-icon gradient-3"><i class="icon ion-ios-notifications"></i></div>
-         <h3 class="h5">Smart notifications</h3>
-         <p>Receive smart notifications exactly at the right moments when you need them.</p><a href="#" class="features-link">Learn more<i class="icon ion-ios-arrow-forward ml-2"></i></a>
-        </div>
-      </div>
-     </div>
-   </div>
-  </section>
+  
+  <!--pricing section-->
+	<section class="pt-7" id="pricing">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-7 mx-auto text-center">
+					<h2>스쿱을 무료로 사용해 보세요</h2>
+					<br>
+					<p class="text-muted lead">무료로 얼마든지 동료를 초대하고 협업공간을 생성하여 협업할 수
+						있습니다.</p>
+				</div>
+			</div>
+			<!--pricing tables-->
+			<div class="row pt-5 pricing-table">
+				<div class="col-sm-12">
+					<div class="card-deck pricing-table">
+						<div class="card text-center" style="border-color:#fff">
+							<div class="card-body">
+								<h4 class="card-title pt-3"  style="color:#f38181">CHOICE</h4>
+								<h2 class="card-title pt-4"  style="color:#f38181">PRICE</h2>
+								<div class="text-muted mt-4">기한</div>
+								<ul class="list-unstyled pricing-list">
+									<li>알림을 가질 수 있는 협업 공간</li>
+									<li>완료된 협업 공간</li>
+									<li>1회 업로드 용량</li>
+									<li>퇴사자 관리</li>
+									<li>회사/팀 통합 관리</li>
+									<li>협업공간 관리</li>
+									<li>공용공간 관리</li>
+									<li>멤버수</li>
+									<li>외부 협업자 수</li>
+									<li>CS(1:1문의)</li>
+									<li>외부 서비스 연동</li>
+									<li>이메일 연동(준비중)</li>
+								</ul>
+								<h5> 지금 바로 시작해보세요. </h5>
+							</div>
+						</div>
+				
+						<div class="card text-center" style="border-color:#fff">
+							<div class="card-body">
+								<h4 class="card-title pt-3">Free</h4>
+								<h2 class="card-title pt-4">$0</h2>
+								<div class="text-muted mt-4">
+									<span class="iconify" data-icon="ion:infinite-sharp"
+										data-inline="false"></span>
+								</div>
+								<ul class="list-unstyled pricing-list">
+									<li>3개</li>
+									<li>무제한</li>
+									<li>무제한</li>
+									<li>20MB</li>
+									<li>-</li>
+									<li>-</li>
+									<li><span class="iconify" data-icon="bx:bx-check"
+										data-inline="false" style="color: #d4af37;"></span></li>
+									<li>-</li>
+									<li>무제한</li>
+									<li>무제한</li>
+									<li>-</li>
+									<li>-</li>
+								</ul>
+								<a href="#" data-toggle="modal" data-target="#login" class="btn btn-secondary"> Get started </a>
+							</div>
+						</div>
+						<div class="card text-center"style="border-color:#fff">
+							<div class="card-body">
+								<h4 class="card-title text-primary pt-3">Premium</h4>
+								<h2 class="card-title text-primary pt-4">$4</h2>
+								<div class="text-muted mt-4">per month</div>
+								<ul class="list-unstyled pricing-list">
+									<li>무제한</li>
+									<li>무제한</li>
+									<li>50MB</li>
+									<li><span class="iconify" data-icon="bx:bx-check"
+										data-inline="false" style="color: #d4af37;"></span></li>
+									<li><span class="iconify" data-icon="bx:bx-check"
+										data-inline="false" style="color: #d4af37;"></span></li>
+									<li><span class="iconify" data-icon="bx:bx-check"
+										data-inline="false" style="color: #d4af37;"></span></li>
+									<li><span class="iconify" data-icon="bx:bx-check"
+										data-inline="false" style="color: #d4af37;"></span></li>
+									<li>무제한</li>
+									<li>무제한</li>
+									<li><span class="iconify" data-icon="bx:bx-check"
+										data-inline="false" style="color: #d4af37;"></span></li>
+									<li>무제한</li>
+									<li>-</li>
+								</ul>
+								<a href="#" data-toggle="modal" data-target="#login" class="btn btn-primary"> Get Started </a>
+
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<div class="row mt-6">
+				<div class="col-md-10 mx-auto">
+					<div class="row">
+						<div class="col-md-6 mb-5">
+							<h6>Can I try Musli for free?</h6>
+							<p class="text-muted">Nam liber tempor cum soluta nobis
+								eleifend option congue nihil imper per tem por legere me doming.</p>
+						</div>
+						<div class="col-md-6 mb-5">
+							<h6>Do you have hidden fees?</h6>
+							<p class="text-muted">Nam liber tempor cum soluta nobis
+								eleifend option congue nihil imper per tem por legere me doming.</p>
+						</div>
+						<div class="col-md-6 mb-5">
+							<h6>What are the payment methods you accept?</h6>
+							<p class="text-muted">Nam liber tempor cum soluta nobis
+								eleifend option congue nihil imper per tem por legere me doming.</p>
+						</div>
+						<div class="col-md-6 mb-5">
+							<h6>How often do you release updates?</h6>
+							<p class="text-muted">Nam liber tempor cum soluta nobis
+								eleifend option congue nihil imper per tem por legere me doming.</p>
+						</div>
+						<div class="col-md-6 mb-5">
+							<h6>What is your refund policy?</h6>
+							<p class="text-muted">Nam liber tempor cum soluta nobis
+								eleifend option congue nihil imper per tem por legere me doming.</p>
+						</div>
+						<div class="col-md-6 mb-5">
+							<h6>How can I contact you?</h6>
+							<p class="text-muted">Nam liber tempor cum soluta nobis
+								eleifend option congue nihil imper per tem por legere me doming.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="tlinks">
+			Collect from <a href="http://www.cssmoban.com/" title=""></a>
+		</div>
+	</section>
+  
   <!-- App Showcase Section-->
   <section class="app-showcase pb-big">
    <div class="container">
@@ -568,6 +680,7 @@
      <p class="copyrights-text mb-0">Copyright &copy; 2019.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
    </div>
   </div>
+
 </footer>
 <!-- JavaScript files-->
 <script src="vendor/jquery/jquery.min.js"></script>
