@@ -64,7 +64,7 @@ $(document).ready(function($) {
 <header class="header">
   <nav class="navbar navbar-expand-lg">
    <div class="container">
-     <!-- Navbar brand--><a href="frontpage.jsp" class="navbar-brand font-weight-bold"><img src="img/brownlogo.png" alt="..." class="img-fluid"></a>
+     <!-- Navbar brand--><a href="frontpage.jsp" class="navbar-brand font-weight-bold"><img src="images/logo/ScoopBig.png" style="width:200px;height: 75px; " alt="..." ></a>
      <!-- Navbar toggler button-->
      <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right">Menu<i class="icon ion-md-list ml-2"></i></button>
      <div id="navbarSupportedContent" class="collapse navbar-collapse">
@@ -147,7 +147,7 @@ $(document).ready(function($) {
       <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
      </div>
      <div class="modal-body p-4 p-lg-5">
-      <img class="img-responsive center-block" alt="Scoop로고" src="images/logo/brownlogo.png" style="width:100%;height:auto;padding-right:15%;padding-left:15%;"/>
+      <img class="img-responsive center-block" alt="Scoop로고" src="images/logo/ScoopBig.png" style="width:100%;height:auto;padding-right:15%;padding-left:15%;"/>
       <form action="#" class="login-form text-left">
         <div class="form-group mb-4">
          <label>Email address</label>
@@ -214,7 +214,7 @@ $(document).ready(function($) {
       <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
      </div>
      <div class="modal-body p-4 p-lg-5">
-      <img class="img-responsive center-block" alt="Scoop로고" src="images/logo/brownlogo.png" style="width:100%;height:auto;padding-right:15%;padding-left:15%;"/>
+      <img class="img-responsive center-block" alt="Scoop로고" src="images/logo/ScoopBig.png" style="width:100%;height:auto;padding-right:15%;padding-left:15%;"/>
       <form action="#" class="login-form text-left">
         <div class="form-group mb-4">
          <label>Email address</label>
