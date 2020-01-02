@@ -215,7 +215,7 @@ $(document).ready(function($) {
      </div>
      <div class="modal-body p-4 p-lg-5">
       <img class="img-responsive center-block" alt="Scoop로고" src="images/logo/ScoopBig.png" style="width:100%;height:auto;padding-right:15%;padding-left:15%;"/>
-      <form action="#" class="login-form text-left">
+      <form action="register.do" class="login-form text-left">
         <div class="form-group mb-4">
          <label>Email address</label>
          <input type="text" class="form-control" id="scoop_out" placeholder="E-mail@company.com" required>
