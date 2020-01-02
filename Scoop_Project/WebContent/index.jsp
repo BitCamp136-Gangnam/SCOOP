@@ -65,15 +65,15 @@
 			    <li class="nav-item dropdown">
 			      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">정렬</a>
 			      <div class="dropdown-menu">
-			        <a class="dropdown-item" href="#">안읽음</a>
-			        <a class="dropdown-item" href="#">읽음</a>
+			        <a class="dropdown-item" data-toggle="tab" href="#">안읽음</a>
+			        <a class="dropdown-item" data-toggle="tab" href="#">읽음</a>
 			      </div>
 			    </li>
 			    <li class="nav-item">
-			      <a class="nav-link active" href="#">이슈 업데이트</a>
+			      <a class="nav-link active" data-toggle="tab" href="#">이슈 업데이트</a>
 			    </li>
 			    <li class="nav-item">
-			      <a class="nav-link" href="#">@멘션</a>
+			      <a class="nav-link" data-toggle="tab" href="#">@멘션</a>
 			    </li>
 		    </ul>
 		</div>

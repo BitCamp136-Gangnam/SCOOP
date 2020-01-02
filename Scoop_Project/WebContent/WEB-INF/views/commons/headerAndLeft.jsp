@@ -143,6 +143,15 @@
                             <div class="drop-down animated fadeIn dropdown-menu dropdown-notfication">
                                 <div class="dropdown-content-body">
                                     <ul>
+                                    	<li>
+                                    		<a href="javascript:void()">
+                                    			<span class="mr-3 avatar-icon bg-success-lighten-2"><i class="icon-present"></i></span>
+                                                <div class="notification-content">
+                                                    <h6 class="notification-heading">무슨 알림인지</h6>
+                                                    <span class="notification-text">알림 몇분전에 왔는지</span> 
+                                                </div>
+                                    		</a>
+                                    	</li>
                                         <li>
                                             <a href="javascript:void()">
                                                 <span class="mr-3 avatar-icon bg-success-lighten-2"><i class="icon-present"></i></span>
