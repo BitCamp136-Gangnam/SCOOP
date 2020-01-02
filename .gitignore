@@ -148,3 +148,5 @@
 .metadata/.plugins/org.eclipse.m2e.core/workspaceState.ser
 .metadata/.plugins/org.eclipse.m2e.core/nexus/91c983abde1d7cafd57e03f12910ff19/write.lock
 .metadata/.plugins/org.eclipse.m2e.core/nexus/91c983abde1d7cafd57e03f12910ff19/segments_2
+Scoop_Project/target/classes/snippet/Snippet.class
+Scoop_Project/src/snippet/Snippet.java
