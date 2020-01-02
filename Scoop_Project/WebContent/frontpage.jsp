@@ -199,8 +199,6 @@ $(document).ready(function($) {
 							        }
 							      </script>
 							      <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
-						
-							   
      </div>
    </div>
   </div>
