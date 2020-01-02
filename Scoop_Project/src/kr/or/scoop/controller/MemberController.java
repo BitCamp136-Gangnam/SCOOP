@@ -1,13 +1,12 @@
 package kr.or.scoop.controller;
 
-import java.security.Principal;
+import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.or.scoop.service.MemberService;
 import kr.or.scoop.vo.Member;
@@ -23,9 +22,10 @@ public class MemberController {
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@RequestMapping(value="register.do",method=RequestMethod.POST)
-	public String join(String email,String pwd,String name) throws ClassNotFoundException, SQLException {
+	public String register(String email,String pwd,String name) throws ClassNotFoundException, SQLException {
 		
-		Member member;
+		System.out.println("여기옴?");
+		Member member = null;
 		
 		int result = 0;
 		String viewpage="";
@@ -35,7 +35,7 @@ public class MemberController {
 		
 		if(result > 0) {
 			System.out.println("가입성공");
-			viewpage = "redirect:/index.do";
+			viewpage = "redirect:/index.jsp";
 		}else {
 			System.out.println("가입실패");
 			viewpage = "index.do";
@@ -45,29 +45,5 @@ public class MemberController {
 		
 	}
 	
-	@RequestMapping(value="register.do",method=RequestMethod.POST)
-	public String memberConfirm(
-				String email,String pwd,String name
-			) {
-		String viewpage="";
-		
-		//�쉶�썝�젙蹂�
-		Member member = service.getMember(Principal.getName());
-		
-		//DB�뿉�꽌 媛��졇�삩 �븫�샇�솕�맂 臾몄옄�뿴
-		String encodedPassword = member.getPwd();
-		
-		System.out.println("encodepassword : " + encodedPassword); //DB�뿉 ���옣�맂 �븫�샇�솕�맂 媛�
-		
-		//�엯�젰媛믨낵 �븫�샇�쉶�맂  媛� 留ㅼ묶�떆�궎�뒗 怨쇱젙(matches �븿�닔)
-		boolean result = bCryptPasswordEncoder.matches(pwd, encodedPassword);
-		
-		if(result){
-			viewpage="redirect:memberupdate.do";
-		}else{
-			viewpage="redirect:memberconfirm.do";
-		}
-		
-		return viewpage;
-	}
+
 }

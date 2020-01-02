@@ -52,7 +52,7 @@ $(document).ready(function($) {
 	//이메일 아웃풋
 	$("#scoop_input").click(function(){
 
-		$("#scoop_out").val($("#scoop_in").val());
+		$("#email").val($("#scoop_in").val());
 			
 	});
 	
@@ -217,15 +217,15 @@ $(document).ready(function($) {
         <h4>회원가입</h4>
         <div class="form-group mb-4">
          <label>Email address</label>
-         <input type="text" class="form-control" id="scoop_out" placeholder="E-mail@company.com" required>
+         <input type="text" class="form-control" id="email" name="email" placeholder="E-mail@company.com" required>
         </div>
         <div class="form-group mb-4">
          <label>Name</label>
-         <input type="text" class="form-control"  placeholder="Name" required>
+         <input type="text" class="form-control" id="name" name ="name" placeholder="Name" required>
         </div>
         <div class="form-group mb-4">
          <label>Password</label>
-         <input type="password" class="form-control" placeholder="Password" required>
+         <input type="password" class="form-control" id="pwd" name="pwd" placeholder="Password" required>
         </div>
         <div class="form-group">
         	<center>
@@ -253,7 +253,7 @@ $(document).ready(function($) {
       <form action="#" class="login-form text-left">
         <div class="form-group mb-4">
          <label>Email address</label>
-         <input type="text" class="form-control" id="scoop_out" placeholder="E-mail@company.com" required>
+         <input type="text" class="form-control" id="email" placeholder="E-mail@company.com" required>
         </div>
        
         <div class="form-group">
