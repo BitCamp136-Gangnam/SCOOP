@@ -65,7 +65,7 @@ section {
   display: block;
   height: 50rem;
   width: 50rem;
-  background: url(../img/shape-1.svg) no-repeat;
+ /*  background: url(../img/shape-1.svg) no-repeat; */
   background-size: 100%;
   position: absolute;
   top: -9rem;
