@@ -96,11 +96,11 @@
         ***********************************-->
         <div id="pagelogo" class="nav-header">
             <div class="brand-logo">
-                <a href="index.jsp" style="padding-top: 5%">
-                    <b class="logo-abbr"><img class="img-responsive center-block" src="images/logo/smalllogo.png" alt="mini" style="width:100px;height: auto;padding-top:0;margin-top: 30px; "> </b>
-                    <span class="logo-compact"><img class="img-responsive center-block"src="images/logo/brownlogo.png" alt="" style="margin-top: 20px;"></span>
+                <a href="index.jsp" style="padding-top: 0px;">
+                    <b class="logo-abbr"><img class="img-responsive center-block" src="images/logo/ScoopTitle.png" alt="mini" style="width:100px;height: auto;padding-top:0;margin-top: 30px; "> </b>
+                    <span class="logo-compact"><img class="img-responsive center-block"src="images/logo/ScoopBig.png" alt="" style="margin-top: 20px; text-align: center;"></span>
                     <span class="brand-title">
-                        <img class="img-responsive center-block" src="images/logo/brownlogo.png" alt="" >
+                        <img class="img-responsive center-block" src="images/logo/ScoopBig.png" alt="" style="margin-top: 3%;">
                     </span>
                 </a>
             </div>
@@ -126,7 +126,7 @@
                             <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
                         </div>
                         <input type="search" class="form-control" placeholder="검색하세요" aria-label="Search">
-                        <input type="button" class="form-control" style="background-color: #fff5a5; border-color: #CCCCCC; margin-left: 2%; color: gray; cursor: pointer;" value="이슈 작성" data-toggle="modal" data-target="#makeissue">
+                        <input type="button" class="form-control" style="background-color: #E71D36; border-color: #CCCCCC; margin-left: 2%; color: #fff; cursor: pointer;" value="이슈 작성" data-toggle="modal" data-target="#makeissue">
                         <div class="drop-down animated flipInX d-md-none">
                             <form action="#">
                                 <input type="text" class="form-control" placeholder="Search">
@@ -263,7 +263,7 @@
                         </a>
                     </li>
                     <li class="nav-label" style="padding-bottom: 0"><b>협업 공간</b></li>
-                    <li class="nav-label"><button type="button" class="btn" style="background-color: #fff5a5; border-color: #CCCCCC; color: gray; cursor: pointer;" data-toggle="modal" data-target="#myModal"><i class="icon-note menu-icon"></i> 새 협업공간 만들기</button></li>
+                    <li class="nav-label"><button type="button" class="btn" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-toggle="modal" data-target="#myModal"><i class="icon-note menu-icon"></i> 새 협업공간 만들기</button></li>
                     <li class="nav-label" style="padding-top: 0"><input type="search" class="form-control" style="border-radius: 0.25rem; height: 20px" placeholder="협업공간 검색"></li>
                     <li>
                         <a href="./cooperation-issue.jsp" aria-expanded="false">
@@ -310,8 +310,8 @@
         
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button type="submit" class="btn btn-secondary" style="background-color: #fff5a5; border-color: #CCCCCC; color: gray; cursor: pointer;" data-dismiss="modal">만들기</button>
-          <button type="button" class="btn btn-secondary" style="background-color: #fff5a5; border-color: #CCCCCC; color: gray; cursor: pointer;" data-dismiss="modal">취소</button>
+          <button type="submit" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">만들기</button>
+          <button type="button" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">취소</button>
         </div>
         </form>
       </div>
@@ -379,8 +379,8 @@
         </div>
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button type="submit" class="btn btn-secondary" style="background-color: #fff5a5; border-color: #CCCCCC; color: gray; cursor: pointer;" data-dismiss="modal">만들기</button>
-          <button type="button" class="btn btn-secondary" style="background-color: #fff5a5; border-color: #CCCCCC; color: gray; cursor: pointer;" data-dismiss="modal">취소</button>
+          <button type="submit" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">만들기</button>
+          <button type="button" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">취소</button>
         </div>
         </form>
       </div>
