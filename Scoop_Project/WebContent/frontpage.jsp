@@ -279,7 +279,7 @@ $(document).ready(function($) {
   <br>
   
   <!--pricing section-->
-	<section class="pt-7" id="pricing">
+	<section class="pt-4" id="pricing">
 	<div id="pricing_area"> </div>
 		<div class="container">	
 			<div class="row">
