@@ -396,31 +396,50 @@
     </div>
           		      <!-- @자동완성 수정 많이해야됨 자동완성의 위치와 키다운 위아래랑 엔터 -->
 	  <div class="list-group" id="mentionlist" style="display: none">
-	  <a href="#" class="list-group-item list-group-item-action" style="padding: 5px">멘션</a>
-	  <a href="#" class="list-group-item list-group-item-action" style="padding: 5px">소스코드</a>
-	  <a href="#" class="list-group-item list-group-item-action" style="padding: 5px">구글 드라이브</a>
-	  <a href="#" class="list-group-item list-group-item-action" style="padding: 5px">파일</a>
-	  <a href="#" class="list-group-item list-group-item-action" style="padding: 5px">표</a>
-	  <a href="#" class="list-group-item list-group-item-action" style="padding: 5px">관련 이슈</a>
-	  <a href="#" class="list-group-item list-group-item-action" style="padding: 5px">의사결정</a>
-	  <a href="#" class="list-group-item list-group-item-action" style="padding: 5px">할 일</a>
-	  <a href="#" class="list-group-item list-group-item-action" style="padding: 5px">일정</a>
+	  <a href="#" class="list-group-item list-group-item-action" id="men1" style="padding: 5px">멘션</a>
+	  <a href="#" class="list-group-item list-group-item-action" id="men2" style="padding: 5px">소스코드</a>
+	  <a href="#" class="list-group-item list-group-item-action" id="men3" style="padding: 5px">구글 드라이브</a>
+	  <a href="#" class="list-group-item list-group-item-action" id="men4" style="padding: 5px">파일</a>
+	  <a href="#" class="list-group-item list-group-item-action" id="men5" style="padding: 5px">표</a>
+	  <a href="#" class="list-group-item list-group-item-action" id="men6" style="padding: 5px">관련 이슈</a>
+	  <a href="#" class="list-group-item list-group-item-action" id="men7" style="padding: 5px">의사결정</a>
+	  <a href="#" class="list-group-item list-group-item-action" id="men8" style="padding: 5px">할 일</a>
+	  <a href="#" class="list-group-item list-group-item-action" id="men9" style="padding: 5px">일정</a>
 	</div>
 	<!--  -->
+	<!-- 멘션할 사람 목록 -->
+	<div class="list-group" id="memlist" style="display: none">
+	  <a href="#" class="list-group-item list-group-item-action" style="padding: 5px">홍길동</a>
+	  <a href="#" class="list-group-item list-group-item-action" style="padding: 5px">김유신</a>
+	  <a href="#" class="list-group-item list-group-item-action" style="padding: 5px">임경균</a>
+	</div>
   </div>
 
   <script type="text/javascript">
 	$('#issuecontent').keydown(function(event){
-		var top = ($('#issuecontent').focus().offset().top+40);
-		var left = ($('#issuecontent').focus().offset().left+20);
+		var top = ($('#issuecontent').offset().top);
+		var left = ($('#issuecontent').offset().left+490);
 		if(event.shiftKey && event.keyCode==50){
 			console.log("top&left" + top + ", "+left);
 			$('#mentionlist').attr('style','position:fixed; width:20%;top:'+top+'px;left:'+left+'px; z-index:4');
 			$('#mentionlist').show();
-			$('div').not('div.list-group').click(function(){
-				console.log("가려지냐?");
+			$('div').not('#mentionlist').click(function(){
 				$('#mentionlist').hide();
 				});
 			}
+		});
+	$('#men1').click(function(){
+		var top = ($('#issuecontent').offset().top);
+		var left = ($('#issuecontent').offset().left+490);
+		$('#mentionlist').hide();
+		$('#memlist').attr('style','position:fixed; width:20%;top:'+top+'px;left:'+left+'px; z-index:4');
+		$('#memlist').show();
+		
+		$('.list-group-item').click(function(){
+			var text = "";
+			text = $('#issuecontent').val() + $(this).text();
+			$('#issuecontent').val(text);
+			$('#memlist').hide();
+			});
 		});
 </script>
