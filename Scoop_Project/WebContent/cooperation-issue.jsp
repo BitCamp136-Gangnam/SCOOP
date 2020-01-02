@@ -54,13 +54,13 @@
 		<div class="row" style="margin-left: 2%;">
 			<ul class="nav nav-pills">
 			    <li class="nav-item">
-			      <a class="nav-link" data-toggle="tab" href="./cooperation-issue.jsp">협업공간 이슈</a>
+			      <a class="nav-link" href="./cooperation-issue.jsp">협업공간 이슈</a>
 			    </li>
 			    <li class="nav-item">
-			      <a class="nav-link" data-toggle="tab" href="./cooperation-kanban.jsp">칸반</a>
+			      <a class="nav-link" href="./cooperation-kanban.jsp">칸반</a>
 			    </li>
 			    <li class="nav-item">
-			      <a class="nav-link" data-toggle="tab" href="./cooperation-cal.jsp">캘린더</a>
+			      <a class="nav-link" href="./cooperation-cal.jsp">캘린더</a>
 			    </li>
 		    </ul>
 		</div>

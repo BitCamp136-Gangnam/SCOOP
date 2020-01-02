@@ -54,10 +54,10 @@
 		<div class="row" style="margin-left: 2%;">
 			<ul class="nav nav-pills">
 			    <li class="nav-item">
-			      <a class="nav-link" data-toggle="tab" href="./private-place.jsp">프라이빗 이슈</a>
+			      <a class="nav-link" href="./private-place.jsp">프라이빗 이슈</a>
 			    </li>
 			    <li class="nav-item">
-			      <a class="nav-link" data-toggle="tab" href="./private-cal.jsp">캘린더</a>
+			      <a class="nav-link" href="./private-cal.jsp">캘린더</a>
 			    </li>
 		    </ul>
 		</div>
