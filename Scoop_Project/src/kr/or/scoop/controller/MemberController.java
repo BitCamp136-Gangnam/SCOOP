@@ -12,6 +12,7 @@ import kr.or.scoop.service.MemberService;
 import kr.or.scoop.vo.Member;
 
 @Controller
+@RequestMapping("//")
 public class MemberController {
 	
 	
