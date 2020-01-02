@@ -149,6 +149,7 @@ $(document).ready(function($) {
      <div class="modal-body p-4 p-lg-5">
       <img class="img-responsive center-block" alt="Scoop로고" src="images/logo/ScoopBig.png" style="width:100%;height:auto;padding-right:15%;padding-left:15%;"/>
       <form action="#" class="login-form text-left">
+        <h4>로그인</h4>
         <div class="form-group mb-4">
          <label>Email address</label>
          <input type="email" name="email" placeholder="name@company.com" class="form-control">
@@ -163,9 +164,8 @@ $(document).ready(function($) {
         	<div id="naver_id_login" style="float:right;margin-right: 5px;margin-left: 0px;width: 210px;border-left-width: 20px;padding-left: 15px;"></div>
         </div>
         <div>
-	        	   <a href="" style="padding-right:45%;">아직 회원이 아니신가요?</a>
-	        	   
-	        	   <a href="">비밀번호를 잃어버리셨나요?</a>
+	        	   <a href="" data-toggle="modal" data-target="#signUp" style="padding-right:45%;">아직 회원이 아니신가요?</a>
+	        	   <a href="#" data-toggle="modal" data-target="#passwordFind">비밀번호를 잃어버리셨나요?</a>
         </div>
       	</form>
 		<!-- 네이버아이디로로그인 버튼 노출 영역 -->
@@ -216,6 +216,7 @@ $(document).ready(function($) {
      <div class="modal-body p-4 p-lg-5">
       <img class="img-responsive center-block" alt="Scoop로고" src="images/logo/ScoopBig.png" style="width:100%;height:auto;padding-right:15%;padding-left:15%;"/>
       <form action="#" class="login-form text-left">
+        <h4>회원가입</h4>
         <div class="form-group mb-4">
          <label>Email address</label>
          <input type="text" class="form-control" id="scoop_out" placeholder="E-mail@company.com" required>
@@ -232,6 +233,34 @@ $(document).ready(function($) {
         	<center>
         		<input type="submit" value="스쿱 시작하기" class="btn btn-primary" style="width: 300px;height:38px;text-align: center;padding-top: 5px;">
     		</center>
+        </div>
+        <div>
+        </div>
+      	</form>								   
+     </div>
+   </div>
+  </div>
+</div>
+ 
+
+<!-- PasswordFind Modal-->
+<div id="passwordFind" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade bd-example-modal-lg">
+  <div role="document" class="modal-dialog modal-dialog-centered modal-lg">
+   <div class="modal-content">
+     <div class="modal-header border-bottom-0">
+      <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+     </div>
+     <div class="modal-body p-4 p-lg-5">
+      <img class="img-responsive center-block" alt="Scoop로고" src="images/logo/ScoopBig.png" style="width:100%;height:auto;padding-right:15%;padding-left:15%;"/>
+      <form action="#" class="login-form text-left">
+        <div class="form-group mb-4">
+         <label>Email address</label>
+         <input type="text" class="form-control" id="scoop_out" placeholder="E-mail@company.com" required>
+        </div>
+       
+        <div class="form-group">
+        	<a href="" data-dismiss="modal" aria-label="Close" style="float: left;padding-right: 33%;">〈 로그인으로 돌아가기</a>
+        	<input type="submit" value="비밀번호 재설정 메일 발송" class="btn btn-primary" style="width: 300px;height:38px;text-align: center;padding-top: 5px;">
         </div>
         <div>
         </div>
