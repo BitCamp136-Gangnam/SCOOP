@@ -54,7 +54,6 @@ $(document).ready(function($) {
 
 		$("#scoop_out").val($("#scoop_in").val());
 			
-
 	});
 	
 });
