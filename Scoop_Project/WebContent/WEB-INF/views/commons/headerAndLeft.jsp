@@ -60,7 +60,7 @@
 			        		}
 				  }
 				});  
-        });
+});
   </script>
     <style>
   #filediv {
@@ -377,7 +377,6 @@
             <label for="content">이슈 설명</label>
     		<textarea class="form-control createmodal" rows="5" id="issuecontent" style="width: 100%" placeholder="@를 입력하여 멘션, 할 일, 파일 등을 추가해 보세요."></textarea>
         </div>
-        
         <!-- Modal footer -->
         <div class="modal-footer">
           <button type="submit" class="btn btn-secondary" style="background-color: #fff5a5; border-color: #CCCCCC; color: gray; cursor: pointer;" data-dismiss="modal">만들기</button>
@@ -386,4 +385,33 @@
         </form>
       </div>
     </div>
+          		      <!-- @자동완성 수정 많이해야됨 자동완성의 위치와 키다운 위아래랑 엔터 -->
+	  <div class="list-group" id="mentionlist" style="display: none">
+	  <a href="#" class="list-group-item list-group-item-action" style="padding: 5px">멘션</a>
+	  <a href="#" class="list-group-item list-group-item-action" style="padding: 5px">소스코드</a>
+	  <a href="#" class="list-group-item list-group-item-action" style="padding: 5px">구글 드라이브</a>
+	  <a href="#" class="list-group-item list-group-item-action" style="padding: 5px">파일</a>
+	  <a href="#" class="list-group-item list-group-item-action" style="padding: 5px">표</a>
+	  <a href="#" class="list-group-item list-group-item-action" style="padding: 5px">관련 이슈</a>
+	  <a href="#" class="list-group-item list-group-item-action" style="padding: 5px">의사결정</a>
+	  <a href="#" class="list-group-item list-group-item-action" style="padding: 5px">할 일</a>
+	  <a href="#" class="list-group-item list-group-item-action" style="padding: 5px">일정</a>
+	</div>
+	<!--  -->
   </div>
+
+  <script type="text/javascript">
+	$('#issuecontent').keydown(function(event){
+		var top = ($('#issuecontent').focus().offset().top+40);
+		var left = ($('#issuecontent').focus().offset().left+20);
+		if(event.shiftKey && event.keyCode==50){
+			console.log("top&left" + top + ", "+left);
+			$('#mentionlist').attr('style','position:fixed; width:20%;top:'+top+'px;left:'+left+'px; z-index:4');
+			$('#mentionlist').show();
+			$('div').not('div.list-group').click(function(){
+				console.log("가려지냐?");
+				$('#mentionlist').hide();
+				});
+			}
+		});
+</script>
