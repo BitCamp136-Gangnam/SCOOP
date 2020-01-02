@@ -296,8 +296,8 @@ $(document).ready(function($) {
 					<div class="card-deck pricing-table">
 						<div class="card text-center" style="border-color:#fff">
 							<div class="card-body">
-								<h4 class="card-title pt-3"  style="color:#f38181">CHOICE</h4>
-								<h2 class="card-title pt-4"  style="color:#f38181">PRICE</h2>
+								<h4 class="card-title pt-3"  style="color:#0E2866">CHOICE</h4>
+								<h2 class="card-title pt-4"  style="color:#0E2866">PRICE</h2>
 								<div class="text-muted mt-4">기한</div>
 								<ul class="list-unstyled pricing-list">
 									<li>알림을 가질 수 있는 협업 공간</li>
@@ -333,7 +333,7 @@ $(document).ready(function($) {
 									<li>-</li>
 									<li>-</li>
 									<li><span class="iconify" data-icon="bx:bx-check"
-										data-inline="false" style="color: #d4af37;"></span></li>
+										data-inline="false" style="color: #E71D36;"></span></li>
 									<li>-</li>
 									<li>무제한</li>
 									<li>무제한</li>
@@ -353,17 +353,17 @@ $(document).ready(function($) {
 									<li>무제한</li>
 									<li>50MB</li>
 									<li><span class="iconify" data-icon="bx:bx-check"
-										data-inline="false" style="color: #d4af37;"></span></li>
+										data-inline="false" style="color: #E71D36;"></span></li>
 									<li><span class="iconify" data-icon="bx:bx-check"
-										data-inline="false" style="color: #d4af37;"></span></li>
+										data-inline="false" style="color: #E71D36;"></span></li>
 									<li><span class="iconify" data-icon="bx:bx-check"
-										data-inline="false" style="color: #d4af37;"></span></li>
+										data-inline="false" style="color: #E71D36;"></span></li>
 									<li><span class="iconify" data-icon="bx:bx-check"
-										data-inline="false" style="color: #d4af37;"></span></li>
+										data-inline="false" style="color: #E71D36;"></span></li>
 									<li>무제한</li>
 									<li>무제한</li>
 									<li><span class="iconify" data-icon="bx:bx-check"
-										data-inline="false" style="color: #d4af37;"></span></li>
+										data-inline="false" style="color: #E71D36;"></span></li>
 									<li>무제한</li>
 									<li>-</li>
 								</ul>
