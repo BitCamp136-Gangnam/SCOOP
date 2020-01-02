@@ -54,7 +54,6 @@ $(document).ready(function($) {
 
 		$("#scoop_out").val($("#scoop_in").val());
 			
-
 	});
 	
 });
@@ -65,7 +64,7 @@ $(document).ready(function($) {
 <header class="header">
   <nav class="navbar navbar-expand-lg">
    <div class="container">
-     <!-- Navbar brand--><a href="frontpage.jsp" class="navbar-brand font-weight-bold"><img src="img/brownlogo.png" alt="..." class="img-fluid"></a>
+     <!-- Navbar brand--><a href="frontpage.jsp" class="navbar-brand font-weight-bold"><img src="images/logo/ScoopBig.png" style="width:200px;height: 75px; " alt="..." ></a>
      <!-- Navbar toggler button-->
      <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right">Menu<i class="icon ion-md-list ml-2"></i></button>
      <div id="navbarSupportedContent" class="collapse navbar-collapse">
@@ -148,7 +147,7 @@ $(document).ready(function($) {
       <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
      </div>
      <div class="modal-body p-4 p-lg-5">
-      <img class="img-responsive center-block" alt="Scoop로고" src="images/logo/brownlogo.png" style="width:100%;height:auto;padding-right:15%;padding-left:15%;"/>
+      <img class="img-responsive center-block" alt="Scoop로고" src="images/logo/ScoopBig.png" style="width:100%;height:auto;padding-right:15%;padding-left:15%;"/>
       <form action="#" class="login-form text-left">
         <div class="form-group mb-4">
          <label>Email address</label>
@@ -215,7 +214,7 @@ $(document).ready(function($) {
       <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
      </div>
      <div class="modal-body p-4 p-lg-5">
-      <img class="img-responsive center-block" alt="Scoop로고" src="images/logo/brownlogo.png" style="width:100%;height:auto;padding-right:15%;padding-left:15%;"/>
+      <img class="img-responsive center-block" alt="Scoop로고" src="images/logo/ScoopBig.png" style="width:100%;height:auto;padding-right:15%;padding-left:15%;"/>
       <form action="#" class="login-form text-left">
         <div class="form-group mb-4">
          <label>Email address</label>
@@ -297,8 +296,8 @@ $(document).ready(function($) {
 					<div class="card-deck pricing-table">
 						<div class="card text-center" style="border-color:#fff">
 							<div class="card-body">
-								<h4 class="card-title pt-3"  style="color:#f38181">CHOICE</h4>
-								<h2 class="card-title pt-4"  style="color:#f38181">PRICE</h2>
+								<h4 class="card-title pt-3"  style="color:#0E2866">CHOICE</h4>
+								<h2 class="card-title pt-4"  style="color:#0E2866">PRICE</h2>
 								<div class="text-muted mt-4">기한</div>
 								<ul class="list-unstyled pricing-list">
 									<li>알림을 가질 수 있는 협업 공간</li>
@@ -334,7 +333,7 @@ $(document).ready(function($) {
 									<li>-</li>
 									<li>-</li>
 									<li><span class="iconify" data-icon="bx:bx-check"
-										data-inline="false" style="color: #d4af37;"></span></li>
+										data-inline="false" style="color: #E71D36;"></span></li>
 									<li>-</li>
 									<li>무제한</li>
 									<li>무제한</li>
@@ -354,17 +353,17 @@ $(document).ready(function($) {
 									<li>무제한</li>
 									<li>50MB</li>
 									<li><span class="iconify" data-icon="bx:bx-check"
-										data-inline="false" style="color: #d4af37;"></span></li>
+										data-inline="false" style="color: #E71D36;"></span></li>
 									<li><span class="iconify" data-icon="bx:bx-check"
-										data-inline="false" style="color: #d4af37;"></span></li>
+										data-inline="false" style="color: #E71D36;"></span></li>
 									<li><span class="iconify" data-icon="bx:bx-check"
-										data-inline="false" style="color: #d4af37;"></span></li>
+										data-inline="false" style="color: #E71D36;"></span></li>
 									<li><span class="iconify" data-icon="bx:bx-check"
-										data-inline="false" style="color: #d4af37;"></span></li>
+										data-inline="false" style="color: #E71D36;"></span></li>
 									<li>무제한</li>
 									<li>무제한</li>
 									<li><span class="iconify" data-icon="bx:bx-check"
-										data-inline="false" style="color: #d4af37;"></span></li>
+										data-inline="false" style="color: #E71D36;"></span></li>
 									<li>무제한</li>
 									<li>-</li>
 								</ul>
