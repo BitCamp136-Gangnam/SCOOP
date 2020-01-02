@@ -16,6 +16,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		</environment>
 	</environments>
 	<mappers>
-		<mapper resource="sqlmapper/User.xml" />
+		<mapper resource="sqlMapper/Member.xml" />
 	</mappers>
 </configuration>
