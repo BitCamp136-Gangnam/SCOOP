@@ -55,10 +55,65 @@ $(document).ready(function($) {
 		$("#email").val($("#scoop_in").val());
 			
 	});
+
+	//자주 묻는 질문
+	var acc = document.getElementsByClassName("accordion");
+	var i;
+
+	for (i = 0; i < acc.length; i++) {
+	  acc[i].addEventListener("click", function() {
+	    this.classList.toggle("active");
+	    var panel = this.nextElementSibling;
+	    if (panel.style.maxHeight) {
+	      panel.style.maxHeight = null;
+	    } else {
+	      panel.style.maxHeight = panel.scrollHeight + "px";
+	    } 
+	  });
+	}
 	
 });
 
 </script>
+<style>
+	.accordion {
+  background-color: #fff;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+}
+
+.active, .accordion:hover {
+  background-color: #fff;
+}
+
+.accordion:after {
+  content: '\002B';
+  color: #777;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2212";
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+</style>
 <body>
 <!-- navbar-->
 <header class="header">
@@ -403,38 +458,25 @@ $(document).ready(function($) {
 				</div>
 			</div>
 
-			<div class="row mt-6">
+			<div class="row mt-5">
 				<div class="col-md-10 mx-auto">
 					<div class="row">
-						<div class="col-md-6 mb-5">
-							<h6>Can I try Musli for free?</h6>
-							<p class="text-muted">Nam liber tempor cum soluta nobis
-								eleifend option congue nihil imper per tem por legere me doming.</p>
+						<div class="col-sm-12" style="text-align: center;padding-bottom: 5%;">
+						<h2>자주 묻는 질문</h2>
 						</div>
-						<div class="col-md-6 mb-5">
-							<h6>Do you have hidden fees?</h6>
-							<p class="text-muted">Nam liber tempor cum soluta nobis
-								eleifend option congue nihil imper per tem por legere me doming.</p>
+						<button class="accordion">Section 1</button>
+						<div class="panel">
+						  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 						</div>
-						<div class="col-md-6 mb-5">
-							<h6>What are the payment methods you accept?</h6>
-							<p class="text-muted">Nam liber tempor cum soluta nobis
-								eleifend option congue nihil imper per tem por legere me doming.</p>
+						
+						<button class="accordion">Section 2</button>
+						<div class="panel">
+						  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 						</div>
-						<div class="col-md-6 mb-5">
-							<h6>How often do you release updates?</h6>
-							<p class="text-muted">Nam liber tempor cum soluta nobis
-								eleifend option congue nihil imper per tem por legere me doming.</p>
-						</div>
-						<div class="col-md-6 mb-5">
-							<h6>What is your refund policy?</h6>
-							<p class="text-muted">Nam liber tempor cum soluta nobis
-								eleifend option congue nihil imper per tem por legere me doming.</p>
-						</div>
-						<div class="col-md-6 mb-5">
-							<h6>How can I contact you?</h6>
-							<p class="text-muted">Nam liber tempor cum soluta nobis
-								eleifend option congue nihil imper per tem por legere me doming.</p>
+						
+						<button class="accordion">Section 3</button>
+						<div class="panel">
+						  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 						</div>
 					</div>
 				</div>
