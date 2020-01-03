@@ -16,18 +16,20 @@ import kr.or.scoop.vo.Member;
 public class memberController {
 	
 
-	
-
 	private SqlSession sqlsession;
 	
-	@Autowired	
+	@Autowired
 	public void setSqlsession(SqlSession sqlsession) {
 		this.sqlsession = sqlsession;
 	}
+
 	
-	@Autowired
+	
+	
+	
+	
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
+		
 	@RequestMapping(value="frontpage.htm",method=RequestMethod.POST)
 	public String register(Member member) throws ClassNotFoundException, SQLException {
 		
