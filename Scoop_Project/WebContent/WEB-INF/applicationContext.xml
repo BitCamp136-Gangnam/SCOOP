@@ -27,12 +27,16 @@
  </bean>
  
  <!-- 공통 요소  -->
-
+ <bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="driverManagerDataSource" />
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
 
 <!-- Mybatis 설정 -->
 <bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
 	<property name="dataSource" ref="driverManagerDataSource"></property>
-	<property name="mapperLocations" value="classpath*:mapper/*xml" />
+	<property name="mapperLocations" value="classpath*:sqlMapper/*xml" />
 </bean>
 
 <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
