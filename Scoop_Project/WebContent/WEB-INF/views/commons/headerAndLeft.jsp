@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="lib/codemirror.css">
+    <script src="lib/codemirror.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
   <script type="text/javascript">
         $(function(){
@@ -477,10 +479,10 @@ span{
           		      <!-- @자동완성 수정 많이해야됨 자동완성의 위치와 키다운 위아래랑 엔터 -->
 	  <div class="list-group" id="mentionlist" style="display: none">
 	  <a href="#" class="list-group-item list-group-item-action" id="men1" style="padding: 5px">멘션</a>
-	  <a href="#" class="list-group-item list-group-item-action" id="men2" style="padding: 5px">소스코드</a>
-	  <a href="#" class="list-group-item list-group-item-action" id="men3" style="padding: 5px">구글 드라이브</a>
+	  <a href="#" class="list-group-item list-group-item-action" id="men2" style="padding: 5px">소스코드(코드미러 하다말았음)</a>
+	  <a href="#" class="list-group-item list-group-item-action" id="men3" style="padding: 5px">구글 드라이브(가능?)</a>
 	  <a href="#" class="list-group-item list-group-item-action" id="men4" style="padding: 5px">파일</a>
-	  <a href="#" class="list-group-item list-group-item-action" id="men5" style="padding: 5px">표</a>
+	  <a href="#" class="list-group-item list-group-item-action" id="men5" style="padding: 5px">표(이건 어떻게함;;)</a>
 	  <a href="#" class="list-group-item list-group-item-action" id="men6" style="padding: 5px">관련 이슈</a>
 	  <a href="#" class="list-group-item list-group-item-action" id="men7" style="padding: 5px">의사결정</a>
 	  <a href="#" class="list-group-item list-group-item-action" id="men8" style="padding: 5px">할 일</a>
@@ -521,5 +523,16 @@ span{
 			$('#issuecontent').val(text);
 			$('#memlist').hide();
 			});
+		});
+	$('#men2').click(function(){
+		$('#mentionlist').hide();
+		var textarea = document.getElementById('issuecontent');
+		  var editor = CodeMirror.fromTextArea(textarea, {
+		      mode: "javascript",
+		      lineNumbers: true,
+		      lineWrapping: true,
+		      theme: "eclipse",
+		      val: textarea.value
+		  });
 		});
 </script>
