@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="lib/codemirror.css">
+    <script src="lib/codemirror.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
   <script type="text/javascript">
         $(function(){
@@ -61,8 +64,16 @@
 				  }
 				});  
 });
-  </script>
-    <style>
+        
+
+        var check = $("input[type='checkbox']");
+        check.click(function(){
+        	$("p").toggle();
+        });
+
+</script>
+  
+<style>
   #filediv {
 		  position: fixed;
 		  bottom: 0;
@@ -90,7 +101,76 @@
 		  font-size: 18px;
 		  z-index: 3;
 		}
+
+/* The switch - the box around the slider */
+.switch_alarm {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  vertical-align:middle;
+}
+
+/* Hide default HTML checkbox */
+.switch_alarm input {display:none;}
+
+/* The slider */
+.slider_alarm {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider_alarm:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider_alarm {
+  background-color: #2196F3;
+}
+
+input:focus + .slider_alarm {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider_alarm:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider_alarm.round_alarm {
+  border-radius: 34px;
+}
+
+.slider_alarm.round_alarm:before {
+  border-radius: 50%;
+}
+
+span{
+	margin:0px;
+	display:inline-block;
+	font-size:15px;
+	font-weight:bold;
+}
+
 </style>
+
 <!--**********************************
             Nav header start
         ***********************************-->
@@ -144,14 +224,16 @@
                                 <div class="dropdown-content-body">
                                     <ul>
                                     	<li>
-                                    		<a href="javascript:void()">
-                                    			<span class="mr-3 avatar-icon bg-success-lighten-2"><i class="icon-present"></i></span>
-                                                <div class="notification-content">
-                                                    <h6 class="notification-heading">무슨 알림인지</h6>
-                                                    <span class="notification-text">알림 몇분전에 왔는지</span> 
-                                                </div>
-                                    		</a>
+                                    		
+                                    			<label class="switch_alarm">
+  													<input type="checkbox">
+  													<span class="slider_alarm round_alarm"></span>
+													</label>
+													<span>OFF</span>
+													<span style="display:none;">ON</span>
+                                    	
                                     	</li>
+                                    	
                                         <li>
                                             <a href="javascript:void()">
                                                 <span class="mr-3 avatar-icon bg-success-lighten-2"><i class="icon-present"></i></span>
@@ -397,10 +479,10 @@
           		      <!-- @자동완성 수정 많이해야됨 자동완성의 위치와 키다운 위아래랑 엔터 -->
 	  <div class="list-group" id="mentionlist" style="display: none">
 	  <a href="#" class="list-group-item list-group-item-action" id="men1" style="padding: 5px">멘션</a>
-	  <a href="#" class="list-group-item list-group-item-action" id="men2" style="padding: 5px">소스코드</a>
-	  <a href="#" class="list-group-item list-group-item-action" id="men3" style="padding: 5px">구글 드라이브</a>
+	  <a href="#" class="list-group-item list-group-item-action" id="men2" style="padding: 5px">소스코드(코드미러 하다말았음)</a>
+	  <a href="#" class="list-group-item list-group-item-action" id="men3" style="padding: 5px">구글 드라이브(가능?)</a>
 	  <a href="#" class="list-group-item list-group-item-action" id="men4" style="padding: 5px">파일</a>
-	  <a href="#" class="list-group-item list-group-item-action" id="men5" style="padding: 5px">표</a>
+	  <a href="#" class="list-group-item list-group-item-action" id="men5" style="padding: 5px">표(이건 어떻게함;;)</a>
 	  <a href="#" class="list-group-item list-group-item-action" id="men6" style="padding: 5px">관련 이슈</a>
 	  <a href="#" class="list-group-item list-group-item-action" id="men7" style="padding: 5px">의사결정</a>
 	  <a href="#" class="list-group-item list-group-item-action" id="men8" style="padding: 5px">할 일</a>
@@ -441,5 +523,16 @@
 			$('#issuecontent').val(text);
 			$('#memlist').hide();
 			});
+		});
+	$('#men2').click(function(){
+		$('#mentionlist').hide();
+		var textarea = document.getElementById('issuecontent');
+		  var editor = CodeMirror.fromTextArea(textarea, {
+		      mode: "javascript",
+		      lineNumbers: true,
+		      lineWrapping: true,
+		      theme: "eclipse",
+		      val: textarea.value
+		  });
 		});
 </script>
