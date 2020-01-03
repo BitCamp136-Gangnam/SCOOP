@@ -63,14 +63,22 @@
 			        		}
 				  }
 				});  
-});
-        
-
         var check = $("input[type='checkbox']");
         check.click(function(){
         	$("p").toggle();
         });
-
+		$('#alarmbtn').click(function(event){
+			event.stopPropagation();
+			if($('#alarmbox').attr('name')=='on'){
+				$('#alarmbox').attr('name','off');
+			$('#alarm_power').text('OFF');
+				}else{
+					$('#alarmbox').attr('name','on');
+					$('#alarm_power').text('ON');
+					}
+			
+			});
+});
 </script>
   
 <style>
@@ -226,11 +234,10 @@ span{
                                     	<li>
                                     		
                                     			<label class="switch_alarm">
-  													<input type="checkbox">
-  													<span class="slider_alarm round_alarm"></span>
+  													<input type="checkbox" checked="checked" id="alarmbox" name="on">
+  													<span class="slider_alarm round_alarm" id="alarmbtn"></span>
 													</label>
-													<span>OFF</span>
-													<span style="display:none;">ON</span>
+													<span id="alarm_power">ON</span>
                                     	
                                     	</li>
                                     	
