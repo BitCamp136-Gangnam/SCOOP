@@ -6,6 +6,12 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
   <script type="text/javascript">
         $(function(){
+        	$('.modal').on('hidden.bs.modal', function (e) {
+        	    console.log('modal close');
+        	    $('.CodeMirror').hide();
+        	    $('#issuecontent').show();
+        	  $(this).find('form')[0].reset()
+        	});
             $('#fileopen').click(function(){
             	$('#filediv').show();
             	$('#fileclose').show();
@@ -469,10 +475,10 @@ span{
             <label for="title">이슈 제목</label>
     		<input class="form-control createmodal" type="text" id="issuetitle" style="width: 100%" placeholder="제목을 입력해 주세요.">
     		<br>
-            <label for="content">이슈 설명</label>
-            <input type="file" id="fileclick" hidden="">
-            <img id="wook" alt="사진 미리보기 자리" style="display:none;width: 100px; height: 100px" src="#" />
+            <label for="content">이슈 설명</label> <span id="filename"></span> <img id="imgpreview" alt="사진 미리보기 자리" style="display:none;width: 40px; height: 40px" src="#" />
+            <input type="file" id="fileclick" name="files[0]" hidden="">
     		<textarea class="form-control createmodal" rows="5" id="issuecontent" style="width: 100%" placeholder="@를 입력하여 멘션, 할 일, 파일 등을 추가해 보세요."></textarea>
+    		<textarea rows="" id="codemirrorarea" style="display: none"><-- 코드를 입력하세요 --></textarea>
         </div>
         <!-- Modal footer -->
         <div class="modal-footer">
@@ -532,7 +538,9 @@ span{
 		});
 	$('#men2').click(function(){
 		$('#mentionlist').hide();
-		var textarea = document.getElementById('issuecontent');
+		$('#issuecontent').empty();
+		$('#issuecontent').hide();
+		var textarea = document.getElementById('codemirrorarea');
 		  var editor = CodeMirror.fromTextArea(textarea, {
 		      mode: "javascript",
 		      lineNumbers: true,
@@ -545,4 +553,27 @@ span{
 		$('#mentionlist').hide();
 		$('#fileclick').click();
 		});
+	 function readURL(input) {
+	        if (input.files && input.files[0]) {
+	            var reader = new FileReader();
+	            reader.onload = function(e) {
+	                $('#imgpreview').attr('src', e.target.result);
+	                if(e.target.result.substring(5,10)=='image'){
+	                	$('#imgpreview').show();
+		            }else{
+		            	$('#imgpreview').hide();
+			            }
+	            }
+	            reader.readAsDataURL(input.files[0]);
+	        }
+	    }
+	    $("#fileclick").change(function() {
+	        readURL(this);
+	        $('#filename').empty();
+	        $('#filename').append($("#fileclick").val().substring(12));
+	        var text = "";
+			text = $('#issuecontent').val().replace("@","");
+			$('#issuecontent').val(text);
+	        
+	    });
 </script>
