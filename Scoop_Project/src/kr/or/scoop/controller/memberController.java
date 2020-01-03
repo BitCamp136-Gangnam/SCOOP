@@ -2,7 +2,7 @@ package kr.or.scoop.controller;
 
 import java.sql.SQLException;
 
-import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -16,18 +16,13 @@ import kr.or.scoop.vo.Member;
 public class memberController {
 	
 
-	private SqlSession sqlsession;
+	private SqlSessionTemplate sqlsession;
 	
 	@Autowired
-	public void setSqlsession(SqlSession sqlsession) {
+	public void setSqlsession(SqlSessionTemplate sqlsession) {
 		this.sqlsession = sqlsession;
 	}
 
-	
-	
-	
-	
-	
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 		
 	@RequestMapping(value="frontpage.htm",method=RequestMethod.POST)
