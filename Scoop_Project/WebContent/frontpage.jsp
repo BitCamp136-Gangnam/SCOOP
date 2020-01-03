@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="all,follow">
 <!--vendors styles-->
-<link rel="stylesheet"
+<link rel="stylesheet"Chatfuel
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- Bootstrap CSS / Color Scheme -->
 <link rel="stylesheet" href="css/default.css" id="theme-color">
@@ -76,7 +76,7 @@ $(document).ready(function($) {
 
 </script>
 <style>
-.accordion {
+	.accordion {
   background-color: #fff;
   color: #444;
   cursor: pointer;
@@ -87,6 +87,7 @@ $(document).ready(function($) {
   outline: none;
   font-size: 15px;
   transition: 0.4s;
+  
 }
 
 .active, .accordion:hover {
@@ -111,6 +112,7 @@ $(document).ready(function($) {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
+  border-bottom: 1px solid #B5B1B1;
 }
 
 </style>
@@ -119,7 +121,7 @@ $(document).ready(function($) {
 <header class="header">
   <nav class="navbar navbar-expand-lg">
    <div class="container">
-     <!-- Navbar brand--><a href="frontpage.jsp" class="navbar-brand font-weight-bold"><img src="images/logo/ScoopBig.png" style="width:200px;height: 75px; " alt="..." ></a>
+     <!-- Navbar brand--><a href="frontpage.jsp" class="navbar-nav font-weight-bold"><img src="images/logo/ScoopBig.png" style="width:200px;height: 75px; " alt="..." ></a>
      <!-- Navbar toggler button-->
      <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right">Menu<i class="icon ion-md-list ml-2"></i></button>
      <div id="navbarSupportedContent" class="collapse navbar-collapse">
