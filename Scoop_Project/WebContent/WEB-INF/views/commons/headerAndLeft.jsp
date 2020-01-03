@@ -9,6 +9,8 @@
         	$('.modal').on('hidden.bs.modal', function (e) {
         	    console.log('modal close');
         	    $('.CodeMirror').hide();
+        	    $('#filename').empty();
+        	    $('#imgpreview').hide();
         	    $('#issuecontent').show();
         	  $(this).find('form')[0].reset()
         	});
