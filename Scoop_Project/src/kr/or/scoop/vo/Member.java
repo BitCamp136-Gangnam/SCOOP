@@ -2,16 +2,26 @@ package kr.or.scoop.vo;
 
 import java.sql.Date;
 
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
 public class Member {
-	String email;
-	String pwd;
-	String name;
-	String dname;
-	String drank;
-	String addrress;
-	Date idteme;
-	int mrank;
-	int loginnum;
+	private String email;
+	private String pwd;
+	private String name;
+	private String dname;
+	private String drank;
+	private String addrress;
+	private Date idteme;
+	private int mrank;
+	private int loginnum;
+	private CommonsMultipartFile file;
+	
+	public CommonsMultipartFile getFile() {
+		return file;
+	}
+	public void setFile(CommonsMultipartFile file) {
+		this.file = file;
+	}
 	public String getEmail() {
 		return email;
 	}
