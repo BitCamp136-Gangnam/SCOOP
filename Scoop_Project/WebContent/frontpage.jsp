@@ -52,7 +52,7 @@ $(document).ready(function($) {
 	//이메일 아웃풋
 	$("#scoop_input").click(function(){
 
-		$("#email").val($("#scoop_in").val());
+		$("#email").val($("#email").val());
 			
 	});
 
@@ -268,7 +268,7 @@ $(document).ready(function($) {
      </div>
      <div class="modal-body p-4 p-lg-5">
       <img class="img-responsive center-block" alt="Scoop로고" src="images/logo/ScoopBig.png" style="width:100%;height:auto;padding-right:15%;padding-left:15%;"/>
-      <form action="" class="login-form text-left" method="post">
+      <form action="frontpage.htm" class="login-form text-left" method="post">
         <h4>회원가입</h4>
         <div class="form-group mb-4">
          <label>Email address</label>
