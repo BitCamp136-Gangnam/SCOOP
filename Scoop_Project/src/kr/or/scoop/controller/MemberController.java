@@ -12,7 +12,6 @@ import kr.or.scoop.service.MemberService;
 import kr.or.scoop.vo.Member;
 
 @Controller
-@RequestMapping("/views/")
 public class MemberController {
 	
 	
@@ -23,7 +22,7 @@ public class MemberController {
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
-	@RequestMapping(value="frontpage",method=RequestMethod.POST)
+	@RequestMapping(value="frontpage.htm",method=RequestMethod.POST)
 	public String register(String email,String pwd,String name) throws ClassNotFoundException, SQLException {
 		
 		System.out.println("여기옴?");
@@ -37,10 +36,10 @@ public class MemberController {
 		
 		if(result > 0) {
 			System.out.println("가입성공");
-			viewpage = "redirect:/index.jsp";
+			viewpage = "redirect:/index.htm";
 		}else {
 			System.out.println("가입실패");
-			viewpage = "index.jsp";
+			viewpage = "index.htm";
 		}
 		
 		return viewpage; //주의 (website/index.htm
