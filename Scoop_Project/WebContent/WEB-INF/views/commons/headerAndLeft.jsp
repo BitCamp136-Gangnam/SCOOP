@@ -63,10 +63,7 @@
 			        		}
 				  }
 				});  
-        var check = $("input[type='checkbox']");
-        check.click(function(){
-        	$("p").toggle();
-        });
+     
 		$('#alarmbtn').click(function(event){
 			event.stopPropagation();
 			if($('#alarmbox').attr('name')=='on'){
@@ -148,11 +145,11 @@
 }
 
 input:checked + .slider_alarm {
-  background-color: #2196F3;
+  background-color: #00D63D;
 }
 
 input:focus + .slider_alarm {
-  box-shadow: 0 0 1px #2196F3;
+  box-shadow: 0 0 1px #00D63D;
 }
 
 input:checked + .slider_alarm:before {
@@ -232,7 +229,7 @@ span{
                                 <div class="dropdown-content-body">
                                     <ul>
                                     	<li>
-                                    		
+                                    			<p style="display:inline-block; padding-right: 33%">전체 알람 설정 </p>
                                     			<label class="switch_alarm">
   													<input type="checkbox" checked="checked" id="alarmbox" name="on">
   													<span class="slider_alarm round_alarm" id="alarmbtn"></span>
@@ -473,6 +470,8 @@ span{
     		<input class="form-control createmodal" type="text" id="issuetitle" style="width: 100%" placeholder="제목을 입력해 주세요.">
     		<br>
             <label for="content">이슈 설명</label>
+            <input type="file" id="fileclick" hidden="">
+            <img id="wook" alt="사진 미리보기 자리" style="display:none;width: 100px; height: 100px" src="#" />
     		<textarea class="form-control createmodal" rows="5" id="issuecontent" style="width: 100%" placeholder="@를 입력하여 멘션, 할 일, 파일 등을 추가해 보세요."></textarea>
         </div>
         <!-- Modal footer -->
@@ -541,5 +540,9 @@ span{
 		      theme: "eclipse",
 		      val: textarea.value
 		  });
+		});
+	$('#men4').click(function(){
+		$('#mentionlist').hide();
+		$('#fileclick').click();
 		});
 </script>
