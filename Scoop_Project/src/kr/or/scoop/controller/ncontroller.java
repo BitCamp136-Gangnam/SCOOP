@@ -6,6 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ncontroller {
 
+	@RequestMapping("index.do")
+	public String main() {
+		return "issue";
+	}
+	
 	@RequestMapping("calender.do")
 	public String calender() {
 		return "sidebar/app-calender";
@@ -21,13 +26,23 @@ public class ncontroller {
 		return "sidebar/private-place";
 	}
 
-	@RequestMapping("index.do")
-	public String main() {
-		return "issue";
-	}
-
 	@RequestMapping("bookmark.do")
 	public String bookmark() {
 		return "sidebar/private-bookmark";
 	}
+	
+	@RequestMapping("coop-issue.do")
+	public String coopIssue() {
+		return "cooperation/cooperation-issue";
+	}
+	
+	@RequestMapping("coop-cal.do")
+	public String coopCal() {
+		return "cooperation/cooperation-cal";
+	}
+	
+	public String kanban() {
+		return "cooperation/cooperation-kanban";
+	}
+	
 }
