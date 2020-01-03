@@ -20,7 +20,7 @@
  	<property name="username" value="SCOOP" />
  	<property name="password" value="1004" />
  </bean>
- 
+
 <!-- Jdbc 템플릿 설정 -->
  <bean id="" class="org.springframework.jdbc.core.JdbcTemplate" >
  	<property name="dataSource" ref="driverManagerDataSource"></property>
