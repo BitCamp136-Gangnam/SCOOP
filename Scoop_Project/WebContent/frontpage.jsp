@@ -152,11 +152,11 @@ $(document).ready(function($) {
         <h4>로그인</h4>
         <div class="form-group mb-4">
          <label>Email address</label>
-         <input type="email" name="email" placeholder="name@company.com" class="form-control">
+         <input type="email" name="email" id="email" placeholder="name@company.com" class="form-control">
         </div>
         <div class="form-group mb-4">
          <label>Password</label>
-         <input type="password" name="password" placeholder="Min 8 characters" class="form-control">
+         <input type="password" name="password" id="pwd" placeholder="Min 8 characters" class="form-control">
         </div>
         <div class="form-group">
         	<input type="submit" value="Login" class="btn btn-primary" style="width: 190px;height:38px;text-align: center;padding-top: 5px;">
@@ -213,7 +213,7 @@ $(document).ready(function($) {
      </div>
      <div class="modal-body p-4 p-lg-5">
       <img class="img-responsive center-block" alt="Scoop로고" src="images/logo/ScoopBig.png" style="width:100%;height:auto;padding-right:15%;padding-left:15%;"/>
-      <form action="register.do" class="login-form text-left">
+      <form action="" class="login-form text-left" method="post">
         <h4>회원가입</h4>
         <div class="form-group mb-4">
          <label>Email address</label>
@@ -280,7 +280,7 @@ $(document).ready(function($) {
         <form action="#" class="subscription-form mt-5">
          <div class="form-group">
            <label>Email</label>
-           <input type="email" name="email" id="scoop_in" placeholder="E-mail@company.com" class="form-control">
+           <input type="text" name="email" id="email" placeholder="E-mail@company.com" class="form-control">
         <button type="button" id="scoop_input" data-toggle="modal" data-target="#signUp"class="btn btn-primary">무료로 시작하기</button>     
          </div>
             <span>이미 가입하셨나요?</span>

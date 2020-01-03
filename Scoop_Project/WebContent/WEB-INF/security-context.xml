@@ -59,11 +59,11 @@ auto-config="true" : Spring Security 제공하는 환경설정을 사용하겠�
 -->
 <security:http>
 	<security:csrf disabled="true" />
-	<security:form-login login-page="frontpage.jsp" authentication-failure-url="/frontpage.jsp?error"/>
-	<security:logout logout-success-url="/index.jsp" />
+	<security:form-login login-page="frontpage.jsp" authentication-failure-url="frontpage.jsp?error"/>
+	<security:logout logout-success-url="/register.do" />
 		
-	<security:intercept-url pattern="/customer/noticeDetail.do" access="hasRole('ROLE_USER')" />
-	<security:intercept-url pattern="/customer/noticeReg.do" access="hasRole('ROLE_ADMIN')" /> 
+	<!-- <security:interz	cept-url pattern="/customer/noticeDetail.do" access="hasRole('ROLE_USER')" />
+	<security:intercept-url pattern="/customer/noticeReg.do" access="hasRole('ROLE_ADMIN')" />  -->
 	
 	<!-- <security:intercept-url pattern="/customer/*Reg.do" access="hasRole('ROLE_USER')" />
 	<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" /> -->
@@ -73,7 +73,7 @@ auto-config="true" : Spring Security 제공하는 환경설정을 사용하겠�
 <security:authentication-manager>
 	<security:authentication-provider>
 		<security:jdbc-user-service 
-			authorities-by-username-query="select m.email, r.role_name from member m join role r on m.eamil=r.email where m.email=?"
+			authorities-by-username-query="select m.email, r.rname from member m join role r on m.eamil=r.email where m.email=?"
 			users-by-username-query="select email, pwd , 1 enabled from member where email=?"
 			data-source-ref="driverManagerDataSource" 
 		/><!-- db연결 -->

@@ -16,13 +16,14 @@ import kr.or.scoop.vo.Member;
 public class MemberController {
 	
 	
-	@Autowired
+	
+	@Autowired	
 	private MemberService service;
 	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
-	@RequestMapping(value="register.do",method=RequestMethod.POST)
+	@RequestMapping(value="frontpage",method=RequestMethod.POST)
 	public String register(String email,String pwd,String name) throws ClassNotFoundException, SQLException {
 		
 		System.out.println("여기옴?");
