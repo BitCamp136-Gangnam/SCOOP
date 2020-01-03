@@ -2,8 +2,10 @@ package kr.or.scoop.vo;
 
 import java.sql.Date;
 
+import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+@Repository
 public class Member {
 	private String email;
 	private String pwd;
