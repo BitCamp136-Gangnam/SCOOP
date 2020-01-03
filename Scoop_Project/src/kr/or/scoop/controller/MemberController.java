@@ -12,6 +12,7 @@ import kr.or.scoop.service.MemberService;
 import kr.or.scoop.vo.Member;
 
 @Controller
+@RequestMapping("/views/")
 public class MemberController {
 	
 	
@@ -38,7 +39,7 @@ public class MemberController {
 			viewpage = "redirect:/index.jsp";
 		}else {
 			System.out.println("가입실패");
-			viewpage = "index.do";
+			viewpage = "index.jsp";
 		}
 		
 		return viewpage; //주의 (website/index.htm
