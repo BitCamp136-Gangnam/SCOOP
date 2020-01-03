@@ -54,13 +54,13 @@
 		<div class="row" style="margin-left: 2%;">
 			<ul class="nav nav-pills">
 			    <li class="nav-item">
-			      <a class="nav-link" href="#">협업공간 이슈</a>
+			      <a class="nav-link" onclick="coop-issue.htm">협업공간 이슈</a>
 			    </li>
 			    <li class="nav-item">
-			      <a class="nav-link" href="kanban.do">칸반</a>
+			      <a class="nav-link" href="kanban.htm">칸반</a>
 			    </li>
 			    <li class="nav-item">
-			      <a class="nav-link" href="coop-cal.do">캘린더</a>
+			      <a class="nav-link" href="coop-cal.htm">캘린더</a>
 			    </li>
 		    </ul>
 		</div>

@@ -96,7 +96,7 @@
         ***********************************-->
         <div id="pagelogo" class="nav-header">
             <div class="brand-logo">
-                <a href="index.do" style="padding-top: 0px;">
+                <a href="index.htm" style="padding-top: 0px;">
                     <b class="logo-abbr"><img class="img-responsive center-block" src="images/logo/ScoopTitle.png" alt="mini" style="width:100px;height: auto;padding-top:0;margin-top: 30px; "> </b>
                     <span class="logo-compact"><img class="img-responsive center-block"src="images/logo/ScoopBig.png" alt="" style="margin-top: 20px; text-align: center;"></span>
                     <span class="brand-title">
@@ -245,29 +245,29 @@
                 <ul class="metismenu" id="menu">
                 	<li class="nav-label" style="padding-bottom: 10px;" ><b style="padding-bottom: 2%;">전체 정보</b></li>
                     <li>
-                        <a href="index.do" aria-expanded="false">
+                        <a href="index.htm" aria-expanded="false">
                             <span class="iconify" data-icon="bx:bx-file-blank" data-inline="false" style="width: 20px;height: auto;"> </span><span class="nav-text"> &nbsp;새로운 소식</span>
                             <!-- <i class="icon-speedometer menu-icon"> -->
                         </a>
                     </li>
                     <li>
-                        <a href="myissue.do" aria-expanded="false">
+                        <a href="myissue.htm" aria-expanded="false">
                             <span class="iconify" data-icon="simple-line-icons:emotsmile" data-inline="false" style="width: 20px;height: auto;"> </span><span class="nav-text"> &nbsp;내가 작성한 이슈</span>
                         </a>
                     </li>
                     <li>
-                        <a href="calender.do" aria-expanded="false">
+                        <a href="calender.htm" aria-expanded="false">
                             <span class="iconify" data-icon="bx:bx-calendar" data-inline="false" style="width: 20px;height: auto;"> </span><span class="nav-text"> &nbsp;캘린더</span>
                         </a>
                     </li>
                     <li class="nav-label" style="padding-bottom: 0"><b>개인 공간</b></li>
                     <li>
-                        <a href="private.do" aria-expanded="false">
+                        <a href="private.htm" aria-expanded="false">
                             <span class="iconify" data-icon="ic:baseline-person" data-inline="false" style="width: 20px;height: auto;"> </span><span class="nav-text"> &nbsp;프라이빗 공간</span>
                         </a>
                     </li>
                     <li>
-                        <a href="bookmark.do" aria-expanded="false">
+                        <a href="bookmark.htm" aria-expanded="false">
                             <span class="iconify" data-icon="ic:round-bookmark" data-inline="false" style="width: 20px;height: auto;"> </span><span class="nav-text"> &nbsp;북마크</span>
                         </a>
                     </li>
@@ -275,7 +275,7 @@
                     <li class="nav-label"><button type="button" class="btn" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-toggle="modal" data-target="#myModal"><i class="icon-note menu-icon"></i> 새 협업공간 만들기</button></li>
                     <li class="nav-label" style="padding-top: 0"><input type="search" class="form-control" style="border-radius: 0.25rem; height: 20px" placeholder="협업공간 검색"></li>
                     <li>
-                        <a href="coop-issue.do" aria-expanded="false">
+                        <a href="coop-issue.htm" aria-expanded="false">
                             <span class="iconify" data-icon="bx:bxs-flag-alt" data-inline="false" style="width: 20px;height: auto;"> </span><span class="nav-text"> &nbsp;쫀쬬니(append로..)</span>
                         </a>
                     </li>
