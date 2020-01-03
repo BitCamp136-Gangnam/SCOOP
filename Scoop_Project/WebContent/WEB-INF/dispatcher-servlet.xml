@@ -25,14 +25,14 @@
 <!-- REST API -->	
 	<bean name="jsonview" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
 	
-		<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">
 			<value>/WEB-INF/views/</value>
 		</property>
 		<property name="suffix">
 			<value>.jsp</value>
 		</property>
-	</bean>
+	</bean> -->
 </beans>
 
 

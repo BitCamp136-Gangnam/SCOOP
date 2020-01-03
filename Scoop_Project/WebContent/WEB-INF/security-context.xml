@@ -60,7 +60,7 @@ auto-config="true" : Spring Security 제공하는 환경설정을 사용하겠�
 <security:http>
 	<security:csrf disabled="true" />
 	<security:form-login login-page="frontpage.htm" authentication-failure-url="frontpage.htm?error"/>
-	<security:logout logout-success-url="/frontpage.htm" />
+	<security:logout logout-success-url="frontpage.htm" />
 		
 	<!-- <security:interz	cept-url pattern="/customer/noticeDetail.do" access="hasRole('ROLE_USER')" />
 	<security:intercept-url pattern="/customer/noticeReg.do" access="hasRole('ROLE_ADMIN')" />  -->

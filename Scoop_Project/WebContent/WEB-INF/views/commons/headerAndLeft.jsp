@@ -63,10 +63,7 @@
 			        		}
 				  }
 				});  
-        var check = $("input[type='checkbox']");
-        check.click(function(){
-        	$("p").toggle();
-        });
+     
 		$('#alarmbtn').click(function(event){
 			event.stopPropagation();
 			if($('#alarmbox').attr('name')=='on'){
@@ -148,11 +145,11 @@
 }
 
 input:checked + .slider_alarm {
-  background-color: #2196F3;
+  background-color: #00D63D;
 }
 
 input:focus + .slider_alarm {
-  box-shadow: 0 0 1px #2196F3;
+  box-shadow: 0 0 1px #00D63D;
 }
 
 input:checked + .slider_alarm:before {
@@ -232,7 +229,7 @@ span{
                                 <div class="dropdown-content-body">
                                     <ul>
                                     	<li>
-                                    		
+                                    			<p style="display:inline-block; padding-right: 33%">전체 알람 설정 </p>
                                     			<label class="switch_alarm">
   													<input type="checkbox" checked="checked" id="alarmbox" name="on">
   													<span class="slider_alarm round_alarm" id="alarmbtn"></span>
