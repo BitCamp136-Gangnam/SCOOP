@@ -16,14 +16,16 @@ public class Member {
 	private Date idtime;
 	private int mrank;
 	private int loginnum;
-	private CommonsMultipartFile file;
+	private CommonsMultipartFile profile;
 	
-	public CommonsMultipartFile getFile() {
-		return file;
+	
+	public CommonsMultipartFile getProfile() {
+		return profile;
 	}
-	public void setFile(CommonsMultipartFile file) {
-		this.file = file;
+	public void setProfile(CommonsMultipartFile profile) {
+		this.profile = profile;
 	}
+	
 	public String getEmail() {
 		return email;
 	}
@@ -79,13 +81,14 @@ public class Member {
 	public void setIdtime(Date idtime) {
 		this.idtime = idtime;
 	}
-	
 	@Override
 	public String toString() {
 		return "Member [email=" + email + ", pwd=" + pwd + ", name=" + name + ", dname=" + dname + ", drank=" + drank
 				+ ", address=" + address + ", idtime=" + idtime + ", mrank=" + mrank + ", loginnum=" + loginnum
-				+ ", file=" + file + "]";
+				+ ", profile=" + profile + "]";
 	}
+	
+	
 	
 	
 	
