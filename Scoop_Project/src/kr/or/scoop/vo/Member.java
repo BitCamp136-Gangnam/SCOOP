@@ -12,18 +12,19 @@ public class Member {
 	private String name;
 	private String dname;
 	private String drank;
-	private String addrress;
-	private Date idteme;
-	private int mrank;
+	private String address;
+	private Date idtime;
 	private int loginnum;
-	private CommonsMultipartFile file;
+	private CommonsMultipartFile profile;
 	
-	public CommonsMultipartFile getFile() {
-		return file;
+	
+	public CommonsMultipartFile getProfile() {
+		return profile;
 	}
-	public void setFile(CommonsMultipartFile file) {
-		this.file = file;
+	public void setProfile(CommonsMultipartFile profile) {
+		this.profile = profile;
 	}
+	
 	public String getEmail() {
 		return email;
 	}
@@ -54,35 +55,35 @@ public class Member {
 	public void setDrank(String drank) {
 		this.drank = drank;
 	}
-	public String getAddrress() {
-		return addrress;
-	}
-	public void setAddrress(String addrress) {
-		this.addrress = addrress;
-	}
-	public Date getIdteme() {
-		return idteme;
-	}
-	public void setIdteme(Date idteme) {
-		this.idteme = idteme;
-	}
-	public int getMrank() {
-		return mrank;
-	}
-	public void setMrank(int mrank) {
-		this.mrank = mrank;
-	}
+	
 	public int getLoginnum() {
 		return loginnum;
 	}
 	public void setLoginnum(int loginnum) {
 		this.loginnum = loginnum;
 	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public Date getIdtime() {
+		return idtime;
+	}
+	public void setIdtime(Date idtime) {
+		this.idtime = idtime;
+	}
+	
 	@Override
 	public String toString() {
 		return "Member [email=" + email + ", pwd=" + pwd + ", name=" + name + ", dname=" + dname + ", drank=" + drank
-				+ ", addrress=" + addrress + ", idteme=" + idteme + ", mrank=" + mrank + ", loginnum=" + loginnum + "]";
+				+ ", address=" + address + ", idtime=" + idtime + ", loginnum=" + loginnum + ", profile=" + profile
+				+ "]";
 	}
+	
+	
+	
 	
 	
 }

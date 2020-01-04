@@ -270,7 +270,7 @@ $(document).ready(function($) {
      </div>
      <div class="modal-body p-4 p-lg-5">
       <img class="img-responsive center-block" alt="Scoop로고" src="images/logo/ScoopBig.png" style="width:100%;height:auto;padding-right:15%;padding-left:15%;"/>
-      <form action="frontpage.htm" class="login-form text-left" method="post">
+      <form action="frontpage.do" class="login-form text-left" method="post">
         <h4>회원가입</h4>
         <div class="form-group mb-4">
          <label>Email address</label>
@@ -291,6 +291,11 @@ $(document).ready(function($) {
         </div>
         <div>
         </div>
+        <input type="hidden" name="dname" value="abc">
+        <input type="hidden" name="drank" value="10">
+        <input type="hidden" name="address" value="서울시 강남구">
+         <input type="hidden" name="idtime" value="20/01/04">
+        <input type="hidden" name="profile" value="bb.png"> 
       	</form>								   
      </div>
    </div>

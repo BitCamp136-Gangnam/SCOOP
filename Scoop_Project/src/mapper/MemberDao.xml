@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 -->
 	 <!-- 일반회원가입 -->
 	 <insert id="insertMember" parameterType="kr.or.scoop.vo.Member">
-	 	insert into member(email, pwd, name,idtime,loginnum) values (#{email},#{pwd},#{name},sysdate,1)
+	 	insert into member(email, pwd, name,nvl(idtime,'20-01-04'),loginnum,dname,drank,address,nvl(profile,'0.png')) values (#{email},#{pwd},#{name},#{idtime},1,#{dname},#{drank},#{address},#{profile})
 	 </insert>
 
 	<!-- return multi row >> User 객체 여러개 >> List<User> (x) -->
