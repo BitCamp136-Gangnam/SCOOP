@@ -14,6 +14,7 @@ public class memberService {
 
 	public int insertMember(Member member){
 		int result = 0;
+		System.out.println(member.toString());
 		MemberDao dao = sqlsession.getMapper(MemberDao.class);
 		
 		
