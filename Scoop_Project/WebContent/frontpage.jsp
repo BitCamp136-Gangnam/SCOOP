@@ -294,8 +294,8 @@ $(document).ready(function($) {
         <input type="hidden" name="dname" value="abc">
         <input type="hidden" name="drank" value="10">
         <input type="hidden" name="address" value="서울시 강남구">
-       <!--  <input type="hidden" name="idtime" value="20/01/04">
-        <input type="hidden" name="profile" value="bb.png"> -->
+         <input type="hidden" name="idtime" value="20/01/04">
+        <input type="hidden" name="profile" value="bb.png"> 
       	</form>								   
      </div>
    </div>

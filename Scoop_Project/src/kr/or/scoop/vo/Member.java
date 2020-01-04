@@ -14,7 +14,6 @@ public class Member {
 	private String drank;
 	private String address;
 	private Date idtime;
-	private int mrank;
 	private int loginnum;
 	private CommonsMultipartFile profile;
 	
@@ -57,12 +56,6 @@ public class Member {
 		this.drank = drank;
 	}
 	
-	public int getMrank() {
-		return mrank;
-	}
-	public void setMrank(int mrank) {
-		this.mrank = mrank;
-	}
 	public int getLoginnum() {
 		return loginnum;
 	}
@@ -81,11 +74,12 @@ public class Member {
 	public void setIdtime(Date idtime) {
 		this.idtime = idtime;
 	}
+	
 	@Override
 	public String toString() {
 		return "Member [email=" + email + ", pwd=" + pwd + ", name=" + name + ", dname=" + dname + ", drank=" + drank
-				+ ", address=" + address + ", idtime=" + idtime + ", mrank=" + mrank + ", loginnum=" + loginnum
-				+ ", profile=" + profile + "]";
+				+ ", address=" + address + ", idtime=" + idtime + ", loginnum=" + loginnum + ", profile=" + profile
+				+ "]";
 	}
 	
 	
