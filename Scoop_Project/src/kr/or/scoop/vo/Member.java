@@ -13,18 +13,23 @@ public class Member {
 	private String dname;
 	private String drank;
 	private String address;
-	private Date idtime;
+	private String idtime;
 	private int loginnum;
-	private CommonsMultipartFile profile;
+	private String profile;
+	/*
+	 * private CommonsMultipartFile profile;
+	 * 
+	 * 
+	 * public CommonsMultipartFile getProfile() { return profile; } public void
+	 * setProfile(CommonsMultipartFile profile) { this.profile = profile; }
+	 */
 	
-	
-	public CommonsMultipartFile getProfile() {
+	public String getProfile() {
 		return profile;
 	}
-	public void setProfile(CommonsMultipartFile profile) {
+	public void setProfile(String profile) {
 		this.profile = profile;
 	}
-	
 	public String getEmail() {
 		return email;
 	}
@@ -68,13 +73,14 @@ public class Member {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public Date getIdtime() {
+
+	
+	public String getIdtime() {
 		return idtime;
 	}
-	public void setIdtime(Date idtime) {
+	public void setIdtime(String idtime) {
 		this.idtime = idtime;
 	}
-	
 	@Override
 	public String toString() {
 		return "Member [email=" + email + ", pwd=" + pwd + ", name=" + name + ", dname=" + dname + ", drank=" + drank

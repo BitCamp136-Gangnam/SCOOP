@@ -9,7 +9,7 @@ import kr.or.scoop.vo.Member;
 @Service
 public class memberService {
 	
-
+	
 	private SqlSession sqlsession;
 
 	public int insertMember(Member member){
