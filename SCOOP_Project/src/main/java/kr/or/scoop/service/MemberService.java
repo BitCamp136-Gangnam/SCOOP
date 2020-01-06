@@ -23,15 +23,22 @@ public class MemberService {
 		return result;
 	}
 	
-	public int loginMember(Member member) {
+	public int loginMember(String email, String pwd) {
 		int result = 0;
-		
+		System.out.println("여기어디");
+		System.out.println(email+"/"+pwd);
 		MemberDao dao = sqlsession.getMapper(MemberDao.class);
-		
-		result = dao.loginCheck(member);
+		result = dao.loginCheck(email,pwd);
 		
 		return result;
 		
+	}
+	
+	public Member pwdCheck(String email) {
+		String result = "";
+		MemberDao dao = sqlsession.getMapper(MemberDao.class);
+		result = dao.
+		return result;
 	}
 	
 }

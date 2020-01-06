@@ -44,24 +44,25 @@ public class MemberController {
 			viewpage = "redirect:/index.do";
 		}else {
 			System.out.println("가입실패");
-			viewpage = "frontpage.do";
+			viewpage = "index.do";
 		}
 		
 		return viewpage; //주의 (website/index.htm
 
 	}
-	
-	@RequestMapping(value="frontpage.do", method = RequestMethod.GET)
-	public String login() {
-		return "frontpage";
-	}
-	@RequestMapping(value="frontpage.do", method = RequestMethod.POST)
-	public String login(Member member) {
+	@RequestMapping(value="login.do", method = RequestMethod.POST)
+	public String login(String email, String pwd) {
 		
 		int result = 0;
 		String viewpage = "";
-		result = service.loginMember(member);
-		String encodedPwd = member.getPwd();
+		pwd = bCryptPasswordEncoder.encode(pwd);
+		result = service.loginMember(email,pwd);
+		if(result>0) {
+			viewpage="/user/userindex.do";
+		} else {
+			viewpage="/index.do";
+		}
+		
 		
 		
 		

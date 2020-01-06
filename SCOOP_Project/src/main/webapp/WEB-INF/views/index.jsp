@@ -247,7 +247,7 @@ let app = new Vue({
      </div>
      <div class="modal-body p-4 p-lg-5">
       <img class="img-responsive center-block" alt="Scoop로고" src="resources/images/logo/ScoopBig.png" style="width:100%;height:auto;padding-right:15%;padding-left:15%;"/>
-      <form action="#" class="login-form text-left">
+      <form action="login.do" class="login-form text-left" method="post">
         <h4>로그인</h4>
         <div class="form-group mb-4">
          <label>Email address</label>
@@ -263,7 +263,7 @@ let app = new Vue({
         	<div id="naver_id_login" style="float:right;margin-right: 5px;margin-left: 0px;width: 210px;border-left-width: 20px;padding-left: 15px;"></div>
         </div>
         <div>
-	        	   <a href="" data-toggle="modal" data-target="#signUp" style="padding-right:45%;">아직 회원이 아니신가요?</a>
+	        	   <a href="#" data-toggle="modal" data-target="#signUp" style="padding-right:45%;">아직 회원이 아니신가요?</a>
 	        	   <a href="#" data-toggle="modal" data-target="#passwordFind">비밀번호를 잃어버리셨나요?</a>
         </div>
       	</form>

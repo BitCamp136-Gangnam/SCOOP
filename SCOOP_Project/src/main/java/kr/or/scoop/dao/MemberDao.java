@@ -7,6 +7,8 @@ public interface MemberDao {
 	
 	public int insertMember(Member member);
 	
-	public int loginCheck(Member member);
+	public int loginCheck(String email, String pwd);
+	
+	public Member pwdCheck(String email);
 	
 }
