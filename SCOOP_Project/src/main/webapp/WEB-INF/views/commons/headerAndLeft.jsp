@@ -8,6 +8,7 @@
   <%-- <link rel="stylesheet" href="<c:url value="/resources/demos/style.css" />"> --%>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
   <script type="text/javascript">
         $(function(){ 
            $('.modal').on('hidden.bs.modal', function (e) {
@@ -330,7 +331,19 @@ span{
                                         <li>
                                             <a href="page-lock.jsp"><i class="icon-lock"></i> <span>잠금모드</span></a>
                                         </li>
-                                        <li><a href="logout.do"><i class="icon-key"></i> <span>로그아웃</span></a></li>
+                                        <c:choose>
+                                        	<c:when test="${kind==normal}">
+                                        		<li><a href="logout.do"><i class="icon-key"></i> <span>로그아웃</span></a></li>	
+                                        	</c:when>
+                                        	<c:when test="${kind==google}">
+                                        		<li><a href="#" onclick="signOut();"><i class="icon-key"></i> <span>로그아웃</span></a></li>	
+                                        	</c:when>
+                                        	<c:when test="${kind==naver}">
+                                        		<li><a href="#" onclick="signOut();"><i class="icon-key"></i> <span>로그아웃</span></a></li>	
+                                        	</c:when>
+                                        	<c:otherwise></c:otherwise>
+                                        </c:choose>
+                                        
                                         <li>
                                         <%=session.getAttribute("email")%>
                                         </li>
@@ -349,6 +362,7 @@ span{
         <!--**********************************
             Sidebar start
         ***********************************-->
+        <<c:set var="kind" value="${session.kind}}"></c:set>
         <div class="nk-sidebar" style="z-index: 0">           
             <div id="scnav" class="nk-nav-scroll">
                 <ul class="metismenu" id="menu">
@@ -735,5 +749,14 @@ span{
         date = null;
       }
       return date;
+    }
+    
+    function signOut(){
+    	var auth2 = gapi.auth2.getAuthInstance();
+    	auth2.signOut().then(function(){
+    		console.log('Google LogOut Success');
+    		location.href="logout.do";
+    		auth2.disconnect();
+    	});
     }
 </script>

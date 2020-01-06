@@ -57,7 +57,7 @@ public class MemberController {
 		return viewpage; // 주의 (website/index.htm
 
 	}
-	
+
 	// 일반회원 로그인
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
 	public String login(String email, String pwd, HttpSession session) {
@@ -69,6 +69,25 @@ public class MemberController {
 		if (result > 0) {
 			viewpage = "user/userindex";
 			session.setAttribute("email", email);
+			session.setAttribute("kind", "normal");
+		} else {
+			viewpage = "index";
+		}
+
+		return viewpage;
+	}
+
+	// 일반회원 로그인
+	@RequestMapping(value = "googleLogin.do", method = RequestMethod.POST)
+	public String googleLogin(String email, String name, HttpSession session) {
+
+		int result = 0;
+		String viewpage = "";
+		result = service.googleIdCheck(email, name);
+		if (result > 0) {
+			viewpage = "user/userindex";
+			session.setAttribute("email", email);
+			session.setAttribute("kind", "google");
 		} else {
 			viewpage = "index";
 		}
