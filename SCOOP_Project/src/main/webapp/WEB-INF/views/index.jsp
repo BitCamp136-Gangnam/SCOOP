@@ -8,6 +8,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<jsp:include page="/WEB-INF/views/commons/title.jsp"></jsp:include>
 <meta name="robots" content="all,follow">
 <!--vendors styles-->
 <link rel="stylesheet"Chatfuel
