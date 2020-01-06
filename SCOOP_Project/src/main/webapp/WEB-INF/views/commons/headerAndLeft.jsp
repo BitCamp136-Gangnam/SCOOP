@@ -12,6 +12,7 @@
         $(function(){ 
            $('.modal').on('hidden.bs.modal', function (e) {
                console.log('modal close');
+               $('#memlist').hide();
                $('.CodeMirror').hide();
                $('#filename').empty();
                $('#imgpreview').hide();
@@ -21,6 +22,9 @@
                $('#todolist').empty();
                $('#todoresult').hide();
                $('#todoresult').empty();
+               $('#datepick').hide();
+               $('#from').empty();
+               $('#to').empty();
              $(this).find('form')[0].reset()
            });
             $('#fileopen').click(function(){
@@ -495,6 +499,7 @@ span{
         <!-- Modal footer -->
         <div class="modal-footer">
           <select id="selectpro" class="form-control">
+            <option>프라이빗 공간</option>
             <option>쫀쬬니</option>
             <option>이곳저곳</option>
             <option>캠핑이지</option>
@@ -519,7 +524,7 @@ span{
    </div>
    <!--  -->
    <!-- 멘션할 사람 목록 -->
-   <div class="list-group" id="memlist" style="display: none">
+   <div class="list-group memlist" id="memlist" style="display: none">
      <a href="#" class="list-group-item list-group-item-action todo" style="padding: 5px">홍길동</a>
      <a href="#" class="list-group-item list-group-item-action todo" style="padding: 5px">김유신</a>
      <a href="#" class="list-group-item list-group-item-action todo" style="padding: 5px">임경균</a>
@@ -534,7 +539,25 @@ span{
           <button type="button" id="todocancle" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;">취소</button>
    </div>
    <div class="list-group" id="datepick" style="display: none;">
-   <span class="iconify" data-icon="bx:bx-calendar" data-inline="false" style="width: 15px;height: auto;"></span><input type="text" id="from" name="from"><input type="text" id="to" name="to">
+   <label>일정 작성</label>
+   <div class="row">
+   <div class="col-sm-5" style="padding-right: 0;">
+   <span class="iconify" data-icon="bx:bx-calendar" data-inline="false" style="width: 25px;height: auto;"></span>
+   <input type="text" id="from" name="from" style="width: 70%; border: none;" placeholder="시작날짜">
+   </div>
+   <div class="col-sm-2" style="padding-left: 0; padding-right: 0;">
+   ~
+   </div>
+   <div class="col-sm-5" style="padding-left: 0;">
+   <span class="iconify" data-icon="bx:bx-calendar" data-inline="false" style="width: 25px;height: auto;"></span>
+   <input type="text" id="to" name="to" style="width: 70%; border: none;" placeholder="종료날짜">
+   </div>
+   </div>
+   <br>
+   <label>할 일</label>
+            <textarea class="form-control createmodal" rows="3" id="datecontent" style="width: 100%; margin-bottom: 2%" placeholder="일정을 작성해주세요."></textarea>
+    <button type="button" id="datemake" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;">만들기</button>
+          <button type="button" id="datecancle" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;">취소</button>
    </div>
   </div>
 
@@ -557,13 +580,16 @@ span{
       $('#mentionlist').hide();
       $('#memlist').attr('style','position:fixed; width:20%;top:'+top+'px;left:'+left+'px; z-index:4');
       $('#memlist').show();
-      
-      $('.list-group-item').click(function(){
-         var text = "";
-         text = $('#issuecontent').val() + $(this).text();
-         $('#issuecontent').val(text);
-         $('#memlist').hide();
-         });
+		   $('.modal-content').not('#memlist').click(function(){
+		       $('#memlist').hide();
+		       });
+      });
+   $('#memlist > .list-group-item').click(function(){
+ 	  console.log("gkgkgkgk");
+      var text = "";
+      text = $('#issuecontent').val() + $(this).text();
+      $('#issuecontent').val(text);
+      $('#memlist').hide();
       });
    $('#men2').click(function(){
       $('#mentionlist').hide();
@@ -616,6 +642,9 @@ span{
             $('#todo').attr('style','border-radius:0.25em;padding:1%;position:fixed; width:20%;top:'+(top-208) +'px;left:'+left+'px; z-index:4;background-color:white');
             $('#todo').show();
             $('#todomem').val($(this).text());
+            $('.modal-content').not('#todo').click(function(){
+   		       $('#todo').hide();
+   		       });
             });
        });
     $('#todomake').click(function(){
@@ -646,12 +675,37 @@ span{
           var text = "";
             text = $('#issuecontent').val().replace("@","");
             $('#issuecontent').val(text);
-            $('#datepick').attr('style','position:fixed; width:20%;top:'+top+'px;left:'+left+'px; z-index:4; background-color:white');
+            $('#datepick').attr('style','border-radius:0.25em;padding:1%;position:fixed; width:20%;top:'+top +'px;left:'+left+'px; z-index:4;background-color:white');
          $('#datepick').show();
+             $('.modal-content').not('#datepick').click(function(){
+  		       $('#datepick').hide();
+  		       });
          $('.hasDatepicker').click(function(){
              $('#datepick').append($('#ui-datepicker-div'));
          });
     });
+    $('#datemake').click(function(){
+        $('#datepick').hide();
+        var text = "";
+       text = $('#issuecontent').val().replace("@","");
+       $('#issuecontent').val(text);
+       $('#todoresult').append('<br>');
+       $('#todoresult').append('<span class="iconify" data-icon="bx:bx-calendar" data-inline="false"></span>');
+       $('#todoresult').append($('#from').val()+"~"+$('#to').val());
+       $('#todoresult').append(' <span class="iconify" data-icon="bytesize:arrow-right" data-inline="false"></span> ');
+       $('#todoresult').append($('#datecontent').val());
+       $('#todoresult').show();
+        $('#todolist').val('');
+     })
+     $('#todocancle').click(function(){
+        $('#todo').hide();
+        var text = "";
+       text = $('#issuecontent').val().replace("@","");
+       $('#issuecontent').val(text);
+        $('#todolist').val('');
+     });
+    
+    
         var dateFormat = "mm/dd/yy",
       from = $( "#from" )
         .datepicker({
@@ -670,7 +724,6 @@ span{
       .on( "change", function() {
         from.datepicker( "option", "maxDate", getDate( this ) );
       });
- 
     function getDate( element ) {
       var date;
       try {
@@ -678,7 +731,6 @@ span{
       } catch( error ) {
         date = null;
       }
- 
       return date;
     }
 </script>
