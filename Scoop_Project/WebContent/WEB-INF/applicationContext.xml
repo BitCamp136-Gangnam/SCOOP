@@ -13,10 +13,11 @@
 						http://www.springframework.org/schema/security
 						http://www.springframework.org/schema/security/spring-security.xsd">
 
+<context:annotation-config />
 <!-- 공통 DB작업  -->
  <bean id="driverManagerDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
  	<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
- 	<property name="url" value="jdbc:oracle:thin:@localhost:1521:XE" />
+ 	<property name="url" value="jdbc:oracle:thin:@192.168.6.13:1521:XE" />
  	<property name="username" value="SCOOP" />
  	<property name="password" value="1004" />
  </bean>
@@ -34,15 +35,15 @@
 	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
 
 <!-- Mybatis 설정 -->
-<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
-	<property name="dataSource" ref="driverManagerDataSource"></property>
-	<property name="mapperLocations" value="classpath*:sqlMapper/*xml" />
-</bean>
+<bean id="sqlSessionFactoryBean"  class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="dataSource" ref="driverManagerDataSource"></property>
+    <property name="mapperLocations" value="classpath*:mapper/*xml" />
+</bean> 
 
 <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-	<constructor-arg index="0" ref="sqlSessionFactoryBean"/>
+  <constructor-arg index="0" ref="sqlSessionFactoryBean"/>
 </bean>
-<!-- Mybatis 설정 -->
+
 
 
 <!-- 파일 업로드 -->

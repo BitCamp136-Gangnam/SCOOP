@@ -12,6 +12,11 @@
         	    $('#filename').empty();
         	    $('#imgpreview').hide();
         	    $('#issuecontent').show();
+        	    $('#todo').hide();
+        	    $('#todomem').empty();
+        	    $('#todolist').empty();
+        	    $('#todoresult').hide();
+        	    $('#todoresult').empty();
         	  $(this).find('form')[0].reset()
         	});
             $('#fileopen').click(function(){
@@ -481,6 +486,8 @@ span{
             <input type="file" id="fileclick" name="files[0]" hidden="">
     		<textarea class="form-control createmodal" rows="5" id="issuecontent" style="width: 100%" placeholder="@를 입력하여 멘션, 할 일, 파일 등을 추가해 보세요."></textarea>
     		<textarea rows="" id="codemirrorarea" style="display: none"><-- 코드를 입력하세요 --></textarea>
+    		<div id="todoresult" style="display: none">
+    		</div>
         </div>
         <!-- Modal footer -->
         <div class="modal-footer">
@@ -505,9 +512,18 @@ span{
 	<!--  -->
 	<!-- 멘션할 사람 목록 -->
 	<div class="list-group" id="memlist" style="display: none">
-	  <a href="#" class="list-group-item list-group-item-action" style="padding: 5px">홍길동</a>
-	  <a href="#" class="list-group-item list-group-item-action" style="padding: 5px">김유신</a>
-	  <a href="#" class="list-group-item list-group-item-action" style="padding: 5px">임경균</a>
+	  <a href="#" class="list-group-item list-group-item-action todo" style="padding: 5px">홍길동</a>
+	  <a href="#" class="list-group-item list-group-item-action todo" style="padding: 5px">김유신</a>
+	  <a href="#" class="list-group-item list-group-item-action todo" style="padding: 5px">임경균</a>
+	</div>
+	<div class="list-group" id="todo" style="display: none;">
+	  <label for="todomem">담당자</label>
+    		<input class="form-control createmodal" type="text" id="todomem" style="width: 100%">
+    		<br>
+            <label for="todolist">할 일</label>
+            <textarea class="form-control createmodal" rows="3" id="todolist" style="width: 100%; margin-bottom: 2%" placeholder="할 일을 작성해주세요."></textarea>
+            <button type="button" id="todomake" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;">만들기</button>
+          <button type="button" id="todocancle" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;">취소</button>
 	</div>
   </div>
 
@@ -578,4 +594,37 @@ span{
 			$('#issuecontent').val(text);
 	        
 	    });
+	 $('#men8').click(function(){
+		 var top = ($('#issuecontent').offset().top);
+			var left = ($('#issuecontent').offset().left+490);
+			$('#mentionlist').hide();
+			$('#memlist').attr('style','position:fixed; width:20%;top:'+top+'px;left:'+left+'px; z-index:4');
+			$('#memlist').show();
+			$('.todo').click(function(){
+				$('#memlist').hide();
+				$('#todo').attr('style','border-radius:0.25em;padding:1%;position:fixed; width:20%;top:'+(top-208) +'px;left:'+left+'px; z-index:4;background-color:white');
+				$('#todo').show();
+				$('#todomem').val($(this).text());
+				});
+		 });
+	 $('#todomake').click(function(){
+		 $('#todo').hide();
+		 var text = "";
+		text = $('#issuecontent').val().replace("@","");
+		$('#issuecontent').val(text);
+		$('#todoresult').append('<br>');
+		$('#todoresult').append('<span class="iconify" data-icon="bx:bx-check-circle" data-inline="false"></span>');
+		$('#todoresult').append($('#todomem').val());
+		$('#todoresult').append(' <span class="iconify" data-icon="bytesize:arrow-right" data-inline="false"></span> ');
+		$('#todoresult').append($('#todolist').val());
+		$('#todoresult').show();
+		 $('#todolist').val('');
+	 })
+	 $('#todocancle').click(function(){
+		 $('#todo').hide();
+		 var text = "";
+		text = $('#issuecontent').val().replace("@","");
+		$('#issuecontent').val(text);
+		 $('#todolist').val('');
+	 })
 </script>

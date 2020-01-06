@@ -11,7 +11,6 @@
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
-<mvc:annotation-driven /> 
 <context:annotation-config />
 <context:component-scan base-package="kr.or.scoop.controller" />
 <context:component-scan base-package="kr.or.scoop.service" />
@@ -20,9 +19,9 @@
 <!-- <bean id="memberDao" class="dao.NewMemberDao"></bean> -->
 	
 <!-- Tiles 관련 Resolver 구성  -->
-	<bean id="urlBasedViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+<!-- 	<bean id="urlBasedViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 	</bean> 
-<!-- REST API -->	
+ --><!-- REST API -->	
 	<bean name="jsonview" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
 	
 		<!-- <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
