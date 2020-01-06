@@ -15,5 +15,4 @@ public class FrontController {
 		return "user/index";
 	}
 	
-	
 }
