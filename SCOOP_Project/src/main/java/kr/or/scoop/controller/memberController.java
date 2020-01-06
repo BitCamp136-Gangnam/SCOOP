@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.or.scoop.dto.Member;
-import kr.or.scoop.service.MemberService;
+import kr.or.scoop.service.memberService;
 
 @Controller
-public class MemberController {
+public class memberController {
 	
 	@Autowired
-	private MemberService service;		
+	private memberService service;		
 
 	
 	@RequestMapping(value="frontpage.do",method=RequestMethod.GET)

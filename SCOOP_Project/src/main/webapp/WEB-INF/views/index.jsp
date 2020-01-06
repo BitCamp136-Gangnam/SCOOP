@@ -121,7 +121,7 @@ $(document).ready(function($) {
 <header class="header">
   <nav class="navbar navbar-expand-lg">
    <div class="container">
-     <!-- Navbar brand--><a href="frontpage.jsp" class="navbar-nav font-weight-bold"><img src="/resources/images/logo/ScoopBig.png" style="width:200px;height: 75px; " alt="..." ></a>
+     <!-- Navbar brand--><a href="frontpage.jsp" class="navbar-nav font-weight-bold"><img src="/images/logo/ScoopBig.png" style="width:200px;height: 75px; " alt="..." ></a>
      <!-- Navbar toggler button-->
      <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right">Menu<i class="icon ion-md-list ml-2"></i></button>
      <div id="navbarSupportedContent" class="collapse navbar-collapse">
