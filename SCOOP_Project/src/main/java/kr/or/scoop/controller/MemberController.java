@@ -55,10 +55,10 @@ public class MemberController {
 		
 		int result = 0;
 		String viewpage = "";
-		pwd = bCryptPasswordEncoder.encode(pwd);
+//		pwd = bCryptPasswordEncoder.encode(pwd);
 		result = service.loginMember(email,pwd);
 		if(result>0) {
-			viewpage="/user/userindex.do";
+			viewpage="user/userindex";
 		} else {
 			viewpage="/index.do";
 		}

@@ -2,6 +2,8 @@ package kr.or.scoop.service;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import kr.or.scoop.dao.MemberDao;
@@ -12,7 +14,12 @@ public class MemberService {
 	
 	@Autowired
 	private SqlSession sqlsession;
-
+	
+	@Autowired 
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
+	public PasswordEncoder passwordEncoder;
+	
 	public int insertMember(Member member){
 		int result = 0;
 		System.out.println(member.toString());
@@ -27,18 +34,29 @@ public class MemberService {
 		int result = 0;
 		System.out.println("여기어디");
 		System.out.println(email+"/"+pwd);
+		Member member = pwdCheck(email);
+		String encodePwd = member.getPwd();
+		System.out.println(encodePwd);
+		boolean istrue = bCryptPasswordEncoder.matches(pwd, encodePwd);
+		System.out.println("boolean 다움");
 		MemberDao dao = sqlsession.getMapper(MemberDao.class);
-		result = dao.loginCheck(email,pwd);
-		
+		if(istrue) {
+			System.out.println("true");
+			result = dao.loginCheck(email,encodePwd);
+		} else {
+			System.out.println("false");
+			result = 0;
+		}
 		return result;
 		
 	}
 	
 	public Member pwdCheck(String email) {
-		String result = "";
+		Member member = null;
+		System.out.println("pwd check");
 		MemberDao dao = sqlsession.getMapper(MemberDao.class);
-		result = dao.
-		return result;
+		member = dao.pwdCheck(email);
+		return member;
 	}
 	
 }
