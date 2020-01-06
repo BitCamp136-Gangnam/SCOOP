@@ -2,7 +2,9 @@ package kr.or.scoop.controller;
 
 import java.sql.SQLException;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +17,12 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService service;		
+	
+	@Autowired
+	private SqlSession sqlsession;
+
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	
 	@RequestMapping(value="frontpage.do",method=RequestMethod.GET)
@@ -28,7 +36,7 @@ public class MemberController {
 		int result = 0;
 		String viewpage="";
 		System.out.println("인서트 들어오니"+member);
-		//member.setPwd(this.bCryptPasswordEncoder.encode(member.getPwd())); */
+		member.setPwd(this.bCryptPasswordEncoder.encode(member.getPwd()));
 		result = service.insertMember(member);
 		
 		if(result > 0) {
