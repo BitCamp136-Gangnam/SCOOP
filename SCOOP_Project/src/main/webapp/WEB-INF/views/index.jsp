@@ -204,7 +204,7 @@ $(document).ready(function($) {
       <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
      </div>
      <div class="modal-body p-4 p-lg-5">
-      <img class="img-responsive center-block" alt="Scoop로고" src="images/logo/ScoopBig.png" style="width:100%;height:auto;padding-right:15%;padding-left:15%;"/>
+      <img class="img-responsive center-block" alt="Scoop로고" src="resources/images/logo/ScoopBig.png" style="width:100%;height:auto;padding-right:15%;padding-left:15%;"/>
       <form action="#" class="login-form text-left">
         <h4>로그인</h4>
         <div class="form-group mb-4">
@@ -269,7 +269,7 @@ $(document).ready(function($) {
       <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
      </div>
      <div class="modal-body p-4 p-lg-5">
-      <img class="img-responsive center-block" alt="Scoop로고" src="images/logo/ScoopBig.png" style="width:100%;height:auto;padding-right:15%;padding-left:15%;"/>
+      <img class="img-responsive center-block" alt="Scoop로고" src="resources/images/logo/ScoopBig.png" style="width:100%;height:auto;padding-right:15%;padding-left:15%;"/>
       <form action="frontpage.do" class="login-form text-left" method="post">
         <h4>회원가입</h4>
         <div class="form-group mb-4">
@@ -311,7 +311,7 @@ $(document).ready(function($) {
       <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
      </div>
      <div class="modal-body p-4 p-lg-5">
-      <img class="img-responsive center-block" alt="Scoop로고" src="images/logo/ScoopBig.png" style="width:100%;height:auto;padding-right:15%;padding-left:15%;"/>
+      <img class="img-responsive center-block" alt="Scoop로고" src="resources/images/logo/ScoopBig.png" style="width:100%;height:auto;padding-right:15%;padding-left:15%;"/>
       <form action="#" class="login-form text-left">
         <div class="form-group mb-4">
          <label>Email address</label>
@@ -351,16 +351,16 @@ $(document).ready(function($) {
         <!-- Platforms-->
         <div class="platforms d-none d-lg-block"><span class="platforms-title">Compatible with</span>
          <ul class="platforms-list list-inline">
-           <li class="list-inline-item"><img src="img/netflix.svg" alt="" class="platform-image img-fluid"></li>
-           <li class="list-inline-item"><img src="img/apple.svg" alt="" class="platform-image img-fluid"></li>
-           <li class="list-inline-item"><img src="img/android.svg" alt="" class="platform-image img-fluid"></li>
-           <li class="list-inline-item"><img src="img/windows.svg" alt="" class="platform-image img-fluid"></li>
-           <li class="list-inline-item"><img src="img/synology.svg" alt="" class="platform-image img-fluid"></li>
+           <li class="list-inline-item"><img src="resources/img/netflix.svg" alt="" class="platform-image img-fluid"></li>
+           <li class="list-inline-item"><img src="resources/img/apple.svg" alt="" class="platform-image img-fluid"></li>
+           <li class="list-inline-item"><img src="resources/img/android.svg" alt="" class="platform-image img-fluid"></li>
+           <li class="list-inline-item"><img src="resources/img/windows.svg" alt="" class="platform-image img-fluid"></li>
+           <li class="list-inline-item"><img src="resources/img/synology.svg" alt="" class="platform-image img-fluid"></li>
          </ul>
         </div>
       </div>
       <div class="col-lg-6 d-none d-lg-block">
-          <img src="img/AppleiMac.png" alt="..." class="img-fluid">
+          <img src="resources/img/AppleiMac.png" alt="..." class="img-fluid">
       </div>
      </div>
    </div>
@@ -513,27 +513,27 @@ $(document).ready(function($) {
            <div class="showcase-image-holder">
             <div class="device-wrapper">
               <div data-device="iPhone7" data-orientation="portrait" data-color="black" class="device">
-               <div class="screen"><img src="img/showcase-screen-1.jpg" alt="..." class="img-fluid"></div>
+               <div class="screen"><img src="resources/img/showcase-screen-1.jpg" alt="..." class="img-fluid"></div>
               </div>
-            </div><img src="img/showcase-img-1.jpg" alt="..." class="showcase-image d-none d-lg-block">
+            </div><img src="resources/img/showcase-img-1.jpg" alt="..." class="showcase-image d-none d-lg-block">
            </div>
          </div>
          <div id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" class="tab-pane fade">
            <div class="showcase-image-holder">
             <div class="device-wrapper">
               <div data-device="iPhone7" data-orientation="portrait" data-color="black" class="device">
-               <div class="screen"><img src="img/showcase-screen-2.jpg" alt="..." class="img-fluid"></div>
+               <div class="screen"><img src="resources/img/showcase-screen-2.jpg" alt="..." class="img-fluid"></div>
               </div>
-            </div><img src="img/showcase-img-2.jpg" alt="..." class="showcase-image d-none d-lg-block">
+            </div><img src="resources/img/showcase-img-2.jpg" alt="..." class="showcase-image d-none d-lg-block">
            </div>
          </div>
          <div id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab" class="tab-pane fade">
            <div class="showcase-image-holder">
             <div class="device-wrapper">
               <div data-device="iPhone7" data-orientation="portrait" data-color="black" class="device">
-               <div class="screen"><img src="img/showcase-screen-3.jpg" alt="..." class="img-fluid"></div>
+               <div class="screen"><img src="resources/img/showcase-screen-3.jpg" alt="..." class="img-fluid"></div>
               </div>
-            </div><img src="img/showcase-img-3.jpg" alt="..." class="showcase-image d-none d-lg-block">
+            </div><img src="resources/img/showcase-img-3.jpg" alt="..." class="showcase-image d-none d-lg-block">
            </div>
          </div>
         </div>

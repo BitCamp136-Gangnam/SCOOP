@@ -8,7 +8,7 @@ import kr.or.scoop.dao.MemberDao;
 import kr.or.scoop.dto.Member;
 
 @Service
-public class memberService {
+public class MemberService {
 	
 	@Autowired
 	private SqlSession sqlsession;
