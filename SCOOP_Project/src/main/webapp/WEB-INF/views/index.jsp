@@ -281,6 +281,7 @@ function() {
 							        function onSuccess(googleUser) {
 							          console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
 							          location.href="userindex.do";
+							          
 							        }
 							        function onFailure(error) {
 							          console.log(error);
@@ -611,15 +612,7 @@ function() {
    </div>
   </section>
 </div>
-<div id="app">
-    <h1>iamport-checkout</h1>
-    <input v-model="impCode" placeholder="가맹점 식별코드">
-    <input v-model="order.name" placeholder="상품명">
-    <input v-model="order.amount" placeholder="상품가격">
-    <input v-model="order.buyer_tel" placeholder="주문자 전화번호">
 
-    <button v-on:click="requestPay">결제 요청</button>
-</div>
 <footer class="footer">
   <div class="container text-center">
    <!-- Copyrights-->
