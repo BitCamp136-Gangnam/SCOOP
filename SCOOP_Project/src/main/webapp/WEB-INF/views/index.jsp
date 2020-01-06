@@ -171,6 +171,7 @@ let app = new Vue({
          <!-- 여기 지우면 죽음뿐 -->
       </ul>
       <ul class="navbar-nav">
+      <li><a href="index.do?lang=en">English</a></li>
       <li class="nav-item dropdown"><a id="pages" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">세부기능</a>
       <div class="dropdown-menu">
       <div id="table">
