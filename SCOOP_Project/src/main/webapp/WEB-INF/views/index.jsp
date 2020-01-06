@@ -293,7 +293,7 @@ function() {
 							        	        
 							        	    }
 							        	}); */
-							        	location.href="userindex.do";
+							        	location.href="googleLogin.do";
 							          
 							          
 							        }
