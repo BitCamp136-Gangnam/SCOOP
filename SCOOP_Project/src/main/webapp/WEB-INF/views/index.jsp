@@ -21,7 +21,7 @@
 <!-- Ionicons CSS-->
 <link rel="stylesheet" href="<c:url value="/resources/css/ionicons.min.css"/>">
 <!-- Device mockups CSS-->
-<link rel="stylesheet" href="css/device-mockups.css">
+<link rel="stylesheet" href="<c:url value="/resources/css/device-mockups.css"/>">
 <!-- Google fonts - Source Sans Pro-->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
 <!-- Swiper sLider-->
