@@ -1,127 +1,128 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
-    <link rel="stylesheet" href="lib/codemirror.css">
-    <script src="lib/codemirror.js"></script>
+    <link rel="stylesheet" href="<c:url value="/resources/lib/codemirror.css" />">
+    <script src="<c:url value="/resources/lib/codemirror.js" />"></script>
  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
+  <%-- <link rel="stylesheet" href="<c:url value="/resources/demos/style.css" />"> --%>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script type="text/javascript">
-        $(function(){
-        	$('.modal').on('hidden.bs.modal', function (e) {
-        	    console.log('modal close');
-        	    $('.CodeMirror').hide();
-        	    $('#filename').empty();
-        	    $('#imgpreview').hide();
-        	    $('#issuecontent').show();
-        	    $('#todo').hide();
-        	    $('#todomem').empty();
-        	    $('#todolist').empty();
-        	    $('#todoresult').hide();
-        	    $('#todoresult').empty();
-        	  $(this).find('form')[0].reset()
-        	});
+        $(function(){ 
+           $('.modal').on('hidden.bs.modal', function (e) {
+               console.log('modal close');
+               $('.CodeMirror').hide();
+               $('#filename').empty();
+               $('#imgpreview').hide();
+               $('#issuecontent').show();
+               $('#todo').hide();
+               $('#todomem').empty();
+               $('#todolist').empty();
+               $('#todoresult').hide();
+               $('#todoresult').empty();
+             $(this).find('form')[0].reset()
+           });
             $('#fileopen').click(function(){
-            	$('#filediv').show();
-            	$('#fileclose').show();
-            	$('#fileclose').attr('name','on');
-            	$('#pagelogo').attr('style','opacity:0.5');
-            	$('#scnav').attr('style','opacity:0.5');
-            	$('.content-body').attr('style','opacity:0.5');
-            	$('.header').attr('style','opacity:0.5');
-            	$('#helpopen').hide();
-            	$('#filediv2').show();
+               $('#filediv').show();
+               $('#fileclose').show();
+               $('#fileclose').attr('name','on');
+               $('#pagelogo').attr('style','opacity:0.5');
+               $('#scnav').attr('style','opacity:0.5');
+               $('.content-body').attr('style','opacity:0.5');
+               $('.header').attr('style','opacity:0.5');
+               $('#helpopen').hide();
+               $('#filediv2').show();
             });
             $('#fileclose').click(function(){
-				$('#filediv').hide();
-				$('#fileclose').hide();
-				$('#pagelogo').attr('style','opacity:1');
-            	$('#scnav').attr('style','opacity:1');
-            	$('.content-body').attr('style','opacity:1');
-            	$('.header').attr('style','opacity:1');
-            	$('#helpopen').show();
-            	$('#filediv2').hide();
+            $('#filediv').hide();
+            $('#fileclose').hide();
+            $('#pagelogo').attr('style','opacity:1');
+               $('#scnav').attr('style','opacity:1');
+               $('.content-body').attr('style','opacity:1');
+               $('.header').attr('style','opacity:1');
+               $('#helpopen').show();
+               $('#filediv2').hide();
             });
             $('#filediv2').click(function(){
-				$('#filediv').hide();
-				$('#fileclose').hide();
-				$('#pagelogo').attr('style','opacity:1');
-            	$('#scnav').attr('style','opacity:1');
-            	$('.content-body').attr('style','opacity:1');
-            	$('.header').attr('style','opacity:1');
-            	$('#helpopen').show();
-            	$('#filediv2').hide();
+            $('#filediv').hide();
+            $('#fileclose').hide();
+            $('#pagelogo').attr('style','opacity:1');
+               $('#scnav').attr('style','opacity:1');
+               $('.content-body').attr('style','opacity:1');
+               $('.header').attr('style','opacity:1');
+               $('#helpopen').show();
+               $('#filediv2').hide();
                 });
-           	$(document).keydown(function(event) {
-				  if (event.ctrlKey && event.keyCode==190) {
-					  if($('.fileon').attr('class')=='fileon'){
-		        			$('#filediv').attr('class','fileoff');
-		        			$('#filediv').show();
-		                	$('#fileclose').show();
-		                	$('#fileclose').attr('name','on');
-		                	$('#pagelogo').attr('style','opacity:0.5');
-		                	$('#scnav').attr('style','opacity:0.5');
-		                	$('.content-body').attr('style','opacity:0.5');
-		                	$('.header').attr('style','opacity:0.5');
-		                	$('#helpopen').hide();
-		                	$('#filediv2').show();
-		        		}else{
-		        			$('#filediv').attr('class','fileon');
-		        			$('#filediv').hide();
-		    				$('#fileclose').hide();
-		    				$('#pagelogo').attr('style','opacity:1');
-		                	$('#scnav').attr('style','opacity:1');
-		                	$('.content-body').attr('style','opacity:1');
-		                	$('.header').attr('style','opacity:1');
-		                	$('#helpopen').show();
-		                	$('#filediv2').hide();
-			        		}
-				  }
-				});  
+              $(document).keydown(function(event) {
+              if (event.ctrlKey && event.keyCode==190) {
+                 if($('.fileon').attr('class')=='fileon'){
+                       $('#filediv').attr('class','fileoff');
+                       $('#filediv').show();
+                         $('#fileclose').show();
+                         $('#fileclose').attr('name','on');
+                         $('#pagelogo').attr('style','opacity:0.5');
+                         $('#scnav').attr('style','opacity:0.5');
+                         $('.content-body').attr('style','opacity:0.5');
+                         $('.header').attr('style','opacity:0.5');
+                         $('#helpopen').hide();
+                         $('#filediv2').show();
+                    }else{
+                       $('#filediv').attr('class','fileon');
+                       $('#filediv').hide();
+                      $('#fileclose').hide();
+                      $('#pagelogo').attr('style','opacity:1');
+                         $('#scnav').attr('style','opacity:1');
+                         $('.content-body').attr('style','opacity:1');
+                         $('.header').attr('style','opacity:1');
+                         $('#helpopen').show();
+                         $('#filediv2').hide();
+                       }
+              }
+            });  
      
-		$('#alarmbtn').click(function(event){
-			event.stopPropagation();
-			if($('#alarmbox').attr('name')=='on'){
-				$('#alarmbox').attr('name','off');
-			$('#alarm_power').text('OFF');
-				}else{
-					$('#alarmbox').attr('name','on');
-					$('#alarm_power').text('ON');
-					}
-			
-			});
+      $('#alarmbtn').click(function(event){
+         event.stopPropagation();
+         if($('#alarmbox').attr('name')=='on'){
+            $('#alarmbox').attr('name','off');
+         $('#alarm_power').text('OFF');
+            }else{
+               $('#alarmbox').attr('name','on');
+               $('#alarm_power').text('ON');
+               }
+         
+         });
 });
 </script>
   
 <style>
   #filediv {
-		  position: fixed;
-		  bottom: 0;
-		  right: 0;
-		  font-size: 18px;
-		  z-index: 2;
-		  width: 84.6%;
-		  height: 100%;
-		}
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        font-size: 18px;
+        z-index: 2;
+        width: 84.6%;
+        height: 100%;
+      }
   #filediv2 {
-		  position: fixed;
-		  bottom: 0;
-		  right: left;
-		  font-size: 18px;
-		  z-index: 2;
-		  width: 15.4%;
-		  height: 100%;
-		  background-color: black;
-		  opacity: 0.5;
-		}
+        position: fixed;
+        bottom: 0;
+        right: left;
+        font-size: 18px;
+        z-index: 2;
+        width: 15.4%;
+        height: 100%;
+        background-color: black;
+        opacity: 0.5;
+      }
   #fileclose {
-		  position: fixed;
-		  bottom: 95%;
-		  left: 1%;
-		  font-size: 18px;
-		  z-index: 3;
-		}
+        position: fixed;
+        bottom: 95%;
+        left: 1%;
+        font-size: 18px;
+        z-index: 3;
+      }
 
 /* The switch - the box around the slider */
 .switch_alarm {
@@ -184,10 +185,10 @@ input:checked + .slider_alarm:before {
 }
 
 span{
-	margin:0px;
-	display:inline-block;
-	font-size:15px;
-	font-weight:bold;
+   margin:0px;
+   display:inline-block;
+   font-size:15px;
+   font-weight:bold;
 }
 </style>
 
@@ -197,10 +198,10 @@ span{
         <div id="pagelogo" class="nav-header">
             <div class="brand-logo">
                 <a href="index.htm" style="padding-top: 0px;">
-                    <b class="logo-abbr"><img class="img-responsive center-block" src="images/logo/ScoopTitle.png" alt="mini" style="width:100px;height: auto;padding-top:0;margin-top: 30px; "> </b>
-                    <span class="logo-compact"><img class="img-responsive center-block"src="images/logo/ScoopBig.png" alt="" style="margin-top: 20px; text-align: center;"></span>
+                    <b class="logo-abbr"><img class="img-responsive center-block" src="<c:url value="/resources/images/logo/ScoopTitle.png" />" alt="mini" style="width:100px;height: auto;padding-top:0;margin-top: 30px; "> </b>
+                    <span class="logo-compact"><img class="img-responsive center-block"src="<c:url value="/resources/images/logo/ScoopBig.png" />" alt="" style="margin-top: 20px; text-align: center;"></span>
                     <span class="brand-title">
-                        <img class="img-responsive center-block" src="images/logo/ScoopBig.png" alt="" style="margin-top: 3%;">
+                        <img class="img-responsive center-block" src="<c:url value="/resources/images/logo/ScoopBig.png" />" alt="" style="margin-top: 3%;">
                     </span>
                 </a>
             </div>
@@ -243,16 +244,16 @@ span{
                             <div class="drop-down animated fadeIn dropdown-menu dropdown-notfication">
                                 <div class="dropdown-content-body">
                                     <ul>
-                                    	<li>
-                                    			<p style="display:inline-block; padding-right: 33%">전체 알람 설정 </p>
-                                    			<label class="switch_alarm">
-  													<input type="checkbox" checked="checked" id="alarmbox" name="on">
-  													<span class="slider_alarm round_alarm" id="alarmbtn"></span>
-													</label>
-													<span id="alarm_power">ON</span>
-                                    	
-                                    	</li>
-                                    	
+                                       <li>
+                                             <p style="display:inline-block; padding-right: 33%">전체 알람 설정 </p>
+                                             <label class="switch_alarm">
+                                         <input type="checkbox" checked="checked" id="alarmbox" name="on">
+                                         <span class="slider_alarm round_alarm" id="alarmbtn"></span>
+                                       </label>
+                                       <span id="alarm_power">ON</span>
+                                       
+                                       </li>
+                                       
                                         <li>
                                             <a href="javascript:void()">
                                                 <span class="mr-3 avatar-icon bg-success-lighten-2"><i class="icon-present"></i></span>
@@ -310,7 +311,7 @@ span{
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
                                 <span class="activity active"></span>
-                                <img src="images/avatar/avatar.png" height="40" width="40" alt="">
+                                <img src="<c:url value="/resources/images/avatar/avatar.png" />" height="40" width="40" alt="">
                             </div>
                             <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
                                 <div class="dropdown-content-body">
@@ -344,7 +345,7 @@ span{
         <div class="nk-sidebar" style="z-index: 0">           
             <div id="scnav" class="nk-nav-scroll">
                 <ul class="metismenu" id="menu">
-                	<li class="nav-label" style="padding-bottom: 10px;" ><b style="padding-bottom: 2%;">전체 정보</b></li>
+                   <li class="nav-label" style="padding-bottom: 10px;" ><b style="padding-bottom: 2%;">전체 정보</b></li>
                     <li>
                         <a href="index.htm" aria-expanded="false">
                             <span class="iconify" data-icon="bx:bx-file-blank" data-inline="false" style="width: 20px;height: auto;"> </span><span class="nav-text"> &nbsp;새로운 소식</span>
@@ -387,7 +388,7 @@ span{
             Sidebar end
         ***********************************-->
         <!-- 
-        		협업공간 만들기 모달 생성
+              협업공간 만들기 모달 생성
          -->
  <style>
  .createmodal{
@@ -410,12 +411,12 @@ span{
         <!-- Modal body -->
         <div class="modal-body">
         <p style="font-size: 12px">협업공간은 함께 일하는 멤버들끼리만 자료를 공유하고 협업할 수 있는 공간입니다.<br>
-          	협업공간을 만들고 함께 일할 멤버들을 초대해보세요.</p>
+             협업공간을 만들고 함께 일할 멤버들을 초대해보세요.</p>
           <label for="title">협업공간 이름</label>
-    		<input class="form-control createmodal" type="text" id="title" style="width: 100%">
-    		<br>
+          <input class="form-control createmodal" type="text" id="title" style="width: 100%">
+          <br>
           <label for="content">협업공간 설명</label>
-    		<textarea class="form-control createmodal" rows="3" id="content" style="width: 100%"></textarea>
+          <textarea class="form-control createmodal" rows="3" id="content" style="width: 100%"></textarea>
         </div>
         
         <!-- Modal footer -->
@@ -428,44 +429,44 @@ span{
     </div>
   </div>
   <div id="filediv" class="fileon" style="display: none;background-color: white;">
-  	<div class="row"  style="margin: 2%;">
-  		<div class="col-sm-12">
-  			<h3>파일함(Ctrl + .)</h3>
-  			<h6>어디서든 Drag & Drop으로 파일을 업로드할 수 있습니다.</h6>
-  		</div>
-  	</div>
-  	<div class="row" style="margin: 2%;">
-			<ul class="nav nav-pills">
-			    <li class="nav-item">
-			      <a class="nav-link" href="#">내 파일</a>
-			    </li>
-			    <li class="nav-item">
-			      <a class="nav-link" href="#">전체 파일</a>
-			    </li>
-			    <li class="nav-item dropdown">
-			      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">프로젝트</a>
-			      <div class="dropdown-menu">
-			        <a class="dropdown-item" href="#">쫀쬬니</a>
-			        <a class="dropdown-item" href="#">스쿱</a>
-			      </div>
-			    </li>
-			    <li class="nav-item">
-			    <input type="search" class="form-control" style="border-radius: 0.25rem; height: 20px" placeholder="파일 검색">
-			    </li>
-		    </ul>
-	</div>
-	<div class="row" style="margin: 2%; overflow: auto; height: 600px">
-		<div style="width: 10%; margin: 1%; cursor: pointer;">
-		<img width="100%" height="auto" style="margin: 1%" src="./images/chat/questionmark.png"><br>
-		<p style="font-size: 15px; text-align: center">
-		이미지이름.jpg<br>
-		프로젝트 이름
-		</p>
-		</div>
-	</div>
+     <div class="row"  style="margin: 2%;">
+        <div class="col-sm-12">
+           <h3>파일함(Ctrl + .)</h3>
+           <h6>어디서든 Drag & Drop으로 파일을 업로드할 수 있습니다.</h6>
+        </div>
+     </div>
+     <div class="row" style="margin: 2%;">
+         <ul class="nav nav-pills">
+             <li class="nav-item">
+               <a class="nav-link" href="#">내 파일</a>
+             </li>
+             <li class="nav-item">
+               <a class="nav-link" href="#">전체 파일</a>
+             </li>
+             <li class="nav-item dropdown">
+               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">프로젝트</a>
+               <div class="dropdown-menu">
+                 <a class="dropdown-item" href="#">쫀쬬니</a>
+                 <a class="dropdown-item" href="#">스쿱</a>
+               </div>
+             </li>
+             <li class="nav-item">
+             <input type="search" class="form-control" style="border-radius: 0.25rem; height: 20px" placeholder="파일 검색">
+             </li>
+          </ul>
+   </div>
+   <div class="row" style="margin: 2%; overflow: auto; height: 600px">
+      <div style="width: 10%; margin: 1%; cursor: pointer;">
+      <img width="100%" height="auto" style="margin: 1%" src="<c:url value="/resources/images/chat/questionmark.png" />"><br>
+      <p style="font-size: 15px; text-align: center">
+      이미지이름.jpg<br>
+      프로젝트 이름
+      </p>
+      </div>
+   </div>
   </div>
   <div id="filediv2" style="display:none;"></div>
-  <img src="./images/chat/close.png" id="fileclose" name="on" width=20px height=auto style="cursor: pointer; display: none;">
+  <img src="<c:url value="/resources/images/chat/close.png" />" id="fileclose" name="on" width=20px height=auto style="cursor: pointer; display: none;">
   
   <div class="modal fade" id="makeissue">
     <div class="modal-dialog modal-dialog-centered">
@@ -480,23 +481,23 @@ span{
         <!-- Modal body -->
         <div class="modal-body">
         <!-- <p style="font-size: 12px">협업공간은 함께 일하는 멤버들끼리만 자료를 공유하고 협업할 수 있는 공간입니다.<br>
-          	협업공간을 만들고 함께 일할 멤버들을 초대해보세요.</p> -->
+             협업공간을 만들고 함께 일할 멤버들을 초대해보세요.</p> -->
             <label for="title">이슈 제목</label>
-    		<input class="form-control createmodal" type="text" id="issuetitle" style="width: 100%" placeholder="제목을 입력해 주세요.">
-    		<br>
+          <input class="form-control createmodal" type="text" id="issuetitle" style="width: 100%" placeholder="제목을 입력해 주세요.">
+          <br>
             <label for="content">이슈 설명</label> <span id="filename"></span> <img id="imgpreview" alt="사진 미리보기 자리" style="display:none;width: 40px; height: 40px" src="#" />
             <input type="file" id="fileclick" name="files[0]" hidden="">
-    		<textarea class="form-control createmodal" rows="5" id="issuecontent" style="width: 100%" placeholder="@를 입력하여 멘션, 할 일, 파일 등을 추가해 보세요."></textarea>
-    		<textarea rows="" id="codemirrorarea" style="display: none"><-- 코드를 입력하세요 --></textarea>
-    		<div id="todoresult" style="display: none">
-    		</div>
+          <textarea class="form-control createmodal" rows="5" id="issuecontent" style="width: 100%" placeholder="@를 입력하여 멘션, 할 일, 파일 등을 추가해 보세요."></textarea>
+          <textarea rows="" id="codemirrorarea" style="display: none"><-- 코드를 입력하세요 --></textarea>
+          <div id="todoresult" style="display: none">
+          </div>
         </div>
         <!-- Modal footer -->
         <div class="modal-footer">
-       	<select id="selectpro" class="form-control">
-         	<option>쫀쬬니</option>
-         	<option>이곳저곳</option>
-         	<option>캠핑이지</option>
+          <select id="selectpro" class="form-control">
+            <option>쫀쬬니</option>
+            <option>이곳저곳</option>
+            <option>캠핑이지</option>
           </select>
           <button type="submit" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">만들기</button>
           <button type="button" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">취소</button>
@@ -505,153 +506,153 @@ span{
       </div>
     </div>
     
-	  <div class="list-group" id="mentionlist" style="display: none">
-	  <a href="#" class="list-group-item list-group-item-action" id="men1" style="padding: 5px">멘션</a>
-	  <a href="#" class="list-group-item list-group-item-action" id="men2" style="padding: 5px">소스코드(코드미러 하다말았음)</a>
-	  <a href="#" class="list-group-item list-group-item-action" id="men3" style="padding: 5px">구글 드라이브(가능?)</a>
-	  <a href="#" class="list-group-item list-group-item-action" id="men4" style="padding: 5px">파일</a>
-	  <a href="#" class="list-group-item list-group-item-action" id="men5" style="padding: 5px">표(이건 어떻게함;;)</a>
-	  <a href="#" class="list-group-item list-group-item-action" id="men6" style="padding: 5px">관련 이슈</a>
-	  <a href="#" class="list-group-item list-group-item-action" id="men7" style="padding: 5px">의사결정</a>
-	  <a href="#" class="list-group-item list-group-item-action" id="men8" style="padding: 5px">할 일</a>
-	  <a href="#" class="list-group-item list-group-item-action" id="men9" style="padding: 5px">일정</a>
-	</div>
-	<!--  -->
-	<!-- 멘션할 사람 목록 -->
-	<div class="list-group" id="memlist" style="display: none">
-	  <a href="#" class="list-group-item list-group-item-action todo" style="padding: 5px">홍길동</a>
-	  <a href="#" class="list-group-item list-group-item-action todo" style="padding: 5px">김유신</a>
-	  <a href="#" class="list-group-item list-group-item-action todo" style="padding: 5px">임경균</a>
-	</div>
-	<div class="list-group" id="todo" style="display: none;">
-	  <label for="todomem">담당자</label>
-    		<input class="form-control createmodal" type="text" id="todomem" style="width: 100%">
-    		<br>
+     <div class="list-group" id="mentionlist" style="display: none">
+     <a href="#" class="list-group-item list-group-item-action" id="men1" style="padding: 5px">멘션</a>
+     <a href="#" class="list-group-item list-group-item-action" id="men2" style="padding: 5px">소스코드(코드미러 하다말았음)</a>
+     <a href="#" class="list-group-item list-group-item-action" id="men3" style="padding: 5px">구글 드라이브(가능?)</a>
+     <a href="#" class="list-group-item list-group-item-action" id="men4" style="padding: 5px">파일</a>
+     <a href="#" class="list-group-item list-group-item-action" id="men5" style="padding: 5px">표(이건 어떻게함;;)</a>
+     <a href="#" class="list-group-item list-group-item-action" id="men6" style="padding: 5px">관련 이슈</a>
+     <a href="#" class="list-group-item list-group-item-action" id="men7" style="padding: 5px">의사결정</a>
+     <a href="#" class="list-group-item list-group-item-action" id="men8" style="padding: 5px">할 일</a>
+     <a href="#" class="list-group-item list-group-item-action" id="men9" style="padding: 5px">일정</a>
+   </div>
+   <!--  -->
+   <!-- 멘션할 사람 목록 -->
+   <div class="list-group" id="memlist" style="display: none">
+     <a href="#" class="list-group-item list-group-item-action todo" style="padding: 5px">홍길동</a>
+     <a href="#" class="list-group-item list-group-item-action todo" style="padding: 5px">김유신</a>
+     <a href="#" class="list-group-item list-group-item-action todo" style="padding: 5px">임경균</a>
+   </div>
+   <div class="list-group" id="todo" style="display: none;">
+     <label for="todomem">담당자</label>
+          <input class="form-control createmodal" type="text" id="todomem" style="width: 100%">
+          <br>
             <label for="todolist">할 일</label>
             <textarea class="form-control createmodal" rows="3" id="todolist" style="width: 100%; margin-bottom: 2%" placeholder="할 일을 작성해주세요."></textarea>
             <button type="button" id="todomake" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;">만들기</button>
           <button type="button" id="todocancle" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;">취소</button>
-	</div>
-	<div class="list-group" id="datepick" style="display: none;">
-	<span class="iconify" data-icon="bx:bx-calendar" data-inline="false" style="width: 15px;height: auto;"></span><input type="text" id="from" name="from"><input type="text" id="to" name="to">
-	</div>
+   </div>
+   <div class="list-group" id="datepick" style="display: none;">
+   <span class="iconify" data-icon="bx:bx-calendar" data-inline="false" style="width: 15px;height: auto;"></span><input type="text" id="from" name="from"><input type="text" id="to" name="to">
+   </div>
   </div>
 
   <script type="text/javascript">
-	$('#issuecontent').keydown(function(event){
-		var top = ($('#issuecontent').offset().top);
-		var left = ($('#issuecontent').offset().left+490);
-		if(event.shiftKey && event.keyCode==50){
-			console.log("top&left" + top + ", "+left);
-			$('#mentionlist').attr('style','position:fixed; width:20%;top:'+top+'px;left:'+left+'px; z-index:4');
-			$('#mentionlist').show();
-			$('div').not('#mentionlist').click(function(){
-				$('#mentionlist').hide();
-				});
-			}
-		});
-	$('#men1').click(function(){
-		var top = ($('#issuecontent').offset().top);
-		var left = ($('#issuecontent').offset().left+490);
-		$('#mentionlist').hide();
-		$('#memlist').attr('style','position:fixed; width:20%;top:'+top+'px;left:'+left+'px; z-index:4');
-		$('#memlist').show();
-		
-		$('.list-group-item').click(function(){
-			var text = "";
-			text = $('#issuecontent').val() + $(this).text();
-			$('#issuecontent').val(text);
-			$('#memlist').hide();
-			});
-		});
-	$('#men2').click(function(){
-		$('#mentionlist').hide();
-		$('#issuecontent').empty();
-		$('#issuecontent').hide();
-		var textarea = document.getElementById('codemirrorarea');
-		  var editor = CodeMirror.fromTextArea(textarea, {
-		      mode: "javascript",
-		      lineNumbers: true,
-		      lineWrapping: true,
-		      theme: "eclipse",
-		      val: textarea.value
-		  });
-		});
-	$('#men4').click(function(){
-		$('#mentionlist').hide();
-		$('#fileclick').click();
-		});
-	 function readURL(input) {
-	        if (input.files && input.files[0]) {
-	            var reader = new FileReader();
-	            reader.onload = function(e) {
-	                $('#imgpreview').attr('src', e.target.result);
-	                if(e.target.result.substring(5,10)=='image'){
-	                	$('#imgpreview').show();
-		            }else{
-		            	$('#imgpreview').hide();
-			            }
-	            }
-	            reader.readAsDataURL(input.files[0]);
-	        }
-	    }
-	    $("#fileclick").change(function() {
-	        readURL(this);
-	        $('#filename').empty();
-	        $('#filename').append($("#fileclick").val().substring(12));
-	        var text = "";
-			text = $('#issuecontent').val().replace("@","");
-			$('#issuecontent').val(text);
-	        
-	    });
-	 $('#men8').click(function(){
-		 var top = ($('#issuecontent').offset().top);
-			var left = ($('#issuecontent').offset().left+490);
-			$('#mentionlist').hide();
-			$('#memlist').attr('style','position:fixed; width:20%;top:'+top+'px;left:'+left+'px; z-index:4');
-			$('#memlist').show();
-			$('.todo').click(function(){
-				$('#memlist').hide();
-				$('#todo').attr('style','border-radius:0.25em;padding:1%;position:fixed; width:20%;top:'+(top-208) +'px;left:'+left+'px; z-index:4;background-color:white');
-				$('#todo').show();
-				$('#todomem').val($(this).text());
-				});
-		 });
-	 $('#todomake').click(function(){
-		 $('#todo').hide();
-		 var text = "";
-		text = $('#issuecontent').val().replace("@","");
-		$('#issuecontent').val(text);
-		$('#todoresult').append('<br>');
-		$('#todoresult').append('<span class="iconify" data-icon="bx:bx-check-circle" data-inline="false"></span>');
-		$('#todoresult').append($('#todomem').val());
-		$('#todoresult').append(' <span class="iconify" data-icon="bytesize:arrow-right" data-inline="false"></span> ');
-		$('#todoresult').append($('#todolist').val());
-		$('#todoresult').show();
-		 $('#todolist').val('');
-	 })
-	 $('#todocancle').click(function(){
-		 $('#todo').hide();
-		 var text = "";
-		text = $('#issuecontent').val().replace("@","");
-		$('#issuecontent').val(text);
-		 $('#todolist').val('');
-	 });
-	 
-	 $('#men9').click(function(){
-			var top = ($('#issuecontent').offset().top);
-			var left = ($('#issuecontent').offset().left+490);
-			$('#mentionlist').hide();
-			 var text = "";
-				text = $('#issuecontent').val().replace("@","");
-				$('#issuecontent').val(text);
-				$('#datepick').attr('style','position:fixed; width:20%;top:'+top+'px;left:'+left+'px; z-index:4; background-color:white');
-			$('#datepick').show();
-			$('.hasDatepicker').click(function(){
-				 $('#datepick').append($('#ui-datepicker-div'));
-			});
-	 });
-	     var dateFormat = "mm/dd/yy",
+   $('#issuecontent').keydown(function(event){
+      var top = ($('#issuecontent').offset().top);
+      var left = ($('#issuecontent').offset().left+490);
+      if(event.shiftKey && event.keyCode==50){
+         console.log("top&left" + top + ", "+left);
+         $('#mentionlist').attr('style','position:fixed; width:20%;top:'+top+'px;left:'+left+'px; z-index:4');
+         $('#mentionlist').show();
+         $('div').not('#mentionlist').click(function(){
+            $('#mentionlist').hide();
+            });
+         }
+      });
+   $('#men1').click(function(){
+      var top = ($('#issuecontent').offset().top);
+      var left = ($('#issuecontent').offset().left+490);
+      $('#mentionlist').hide();
+      $('#memlist').attr('style','position:fixed; width:20%;top:'+top+'px;left:'+left+'px; z-index:4');
+      $('#memlist').show();
+      
+      $('.list-group-item').click(function(){
+         var text = "";
+         text = $('#issuecontent').val() + $(this).text();
+         $('#issuecontent').val(text);
+         $('#memlist').hide();
+         });
+      });
+   $('#men2').click(function(){
+      $('#mentionlist').hide();
+      $('#issuecontent').empty();
+      $('#issuecontent').hide();
+      var textarea = document.getElementById('codemirrorarea');
+        var editor = CodeMirror.fromTextArea(textarea, {
+            mode: "javascript",
+            lineNumbers: true,
+            lineWrapping: true,
+            theme: "eclipse",
+            val: textarea.value
+        });
+      });
+   $('#men4').click(function(){
+      $('#mentionlist').hide();
+      $('#fileclick').click();
+      });
+    function readURL(input) {
+           if (input.files && input.files[0]) {
+               var reader = new FileReader();
+               reader.onload = function(e) {
+                   $('#imgpreview').attr('src', e.target.result);
+                   if(e.target.result.substring(5,10)=='image'){
+                      $('#imgpreview').show();
+                  }else{
+                     $('#imgpreview').hide();
+                     }
+               }
+               reader.readAsDataURL(input.files[0]);
+           }
+       }
+       $("#fileclick").change(function() {
+           readURL(this);
+           $('#filename').empty();
+           $('#filename').append($("#fileclick").val().substring(12));
+           var text = "";
+         text = $('#issuecontent').val().replace("@","");
+         $('#issuecontent').val(text);
+           
+       });
+    $('#men8').click(function(){
+       var top = ($('#issuecontent').offset().top);
+         var left = ($('#issuecontent').offset().left+490);
+         $('#mentionlist').hide();
+         $('#memlist').attr('style','position:fixed; width:20%;top:'+top+'px;left:'+left+'px; z-index:4');
+         $('#memlist').show();
+         $('.todo').click(function(){
+            $('#memlist').hide();
+            $('#todo').attr('style','border-radius:0.25em;padding:1%;position:fixed; width:20%;top:'+(top-208) +'px;left:'+left+'px; z-index:4;background-color:white');
+            $('#todo').show();
+            $('#todomem').val($(this).text());
+            });
+       });
+    $('#todomake').click(function(){
+       $('#todo').hide();
+       var text = "";
+      text = $('#issuecontent').val().replace("@","");
+      $('#issuecontent').val(text);
+      $('#todoresult').append('<br>');
+      $('#todoresult').append('<span class="iconify" data-icon="bx:bx-check-circle" data-inline="false"></span>');
+      $('#todoresult').append($('#todomem').val());
+      $('#todoresult').append(' <span class="iconify" data-icon="bytesize:arrow-right" data-inline="false"></span> ');
+      $('#todoresult').append($('#todolist').val());
+      $('#todoresult').show();
+       $('#todolist').val('');
+    })
+    $('#todocancle').click(function(){
+       $('#todo').hide();
+       var text = "";
+      text = $('#issuecontent').val().replace("@","");
+      $('#issuecontent').val(text);
+       $('#todolist').val('');
+    });
+    
+    $('#men9').click(function(){
+         var top = ($('#issuecontent').offset().top);
+         var left = ($('#issuecontent').offset().left+490);
+         $('#mentionlist').hide();
+          var text = "";
+            text = $('#issuecontent').val().replace("@","");
+            $('#issuecontent').val(text);
+            $('#datepick').attr('style','position:fixed; width:20%;top:'+top+'px;left:'+left+'px; z-index:4; background-color:white');
+         $('#datepick').show();
+         $('.hasDatepicker').click(function(){
+             $('#datepick').append($('#ui-datepicker-div'));
+         });
+    });
+        var dateFormat = "mm/dd/yy",
       from = $( "#from" )
         .datepicker({
           defaultDate: "+1w",
