@@ -12,7 +12,7 @@ public class FrontController {
 	}
 	@RequestMapping(value="/userindex.do")
 	public String userindex() {
-		return "user/index";
+		return "user/userindex";
 	}
 	
 	
