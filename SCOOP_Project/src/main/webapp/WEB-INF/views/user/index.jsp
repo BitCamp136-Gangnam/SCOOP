@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,12 +11,12 @@
     <jsp:include page="/WEB-INF/views/commons/title.jsp"></jsp:include>
     <!-- Favicon icon -->
     <!-- Pignose Calender -->
-    <link href="./plugins/pg-calendar/css/pignose.calendar.min.css" rel="stylesheet">
+    <link href="<c:url value="/resources/plugins/pg-calendar/css/pignose.calendar.min.css" />" rel="stylesheet">
     <!-- Chartist -->
-    <link rel="stylesheet" href="./plugins/chartist/css/chartist.min.css">
-    <link rel="stylesheet" href="./plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css">
+    <link rel="stylesheet" href="<c:url value="/resources/plugins/chartist/css/chartist.min.css" />">
+    <link rel="stylesheet" href="<c:url value="/resources/plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css" />">
     <!-- Custom Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 
 </head>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -33,9 +34,9 @@
 </script>
 <style>
 .newissue{
-	border-bottom: 1px solid #c8c8c8;
-	padding-top: 0.7%;
-	padding-bottom: 0.7%;
+   border-bottom: 1px solid #c8c8c8;
+   padding-top: 0.7%;
+   padding-bottom: 0.7%;
 }
 </style>
 <body>
@@ -57,38 +58,38 @@
         <br>
             <div class="container-fluid">
         <div class="card" style="min-height: 1080px">
-		<div class="row" style="margin: 2%">
-				<h3>새로운 소식</h3>
-		</div>
-		<div class="row" style="margin-left: 2%;">
-			<ul class="nav nav-pills">
-			    <li class="nav-item dropdown">
-			      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">정렬</a>
-			      <div class="dropdown-menu">
-			        <a class="dropdown-item" data-toggle="tab" href="#">안읽음</a>
-			        <a class="dropdown-item" data-toggle="tab" href="#">읽음</a>
-			      </div>
-			    </li>
-			    <li class="nav-item">
-			      <a class="nav-link active" data-toggle="tab" href="#">이슈 업데이트</a>
-			    </li>
-			    <li class="nav-item">
-			      <a class="nav-link" data-toggle="tab" href="#">@멘션</a>
-			    </li>
-		    </ul>
-		</div>
-		<hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
-		<div class="row" style="margin-left: 2%; margin-right: 2%">
-			<div class="col-sm-2 newissue" >
-			이슈 제목 들어갈곳
-			</div>
-			<div class="col-sm-8 newissue">
-			아이콘도 넣고 여기에 내용들어가는데 나중엔 append하면 될듯?? 정렬이랑 @멘션은 비동기로?
-			</div>
-			<div class="col-sm-2 newissue">
-			여기에 시간넣으면됨
-			</div>
-		</div>
+      <div class="row" style="margin: 2%">
+            <h3>새로운 소식</h3>
+      </div>
+      <div class="row" style="margin-left: 2%;">
+         <ul class="nav nav-pills">
+             <li class="nav-item dropdown">
+               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">정렬</a>
+               <div class="dropdown-menu">
+                 <a class="dropdown-item" data-toggle="tab" href="#">안읽음</a>
+                 <a class="dropdown-item" data-toggle="tab" href="#">읽음</a>
+               </div>
+             </li>
+             <li class="nav-item">
+               <a class="nav-link active" data-toggle="tab" href="#">이슈 업데이트</a>
+             </li>
+             <li class="nav-item">
+               <a class="nav-link" data-toggle="tab" href="#">@멘션</a>
+             </li>
+          </ul>
+      </div>
+      <hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
+      <div class="row" style="margin-left: 2%; margin-right: 2%">
+         <div class="col-sm-2 newissue" >
+         이슈 제목 들어갈곳
+         </div>
+         <div class="col-sm-8 newissue">
+         아이콘도 넣고 여기에 내용들어가는데 나중엔 append하면 될듯?? 정렬이랑 @멘션은 비동기로?
+         </div>
+         <div class="col-sm-2 newissue">
+         여기에 시간넣으면됨
+         </div>
+      </div>
             <!-- #/ container -->
             </div>
             </div>
@@ -107,33 +108,33 @@
     <!--**********************************
         Scripts
     ***********************************-->
-    <script src="plugins/common/common.min.js"></script>
-    <script src="js/custom.min.js"></script>
-    <script src="js/settings.js"></script>
-    <script src="js/gleek.js"></script>
-    <script src="js/styleSwitcher.js"></script>
+    <script src="<c:url value="/resources/plugins/common/common.min.js" />"></script>
+    <script src="<c:url value="/resources/js/custom.min.js" />"></script>
+    <script src="<c:url value="/resources/js/settings.js" />"></script>
+    <script src="<c:url value="/resources/js/gleek.js" />"></script>
+    <script src="<c:url value="/resources/js/styleSwitcher.js" />"></script>
 
     <!-- Chartjs -->
-    <script src="./plugins/chart.js/Chart.bundle.min.js"></script>
+    <script src="<c:url value="/resources/plugins/chart.js/Chart.bundle.min.js" />"></script>
     <!-- Circle progress -->
-    <script src="./plugins/circle-progress/circle-progress.min.js"></script>
+    <script src="<c:url value="/resources/plugins/circle-progress/circle-progress.min.js" />"></script>
     <!-- Datamap -->
-    <script src="./plugins/d3v3/index.js"></script>
-    <script src="./plugins/topojson/topojson.min.js"></script>
-    <script src="./plugins/datamaps/datamaps.world.min.js"></script>
+    <script src="<c:url value="/resources/plugins/d3v3/index.js"/>"></script>
+    <script src="<c:url value="/resources/plugins/topojson/topojson.min.js"/>"></script>
+    <script src="<c:url value="/resources/plugins/datamaps/datamaps.world.min.js"/>"></script>
     <!-- Morrisjs -->
-    <script src="./plugins/raphael/raphael.min.js"></script>
-    <script src="./plugins/morris/morris.min.js"></script>
+    <script src="<c:url value="/resources/plugins/raphael/raphael.min.js"/>"></script>
+    <script src="<c:url value="/resources/plugins/morris/morris.min.js"/>"></script>
     <!-- Pignose Calender -->
-    <script src="./plugins/moment/moment.min.js"></script>
-    <script src="./plugins/pg-calendar/js/pignose.calendar.min.js"></script>
+    <script src="<c:url value="/resources/plugins/moment/moment.min.js"/>"></script>
+    <script src="<c:url value="/resources/plugins/pg-calendar/js/pignose.calendar.min.js"/>"></script>
     <!-- ChartistJS -->
-    <script src="./plugins/chartist/js/chartist.min.js"></script>
-    <script src="./plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"></script>
+    <script src="<c:url value="/resources/plugins/chartist/js/chartist.min.js"/>"></script>
+    <script src="<c:url value="/resources/plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"/>"></script>
 
 
 
-    <script src="./js/dashboard/dashboard-1.js"></script>
+    <script src="<c:url value="/resources/js/dashboard/dashboard-1.js"/>"></script>
 
 </body>
 </html>
