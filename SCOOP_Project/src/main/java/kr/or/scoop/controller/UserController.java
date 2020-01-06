@@ -26,25 +26,10 @@ public class UserController {
 	
 	@RequestMapping(value="userindex.do", method= RequestMethod.GET)
 	public String userindex() {
+		System.out.println("요왔누?");
 		String viewpage = "userindex";
 		return viewpage;
 	}
 	
-	@RequestMapping(value="logout.do")
-	public String logOut(HttpSession session, HttpServletResponse response ) {
-		String viewpage = "";
-		try {
-			PrintWriter out = response.getWriter();
-			out.print("<script>");
-			out.print("alert('로그아웃');");
-			out.print("</script>");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		viewpage="index.do";
-		session.invalidate();
-		return viewpage;
-		
-	}
+	
 }

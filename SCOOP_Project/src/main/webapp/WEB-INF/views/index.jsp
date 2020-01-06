@@ -72,7 +72,7 @@ $(document).ready(function($) {
 	  });
 	}
 	
-});
+}));
 
 
 function() {
@@ -110,7 +110,7 @@ function() {
       window.addEventListener('DOMContentLoaded', l, false);
       window.addEventListener('load', l, false);
     }
-  });
+  };
   ChannelIO('boot', {
     "pluginKey": "f6d33d63-4c8d-471b-84ca-10dcb27372eb"
   });

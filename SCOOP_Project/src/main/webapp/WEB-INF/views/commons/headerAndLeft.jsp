@@ -330,7 +330,7 @@ span{
                                         <li>
                                             <a href="page-lock.jsp"><i class="icon-lock"></i> <span>잠금모드</span></a>
                                         </li>
-                                        <li><a href="user.logout.do"><i class="icon-key"></i> <span>로그아웃</span></a></li>
+                                        <li><a href="logout.do"><i class="icon-key"></i> <span>로그아웃</span></a></li>
                                         <li>
                                         <%=session.getAttribute("email")%>
                                         </li>
