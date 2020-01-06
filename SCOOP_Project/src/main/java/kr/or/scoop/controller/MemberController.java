@@ -28,7 +28,7 @@ public class MemberController {
 		int result = 0;
 		String viewpage="";
 		System.out.println("인서트 들어오니"+member);
-		member.setPwd(this.bCryptPasswordEncoder.encode(member.getPwd())); */
+		//member.setPwd(this.bCryptPasswordEncoder.encode(member.getPwd())); */
 		result = service.insertMember(member);
 		
 		if(result > 0) {
