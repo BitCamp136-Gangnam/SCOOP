@@ -1,4 +1,4 @@
-package kr.or.bit.dto;
+package kr.or.scoop.dto;
 
 import org.springframework.stereotype.Repository;
 

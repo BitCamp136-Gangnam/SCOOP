@@ -1,11 +1,11 @@
-package kr.or.bit.service;
+package kr.or.scoop.service;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.or.bit.dao.MemberDao;
-import kr.or.bit.dto.Member;
+import kr.or.scoop.dao.MemberDao;
+import kr.or.scoop.dto.Member;
 
 @Service
 public class memberService {

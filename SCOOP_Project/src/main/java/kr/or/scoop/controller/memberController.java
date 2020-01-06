@@ -1,4 +1,4 @@
-package kr.or.bit.controller;
+package kr.or.scoop.controller;
 
 import java.sql.SQLException;
 
@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import kr.or.bit.dto.Member;
-import kr.or.bit.service.memberService;
+import kr.or.scoop.dto.Member;
+import kr.or.scoop.service.memberService;
 
 @Controller
 public class memberController {
