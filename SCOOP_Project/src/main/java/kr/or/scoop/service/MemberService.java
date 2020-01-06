@@ -23,4 +23,15 @@ public class MemberService {
 		return result;
 	}
 	
+	public int loginMember(Member member) {
+		int result = 0;
+		
+		MemberDao dao = sqlsession.getMapper(MemberDao.class);
+		
+		result = dao.loginCheck(member);
+		
+		return result;
+		
+	}
+	
 }
