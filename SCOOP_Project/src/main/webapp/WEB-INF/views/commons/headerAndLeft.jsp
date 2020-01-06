@@ -3,7 +3,10 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
     <link rel="stylesheet" href="lib/codemirror.css">
     <script src="lib/codemirror.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script type="text/javascript">
         $(function(){
         	$('.modal').on('hidden.bs.modal', function (e) {
@@ -186,7 +189,6 @@ span{
 	font-size:15px;
 	font-weight:bold;
 }
-
 </style>
 
 <!--**********************************
@@ -491,13 +493,18 @@ span{
         </div>
         <!-- Modal footer -->
         <div class="modal-footer">
+       	<select id="selectpro" class="form-control">
+         	<option>쫀쬬니</option>
+         	<option>이곳저곳</option>
+         	<option>캠핑이지</option>
+          </select>
           <button type="submit" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">만들기</button>
           <button type="button" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">취소</button>
         </div>
         </form>
       </div>
     </div>
-          		      <!-- @자동완성 수정 많이해야됨 자동완성의 위치와 키다운 위아래랑 엔터 -->
+    
 	  <div class="list-group" id="mentionlist" style="display: none">
 	  <a href="#" class="list-group-item list-group-item-action" id="men1" style="padding: 5px">멘션</a>
 	  <a href="#" class="list-group-item list-group-item-action" id="men2" style="padding: 5px">소스코드(코드미러 하다말았음)</a>
@@ -524,6 +531,9 @@ span{
             <textarea class="form-control createmodal" rows="3" id="todolist" style="width: 100%; margin-bottom: 2%" placeholder="할 일을 작성해주세요."></textarea>
             <button type="button" id="todomake" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;">만들기</button>
           <button type="button" id="todocancle" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;">취소</button>
+	</div>
+	<div class="list-group" id="datepick" style="display: none;">
+	<span class="iconify" data-icon="bx:bx-calendar" data-inline="false" style="width: 15px;height: auto;"></span><input type="text" id="from" name="from"><input type="text" id="to" name="to">
 	</div>
   </div>
 
@@ -626,5 +636,48 @@ span{
 		text = $('#issuecontent').val().replace("@","");
 		$('#issuecontent').val(text);
 		 $('#todolist').val('');
-	 })
+	 });
+	 
+	 $('#men9').click(function(){
+			var top = ($('#issuecontent').offset().top);
+			var left = ($('#issuecontent').offset().left+490);
+			$('#mentionlist').hide();
+			 var text = "";
+				text = $('#issuecontent').val().replace("@","");
+				$('#issuecontent').val(text);
+				$('#datepick').attr('style','position:fixed; width:20%;top:'+top+'px;left:'+left+'px; z-index:4; background-color:white');
+			$('#datepick').show();
+			$('.hasDatepicker').click(function(){
+				 $('#datepick').append($('#ui-datepicker-div'));
+			});
+	 });
+	     var dateFormat = "mm/dd/yy",
+      from = $( "#from" )
+        .datepicker({
+          defaultDate: "+1w",
+          changeMonth: true,
+          numberOfMonths: 3
+        })
+        .on( "change", function() {
+          to.datepicker( "option", "minDate", getDate( this ) );
+        }),
+      to = $( "#to" ).datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+        numberOfMonths: 3
+      })
+      .on( "change", function() {
+        from.datepicker( "option", "maxDate", getDate( this ) );
+      });
+ 
+    function getDate( element ) {
+      var date;
+      try {
+        date = $.datepicker.parseDate( dateFormat, element.value );
+      } catch( error ) {
+        date = null;
+      }
+ 
+      return date;
+    }
 </script>
