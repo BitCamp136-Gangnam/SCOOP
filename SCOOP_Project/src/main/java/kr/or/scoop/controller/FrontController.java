@@ -10,6 +10,10 @@ public class FrontController {
 	public String index() {
 		return "index";
 	}
+	@RequestMapping(value="/userindex.do")
+	public String userindex() {
+		return "user/index";
+	}
 	
 	
 }
