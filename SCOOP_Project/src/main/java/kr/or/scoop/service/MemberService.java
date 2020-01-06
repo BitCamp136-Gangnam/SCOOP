@@ -32,13 +32,9 @@ public class MemberService {
 	
 	public int loginMember(String email, String pwd) {
 		int result = 0;
-		System.out.println("여기어디");
-		System.out.println(email+"/"+pwd);
 		Member member = pwdCheck(email);
 		String encodePwd = member.getPwd();
-		System.out.println(encodePwd);
 		boolean istrue = bCryptPasswordEncoder.matches(pwd, encodePwd);
-		System.out.println("boolean 다움");
 		MemberDao dao = sqlsession.getMapper(MemberDao.class);
 		if(istrue) {
 			System.out.println("true");
