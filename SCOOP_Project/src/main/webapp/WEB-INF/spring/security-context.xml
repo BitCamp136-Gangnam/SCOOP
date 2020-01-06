@@ -86,20 +86,20 @@ error-if-maximum-exceeded : max-sessions을 넘었을때 접속한 세션을 실
 		<security:csrf disabled="true" />
 		<!-- default-target-url="/index.htm" 로그인 후 이동할 기본 페이지 -->
 		<security:form-login default-target-url="/index.do" 
-		                     login-page="/login.do"
+		                     login-page="/index.do"
 		                     authentication-failure-url="/login.do?error" />
 		<security:logout  logout-success-url="/index.do" />
-	  	<security:intercept-url pattern="/message*.do" access="hasRole('ROLE_USER')" />
+	  	<security:intercept-url pattern="*/*.do" access="hasRole('ROLE_USER')" />
 	</security:http>
 	
 	<security:authentication-manager>
 		<security:authentication-provider>
 			<security:jdbc-user-service data-source-ref="driverManagerDataSource"
-			users-by-username-query="SELECT USERID, pwd AS PASSWORD, 1 enabled FROM member_alert where userid=?"
-			authorities-by-username-query="select m.USERID , r.ROLE_NAME  
-           									from member_alert m join roll_alert r 
-           									on m.userid = r.userid 
-           									where m.userid=?" />
+			users-by-username-query="SELECT email, pwd AS PASSWORD, 1 enabled FROM member where email=?"
+			authorities-by-username-query="select m.email , r.RNAME  
+           									from member m join role r 
+           									on m.email = r.email 
+           									where m.email=?" />
 			<security:password-encoder ref="bCryptPasswordEncoder"/>
 		</security:authentication-provider>
 	</security:authentication-manager>
