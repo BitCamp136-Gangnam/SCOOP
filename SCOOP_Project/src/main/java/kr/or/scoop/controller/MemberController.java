@@ -2,8 +2,11 @@ package kr.or.scoop.controller;
 
 import java.sql.SQLException;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,7 +54,7 @@ public class MemberController {
 
 	}
 	@RequestMapping(value="login.do", method = RequestMethod.POST)
-	public String login(String email, String pwd) {
+	public String login(String email, String pwd, HttpSession session) {
 		
 		int result = 0;
 		String viewpage = "";
@@ -59,6 +62,7 @@ public class MemberController {
 		result = service.loginMember(email,pwd);
 		if(result>0) {
 			viewpage="user/userindex";
+			session.setAttribute("email", email);
 		} else {
 			viewpage="/index.do";
 		}

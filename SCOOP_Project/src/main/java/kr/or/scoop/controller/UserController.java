@@ -20,7 +20,6 @@ public class UserController {
 	@RequestMapping(value="userindex.do", method= RequestMethod.GET)
 	public String userindex() {
 		String viewpage = "userindex";
-		
 		return viewpage;
 	}
 }
