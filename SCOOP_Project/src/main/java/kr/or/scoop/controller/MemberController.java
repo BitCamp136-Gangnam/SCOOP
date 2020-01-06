@@ -50,4 +50,24 @@ public class MemberController {
 		return viewpage; //주의 (website/index.htm
 
 	}
+	
+	@RequestMapping(value="frontpage.do", method = RequestMethod.GET)
+	public String login() {
+		return "frontpage";
+	}
+	@RequestMapping(value="frontpage.do", method = RequestMethod.POST)
+	public String login(Member member) {
+		
+		int result = 0;
+		String viewpage = "";
+		result = service.loginMember(member);
+		String encodedPwd = member.getPwd();
+		
+		
+		
+		
+		return viewpage;
+	}
+	
+	
 }

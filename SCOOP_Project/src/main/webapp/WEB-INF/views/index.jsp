@@ -255,7 +255,7 @@ let app = new Vue({
         </div>
         <div class="form-group mb-4">
          <label>Password</label>
-         <input type="password" name="password" id="pwd" placeholder="Min 8 characters" class="form-control">
+         <input type="password" name="pwd" id="pwd" placeholder="Min 8 characters" class="form-control">
         </div>
         <div class="form-group">
         	<input type="submit" value="Login" class="btn btn-primary" style="width: 190px;height:38px;text-align: center;padding-top: 5px;">
