@@ -11,5 +11,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
        insert into member(email, pwd, name,idtime,loginnum,dname,drank,address)
        values (#{email},#{pwd},#{name},SYSDATE,1,#{dname},#{drank},#{address})
     </insert>
-
+	
+	<select id="loginCheck" resultType="int">
+		select count(*)
+		from member 
+		where email = #{param1} and pwd = #{param2}
+	</select>
+	
+	<select id="pwdCheck" resultType="kr.or.scoop.dto.Member">
+		select pwd from member where email = #{param1}
+	</select>
+	
+	
 </mapper>

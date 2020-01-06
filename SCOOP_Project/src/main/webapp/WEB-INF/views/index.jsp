@@ -42,6 +42,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <script src="https://code.iconify.design/1/1.0.3/iconify.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script type="text/javascript">
 $(document).ready(function($) {
 	$("#pricing_area").click(function(event){
@@ -73,7 +74,48 @@ $(document).ready(function($) {
 	}
 	
 });
-
+let app = new Vue({
+    el: '#app',
+    data: {
+        impCode : 'imp86112746',
+        order: {
+            name : 'test',
+            amount : null,
+            buyer_tel : '010-1111-1111',
+        }
+    },
+    methods: {
+        requestPay: function(){
+            //1. 객체 초기화 (가맹점 식별코드 삽입)
+            var IMP = window.IMP;
+            IMP.init(this.impCode);
+            //3. 결제창 호출
+            IMP.request_pay({
+                pg : 'jtnet',
+                pay_method : 'card',
+                merchant_uid : 'merchant_' + new Date().getTime(),
+                name : 'test',
+                amount : 4000,
+                buyer_tel : 010-0000-0000,
+            }, function(rsp) {
+                if ( rsp.success ) {
+                    //4. 결제 요청 결과 서버(자사)에 적용하기
+                    //ajax 서버 통신 구현 -> 5. 서버사이드에서 validation check
+                    //6. 최종 서버 응답 클라이언트에서 단계 4.에서 보낸 서버사이드 응답 에따라 결제 성공 실패 출력
+                    var msg = '결제가 완료되었습니다.';
+                    msg += '고유ID : ' + rsp.imp_uid;
+                    msg += '상점 거래ID : ' + rsp.merchant_uid;
+                    msg += '결제 금액 : ' + rsp.paid_amount;
+                    msg += '카드 승인번호 : ' + rsp.apply_num;
+                } else {
+                    var msg = '결제에 실패하였습니다.';
+                    msg += '에러내용 : ' + rsp.error_msg;
+                }
+                alert(msg);
+            });
+        }
+    }
+});
 </script>
 <style>
 	.accordion {
@@ -129,6 +171,7 @@ $(document).ready(function($) {
          <!-- 여기 지우면 죽음뿐 -->
       </ul>
       <ul class="navbar-nav">
+      <li><a href="index.do?lang=en">English</a></li>
       <li class="nav-item dropdown"><a id="pages" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">세부기능</a>
       <div class="dropdown-menu">
       <div id="table">
@@ -205,7 +248,7 @@ $(document).ready(function($) {
      </div>
      <div class="modal-body p-4 p-lg-5">
       <img class="img-responsive center-block" alt="Scoop로고" src="resources/images/logo/ScoopBig.png" style="width:100%;height:auto;padding-right:15%;padding-left:15%;"/>
-      <form action="#" class="login-form text-left">
+      <form action="login.do" class="login-form text-left" method="post">
         <h4>로그인</h4>
         <div class="form-group mb-4">
          <label>Email address</label>
@@ -213,7 +256,7 @@ $(document).ready(function($) {
         </div>
         <div class="form-group mb-4">
          <label>Password</label>
-         <input type="password" name="password" id="pwd" placeholder="Min 8 characters" class="form-control">
+         <input type="password" name="pwd" id="pwd" placeholder="Min 8 characters" class="form-control">
         </div>
         <div class="form-group">
         	<input type="submit" value="Login" class="btn btn-primary" style="width: 190px;height:38px;text-align: center;padding-top: 5px;">
@@ -221,7 +264,7 @@ $(document).ready(function($) {
         	<div id="naver_id_login" style="float:right;margin-right: 5px;margin-left: 0px;width: 210px;border-left-width: 20px;padding-left: 15px;"></div>
         </div>
         <div>
-	        	   <a href="" data-toggle="modal" data-target="#signUp" style="padding-right:45%;">아직 회원이 아니신가요?</a>
+	        	   <a href="#" data-toggle="modal" data-target="#signUp" style="padding-right:45%;">아직 회원이 아니신가요?</a>
 	        	   <a href="#" data-toggle="modal" data-target="#passwordFind">비밀번호를 잃어버리셨나요?</a>
         </div>
       	</form>
@@ -456,7 +499,7 @@ $(document).ready(function($) {
 									<li>무제한</li>
 									<li>-</li>
 								</ul>
-								<a href="#" data-toggle="modal" data-target="#login" class="btn btn-primary"> Get Started </a>
+								<a href="requestPay" data-toggle="modal" data-target="#login" class="btn btn-primary"> Get Started </a>
 
 							</div>
 						</div>
@@ -568,6 +611,15 @@ $(document).ready(function($) {
      </div>
    </div>
   </section>
+</div>
+<div id="app">
+    <h1>iamport-checkout</h1>
+    <input v-model="impCode" placeholder="가맹점 식별코드">
+    <input v-model="order.name" placeholder="상품명">
+    <input v-model="order.amount" placeholder="상품가격">
+    <input v-model="order.buyer_tel" placeholder="주문자 전화번호">
+
+    <button v-on:click="requestPay">결제 요청</button>
 </div>
 <footer class="footer">
   <div class="container text-center">

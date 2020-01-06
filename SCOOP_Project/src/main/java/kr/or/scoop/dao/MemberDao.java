@@ -9,4 +9,6 @@ public interface MemberDao {
 	
 	public int loginCheck(String email, String pwd);
 	
+	public Member pwdCheck(String email);
+	
 }
