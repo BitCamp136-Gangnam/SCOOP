@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.scoop.dao.MemberDao">
+   <!--
+        name,dname, drank,address,idtime,mrank,loginnum
+    -->
+    <!-- 일반회원가입 -->
+    <insert id="insertMember" parameterType="kr.or.scoop.dto.Member">
+       insert into member(email, pwd, name,idtime,loginnum,dname,drank,address)
+       values (#{email},#{pwd},#{name},SYSDATE,1,#{dname},#{drank},#{address})
+    </insert>
+
+</mapper>
