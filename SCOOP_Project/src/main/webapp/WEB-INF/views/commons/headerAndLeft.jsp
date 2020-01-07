@@ -576,14 +576,9 @@ span{
           <br>
             <label for="content">이슈 설명</label> <span id="filename"></span> <img id="imgpreview" alt="사진 미리보기 자리" style="display:none;width: 40px; height: 40px" src="#" />
             <input type="file" id="fileclick" name="files[0]" hidden="">
-<<<<<<< HEAD
             <button type="button" id="auth" disabled>Authenticate</button>
           <textarea class="form-control createmodal" rows="5" id="issuecontent" style="width: 100%" placeholder="@를 입력하여 멘션, 할 일, 파일 등을 추가해 보세요."></textarea>
           <textarea rows="" id="codemirrorarea" style="display: none"><-- 코드를 입력하세요 --></textarea>
-=======
-          <textarea class="form-control createmodal" rows="5" id="issuecontent" name="issuecontent" style="width: 100%" placeholder="@를 입력하여 멘션, 할 일, 파일 등을 추가해 보세요."></textarea>
-          <textarea rows="" id="codemirrorarea" name = "codemirrorarea" style="display: none"><-- 코드를 입력하세요 --></textarea>
->>>>>>> 1f38fdb91960a2bf952264f33e8ff998c08cdec7
           <div id="todoresult" style="display: none">
           </div>
               <!-- The Google API Loader script. -->
