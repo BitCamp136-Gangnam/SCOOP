@@ -11,7 +11,7 @@ public class PrivateController {
 	
 	@RequestMapping(value="private.do" , method = RequestMethod.GET)
 	public String privateIn(HttpSession session) {
-		
+		session.getAttribute("email");
 		String viewpage = "private/private-place";
 		return viewpage;
 		
