@@ -112,6 +112,7 @@
         display: none;
         overflow: hidden;
         font-size: 12px;
+        border-bottom: 1px solid #B5B1B1;
       }
       </style>
         <div class="footer">
