@@ -132,8 +132,6 @@
     <script src="<c:url value="/resources/plugins/chartist/js/chartist.min.js"/>"></script>
     <script src="<c:url value="/resources/plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"/>"></script>
 
-
-
     <script src="<c:url value="/resources/js/dashboard/dashboard-1.js"/>"></script>
 
 </body>

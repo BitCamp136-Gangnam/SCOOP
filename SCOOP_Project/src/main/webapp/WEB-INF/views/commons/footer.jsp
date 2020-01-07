@@ -11,11 +11,11 @@
         $(function(){
            $('#chatopen').click(function(){
                if($(this).attr('name')=='on'){
-                  $(this).attr('src','./images/chat/chatclose.png');
+                  $(this).attr('src',"<c:url value='/resources/images/chat/chatclose.png' />");
                   $(this).attr('name','off');
                   $('#chatdivopen').show();
                   }else{
-                     $(this).attr('src','./images/chat/chatopen.png');
+                     $(this).attr('src',"<c:url value='/resources/images/chat/chatopen.png' />");
                      $(this).attr('name','on');
                      $('#chatdivopen').hide();
                       }

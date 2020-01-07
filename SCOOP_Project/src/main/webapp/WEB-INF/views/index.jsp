@@ -51,9 +51,7 @@ $(document).ready(function($) {
 
 	//이메일 아웃풋
 	$("#scoop_input").click(function(){
-
-		$("#email").val($("#email").val());
-			
+		$(".signup").val($("#emailTo").val());
 	});
 
 	//자주 묻는 질문
@@ -72,10 +70,9 @@ $(document).ready(function($) {
 	  });
 	}
 	
-}));
+});
 
-
-function() {
+$(function(){
     var w = window;
     if (w.ChannelIO) {
       return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
@@ -110,10 +107,10 @@ function() {
       window.addEventListener('DOMContentLoaded', l, false);
       window.addEventListener('load', l, false);
     }
-  };
   ChannelIO('boot', {
     "pluginKey": "f6d33d63-4c8d-471b-84ca-10dcb27372eb"
   });
+})
 </script>
 <style>
 	.accordion {
@@ -268,7 +265,7 @@ function() {
       	</form>
 		<!-- 네이버아이디로로그인 버튼 노출 영역 -->
 								  <script type="text/javascript">
-								  	var naver_id_login = new naver_id_login("UQIzvQsqqo7IfCBE1GH1", "http://localhost:8090/Scoop_Project/index.jsp");
+								  	var naver_id_login = new naver_id_login("UQIzvQsqqo7IfCBE1GH1", "http://localhost:8090/SCOOP/userindex.do");
 								  	var state = naver_id_login.getUniqState();
 								  	naver_id_login.setButton("white", 3,40);
 								  	naver_id_login.setDomain("http://localhost:8090/");
@@ -331,7 +328,7 @@ function() {
         <h4>회원가입</h4>
         <div class="form-group mb-4">
          <label>Email address</label>
-         <input type="text" class="form-control" id="email" name="email" placeholder="E-mail@company.com" required>
+         <input type="text" class="form-control signup" id="email" name="email" placeholder="E-mail@company.com" required>
         </div>
         <div class="form-group mb-4">
          <label>Name</label>
@@ -399,7 +396,7 @@ function() {
         <form action="#" class="subscription-form mt-5">
          <div class="form-group">
            <label>Email</label>
-           <input type="text" name="email" id="email" placeholder="E-mail@company.com" class="form-control">
+           <input type="text" name="email" id="emailTo" placeholder="E-mail@company.com" class="form-control">
         <button type="button" id="scoop_input" data-toggle="modal" data-target="#signUp"class="btn btn-primary">무료로 시작하기</button>     
          </div>
             <span>이미 가입하셨나요?</span>
