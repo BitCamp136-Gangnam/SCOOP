@@ -117,11 +117,43 @@ public class MemberController {
 	//이슈작성 
 	@RequestMapping(value="issue.do",method = RequestMethod.POST)
 	public String issue(HttpSession session) {
-		
-		
-		
+
 		return null;
 		
 	}
-
+	
+	//마이이슈 작성
+	@RequestMapping(value = "/myissue.do",method = RequestMethod.GET) 
+	public String myissue() {
+		return "sidebar/app-myissue";
+	}
+	
+	@RequestMapping(value = "/myissue.do",method = RequestMethod.POST) 
+	public String myissuecheck() {
+		return null;
+		
+	}
+	
+	//캘린더
+	@RequestMapping(value = "/calendar.do",method = RequestMethod.GET)
+	public String calendar() {
+		return "sidebar/app-calender";
+	}
+	
+	@RequestMapping(value = "/calendar.do",method = RequestMethod.POST) 
+	public String calendarcheck() {
+		return null;
+		
+	}
+	//북마크
+	@RequestMapping(value = "/bookmark.do",method = RequestMethod.GET)
+	public String bookmark() {
+		return "sidebar/private-bookmark";
+	}
+	
+	@RequestMapping(value = "/bookmark.do",method = RequestMethod.POST) 
+	public String bookmarkcheck() {
+		return null;
+		
+	}
 }
