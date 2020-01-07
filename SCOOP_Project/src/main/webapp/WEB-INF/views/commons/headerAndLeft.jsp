@@ -385,7 +385,7 @@ span{
                     </li>
                     <li class="nav-label" style="padding-bottom: 0"><b>개인 공간</b></li>
                     <li>
-                        <a href="private.do" aria-expanded="false" >
+                        <a href="/private/private.do" aria-expanded="false" >
                             <span class="iconify" data-icon="ic:baseline-person" data-inline="false" style="width: 20px;height: auto;"> </span><span class="nav-text"> &nbsp;프라이빗 공간</span>
                         </a>
                     </li>
