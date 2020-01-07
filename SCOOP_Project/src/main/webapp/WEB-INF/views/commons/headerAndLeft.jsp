@@ -116,7 +116,7 @@
         right: left;
         font-size: 18px;
         z-index: 2;
-        width: 15.4%;
+        width: 245px;
         height: 100%;
         background-color: black;
         opacity: 0.5;

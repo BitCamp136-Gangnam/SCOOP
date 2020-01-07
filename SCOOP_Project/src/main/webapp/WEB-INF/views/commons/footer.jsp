@@ -75,21 +75,21 @@
       }
       #helpdivopen {
         background-color:#222;
-        width:15.4%;
+        width:245px;
         height:100%;
         display:none;
         position: fixed;
         bottom: 0;
         left: 0;
         font-size: 18px;
-        z-index: 2;
+        z-index: 4;
       }
       #closeopen {
         position: fixed;
         bottom: 96%;
         left: 13%;
         font-size: 18px;
-        z-index: 2;
+        z-index: 5;
       }
       .accordion {
         background-color: #222;
@@ -104,7 +104,7 @@
         transition: 0.4s;
       }
       .activeacc, .accordion:hover {
-        background-color: #ccc;
+        background-color: #222;
       }
       
       .panel {
