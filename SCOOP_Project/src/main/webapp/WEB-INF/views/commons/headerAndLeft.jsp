@@ -99,7 +99,75 @@
          });
 });
 </script>
-  
+<script type="text/javascript">
+// The Browser API key obtained from the Google API Console.
+var developerKey = 'AIzaSyBIu-Whybpm37l7vHw8O5f48kjpG_bQtzo';
+
+// The Client ID obtained from the Google API Console. Replace with your own Client ID.
+var clientId = "237537328130-p9jshmj42atouica42uq96prsjk4qvtf.apps.googleusercontent.com";
+
+// Scope to use to access user's photos.
+var scope = 'https://www.googleapis.com/auth/drive.file';
+
+var pickerApiLoaded = false;
+var oauthToken;
+
+// Use the API Loader script to load google.picker and gapi.auth.
+function onApiLoad() {
+  gapi.load('auth2', onAuthApiLoad);
+  gapi.load('picker', onPickerApiLoad);
+}
+
+function onAuthApiLoad() {
+  var authBtn = document.getElementById('auth');
+  authBtn.disabled = false;
+  authBtn.addEventListener('click', function() {
+    gapi.auth2.init({ client_id: clientId }).then(function(googleAuth) {
+      googleAuth.signIn({ scope: scope }).then(function(result) {
+        handleAuthResult(result.getAuthResponse());
+      })
+    })
+  });
+}
+
+function onPickerApiLoad() {
+  pickerApiLoaded = true;
+  createPicker();
+}
+
+function handleAuthResult(authResult) {
+  if (authResult && !authResult.error) {
+    oauthToken = authResult.access_token;
+    createPicker();
+  }
+}
+
+// Create and render a Picker object for picking from Google Photos.
+function createPicker() {
+  if (pickerApiLoaded && oauthToken) {
+    var picker = new google.picker.PickerBuilder().
+        addView(google.picker.ViewId.DOCS	).
+        setOAuthToken(oauthToken).
+        setDeveloperKey(developerKey).
+        setCallback(pickerCallback).
+        build();
+    picker.setVisible(true);
+  }
+}
+
+// A simple callback implementation.
+function pickerCallback(data) {
+  var url = 'nothing';
+  if (data[google.picker.Response.ACTION] == google.picker.Action.PICKED) {
+    var doc = data[google.picker.Response.DOCUMENTS][0];
+    url = doc[google.picker.Document.URL];
+    console.log(doc);
+    console.log(doc.name+"."+doc.serviceId);
+  }
+  var message = 'You picked: ' + url;
+  document.getElementById('todoresult').innerHTML = message;
+}
+</script>
 <style>
   #filediv {
         position: fixed;
@@ -508,10 +576,13 @@ span{
           <br>
             <label for="content">이슈 설명</label> <span id="filename"></span> <img id="imgpreview" alt="사진 미리보기 자리" style="display:none;width: 40px; height: 40px" src="#" />
             <input type="file" id="fileclick" name="files[0]" hidden="">
+            <button type="button" id="auth" disabled>Authenticate</button>
           <textarea class="form-control createmodal" rows="5" id="issuecontent" style="width: 100%" placeholder="@를 입력하여 멘션, 할 일, 파일 등을 추가해 보세요."></textarea>
           <textarea rows="" id="codemirrorarea" style="display: none"><-- 코드를 입력하세요 --></textarea>
           <div id="todoresult" style="display: none">
           </div>
+              <!-- The Google API Loader script. -->
+    <script type="text/javascript" src="https://apis.google.com/js/api.js?onload=onApiLoad"></script>
         </div>
         <!-- Modal footer -->
         <div class="modal-footer">
@@ -529,15 +600,15 @@ span{
     </div>
     
      <div class="list-group" id="mentionlist" style="display: none">
-     <a href="#" class="list-group-item list-group-item-action" id="men1" style="padding: 5px">멘션</a>
+     <a href="#" class="list-group-item list-group-item-action" id="men1" style="padding: 5px">멘션(완료)</a>
      <a href="#" class="list-group-item list-group-item-action" id="men2" style="padding: 5px">소스코드(코드미러 하다말았음)</a>
-     <a href="#" class="list-group-item list-group-item-action" id="men3" style="padding: 5px">구글 드라이브(가능?)</a>
-     <a href="#" class="list-group-item list-group-item-action" id="men4" style="padding: 5px">파일</a>
+     <a href="#" class="list-group-item list-group-item-action" id="men3" style="padding: 5px">구글 드라이브(진행중))</a>
+     <a href="#" class="list-group-item list-group-item-action" id="men4" style="padding: 5px">파일(완료)</a>
      <a href="#" class="list-group-item list-group-item-action" id="men5" style="padding: 5px">표(이건 어떻게함;;)</a>
      <a href="#" class="list-group-item list-group-item-action" id="men6" style="padding: 5px">관련 이슈</a>
      <a href="#" class="list-group-item list-group-item-action" id="men7" style="padding: 5px">의사결정</a>
-     <a href="#" class="list-group-item list-group-item-action" id="men8" style="padding: 5px">할 일</a>
-     <a href="#" class="list-group-item list-group-item-action" id="men9" style="padding: 5px">일정</a>
+     <a href="#" class="list-group-item list-group-item-action" id="men8" style="padding: 5px">할 일(완료)</a>
+     <a href="#" class="list-group-item list-group-item-action" id="men9" style="padding: 5px">일정(완료)</a>
    </div>
    <!--  -->
    <!-- 멘션할 사람 목록 -->
