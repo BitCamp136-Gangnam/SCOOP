@@ -272,6 +272,7 @@ $(function(){
 								  	naver_id_login.setDomain("http://localhost:8090/");
 								  	naver_id_login.setState(state);
 								  	naver_id_login.init_naver_id_login();
+								  	console.log(naver_id_login);
 								  </script>
 									
 							      <script>

@@ -30,6 +30,20 @@
   // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
   function naverSignInCallback() {
     console.log(naver_id_login.getProfileData('email'));
+    console.log(naver_id_login.getProfileData('name'));
+    $.ajax({
+	    url:'naverLogin.do', //request 보낼 서버의 경로
+	    type:'post', // 메소드(get, post, put 등)
+	    data:{'email':naver_id_login.getProfileData('email'),
+	    	'name':naver_id_login.getProfileData('name')
+	    	}, //보낼 데이터
+	    success: function(data) {
+	    	location.href="userindex.do";
+	    },
+	    error: function(err) {
+	        
+	    }
+	});
   }
 </script>
 <style>
@@ -57,7 +71,7 @@
         <div class="content-body">
         <br>
             <div class="container-fluid">
-        <div class="card" style="min-height: 1080px">
+        <div class="card" style="min-height: 580px">
       <div class="row" style="margin: 2%">
             <h3>새로운 소식</h3>
       </div>

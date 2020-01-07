@@ -74,7 +74,7 @@ public class MemberController {
 		return viewpage;
 	}
 
-	// 일반회원 로그인
+	// 구글회원 로그인
 	@RequestMapping(value = "googleLogin.do", method = {RequestMethod.GET,RequestMethod.POST})
 	public String googleLogin(String email, String name, HttpSession session) {
 
@@ -153,4 +153,26 @@ public class MemberController {
 		return null;
 		
 	}
+	
+	// 네이버회원 로그인
+	@RequestMapping(value = "naverLogin.do", method = {RequestMethod.GET,RequestMethod.POST})
+	public String naverLogin(String email, String name, HttpSession session) {
+
+		int result = 0;
+		String viewpage = "";
+		result = service.naverIdCheck(email, name);
+		if (result > 0) {
+			System.out.println("성공");
+			viewpage = "user/userindex";
+			session.setAttribute("email", email);
+			session.setAttribute("kind", "naver");
+			System.out.println(session.getAttribute("kind"));
+		} else {
+			System.out.println("실패");
+			viewpage = "index";
+		}
+
+		return viewpage;
+	}
+
 }
