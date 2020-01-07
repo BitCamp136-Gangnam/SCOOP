@@ -756,7 +756,7 @@ span{
     	auth2.signOut().then(function(){
     		console.log('Google LogOut Success');
     		location.href="logout.do";
-    		auth2.disconnect();
     	});
+    	auth2.disconnect();
     }
 </script>

@@ -9,6 +9,7 @@
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="all,follow">
+<jsp:include page="/WEB-INF/views/commons/title.jsp"></jsp:include>
 <!--vendors styles-->
 <link rel="stylesheet"Chatfuel
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -277,20 +278,20 @@ $(function(){
 							      <script>
 							        function onSuccess(googleUser) {
 							          console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-/* 							          $.ajax({
+							          console.log(googleUser.getBasicProfile().getEmail());
+ 							          $.ajax({
 							        	    url:'googleLogin.do', //request 보낼 서버의 경로
 							        	    type:'post', // 메소드(get, post, put 등)
-							        	    data:{'email':googleUser.getBasicProfile().getEmail,
-							        	    	'name':googleUser.getBasicProfile().getName
+							        	    data:{'email':googleUser.getBasicProfile().getEmail(),
+							        	    	'name':googleUser.getBasicProfile().getName()
 							        	    	}, //보낼 데이터
 							        	    success: function(data) {
-							        	    	
+							        	    	location.href="userindex.do"
 							        	    },
 							        	    error: function(err) {
 							        	        
 							        	    }
-							        	}); */
-							        	location.href="googleLogin.do";
+							        	});
 							          
 							          
 							        }
