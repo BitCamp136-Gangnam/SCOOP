@@ -114,34 +114,35 @@ public class MemberController {
 	
 	//이슈작성 
 	@RequestMapping(value="issue.do",method = RequestMethod.POST)
-
 	public String issue(HttpSession session,Issue issue,String selectpro) {
 		return null;
 		
 	}
+	
 	//마이이슈 작성
 	@RequestMapping(value = "/myissue.do",method = RequestMethod.GET) 
 	public String myissue() {
+		System.out.println("ㅎㅇ");
 		return "sidebar/app-myissue";
 	}
 	
 	@RequestMapping(value = "/myissue.do",method = RequestMethod.POST) 
 	public String myissuecheck() {
-		return null;
-		
+		return null;	
 	}
 	
-	//캘린더
-	@RequestMapping(value = "/calendar.do",method = RequestMethod.GET)
-	public String calendar() {
+	//캘린더         
+	@RequestMapping(value = "/calender.do",method = RequestMethod.GET)
+	public String calender() {
+		System.out.println("ㅂㅇ");
 		return "sidebar/app-calender";
 	}
 	
-	@RequestMapping(value = "/calendar.do",method = RequestMethod.POST) 
-	public String calendarcheck() {
+	@RequestMapping(value = "/calender.do",method = RequestMethod.POST) 
+	public String calendercheck() {
 		return null;
-		
 	}
+	
 	//북마크
 	@RequestMapping(value = "/bookmark.do",method = RequestMethod.GET)
 	public String bookmark() {
@@ -151,7 +152,6 @@ public class MemberController {
 	@RequestMapping(value = "/bookmark.do",method = RequestMethod.POST) 
 	public String bookmarkcheck() {
 		return null;
-		
 	}
 	
 	// 네이버회원 로그인

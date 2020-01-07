@@ -442,12 +442,12 @@ span{
                         </a>
                     </li>
                     <li>
-                        <a href="myissue.htm" aria-expanded="false">
+                 		  <a href='<c:url value='/myissue.do'></c:url>' aria-expanded="false" >
                             <span class="iconify" data-icon="simple-line-icons:emotsmile" data-inline="false" style="width: 20px;height: auto;"> </span><span class="nav-text"> &nbsp;내가 작성한 이슈</span>
                         </a>
                     </li>
                     <li>
-                        <a href="calender.htm" aria-expanded="false">
+                    	 <a href='<c:url value='/calender.do'></c:url>' aria-expanded="false" >
                             <span class="iconify" data-icon="bx:bx-calendar" data-inline="false" style="width: 20px;height: auto;"> </span><span class="nav-text"> &nbsp;캘린더</span>
                         </a>
                     </li>
@@ -458,7 +458,7 @@ span{
                         </a>
                     </li>
                     <li>
-                        <a href="bookmark.htm" aria-expanded="false">
+                   		 <a href='<c:url value='/bookmark.do'></c:url>' aria-expanded="false" >
                             <span class="iconify" data-icon="ic:round-bookmark" data-inline="false" style="width: 20px;height: auto;"> </span><span class="nav-text"> &nbsp;북마크</span>
                         </a>
                     </li>
