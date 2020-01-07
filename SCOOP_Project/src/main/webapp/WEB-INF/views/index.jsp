@@ -8,7 +8,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<jsp:include page="/WEB-INF/views/commons/title.jsp"></jsp:include>
 <meta name="robots" content="all,follow">
 <!--vendors styles-->
 <link rel="stylesheet"Chatfuel
@@ -41,9 +40,8 @@
 </head>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="https://apis.google.com/js/platform.js" async defer></script>
+<!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
 <script src="https://code.iconify.design/1/1.0.3/iconify.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script type="text/javascript">
 $(document).ready(function($) {
 	$("#pricing_area").click(function(event){
@@ -74,51 +72,10 @@ $(document).ready(function($) {
 	  });
 	}
 	
-});
-let app = new Vue({
-    el: '#app',
-    data: {
-        impCode : 'imp86112746',
-        order: {
-            name : 'test',
-            amount : null,
-            buyer_tel : '010-1111-1111',
-        }
-    },
-    methods: {
-        requestPay: function(){
-            //1. 객체 초기화 (가맹점 식별코드 삽입)
-            var IMP = window.IMP;
-            IMP.init(this.impCode);
-            //3. 결제창 호출
-            IMP.request_pay({
-                pg : 'jtnet',
-                pay_method : 'card',
-                merchant_uid : 'merchant_' + new Date().getTime(),
-                name : 'test',
-                amount : 4000,
-                buyer_tel : 010-0000-0000,
-            }, function(rsp) {
-                if ( rsp.success ) {
-                    //4. 결제 요청 결과 서버(자사)에 적용하기
-                    //ajax 서버 통신 구현 -> 5. 서버사이드에서 validation check
-                    //6. 최종 서버 응답 클라이언트에서 단계 4.에서 보낸 서버사이드 응답 에따라 결제 성공 실패 출력
-                    var msg = '결제가 완료되었습니다.';
-                    msg += '고유ID : ' + rsp.imp_uid;
-                    msg += '상점 거래ID : ' + rsp.merchant_uid;
-                    msg += '결제 금액 : ' + rsp.paid_amount;
-                    msg += '카드 승인번호 : ' + rsp.apply_num;
-                } else {
-                    var msg = '결제에 실패하였습니다.';
-                    msg += '에러내용 : ' + rsp.error_msg;
-                }
-                alert(msg);
-            });
-        }
-    }
-});
+}));
 
-(function() {
+
+function() {
     var w = window;
     if (w.ChannelIO) {
       return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
@@ -153,7 +110,7 @@ let app = new Vue({
       window.addEventListener('DOMContentLoaded', l, false);
       window.addEventListener('load', l, false);
     }
-  })();
+  };
   ChannelIO('boot', {
     "pluginKey": "f6d33d63-4c8d-471b-84ca-10dcb27372eb"
   });
@@ -323,6 +280,22 @@ let app = new Vue({
 							      <script>
 							        function onSuccess(googleUser) {
 							          console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+/* 							          $.ajax({
+							        	    url:'googleLogin.do', //request 보낼 서버의 경로
+							        	    type:'post', // 메소드(get, post, put 등)
+							        	    data:{'email':googleUser.getBasicProfile().getEmail,
+							        	    	'name':googleUser.getBasicProfile().getName
+							        	    	}, //보낼 데이터
+							        	    success: function(data) {
+							        	    	
+							        	    },
+							        	    error: function(err) {
+							        	        
+							        	    }
+							        	}); */
+							        	location.href="googleLogin.do";
+							          
+							          
 							        }
 							        function onFailure(error) {
 							          console.log(error);
@@ -653,15 +626,7 @@ let app = new Vue({
    </div>
   </section>
 </div>
-<div id="app">
-    <h1>iamport-checkout</h1>
-    <input v-model="impCode" placeholder="가맹점 식별코드">
-    <input v-model="order.name" placeholder="상품명">
-    <input v-model="order.amount" placeholder="상품가격">
-    <input v-model="order.buyer_tel" placeholder="주문자 전화번호">
 
-    <button v-on:click="requestPay">결제 요청</button>
-</div>
 <footer class="footer">
   <div class="container text-center">
    <!-- Copyrights-->

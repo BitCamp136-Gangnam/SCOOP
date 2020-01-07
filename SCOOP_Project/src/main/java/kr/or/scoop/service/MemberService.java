@@ -55,4 +55,25 @@ public class MemberService {
 		return member;
 	}
 	
+	public int googleIdCheck(String email, String name) {
+		int result = 0;
+		MemberDao dao = sqlsession.getMapper(MemberDao.class);
+		result = dao.googleIdCheck(email, name);
+		if(result>0) {
+			System.out.println("구글아이디 존재");
+		} else {
+			System.out.println("구글아이디가 없네요 등록합니당");
+			int googleInsertCheck = 0;
+			googleInsertCheck = dao.googleInsertCheck(email, name);
+			if(googleInsertCheck>0) {
+				System.out.println("구글아이디 가입성공");
+				result = googleInsertCheck;
+			}else {
+				System.out.println("구글아이디 가입실패");
+			}
+		}
+		return result;
+		
+	}
+	
 }

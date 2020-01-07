@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/private/")
 public class PrivateController {
 	
-	@RequestMapping(value="private.do" , method = RequestMethod.GET)
+	@RequestMapping(value="private.do" , method=RequestMethod.GET)
 	public String privateIn() {
-		return "private-place";
+		System.out.println("프라이빗");
+		String viewpage = "private-place";
+		return viewpage;
 		
 	}
 }
