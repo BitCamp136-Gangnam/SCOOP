@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class PrivateController {
 	
+	//프라이빗 공간 이동
 	@RequestMapping(value="private.do" , method = RequestMethod.GET)
 	public String privateIn(HttpSession session) {
 		session.getAttribute("email");
@@ -16,4 +17,6 @@ public class PrivateController {
 		return viewpage;
 		
 	}
+	
+	
 }
