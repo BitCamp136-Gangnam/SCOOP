@@ -41,7 +41,7 @@
 </head>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 <script src="https://code.iconify.design/1/1.0.3/iconify.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function($) {
@@ -286,7 +286,7 @@ $(function(){
 							        	    	'name':googleUser.getBasicProfile().getName()
 							        	    	}, //보낼 데이터
 							        	    success: function(data) {
-							        	    	location.href="userindex.do"
+							        	    	location.href="userindex.do";
 							        	    },
 							        	    error: function(err) {
 							        	        

@@ -17,6 +17,7 @@ public class Issue {
 	private int ispibook;
 	private String email;
 	private Date pidate;
+	
 	public int getPiseq() {
 		return piseq;
 	}
