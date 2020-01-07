@@ -286,8 +286,7 @@ $(function(){
 							        	    	'name':googleUser.getBasicProfile().getName()
 							        	    	}, //보낼 데이터
 							        	    success: function(data) {
-							        	    	console.log(data.email);
-							        	    	console.log(data.name);
+							        	    	location.href="userindex.do"
 							        	    },
 							        	    error: function(err) {
 							        	        
