@@ -112,7 +112,9 @@
         display: none;
         overflow: hidden;
         font-size: 12px;
+        transition: max-height 0.2s ease-out;
         border-bottom: 1px solid #B5B1B1;
+        
       }
       </style>
         <div class="footer">
