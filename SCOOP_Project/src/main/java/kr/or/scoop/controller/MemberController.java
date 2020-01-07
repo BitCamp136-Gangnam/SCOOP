@@ -140,17 +140,7 @@ public class MemberController {
 		return null;
 		
 	}
-	//북마크
-	@RequestMapping(value = "/bookmark.do",method = RequestMethod.GET)
-	public String bookmark() {
-		return "sidebar/private-bookmark";
-	}
 	
-	@RequestMapping(value = "/bookmark.do",method = RequestMethod.POST) 
-	public String bookmarkcheck() {
-		return null;
-		
-	}
 	
 	// 네이버회원 로그인
 	@RequestMapping(value = "naverLogin.do", method = {RequestMethod.GET,RequestMethod.POST})
