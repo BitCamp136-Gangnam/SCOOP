@@ -87,7 +87,7 @@
       #closeopen {
         position: fixed;
         bottom: 96%;
-        left: 13%;
+        left: 200px;
         font-size: 18px;
         z-index: 5;
       }
