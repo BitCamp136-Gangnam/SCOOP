@@ -57,8 +57,10 @@ public class MemberService {
 	
 	public int googleIdCheck(String email, String name) {
 		int result = 0;
+		System.out.println(email+"/"+name);
 		MemberDao dao = sqlsession.getMapper(MemberDao.class);
 		result = dao.googleIdCheck(email, name);
+		System.out.println(email+"/"+name+"/"+result);
 		if(result>0) {
 			System.out.println("구글아이디 존재");
 		} else {

@@ -277,20 +277,21 @@ $(function(){
 							      <script>
 							        function onSuccess(googleUser) {
 							          console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-/* 							          $.ajax({
+							          console.log(googleUser.getBasicProfile().getEmail());
+ 							          $.ajax({
 							        	    url:'googleLogin.do', //request 보낼 서버의 경로
 							        	    type:'post', // 메소드(get, post, put 등)
-							        	    data:{'email':googleUser.getBasicProfile().getEmail,
-							        	    	'name':googleUser.getBasicProfile().getName
+							        	    data:{'email':googleUser.getBasicProfile().getEmail(),
+							        	    	'name':googleUser.getBasicProfile().getName()
 							        	    	}, //보낼 데이터
 							        	    success: function(data) {
-							        	    	
+							        	    	console.log(data.email);
+							        	    	console.log(data.name);
 							        	    },
 							        	    error: function(err) {
 							        	        
 							        	    }
-							        	}); */
-							        	location.href="googleLogin.do";
+							        	});
 							          
 							          
 							        }
