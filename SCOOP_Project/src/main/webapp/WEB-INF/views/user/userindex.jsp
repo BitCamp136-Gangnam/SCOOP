@@ -30,6 +30,20 @@
   // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
   function naverSignInCallback() {
     console.log(naver_id_login.getProfileData('email'));
+    console.log(naver_id_login.getProfileData('name'));
+    $.ajax({
+	    url:'naverLogin.do', //request 보낼 서버의 경로
+	    type:'post', // 메소드(get, post, put 등)
+	    data:{'email':naver_id_login.getProfileData('email'),
+	    	'name':naver_id_login.getProfileData('name')
+	    	}, //보낼 데이터
+	    success: function(data) {
+	    	
+	    },
+	    error: function(err) {
+	        
+	    }
+	});
   }
 </script>
 <style>

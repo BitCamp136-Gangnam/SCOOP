@@ -339,7 +339,7 @@ span{
                                         		<li><a href="#" onclick="signOut();"><i class="icon-key"></i> <span>로그아웃</span></a></li>	
                                         	</c:when>
                                         	<c:when test="${kind=='naver'}">
-                                        		<li><a href="#" onclick="signOut();"><i class="icon-key"></i> <span>로그아웃</span></a></li>	
+                                        		<li><a href="logout.do"><i class="icon-key"></i> <span>로그아웃</span></a></li>	
                                         	</c:when>
                                         	<c:otherwise></c:otherwise>
                                         </c:choose>

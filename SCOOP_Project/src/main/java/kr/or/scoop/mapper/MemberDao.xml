@@ -33,5 +33,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
        insert into member(email,pwd,name,idtime,loginnum)
        values (#{param1},'google',#{param2},SYSDATE,3)
     </insert>
+    
+    <!-- public String googleLogin(String email, String name, HttpSession session); -->
+	<select id="naverIdCheck" resultType="int">
+		select count(*)
+		from member 
+		where email = #{param1} and name = #{param2}
+	</select>
+	
+	<insert id="naverInsertCheck">
+       insert into member(email,pwd,name,idtime,loginnum)
+       values (#{param1},'naver',#{param2},SYSDATE,3)
+    </insert>
 	
 </mapper>

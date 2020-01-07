@@ -22,4 +22,7 @@ public interface MemberDao {
 	// 구글아이디 등록
 	public int googleInsertCheck(String email, String name);
 	
+	// 네이버아이디 등록
+	public int naverInsertCheck(String email, String name);
+	
 }

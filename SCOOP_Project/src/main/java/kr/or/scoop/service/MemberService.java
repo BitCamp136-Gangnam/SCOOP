@@ -80,5 +80,25 @@ public class MemberService {
 		return 0;
 		
 	}
+
+	public int naverIdCheck(String email, String name) {
+		int result = 0;
+		MemberDao dao = sqlsession.getMapper(MemberDao.class);
+		result = dao.googleIdCheck(email, name);
+		if(result>0) {
+			System.out.println("네이버아이디 존재");
+		} else {
+			System.out.println("네이버아이디가 없네요 등록합니당");
+			int naverInsertCheck = 0;
+			naverInsertCheck = dao.naverInsertCheck(email, name);
+			if(naverInsertCheck>0) {
+				System.out.println("네이버아이디 가입성공");
+				result = naverInsertCheck;
+			}else {
+				System.out.println("네이버아이디 가입실패");
+			}
+		}
+		return result;
+	}
 	
 }
