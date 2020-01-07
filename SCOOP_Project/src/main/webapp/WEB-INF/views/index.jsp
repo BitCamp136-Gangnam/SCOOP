@@ -41,7 +41,7 @@
 </head>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 <script src="https://code.iconify.design/1/1.0.3/iconify.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function($) {
@@ -266,12 +266,11 @@ $(function(){
       	</form>
 		<!-- 네이버아이디로로그인 버튼 노출 영역 -->
 								  <script type="text/javascript">
-								  	var naver_id_login = new naver_id_login("UQIzvQsqqo7IfCBE1GH1", "http://localhost:8090/SCOOP/userindex.do");
+								  	var naver_id_login = new naver_id_login("idXo9CECDTdxmjiuAWdC", "http://localhost:8090/SCOOP/userindex.do");
 								  	var state = naver_id_login.getUniqState();
 								  	naver_id_login.setButton("white", 3,40);
 								  	naver_id_login.setDomain("http://localhost:8090/");
 								  	naver_id_login.setState(state);
-								  	naver_id_login.setPopup();
 								  	naver_id_login.init_naver_id_login();
 								  </script>
 									
@@ -286,7 +285,7 @@ $(function(){
 							        	    	'name':googleUser.getBasicProfile().getName()
 							        	    	}, //보낼 데이터
 							        	    success: function(data) {
-							        	    	location.href="userindex.do"
+							        	    	location.href="userindex.do";
 							        	    },
 							        	    error: function(err) {
 							        	        

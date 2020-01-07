@@ -6,9 +6,9 @@
     <script src="<c:url value="/resources/lib/codemirror.js" />"></script>
  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <%-- <link rel="stylesheet" href="<c:url value="/resources/demos/style.css" />"> --%>
+  <meta name="google-signin-client_id" content="47797892299-i06tt9qhbs15g8mn89ncu1isa1eneql8.apps.googleusercontent.com">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script src="https://apis.google.com/js/platform.js" async defer></script>
   <script type="text/javascript">
         $(function(){ 
            $('.modal').on('hidden.bs.modal', function (e) {
@@ -750,13 +750,20 @@ span{
       }
       return date;
     }
-    
-    function signOut(){
-    	var auth2 = gapi.auth2.getAuthInstance();
-    	auth2.signOut().then(function(){
-    		console.log('Google LogOut Success');
+
+    function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+        	console.log('Google LogOut Success');
     		location.href="logout.do";
-    	});
-    	auth2.disconnect();
-    }
+        });
+        auth2.disconnect();
+      }
+
+    function onLoad() {
+        gapi.load('auth2', function() {
+          gapi.auth2.init();
+        });
+      }
 </script>
+<script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>

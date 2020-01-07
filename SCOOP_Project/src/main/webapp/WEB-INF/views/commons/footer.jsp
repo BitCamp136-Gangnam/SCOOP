@@ -7,12 +7,6 @@
         <link href="<c:url value="/resources/css/chat.css" />" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-        <script src="<c:url value="/resources/vendor/jquery/jquery.min.js"/>"></script>
-		<script src="<c:url value="/resources/vendor/popper.js/umd/popper.min.js"/>"> </script>
-		<script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.min.js"/>"></script>
-		<script src="<c:url value="/resources/vendor/jquery.cookie/jquery.cookie.js"/>"> </script>
-		<script src="<c:url value="/resources/vendor/swiper/js/swiper.min.js"/>"></script>
-		<script src="<c:url value="/resources/js/front.js"/>"></script>
         <script type="text/javascript">
         $(function(){
            $('#chatopen').click(function(){
