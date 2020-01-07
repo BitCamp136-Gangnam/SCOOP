@@ -51,9 +51,7 @@ $(document).ready(function($) {
 
 	//이메일 아웃풋
 	$("#scoop_input").click(function(){
-
-		$("#email").val($("#email").val());
-			
+		$(".signup").val($("#emailTo").val());
 	});
 
 	//자주 묻는 질문
@@ -330,7 +328,7 @@ $(function(){
         <h4>회원가입</h4>
         <div class="form-group mb-4">
          <label>Email address</label>
-         <input type="text" class="form-control" id="email" name="email" placeholder="E-mail@company.com" required>
+         <input type="text" class="form-control signup" id="email" name="email" placeholder="E-mail@company.com" required>
         </div>
         <div class="form-group mb-4">
          <label>Name</label>
@@ -398,7 +396,7 @@ $(function(){
         <form action="#" class="subscription-form mt-5">
          <div class="form-group">
            <label>Email</label>
-           <input type="text" name="email" id="email" placeholder="E-mail@company.com" class="form-control">
+           <input type="text" name="email" id="emailTo" placeholder="E-mail@company.com" class="form-control">
         <button type="button" id="scoop_input" data-toggle="modal" data-target="#signUp"class="btn btn-primary">무료로 시작하기</button>     
          </div>
             <span>이미 가입하셨나요?</span>
