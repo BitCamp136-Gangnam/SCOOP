@@ -9,7 +9,10 @@ public class BoardService {
 	@Autowired
 	private SqlSession sqlsession;
 	
-	public int team
+	public int insertTeamPjt() {
+		return 0;
+		
+	}
 	
 	
 }
