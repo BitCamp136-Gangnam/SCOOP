@@ -104,10 +104,10 @@
   #filediv {
         position: fixed;
         bottom: 0;
-        right: 0;
+        left: 245px;
         font-size: 18px;
         z-index: 2;
-        width: 84.6%;
+        width: 1300px;
         height: 100%;
       }
   #filediv2 {
@@ -116,7 +116,7 @@
         right: left;
         font-size: 18px;
         z-index: 2;
-        width: 15.4%;
+        width: 245px;
         height: 100%;
         background-color: black;
         opacity: 0.5;
@@ -362,7 +362,7 @@ span{
         <!--**********************************
             Sidebar start
         ***********************************-->
-        <<c:set var="kind" value="${session.kind}}"></c:set>
+        <c:set var="kind" value="${session.kind}}"></c:set>
         <div class="nk-sidebar" style="z-index: 0">           
             <div id="scnav" class="nk-nav-scroll">
                 <ul class="metismenu" id="menu">
@@ -385,7 +385,7 @@ span{
                     </li>
                     <li class="nav-label" style="padding-bottom: 0"><b>개인 공간</b></li>
                     <li>
-                        <a href="/private/private.do" aria-expanded="false" >
+                        <a href='<c:url value='/private.do'></c:url>' aria-expanded="false" >
                             <span class="iconify" data-icon="ic:baseline-person" data-inline="false" style="width: 20px;height: auto;"> </span><span class="nav-text"> &nbsp;프라이빗 공간</span>
                         </a>
                     </li>

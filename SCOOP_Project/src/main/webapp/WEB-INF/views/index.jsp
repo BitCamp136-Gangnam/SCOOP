@@ -9,6 +9,7 @@
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="all,follow">
+<jsp:include page="/WEB-INF/views/commons/title.jsp"></jsp:include>
 <!--vendors styles-->
 <link rel="stylesheet"Chatfuel
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
