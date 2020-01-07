@@ -25,4 +25,7 @@ public interface MemberDao {
 	// 네이버아이디 등록
 	public int naverInsertCheck(String email, String name);
 	
+	// 아이디 중복체크
+	public int idCheck(String email);
+	
 }

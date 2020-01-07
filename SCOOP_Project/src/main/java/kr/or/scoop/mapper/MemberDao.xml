@@ -11,6 +11,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
        insert into member(email, pwd, name,idtime,loginnum,dname,drank,address)
        values (#{email},#{pwd},#{name},SYSDATE,1,#{dname},#{drank},#{address})
     </insert>
+    
+    <select id="idCheck" resultType="int">
+		select count(*)
+		from member 
+		where email = #{param1}
+	</select>
 	
 	<select id="loginCheck" resultType="int">
 		select count(*)

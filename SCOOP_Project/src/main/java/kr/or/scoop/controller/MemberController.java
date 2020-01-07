@@ -162,5 +162,27 @@ public class MemberController {
 
 		return viewpage;
 	}
+	
+	// 일반 회원가입
+		@RequestMapping(value = "sendMail.do", method = RequestMethod.POST)
+		public String sendMail(Member member) throws ClassNotFoundException, SQLException {
+
+			int result = 0;
+			String viewpage = "";
+			System.out.println("인서트 들어오니" + member);
+			member.setPwd(this.bCryptPasswordEncoder.encode(member.getPwd()));
+			result = service.insertMember(member);
+
+			if (result > 0) {
+				System.out.println("가입성공");
+				viewpage = "redirect:/index.do";
+			} else {
+				System.out.println("가입실패");
+				viewpage = "index";
+			}
+
+			return viewpage; // 주의 (website/index.htm
+
+		}
 
 }
