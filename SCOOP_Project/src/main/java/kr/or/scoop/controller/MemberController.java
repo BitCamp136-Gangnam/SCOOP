@@ -113,5 +113,15 @@ public class MemberController {
 		return viewpage;
 
 	}
+	
+	//이슈작성 
+	@RequestMapping(value="issue.do",method = RequestMethod.POST)
+	public String issue(HttpSession session) {
+		
+		
+		
+		return null;
+		
+	}
 
 }
