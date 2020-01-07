@@ -71,7 +71,7 @@
         <div class="content-body">
         <br>
             <div class="container-fluid">
-        <div class="card" style="min-height: 1080px">
+        <div class="card" style="min-height: 580px">
       <div class="row" style="margin: 2%">
             <h3>새로운 소식</h3>
       </div>
