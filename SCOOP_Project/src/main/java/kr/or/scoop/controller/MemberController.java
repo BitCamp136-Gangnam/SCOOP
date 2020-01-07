@@ -64,7 +64,6 @@ public class MemberController {
 
 		int result = 0;
 		String viewpage = "";
-//		pwd = bCryptPasswordEncoder.encode(pwd);
 		result = service.loginMember(email, pwd);
 		if (result > 0) {
 			viewpage = "user/userindex";
@@ -96,7 +95,7 @@ public class MemberController {
 	}
 
 	// 로그인 성공
-	@RequestMapping(value = "/userindex.do")
+	@RequestMapping(value = "/userindex.do",method = RequestMethod.GET)
 	public String userindex() {
 		return "user/userindex";
 	}
