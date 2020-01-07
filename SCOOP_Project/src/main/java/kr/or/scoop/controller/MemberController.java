@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import kr.or.scoop.dto.Issue;
 import kr.or.scoop.dto.Member;
 import kr.or.scoop.service.MemberService;
 
@@ -112,13 +111,12 @@ public class MemberController {
 
 	}
 	
-	//이슈작성 
-	@RequestMapping(value="issue.do",method = RequestMethod.POST)
-
-	public String issue(HttpSession session,Issue issue,String selectpro) {
-		return null;
-		
-	}
+	/*
+	 * //이슈작성
+	 * 
+	 * @RequestMapping(value="issue.do",method = RequestMethod.POST) public String
+	 * issue(HttpSession session,Issue issue,String selectpro) { return null; }
+	 */
 	//마이이슈 작성
 	@RequestMapping(value = "/myissue.do",method = RequestMethod.GET) 
 	public String myissue() {

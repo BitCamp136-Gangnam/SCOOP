@@ -38,7 +38,7 @@
 	    	'name':naver_id_login.getProfileData('name')
 	    	}, //보낼 데이터
 	    success: function(data) {
-	    	
+	    	location.href="userindex.do";
 	    },
 	    error: function(err) {
 	        
@@ -71,7 +71,7 @@
         <div class="content-body">
         <br>
             <div class="container-fluid">
-        <div class="card" style="min-height: 1080px">
+        <div class="card" style="min-height: 580px">
       <div class="row" style="margin: 2%">
             <h3>새로운 소식</h3>
       </div>

@@ -43,7 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<insert id="naverInsertCheck">
        insert into member(email,pwd,name,idtime,loginnum)
-       values (#{param1},'naver',#{param2},SYSDATE,3)
+       values (#{param1},'naver',#{param2},SYSDATE,2)
     </insert>
 	
 </mapper>
