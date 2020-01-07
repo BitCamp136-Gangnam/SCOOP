@@ -110,7 +110,6 @@
       .panel {
         padding: 0 18px;
         display: none;
-        background-color: white;
         overflow: hidden;
         font-size: 12px;
       }
