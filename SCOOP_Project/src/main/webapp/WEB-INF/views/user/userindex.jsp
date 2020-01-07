@@ -38,7 +38,7 @@
 	    	'name':naver_id_login.getProfileData('name')
 	    	}, //보낼 데이터
 	    success: function(data) {
-	    	
+	    	location.href="userindex.do";
 	    },
 	    error: function(err) {
 	        
