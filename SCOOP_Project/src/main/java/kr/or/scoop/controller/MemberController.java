@@ -1,7 +1,5 @@
 package kr.or.scoop.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletResponse;
@@ -9,12 +7,12 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.or.scoop.dto.Issue;
 import kr.or.scoop.dto.Member;
 import kr.or.scoop.service.MemberService;
 
@@ -116,7 +114,7 @@ public class MemberController {
 	
 	//이슈작성 
 	@RequestMapping(value="issue.do",method = RequestMethod.POST)
-	public String issue(HttpSession session) {
+	public String issue(HttpSession session,Issue issue,String selectpro) {
 		
 		
 		
