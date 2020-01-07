@@ -134,27 +134,27 @@
 }
 
 ::-webkit-scrollbar {
-	width: 16px;
+	width: 3px;
 }
 
 ::-webkit-scrollbar-track {
-	background-color: #f1f1f1;
+	background-color: rgba(255,255,255,0.3);
 }
 
 ::-webkit-scrollbar-thumb {
-	background-color: #f1ef79;
-	border-radius: 10px;
+	background-color: #ad2d45;
+	border-radius: 25px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-	background: #555;
+	background: #ad2d45;
 }
 
 ::-webkit-scrollbar-button:start:decrement, ::-webkit-scrollbar-button:end:increment
 	{
-	width: 16px;
-	height: 16px;
-	background: #f1ef79;
+	width: 3px;
+	height: 3px;
+	background: rgba(61, 56, 57,0.5);
 }
 </style>
 <div class="footer">
