@@ -104,10 +104,10 @@
   #filediv {
         position: fixed;
         bottom: 0;
-        right: 0;
+        left: 245px;
         font-size: 18px;
         z-index: 2;
-        width: 84.6%;
+        width: 1300px;
         height: 100%;
       }
   #filediv2 {
@@ -116,7 +116,7 @@
         right: left;
         font-size: 18px;
         z-index: 2;
-        width: 15.4%;
+        width: 245px;
         height: 100%;
         background-color: black;
         opacity: 0.5;
