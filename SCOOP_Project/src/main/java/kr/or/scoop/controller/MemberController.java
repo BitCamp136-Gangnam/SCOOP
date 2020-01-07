@@ -1,7 +1,5 @@
 package kr.or.scoop.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletResponse;
@@ -9,12 +7,12 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.or.scoop.dto.Issue;
 import kr.or.scoop.dto.Member;
 import kr.or.scoop.service.MemberService;
 
@@ -64,7 +62,6 @@ public class MemberController {
 
 		int result = 0;
 		String viewpage = "";
-//		pwd = bCryptPasswordEncoder.encode(pwd);
 		result = service.loginMember(email, pwd);
 		if (result > 0) {
 			viewpage = "user/userindex";
@@ -78,17 +75,20 @@ public class MemberController {
 	}
 
 	// 일반회원 로그인
-	@RequestMapping(value = "googleLogin.do", method = RequestMethod.POST)
+	@RequestMapping(value = "googleLogin.do", method = {RequestMethod.GET,RequestMethod.POST})
 	public String googleLogin(String email, String name, HttpSession session) {
 
 		int result = 0;
 		String viewpage = "";
 		result = service.googleIdCheck(email, name);
 		if (result > 0) {
+			System.out.println("성공");
 			viewpage = "user/userindex";
 			session.setAttribute("email", email);
 			session.setAttribute("kind", "google");
+			System.out.println(session.getAttribute("kind"));
 		} else {
+			System.out.println("실패");
 			viewpage = "index";
 		}
 
@@ -96,7 +96,7 @@ public class MemberController {
 	}
 
 	// 로그인 성공
-	@RequestMapping(value = "/userindex.do")
+	@RequestMapping(value = "/userindex.do",method = RequestMethod.GET)
 	public String userindex() {
 		return "user/userindex";
 	}
@@ -111,5 +111,46 @@ public class MemberController {
 		return viewpage;
 
 	}
+	
+	//이슈작성 
+	@RequestMapping(value="issue.do",method = RequestMethod.POST)
 
+	public String issue(HttpSession session,Issue issue,String selectpro) {
+		return null;
+		
+	}
+	//마이이슈 작성
+	@RequestMapping(value = "/myissue.do",method = RequestMethod.GET) 
+	public String myissue() {
+		return "sidebar/app-myissue";
+	}
+	
+	@RequestMapping(value = "/myissue.do",method = RequestMethod.POST) 
+	public String myissuecheck() {
+		return null;
+		
+	}
+	
+	//캘린더
+	@RequestMapping(value = "/calendar.do",method = RequestMethod.GET)
+	public String calendar() {
+		return "sidebar/app-calender";
+	}
+	
+	@RequestMapping(value = "/calendar.do",method = RequestMethod.POST) 
+	public String calendarcheck() {
+		return null;
+		
+	}
+	//북마크
+	@RequestMapping(value = "/bookmark.do",method = RequestMethod.GET)
+	public String bookmark() {
+		return "sidebar/private-bookmark";
+	}
+	
+	@RequestMapping(value = "/bookmark.do",method = RequestMethod.POST) 
+	public String bookmarkcheck() {
+		return null;
+		
+	}
 }

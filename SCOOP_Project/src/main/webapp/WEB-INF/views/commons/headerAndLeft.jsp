@@ -6,9 +6,9 @@
     <script src="<c:url value="/resources/lib/codemirror.js" />"></script>
  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <%-- <link rel="stylesheet" href="<c:url value="/resources/demos/style.css" />"> --%>
+  <meta name="google-signin-client_id" content="47797892299-i06tt9qhbs15g8mn89ncu1isa1eneql8.apps.googleusercontent.com">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script src="https://apis.google.com/js/platform.js" async defer></script>
   <script type="text/javascript">
         $(function(){ 
            $('.modal').on('hidden.bs.modal', function (e) {
@@ -172,10 +172,10 @@ function pickerCallback(data) {
   #filediv {
         position: fixed;
         bottom: 0;
-        right: 0;
+        left: 245px;
         font-size: 18px;
         z-index: 2;
-        width: 84.6%;
+        width: 1300px;
         height: 100%;
       }
   #filediv2 {
@@ -184,7 +184,7 @@ function pickerCallback(data) {
         right: left;
         font-size: 18px;
         z-index: 2;
-        width: 15.4%;
+        width: 245px;
         height: 100%;
         background-color: black;
         opacity: 0.5;
@@ -400,13 +400,13 @@ span{
                                             <a href="page-lock.jsp"><i class="icon-lock"></i> <span>잠금모드</span></a>
                                         </li>
                                         <c:choose>
-                                        	<c:when test="${kind==normal}">
+                                        	<c:when test="${kind=='normal'}">
                                         		<li><a href="logout.do"><i class="icon-key"></i> <span>로그아웃</span></a></li>	
                                         	</c:when>
-                                        	<c:when test="${kind==google}">
+                                        	<c:when test="${kind=='google'}">
                                         		<li><a href="#" onclick="signOut();"><i class="icon-key"></i> <span>로그아웃</span></a></li>	
                                         	</c:when>
-                                        	<c:when test="${kind==naver}">
+                                        	<c:when test="${kind=='naver'}">
                                         		<li><a href="#" onclick="signOut();"><i class="icon-key"></i> <span>로그아웃</span></a></li>	
                                         	</c:when>
                                         	<c:otherwise></c:otherwise>
@@ -430,7 +430,7 @@ span{
         <!--**********************************
             Sidebar start
         ***********************************-->
-        <<c:set var="kind" value="${session.kind}}"></c:set>
+        <c:set var="kind" value="${session.kind}}"></c:set>
         <div class="nk-sidebar" style="z-index: 0">           
             <div id="scnav" class="nk-nav-scroll">
                 <ul class="metismenu" id="menu">
@@ -453,7 +453,7 @@ span{
                     </li>
                     <li class="nav-label" style="padding-bottom: 0"><b>개인 공간</b></li>
                     <li>
-                        <a href="private.do" aria-expanded="false" >
+                        <a href='<c:url value='/private.do'></c:url>' aria-expanded="false" >
                             <span class="iconify" data-icon="ic:baseline-person" data-inline="false" style="width: 20px;height: auto;"> </span><span class="nav-text"> &nbsp;프라이빗 공간</span>
                         </a>
                     </li>
@@ -572,13 +572,18 @@ span{
         <!-- <p style="font-size: 12px">협업공간은 함께 일하는 멤버들끼리만 자료를 공유하고 협업할 수 있는 공간입니다.<br>
              협업공간을 만들고 함께 일할 멤버들을 초대해보세요.</p> -->
             <label for="title">이슈 제목</label>
-          <input class="form-control createmodal" type="text" id="issuetitle" style="width: 100%" placeholder="제목을 입력해 주세요.">
+          <input class="form-control createmodal" type="text" id="issuetitle" name ="issuetitle" style="width: 100%" placeholder="제목을 입력해 주세요.">
           <br>
             <label for="content">이슈 설명</label> <span id="filename"></span> <img id="imgpreview" alt="사진 미리보기 자리" style="display:none;width: 40px; height: 40px" src="#" />
             <input type="file" id="fileclick" name="files[0]" hidden="">
+<<<<<<< HEAD
             <button type="button" id="auth" disabled>Authenticate</button>
           <textarea class="form-control createmodal" rows="5" id="issuecontent" style="width: 100%" placeholder="@를 입력하여 멘션, 할 일, 파일 등을 추가해 보세요."></textarea>
           <textarea rows="" id="codemirrorarea" style="display: none"><-- 코드를 입력하세요 --></textarea>
+=======
+          <textarea class="form-control createmodal" rows="5" id="issuecontent" name="issuecontent" style="width: 100%" placeholder="@를 입력하여 멘션, 할 일, 파일 등을 추가해 보세요."></textarea>
+          <textarea rows="" id="codemirrorarea" name = "codemirrorarea" style="display: none"><-- 코드를 입력하세요 --></textarea>
+>>>>>>> 1f38fdb91960a2bf952264f33e8ff998c08cdec7
           <div id="todoresult" style="display: none">
           </div>
               <!-- The Google API Loader script. -->
@@ -586,7 +591,7 @@ span{
         </div>
         <!-- Modal footer -->
         <div class="modal-footer">
-          <select id="selectpro" class="form-control">
+          <select id="selectpro" name="selectpro" class="form-control">
             <option>프라이빗 공간</option>
             <option>쫀쬬니</option>
             <option>이곳저곳</option>
@@ -821,13 +826,20 @@ span{
       }
       return date;
     }
-    
-    function signOut(){
-    	var auth2 = gapi.auth2.getAuthInstance();
-    	auth2.signOut().then(function(){
-    		console.log('Google LogOut Success');
+
+    function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+        	console.log('Google LogOut Success');
     		location.href="logout.do";
-    		auth2.disconnect();
-    	});
-    }
+        });
+        auth2.disconnect();
+      }
+
+    function onLoad() {
+        gapi.load('auth2', function() {
+          gapi.auth2.init();
+        });
+      }
 </script>
+<script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>

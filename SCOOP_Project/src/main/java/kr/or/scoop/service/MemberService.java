@@ -76,4 +76,9 @@ public class MemberService {
 		
 	}
 	
+	public int issueCheck() {
+		return 0;
+		
+	}
+	
 }
