@@ -24,12 +24,6 @@ public class UserController {
 	@Autowired
 	private View jsonview;
 	
-	@RequestMapping(value="userindex.do", method= RequestMethod.GET)
-	public String userindex() {
-		System.out.println("요왔누?");
-		String viewpage = "userindex";
-		return viewpage;
-	}
 	
 	
 }
