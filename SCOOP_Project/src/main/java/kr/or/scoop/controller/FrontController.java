@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class FrontController {
 
-	// Index.do �꽌釉붾┸
+	// Index.do 서블릿
 	@RequestMapping(value="/index.do")
 	public String index(HttpSession session) {
 		session.invalidate();
