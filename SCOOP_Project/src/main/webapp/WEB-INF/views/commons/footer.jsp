@@ -84,6 +84,8 @@
 	      title: steps[currentStep],
 	      inputValue: values[currentStep],
 	      showCancelButton: currentStep > 0,
+	      confirmButtonColor: '#E71D36',
+	      cancelButtonColor: '#E71D36',
 	      currentProgressStep: currentStep
 	    })
 	
@@ -203,6 +205,7 @@
 				}
 			}
 		});
+		
 	});
 </script>
 <style>
@@ -316,10 +319,10 @@
 				<div class="card">
 					<div class="card-header">
 						<i class="fas fa-comments"></i> 실시간 채팅
-						<button id="createChat" class="btn btn-primary mb-3" type="button">채팅방	만들기</button>
+						<button id="createChat" class="btn btn-primary" type="button" style="margin-bottom: 0">채팅방	만들기</button>
 					</div>
-					<div class="card-body" style="height: 200px;">
-						<div class="table">
+					<div class="card-body" style="padding-top: 0">
+						<div class="table"  style="height: 200px;overflow: auto;">
 							<table class="table table-bordered" id="dataTable" style="text-align: center; background-color: white">
 								<thead>
 									<tr>
