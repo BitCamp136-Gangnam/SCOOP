@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<style>
+ input::placeholder {
+ color: #fff;
+}
+</style>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
     <link rel="stylesheet" href="<c:url value="/resources/lib/codemirror.css" />">
     <script src="<c:url value="/resources/lib/codemirror.js" />"></script>
@@ -315,6 +320,24 @@ span{
                 </div>
                 <div class="header-right">
                     <ul class="clearfix">
+                    	<li class="icons dropdown d-none d-md-flex">
+                            <a href="javascript:void(0)" class="log-user"  data-toggle="dropdown">
+                                <span>한국어</span>  <i class="fa fa-angle-down f-s-14" aria-hidden="true"></i>
+                            </a>
+                            <div class="drop-down dropdown-language animated fadeIn  dropdown-menu">
+                                <div class="dropdown-content-body">
+                                    <ul>
+                                        <li><a href="javascript:void()">한국어</a></li>
+                                        <li><a href="javascript:void()">English</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        
+                        <li class="icons dropdown d-none d-md-flex">	
+                        	<i class="fas fa-user-plus"data-toggle="modal" id="inviteModal_id" data-target="#inviteModal" style="cursor: pointer;color:#535359;font-size: 18px;padding-bottom: 12px;" ></i>
+                        	  
+                        </li>
                         <li class="icons dropdown"><a href="javascript:void(0)" data-toggle="dropdown">
                                 <i class="mdi mdi-bell-outline"></i>
                                 <span class="badge badge-pill gradient-2">0</span>
@@ -373,19 +396,7 @@ span{
                                 </div>
                             </div>
                         </li>
-                        <li class="icons dropdown d-none d-md-flex">
-                            <a href="javascript:void(0)" class="log-user"  data-toggle="dropdown">
-                                <span>한국어</span>  <i class="fa fa-angle-down f-s-14" aria-hidden="true"></i>
-                            </a>
-                            <div class="drop-down dropdown-language animated fadeIn  dropdown-menu">
-                                <div class="dropdown-content-body">
-                                    <ul>
-                                        <li><a href="javascript:void()">한국어</a></li>
-                                        <li><a href="javascript:void()">English</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
+                       
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
                                 <span class="activity active"></span>
@@ -424,6 +435,8 @@ span{
                                 </div>
                             </div>
                         </li>
+                        
+                         
                     </ul>
                 </div>
             </div>
@@ -435,7 +448,8 @@ span{
         <!--**********************************
             Sidebar start
         ***********************************-->
-        <<c:set var="kind" value="${session.kind}}"></c:set>
+        <c:set var="kind" value="${session.kind}}"></c:set>
+        <c:set var="email" value="${session.email}}"></c:set>
         <div class="nk-sidebar" style="z-index: 0">           
             <div id="scnav" class="nk-nav-scroll">
                 <ul class="metismenu" id="menu">
@@ -447,12 +461,12 @@ span{
                         </a>
                     </li>
                     <li>
-                        <a href="myissue.htm" aria-expanded="false">
+                        <a href="myissue.do" aria-expanded="false">
                             <span class="iconify" data-icon="simple-line-icons:emotsmile" data-inline="false" style="width: 20px;height: auto;"> </span><span class="nav-text"> &nbsp;내가 작성한 이슈</span>
                         </a>
                     </li>
                     <li>
-                        <a href="calender.htm" aria-expanded="false">
+                        <a href="calender.do" aria-expanded="false">
                             <span class="iconify" data-icon="bx:bx-calendar" data-inline="false" style="width: 20px;height: auto;"> </span><span class="nav-text"> &nbsp;캘린더</span>
                         </a>
                     </li>
@@ -463,7 +477,7 @@ span{
                         </a>
                     </li>
                     <li>
-                        <a href="bookmark.htm" aria-expanded="false">
+                        <a href="bookmark.do" aria-expanded="false">
                             <span class="iconify" data-icon="ic:round-bookmark" data-inline="false" style="width: 20px;height: auto;"> </span><span class="nav-text"> &nbsp;북마크</span>
                         </a>
                     </li>
@@ -491,7 +505,7 @@ span{
 }
 </style>
 
-           <!-- The Modal -->
+<!-- The Modal -->
   <div class="modal fade" id="myModal">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -501,23 +515,27 @@ span{
           <h3 class="modal-title">새 협업공간 만들기</h3>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
-        <form action="">
+        <form action="team.do" method="post">
         <!-- Modal body -->
         <div class="modal-body">
         <p style="font-size: 12px">협업공간은 함께 일하는 멤버들끼리만 자료를 공유하고 협업할 수 있는 공간입니다.<br>
              협업공간을 만들고 함께 일할 멤버들을 초대해보세요.</p>
-          <label for="title">협업공간 이름</label>
-          <input class="form-control createmodal" type="text" id="title" style="width: 100%">
+          <label for="pname">협업공간 이름</label>
+          <input class="form-control createmodal" type="text" id="pname" name="pname" style="width: 100%">
           <br>
-          <label for="content">협업공간 설명</label>
-          <textarea class="form-control createmodal" rows="3" id="content" style="width: 100%"></textarea>
+          <label for="pcontent">협업공간 설명</label>
+          <textarea class="form-control createmodal" rows="3" id="pcontent" name="pcontent" style="width: 100%"></textarea>
         </div>
         
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button type="submit" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">만들기</button>
+          <input type="submit" class="btn btn-secondary" value="만들기" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">
           <button type="button" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">취소</button>
         </div>
+        <input type="hidden" name="ischarge" value="0">
+        <input type="hidden" name="email" value="${email} ">
+        <input type="hidden" name="isppalarm" value="0">
+        <input type="hidden" name="ptime" value="20-01-08">
         </form>
       </div>
     </div>
@@ -653,6 +671,43 @@ span{
           <button type="button" id="datecancle" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;">취소</button>
    </div>
   </div>
+  <!-- 파트너 초대 모달 -->
+  <div class="modal fade" id="inviteModal">
+							    <div class="modal-dialog modal-dialog-centered" >
+							      <div class="modal-content" ">
+							        <!-- Modal Header -->
+							        <div class="modal-header">
+							          <h5>새 협업공간 만들기</h5>
+							          <button type="button" class="close" data-dismiss="modal">&times;</button>
+							        </div>
+							       
+							        <!-- Modal body -->
+							        <div class="row">
+							        <div class="col-sm-6" style="border-right:1px solid #000;" >
+							        <div class="modal-body">
+							        <p style="font-size: 12px">더 많은 사람들을 초대하여 원활한 소통으로 업무를 효율적으로 처리해보세요.<br>
+							            					     회사 동료뿐만 아니라 외부 협업자도 파트너로 초대할 수 있습니다.</p>
+							          <label for="title">파트너 초대</label>
+							          <input class="form-control createmodal" type="text" id="title" placeholder="이메일 주소를 입력하고 Enter키를 눌러주세요" style="width: 100%;border-radius: 0.25rem;">
+							          <p style="font-size:13px;margin-top:2%;margin-left:1%; ">이메일 주소를 입력하고 Enter키를 눌러 동료들을 초대해 보세요.</p>
+							          <br>
+							          <label for="content">협업공간 설명</label>
+							          <textarea class="form-control createmodal" rows="3" id="content" style="width: 100%;border-radius: 0.25rem;"></textarea>
+							        </div>
+							        </div>
+							        <div class="col-sm-6">
+							        
+							        </div>
+							        </div>
+							        <!-- Modal footer -->
+							        <div class="modal-footer">
+							          <button type="submit" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">만들기</button>
+							          <button type="button" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">취소</button>
+							        </div>
+							        
+							      </div>
+							    </div>
+							  </div>
 
   <script type="text/javascript">
    $('#issuecontent').keydown(function(event){
@@ -848,4 +903,12 @@ span{
     		auth2.disconnect();
     	});
     }
+
+    $('#inviteModal_id').mouseover(function(){
+        $(this).attr('style','cursor: pointer;color:#e71d36;font-size: 18px;padding-bottom: 12px;');
+        });
+    $('#inviteModal_id').mouseleave(function(){
+        $(this).attr('style','cursor: pointer;color:#535359;font-size: 18px;padding-bottom: 12px;');
+        });
+    
 </script>
