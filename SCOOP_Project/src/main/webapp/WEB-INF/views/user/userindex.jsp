@@ -68,10 +68,10 @@
         <!--**********************************
             Content body start
         ***********************************-->
-        <div class="content-body">
-        <br>
+        <div class="content-body" style="min-height: 500px;">
+       
             <div class="container-fluid">
-        <div class="card" style="min-height: 580px">
+        <div class="card" style="min-height: 570px">
       <div class="row" style="margin: 2%">
             <h3>새로운 소식</h3>
       </div>
