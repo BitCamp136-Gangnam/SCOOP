@@ -13,6 +13,7 @@ public class TeamPjt {
 	private Date ptime;
 	private int istpalarm;
 	private int ischarge;
+	
 	public int getTseq() {
 		return tseq;
 	}
