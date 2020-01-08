@@ -96,14 +96,11 @@ public class MemberController {
 
 		int result = 0;
 		String viewpage = "";
-		session.setAttribute("checkemail", member.getEmail());
-		session.setAttribute("checkpwd", this.bCryptPasswordEncoder.encode(member.getPwd()));
-		session.setAttribute("checkname", member.getName());
 		System.out.println("인서트 들어오니" + member);
 		member.setPwd((String)session.getAttribute("checkpwd"));
 		member.setEmail((String)session.getAttribute("checkemail"));
 		member.setName((String)session.getAttribute("checkname"));
-
+		System.out.println(session.getAttribute("checkpwd"));
 		result = service.insertMember(member);
 
 		if (result > 0) {
