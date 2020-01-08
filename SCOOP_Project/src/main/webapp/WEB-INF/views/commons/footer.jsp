@@ -158,6 +158,7 @@
     	let name = room;
     	let option = "width = 500, height = 500, top = 100, left = 200, location = no, channelmode = yes";
         window.open(url, name, option);
+        
     }
 </script>
 <script type="text/javascript">
@@ -221,7 +222,7 @@
 	display: none;
 	width: 500px;
 	position: fixed;
-	bottom: 60px;
+	bottom: 75px;
 	right: 16px;
 	font-size: 18px;
 	z-index: 1;
@@ -316,7 +317,7 @@
 </div>
 <!-- chat 시작 -->
 			<div id="chatdivopen">
-				<div class="card">
+				<div class="card" style="border-radius: 10px; margin-bottom: 0;border : 1px solid #ced4da;">
 					<div class="card-header">
 						<i class="fas fa-comments"></i> 실시간 채팅
 						<button id="createChat" class="btn btn-primary" type="button" style="margin-bottom: 0">채팅방	만들기</button>
