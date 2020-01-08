@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,7 +42,7 @@
 </head>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="https://apis.google.com/js/platform.js" async defer></script>
+<!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
 <script src="https://code.iconify.design/1/1.0.3/iconify.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function($) {
@@ -167,8 +168,19 @@ $(function(){
          <!-- 여기 지우면 죽음뿐 -->
       </ul>
       <ul class="navbar-nav">
-      <li><a href="index.do?lang=en">English</a></li>
-      <li class="nav-item dropdown"><a id="pages" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">세부기능</a>
+      <li class="nav-item dropdown"><a id="pages" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><spring:message code="language" /></a>
+      	<div class="dropdown-menu">
+      		<div id="table">
+      			<div id="rowdrop">
+      				<span style="color: gray;font-size:15px"><a a href="index.do?lang=ko">한국어</a></span>
+      			</div>
+      			<hr width="80%">
+      			<div id="rowdrop">
+      				<span style="color: gray;font-size:15px"><a href="index.do?lang=en">English</a></span>
+      			</div>
+      		</div>
+      	</div>
+      <li class="nav-item dropdown"><a id="pages" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><spring:message code="detail" /></a>
       <div class="dropdown-menu">
       <div id="table">
       <div class="rowdrop">
@@ -226,10 +238,10 @@ $(function(){
            </div>
            </li>
            <!-- Link-->
-           <li class="nav-item"> <a href="#pricing" id="pricing_area" class="nav-link">가격</a></li>
+           <li class="nav-item"> <a href="#pricing" id="pricing_area" class="nav-link"><spring:message code="price" /></a></li>
        
-        <li class="nav-item"><a href="#" data-toggle="modal" data-target="#login" class="nav-link font-weight-bold mr-3">Login</a></li>
-        <li class="nav-item"><a href="#" data-toggle="modal" data-target="#signUp" class="navbar-btn btn btn-primary">무료로 시작하기</a></li>
+        <li class="nav-item"><a href="#" data-toggle="modal" data-target="#login" class="nav-link font-weight-bold mr-3"><spring:message code="login.menu" /></a></li>
+        <li class="nav-item"><a href="#" data-toggle="modal" data-target="#signUp" class="navbar-btn btn btn-primary"><spring:message code="start" /></a></li>
       </ul>
      </div>
    </div>
@@ -266,13 +278,13 @@ $(function(){
       	</form>
 		<!-- 네이버아이디로로그인 버튼 노출 영역 -->
 								  <script type="text/javascript">
-								  	var naver_id_login = new naver_id_login("idXo9CECDTdxmjiuAWdC", "http://localhost:8090/SCOOP/userindex.do");
+								  	var naver_id_login = new naver_id_login("UQIzvQsqqo7IfCBE1GH1", "http://localhost:8090/SCOOP/userindex.do");
 								  	var state = naver_id_login.getUniqState();
 								  	naver_id_login.setButton("white", 3,40);
 								  	naver_id_login.setDomain("http://localhost:8090/");
 								  	naver_id_login.setState(state);
+								  	naver_id_login.setPopup();
 								  	naver_id_login.init_naver_id_login();
-								  	console.log(naver_id_login);
 								  </script>
 									
 							      <script>
@@ -286,7 +298,7 @@ $(function(){
 							        	    	'name':googleUser.getBasicProfile().getName()
 							        	    	}, //보낼 데이터
 							        	    success: function(data) {
-							        	    	location.href="userindex.do";
+							        	    	location.href="userindex.do"
 							        	    },
 							        	    error: function(err) {
 							        	        
@@ -391,17 +403,17 @@ $(function(){
    <div class="container">
      <div class="row align-items-center">
       <div class="col-lg-6">
-        <h1 class="hero-heading">하나의 문서로 함께 만드는 협업</h1>
-        <p class="lead mt-5 font-weight-light">동료와 한 페이지 안에서 할 일,파일,의사결정,일정 및 커뮤니케이션을 모두 담아 이슈를 해결해 보세요.🍿</p>
+        <h1 class="hero-heading"><spring:message code="main.title" /></h1>
+        <p class="lead mt-5 font-weight-light"><spring:message code="main.content" />🍿</p>
         <!-- Subscription form-->
         <form action="#" class="subscription-form mt-5">
          <div class="form-group">
            <label>Email</label>
            <input type="text" name="email" id="emailTo" placeholder="E-mail@company.com" class="form-control">
-        <button type="button" id="scoop_input" data-toggle="modal" data-target="#signUp"class="btn btn-primary">무료로 시작하기</button>     
+        <button type="button" id="scoop_input" data-toggle="modal" data-target="#signUp"class="btn btn-primary"><spring:message code="register" /></button>     
          </div>
-            <span>이미 가입하셨나요?</span>
-            <a href="" data-toggle="modal" data-target="#login"style="color:#cf455c;">로그인 하기</a>    
+            <span><spring:message code="login.content" /></span>
+            <a href="" data-toggle="modal" data-target="#login"style="color:#cf455c;"><spring:message code="login.main" /></a>    
         </form>
         <!-- Platforms-->
         <div class="platforms d-none d-lg-block"><span class="platforms-title">Compatible with</span>
@@ -428,10 +440,9 @@ $(function(){
 		<div class="container">	
 			<div class="row">
 				<div class="col-md-7 mx-auto text-center">
-					<h2>스쿱을 무료로 사용해 보세요</h2>
+					<h2><spring:message code="payment.title" /></h2>
 					<br>
-					<p class="text-muted lead">무료로 얼마든지 동료를 초대하고 협업공간을 생성하여 협업할 수
-						있습니다.</p>
+					<p class="text-muted lead"><spring:message code="payment.content" /></p>
 				</div>
 			</div>
 			<!--pricing tables-->
@@ -524,7 +535,7 @@ $(function(){
 				<div class="col-md-10 mx-auto">
 					<div class="row">
 						<div class="col-sm-12" style="text-align: center;padding-bottom: 5%;">
-						<h2>자주 묻는 질문</h2>
+						<h2><spring:message code="qna" /></h2>
 						</div>
 						<button class="accordion">Section 1</button>
 						<div class="panel">

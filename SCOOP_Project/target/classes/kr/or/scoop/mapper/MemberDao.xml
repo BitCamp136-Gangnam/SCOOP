@@ -8,8 +8,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     -->
     <!-- 일반회원가입 -->
     <insert id="insertMember" parameterType="kr.or.scoop.dto.Member">
-       insert into member(email, pwd, name,idtime,loginnum,dname,drank,address)
-       values (#{email},#{pwd},#{name},SYSDATE,1,#{dname},#{drank},#{address})
+       insert into member(email, pwd, name,idtime,loginnum)
+       values (#{email},#{pwd},#{name},SYSDATE,1)
     </insert>
 	
 	<select id="loginCheck" resultType="int">
@@ -45,5 +45,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
        insert into member(email,pwd,name,idtime,loginnum)
        values (#{param1},'naver',#{param2},SYSDATE,2)
     </insert>
+    
+    <select id="idCheck" resultType="int">
+		select count(*)
+		from member 
+		where email = #{param1}
+	</select>
 	
 </mapper>

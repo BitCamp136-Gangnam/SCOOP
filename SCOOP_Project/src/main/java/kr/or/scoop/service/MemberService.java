@@ -23,10 +23,16 @@ public class MemberService {
 	public int insertMember(Member member){
 		int result = 0;
 		System.out.println(member.toString());
-		MemberDao dao = sqlsession.getMapper(MemberDao.class);
-		System.out.println("여기좀 와주라 ㅠㅠㅠㅠ");
+		int isIdCheck = idCheck(member.getEmail());
+		if(isIdCheck>0) {
+			System.out.println("중복아이디 존재");
+		} else {
+			System.out.println("중복아이디가 없네요 등록합니당");
+			MemberDao dao = sqlsession.getMapper(MemberDao.class);
+			System.out.println("여기좀 와주라 ㅠㅠㅠㅠ");
+			result = dao.insertMember(member);
+		}
 		
-		result = dao.insertMember(member);
 		return result;
 	}
 	
@@ -98,6 +104,13 @@ public class MemberService {
 				System.out.println("네이버아이디 가입실패");
 			}
 		}
+		return result;
+	}
+
+	public int idCheck(String email) {
+		int result = 0;
+		MemberDao dao = sqlsession.getMapper(MemberDao.class);
+		result = dao.idCheck(email);
 		return result;
 	}
 	
