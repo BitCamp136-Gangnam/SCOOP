@@ -130,12 +130,12 @@ public class MemberController {
 	}
 	
 	//캘린더
-	@RequestMapping(value = "/calendar.do",method = RequestMethod.GET)
+	@RequestMapping(value = "/calender.do",method = RequestMethod.GET)
 	public String calendar() {
 		return "sidebar/app-calender";
 	}
 	
-	@RequestMapping(value = "/calendar.do",method = RequestMethod.POST) 
+	@RequestMapping(value = "/calender.do",method = RequestMethod.POST) 
 	public String calendarcheck() {
 		return null;
 		
