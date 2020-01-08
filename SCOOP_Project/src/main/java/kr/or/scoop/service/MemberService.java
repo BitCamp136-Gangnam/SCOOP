@@ -22,11 +22,16 @@ public class MemberService {
 	
 	public int insertMember(Member member){
 		int result = 0;
-		System.out.println(member.toString());
-		MemberDao dao = sqlsession.getMapper(MemberDao.class);
-		System.out.println("여기좀 와주라 ㅠㅠㅠㅠ");
-		
-		result = dao.insertMember(member);
+		int isIdExist = idCheck(member.getEmail());
+		// 아이디 존재 함 등록 못함
+		if(isIdExist > 0) {
+			result = 0;
+		} else { // 아이디 없음 등록해야됨
+			System.out.println(member.toString());
+			MemberDao dao = sqlsession.getMapper(MemberDao.class);
+			System.out.println("여기좀 와주라 ㅠㅠㅠㅠ");			
+			result = dao.insertMember(member);
+		}
 		return result;
 	}
 	
@@ -97,6 +102,18 @@ public class MemberService {
 			}else {
 				System.out.println("네이버아이디 가입실패");
 			}
+		}
+		return result;
+	}
+	
+	public int idCheck(String email) {
+		int result = 0;
+		MemberDao dao = sqlsession.getMapper(MemberDao.class);
+		result = dao.idCheck(email);
+		if(result>0) {
+			System.out.println("일반아이디 존재");
+		} else {
+			System.out.println("일반아이디가 없네요 등록합니당");
 		}
 		return result;
 	}

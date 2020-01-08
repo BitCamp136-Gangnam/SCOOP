@@ -6,9 +6,9 @@
     <script src="<c:url value="/resources/lib/codemirror.js" />"></script>
  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <%-- <link rel="stylesheet" href="<c:url value="/resources/demos/style.css" />"> --%>
-  <meta name="google-signin-client_id" content="47797892299-i06tt9qhbs15g8mn89ncu1isa1eneql8.apps.googleusercontent.com">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
   <script type="text/javascript">
         $(function(){ 
            $('.modal').on('hidden.bs.modal', function (e) {
@@ -21,11 +21,12 @@
                $('#todo').hide();
                $('#todomem').empty();
                $('#todolist').empty();
-               $('#todoresult').hide();
                $('#todoresult').empty();
+               $('#todoresult').hide();
                $('#datepick').hide();
                $('#from').empty();
                $('#to').empty();
+               $('#memlist').attr('class','list-group');
              $(this).find('form')[0].reset()
            });
             $('#fileopen').click(function(){
@@ -100,82 +101,86 @@
 });
 </script>
 <script type="text/javascript">
-// The Browser API key obtained from the Google API Console.
-var developerKey = 'AIzaSyBIu-Whybpm37l7vHw8O5f48kjpG_bQtzo';
+	// The Browser API key obtained from the Google API Console.
+	var developerKey = 'AIzaSyBIu-Whybpm37l7vHw8O5f48kjpG_bQtzo';
 
-// The Client ID obtained from the Google API Console. Replace with your own Client ID.
-var clientId = "237537328130-p9jshmj42atouica42uq96prsjk4qvtf.apps.googleusercontent.com";
+	// The Client ID obtained from the Google API Console. Replace with your own Client ID.
+	var clientId = "237537328130-p9jshmj42atouica42uq96prsjk4qvtf.apps.googleusercontent.com";
 
-// Scope to use to access user's photos.
-var scope = 'https://www.googleapis.com/auth/drive.file';
+	// Scope to use to access user's photos.
+	var scope = 'https://www.googleapis.com/auth/drive.file';
 
-var pickerApiLoaded = false;
-var oauthToken;
+	var pickerApiLoaded = false;
+	var oauthToken;
 
-// Use the API Loader script to load google.picker and gapi.auth.
-function onApiLoad() {
-  gapi.load('auth2', onAuthApiLoad);
-  gapi.load('picker', onPickerApiLoad);
-}
+	// Use the API Loader script to load google.picker and gapi.auth.
+	function onApiLoad() {
+	  gapi.load('auth2', onAuthApiLoad);
+	  gapi.load('picker', onPickerApiLoad);
+	}
 
-function onAuthApiLoad() {
-  var authBtn = document.getElementById('auth');
-  authBtn.disabled = false;
-  authBtn.addEventListener('click', function() {
-    gapi.auth2.init({ client_id: clientId }).then(function(googleAuth) {
-      googleAuth.signIn({ scope: scope }).then(function(result) {
-        handleAuthResult(result.getAuthResponse());
-      })
-    })
-  });
-}
+	function onAuthApiLoad() {
+	  var authBtn = document.getElementById('auth');
+	  authBtn.disabled = false;
+	  authBtn.addEventListener('click', function() {
+	    gapi.auth2.init({ client_id: clientId }).then(function(googleAuth) {
+	      googleAuth.signIn({ scope: scope }).then(function(result) {
+	        handleAuthResult(result.getAuthResponse());
+	      })
+	    })
+	  });
+	}
 
-function onPickerApiLoad() {
-  pickerApiLoaded = true;
-  createPicker();
-}
+	function onPickerApiLoad() {
+	  pickerApiLoaded = true;
+	  createPicker();
+	}
 
-function handleAuthResult(authResult) {
-  if (authResult && !authResult.error) {
-    oauthToken = authResult.access_token;
-    createPicker();
-  }
-}
+	function handleAuthResult(authResult) {
+	  if (authResult && !authResult.error) {
+	    oauthToken = authResult.access_token;
+	    createPicker();
+	  }
+	}
+	// Create and render a Picker object for picking from Google Photos.
+	function createPicker() {
+	  if (pickerApiLoaded && oauthToken) {
+	    var picker = new google.picker.PickerBuilder().
+	        addView(google.picker.ViewId.DOCS	).
+	        setOAuthToken(oauthToken).
+	        setDeveloperKey(developerKey).
+	        setCallback(pickerCallback).
+	        build();
+	    picker.setVisible(true);
+	    $('.picker-dialog').attr('style','z-index:1051;top:5%;left:20%')
+	  }
+	}
 
-// Create and render a Picker object for picking from Google Photos.
-function createPicker() {
-  if (pickerApiLoaded && oauthToken) {
-    var picker = new google.picker.PickerBuilder().
-        addView(google.picker.ViewId.DOCS	).
-        setOAuthToken(oauthToken).
-        setDeveloperKey(developerKey).
-        setCallback(pickerCallback).
-        build();
-    picker.setVisible(true);
-  }
-}
+	  var url = '';
+	  var drivename = '';
+	// A simple callback implementation.
+	function pickerCallback(data) {
+	  if (data[google.picker.Response.ACTION] == google.picker.Action.PICKED) {
+	    var doc = data[google.picker.Response.DOCUMENTS][0];
+	    url = doc[google.picker.Document.URL];
+	    drivename = doc.name;
+	  }
+	  var message = url;
+	  if(url!=''){
+		  $('#todoresult').append('<div><a href='+url+'><span class="iconify" data-icon="whh:googledrive" data-inline="false"></span>'+drivename+'</a></div>');
+		  $('#todoresult').show();  
+	  }
+	}
 
-// A simple callback implementation.
-function pickerCallback(data) {
-  var url = 'nothing';
-  if (data[google.picker.Response.ACTION] == google.picker.Action.PICKED) {
-    var doc = data[google.picker.Response.DOCUMENTS][0];
-    url = doc[google.picker.Document.URL];
-    console.log(doc);
-    console.log(doc.name+"."+doc.serviceId);
-  }
-  var message = 'You picked: ' + url;
-  document.getElementById('todoresult').innerHTML = message;
-}
 </script>
 <style>
   #filediv {
         position: fixed;
         bottom: 0;
-        left: 245px;
+        right: 0;
         font-size: 18px;
         z-index: 2;
-        width: 1300px;
+        width: 84.6%;
         height: 100%;
       }
   #filediv2 {
@@ -184,7 +189,7 @@ function pickerCallback(data) {
         right: left;
         font-size: 18px;
         z-index: 2;
-        width: 245px;
+        width: 15.4%;
         height: 100%;
         background-color: black;
         opacity: 0.5;
@@ -430,7 +435,7 @@ span{
         <!--**********************************
             Sidebar start
         ***********************************-->
-        <c:set var="kind" value="${session.kind}}"></c:set>
+        <<c:set var="kind" value="${session.kind}}"></c:set>
         <div class="nk-sidebar" style="z-index: 0">           
             <div id="scnav" class="nk-nav-scroll">
                 <ul class="metismenu" id="menu">
@@ -442,23 +447,23 @@ span{
                         </a>
                     </li>
                     <li>
-                 		  <a href='<c:url value='/myissue.do'></c:url>' aria-expanded="false" >
+                        <a href="myissue.do" aria-expanded="false">
                             <span class="iconify" data-icon="simple-line-icons:emotsmile" data-inline="false" style="width: 20px;height: auto;"> </span><span class="nav-text"> &nbsp;내가 작성한 이슈</span>
                         </a>
                     </li>
                     <li>
-                    	 <a href='<c:url value='/calender.do'></c:url>' aria-expanded="false" >
+                        <a href="calendar.do" aria-expanded="false">
                             <span class="iconify" data-icon="bx:bx-calendar" data-inline="false" style="width: 20px;height: auto;"> </span><span class="nav-text"> &nbsp;캘린더</span>
                         </a>
                     </li>
                     <li class="nav-label" style="padding-bottom: 0"><b>개인 공간</b></li>
                     <li>
-                        <a href='<c:url value='/private.do'></c:url>' aria-expanded="false" >
+                        <a href="private.do" aria-expanded="false" >
                             <span class="iconify" data-icon="ic:baseline-person" data-inline="false" style="width: 20px;height: auto;"> </span><span class="nav-text"> &nbsp;프라이빗 공간</span>
                         </a>
                     </li>
                     <li>
-                   		 <a href='<c:url value='/bookmark.do'></c:url>' aria-expanded="false" >
+                        <a href="bookmark.do" aria-expanded="false">
                             <span class="iconify" data-icon="ic:round-bookmark" data-inline="false" style="width: 20px;height: auto;"> </span><span class="nav-text"> &nbsp;북마크</span>
                         </a>
                     </li>
@@ -572,11 +577,11 @@ span{
         <!-- <p style="font-size: 12px">협업공간은 함께 일하는 멤버들끼리만 자료를 공유하고 협업할 수 있는 공간입니다.<br>
              협업공간을 만들고 함께 일할 멤버들을 초대해보세요.</p> -->
             <label for="title">이슈 제목</label>
-          <input class="form-control createmodal" type="text" id="issuetitle" name ="issuetitle" style="width: 100%" placeholder="제목을 입력해 주세요.">
+          <input class="form-control createmodal" type="text" id="issuetitle" style="width: 100%" placeholder="제목을 입력해 주세요.">
           <br>
             <label for="content">이슈 설명</label> <span id="filename"></span> <img id="imgpreview" alt="사진 미리보기 자리" style="display:none;width: 40px; height: 40px" src="#" />
             <input type="file" id="fileclick" name="files[0]" hidden="">
-            <button type="button" id="auth" disabled>Authenticate</button>
+            <button type="button" id="auth" disabled hidden="">Authenticate</button>
           <textarea class="form-control createmodal" rows="5" id="issuecontent" style="width: 100%" placeholder="@를 입력하여 멘션, 할 일, 파일 등을 추가해 보세요."></textarea>
           <textarea rows="" id="codemirrorarea" style="display: none"><-- 코드를 입력하세요 --></textarea>
           <div id="todoresult" style="display: none">
@@ -586,7 +591,7 @@ span{
         </div>
         <!-- Modal footer -->
         <div class="modal-footer">
-          <select id="selectpro" name="selectpro" class="form-control">
+          <select id="selectpro" class="form-control">
             <option>프라이빗 공간</option>
             <option>쫀쬬니</option>
             <option>이곳저곳</option>
@@ -612,7 +617,7 @@ span{
    </div>
    <!--  -->
    <!-- 멘션할 사람 목록 -->
-   <div class="list-group memlist" id="memlist" style="display: none">
+   <div class="list-group" id="memlist" style="display: none">
      <a href="#" class="list-group-item list-group-item-action todo" style="padding: 5px">홍길동</a>
      <a href="#" class="list-group-item list-group-item-action todo" style="padding: 5px">김유신</a>
      <a href="#" class="list-group-item list-group-item-action todo" style="padding: 5px">임경균</a>
@@ -668,16 +673,21 @@ span{
       $('#mentionlist').hide();
       $('#memlist').attr('style','position:fixed; width:20%;top:'+top+'px;left:'+left+'px; z-index:4');
       $('#memlist').show();
+      $('#memlist').attr('class','list-group mem');
 		   $('.modal-content').not('#memlist').click(function(){
 		       $('#memlist').hide();
+		       $('#memlist').attr('class','list-group');
 		       });
-      });
-   $('#memlist > .list-group-item').click(function(){
- 	  console.log("gkgkgkgk");
-      var text = "";
-      text = $('#issuecontent').val() + $(this).text();
-      $('#issuecontent').val(text);
-      $('#memlist').hide();
+      $('.mem > .list-group-item-action').click(function(){
+	      var text = "";
+          text = $('#issuecontent').val().replace("@","");
+          $('#issuecontent').val(text);
+	      $('#todoresult').append('<div>@'+$(this).text()+'</div>');
+	      console.log($(this).text());
+	      $('#todoresult').show();
+	      $('#memlist').hide();
+	      $('#memlist').attr('class','list-group');
+      })
       });
    $('#men2').click(function(){
       $('#mentionlist').hide();
@@ -692,6 +702,15 @@ span{
             val: textarea.value
         });
       });
+   $('#men3').click(function(){
+	   $('#mentionlist').hide();
+	   var text = "";
+       text = $('#issuecontent').val().replace("@","");
+       $('#issuecontent').val(text);
+       $('#auth').click();
+       $('#issuecontent').append($('.picker-dialog'));
+       
+   });
    $('#men4').click(function(){
       $('#mentionlist').hide();
       $('#fileclick').click();
@@ -720,6 +739,9 @@ span{
            
        });
     $('#men8').click(function(){
+    	var text = "";
+        text = $('#issuecontent').val().replace("@","");
+        $('#issuecontent').val(text);
        var top = ($('#issuecontent').offset().top);
          var left = ($('#issuecontent').offset().left+490);
          $('#mentionlist').hide();
@@ -741,10 +763,7 @@ span{
       text = $('#issuecontent').val().replace("@","");
       $('#issuecontent').val(text);
       $('#todoresult').append('<br>');
-      $('#todoresult').append('<span class="iconify" data-icon="bx:bx-check-circle" data-inline="false"></span>');
-      $('#todoresult').append($('#todomem').val());
-      $('#todoresult').append(' <span class="iconify" data-icon="bytesize:arrow-right" data-inline="false"></span> ');
-      $('#todoresult').append($('#todolist').val());
+      $('#todoresult').append('<div><span class="iconify" data-icon="bx:bx-check-circle" data-inline="false"></span>'+$('#todomem').val()+' <span class="iconify" data-icon="bytesize:arrow-right" data-inline="false"></span> '+$('#todolist').val()+'</div>');
       $('#todoresult').show();
        $('#todolist').val('');
     })
@@ -778,10 +797,7 @@ span{
        text = $('#issuecontent').val().replace("@","");
        $('#issuecontent').val(text);
        $('#todoresult').append('<br>');
-       $('#todoresult').append('<span class="iconify" data-icon="bx:bx-calendar" data-inline="false"></span>');
-       $('#todoresult').append($('#from').val()+"~"+$('#to').val());
-       $('#todoresult').append(' <span class="iconify" data-icon="bytesize:arrow-right" data-inline="false"></span> ');
-       $('#todoresult').append($('#datecontent').val());
+       $('#todoresult').append('<div><span class="iconify" data-icon="bx:bx-calendar" data-inline="false"></span>'+$('#from').val()+'~'+$('#to').val()+' <span class="iconify" data-icon="bytesize:arrow-right" data-inline="false"></span> '+$('#datecontent').val()+'</div>');
        $('#todoresult').show();
         $('#todolist').val('');
      })
@@ -821,20 +837,13 @@ span{
       }
       return date;
     }
-
-    function signOut() {
-        var auth2 = gapi.auth2.getAuthInstance();
-        auth2.signOut().then(function () {
-        	console.log('Google LogOut Success');
+    
+    function signOut(){
+    	var auth2 = gapi.auth2.getAuthInstance();
+    	auth2.signOut().then(function(){
+    		console.log('Google LogOut Success');
     		location.href="logout.do";
-        });
-        auth2.disconnect();
-      }
-
-    function onLoad() {
-        gapi.load('auth2', function() {
-          gapi.auth2.init();
-        });
-      }
+    		auth2.disconnect();
+    	});
+    }
 </script>
-<script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>

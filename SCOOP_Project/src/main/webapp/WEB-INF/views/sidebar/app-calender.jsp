@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 
 
@@ -10,8 +11,8 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <jsp:include page="/WEB-INF/views/commons/title.jsp"></jsp:include>
     <!-- Custom Stylesheet -->
-    <link href="./plugins/fullcalendar/css/fullcalendar.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="<c:url value="/resources/plugins/fullcalendar/css/fullcalendar.min.css" />" rel="stylesheet">
+    <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 
 </head>
 
@@ -134,17 +135,17 @@
     <!--**********************************
         Scripts
     ***********************************-->
-    <script src="plugins/common/common.min.js"></script>
-    <script src="js/custom.min.js"></script>
-    <script src="js/settings.js"></script>
-    <script src="js/gleek.js"></script>
-    <script src="js/styleSwitcher.js"></script>
-
+ 
+	<script src="<c:url value="/resources/plugins/common/common.min.js" />"></script>
+    <script src="<c:url value="/resources/js/custom.min.js" />"></script>
+    <script src="<c:url value="/resources/js/settings.js" />"></script>
+    <script src="<c:url value="/resources/js/gleek.js" />"></script>
+    <script src="<c:url value="/resources/js/styleSwitcher.js" />"></script>
     
-    <script src="./plugins/jqueryui/js/jquery-ui.min.js"></script>
-    <script src="./plugins/moment/moment.min.js"></script>
-    <script src="./plugins/fullcalendar/js/fullcalendar.min.js"></script>
-    <script src="./js/plugins-init/fullcalendar-init.js"></script>
+    <script src="<c:url value="/resources/plugins/jqueryui/js/jquery-ui.min.js"/>"></script>
+    <script src="<c:url value="/resources/plugins/moment/moment.min.js"/>"></script>
+    <script src="<c:url value="/resources/plugins/fullcalendar/js/fullcalendar.min.js"/>"></script>
+    <script src="<c:url value="/resources/js/plugins-init/fullcalendar-init.js"/>"></script>
 
 </body>
 

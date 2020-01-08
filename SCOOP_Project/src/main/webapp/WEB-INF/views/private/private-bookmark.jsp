@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,12 +10,13 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <jsp:include page="/WEB-INF/views/commons/title.jsp"></jsp:include>
     <!-- Pignose Calender -->
-    <link href="./plugins/pg-calendar/css/pignose.calendar.min.css" rel="stylesheet">
+   <!-- Pignose Calender -->
+    <link href="<c:url value="/resources/plugins/pg-calendar/css/pignose.calendar.min.css" />" rel="stylesheet">
     <!-- Chartist -->
-    <link rel="stylesheet" href="./plugins/chartist/css/chartist.min.css">
-    <link rel="stylesheet" href="./plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css">
+    <link rel="stylesheet" href="<c:url value="/resources/plugins/chartist/css/chartist.min.css" />">
+    <link rel="stylesheet" href="<c:url value="/resources/plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css" />">
     <!-- Custom Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 
 </head>
 
@@ -76,33 +78,31 @@
     <!--**********************************
         Scripts
     ***********************************-->
-    <script src="plugins/common/common.min.js"></script>
-    <script src="js/custom.min.js"></script>
-    <script src="js/settings.js"></script>
-    <script src="js/gleek.js"></script>
-    <script src="js/styleSwitcher.js"></script>
+   <script src="<c:url value="/resources/plugins/common/common.min.js" />"></script>
+    <script src="<c:url value="/resources/js/custom.min.js" />"></script>
+    <script src="<c:url value="/resources/js/settings.js" />"></script>
+    <script src="<c:url value="/resources/js/gleek.js" />"></script>
+    <script src="<c:url value="/resources/js/styleSwitcher.js" />"></script>
 
     <!-- Chartjs -->
-    <script src="./plugins/chart.js/Chart.bundle.min.js"></script>
+    <script src="<c:url value="/resources/plugins/chart.js/Chart.bundle.min.js" />"></script>
     <!-- Circle progress -->
-    <script src="./plugins/circle-progress/circle-progress.min.js"></script>
+    <script src="<c:url value="/resources/plugins/circle-progress/circle-progress.min.js" />"></script>
     <!-- Datamap -->
-    <script src="./plugins/d3v3/index.js"></script>
-    <script src="./plugins/topojson/topojson.min.js"></script>
-    <script src="./plugins/datamaps/datamaps.world.min.js"></script>
+    <script src="<c:url value="/resources/plugins/d3v3/index.js"/>"></script>
+    <script src="<c:url value="/resources/plugins/topojson/topojson.min.js"/>"></script>
+    <script src="<c:url value="/resources/plugins/datamaps/datamaps.world.min.js"/>"></script>
     <!-- Morrisjs -->
-    <script src="./plugins/raphael/raphael.min.js"></script>
-    <script src="./plugins/morris/morris.min.js"></script>
+    <script src="<c:url value="/resources/plugins/raphael/raphael.min.js"/>"></script>
+    <script src="<c:url value="/resources/plugins/morris/morris.min.js"/>"></script>
     <!-- Pignose Calender -->
-    <script src="./plugins/moment/moment.min.js"></script>
-    <script src="./plugins/pg-calendar/js/pignose.calendar.min.js"></script>
+    <script src="<c:url value="/resources/plugins/moment/moment.min.js"/>"></script>
+    <script src="<c:url value="/resources/plugins/pg-calendar/js/pignose.calendar.min.js"/>"></script>
     <!-- ChartistJS -->
-    <script src="./plugins/chartist/js/chartist.min.js"></script>
-    <script src="./plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"></script>
+    <script src="<c:url value="/resources/plugins/chartist/js/chartist.min.js"/>"></script>
+    <script src="<c:url value="/resources/plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"/>"></script>
 
-
-
-    <script src="./js/dashboard/dashboard-1.js"></script>
+    <script src="<c:url value="/resources/js/dashboard/dashboard-1.js"/>"></script>
 
 </body>
 </html>
