@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.scoop.dao.BoardDao">
+<insert id="insertIssue" parameterType="kr.or.scoop.dto.Issue">
+      insert into ${table} (piseq,pfilename,pfilesize,pititle
+      picontent,pistart,piend,ispibook,email,pidate) values (piseq_myissue_seq.nextval,#{filename},#{filesize},#{pititle}
+      #{picontent},#{pistart},#{piend},#{ispibook},sysdate)
+    </insert>
+
+
+</mapper>
