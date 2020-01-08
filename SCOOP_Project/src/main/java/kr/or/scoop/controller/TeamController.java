@@ -1,6 +1,5 @@
 package kr.or.scoop.controller;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,10 +20,10 @@ public class TeamController {
 	@RequestMapping(value="team.do" , method = RequestMethod.POST)
 	public String CreateProject(TeamPjt team) {
 		
-		System.out.println("팀컨 와?" + team);
 		int result = 0;
 		String viewpage;
 		
+		System.out.println("팀컨 와?" + team);
 		result = service.insertTeamPjt(team);
 		
 		if(result > 0) {

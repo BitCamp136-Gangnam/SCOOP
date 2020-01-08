@@ -435,7 +435,6 @@ span{
                                 </div>
                             </div>
                         </li>
-                        
                          
                     </ul>
                 </div>
@@ -449,7 +448,6 @@ span{
             Sidebar start
         ***********************************-->
         <c:set var="kind" value="${session.kind}}"></c:set>
-        <c:set var="email" value="${session.email}}"></c:set>
         <div class="nk-sidebar" style="z-index: 0">           
             <div id="scnav" class="nk-nav-scroll">
                 <ul class="metismenu" id="menu">
@@ -532,8 +530,9 @@ span{
           <input type="submit" class="btn btn-secondary" value="만들기" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">
           <button type="button" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">취소</button>
         </div>
+        <input type="hidden" name="tseq" value="1">
         <input type="hidden" name="ischarge" value="0">
-        <input type="hidden" name="email" value="${email} ">
+        <input type="hidden" name="email" value="${sessionScope.email} ">
         <input type="hidden" name="isppalarm" value="0">
         <input type="hidden" name="ptime" value="20-01-08">
         </form>
@@ -683,7 +682,7 @@ span{
 							       
 							        <!-- Modal body -->
 							        <div class="row">
-							        <div class="col-sm-6" style="border-right:1px solid #000;" >
+							        <div class="col-sm-6" style="border-right:1px solid #c8c8c8;" >
 							        <div class="modal-body">
 							        <p style="font-size: 12px">더 많은 사람들을 초대하여 원활한 소통으로 업무를 효율적으로 처리해보세요.<br>
 							            					     회사 동료뿐만 아니라 외부 협업자도 파트너로 초대할 수 있습니다.</p>
