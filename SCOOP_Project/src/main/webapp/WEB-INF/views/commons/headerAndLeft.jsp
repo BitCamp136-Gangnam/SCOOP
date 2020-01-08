@@ -435,7 +435,6 @@ span{
                                 </div>
                             </div>
                         </li>
-                        
                          
                     </ul>
                 </div>
@@ -683,7 +682,7 @@ span{
 							       
 							        <!-- Modal body -->
 							        <div class="row">
-							        <div class="col-sm-6" style="border-right:1px solid #000;" >
+							        <div class="col-sm-6" style="border-right:1px solid #c8c8c8;" >
 							        <div class="modal-body">
 							        <p style="font-size: 12px">더 많은 사람들을 초대하여 원활한 소통으로 업무를 효율적으로 처리해보세요.<br>
 							            					     회사 동료뿐만 아니라 외부 협업자도 파트너로 초대할 수 있습니다.</p>
