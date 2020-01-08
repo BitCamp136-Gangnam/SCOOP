@@ -1,19 +1,27 @@
 package kr.or.scoop.controller;
 
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.velocity.VelocityEngineFactoryBean;
+import org.springframework.ui.velocity.VelocityEngineUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.or.scoop.dto.Member;
 import kr.or.scoop.service.MemberService;
+import kr.or.scoop.utils.Mail;
 
 @Controller
 public class MemberController {
@@ -27,20 +35,75 @@ public class MemberController {
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+	@Autowired
+	private JavaMailSender mailSender;
+
+	@Autowired
+	private VelocityEngineFactoryBean velocityEngineFactoryBean;
+
 	// Front page 서블릿
 	@RequestMapping(value = "frontpage.do", method = RequestMethod.GET)
 	public String register() {
 		return "frontpage";
 	}
 
-	// 일반 회원가입
-	@RequestMapping(value = "frontpage.do", method = RequestMethod.POST)
-	public String register(Member member) throws ClassNotFoundException, SQLException {
+	// 일반 회원가입 인증
+	@RequestMapping(value = "frontpage.do", method = { RequestMethod.POST, RequestMethod.GET })
+	public String register(Member member, HttpSession session, Mail mail) throws ClassNotFoundException, SQLException {
 
 		int result = 0;
 		String viewpage = "";
+		session.setAttribute("checkemail", member.getEmail());
+		session.setAttribute("checkpwd", this.bCryptPasswordEncoder.encode(member.getPwd()));
+		session.setAttribute("checkname", member.getName());
 		System.out.println("인서트 들어오니" + member);
 		member.setPwd(this.bCryptPasswordEncoder.encode(member.getPwd()));
+		int number = (int) ((Math.random() * 99999) + 100000);
+		String temp = String.valueOf(number);
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+
+			Map model = new HashMap();
+			model.put("title", "협업공간 SCOOP 회원가입 인증 이메일입니다");
+			// model.put("password", temp);
+			String mailBody = VelocityEngineUtils.mergeTemplateIntoString(
+					velocityEngineFactoryBean.createVelocityEngine(), "emailTemplate.vm", "UTF-8", model);
+			messageHelper.setFrom("bnbn1318@gmail.com");
+			messageHelper.setTo(member.getEmail());
+			messageHelper.setSubject("협업공간 SCOOP 회원가입 인증 이메일입니다");
+			messageHelper.setText(mailBody, true);
+			mailSender.send(message);
+			viewpage = "index";
+		} catch (Exception e) {
+			System.out.println("모시모시" + e.getMessage());
+			viewpage = "index";
+		}
+		/*
+		 * result = service.insertMember(member);
+		 * 
+		 * if (result > 0) { System.out.println("가입성공"); viewpage =
+		 * "redirect:/index.do"; } else { System.out.println("가입실패"); viewpage =
+		 * "index"; }
+		 */
+		return viewpage; // 주의 (website/index.htm
+
+	}
+
+	// 일반 회원가입 인증 후 가입
+	@RequestMapping(value = "registerOk.do", method = { RequestMethod.POST, RequestMethod.GET })
+	public String normalInsert(Member member, HttpSession session) throws ClassNotFoundException, SQLException {
+
+		int result = 0;
+		String viewpage = "";
+		session.setAttribute("checkemail", member.getEmail());
+		session.setAttribute("checkpwd", this.bCryptPasswordEncoder.encode(member.getPwd()));
+		session.setAttribute("checkname", member.getName());
+		System.out.println("인서트 들어오니" + member);
+		member.setPwd((String)session.getAttribute("checkpwd"));
+		member.setEmail((String)session.getAttribute("checkemail"));
+		member.setName((String)session.getAttribute("checkname"));
+
 		result = service.insertMember(member);
 
 		if (result > 0) {
@@ -74,7 +137,7 @@ public class MemberController {
 	}
 
 	// 구글회원 로그인
-	@RequestMapping(value = "googleLogin.do", method = {RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value = "googleLogin.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String googleLogin(String email, String name, HttpSession session) {
 
 		int result = 0;
@@ -95,7 +158,7 @@ public class MemberController {
 	}
 
 	// 로그인 성공
-	@RequestMapping(value = "/userindex.do",method = RequestMethod.GET)
+	@RequestMapping(value = "/userindex.do", method = RequestMethod.GET)
 	public String userindex() {
 		return "user/userindex";
 	}
@@ -110,40 +173,39 @@ public class MemberController {
 		return viewpage;
 
 	}
-	
+
 	/*
 	 * //이슈작성
 	 * 
 	 * @RequestMapping(value="issue.do",method = RequestMethod.POST) public String
 	 * issue(HttpSession session,Issue issue,String selectpro) { return null; }
 	 */
-	//마이이슈 작성
-	@RequestMapping(value = "/myissue.do",method = RequestMethod.GET) 
+	// 마이이슈 작성
+	@RequestMapping(value = "/myissue.do", method = RequestMethod.GET)
 	public String myissue() {
 		return "sidebar/app-myissue";
 	}
-	
-	@RequestMapping(value = "/myissue.do",method = RequestMethod.POST) 
+
+	@RequestMapping(value = "/myissue.do", method = RequestMethod.POST)
 	public String myissuecheck() {
 		return null;
-		
+
 	}
-	
-	//캘린더
-	@RequestMapping(value = "/calendar.do",method = RequestMethod.GET)
+
+	// 캘린더
+	@RequestMapping(value = "/calendar.do", method = RequestMethod.GET)
 	public String calendar() {
 		return "sidebar/app-calender";
 	}
-	
-	@RequestMapping(value = "/calendar.do",method = RequestMethod.POST) 
+
+	@RequestMapping(value = "/calendar.do", method = RequestMethod.POST)
 	public String calendarcheck() {
 		return null;
-		
+
 	}
-	
-	
+
 	// 네이버회원 로그인
-	@RequestMapping(value = "naverLogin.do", method = {RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value = "naverLogin.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String naverLogin(String email, String name, HttpSession session) {
 
 		int result = 0;
@@ -161,6 +223,12 @@ public class MemberController {
 		}
 
 		return viewpage;
+	}
+
+	// 캘린더
+	@RequestMapping(value = "/certified.do")
+	public String certified() {
+		return "certified/Certified";
 	}
 
 }

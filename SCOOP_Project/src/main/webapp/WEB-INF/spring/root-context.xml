@@ -70,7 +70,7 @@
 			</props>
 		</property>
 		<property name="resourceLoaderPath"
-			value="/resources/admin/velocity/" />
+			value="/WEB-INF/velocity/" />
 	</bean>
 
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
