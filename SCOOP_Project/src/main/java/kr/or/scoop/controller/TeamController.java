@@ -17,7 +17,7 @@ public class TeamController {
 	@Autowired
 	private BoardService service;
 	
-	@RequestMapping(value="team.do" , method = RequestMethod.POST)
+	@RequestMapping(value="/team.do" , method = RequestMethod.POST)
 	public String CreateProject(TeamPjt team) {
 		
 		int result = 0;

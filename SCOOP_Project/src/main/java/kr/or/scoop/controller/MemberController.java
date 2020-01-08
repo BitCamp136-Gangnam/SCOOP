@@ -79,13 +79,6 @@ public class MemberController {
 			System.out.println("모시모시" + e.getMessage());
 			viewpage = "index";
 		}
-		/*
-		 * result = service.insertMember(member);
-		 * 
-		 * if (result > 0) { System.out.println("가입성공"); viewpage =
-		 * "redirect:/index.do"; } else { System.out.println("가입실패"); viewpage =
-		 * "index"; }
-		 */
 		return viewpage; // 주의 (website/index.htm
 
 	}
@@ -106,6 +99,9 @@ public class MemberController {
 		if (result > 0) {
 			System.out.println("가입성공");
 			viewpage = "redirect:/index.do";
+			session.removeAttribute("checkpwd");
+			session.removeAttribute("checkemail");
+			session.removeAttribute("checkname");
 		} else {
 			System.out.println("가입실패");
 			viewpage = "index";

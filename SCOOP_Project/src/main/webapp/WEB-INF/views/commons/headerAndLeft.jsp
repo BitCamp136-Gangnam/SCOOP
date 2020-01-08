@@ -416,7 +416,7 @@ span{
                                             <a href="page-lock.jsp"><i class="icon-lock"></i> <span>잠금모드</span></a>
                                         </li>
                                         <c:choose>
-                                        	<c:when test="${kind==normal}">
+                                        	<c:when test="${kind=='normal'}">
                                         		<li><a href="logout.do"><i class="icon-key"></i> <span>로그아웃</span></a></li>	
                                         	</c:when>
                                         	<c:when test="${kind=='google'}">
@@ -448,7 +448,6 @@ span{
             Sidebar start
         ***********************************-->
         <c:set var="kind" value="${session.kind}}"></c:set>
-        <c:set var="email" value="${session.email}}"></c:set>
         <div class="nk-sidebar" style="z-index: 0">           
             <div id="scnav" class="nk-nav-scroll">
                 <ul class="metismenu" id="menu">
@@ -514,7 +513,7 @@ span{
           <h3 class="modal-title">새 협업공간 만들기</h3>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
-        <form action="team.do" method="post">
+        <form action='<c:url value="team.do"></c:url>' method="post">
         <!-- Modal body -->
         <div class="modal-body">
         <p style="font-size: 12px">협업공간은 함께 일하는 멤버들끼리만 자료를 공유하고 협업할 수 있는 공간입니다.<br>
@@ -531,8 +530,9 @@ span{
           <input type="submit" class="btn btn-secondary" value="만들기" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">
           <button type="button" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">취소</button>
         </div>
+        <input type="hidden" name="tseq" value="1">
         <input type="hidden" name="ischarge" value="0">
-        <input type="hidden" name="email" value="${email} ">
+        <input type="hidden" name="email" value="${sessionScope.email} ">
         <input type="hidden" name="isppalarm" value="0">
         <input type="hidden" name="ptime" value="20-01-08">
         </form>
