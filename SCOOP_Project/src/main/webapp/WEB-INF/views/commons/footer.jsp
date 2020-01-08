@@ -3,14 +3,14 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="ref" value="${ref+1}" />
 <!-- Page level plugin CSS-->
-<link href="<c:url value="/resources/chat/vendor/datatables/dataTables.bootstrap4.css" />" rel="stylesheet">
+<%-- <link href="<c:url value="/resources/chat/vendor/datatables/dataTables.bootstrap4.css" />" rel="stylesheet"> --%>
 
 <!-- Custom styles for this template-->
-<link href="<c:url value="/resources/chat/css/sb-admin.css" />" rel="stylesheet">
+<%-- <link href="<c:url value="/resources/chat/css/sb-admin.css" />" rel="stylesheet"> --%>
 
  <!-- Bootstrap core JavaScript-->
-  <script src="<c:url value="/resources/chat/vendor/jquery/jquery.min.js" />"></script>
-  <script src="<c:url value="/resources/chat/vendor/bootstrap/js/bootstrap.bundle.min.js" />"></script>
+  <%-- <script src="<c:url value="/resources/chat/vendor/jquery/jquery.min.js" />"></script> --%>
+  <%-- <script src="<c:url value="/resources/chat/vendor/bootstrap/js/bootstrap.bundle.min.js" />"></script> --%>
 
   <!-- Core plugin JavaScript-->
   <script src="<c:url value="/resources/chat/vendor/jquery-easing/jquery.easing.min.js" />"></script>
@@ -30,7 +30,7 @@
 <!--**********************************
             Footer start
         ***********************************-->
-<link href="<c:url value="/resources/css/chat.css" />" rel="stylesheet">
+<%-- <link href="<c:url value="/resources/css/chat.css" />" rel="stylesheet"> --%>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link rel="stylesheet"
