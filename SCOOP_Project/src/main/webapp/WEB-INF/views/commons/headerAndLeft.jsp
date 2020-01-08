@@ -98,6 +98,13 @@
                }
          
          });
+	$('#goco').click(function(){
+		console.log('아니 눌려');
+		console.log($('#pname').val());
+		console.log($('#pcontent').val());
+		console.log($('#te').val());
+		});
+      
 });
 </script>
 <script type="text/javascript">
@@ -436,7 +443,6 @@ span{
             Sidebar start
         ***********************************-->
         <c:set var="kind" value="${session.kind}}"></c:set>
-        <c:set var="email" value="${session.email}}"></c:set>
         <div class="nk-sidebar" style="z-index: 0">           
             <div id="scnav" class="nk-nav-scroll">
                 <ul class="metismenu" id="menu">
@@ -516,11 +522,11 @@ span{
         
         <!-- Modal footer -->
         <div class="modal-footer">
-          <input type="submit" class="btn btn-secondary" value="만들기" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">
+          <input type="submit" class="btn btn-secondary" value="만들기" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal" id="goco">
           <button type="button" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">취소</button>
         </div>
         <input type="hidden" name="ischarge" value="0">
-        <input type="hidden" name="email" value="${email} ">
+        <input type="hidden" id="te" name="email" value="${sessionScope.email}">
         <input type="hidden" name="isppalarm" value="0">
         <input type="hidden" name="ptime" value="20-01-08">
         </form>
@@ -853,4 +859,6 @@ span{
     		auth2.disconnect();
     	});
     }
+
+    
 </script>

@@ -15,7 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="loginCheck" resultType="int">
 		select count(*)
 		from member 
-		where email = #{param1} and pwd = #{param2} and iscertified = 1
+		where email = #{param1} and pwd = #{param2}
 	</select>
 	
 	<select id="pwdCheck" resultType="kr.or.scoop.dto.Member">
