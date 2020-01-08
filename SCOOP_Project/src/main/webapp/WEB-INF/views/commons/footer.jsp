@@ -134,10 +134,10 @@
 		$('#dataTable > tbody').empty();
 		$.each(data.rooms, function(index, element){
 			let room = $("<tr></tr>");
-			room.append("<td>" + (num++) + "</td>");
-			room.append("<td>"+element.name+"</td>");
-			room.append("<td>"+element.users.length+ " / " +element.max+"</td>");
- 			let btn = $("<button>입장</button>");
+			room.append("<td style='padding-top:5%;'>" + (num++) + "</td>");
+			room.append("<td style='padding-top:5%;'>"+element.name+"</td>");
+			room.append("<td style='padding-top:5%;'>"+element.users.length+ " / " +element.max+"</td>");
+ 			let btn = $("<button class='btn btn-primary'>입장</button>");
 			if(element.users.length == element.max)
 				btn.attr("disabled",true);
 
@@ -318,13 +318,13 @@
 						<i class="fas fa-comments"></i> 실시간 채팅
 						<button id="createChat" class="btn btn-primary mb-3" type="button">채팅방	만들기</button>
 					</div>
-					<div class="card-body" style="padding-top: 0; height: 200px;">
-						<div class="table-responsive">
-							<table class="table table-bordered" id="dataTable">
+					<div class="card-body" style="height: 200px;">
+						<div class="table">
+							<table class="table table-bordered" id="dataTable" style="text-align: center; background-color: white">
 								<thead>
 									<tr>
 										<th width="10%">NO</th>
-										<th width="60%">NAME</th>
+										<th width="20%">NAME</th>
 										<th width="10%">USER</th>
 										<th width="10%">ENTER</th>
 									</tr>
