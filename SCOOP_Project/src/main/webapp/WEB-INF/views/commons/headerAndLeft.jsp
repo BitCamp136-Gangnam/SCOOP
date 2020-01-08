@@ -106,79 +106,86 @@
 });
 </script>
 <script type="text/javascript">
-	// The Browser API key obtained from the Google API Console.
-	var developerKey = 'AIzaSyBIu-Whybpm37l7vHw8O5f48kjpG_bQtzo';
+   // The Browser API key obtained from the Google API Console.
+   var developerKey = 'AIzaSyBIu-Whybpm37l7vHw8O5f48kjpG_bQtzo';
 
-	// The Client ID obtained from the Google API Console. Replace with your own Client ID.
-	var clientId = "237537328130-p9jshmj42atouica42uq96prsjk4qvtf.apps.googleusercontent.com";
+   // The Client ID obtained from the Google API Console. Replace with your own Client ID.
+   var clientId = "237537328130-p9jshmj42atouica42uq96prsjk4qvtf.apps.googleusercontent.com";
 
-	// Scope to use to access user's photos.
-	var scope = 'https://www.googleapis.com/auth/drive.file';
+   // Scope to use to access user's photos.
+   var scope = 'https://www.googleapis.com/auth/drive.file';
 
-	var pickerApiLoaded = false;
-	var oauthToken;
+   var pickerApiLoaded = false;
+   var oauthToken;
 
-	// Use the API Loader script to load google.picker and gapi.auth.
-	function onApiLoad() {
-	  gapi.load('auth2', onAuthApiLoad);
-	  gapi.load('picker', onPickerApiLoad);
-	}
+   // Use the API Loader script to load google.picker and gapi.auth.
+   function onApiLoad() {
+     gapi.load('auth2', onAuthApiLoad);
+     gapi.load('picker', onPickerApiLoad);
+   }
 
-	function onAuthApiLoad() {
-	  var authBtn = document.getElementById('auth');
-	  authBtn.disabled = false;
-	  authBtn.addEventListener('click', function() {
-	    gapi.auth2.init({ client_id: clientId }).then(function(googleAuth) {
-	      googleAuth.signIn({ scope: scope }).then(function(result) {
-	        handleAuthResult(result.getAuthResponse());
-	      })
-	    })
-	  });
-	}
+   function onAuthApiLoad() {
+     var authBtn = document.getElementById('auth');
+     authBtn.disabled = false;
+     authBtn.addEventListener('click', function() {
+       gapi.auth2.init({ client_id: clientId }).then(function(googleAuth) {
+         googleAuth.signIn({ scope: scope }).then(function(result) {
+           handleAuthResult(result.getAuthResponse());
+         })
+       })
+     });
+   }
 
-	function onPickerApiLoad() {
-	  pickerApiLoaded = true;
-	  createPicker();
-	}
+   function onPickerApiLoad() {
+     pickerApiLoaded = true;
+     createPicker();
+   }
 
-	function handleAuthResult(authResult) {
-	  if (authResult && !authResult.error) {
-	    oauthToken = authResult.access_token;
-	    createPicker();
-	  }
-	}
-	// Create and render a Picker object for picking from Google Photos.
-	function createPicker() {
-	  if (pickerApiLoaded && oauthToken) {
-	    var picker = new google.picker.PickerBuilder().
-	        addView(google.picker.ViewId.DOCS	).
-	        setOAuthToken(oauthToken).
-	        setDeveloperKey(developerKey).
-	        setCallback(pickerCallback).
-	        build();
-	    picker.setVisible(true);
-	    $('.picker-dialog').attr('style','z-index:1051;top:5%;left:20%')
-	  }
-	}
+   function handleAuthResult(authResult) {
+     if (authResult && !authResult.error) {
+       oauthToken = authResult.access_token;
+       createPicker();
+     }
+   }
+   // Create and render a Picker object for picking from Google Photos.
+   function createPicker() {
+     if (pickerApiLoaded && oauthToken) {
+       var picker = new google.picker.PickerBuilder().
+           addView(google.picker.ViewId.DOCS   ).
+           setOAuthToken(oauthToken).
+           setDeveloperKey(developerKey).
+           setCallback(pickerCallback).
+           build();
+       picker.setVisible(true);
+       $('.picker-dialog').attr('style','z-index:1051;top:5%;left:20%')
+     }
+   }
 
-	  var url = '';
-	  var drivename = '';
-	// A simple callback implementation.
-	function pickerCallback(data) {
-	  if (data[google.picker.Response.ACTION] == google.picker.Action.PICKED) {
-	    var doc = data[google.picker.Response.DOCUMENTS][0];
-	    url = doc[google.picker.Document.URL];
-	    drivename = doc.name;
-	  }
-	  var message = url;
-	  if(url!=''){
-		  $('#todoresult').append('<div><a href='+url+'><span class="iconify" data-icon="whh:googledrive" data-inline="false"></span>'+drivename+'</a></div>');
-		  $('#todoresult').show();  
-	  }
-	}
+     var url = '';
+     var drivename = '';
+   // A simple callback implementation.
+   function pickerCallback(data) {
+     if (data[google.picker.Response.ACTION] == google.picker.Action.PICKED) {
+       var doc = data[google.picker.Response.DOCUMENTS][0];
+       url = doc[google.picker.Document.URL];
+       drivename = doc.name;
+     }
+     var message = url;
+     if(url!=''){
+        $('#todoresult').append('<div><a href='+url+'><span class="iconify" data-icon="whh:googledrive" data-inline="false"></span>'+drivename+'</a></div>');
+        $('#todoresult').show();  
+     }
+   }
 
 </script>
 <style>
+.modal-content.modal-fullsize {
+  height: auto;
+  min-height: 100%;
+  border-radius: 0;
+  min-width: 700px;
+  right:100px;
+}
   #filediv {
         position: fixed;
         bottom: 0;
@@ -320,7 +327,7 @@ span{
                 </div>
                 <div class="header-right">
                     <ul class="clearfix">
-                    	<li class="icons dropdown d-none d-md-flex">
+                       <li class="icons dropdown d-none d-md-flex">
                             <a href="javascript:void(0)" class="log-user"  data-toggle="dropdown">
                                 <span>한국어</span>  <i class="fa fa-angle-down f-s-14" aria-hidden="true"></i>
                             </a>
@@ -334,9 +341,9 @@ span{
                             </div>
                         </li>
                         
-                        <li class="icons dropdown d-none d-md-flex">	
-                        	<i class="fas fa-user-plus"data-toggle="modal" id="inviteModal_id" data-target="#inviteModal" style="cursor: pointer;color:#535359;font-size: 18px;padding-bottom: 12px;" ></i>
-                        	  
+                        <li class="icons dropdown d-none d-md-flex">   
+                           <i class="fas fa-user-plus"data-toggle="modal" id="inviteModal_id" data-target="#inviteModal" style="cursor: pointer;color:#535359;font-size: 18px;padding-bottom: 12px;" ></i>
+                             
                         </li>
                         <li class="icons dropdown"><a href="javascript:void(0)" data-toggle="dropdown">
                                 <i class="mdi mdi-bell-outline"></i>
@@ -416,6 +423,16 @@ span{
                                             <a href="page-lock.jsp"><i class="icon-lock"></i> <span>잠금모드</span></a>
                                         </li>
                                         <c:choose>
+                                           <c:when test="${kind==normal}">
+                                              <li><a href="logout.do"><i class="icon-key"></i> <span>로그아웃</span></a></li>   
+                                           </c:when>
+                                           <c:when test="${kind=='google'}">
+                                              <li><a href="#" onclick="signOut();"><i class="icon-key"></i> <span>로그아웃</span></a></li>   
+                                           </c:when>
+                                           <c:when test="${kind=='naver'}">
+                                              <li><a href="logout.do"><i class="icon-key"></i> <span>로그아웃</span></a></li>   
+                                           </c:when>
+                                           <c:otherwise></c:otherwise>
                                         	<c:when test="${kind=='normal'}">
                                         		<li><a href="logout.do"><i class="icon-key"></i> <span>로그아웃</span></a></li>	
                                         	</c:when>
@@ -448,6 +465,7 @@ span{
             Sidebar start
         ***********************************-->
         <c:set var="kind" value="${session.kind}}"></c:set>
+        <c:set var="email" value="${session.email}}"></c:set>
         <div class="nk-sidebar" style="z-index: 0">           
             <div id="scnav" class="nk-nav-scroll">
                 <ul class="metismenu" id="menu">
@@ -513,6 +531,7 @@ span{
           <h3 class="modal-title">새 협업공간 만들기</h3>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
+        <form action="team.do" method="post">
         <form action='<c:url value="team.do"></c:url>' method="post">
         <!-- Modal body -->
         <div class="modal-body">
@@ -532,6 +551,7 @@ span{
         </div>
         <input type="hidden" name="tseq" value="1">
         <input type="hidden" name="ischarge" value="0">
+        <input type="hidden" name="email" value="${email} ">
         <input type="hidden" name="email" value="${sessionScope.email} ">
         <input type="hidden" name="isppalarm" value="0">
         <input type="hidden" name="ptime" value="20-01-08">
@@ -672,6 +692,41 @@ span{
   </div>
   <!-- 파트너 초대 모달 -->
   <div class="modal fade" id="inviteModal">
+                         <div class="modal-dialog modal-dialog-centered" >
+                           <div class="modal-content modal-fullsize">
+                             <!-- Modal Header -->
+                             <div class="modal-header">
+                               <h5>새 협업공간 만들기</h5>
+                               <button type="button" class="close" data-dismiss="modal">&times;</button>
+                             </div>
+                            
+                             <!-- Modal body -->
+                             <div class="row">
+                             <div class="col-sm-6" style="border-right:1px solid #c8c8c8;" >
+                             <div class="modal-body">
+                             <p style="font-size: 12px">더 많은 사람들을 초대하여 원활한 소통으로 업무를 효율적으로 처리해보세요.<br>
+                                                     회사 동료뿐만 아니라 외부 협업자도 파트너로 초대할 수 있습니다.</p>
+                               <label for="title">파트너 초대</label>
+                               <input class="form-control createmodal" type="text" id="title" placeholder="이메일 주소를 입력하고 Enter키를 눌러주세요" style="width: 100%;border-radius: 0.25rem;">
+                               <p style="font-size:13px;margin-top:2%;margin-left:1%; ">이메일 주소를 입력하고 Enter키를 눌러 동료들을 초대해 보세요.</p>
+                               <br>
+                               <label for="content">협업공간 설명</label>
+                               <textarea class="form-control createmodal" rows="3" id="content" style="width: 100%;border-radius: 0.25rem;"></textarea>
+                             </div>
+                             </div>
+                             <div class="col-sm-6">
+                             
+                             </div>
+                             </div>
+                             <!-- Modal footer -->
+                             <div class="modal-footer">
+                               <button type="submit" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">만들기</button>
+                               <button type="button" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">취소</button>
+                             </div>
+                             
+                           </div>
+                         </div>
+                       </div>
 							    <div class="modal-dialog modal-dialog-centered" >
 							      <div class="modal-content" ">
 							        <!-- Modal Header -->
@@ -728,10 +783,10 @@ span{
       $('#memlist').attr('style','position:fixed; width:20%;top:'+top+'px;left:'+left+'px; z-index:4');
       $('#memlist').show();
       $('#memlist').attr('class','list-group mem');
-		   $('.modal-content').not('#memlist').click(function(){
-		       $('#memlist').hide();
-		       $('#memlist').attr('class','list-group');
-		       });
+         $('.modal-content').not('#memlist').click(function(){
+             $('#memlist').hide();
+             $('#memlist').attr('class','list-group');
+             });
       });
    $('#men2').click(function(){
       $('#mentionlist').hide();
@@ -747,8 +802,8 @@ span{
         });
       });
    $('#men3').click(function(){
-	   $('#mentionlist').hide();
-	   var text = "";
+      $('#mentionlist').hide();
+      var text = "";
        text = $('#issuecontent').val().replace("@","");
        $('#issuecontent').val(text);
        $('#auth').click();
@@ -783,7 +838,7 @@ span{
            
        });
     $('#men8').click(function(){
-    	var text = "";
+       var text = "";
         text = $('#issuecontent').val().replace("@","");
         $('#issuecontent').val(text);
        var top = ($('#issuecontent').offset().top);
@@ -793,27 +848,27 @@ span{
          $('#memlist').show();
        });
      $('.todo').click(function(){
-    	 var top = ($('#issuecontent').offset().top);
+        var top = ($('#issuecontent').offset().top);
          var left = ($('#issuecontent').offset().left+490);
-    	 if($(this).parents('#memlist').attr('class')=='list-group mem'){
-   	      var text = "";
+        if($(this).parents('#memlist').attr('class')=='list-group mem'){
+            var text = "";
           text = $('#issuecontent').val().replace("@","");
           $('#issuecontent').val(text);
-  	      $('#todoresult').append('<div>@'+$(this).text()+'</div>');
-  	      console.log($(this).text());
-  	      $('#todoresult').show();
-  	      $('#memlist').hide();
-  	      $('#memlist').attr('class','list-group');
-    	 }else{
-    	        $('#memlist').hide();
-    	        $('#todo').attr('style','border-radius:0.25em;padding:1%;position:fixed; width:20%;top:'+(top-208) +'px;left:'+left+'px; z-index:4;background-color:white');
-    	        $('#todo').show();
-    	        $('#todomem').val($(this).text());
-    	 }
+           $('#todoresult').append('<div>@'+$(this).text()+'</div>');
+           console.log($(this).text());
+           $('#todoresult').show();
+           $('#memlist').hide();
+           $('#memlist').attr('class','list-group');
+        }else{
+               $('#memlist').hide();
+               $('#todo').attr('style','border-radius:0.25em;padding:1%;position:fixed; width:20%;top:'+(top-208) +'px;left:'+left+'px; z-index:4;background-color:white');
+               $('#todo').show();
+               $('#todomem').val($(this).text());
+        }
 
         $('.modal-content').not('#todo').click(function(){
-	       $('#todo').hide();
-	       });
+          $('#todo').hide();
+          });
         });
     $('#todomake').click(function(){
        $('#todo').hide();
@@ -842,8 +897,8 @@ span{
             $('#datepick').attr('style','border-radius:0.25em;padding:1%;position:fixed; width:20%;top:'+top +'px;left:'+left+'px; z-index:4;background-color:white');
          $('#datepick').show();
              $('.modal-content').not('#datepick').click(function(){
-  		       $('#datepick').hide();
-  		       });
+               $('#datepick').hide();
+               });
          $('.hasDatepicker').click(function(){
              $('#datepick').append($('#ui-datepicker-div'));
          });
@@ -895,12 +950,12 @@ span{
     }
     
     function signOut(){
-    	var auth2 = gapi.auth2.getAuthInstance();
-    	auth2.signOut().then(function(){
-    		console.log('Google LogOut Success');
-    		location.href="logout.do";
-    		auth2.disconnect();
-    	});
+       var auth2 = gapi.auth2.getAuthInstance();
+       auth2.signOut().then(function(){
+          console.log('Google LogOut Success');
+          location.href="logout.do";
+          auth2.disconnect();
+       });
     }
 
     $('#inviteModal_id').mouseover(function(){
