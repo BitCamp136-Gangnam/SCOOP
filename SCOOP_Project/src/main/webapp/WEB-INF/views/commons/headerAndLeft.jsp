@@ -423,16 +423,6 @@ span{
                                             <a href="page-lock.jsp"><i class="icon-lock"></i> <span>잠금모드</span></a>
                                         </li>
                                         <c:choose>
-                                           <c:when test="${kind==normal}">
-                                              <li><a href="logout.do"><i class="icon-key"></i> <span>로그아웃</span></a></li>   
-                                           </c:when>
-                                           <c:when test="${kind=='google'}">
-                                              <li><a href="#" onclick="signOut();"><i class="icon-key"></i> <span>로그아웃</span></a></li>   
-                                           </c:when>
-                                           <c:when test="${kind=='naver'}">
-                                              <li><a href="logout.do"><i class="icon-key"></i> <span>로그아웃</span></a></li>   
-                                           </c:when>
-                                           <c:otherwise></c:otherwise>
                                         	<c:when test="${kind=='normal'}">
                                         		<li><a href="logout.do"><i class="icon-key"></i> <span>로그아웃</span></a></li>	
                                         	</c:when>
@@ -692,43 +682,8 @@ span{
   </div>
   <!-- 파트너 초대 모달 -->
   <div class="modal fade" id="inviteModal">
-                         <div class="modal-dialog modal-dialog-centered" >
-                           <div class="modal-content modal-fullsize">
-                             <!-- Modal Header -->
-                             <div class="modal-header">
-                               <h5>새 협업공간 만들기</h5>
-                               <button type="button" class="close" data-dismiss="modal">&times;</button>
-                             </div>
-                            
-                             <!-- Modal body -->
-                             <div class="row">
-                             <div class="col-sm-6" style="border-right:1px solid #c8c8c8;" >
-                             <div class="modal-body">
-                             <p style="font-size: 12px">더 많은 사람들을 초대하여 원활한 소통으로 업무를 효율적으로 처리해보세요.<br>
-                                                     회사 동료뿐만 아니라 외부 협업자도 파트너로 초대할 수 있습니다.</p>
-                               <label for="title">파트너 초대</label>
-                               <input class="form-control createmodal" type="text" id="title" placeholder="이메일 주소를 입력하고 Enter키를 눌러주세요" style="width: 100%;border-radius: 0.25rem;">
-                               <p style="font-size:13px;margin-top:2%;margin-left:1%; ">이메일 주소를 입력하고 Enter키를 눌러 동료들을 초대해 보세요.</p>
-                               <br>
-                               <label for="content">협업공간 설명</label>
-                               <textarea class="form-control createmodal" rows="3" id="content" style="width: 100%;border-radius: 0.25rem;"></textarea>
-                             </div>
-                             </div>
-                             <div class="col-sm-6">
-                             
-                             </div>
-                             </div>
-                             <!-- Modal footer -->
-                             <div class="modal-footer">
-                               <button type="submit" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">만들기</button>
-                               <button type="button" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">취소</button>
-                             </div>
-                             
-                           </div>
-                         </div>
-                       </div>
 							    <div class="modal-dialog modal-dialog-centered" >
-							      <div class="modal-content" ">
+							      <div class="modal-content modal-fullsize">
 							        <!-- Modal Header -->
 							        <div class="modal-header">
 							          <h5>새 협업공간 만들기</h5>
