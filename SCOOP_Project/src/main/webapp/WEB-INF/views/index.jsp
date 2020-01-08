@@ -241,7 +241,7 @@ $(function(){
            <li class="nav-item"> <a href="#pricing" id="pricing_area" class="nav-link"><spring:message code="price" /></a></li>
        
         <li class="nav-item"><a href="#" data-toggle="modal" data-target="#login" class="nav-link font-weight-bold mr-3"><spring:message code="login.menu" /></a></li>
-        <li class="nav-item"><a href="#" data-toggle="modal" data-target="#signUp" class="navbar-btn btn btn-primary"><spring:message code="start" /></a></li>
+        <li class="nav-item"><a href="#" data-toggle="modal" data-target="#signUp" class="navbar-btn btn btn-primary"><spring:message code="register" /></a></li>
       </ul>
      </div>
    </div>
@@ -453,22 +453,22 @@ $(function(){
 							<div class="card-body">
 								<h4 class="card-title pt-3"  style="color:#0E2866">CHOICE</h4>
 								<h2 class="card-title pt-4"  style="color:#0E2866">PRICE</h2>
-								<div class="text-muted mt-4">기한</div>
+								<div class="text-muted mt-4"><spring:message code="payment.date" /></div>
 								<ul class="list-unstyled pricing-list">
-									<li>알림을 가질 수 있는 협업 공간</li>
-									<li>완료된 협업 공간</li>
-									<li>1회 업로드 용량</li>
-									<li>퇴사자 관리</li>
-									<li>회사/팀 통합 관리</li>
-									<li>협업공간 관리</li>
-									<li>공용공간 관리</li>
-									<li>멤버수</li>
-									<li>외부 협업자 수</li>
-									<li>CS(1:1문의)</li>
-									<li>외부 서비스 연동</li>
-									<li>이메일 연동(준비중)</li>
+									<li><spring:message code="payment.team" /></li>
+									<li><spring:message code="payment.alam" /></li>
+									<li><spring:message code="payment.upload" /></li>
+									<li><spring:message code="payment.retiree" /></li>
+									<li><spring:message code="payment.comMgm" /></li>
+									<li><spring:message code="payment.teamMgm" /></li>
+									<li><spring:message code="payment.publicMgm" /></li>
+									<li><spring:message code="payment.member" /></li>
+									<li><spring:message code="payment.collabo" /></li>
+									<li><spring:message code="payment.cs" /></li>
+									<li><spring:message code="payment.api" /></li>
+									<li><spring:message code="payment.email" /></li>
 								</ul>
-								<h5> 지금 바로 시작해보세요. </h5>
+								<h5> <spring:message code="payment.start" /> </h5>
 							</div>
 						</div>
 				
