@@ -419,7 +419,7 @@ span{
                                         	<c:when test="${kind==normal}">
                                         		<li><a href="logout.do"><i class="icon-key"></i> <span>로그아웃</span></a></li>	
                                         	</c:when>
-                                        	<c:when test="${kind==google}">
+                                        	<c:when test="${kind=='google'}">
                                         		<li><a href="#" onclick="signOut();"><i class="icon-key"></i> <span>로그아웃</span></a></li>	
                                         	</c:when>
                                         	<c:when test="${kind=='naver'}">
