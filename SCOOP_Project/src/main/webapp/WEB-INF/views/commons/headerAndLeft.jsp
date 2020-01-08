@@ -448,7 +448,8 @@ span{
         <!--**********************************
             Sidebar start
         ***********************************-->
-        <<c:set var="kind" value="${session.kind}}"></c:set>
+        <c:set var="kind" value="${session.kind}}"></c:set>
+        <c:set var="email" value="${session.email}}"></c:set>
         <div class="nk-sidebar" style="z-index: 0">           
             <div id="scnav" class="nk-nav-scroll">
                 <ul class="metismenu" id="menu">
@@ -460,12 +461,12 @@ span{
                         </a>
                     </li>
                     <li>
-                        <a href="myissue.htm" aria-expanded="false">
+                        <a href="myissue.do" aria-expanded="false">
                             <span class="iconify" data-icon="simple-line-icons:emotsmile" data-inline="false" style="width: 20px;height: auto;"> </span><span class="nav-text"> &nbsp;내가 작성한 이슈</span>
                         </a>
                     </li>
                     <li>
-                        <a href="calender.htm" aria-expanded="false">
+                        <a href="calender.do" aria-expanded="false">
                             <span class="iconify" data-icon="bx:bx-calendar" data-inline="false" style="width: 20px;height: auto;"> </span><span class="nav-text"> &nbsp;캘린더</span>
                         </a>
                     </li>
@@ -476,7 +477,7 @@ span{
                         </a>
                     </li>
                     <li>
-                        <a href="bookmark.htm" aria-expanded="false">
+                        <a href="bookmark.do" aria-expanded="false">
                             <span class="iconify" data-icon="ic:round-bookmark" data-inline="false" style="width: 20px;height: auto;"> </span><span class="nav-text"> &nbsp;북마크</span>
                         </a>
                     </li>
@@ -514,23 +515,27 @@ span{
           <h3 class="modal-title">새 협업공간 만들기</h3>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
-        <form action="">
+        <form action="team.do" method="post">
         <!-- Modal body -->
         <div class="modal-body">
         <p style="font-size: 12px">협업공간은 함께 일하는 멤버들끼리만 자료를 공유하고 협업할 수 있는 공간입니다.<br>
              협업공간을 만들고 함께 일할 멤버들을 초대해보세요.</p>
-          <label for="title">협업공간 이름</label>
-          <input class="form-control createmodal" type="text" id="title" style="width: 100%">
+          <label for="pname">협업공간 이름</label>
+          <input class="form-control createmodal" type="text" id="pname" name="pname" style="width: 100%">
           <br>
-          <label for="content">협업공간 설명</label>
-          <textarea class="form-control createmodal" rows="3" id="content" style="width: 100%"></textarea>
+          <label for="pcontent">협업공간 설명</label>
+          <textarea class="form-control createmodal" rows="3" id="pcontent" name="pcontent" style="width: 100%"></textarea>
         </div>
         
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button type="submit" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">만들기</button>
+          <input type="submit" class="btn btn-secondary" value="만들기" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">
           <button type="button" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">취소</button>
         </div>
+        <input type="hidden" name="ischarge" value="0">
+        <input type="hidden" name="email" value="${email} ">
+        <input type="hidden" name="isppalarm" value="0">
+        <input type="hidden" name="ptime" value="20-01-08">
         </form>
       </div>
     </div>
