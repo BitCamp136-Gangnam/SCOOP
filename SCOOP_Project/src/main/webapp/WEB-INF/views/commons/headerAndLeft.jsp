@@ -405,10 +405,10 @@ span{
                                             <a href="page-lock.jsp"><i class="icon-lock"></i> <span>잠금모드</span></a>
                                         </li>
                                         <c:choose>
-                                        	<c:when test="${kind=='normal'}">
+                                        	<c:when test="${kind==normal}">
                                         		<li><a href="logout.do"><i class="icon-key"></i> <span>로그아웃</span></a></li>	
                                         	</c:when>
-                                        	<c:when test="${kind=='google'}">
+                                        	<c:when test="${kind==google}">
                                         		<li><a href="#" onclick="signOut();"><i class="icon-key"></i> <span>로그아웃</span></a></li>	
                                         	</c:when>
                                         	<c:when test="${kind=='naver'}">
@@ -447,12 +447,12 @@ span{
                         </a>
                     </li>
                     <li>
-                        <a href="myissue.do" aria-expanded="false">
+                        <a href="myissue.htm" aria-expanded="false">
                             <span class="iconify" data-icon="simple-line-icons:emotsmile" data-inline="false" style="width: 20px;height: auto;"> </span><span class="nav-text"> &nbsp;내가 작성한 이슈</span>
                         </a>
                     </li>
                     <li>
-                        <a href="calendar.do" aria-expanded="false">
+                        <a href="calender.htm" aria-expanded="false">
                             <span class="iconify" data-icon="bx:bx-calendar" data-inline="false" style="width: 20px;height: auto;"> </span><span class="nav-text"> &nbsp;캘린더</span>
                         </a>
                     </li>
@@ -463,7 +463,7 @@ span{
                         </a>
                     </li>
                     <li>
-                        <a href="bookmark.do" aria-expanded="false">
+                        <a href="bookmark.htm" aria-expanded="false">
                             <span class="iconify" data-icon="ic:round-bookmark" data-inline="false" style="width: 20px;height: auto;"> </span><span class="nav-text"> &nbsp;북마크</span>
                         </a>
                     </li>
@@ -607,7 +607,7 @@ span{
      <div class="list-group" id="mentionlist" style="display: none">
      <a href="#" class="list-group-item list-group-item-action" id="men1" style="padding: 5px">멘션(완료)</a>
      <a href="#" class="list-group-item list-group-item-action" id="men2" style="padding: 5px">소스코드(코드미러 하다말았음)</a>
-     <a href="#" class="list-group-item list-group-item-action" id="men3" style="padding: 5px">구글 드라이브(진행중))</a>
+     <a href="#" class="list-group-item list-group-item-action" id="men3" style="padding: 5px">구글 드라이브(완료))</a>
      <a href="#" class="list-group-item list-group-item-action" id="men4" style="padding: 5px">파일(완료)</a>
      <a href="#" class="list-group-item list-group-item-action" id="men5" style="padding: 5px">표(이건 어떻게함;;)</a>
      <a href="#" class="list-group-item list-group-item-action" id="men6" style="padding: 5px">관련 이슈</a>
@@ -678,16 +678,6 @@ span{
 		       $('#memlist').hide();
 		       $('#memlist').attr('class','list-group');
 		       });
-      $('.mem > .list-group-item-action').click(function(){
-	      var text = "";
-          text = $('#issuecontent').val().replace("@","");
-          $('#issuecontent').val(text);
-	      $('#todoresult').append('<div>@'+$(this).text()+'</div>');
-	      console.log($(this).text());
-	      $('#todoresult').show();
-	      $('#memlist').hide();
-	      $('#memlist').attr('class','list-group');
-      })
       });
    $('#men2').click(function(){
       $('#mentionlist').hide();
@@ -747,22 +737,35 @@ span{
          $('#mentionlist').hide();
          $('#memlist').attr('style','position:fixed; width:20%;top:'+top+'px;left:'+left+'px; z-index:4');
          $('#memlist').show();
-         $('.todo').click(function(){
-            $('#memlist').hide();
-            $('#todo').attr('style','border-radius:0.25em;padding:1%;position:fixed; width:20%;top:'+(top-208) +'px;left:'+left+'px; z-index:4;background-color:white');
-            $('#todo').show();
-            $('#todomem').val($(this).text());
-            $('.modal-content').not('#todo').click(function(){
-   		       $('#todo').hide();
-   		       });
-            });
        });
+     $('.todo').click(function(){
+    	 var top = ($('#issuecontent').offset().top);
+         var left = ($('#issuecontent').offset().left+490);
+    	 if($(this).parents('#memlist').attr('class')=='list-group mem'){
+   	      var text = "";
+          text = $('#issuecontent').val().replace("@","");
+          $('#issuecontent').val(text);
+  	      $('#todoresult').append('<div>@'+$(this).text()+'</div>');
+  	      console.log($(this).text());
+  	      $('#todoresult').show();
+  	      $('#memlist').hide();
+  	      $('#memlist').attr('class','list-group');
+    	 }else{
+    	        $('#memlist').hide();
+    	        $('#todo').attr('style','border-radius:0.25em;padding:1%;position:fixed; width:20%;top:'+(top-208) +'px;left:'+left+'px; z-index:4;background-color:white');
+    	        $('#todo').show();
+    	        $('#todomem').val($(this).text());
+    	 }
+
+        $('.modal-content').not('#todo').click(function(){
+	       $('#todo').hide();
+	       });
+        });
     $('#todomake').click(function(){
        $('#todo').hide();
        var text = "";
       text = $('#issuecontent').val().replace("@","");
       $('#issuecontent').val(text);
-      $('#todoresult').append('<br>');
       $('#todoresult').append('<div><span class="iconify" data-icon="bx:bx-check-circle" data-inline="false"></span>'+$('#todomem').val()+' <span class="iconify" data-icon="bytesize:arrow-right" data-inline="false"></span> '+$('#todolist').val()+'</div>');
       $('#todoresult').show();
        $('#todolist').val('');
@@ -796,13 +799,12 @@ span{
         var text = "";
        text = $('#issuecontent').val().replace("@","");
        $('#issuecontent').val(text);
-       $('#todoresult').append('<br>');
        $('#todoresult').append('<div><span class="iconify" data-icon="bx:bx-calendar" data-inline="false"></span>'+$('#from').val()+'~'+$('#to').val()+' <span class="iconify" data-icon="bytesize:arrow-right" data-inline="false"></span> '+$('#datecontent').val()+'</div>');
        $('#todoresult').show();
         $('#todolist').val('');
      })
-     $('#todocancle').click(function(){
-        $('#todo').hide();
+     $('#datecancle').click(function(){
+        $('#datepick').hide();
         var text = "";
        text = $('#issuecontent').val().replace("@","");
        $('#issuecontent').val(text);
