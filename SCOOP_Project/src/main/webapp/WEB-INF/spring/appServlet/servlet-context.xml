@@ -32,4 +32,13 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
+	
+	<websocket:handlers>
+	<websocket:mapping handler="chatHandler" path="/Chat-ws.do" />
+	 <websocket:handshake-interceptors>
+       <beans:bean class="kr.or.scoop.interceptor.HandShakeInterceptor"/>
+	</websocket:handshake-interceptors> 
+</websocket:handlers>
+
+<beans:bean id="chatHandler" class="kr.or.scoop.handler.ChatWebSocketHandler" />
 </beans:beans>
