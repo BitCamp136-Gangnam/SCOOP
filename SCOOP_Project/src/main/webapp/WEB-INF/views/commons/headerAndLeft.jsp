@@ -416,7 +416,7 @@ span{
                                             <a href="page-lock.jsp"><i class="icon-lock"></i> <span>잠금모드</span></a>
                                         </li>
                                         <c:choose>
-                                        	<c:when test="${kind==normal}">
+                                        	<c:when test="${kind=='normal'}">
                                         		<li><a href="logout.do"><i class="icon-key"></i> <span>로그아웃</span></a></li>	
                                         	</c:when>
                                         	<c:when test="${kind=='google'}">
