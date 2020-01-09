@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -18,6 +20,7 @@ import org.springframework.ui.velocity.VelocityEngineFactoryBean;
 import org.springframework.ui.velocity.VelocityEngineUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 
 import kr.or.scoop.dto.Member;
 import kr.or.scoop.dto.TeamPjt;
@@ -74,7 +77,7 @@ public class MemberController {
 			// model.put("password", temp);
 			String mailBody = VelocityEngineUtils.mergeTemplateIntoString(
 					velocityEngineFactoryBean.createVelocityEngine(), "emailTemplate.vm", "UTF-8", model);
-			messageHelper.setFrom("bnbn1318@gmail.com");
+			messageHelper.setFrom("leeyong1321@gmail.com");
 			messageHelper.setTo(member.getEmail());
 			messageHelper.setSubject("협업공간 SCOOP 회원가입 인증 이메일입니다");
 			messageHelper.setText(mailBody, true);
@@ -230,6 +233,37 @@ public class MemberController {
 	@RequestMapping(value = "/certified.do")
 	public String certified() {
 		return "certified/Certified";
+	}
+	
+	@RequestMapping(value = "inviteTeam.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public String inviteTeam(HttpServletRequest request) {
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper messageHelper = new MimeMessageHelper(message,true,"UTF-8");
+			request.setCharacterEncoding("UTF-8");
+			int cnt = Integer.parseInt(request.getParameter("invitecnt"));
+			System.out.println("cnt:"+cnt);
+			String[] invitemem = new String[cnt];
+			for(int i=0;i<cnt;i++) {
+				if(request.getParameter("invite"+i)!=null) {
+					invitemem[i] = request.getParameter("invite"+i);
+					System.out.println(invitemem[i]);
+					messageHelper.setFrom("leeyong1321@gmail.com");
+					messageHelper.setTo(invitemem[i]);
+					messageHelper.setSubject("협업공간 SCOOP 팀 멤버 초대 인증 이메일입니다");
+					Map model = new HashMap();
+					model.put("mailTo", invitemem[i]);
+					String mailBody = VelocityEngineUtils.mergeTemplateIntoString(velocityEngineFactoryBean.createVelocityEngine(), "emailTemplate.vm","UTF-8", model);
+					messageHelper.setText(mailBody,true);
+					mailSender.send(message);
+				}
+			}
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			
+		} 
+		return "redirect:userindex.do";
 	}
 	
 	
