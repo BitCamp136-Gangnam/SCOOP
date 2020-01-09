@@ -103,6 +103,7 @@
                }
          
          });
+      
 });
 </script>
 <script type="text/javascript">
@@ -687,24 +688,24 @@ span{
 							    <div class="modal-dialog modal-dialog-centered" >
 							      <div class="modal-content modal-fullsize" style="border-radius: 0.5rem;">
 							        <!-- Modal Header -->
-							        <div class="modal-header">
-							          <h5>새 협업공간 만들기</h5>
+							        <div class="modal-header"style="padding-bottom: 0px;">
+							          <h5 style="padding-top: 2%;padding-left: 5px;">멤버 초대</h5>
 							          <button type="button" class="close" data-dismiss="modal">&times;</button>
 							        </div>
 							       
 							        <!-- Modal body -->
-							        <div class="row">
+							        <div class="row" style="margin-bottom: 1%;">
 							        <div class="col-sm-6" style="border-right:1px solid #c8c8c8;padding-left: 20px;" >
 							        <div class="modal-body">
 							        <p style="font-size: 12px">더 많은 사람들을 초대하여 원활한 소통으로 업무를 효율적으로 처리해보세요.<br>
 							            					     회사 동료뿐만 아니라 외부 협업자도 파트너로 초대할 수 있습니다.</p>
 							          <label for="title">파트너 초대</label>
-							          <input class="form-control createmodal" type="text" id="title" placeholder="이메일 주소를 입력하고 Enter키를 눌러주세요" style="width: 100%;border-radius: 0.25rem;">
+							          <input class="form-control createmodal" type="text" id="invite_Enter" placeholder="이메일 주소를 입력하고 Enter키를 눌러주세요" style="width: 100%;border-radius: 0.25rem;">
 							          <p style="font-size:13px;margin-top:2%;margin-left:1%; ">이메일 주소를 입력하고 Enter키를 눌러 동료들을 초대해 보세요.</p>
-							          <br>
+							         
 							          <label for="content">협업 공간</label>
-							          <select id="select_invite" class="form-control" style="border-radius: 0.25rem;">
-							            <option>프라이빗 공간</option>
+							          <select id="select_invite" class="form-control" style="border-radius: 0.25rem;" >
+							         	<option>프라이빗 공간</option>
 							            <option>쫀쬬니</option>
 							            <option>이곳저곳</option>
 							            <option>캠핑이지</option>
@@ -712,14 +713,18 @@ span{
 							        </div>
 							        </div>
 							        <div class="col-sm-6">
+							        	<label for="content" style="margin-top: 3%;margin-bottom: 0px;">초대 리스트</label>
+							        	<div  id="invite_Input"  style="border: 1px solid rgba(124, 119, 119,0.3);border-radius:0.5rem;margin-right: 3%;height: 280px;overflow: auto;margin-bottom: 10px;">
+							        		<span id="invite_Input1" style="margin-left: 35%;margin-top: 10%;">
+							        			<img src="<c:url value="/resources/images/icon/mail.png" />"style="width:75px;height: 75px;margin-left: 40%;' ">
+							        		</span>
+							        		<p id="invite_Input2" style="text-align: center;">초대 메일 보낼 이메일 주소를<br>여기에서 확인할 수 있습니다 </p>
+							        	</div>
+							        <button type="submit" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;margin-left: 100px;padding-left: 75px;padding-right: 75px;" data-dismiss="modal">1명의 멤버 초대하기</button>
+							        	
+							        </div>
+							        </div>
 							        
-							        </div>
-							        </div>
-							        <!-- Modal footer -->
-							        <div class="modal-footer">
-							          <button type="submit" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">만들기</button>
-							          <button type="button" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">취소</button>
-							        </div>
 							        
 							      </div>
 							    </div>
@@ -926,5 +931,27 @@ span{
     $('#inviteModal_id').mouseleave(function(){
         $(this).attr('style','cursor: pointer;color:#535359;font-size: 18px;padding-bottom: 12px;');
         });
+
+    $('#invite_Enter').keyup(function(event){
+			if(event.keyCode==13){
+				$('#invite_Input').append('<span style="border:1px solid rgba(124, 119, 119,0.5);border-radius:0.25rem; padding-top: 1%;padding-bottom: 1%;padding-left: 2%;padding-right: 2%;margin:2%;"><i class="far fa-paper-plane" style="color:#9e6767;padding-right: 5px;"></i>'+$(this).val()+'<button type="button" id=""  class="invite_close" style="border:0;background-color:#fff;border-radius:0.25rem;"><i class="fas fa-times" style="color:#A84747;padding-left: 10px;"></i></button></span>');
+				$(this).val('');
+				}
+			
+    $('.invite_close').click(function(){
+			$(this).parent().remove();
+			  if($('#invite_Input').children().length==2){
+		        	console.log("1234");
+		    	 $('#invite_Input1').show();
+		         $('#invite_Input2').show();
+		        }
+        });
+    if($('#invite_Input').children().length>2){
+        $('#invite_Input1').hide();
+        $('#invite_Input2').hide();
+        
+        }
+    });
+
     
 </script>
