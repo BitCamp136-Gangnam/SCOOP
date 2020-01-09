@@ -1,10 +1,14 @@
 package kr.or.scoop.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -19,6 +23,7 @@ import org.springframework.ui.velocity.VelocityEngineUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+
 import kr.or.scoop.dto.Member;
 import kr.or.scoop.dto.TeamPjt;
 import kr.or.scoop.service.BoardService;
@@ -28,8 +33,6 @@ import kr.or.scoop.utils.Mail;
 @Controller
 public class MemberController {
 	
-	@Autowired
-	private BoardService bservice;
 	
 	@Autowired
 	private MemberService service;
@@ -54,8 +57,8 @@ public class MemberController {
 
 	// 일반 회원가입 인증
 	@RequestMapping(value = "frontpage.do", method = { RequestMethod.POST, RequestMethod.GET })
-	public String register(Member member, HttpSession session, Mail mail) throws ClassNotFoundException, SQLException {
-
+	public String register(Member member, HttpSession session, Mail mail, HttpServletResponse response) throws ClassNotFoundException, SQLException {
+		response.setContentType("text/html; charset=UTF-8");
 		int result = 0;
 		String viewpage = "";
 		session.setAttribute("checkemail", member.getEmail());
@@ -68,21 +71,44 @@ public class MemberController {
 		try {
 			MimeMessage message = mailSender.createMimeMessage();
 			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
-
+			
 			Map model = new HashMap();
 			model.put("title", "협업공간 SCOOP 회원가입 인증 이메일입니다");
 			// model.put("password", temp);
 			String mailBody = VelocityEngineUtils.mergeTemplateIntoString(
 					velocityEngineFactoryBean.createVelocityEngine(), "emailTemplate.vm", "UTF-8", model);
-			messageHelper.setFrom("bnbn1318@gmail.com");
+			messageHelper.setFrom("leeyong1321@gmail.com");
 			messageHelper.setTo(member.getEmail());
 			messageHelper.setSubject("협업공간 SCOOP 회원가입 인증 이메일입니다");
 			messageHelper.setText(mailBody, true);
 			mailSender.send(message);
+			PrintWriter out = response.getWriter();
+			out.println("<script>Swal.fire({" + 
+					"							        	    		  title: \"인증 이메일 발송\"," + 
+					"							        	    		  text: \"이메일로 인증 이메일을 발송했습니다. 30분 이내에 인증해주세요\"," + 
+					"							        	    		  icon: \"info\"," + 
+					"							        	    		  button: \"확인\"" + 
+					"							        	    		})</script>");
+			out.flush(); 
 			viewpage = "index";
 		} catch (Exception e) {
 			System.out.println("모시모시" + e.getMessage());
 			viewpage = "index";
+			PrintWriter out;
+			try {
+				out = response.getWriter();
+				out.println("<script>Swal.fire({\r\n" + 
+						"							        	    		  title: \"인증 이메일 발송 중 에러\",\r\n" + 
+						"							        	    		  text: \"이메일로 인증 이메일을 발송하던 도중 에러가 발생했습니다 이메일을 확인해주세요\",\r\n" + 
+						"							        	    		  icon: \"error\",\r\n" + 
+						"							        	    		  button: \"확인\"\r\n" + 
+						"							        	    		})</script>");
+				out.flush(); 
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
 		}
 		return viewpage; // 주의 (website/index.htm
 
@@ -168,6 +194,20 @@ public class MemberController {
 		System.out.println("로그아웃 함수");
 		viewpage = "index";
 		session.invalidate();
+		PrintWriter out;
+		try {
+			out = response.getWriter();
+			out.println("<script>Swal.fire({\r\n" + 
+					"							        	    		  title: \"로그아웃\",\r\n" + 
+					"							        	    		  text: \"로그아웃 성공\",\r\n" + 
+					"							        	    		  icon: \"success\",\r\n" + 
+					"							        	    		  button: \"확인\"\r\n" + 
+					"							        	    		})</script>");
+			out.flush(); 
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		return viewpage;
 
 	}
@@ -230,6 +270,37 @@ public class MemberController {
 	@RequestMapping(value = "/certified.do")
 	public String certified() {
 		return "certified/Certified";
+	}
+	
+	@RequestMapping(value = "inviteTeam.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public String inviteTeam(HttpServletRequest request) {
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper messageHelper = new MimeMessageHelper(message,true,"UTF-8");
+			request.setCharacterEncoding("UTF-8");
+			int cnt = Integer.parseInt(request.getParameter("invitecnt"));
+			System.out.println("cnt:"+cnt);
+			String[] invitemem = new String[cnt];
+			for(int i=0;i<cnt;i++) {
+				if(request.getParameter("invite"+i)!=null) {
+					invitemem[i] = request.getParameter("invite"+i);
+					System.out.println(invitemem[i]);
+					messageHelper.setFrom("leeyong1321@gmail.com");
+					messageHelper.setTo(invitemem[i]);
+					messageHelper.setSubject("협업공간 SCOOP 팀 멤버 초대 인증 이메일입니다");
+					Map model = new HashMap();
+					model.put("mailTo", invitemem[i]);
+					String mailBody = VelocityEngineUtils.mergeTemplateIntoString(velocityEngineFactoryBean.createVelocityEngine(), "emailTemplate.vm","UTF-8", model);
+					messageHelper.setText(mailBody,true);
+					mailSender.send(message);
+				}
+			}
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			
+		} 
+		return "redirect:userindex.do";
 	}
 	
 	

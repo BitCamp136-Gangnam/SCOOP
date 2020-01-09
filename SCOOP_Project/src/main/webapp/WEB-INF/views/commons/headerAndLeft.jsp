@@ -542,7 +542,7 @@ span{
         <input type="hidden" name="ischarge" value="0">
         <input type="hidden" name="email" value="${sessionScope.email} ">
         <input type="hidden" name="istpalarm" value="0">
-        <input type="hidden" name="ptime" value="20/01/08">
+        <!-- <input type="hidden" name="ptime" value="20/01/08"> -->
         <div class="modal-footer">
           <input type="submit" class="btn btn-secondary" value="만들기" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" >
           <input type="button" class="btn btn-secondary" value="취소" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">
@@ -715,6 +715,7 @@ span{
 							        </div>
 							        </div>
 							        <div class="col-sm-6">
+							        <form action="inviteTeam.do" method="post">
 							        	<label for="content" style="margin-top: 3%;margin-bottom: 0px;">초대 리스트</label>
 							        	<div  id="invite_Input"  style="border: 1px solid rgba(124, 119, 119,0.3);border-radius:0.5rem;margin-right: 3%;height: 280px;overflow: auto;margin-bottom: 10px;">
 							        		<span id="invite_Input1" style="margin-left: 35%;margin-top: 10%;">
@@ -722,8 +723,9 @@ span{
 							        		</span>
 							        		<p id="invite_Input2" style="text-align: center;">초대 메일 보낼 이메일 주소를<br>여기에서 확인할 수 있습니다 </p>
 							        	</div>
-							        <button type="submit" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;margin-left: 100px;padding-left: 75px;padding-right: 75px;" data-dismiss="modal">1명의 멤버 초대하기</button>
-							        	
+							        	<input type="hidden" name="invitecnt" id="invitecnt">
+							        <button type="submit" class="btn btn-secondary" id="invitebtn" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;margin-left: 100px;padding-left: 75px;padding-right: 75px;" disabled="disabled">멤버 초대하기</button>
+							        </form>	
 							        </div>
 							        </div>
 							        
@@ -934,16 +936,29 @@ span{
         $(this).attr('style','cursor: pointer;color:#535359;font-size: 18px;padding-bottom: 12px;');
         });
 
+<<<<<<< HEAD
     $('#invite_Submit').keyup(function(event){
+=======
+    	var number =0;
+    $('#invite_Enter').keyup(function(event){
+>>>>>>> 4eb042f4dd69ffce80eb747b4e078493d8e881f8
 			if(event.keyCode==13){
-				$('#invite_Input').append('<span style="border:1px solid rgba(124, 119, 119,0.5);border-radius:0.25rem; padding-top: 1%;padding-bottom: 1%;padding-left: 2%;padding-right: 2%;margin:2%;"><i class="far fa-paper-plane" style="color:#9e6767;padding-right: 5px;"></i>'+$(this).val()+'<button type="button" id=""  class="invite_close" style="border:0;background-color:#fff;border-radius:0.25rem;"><i class="fas fa-times" style="color:#A84747;padding-left: 10px;"></i></button></span>');
+				$('#invite_Input').append('<span style="border:1px solid rgba(124, 119, 119,0.5);border-radius:0.25rem; padding-top: 1%;padding-bottom: 1%;padding-left: 2%;padding-right: 2%;margin:2%;"><i class="far fa-paper-plane" style="color:#9e6767;padding-right: 5px;"></i><input type="text" value='+$(this).val()+' name=invite'+(number++)+' style="border:0px; width:200px;margin-left:3px;" readonly><button type="button" id=""  class="invite_close" style="border:0;background-color:#fff;border-radius:0.25rem;"><i class="fas fa-times" style="color:#A84747;padding-left: 10px;"></i></button></span>');
 				$(this).val('');
+				$('#invitebtn').removeAttr('disabled');
+				$('#invitecnt').val(number);
+				$('#invitebtn').empty();
+				$('#invitebtn').prepend($('#invite_Input').children().length - 2+'명의 멤버 초대하기');
 				}
 			
     $('.invite_close').click(function(){
+			$('#invitebtn').empty();
+			$('#invitebtn').prepend($('#invite_Input').children().length - 2+'명의 멤버 초대하기');
 			$(this).parent().remove();
 			  if($('#invite_Input').children().length==2){
-		        	console.log("1234");
+				  $('#invitebtn').empty();
+				  $('#invitebtn').prepend('멤버 초대하기');
+				  $('#invitebtn').attr('disabled','disabled');
 		    	 $('#invite_Input1').show();
 		         $('#invite_Input2').show();
 		        }
