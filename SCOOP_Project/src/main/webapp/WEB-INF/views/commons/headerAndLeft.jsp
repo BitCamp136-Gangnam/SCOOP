@@ -428,7 +428,7 @@ span{
                                         		<li><a href="logout.do"><i class="icon-key"></i> <span>로그아웃</span></a></li>	
                                         	</c:when>
                                         	<c:when test="${kind=='google'}">
-                                        		<li><a href="#" onclick="signOut();"><i class="icon-key"></i> <span>로그아웃</span></a></li>	
+                                        		<li><a href="#" onclick="signOut();"><i class="icon-key"></i> <span>로그아웃</span></a></li>		
                                         	</c:when>
                                         	<c:when test="${kind=='naver'}">
                                         		<li><a href="logout.do"><i class="icon-key"></i> <span>로그아웃</span></a></li>	
@@ -920,13 +920,19 @@ span{
       return date;
     }
     
-    function signOut(){
-       var auth2 = gapi.auth2.getAuthInstance();
-       auth2.signOut().then(function(){
-          console.log('Google LogOut Success');
-          location.href="logout.do";
-          auth2.disconnect();
-       });
+    function signOut() {
+    	var auth2 = gapi.auth2.getAuthInstance();
+    	auth2.signOut().then(function () {
+        	location.href="logout.do";
+    	});
+    	auth2.disconnect();
+
+    }
+
+    function onLoad() {
+        gapi.load('auth2', function() {
+            gapi.auth2.init();
+        });
     }
 
     $('#inviteModal_id').mouseover(function(){
