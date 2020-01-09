@@ -705,11 +705,10 @@ span{
 							         
 							          <label for="content">협업 공간</label>
 							          <select id="select_invite" class="form-control" style="border-radius: 0.25rem;" >
-							            <option>프라이빗 공간</option>
+							         	<option>프라이빗 공간</option>
 							            <option>쫀쬬니</option>
 							            <option>이곳저곳</option>
 							            <option>캠핑이지</option>
-							            
 							          </select>
 							        </div>
 							        </div>
@@ -952,8 +951,7 @@ span{
         $('#invite_Input2').hide();
         
         }
- 
-
-    console.log($('#invite_Input').children().length);
     });
+
+    
 </script>
