@@ -472,7 +472,7 @@ span{
                         </a>
                     </li>
                     <li>
-                        <a href="calender.do" aria-expanded="false">
+                        <a href="calendar.do" aria-expanded="false">
                             <span class="iconify" data-icon="bx:bx-calendar" data-inline="false" style="width: 20px;height: auto;"> </span><span class="nav-text"> &nbsp;캘린더</span>
                         </a>
                     </li>
@@ -521,8 +521,8 @@ span{
           <h3 class="modal-title">새 협업공간 만들기</h3>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
-        <form action="team.do" method="post">
-        <form action='<c:url value="team.do"></c:url>' method="post">
+        <form action="commons/team.do" method="post"> 
+       
         <!-- Modal body -->
         <div class="modal-body">
         <p style="font-size: 12px">협업공간은 함께 일하는 멤버들끼리만 자료를 공유하고 협업할 수 있는 공간입니다.<br>
