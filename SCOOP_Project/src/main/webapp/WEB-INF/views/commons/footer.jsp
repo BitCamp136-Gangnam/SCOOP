@@ -226,6 +226,24 @@
 					$('#closeopen').hide();
 				}
 			}
+			if (event.ctrlKey && event.keyCode == 188) {
+				if ($('#chatopen').attr('name') == 'on') {
+					$('#chatopen').attr('src',"<c:url value='/resources/images/chat/chatclose.png' />");
+					$('#chatopen').attr('name', 'off');
+					if($('#chatdivopen').attr('class')=='true'){
+						$('#chatdivopen').show();
+					}else if($('#chatroomdivopen').attr('class')=='true'){
+						$('#chatroomdivopen').show();
+						$('#chatback').show();
+					}
+				}else {
+					$('#chatopen').attr('src',"<c:url value='/resources/images/chat/chatopen.png' />");
+					$('#chatopen').attr('name', 'on');
+					$('#chatdivopen').hide();
+					$('#chatback').hide();
+					$('#chatroomdivopen').hide();
+				}
+			}
 		});
 		
 	});
@@ -358,8 +376,8 @@
 			<div id="chatdivopen" class="true">
 				<div class="card" style="border-radius: 10px; margin-bottom: 0;border : 1px solid #ced4da;">
 					<div class="card-header">
-						<i class="fas fa-comments"></i> 실시간 채팅
-						<button id="createChat" class="btn btn-primary" type="button" style="margin-bottom: 0">채팅방	만들기</button>
+						<i class="fas fa-comments"></i> 실시간 채팅(Ctrl + ,)
+						<button id="createChat" class="btn btn-primary" type="button" style="margin-bottom: 0; margin-left: 45px">채팅방	만들기</button>
 					</div>
 					<div class="card-body" style="padding-top: 0">
 						<div class="table"  style="height: 200px;overflow: auto;">
