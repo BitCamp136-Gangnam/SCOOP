@@ -10,7 +10,7 @@
 <link href="<c:url value="/resources/chat/vendor/datatables/dataTables.bootstrap4.css" />" rel="stylesheet">
 
 <!-- Custom styles for this template-->
-<link href="<c:url value="/resources/chat/css/sb-admin.css" />" rel="stylesheet">
+<%-- <link href="<c:url value="/resources/chat/css/sb-admin.css" />" rel="stylesheet"> --%>
 
  <!-- Bootstrap core JavaScript-->
   <script src="<c:url value="/resources/chat/vendor/jquery/jquery.min.js" />"></script>
@@ -36,7 +36,7 @@
 <link href="<c:url value="/resources/chat/css/style_message.css" />" rel="stylesheet">
 <script type="text/javascript">
 	//웹소켓 변수 선언
-	var wsocket;
+	//var wsocket;
 
 	$(function() {
 		connect();
@@ -139,12 +139,12 @@
 
 </style>
 <body id="page-top">
-<div class="col-md-3">
+<div class="col-md-12">
       <!-- DIRECT CHAT PRIMARY -->
-      <div class="box box-primary direct-chat direct-chat-primary" >
+      <div class="box box-primary direct-chat direct-chat-primary" style="width: 400px;">
         <div class="box-header with-border">
           <h3 class="box-title"> ${room}</h3>
-          <div class="box-tools pull-right">
+<!--           <div class="box-tools pull-right">
 
              <div class="btn-group gurdeepoushan">
 				  <button  class="btn btn-box-tool"  data-toggle="dropdown" type="button" aria-expanded="false">
@@ -157,7 +157,7 @@
             <button type="button" class="btn btn-box-tool" id="closeBtn">
             	<i class="fa fa-times"></i>
            	</button>
-          </div>
+          </div> -->
         </div>
         <!-- /.box-header -->
         <div class="box-body" style="height: 350px">

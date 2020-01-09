@@ -287,7 +287,7 @@ span{
         ***********************************-->
         <div id="pagelogo" class="nav-header">
             <div class="brand-logo">
-                <a href="index.htm" style="padding-top: 0px;">
+                <a href="userindex.do" style="padding-top: 0px;">
                     <b class="logo-abbr"><img class="img-responsive center-block" src="<c:url value="/resources/images/logo/ScoopTitle.png" />" alt="mini" style="width:100px;height: auto;padding-top:0;margin-top: 30px; "> </b>
                     <span class="logo-compact"><img class="img-responsive center-block"src="<c:url value="/resources/images/logo/ScoopBig.png" />" alt="" style="margin-top: 20px; text-align: center;"></span>
                     <span class="brand-title">
@@ -461,7 +461,7 @@ span{
                 <ul class="metismenu" id="menu">
                    <li class="nav-label" style="padding-bottom: 10px;" ><b style="padding-bottom: 2%;">전체 정보</b></li>
                     <li>
-                        <a href="index.htm" aria-expanded="false">
+                        <a href="userindex.do" aria-expanded="false">
                             <span class="iconify" data-icon="bx:bx-file-blank" data-inline="false" style="width: 20px;height: auto;"> </span><span class="nav-text"> &nbsp;새로운 소식</span>
                             <!-- <i class="icon-speedometer menu-icon"> -->
                         </a>
