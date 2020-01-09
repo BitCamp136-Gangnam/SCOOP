@@ -702,7 +702,9 @@ span{
 							          <label for="title">파트너 초대</label>
 							          <input class="form-control createmodal" type="text" id="invite_Submit" placeholder="이메일 주소를 입력하고 Enter키를 눌러주세요" style="width: 100%;border-radius: 0.25rem;">
 							          <p style="font-size:13px;margin-top:2%;margin-left:1%; ">이메일 주소를 입력하고 Enter키를 눌러 동료들을 초대해 보세요.</p>
-							         
+							          <div id="invite_email_append" style="width:50%;border: 1px solid #c8c8c8; border-radius:0.25rem; background-color:#fff; display: none; position: absolute;top:145px;left: 18px; " >
+							     
+							           </div>
 							          <label for="content">협업 공간</label>
 							          <select id="select_invite" class="form-control" style="border-radius: 0.25rem;" >
 							         	<option>프라이빗 공간</option>
@@ -934,6 +936,7 @@ span{
         $(this).attr('style','cursor: pointer;color:#535359;font-size: 18px;padding-bottom: 12px;');
         });
 
+    $('#invite_Submit').keyup(function(event){
     	var number =0;
     $('#invite_Submit').keyup(function(event){
 			if(event.keyCode==13){
