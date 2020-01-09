@@ -155,10 +155,23 @@
 
     function openChat(room){
     	let url = "Chat.do?room="+room;
-    	let name = room;
-    	let option = "width = 500, height = 500, top = 100, left = 200, location = no, channelmode = yes";
-        window.open(url, name, option);
-        
+    	//let name = room;
+    	//let option = "width = 500, height = 500, top = 100, left = 200, location = no, channelmode = yes";
+        //window.open(url, name, option);
+        //window.location.href=url;
+        $('#chatdivopen').hide();
+        $('#chatroomdivopen').load(url);
+        $('#chatroomdivopen').show();
+        $('#chatdivopen').attr('class','false');
+        $('#chatroomdivopen').attr('class','true');
+        $('#chatback').show();
+        $('#chatback').click(function(){
+        	$('#chatback').hide();
+        	$('#chatroomdivopen').hide();
+        	$('#chatdivopen').show();
+        	$('#chatdivopen').attr('class','true');
+            $('#chatroomdivopen').attr('class','false');
+        })
     }
 </script>
 <script type="text/javascript">
@@ -171,13 +184,21 @@
 										.attr('src',
 												"<c:url value='/resources/images/chat/chatclose.png' />");
 								$(this).attr('name', 'off');
-								$('#chatdivopen').show();
+								if($('#chatdivopen').attr('class')=='true'){
+									$('#chatdivopen').show();
+								}else if($('#chatroomdivopen').attr('class')=='true'){
+									$('#chatroomdivopen').show();
+									$('#chatback').show();
+								}
+								
 							} else {
 								$(this)
 										.attr('src',
 												"<c:url value='/resources/images/chat/chatopen.png' />");
 								$(this).attr('name', 'on');
 								$('#chatdivopen').hide();
+								$('#chatback').hide();
+								$('#chatroomdivopen').hide();
 							}
 						});
 		$('#helpopen').click(function() {
@@ -220,12 +241,30 @@
 
 #chatdivopen {
 	display: none;
-	width: 500px;
+	width: 400px;
 	position: fixed;
-	bottom: 75px;
+	bottom: 78px;
+	right: 0px;
+	font-size: 18px;
+	z-index: 1;
+}
+#chatroomdivopen {
+	display: none;
+	width: 400px;
+	position: fixed;
+	bottom: 60px;
 	right: 16px;
 	font-size: 18px;
 	z-index: 1;
+}
+#chatback {
+	display: none;
+	position: fixed;
+	bottom: 530px;
+	right: 20px;
+	font-size: 30px;
+	cursor: pointer;
+	z-index: 3;
 }
 
 #helpopen {
@@ -316,7 +355,7 @@
 	</div>
 </div>
 <!-- chat 시작 -->
-			<div id="chatdivopen">
+			<div id="chatdivopen" class="true">
 				<div class="card" style="border-radius: 10px; margin-bottom: 0;border : 1px solid #ced4da;">
 					<div class="card-header">
 						<i class="fas fa-comments"></i> 실시간 채팅
@@ -341,6 +380,9 @@
 					</div>
 				</div>
 
+			</div>
+			<span class="iconify" id="chatback" data-icon="ion:arrow-back" data-inline="false" style="display: none"></span>
+			<div id="chatroomdivopen">
 			</div>
 <!-- chat 끝 -->
 <div id="helpdivopen" class="scrollbar">
