@@ -24,12 +24,14 @@ public class PrivateController {
 			return "private/private-bookmark";
 		}
 		
-		//북마크 처리
-		@RequestMapping(value = "/bookmark.do",method = RequestMethod.POST) 
-		public String bookmarkcheck() {
-			return null;
-			
-		}
+	/*
+	 * //북마크 처리
+	 * 
+	 * @RequestMapping(value = "/bookmark.do",method = RequestMethod.POST) public
+	 * String bookmarkcheck() { return null;
+	 * 
+	 * }
+	 */
 	
 	
 }

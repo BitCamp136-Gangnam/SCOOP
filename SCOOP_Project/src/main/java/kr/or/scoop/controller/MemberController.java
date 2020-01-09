@@ -20,12 +20,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.or.scoop.dto.Member;
+import kr.or.scoop.dto.TeamPjt;
+import kr.or.scoop.service.BoardService;
 import kr.or.scoop.service.MemberService;
 import kr.or.scoop.utils.Mail;
 
 @Controller
 public class MemberController {
-
+	
+	@Autowired
+	private BoardService bservice;
+	
 	@Autowired
 	private MemberService service;
 
@@ -173,17 +178,19 @@ public class MemberController {
 	 * @RequestMapping(value="issue.do",method = RequestMethod.POST) public String
 	 * issue(HttpSession session,Issue issue,String selectpro) { return null; }
 	 */
+	
 	// 마이이슈 작성
 	@RequestMapping(value = "/myissue.do", method = RequestMethod.GET)
 	public String myissue() {
 		return "sidebar/app-myissue";
 	}
 
-	@RequestMapping(value = "/myissue.do", method = RequestMethod.POST)
-	public String myissuecheck() {
-		return null;
-
-	}
+	/*
+	 * @RequestMapping(value = "/myissue.do", method = RequestMethod.POST) public
+	 * String myissuecheck() { return null;
+	 * 
+	 * }
+	 */
 
 	// 캘린더
 	@RequestMapping(value = "/calendar.do", method = RequestMethod.GET)
@@ -191,11 +198,12 @@ public class MemberController {
 		return "sidebar/app-calender";
 	}
 
-	@RequestMapping(value = "/calendar.do", method = RequestMethod.POST)
-	public String calendarcheck() {
-		return null;
-
-	}
+	/*
+	 * @RequestMapping(value = "/calendar.do", method = RequestMethod.POST) public
+	 * String calendarcheck() { return null;
+	 * 
+	 * }
+	 */
 
 	// 네이버회원 로그인
 	@RequestMapping(value = "naverLogin.do", method = { RequestMethod.GET, RequestMethod.POST })
@@ -223,5 +231,7 @@ public class MemberController {
 	public String certified() {
 		return "certified/Certified";
 	}
+	
+	
 
 }

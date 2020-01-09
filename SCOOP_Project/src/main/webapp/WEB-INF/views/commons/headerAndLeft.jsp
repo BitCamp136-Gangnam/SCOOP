@@ -288,7 +288,7 @@ span{
         ***********************************-->
         <div id="pagelogo" class="nav-header">
             <div class="brand-logo">
-                <a href="index.htm" style="padding-top: 0px;">
+                <a href="userindex.do" style="padding-top: 0px;">
                     <b class="logo-abbr"><img class="img-responsive center-block" src="<c:url value="/resources/images/logo/ScoopTitle.png" />" alt="mini" style="width:100px;height: auto;padding-top:0;margin-top: 30px; "> </b>
                     <span class="logo-compact"><img class="img-responsive center-block"src="<c:url value="/resources/images/logo/ScoopBig.png" />" alt="" style="margin-top: 20px; text-align: center;"></span>
                     <span class="brand-title">
@@ -462,7 +462,7 @@ span{
                 <ul class="metismenu" id="menu">
                    <li class="nav-label" style="padding-bottom: 10px;" ><b style="padding-bottom: 2%;">전체 정보</b></li>
                     <li>
-                        <a href="index.htm" aria-expanded="false">
+                        <a href="userindex.do" aria-expanded="false">
                             <span class="iconify" data-icon="bx:bx-file-blank" data-inline="false" style="width: 20px;height: auto;"> </span><span class="nav-text"> &nbsp;새로운 소식</span>
                             <!-- <i class="icon-speedometer menu-icon"> -->
                         </a>
@@ -473,7 +473,7 @@ span{
                         </a>
                     </li>
                     <li>
-                        <a href="calender.do" aria-expanded="false">
+                        <a href="calendar.do" aria-expanded="false">
                             <span class="iconify" data-icon="bx:bx-calendar" data-inline="false" style="width: 20px;height: auto;"> </span><span class="nav-text"> &nbsp;캘린더</span>
                         </a>
                     </li>
@@ -513,6 +513,7 @@ span{
 </style>
 
 <!-- The Modal -->
+        
   <div class="modal fade" id="myModal">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -522,9 +523,9 @@ span{
           <h3 class="modal-title">새 협업공간 만들기</h3>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
-        <form action="team.do" method="post">
-        <form action='<c:url value="team.do"></c:url>' method="post">
+       
         <!-- Modal body -->
+       <form action="team.do" method="post"> 
         <div class="modal-body">
         <p style="font-size: 12px">협업공간은 함께 일하는 멤버들끼리만 자료를 공유하고 협업할 수 있는 공간입니다.<br>
              협업공간을 만들고 함께 일할 멤버들을 초대해보세요.</p>
@@ -536,20 +537,21 @@ span{
         </div>
         
         <!-- Modal footer -->
-        <div class="modal-footer">
-          <input type="submit" class="btn btn-secondary" value="만들기" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">
-          <button type="button" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">취소</button>
-        </div>
+        
         <input type="hidden" name="tseq" value="1">
         <input type="hidden" name="ischarge" value="0">
-        <input type="hidden" name="email" value="${email} ">
         <input type="hidden" name="email" value="${sessionScope.email} ">
-        <input type="hidden" name="isppalarm" value="0">
-        <input type="hidden" name="ptime" value="20-01-08">
+        <input type="hidden" name="istpalarm" value="0">
+        <input type="hidden" name="ptime" value="20/01/08">
+        <div class="modal-footer">
+          <input type="submit" class="btn btn-secondary" value="만들기" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" >
+          <input type="button" class="btn btn-secondary" value="취소" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">
+        </div>
         </form>
       </div>
     </div>
   </div>
+        
   <div id="filediv" class="fileon" style="display: none;background-color: white;">
      <div class="row"  style="margin: 2%;">
         <div class="col-sm-12">
