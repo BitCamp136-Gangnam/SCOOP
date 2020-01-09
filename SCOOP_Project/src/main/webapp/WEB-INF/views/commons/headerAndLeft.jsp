@@ -936,7 +936,6 @@ span{
         $(this).attr('style','cursor: pointer;color:#535359;font-size: 18px;padding-bottom: 12px;');
         });
 
-    $('#invite_Submit').keyup(function(event){
     	var number =0;
     $('#invite_Submit').keyup(function(event){
 			if(event.keyCode==13){
@@ -974,8 +973,6 @@ span{
   if(event.keyCode==13){
      $('#invite_email_append').hide();
      }
-
-  $('.email_append').click(function)
     });
     
 </script>
