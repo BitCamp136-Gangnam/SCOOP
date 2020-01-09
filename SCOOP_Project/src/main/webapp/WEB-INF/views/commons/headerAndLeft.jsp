@@ -964,15 +964,24 @@ span{
         $('#invite_Input2').hide();
         
         }
-    $('#invite_email_append').show();
-    $('#invite_email_append').empty();
-    
-  $('#invite_email_append').append('<div class="email_append">'+$(this).val()+'@naver.com</div>');
-  $('#invite_email_append').append('<div class="email_append">'+$(this).val()+'@gmail.com</div>');
-  $('#invite_email_append').append('<div class="email_append">'+$(this).val()+'@daum.net</div>');
-  if(event.keyCode==13){
-     $('#invite_email_append').hide();
-     }
+	    $('#invite_email_append').show();
+	    $('#invite_email_append').empty();
+	    
+		$('#invite_email_append').append('<div class="email_append">'+$(this).val()+'@naver.com</div>');
+		$('#invite_email_append').append('<div class="email_append">'+$(this).val()+'@gmail.com</div>');
+		$('#invite_email_append').append('<div class="email_append">'+$(this).val()+'@daum.net</div>');
+
+		if(event.keyCode==13){
+		   $('#invite_email_append').hide();
+		}
+
+		
+		/* if(event.keyCode==50&&event.shiftKey){
+			
+		} */
+		
+			
+		
     });
     
 </script>
