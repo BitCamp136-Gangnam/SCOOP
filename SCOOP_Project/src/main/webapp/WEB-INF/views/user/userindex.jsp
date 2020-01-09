@@ -38,10 +38,21 @@
 	    	'name':naver_id_login.getProfileData('name')
 	    	}, //보낼 데이터
 	    success: function(data) {
+	    	Swal.fire({
+	    		  title: "네이버 로그인 성공",
+	    		  text: "WELCOME",
+	    		  icon: "success",
+	    		  button: "확인"
+	    		})
 	    	location.href="userindex.do";
 	    },
 	    error: function(err) {
-	        
+	    	Swal.fire({
+	    		  title: "네이버 로그인 실패",
+	    		  text: "로그인 중 에러가 발생했습니다",
+	    		  icon: "error",
+	    		  button: "확인"
+	    		})
 	    }
 	});
   }
