@@ -700,9 +700,11 @@ span{
 							        <p style="font-size: 12px">더 많은 사람들을 초대하여 원활한 소통으로 업무를 효율적으로 처리해보세요.<br>
 							            					     회사 동료뿐만 아니라 외부 협업자도 파트너로 초대할 수 있습니다.</p>
 							          <label for="title">파트너 초대</label>
-							          <input class="form-control createmodal" type="text" id="invite_Enter" placeholder="이메일 주소를 입력하고 Enter키를 눌러주세요" style="width: 100%;border-radius: 0.25rem;">
+							          <input class="form-control createmodal" type="text" id="invite_Submit" placeholder="이메일 주소를 입력하고 Enter키를 눌러주세요" style="width: 100%;border-radius: 0.25rem;">
 							          <p style="font-size:13px;margin-top:2%;margin-left:1%; ">이메일 주소를 입력하고 Enter키를 눌러 동료들을 초대해 보세요.</p>
-							         
+							          <div id="invite_email_append" style="width:50%;border: 1px solid #c8c8c8; border-radius:0.25rem; background-color:#fff; display: none; position: absolute;top:145px;left: 18px; " >
+							     
+							           </div>
 							          <label for="content">협업 공간</label>
 							          <select id="select_invite" class="form-control" style="border-radius: 0.25rem;" >
 							         	<option>프라이빗 공간</option>
@@ -932,7 +934,7 @@ span{
         $(this).attr('style','cursor: pointer;color:#535359;font-size: 18px;padding-bottom: 12px;');
         });
 
-    $('#invite_Enter').keyup(function(event){
+    $('#invite_Submit').keyup(function(event){
 			if(event.keyCode==13){
 				$('#invite_Input').append('<span style="border:1px solid rgba(124, 119, 119,0.5);border-radius:0.25rem; padding-top: 1%;padding-bottom: 1%;padding-left: 2%;padding-right: 2%;margin:2%;"><i class="far fa-paper-plane" style="color:#9e6767;padding-right: 5px;"></i>'+$(this).val()+'<button type="button" id=""  class="invite_close" style="border:0;background-color:#fff;border-radius:0.25rem;"><i class="fas fa-times" style="color:#A84747;padding-left: 10px;"></i></button></span>');
 				$(this).val('');
@@ -953,5 +955,17 @@ span{
         }
     });
 
+    $('#invite_Submit').keyup(function(event){
+        $('#invite_email_append').show();
+        $('#invite_email_append').empty();
+        
+		$('#invite_email_append').append('<div class="email_append">'+$(this).val()+'@naver.com</div>');
+		$('#invite_email_append').append('<div class="email_append">'+$(this).val()+'@gmail.com</div>');
+		$('#invite_email_append').append('<div class="email_append">'+$(this).val()+'@daum.net</div>');
+		if(event.keyCode==13){
+			$('#invite_email_append').hide();
+			}
+    });
+	
     
 </script>
