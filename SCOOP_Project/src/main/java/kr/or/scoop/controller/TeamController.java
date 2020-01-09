@@ -17,9 +17,9 @@ public class TeamController {
 	@Autowired
 	private BoardService service;
 	
-	@RequestMapping(value = "/team.do" , method= {RequestMethod.POST,RequestMethod.GET})
+	@RequestMapping(value = "team.do" , method= {RequestMethod.POST,RequestMethod.GET})
 	public String CreateProject(TeamPjt team) {
-		
+		System.out.println("팀컨 와?" + team);
 		int result = 0;
 		String viewpage;
 		
