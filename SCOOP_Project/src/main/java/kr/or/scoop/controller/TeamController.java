@@ -19,11 +19,11 @@ public class TeamController {
 	
 	@RequestMapping(value = "/team.do" , method= {RequestMethod.POST,RequestMethod.GET})
 	public String CreateProject(TeamPjt team) {
+		System.out.println("팀컨 와?" + team);
 		
 		int result = 0;
 		String viewpage;
 		
-		System.out.println("팀컨 와?" + team);
 		result = service.insertTeamPjt(team);
 		
 		if(result > 0) {

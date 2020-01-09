@@ -518,13 +518,13 @@ span{
       <div class="modal-content">
       
         <!-- Modal Header -->
+       <form action="team.do" method="post"> 
         <div class="modal-header">
           <h3 class="modal-title">새 협업공간 만들기</h3>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
        
         <!-- Modal body -->
-       <form action="team.do" method="post"> 
         <div class="modal-body">
         <p style="font-size: 12px">협업공간은 함께 일하는 멤버들끼리만 자료를 공유하고 협업할 수 있는 공간입니다.<br>
              협업공간을 만들고 함께 일할 멤버들을 초대해보세요.</p>
@@ -533,15 +533,15 @@ span{
           <br>
           <label for="pcontent">협업공간 설명</label>
           <textarea class="form-control createmodal" rows="3" id="pcontent" name="pcontent" style="width: 100%"></textarea>
+        <input type="hidden" name="tseq" value="1">
+        <input type="hidden"  name="ischarge" value="0">
+        <input type="hidden"  name="email" value="${sessionScope.email} ">
+        <input type="hidden"  name="istpalarm" value="0">
+       <!--  <input type="hidden"  name="ptime" value="20-01-08">  -->
         </div>
         
         <!-- Modal footer -->
         
-        <input type="hidden" name="tseq" value="1">
-        <input type="hidden" name="ischarge" value="0">
-        <input type="hidden" name="email" value="${sessionScope.email} ">
-        <input type="hidden" name="istpalarm" value="0">
-        <input type="hidden" name="ptime" value="20/01/08">
         <div class="modal-footer">
           <input type="submit" class="btn btn-secondary" value="만들기" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" >
           <input type="button" class="btn btn-secondary" value="취소" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">
@@ -717,7 +717,7 @@ span{
 							        </div>
 							        <!-- Modal footer -->
 							        <div class="modal-footer">
-							          <button type="submit" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">만들기</button>
+							          <button type="submit" id="goco" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">만들기</button>
 							          <button type="button" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">취소</button>
 							        </div>
 							        
@@ -926,5 +926,7 @@ span{
     $('#inviteModal_id').mouseleave(function(){
         $(this).attr('style','cursor: pointer;color:#535359;font-size: 18px;padding-bottom: 12px;');
         });
+
+	
     
 </script>

@@ -28,8 +28,6 @@ import kr.or.scoop.utils.Mail;
 @Controller
 public class MemberController {
 	
-	@Autowired
-	private BoardService bservice;
 	
 	@Autowired
 	private MemberService service;
