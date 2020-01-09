@@ -44,6 +44,10 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
 <script src="https://code.iconify.design/1/1.0.3/iconify.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+  <script src="sweetalert2.all.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
 <script type="text/javascript">
 $(document).ready(function($) {
 	$("#pricing_area").click(function(event){
@@ -298,16 +302,33 @@ $(function(){
 							        	    	'name':googleUser.getBasicProfile().getName()
 							        	    	}, //보낼 데이터
 							        	    success: function(data) {
+							        	    	Swal.fire({
+							        	    		  title: "구글 로그인 성공",
+							        	    		  text: "WELCOME",
+							        	    		  icon: "success",
+							        	    		  button: "확인"
+							        	    		})
 							        	    	location.href="userindex.do"
 							        	    },
 							        	    error: function(err) {
-							        	        
+							        	    	Swal.fire({
+							        	    		  title: "에러 발생",
+							        	    		  text: "로그인 중 에러가 발생했습니다",
+							        	    		  icon: "error",
+							        	    		  button: "확인"
+							        	    		})
 							        	    }
 							        	});
 							          
 							          
 							        }
 							        function onFailure(error) {
+							        	Swal.fire({
+					        	    		  title: "구글 로그인 실패",
+					        	    		  text: "구글 로그인 실패",
+					        	    		  icon: "warning",
+					        	    		  button: "확인"
+					        	    		})
 							          console.log(error);
 							        }
 							        function renderButton() {
