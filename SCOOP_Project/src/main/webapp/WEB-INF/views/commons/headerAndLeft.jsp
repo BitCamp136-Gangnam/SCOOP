@@ -16,9 +16,9 @@
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   <script type="text/javascript">
         $(function(){ 
-
         	
-
+        	
+        	
             $('.modal').on('hidden.bs.modal', function (e) {
                console.log('modal close');
                $('#memlist').hide();
@@ -713,9 +713,7 @@ span{
 							          <label for="content">협업 공간</label>
 							          <select id="select_invite" class="form-control" style="border-radius: 0.25rem;" >
 							         	<c:forEach items="${pjtlist}" var="p">
-					                    <option value="${p.tseq}">
-										${p.pname}
-										</option>
+					                    <option value="${p.tseq}">${p.pname}</option>
 										</c:forEach>
 							          </select>
 							        </div>
