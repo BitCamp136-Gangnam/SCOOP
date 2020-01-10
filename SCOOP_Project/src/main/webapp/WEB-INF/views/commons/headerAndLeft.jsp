@@ -829,7 +829,7 @@ span{
             var text = "";
           text = $('#issuecontent').val().replace("@","");
           $('#issuecontent').val(text);
-           $('#todoresult').append('<div>@'+$(this).text()+'</div>');
+           $('#todoresult').append('<div id="mention" name="mention">@'+$(this).text()+'</div>');
            console.log($(this).text());
            $('#todoresult').show();
            $('#memlist').hide();
