@@ -7,6 +7,7 @@ import kr.or.scoop.dto.Member;
 
 public interface MemberDao {
 	
+	//회원정보 
 	public Member getMember(String email);
 	
 	// 일반회원 회원가입
@@ -29,5 +30,8 @@ public interface MemberDao {
 	
 	// 아이디 중복체크
 	public int idCheck(String email);
+	
+	//회원 수정
+	public int updateMember(Member member);
 	
 }

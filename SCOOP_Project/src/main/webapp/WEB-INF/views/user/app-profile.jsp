@@ -75,7 +75,7 @@
 		</div>
 		<div class="row" style="margin-left: 4%; margin-top: 2%">
 		<div class="form-group" style="width: 100%">
-			<form action="memberEdit.do">
+			<form action="editCheck.do" method="post">
     		<label for="email">이메일</label>
     		<input class="form-control myinfo" type="text" id="email" name="email" style="width: 60%" readonly="readonly" value="${member.email}">
     		<br>

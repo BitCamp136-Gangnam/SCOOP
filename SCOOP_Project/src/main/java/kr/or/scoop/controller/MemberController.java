@@ -261,11 +261,29 @@ public class MemberController {
 	public String EditProfile(String email,Model model) {
 		MemberDao dao = sqlsession.getMapper(MemberDao.class);
 		Member member = dao.getMember(email);
-		System.out.println("들어오긴하니??");
-		System.out.println("컨트롤" + member);
+		System.out.println("에딧컨");
+		System.out.println(member);
 		model.addAttribute("member",member);
 		
 		return "user/app-profile";
+		
+	}
+	
+	@RequestMapping(value="editCheck.do" , method = RequestMethod.POST)
+	public String UpdateProfile(Member member) {
+		int result = 0;
+		String viewpage;
+		member.setPwd(this.bCryptPasswordEncoder.encode(member.getPwd()));
+		result = service.update(member);
+		if(result > 0) {
+			System.out.println("업데이트 성공");
+			viewpage = "user/userindex";
+		}else {
+			System.out.println("업데이트 성공");
+			viewpage = "user/app-profile";
+		}
+		
+		return viewpage;
 		
 	}
 	

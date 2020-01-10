@@ -417,7 +417,7 @@ span{
                                 <div class="dropdown-content-body">
                                     <ul>
                                         <li>
-                                            <a href="app-profile.jsp"><i class="icon-user"></i> <span>내 정보</span></a>
+                                            <a href="memberEdit.do?${sessionScope.email}"><i class="icon-user"></i> <span>내 정보</span></a>
                                         </li>
                                         <li>
                                             <a href="#" id="fileopen"><span class="iconify" data-icon="ion:folder-open-outline" data-inline="false" style="font-size: 15px"></span> <span> &nbsp;&nbsp;파일함</span></a>
