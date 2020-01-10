@@ -120,7 +120,7 @@ function requestPay(){
 					<div class="row" style="margin-left: 2%;">
 						<ul class="nav nav-pills">
 							<li class="nav-item"><a class="nav-link"
-								href="./app-profile.jsp">내 정보</a></li>
+								href="memberEdit.do">내 정보</a></li>
 							<li class="nav-item"><a class="nav-link"
 								href="./app-alram.jsp">알림</a></li>
 							<li class="nav-item"><a class="nav-link"
