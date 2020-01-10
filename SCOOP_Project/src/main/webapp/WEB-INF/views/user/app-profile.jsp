@@ -59,7 +59,7 @@
 			      <a class="nav-link" href="./app-external.jsp">외부 서비스 연결</a>
 			    </li>
 			    <li class="nav-item">
-			      <a class="nav-link" href="#">가격 및 결제</a>
+			      <a class="nav-link" href="paymentPage.do">가격 및 결제</a>
 			    </li>
 		    </ul>
 		</div>

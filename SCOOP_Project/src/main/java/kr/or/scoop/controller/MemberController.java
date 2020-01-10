@@ -269,5 +269,11 @@ public class MemberController {
 		
 	}
 	
+	// 결재페이지
+	@RequestMapping(value = "/paymentPage.do")
+	public String paymentPage() {
+		return "user/Payment";
+	}
+	
 
 }
