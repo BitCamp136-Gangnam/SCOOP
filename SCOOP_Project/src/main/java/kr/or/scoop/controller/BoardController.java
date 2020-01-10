@@ -1,5 +1,9 @@
 package kr.or.scoop.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,5 +34,19 @@ public class BoardController {
 	}
 
 	// 이슈 작성
-	
+	@RequestMapping(value="writeIssue.do", method=RequestMethod.POST)
+	public String writeIssue(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+		String email = (String)session.getAttribute("email");
+		String title = request.getParameter("issuetitle");
+		String content = request.getParameter("issuecontent");
+		String mention = request.getParameter("mention");
+		
+		System.out.println("id : " + email);
+		System.out.println("title : " + title);
+		System.out.println("content : " + content);
+		System.out.println("mention : " + mention);
+		
+		
+		return "";
+	}
 }
