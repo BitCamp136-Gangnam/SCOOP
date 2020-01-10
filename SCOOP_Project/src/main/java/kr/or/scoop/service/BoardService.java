@@ -17,7 +17,7 @@ public class BoardService {
 		// 아이디 존재 함 등록 못함
 			ProjectDao dao = sqlsession.getMapper(ProjectDao.class);
 			System.out.println("여기좀 와주라 ㅠㅠㅠㅠ123");	
-			
+			System.out.println(team.toString());
 			result = dao.insertPJT(team);
 			System.out.println("꺄르르륵");
 		return result;
