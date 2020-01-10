@@ -1077,7 +1077,4 @@ span{
     	}
 		
     });
-    $('#searchpjt').keydown(function(){
-    	$('#searchpjt').match()
-    })
 </script>
