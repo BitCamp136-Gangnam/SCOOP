@@ -146,17 +146,10 @@ public class MemberController {
 		result = service.loginMember(email, pwd);
 		if (result > 0) {
 			viewpage = "redirect:/userindex.do";
-			ProjectDao noticeDao = sqlsession.getMapper(ProjectDao.class);
-			System.out.println("1111");
-			List<TeamPjt> pjtlist = noticeDao.getPJT(email);
-			System.out.println("2222");
-			session.setAttribute("pjtlist", pjtlist);
-			System.out.println("3333");
-			System.out.println(pjtlist.get(0));
 			session.setAttribute("email", email);
 			session.setAttribute("kind", "normal");
 		} else {
-			viewpage = "redirect:/frontpage.do";
+			viewpage = "redirect:/index.do";
 		}
 
 		return viewpage;
@@ -171,16 +164,13 @@ public class MemberController {
 		result = service.googleIdCheck(email, name);
 		if (result > 0) {
 			System.out.println("성공");
-			ProjectDao noticeDao = sqlsession.getMapper(ProjectDao.class);
-			List<TeamPjt> pjtlist = noticeDao.getPJT(email);
-			session.setAttribute("pjtlist", pjtlist);
 			viewpage = "redirect:/userindex.do";
 			session.setAttribute("email", email);
 			session.setAttribute("kind", "google");
 			System.out.println(session.getAttribute("kind"));
 		} else {
 			System.out.println("실패");
-			viewpage = "redirect:/frontpage.do";
+			viewpage = "redirect:/index.do";
 		}
 
 		return viewpage;
@@ -188,7 +178,16 @@ public class MemberController {
 
 	// 로그인 성공
 	@RequestMapping(value = "/userindex.do", method = RequestMethod.GET)
-	public String userindex() {
+	public String userindex(HttpSession session) {
+		String email = "";
+		email = (String)session.getAttribute("email");
+		ProjectDao noticeDao = sqlsession.getMapper(ProjectDao.class);
+		System.out.println("1111");
+		List<TeamPjt> pjtlist = noticeDao.getPJT(email);
+		System.out.println("2222");
+		session.setAttribute("pjtlist", pjtlist);
+		System.out.println("3333");
+		System.out.println(pjtlist.get(0));
 		return "user/userindex";
 	}
 
@@ -197,7 +196,7 @@ public class MemberController {
 	public String logout(HttpSession session, HttpServletResponse response) {
 		String viewpage = "";
 		System.out.println("로그아웃 함수");
-		viewpage = "redirect:/frontpage.do";
+		viewpage = "redirect:/index.do";
 		session.invalidate();
 		return viewpage;
 
@@ -222,15 +221,12 @@ public class MemberController {
 		if (result > 0) {
 			System.out.println("성공");
 			viewpage = "redirect:/userindex.do";
-			ProjectDao noticeDao = sqlsession.getMapper(ProjectDao.class);
-			List<TeamPjt> pjtlist = noticeDao.getPJT(email);
-			session.setAttribute("pjtlist", pjtlist);
 			session.setAttribute("email", email);
 			session.setAttribute("kind", "naver");
 			System.out.println(session.getAttribute("kind"));
 		} else {
 			System.out.println("실패");
-			viewpage = "redirect:/frontpage.do";
+			viewpage = "redirect:/index.do";
 		}
 
 		return viewpage;
@@ -243,8 +239,9 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "inviteTeam.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String inviteTeam(HttpServletRequest request) {
+	public String inviteTeam(HttpServletRequest request, HttpSession session) {
 		try {
+			String mailFrom = (String)session.getAttribute("email");
 			MimeMessage message = mailSender.createMimeMessage();
 			MimeMessageHelper messageHelper = new MimeMessageHelper(message,true,"UTF-8");
 			request.setCharacterEncoding("UTF-8");
@@ -260,7 +257,8 @@ public class MemberController {
 					messageHelper.setSubject("협업공간 SCOOP 팀 멤버 초대 인증 이메일입니다");
 					Map model = new HashMap();
 					model.put("mailTo", invitemem[i]);
-					String mailBody = VelocityEngineUtils.mergeTemplateIntoString(velocityEngineFactoryBean.createVelocityEngine(), "emailTemplate.vm","UTF-8", model);
+					model.put("mailFrom", mailFrom);
+					String mailBody = VelocityEngineUtils.mergeTemplateIntoString(velocityEngineFactoryBean.createVelocityEngine(), "invite_email.vm","UTF-8", model);
 					messageHelper.setText(mailBody,true);
 					mailSender.send(message);
 				}
