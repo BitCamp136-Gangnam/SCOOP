@@ -966,13 +966,16 @@ span{
   
 
    $('#invite_Submit').keyup(function(event){
-    	
 	    $('#invite_email_append').show();
 	    $('#invite_email_append').empty();
-	    
-		$('#invite_email_append').append('<div id="email_append_1" class="email_append" style="margin:10px;">'+$(this).val()+'@naver.com</div>');
-		$('#invite_email_append').append('<div id="email_append_2" class="email_append" style="margin:10px;">'+$(this).val()+'@gmail.com</div>');
-		$('#invite_email_append').append('<div id="email_append_3" class="email_append" style="margin:10px;">'+$(this).val()+'@daum.net</div>');
+		
+	   if($('#invite_Submit').val().match('@')){
+		   $('#invite_email_append').append('<div id="email_append_1" class="email_append" style="margin:10px;">'+$(this).val());
+	   }else{
+		   $('#invite_email_append').append('<div id="email_append_1" class="email_append" style="margin:10px;">'+$(this).val()+'@naver.com</div>');
+			$('#invite_email_append').append('<div id="email_append_2" class="email_append" style="margin:10px;">'+$(this).val()+'@gmail.com</div>');
+			$('#invite_email_append').append('<div id="email_append_3" class="email_append" style="margin:10px;">'+$(this).val()+'@daum.net</div>');
+	   }
 
 		if($('#invite_Submit').val()==""){
 			$('#invite_email_append').hide();
