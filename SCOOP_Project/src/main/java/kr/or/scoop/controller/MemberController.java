@@ -275,11 +275,10 @@ public class MemberController {
 	
 	//회원수정 페이지 이동
 	@RequestMapping(value="memberEdit.do" , method = RequestMethod.GET)
-	public String EditProfile(String email,Model model) {
+	public String EditProfile(Model model,HttpSession session) {
 		MemberDao dao = sqlsession.getMapper(MemberDao.class);
-		Member member = dao.getMember(email);
-		System.out.println("들어오긴하니??");
-		System.out.println("컨트롤" + member);
+		Member member = dao.getMember((String)session.getAttribute("email"));
+		
 		model.addAttribute("member",member);
 		
 		return "user/app-profile";
