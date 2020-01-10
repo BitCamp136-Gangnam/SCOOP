@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -18,15 +18,16 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.velocity.VelocityEngineFactoryBean;
 import org.springframework.ui.velocity.VelocityEngineUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
+import kr.or.scoop.dao.ProjectDao;
+import kr.or.scoop.dao.MemberDao;
 import kr.or.scoop.dto.Member;
 import kr.or.scoop.dto.TeamPjt;
-import kr.or.scoop.service.BoardService;
 import kr.or.scoop.service.MemberService;
 import kr.or.scoop.utils.Mail;
 
@@ -48,12 +49,6 @@ public class MemberController {
 
 	@Autowired
 	private VelocityEngineFactoryBean velocityEngineFactoryBean;
-
-	// Front page 서블릿
-	@RequestMapping(value = "frontpage.do", method = RequestMethod.GET)
-	public String register() {
-		return "frontpage";
-	}
 
 	// 일반 회원가입 인증
 	@RequestMapping(value = "frontpage.do", method = { RequestMethod.POST, RequestMethod.GET })
@@ -150,11 +145,18 @@ public class MemberController {
 		String viewpage = "";
 		result = service.loginMember(email, pwd);
 		if (result > 0) {
-			viewpage = "user/userindex";
+			viewpage = "redirect:/userindex.do";
+			ProjectDao noticeDao = sqlsession.getMapper(ProjectDao.class);
+			System.out.println("1111");
+			List<TeamPjt> pjtlist = noticeDao.getPJT(email);
+			System.out.println("2222");
+			session.setAttribute("pjtlist", pjtlist);
+			System.out.println("3333");
+			System.out.println(pjtlist.get(0));
 			session.setAttribute("email", email);
 			session.setAttribute("kind", "normal");
 		} else {
-			viewpage = "index";
+			viewpage = "redirect:/frontpage.do";
 		}
 
 		return viewpage;
@@ -169,13 +171,16 @@ public class MemberController {
 		result = service.googleIdCheck(email, name);
 		if (result > 0) {
 			System.out.println("성공");
-			viewpage = "user/userindex";
+			ProjectDao noticeDao = sqlsession.getMapper(ProjectDao.class);
+			List<TeamPjt> pjtlist = noticeDao.getPJT(email);
+			session.setAttribute("pjtlist", pjtlist);
+			viewpage = "redirect:/userindex.do";
 			session.setAttribute("email", email);
 			session.setAttribute("kind", "google");
 			System.out.println(session.getAttribute("kind"));
 		} else {
 			System.out.println("실패");
-			viewpage = "index";
+			viewpage = "redirect:/frontpage.do";
 		}
 
 		return viewpage;
@@ -192,7 +197,7 @@ public class MemberController {
 	public String logout(HttpSession session, HttpServletResponse response) {
 		String viewpage = "";
 		System.out.println("로그아웃 함수");
-		viewpage = "index";
+		viewpage = "redirect:/frontpage.do";
 		session.invalidate();
 		return viewpage;
 
@@ -205,31 +210,7 @@ public class MemberController {
 	 * issue(HttpSession session,Issue issue,String selectpro) { return null; }
 	 */
 	
-	// 마이이슈 작성
-	@RequestMapping(value = "/myissue.do", method = RequestMethod.GET)
-	public String myissue() {
-		return "sidebar/app-myissue";
-	}
-
-	/*
-	 * @RequestMapping(value = "/myissue.do", method = RequestMethod.POST) public
-	 * String myissuecheck() { return null;
-	 * 
-	 * }
-	 */
-
-	// 캘린더
-	@RequestMapping(value = "/calendar.do", method = RequestMethod.GET)
-	public String calendar() {
-		return "sidebar/app-calender";
-	}
-
-	/*
-	 * @RequestMapping(value = "/calendar.do", method = RequestMethod.POST) public
-	 * String calendarcheck() { return null;
-	 * 
-	 * }
-	 */
+	
 
 	// 네이버회원 로그인
 	@RequestMapping(value = "naverLogin.do", method = { RequestMethod.GET, RequestMethod.POST })
@@ -240,13 +221,16 @@ public class MemberController {
 		result = service.naverIdCheck(email, name);
 		if (result > 0) {
 			System.out.println("성공");
-			viewpage = "user/userindex";
+			viewpage = "redirect:/userindex.do";
+			ProjectDao noticeDao = sqlsession.getMapper(ProjectDao.class);
+			List<TeamPjt> pjtlist = noticeDao.getPJT(email);
+			session.setAttribute("pjtlist", pjtlist);
 			session.setAttribute("email", email);
 			session.setAttribute("kind", "naver");
 			System.out.println(session.getAttribute("kind"));
 		} else {
 			System.out.println("실패");
-			viewpage = "index";
+			viewpage = "redirect:/frontpage.do";
 		}
 
 		return viewpage;
@@ -289,6 +273,23 @@ public class MemberController {
 		return "redirect:userindex.do";
 	}
 	
+	@RequestMapping(value="memberEdit.do" , method = RequestMethod.GET)
+	public String EditProfile(String email,Model model) {
+		MemberDao dao = sqlsession.getMapper(MemberDao.class);
+		Member member = dao.getMember(email);
+		System.out.println("들어오긴하니??");
+		System.out.println("컨트롤" + member);
+		model.addAttribute("member",member);
+		
+		return "user/app-profile";
+		
+	}
+	
+	// 결재페이지
+	@RequestMapping(value = "/paymentPage.do")
+	public String paymentPage() {
+		return "user/Payment";
+	}
 	
 
 }

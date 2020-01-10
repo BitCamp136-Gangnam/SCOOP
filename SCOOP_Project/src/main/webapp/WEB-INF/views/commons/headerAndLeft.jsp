@@ -494,11 +494,11 @@ span{
                     <li class="nav-label" style="padding-bottom: 0"><b>협업 공간</b></li>
                     <li class="nav-label"><button type="button" class="btn" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-toggle="modal" data-target="#myModal"><i class="icon-note menu-icon"></i> 새 협업공간 만들기</button></li>
                     <li class="nav-label" style="padding-top: 0"><input type="search" class="form-control" style="border-radius: 0.25rem; height: 20px" placeholder="협업공간 검색"></li>
+                    <c:forEach items="${pjtlist}" var="p">
                     <li>
-                        <a href="coop-issue.htm" aria-expanded="false">
-                            <span class="iconify" data-icon="bx:bxs-flag-alt" data-inline="false" style="width: 20px;height: auto;"> </span><span class="nav-text"> &nbsp;쫀쬬니(append로..)</span>
-                        </a>
-                    </li>
+					<a href="projectDetail.do?tseq=${p.tseq}" aria-expanded="false"><span class="iconify" data-icon="bx:bxs-flag-alt" data-inline="false" style="width: 20px;height: auto;"> </span><span class="nav-text"> &nbsp;${p.pname}</span></a>
+					</li>
+					</c:forEach>
                 </ul>
             </div>
         </div>
@@ -604,33 +604,34 @@ span{
           <h3 class="modal-title">이슈 작성</h3>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
-        <form action="">
+        <form action="writeIssue.do" method="POST">
         <!-- Modal body -->
         <div class="modal-body">
         <!-- <p style="font-size: 12px">협업공간은 함께 일하는 멤버들끼리만 자료를 공유하고 협업할 수 있는 공간입니다.<br>
              협업공간을 만들고 함께 일할 멤버들을 초대해보세요.</p> -->
             <label for="title">이슈 제목</label>
-          <input class="form-control createmodal" type="text" id="issuetitle" style="width: 100%" placeholder="제목을 입력해 주세요.">
+          <input class="form-control createmodal" type="text" id="issuetitle" name="issuetitle" style="width: 100%" placeholder="제목을 입력해 주세요.">
           <br>
             <label for="content">이슈 설명</label> <span id="filename"></span> <img id="imgpreview" alt="사진 미리보기 자리" style="display:none;width: 40px; height: 40px" src="#" />
             <input type="file" id="fileclick" name="files[0]" hidden="">
             <button type="button" id="auth" disabled hidden="">Authenticate</button>
-          <textarea class="form-control createmodal" rows="5" id="issuecontent" style="width: 100%" placeholder="@를 입력하여 멘션, 할 일, 파일 등을 추가해 보세요."></textarea>
+          <textarea class="form-control createmodal" rows="5" id="issuecontent" name="issuecontent" style="width: 100%" placeholder="@를 입력하여 멘션, 할 일, 파일 등을 추가해 보세요."></textarea>
           <textarea rows="" id="codemirrorarea" style="display: none"><-- 코드를 입력하세요 --></textarea>
           <div id="todoresult" style="display: none">
+          	<!-- mention -->
           </div>
               <!-- The Google API Loader script. -->
     <script type="text/javascript" src="https://apis.google.com/js/api.js?onload=onApiLoad"></script>
         </div>
         <!-- Modal footer -->
         <div class="modal-footer">
-          <select id="selectpro" class="form-control">
+          <select id="selectpro" name="selectTeam" class="form-control">
             <option>프라이빗 공간</option>
             <option>쫀쬬니</option>
             <option>이곳저곳</option>
             <option>캠핑이지</option>
           </select>
-          <button type="submit" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">만들기</button>
+          <button type="submit" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;">만들기</button>
           <button type="button" class="btn btn-secondary" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">취소</button>
         </div>
         </form>
@@ -828,7 +829,7 @@ span{
             var text = "";
           text = $('#issuecontent').val().replace("@","");
           $('#issuecontent').val(text);
-           $('#todoresult').append('<div>@'+$(this).text()+'</div>');
+           $('#todoresult').append('<div id="mention" name="mention">@'+$(this).text()+'</div>');
            console.log($(this).text());
            $('#todoresult').show();
            $('#memlist').hide();
