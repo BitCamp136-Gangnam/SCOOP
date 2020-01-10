@@ -146,13 +146,6 @@ public class MemberController {
 		result = service.loginMember(email, pwd);
 		if (result > 0) {
 			viewpage = "redirect:/userindex.do";
-			ProjectDao noticeDao = sqlsession.getMapper(ProjectDao.class);
-			System.out.println("1111");
-			List<TeamPjt> pjtlist = noticeDao.getPJT(email);
-			System.out.println("2222");
-			session.setAttribute("pjtlist", pjtlist);
-			System.out.println("3333");
-			System.out.println(pjtlist.get(0));
 			session.setAttribute("email", email);
 			session.setAttribute("kind", "normal");
 		} else {
@@ -171,9 +164,6 @@ public class MemberController {
 		result = service.googleIdCheck(email, name);
 		if (result > 0) {
 			System.out.println("성공");
-			ProjectDao noticeDao = sqlsession.getMapper(ProjectDao.class);
-			List<TeamPjt> pjtlist = noticeDao.getPJT(email);
-			session.setAttribute("pjtlist", pjtlist);
 			viewpage = "redirect:/userindex.do";
 			session.setAttribute("email", email);
 			session.setAttribute("kind", "google");
@@ -188,7 +178,16 @@ public class MemberController {
 
 	// 로그인 성공
 	@RequestMapping(value = "/userindex.do", method = RequestMethod.GET)
-	public String userindex() {
+	public String userindex(HttpSession session) {
+		String email = "";
+		email = (String)session.getAttribute("email");
+		ProjectDao noticeDao = sqlsession.getMapper(ProjectDao.class);
+		System.out.println("1111");
+		List<TeamPjt> pjtlist = noticeDao.getPJT(email);
+		System.out.println("2222");
+		session.setAttribute("pjtlist", pjtlist);
+		System.out.println("3333");
+		System.out.println(pjtlist.get(0));
 		return "user/userindex";
 	}
 
@@ -222,9 +221,6 @@ public class MemberController {
 		if (result > 0) {
 			System.out.println("성공");
 			viewpage = "redirect:/userindex.do";
-			ProjectDao noticeDao = sqlsession.getMapper(ProjectDao.class);
-			List<TeamPjt> pjtlist = noticeDao.getPJT(email);
-			session.setAttribute("pjtlist", pjtlist);
 			session.setAttribute("email", email);
 			session.setAttribute("kind", "naver");
 			System.out.println(session.getAttribute("kind"));
