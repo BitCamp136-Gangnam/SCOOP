@@ -424,7 +424,7 @@ span{
                                         </li>
                                         <hr class="my-2">
                                         <li>
-                                            <a href="page-lock.jsp"><i class="icon-lock"></i> <span>잠금모드</span></a>
+                                            <a href="page-lock.jsp"><i class="icon-lock"></i><span>잠금모드</span></a>
                                         </li>
                                         <c:choose>
                                         	<c:when test="${kind=='normal'}">
@@ -1046,10 +1046,8 @@ span{
 					$('#invitebtn').empty();
 					$('#invitebtn').prepend($('#invite_Input').children().length - 2+'명의 멤버 초대하기');
 
-
 					} 
-				
-							}
+			}
 			
 			  $('.invite_close').click(function(){
 					$('#invitebtn').empty();
