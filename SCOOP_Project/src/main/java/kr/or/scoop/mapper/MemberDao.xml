@@ -52,4 +52,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where email = #{param1}
 	</select>
 	
+	<select id="getMember" resultType="kr.or.scoop.dto.Member" parameterType="map">
+		select email,name,pwd,dname,drank,address,loginnum from member 
+		where email = #{email}
+	</select>
+	
 </mapper>

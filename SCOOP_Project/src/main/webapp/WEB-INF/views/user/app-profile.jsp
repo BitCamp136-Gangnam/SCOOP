@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
@@ -9,7 +10,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <jsp:include page="/WEB-INF/views/commons/title.jsp"></jsp:include>
     <!-- Custom Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 
 </head>
 <style>
@@ -65,39 +66,45 @@
 		<hr style="margin-top: 0">
 		<div class="row" style="margin-left: 4%; margin-right: 2%; margin-top: 1%">
 			<div class="media align-items-center mb-4">
-                                    <img class="mr-3" src="images/avatar/11.png" width="120" height="120" alt="">
+                                    <img class="mr-3" src="<c:url value="/resources/images/avatar/avatar.png" />" width="120" height="120" alt="">
                                     <div class="media-body">
-                                        <h3 class="mb-0">이름들어갈 자리</h3>
-                                        <p class="text-muted mb-0" style="margin-left: 2%">이메일@example.com</p>
+                                        <h3 class="mb-0">${member.name}</h3>
+                                        <p class="text-muted mb-0" style="margin-left: 2%">${member.email}</p>
                                     </div>
                                 </div>
 		</div>
 		<div class="row" style="margin-left: 4%; margin-top: 2%">
 		<div class="form-group" style="width: 100%">
-			<form action="">
+			<form action="memberEdit.do">
     		<label for="email">이메일</label>
-    		<input class="form-control myinfo" type="text" id="email" style="width: 60%" readonly="readonly">
+    		<input class="form-control myinfo" type="text" id="email" name="email" style="width: 60%" readonly="readonly" value="${member.email}">
     		<br>
+    		<c:choose>
+    		<c:when test="${member.pwd == 'google'}">
     		<label for="pwd">비밀번호</label>
-    		<input class="form-control myinfo" type="text" id="pwd" style="width: 60%">
+    		<input class="form-control myinfo" type="text" id="pwd" name="pwd" style="width: 60%" value="구글에 문의하세요" readonly="readonly">
+    		</c:when>
+    		<c:when test="${member.pwd == 'naver'}">
+    		<label for="pwd">비밀번호</label>
+    		<input class="form-control myinfo" type="text" id="pwd" name="pwd" style="width: 60%" value="네이버에 문의하세요" readonly="readonly">
+    		</c:when>
+    		<c:otherwise>
+    		<label for="pwd">비밀번호</label>
+    		<input class="form-control myinfo" type="password" id="pwd" name="pwd" style="width: 60%">
+    		</c:otherwise>
+    		</c:choose>
     		<br>
     		<label for="name">이름</label>
-    		<input class="form-control myinfo" type="text" id="name" style="width: 60%" readonly="readonly">
-    		<br>
-    		<label for="birth">생년월일</label>
-    		<input class="form-control myinfo" type="text" id="birth" style="width: 60%" readonly="readonly">
-    		<br>
-    		<label for="gender">성별</label>
-    		<input class="form-control myinfo" type="text" id="gender" style="width: 60%" readonly="readonly">
+    		<input class="form-control myinfo" type="text" id="name" name="name" style="width: 60%" readonly="readonly" value="${member.name}">
     		<br>
     		<label for="dname">부서</label>
-    		<input class="form-control myinfo" type="text" id="dname" style="width: 60%">
+    		<input class="form-control myinfo" type="text" id="dname" name="dname" style="width: 60%" value="${member.dname}">
     		<br>
     		<label for="drank">직함</label>
-    		<input class="form-control myinfo" type="text" id="drank" style="width: 60%">
+    		<input class="form-control myinfo" type="text" id="drank" name="drank" style="width: 60%" value="${member.drank}">
     		<br>
     		<label for="address">주소</label>
-    		<input class="form-control myinfo" type="text" id="address" style="width: 60%">
+    		<input class="form-control myinfo" type="text" id="address" name="address" style="width: 60%" value="${member.address}">
     		<br>
     		<input type="submit" class="btn" style="background-color: #fff5a5; border-color: #CCCCCC; color: gray; cursor: pointer;" value="수정완료">
     		</form>	
@@ -127,11 +134,11 @@
     <!--**********************************
         Scripts
     ***********************************-->
-    <script src="plugins/common/common.min.js"></script>
-    <script src="js/custom.min.js"></script>
-    <script src="js/settings.js"></script>
-    <script src="js/gleek.js"></script>
-    <script src="js/styleSwitcher.js"></script>
+      <script src="<c:url value="/resources/plugins/common/common.min.js" />"></script>
+    <script src="<c:url value="/resources/js/custom.min.js" />"></script>
+    <script src="<c:url value="/resources/js/settings.js" />"></script>
+    <script src="<c:url value="/resources/js/gleek.js" />"></script>
+    <script src="<c:url value="/resources/js/styleSwitcher.js" />"></script>
 
 </body>
 
