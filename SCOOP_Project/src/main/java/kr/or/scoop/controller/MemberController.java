@@ -275,9 +275,9 @@ public class MemberController {
 	
 	//회원수정 페이지 이동
 	@RequestMapping(value="memberEdit.do" , method = RequestMethod.GET)
-	public String EditProfile(String email,Model model) {
+	public String EditProfile(Model model,HttpSession session) {
 		MemberDao dao = sqlsession.getMapper(MemberDao.class);
-		Member member = dao.getMember(email);
+		Member member = dao.getMember((String)session.getAttribute("email"));
 		System.out.println("들어오긴하니??");
 		System.out.println("컨트롤" + member);
 		model.addAttribute("member",member);
@@ -302,7 +302,7 @@ public class MemberController {
 		}
 		
 		return viewpage;
-		
+	}
 	
 	// 결재페이지
 	@RequestMapping(value = "/paymentPage.do")
