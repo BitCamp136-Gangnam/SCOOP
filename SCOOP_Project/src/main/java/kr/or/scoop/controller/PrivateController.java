@@ -24,6 +24,8 @@ public class PrivateController {
 			return "private/private-bookmark";
 		}
 		
+		
+	
 	/*
 	 * //북마크 처리
 	 * 
