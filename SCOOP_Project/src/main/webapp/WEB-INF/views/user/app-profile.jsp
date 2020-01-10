@@ -69,7 +69,7 @@
                                     <img class="mr-3" src="<c:url value="/resources/images/avatar/avatar.png" />" width="120" height="120" alt="">
                                     <div class="media-body">
                                         <h3 class="mb-0">${member.name}</h3>
-                                        <p class="text-muted mb-0" style="margin-left: 2%">${member.email}</p>
+                                        <p class="text-muted mb-0" style="margin-left: 2%; width: 300px;">${member.email}</p>
                                     </div>
                                 </div>
 		</div>
