@@ -7,6 +7,8 @@ import kr.or.scoop.dto.Member;
 
 public interface MemberDao {
 	
+	public Member getMember(String email);
+	
 	// 일반회원 회원가입
 	public int insertMember(Member member);
 	
