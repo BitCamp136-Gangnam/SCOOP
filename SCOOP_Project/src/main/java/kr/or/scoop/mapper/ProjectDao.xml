@@ -5,6 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="kr.or.scoop.dao.ProjectDao">
 <insert id="insertPJT" parameterType="kr.or.scoop.dto.TeamPjt" >
  insert into Teampjt (tseq,email,pname,pcontent,ptime,istpalarm,ischarge)
-  values (tseq_teampjt_seq.nextval,#{email},#{pname},#{pcontent},sysdate,#{istpalarm},#{ischarge}) </insert>
+  values (tseq_teampjt_seq.nextval,#{email},#{pname},#{pcontent},sysdate,#{istpalarm},#{ischarge})
+</insert>
 
 </mapper>

@@ -540,7 +540,7 @@ span{
         
         <!-- <input type="hidden" name="tseq" value="1"> -->
         <!-- <input type="hidden" name="ischarge" value="0"> -->
-        <input type="hidden" name="email" value="${sessionScope.email} ">
+        <input type="hidden" name="email" value="${sessionScope.email}">
         <!-- <input type="hidden" name="istpalarm" value="0"> -->
         <!-- <input type="hidden" name="ptime" value="20/01/08"> -->
         <div class="modal-footer">
