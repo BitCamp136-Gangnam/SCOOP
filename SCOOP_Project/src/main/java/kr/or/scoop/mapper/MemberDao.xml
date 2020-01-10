@@ -57,9 +57,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where email = #{email}
 	</select>
 	
-	<update id="updateMember">
+	<update id="updateMember" parameterType="kr.or.scoop.dto.Member">
 		update member
-		set pwd = #{pwd}, name=#{name}, dname=#{dname}, drank=#{drank} , address = #{address}
+		set email = #{email}, pwd = #{pwd}, name=#{name}, dname=#{dname}, drank=#{drank} , address = #{address}
 		where email = #{email}
 	</update>
 	
