@@ -310,5 +310,6 @@ public class MemberController {
 		return "user/Payment";
 	}
 	
+	
 
 }
