@@ -493,12 +493,13 @@ span{
                     </li>
                     <li class="nav-label" style="padding-bottom: 0"><b>협업 공간</b></li>
                     <li class="nav-label"><button type="button" class="btn" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-toggle="modal" data-target="#myModal"><i class="icon-note menu-icon"></i> 새 협업공간 만들기</button></li>
-                    <li class="nav-label" style="padding-top: 0"><input type="search" class="form-control" style="border-radius: 0.25rem; height: 20px" placeholder="협업공간 검색"></li>
+                    <li class="nav-label" style="padding-top: 0"><input type="search" id="searchpjt" class="form-control" style="border-radius: 0.25rem; height: 20px" placeholder="협업공간 검색"></li>
                     <c:forEach items="${pjtlist}" var="p">
                     <li>
-					<a href="projectDetail.do?tseq=${p.tseq}" aria-expanded="false"><span class="iconify" data-icon="bx:bxs-flag-alt" data-inline="false" style="width: 20px;height: auto;"> </span><span class="nav-text"> &nbsp;${p.pname}</span></a>
+					<a href="projectDetail.do?tseq=${p.tseq}" aria-expanded="false"><span class="iconify" data-icon="bx:bxs-flag-alt" data-inline="false" style="width: 20px;height: auto;"> </span><span class="nav-text resultsearch"> &nbsp;${p.pname}</span></a>
 					</li>
 					</c:forEach>
+					<li class="nav-label" style="padding-bottom: 30px"></li>
                 </ul>
             </div>
         </div>
@@ -706,15 +707,16 @@ span{
 							          <label for="title">파트너 초대</label>
 							          <input class="form-control createmodal" type="text" id="invite_Submit" placeholder="이메일 주소를 입력하고 Enter키를 눌러주세요" style="width: 100%;border-radius: 0.25rem;">
 							          <p style="font-size:13px;margin-top:2%;margin-left:1%; ">이메일 주소를 입력하고 Enter키를 눌러 동료들을 초대해 보세요.</p>
-							          <div id="invite_email_append" style="min-width:50%; border: 1px solid #c8c8c8; border-radius:0.25rem; background-color:#fff; display: none; position: absolute;top:145px;left: 18px;" >
+							          <div id="invite_email_append" style="min-width:35%; border: 1px solid #c8c8c8; border-radius:0.25rem; background-color:#fff; display: none; position: absolute;top:145px;left: 18px;" >
 							     
 							           </div>
 							          <label for="content">협업 공간</label>
 							          <select id="select_invite" class="form-control" style="border-radius: 0.25rem;" >
-							         	<option>프라이빗 공간</option>
-							            <option>쫀쬬니</option>
-							            <option>이곳저곳</option>
-							            <option>캠핑이지</option>
+							         	<c:forEach items="${pjtlist}" var="p">
+					                    <option value="${p.tseq}">
+										${p.pname}
+										</option>
+										</c:forEach>
 							          </select>
 							        </div>
 							        </div>
@@ -722,7 +724,7 @@ span{
 							        <form action="inviteTeam.do" method="post">
 							        	<label for="content" style="margin-top: 3%;margin-bottom: 0px;">초대 리스트</label>
 							        	<div  id="invite_Input"  style="border: 1px solid rgba(124, 119, 119,0.3);border-radius:0.5rem;margin-right: 3%;height: 280px;overflow: auto;margin-bottom: 10px;">
-							        		<span id="invite_Input1" style="margin-left: 35%;margin-top: 10%;">
+							        		<span id="invite_Input1" style="margin-left: 35%;margin-top: 18%;">
 							        			<img src="<c:url value="/resources/images/icon/mail.png" />"style="width:75px;height: 75px;margin-left: 40%;' ">
 							        		</span>
 							        		<p id="invite_Input2" style="text-align: center;">초대 메일 보낼 이메일 주소를<br>여기에서 확인할 수 있습니다 </p>
@@ -970,11 +972,11 @@ span{
 	    $('#invite_email_append').empty();
 		
 	   if($('#invite_Submit').val().match('@')){
-		   $('#invite_email_append').append('<div id="email_append_1" class="email_append" style="margin:10px;">'+$(this).val());
+		   $('#invite_email_append').append('<div id="email_append_1" class="email_append" style="margin:10px;color:#000;">'+$(this).val());
 	   }else{
-		   $('#invite_email_append').append('<div id="email_append_1" class="email_append" style="margin:10px;">'+$(this).val()+'@naver.com</div>');
-			$('#invite_email_append').append('<div id="email_append_2" class="email_append" style="margin:10px;">'+$(this).val()+'@gmail.com</div>');
-			$('#invite_email_append').append('<div id="email_append_3" class="email_append" style="margin:10px;">'+$(this).val()+'@daum.net</div>');
+		   $('#invite_email_append').append('<div id="email_append_1" class="email_append" style="margin:10px 7px 10px 7px;color:#000;">'+$(this).val()+'@naver.com</div>');
+			$('#invite_email_append').append('<div id="email_append_2" class="email_append" style="margin:10px 7px 10px 7px;color:#000;">'+$(this).val()+'@gmail.com</div>');
+			$('#invite_email_append').append('<div id="email_append_3" class="email_append" style="margin:10px 7px 10px 7px;color:#000;">'+$(this).val()+'@daum.net</div>');
 	   }
 
 		if($('#invite_Submit').val()==""){
@@ -1014,14 +1016,14 @@ span{
 		$('#email_append_'+target).focus();
 		if($('#email_append_'+target).focus()){
 			$('.email_append').css('background-color','#fff');
-    		$('#email_append_'+target).css('background-color','rgba(181, 85, 109,0.3)');
+    		$('#email_append_'+target).css('background-color','rgba(225, 225, 225,0.5)');
 
 			if(event.keyCode==13){
 				
 				  var u_email = $('#email_append_'+target); 
 				  var regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-
-		    	  if(u_email.text()==''){
+				  console.log(u_email.text());
+		    	  if(u_email.text()=="@naver.com"){
 						alert("이메일을 입력하세요");
 		              u_email.focus();
 		              return false;
@@ -1076,5 +1078,4 @@ span{
     	}
 		
     });
-    
 </script>
