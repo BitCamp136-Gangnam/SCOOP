@@ -156,7 +156,7 @@ public class MemberController {
 			session.setAttribute("email", email);
 			session.setAttribute("kind", "normal");
 		} else {
-			viewpage = "redirect:/frontpage.do";
+			viewpage = "redirect:/index.do";
 		}
 
 		return viewpage;
@@ -180,7 +180,7 @@ public class MemberController {
 			System.out.println(session.getAttribute("kind"));
 		} else {
 			System.out.println("실패");
-			viewpage = "redirect:/frontpage.do";
+			viewpage = "redirect:/index.do";
 		}
 
 		return viewpage;
@@ -197,7 +197,7 @@ public class MemberController {
 	public String logout(HttpSession session, HttpServletResponse response) {
 		String viewpage = "";
 		System.out.println("로그아웃 함수");
-		viewpage = "redirect:/frontpage.do";
+		viewpage = "redirect:/index.do";
 		session.invalidate();
 		return viewpage;
 
@@ -230,7 +230,7 @@ public class MemberController {
 			System.out.println(session.getAttribute("kind"));
 		} else {
 			System.out.println("실패");
-			viewpage = "redirect:/frontpage.do";
+			viewpage = "redirect:/index.do";
 		}
 
 		return viewpage;
