@@ -273,6 +273,7 @@ public class MemberController {
 		return "redirect:userindex.do";
 	}
 	
+	//회원수정 페이지 이동
 	@RequestMapping(value="memberEdit.do" , method = RequestMethod.GET)
 	public String EditProfile(String email,Model model) {
 		MemberDao dao = sqlsession.getMapper(MemberDao.class);
@@ -284,6 +285,24 @@ public class MemberController {
 		return "user/app-profile";
 		
 	}
+	
+	//회원수정 체크
+	@RequestMapping(value="editCheck.do" , method = RequestMethod.POST)
+	public String UpdateProfile(Member member) {
+		int result = 0;
+		String viewpage;
+		member.setPwd(this.bCryptPasswordEncoder.encode(member.getPwd()));
+		result = service.update(member);
+		if(result > 0) {
+			System.out.println("업데이트 성공");
+			viewpage = "user/userindex";
+		}else {
+			System.out.println("업데이트 성공");
+			viewpage = "user/app-profile";
+		}
+		
+		return viewpage;
+		
 	
 	// 결재페이지
 	@RequestMapping(value = "/paymentPage.do")
