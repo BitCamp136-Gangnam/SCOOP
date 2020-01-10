@@ -16,7 +16,10 @@
   <script src="https://apis.google.com/js/platform.js" async defer></script>
   <script type="text/javascript">
         $(function(){ 
-           $('.modal').on('hidden.bs.modal', function (e) {
+
+        	
+
+            $('.modal').on('hidden.bs.modal', function (e) {
                console.log('modal close');
                $('#memlist').hide();
                $('.CodeMirror').hide();
@@ -414,7 +417,7 @@ span{
                                 <div class="dropdown-content-body">
                                     <ul>
                                         <li>
-                                            <a href="memberEdit.do?email=${sessionScope.email}"><i class="icon-user"></i> <span>내 정보</span></a>
+                                            <a href="app-profile.jsp"><i class="icon-user"></i> <span>내 정보</span></a>
                                         </li>
                                         <li>
                                             <a href="#" id="fileopen"><span class="iconify" data-icon="ion:folder-open-outline" data-inline="false" style="font-size: 15px"></span> <span> &nbsp;&nbsp;파일함</span></a>
@@ -538,11 +541,11 @@ span{
         
         <!-- Modal footer -->
         
-        <input type="hidden" name="tseq" value=15>
-        <input type="hidden" name="ischarge" value=0>
-        <input type="hidden" name="email" value="${sessionScope.email} ">
-        <input type="hidden" name="istpalarm" value=0>
-        <input type="hidden" name="ptime" value="20-01-10">
+        <!-- <input type="hidden" name="tseq" value="1"> -->
+        <!-- <input type="hidden" name="ischarge" value="0"> -->
+        <input type="hidden" name="email" value="${sessionScope.email}">
+        <!-- <input type="hidden" name="istpalarm" value="0"> -->
+        <!-- <input type="hidden" name="ptime" value="20/01/08"> -->
         <div class="modal-footer">
           <input type="submit" class="btn btn-secondary" value="만들기" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" >
           <input type="button" class="btn btn-secondary" value="취소" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">
@@ -640,7 +643,7 @@ span{
      <a href="#" class="list-group-item list-group-item-action" id="men3" style="padding: 5px">구글 드라이브(완료))</a>
      <a href="#" class="list-group-item list-group-item-action" id="men4" style="padding: 5px">파일(완료)</a>
      <a href="#" class="list-group-item list-group-item-action" id="men5" style="padding: 5px">표(이건 어떻게함;;)</a>
-     <a href="#" class="list-group-item list-group-item-action" id="men6" style="padding: 5px">관련 이이슈</a>
+     <a href="#" class="list-group-item list-group-item-action" id="men6" style="padding: 5px">관련 이슈</a>
      <a href="#" class="list-group-item list-group-item-action" id="men7" style="padding: 5px">의사결정</a>
      <a href="#" class="list-group-item list-group-item-action" id="men8" style="padding: 5px">할 일(완료)</a>
      <a href="#" class="list-group-item list-group-item-action" id="men9" style="padding: 5px">일정(완료)</a>
@@ -702,7 +705,7 @@ span{
 							          <label for="title">파트너 초대</label>
 							          <input class="form-control createmodal" type="text" id="invite_Submit" placeholder="이메일 주소를 입력하고 Enter키를 눌러주세요" style="width: 100%;border-radius: 0.25rem;">
 							          <p style="font-size:13px;margin-top:2%;margin-left:1%; ">이메일 주소를 입력하고 Enter키를 눌러 동료들을 초대해 보세요.</p>
-							          <div id="invite_email_append" style="width:50%;border: 1px solid #c8c8c8; border-radius:0.25rem; background-color:#fff; display: none; position: absolute;top:145px;left: 18px; " >
+							          <div id="invite_email_append" style="min-width:50%; border: 1px solid #c8c8c8; border-radius:0.25rem; background-color:#fff; display: none; position: absolute;top:145px;left: 18px;" >
 							     
 							           </div>
 							          <label for="content">협업 공간</label>
@@ -942,51 +945,133 @@ span{
         $(this).attr('style','cursor: pointer;color:#535359;font-size: 18px;padding-bottom: 12px;');
         });
 
-    	var number =0;
-    $('#invite_Submit').keyup(function(event){
-			if(event.keyCode==13){
-				$('#invite_Input').append('<span style="border:1px solid rgba(124, 119, 119,0.5);border-radius:0.25rem; padding-top: 1%;padding-bottom: 1%;padding-left: 2%;padding-right: 2%;margin:2%;"><i class="far fa-paper-plane" style="color:#9e6767;padding-right: 5px;"></i><input type="text" value='+$(this).val()+' name=invite'+(number++)+' style="border:0px; width:200px;margin-left:3px;" readonly><button type="button" id=""  class="invite_close" style="border:0;background-color:#fff;border-radius:0.25rem;"><i class="fas fa-times" style="color:#A84747;padding-left: 10px;"></i></button></span>');
-				$(this).val('');
-				$('#invitebtn').removeAttr('disabled');
-				$('#invitecnt').val(number);
-				$('#invitebtn').empty();
-				$('#invitebtn').prepend($('#invite_Input').children().length - 2+'명의 멤버 초대하기');
-				}
-			
-    $('.invite_close').click(function(){
-			$('#invitebtn').empty();
-			$('#invitebtn').prepend($('#invite_Input').children().length - 2+'명의 멤버 초대하기');
-			$(this).parent().remove();
-			  if($('#invite_Input').children().length==2){
-				  $('#invitebtn').empty();
-				  $('#invitebtn').prepend('멤버 초대하기');
-				  $('#invitebtn').attr('disabled','disabled');
-		    	 $('#invite_Input1').show();
-		         $('#invite_Input2').show();
-		        }
-        });
-    if($('#invite_Input').children().length>2){
-        $('#invite_Input1').hide();
-        $('#invite_Input2').hide();
-        
-        }
+    var number =0;
+
+	var target=1;
+	/* var regExp  = /([w-.]+)@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.)|(([w-]+.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(]?)$/;
+	
+	if('!$("#invite_Submit").val()'){
+		 alert("이메일주소를 입력 해 주세요"); 
+		   $("#invite_Submit").focus(); 
+		   return false; 
+   } else { 
+   	   if(!regExp.test($("#invite_Submit").val())) { 
+   		      alert("이메일 주소가 유효하지 않습니다"); 
+   		      $("#invite_Submit").focus(); 
+   		      return false; 
+   		   } 
+   }  */
+
+  
+
+   $('#invite_Submit').keyup(function(event){
+    	
 	    $('#invite_email_append').show();
 	    $('#invite_email_append').empty();
 	    
-		$('#invite_email_append').append('<div class="email_append">'+$(this).val()+'@naver.com</div>');
-		$('#invite_email_append').append('<div class="email_append">'+$(this).val()+'@gmail.com</div>');
-		$('#invite_email_append').append('<div class="email_append">'+$(this).val()+'@daum.net</div>');
+		$('#invite_email_append').append('<div id="email_append_1" class="email_append" style="margin:10px;">'+$(this).val()+'@naver.com</div>');
+		$('#invite_email_append').append('<div id="email_append_2" class="email_append" style="margin:10px;">'+$(this).val()+'@gmail.com</div>');
+		$('#invite_email_append').append('<div id="email_append_3" class="email_append" style="margin:10px;">'+$(this).val()+'@daum.net</div>');
 
+		if($('#invite_Submit').val()==""){
+			$('#invite_email_append').hide();
+		}
+		else{
+			$('#invite_email_append').show();
+		}
+		
 		if(event.keyCode==13){
 		   $('#invite_email_append').hide();
 		}
+		
 
 		
-		/* if(event.keyCode==50&&event.shiftKey){
+		var key = event.keyCode;
+		console.log(key);
+		switch(key){
+		case 38:
+			console.log("위");
+			target--;
+			break;
+		case 40:
+			target++;
+			break;
+		case 39:
+			break;
+		case 37:
+			break;
+		}
+		if(target<1){
+			target=1;
+		}
+		if(target>3){
+			target=3;
+		}
+		$('#email_append_'+target).focus();
+		if($('#email_append_'+target).focus()){
+			$('.email_append').css('background-color','#fff');
+    		$('#email_append_'+target).css('background-color','rgba(181, 85, 109,0.3)');
+
+			if(event.keyCode==13){
+				
+				  var u_email = $('#email_append_'+target); 
+				  var regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+
+		    	  if(u_email.text()==''){
+						alert("이메일을 입력하세요");
+		              u_email.focus();
+		              return false;
+		          }else {
+		              if(!regEmail.test(u_email.text())) {
+		            	  alert("유효한 이메일 형식이 아닙니다.");
+		                  u_email.focus();
+		                  return false;
+		              }
+		          } 
+		  		if(event.shiftKey&&event.keyCode==50){
+			  		console.log("?????");
+					$('#invite_email_append').hide();
+					$('#invite_Input').append('<span style="border:1px solid rgba(124, 119, 119,0.5);border-radius:0.25rem; padding-top: 1%;padding-bottom: 1%;padding-left: 2%;padding-right: 2%;margin:2%;"><i class="far fa-paper-plane" style="color:#9e6767;padding-right: 5px;"></i><input type="text" value='+$(this).val()+' name=invite'+(number++)+' style="border:0px; width:200px;margin-left:3px;" readonly><button type="button" id=""  class="invite_close" style="border:0;background-color:#fff;border-radius:0.25rem;"><i class="fas fa-times" style="color:#A84747;padding-left: 10px;"></i></button></span>');
+					$(this).val('');
+					$('#invitebtn').removeAttr('disabled');
+					$('#invitecnt').val(number);
+					$('#invitebtn').empty();
+					$('#invitebtn').prepend($('#invite_Input').children().length - 2+'명의 멤버 초대하기');
+					
+				}else{
+					$('#invite_Input').append('<span style="border:1px solid rgba(124, 119, 119,0.5);border-radius:0.25rem; padding-top: 1%;padding-bottom: 1%;padding-left: 2%;padding-right: 2%;margin:2%;"><i class="far fa-paper-plane" style="color:#9e6767;padding-right: 5px;"></i><input type="text" value='+$('#email_append_'+target).text()+' name=invite'+(number++)+' style="border:0px; width:200px;margin-left:3px;" readonly><button type="button" id=""  class="invite_close" style="border:0;background-color:#fff;border-radius:0.25rem;"><i class="fas fa-times" style="color:#A84747;padding-left: 10px;"></i></button></span>');
+					$(this).val('');
+					$('#invitebtn').removeAttr('disabled');
+					$('#invitecnt').val(number);
+					$('#invitebtn').empty();
+					$('#invitebtn').prepend($('#invite_Input').children().length - 2+'명의 멤버 초대하기');
+
+
+					} 
+				
+							}
 			
-		} */
-		
-			
+			  $('.invite_close').click(function(){
+					$('#invitebtn').empty();
+					$('#invitebtn').prepend($('#invite_Input').children().length - 2+'명의 멤버 초대하기');
+					$(this).parent().remove();
+					  if($('#invite_Input').children().length==2){
+						  $('#invitebtn').empty();
+						  $('#invitebtn').prepend('멤버 초대하기');
+						  $('#invitebtn').attr('disabled','disabled');
+				    	 $('#invite_Input1').show();
+				         $('#invite_Input2').show();
+				        }
+		        });
+
+		       if($('#invite_Input').children().length>2){
+		        $('#invite_Input1').hide();
+		        $('#invite_Input2').hide();
+		        }
+
+		        
+		        
+    	}
 		
     });
     
