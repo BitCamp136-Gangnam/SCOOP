@@ -414,7 +414,7 @@ span{
                                 <div class="dropdown-content-body">
                                     <ul>
                                         <li>
-                                            <a href="app-profile.jsp"><i class="icon-user"></i> <span>내 정보</span></a>
+                                            <a href="memberEdit.do?email=${sessionScope.email}"><i class="icon-user"></i> <span>내 정보</span></a>
                                         </li>
                                         <li>
                                             <a href="#" id="fileopen"><span class="iconify" data-icon="ion:folder-open-outline" data-inline="false" style="font-size: 15px"></span> <span> &nbsp;&nbsp;파일함</span></a>
@@ -538,11 +538,11 @@ span{
         
         <!-- Modal footer -->
         
-        <!-- <input type="hidden" name="tseq" value="1"> -->
-        <!-- <input type="hidden" name="ischarge" value="0"> -->
-        <input type="hidden" name="email" value="${sessionScope.email}">
-        <!-- <input type="hidden" name="istpalarm" value="0"> -->
-        <!-- <input type="hidden" name="ptime" value="20/01/08"> -->
+        <input type="hidden" name="tseq" value=15>
+        <input type="hidden" name="ischarge" value=0>
+        <input type="hidden" name="email" value="${sessionScope.email} ">
+        <input type="hidden" name="istpalarm" value=0>
+        <input type="hidden" name="ptime" value="20-01-10">
         <div class="modal-footer">
           <input type="submit" class="btn btn-secondary" value="만들기" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" >
           <input type="button" class="btn btn-secondary" value="취소" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-dismiss="modal">
@@ -640,7 +640,7 @@ span{
      <a href="#" class="list-group-item list-group-item-action" id="men3" style="padding: 5px">구글 드라이브(완료))</a>
      <a href="#" class="list-group-item list-group-item-action" id="men4" style="padding: 5px">파일(완료)</a>
      <a href="#" class="list-group-item list-group-item-action" id="men5" style="padding: 5px">표(이건 어떻게함;;)</a>
-     <a href="#" class="list-group-item list-group-item-action" id="men6" style="padding: 5px">관련 이슈</a>
+     <a href="#" class="list-group-item list-group-item-action" id="men6" style="padding: 5px">관련 이이슈</a>
      <a href="#" class="list-group-item list-group-item-action" id="men7" style="padding: 5px">의사결정</a>
      <a href="#" class="list-group-item list-group-item-action" id="men8" style="padding: 5px">할 일(완료)</a>
      <a href="#" class="list-group-item list-group-item-action" id="men9" style="padding: 5px">일정(완료)</a>
@@ -970,7 +970,6 @@ span{
         $('#invite_Input2').hide();
         
         }
-
 	    $('#invite_email_append').show();
 	    $('#invite_email_append').empty();
 	    
@@ -986,7 +985,9 @@ span{
 		/* if(event.keyCode==50&&event.shiftKey){
 			
 		} */
-
+		
+			
+		
     });
     
 </script>
