@@ -47,6 +47,6 @@ public class BoardController {
 		System.out.println("mention : " + mention);
 		
 		
-		return "private/pravate-place";
+		return "redirect:/userindex.do";
 	}
 }

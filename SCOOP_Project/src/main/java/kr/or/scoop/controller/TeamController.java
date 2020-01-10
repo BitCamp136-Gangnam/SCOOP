@@ -28,10 +28,10 @@ public class TeamController {
 		
 		if(result > 0) {
 			System.out.println("프로젝트 생성성공");
-			viewpage = "user/userindex";
+			viewpage = "redirect:/userindex.do";
 		}else {
 			System.out.println("프로젝트 생성실패");
-			viewpage = "user/userindex";
+			viewpage = "redirect:/userindex.do";
 		}
 		return viewpage;
 		
