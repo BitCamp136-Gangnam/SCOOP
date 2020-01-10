@@ -538,10 +538,10 @@ span{
         
         <!-- Modal footer -->
         
-        <input type="hidden" name="tseq" value="1">
-        <input type="hidden" name="ischarge" value="0">
+        <!-- <input type="hidden" name="tseq" value="1"> -->
+        <!-- <input type="hidden" name="ischarge" value="0"> -->
         <input type="hidden" name="email" value="${sessionScope.email} ">
-        <input type="hidden" name="istpalarm" value="0">
+        <!-- <input type="hidden" name="istpalarm" value="0"> -->
         <!-- <input type="hidden" name="ptime" value="20/01/08"> -->
         <div class="modal-footer">
           <input type="submit" class="btn btn-secondary" value="만들기" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" >
@@ -964,6 +964,7 @@ span{
         $('#invite_Input2').hide();
         
         }
+    
     $('#invite_email_append').show();
     $('#invite_email_append').empty();
     
