@@ -494,11 +494,11 @@ span{
                     <li class="nav-label" style="padding-bottom: 0"><b>협업 공간</b></li>
                     <li class="nav-label"><button type="button" class="btn" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-toggle="modal" data-target="#myModal"><i class="icon-note menu-icon"></i> 새 협업공간 만들기</button></li>
                     <li class="nav-label" style="padding-top: 0"><input type="search" class="form-control" style="border-radius: 0.25rem; height: 20px" placeholder="협업공간 검색"></li>
+                    <c:forEach items="${pjtlist}" var="p">
                     <li>
-                        <a href="coop-issue.htm" aria-expanded="false">
-                            <span class="iconify" data-icon="bx:bxs-flag-alt" data-inline="false" style="width: 20px;height: auto;"> </span><span class="nav-text"> &nbsp;쫀쬬니(append로..)</span>
-                        </a>
-                    </li>
+					<a href="projectDetail.do?tseq=${p.tseq}" aria-expanded="false"><span class="iconify" data-icon="bx:bxs-flag-alt" data-inline="false" style="width: 20px;height: auto;"> </span><span class="nav-text"> &nbsp;${p.pname}</span></a>
+					</li>
+					</c:forEach>
                 </ul>
             </div>
         </div>
@@ -829,7 +829,7 @@ span{
             var text = "";
           text = $('#issuecontent').val().replace("@","");
           $('#issuecontent').val(text);
-           $('#todoresult').append('<div>@'+$(this).text()+'</div>');
+           $('#todoresult').append('<div id="mention" name="mention">@'+$(this).text()+'</div>');
            console.log($(this).text());
            $('#todoresult').show();
            $('#memlist').hide();

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.mail.internet.MimeMessage;
@@ -23,8 +24,10 @@ import org.springframework.ui.velocity.VelocityEngineUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.or.scoop.dao.ProjectDao;
 import kr.or.scoop.dao.MemberDao;
 import kr.or.scoop.dto.Member;
+import kr.or.scoop.dto.TeamPjt;
 import kr.or.scoop.service.MemberService;
 import kr.or.scoop.utils.Mail;
 
@@ -142,11 +145,18 @@ public class MemberController {
 		String viewpage = "";
 		result = service.loginMember(email, pwd);
 		if (result > 0) {
-			viewpage = "user/userindex";
+			viewpage = "redirect:/userindex.do";
+			ProjectDao noticeDao = sqlsession.getMapper(ProjectDao.class);
+			System.out.println("1111");
+			List<TeamPjt> pjtlist = noticeDao.getPJT(email);
+			System.out.println("2222");
+			session.setAttribute("pjtlist", pjtlist);
+			System.out.println("3333");
+			System.out.println(pjtlist.get(0));
 			session.setAttribute("email", email);
 			session.setAttribute("kind", "normal");
 		} else {
-			viewpage = "index";
+			viewpage = "redirect:/frontpage.do";
 		}
 
 		return viewpage;
@@ -161,13 +171,16 @@ public class MemberController {
 		result = service.googleIdCheck(email, name);
 		if (result > 0) {
 			System.out.println("성공");
-			viewpage = "user/userindex";
+			ProjectDao noticeDao = sqlsession.getMapper(ProjectDao.class);
+			List<TeamPjt> pjtlist = noticeDao.getPJT(email);
+			session.setAttribute("pjtlist", pjtlist);
+			viewpage = "redirect:/userindex.do";
 			session.setAttribute("email", email);
 			session.setAttribute("kind", "google");
 			System.out.println(session.getAttribute("kind"));
 		} else {
 			System.out.println("실패");
-			viewpage = "index";
+			viewpage = "redirect:/frontpage.do";
 		}
 
 		return viewpage;
@@ -184,7 +197,7 @@ public class MemberController {
 	public String logout(HttpSession session, HttpServletResponse response) {
 		String viewpage = "";
 		System.out.println("로그아웃 함수");
-		viewpage = "index";
+		viewpage = "redirect:/frontpage.do";
 		session.invalidate();
 		return viewpage;
 
@@ -208,13 +221,16 @@ public class MemberController {
 		result = service.naverIdCheck(email, name);
 		if (result > 0) {
 			System.out.println("성공");
-			viewpage = "user/userindex";
+			viewpage = "redirect:/userindex.do";
+			ProjectDao noticeDao = sqlsession.getMapper(ProjectDao.class);
+			List<TeamPjt> pjtlist = noticeDao.getPJT(email);
+			session.setAttribute("pjtlist", pjtlist);
 			session.setAttribute("email", email);
 			session.setAttribute("kind", "naver");
 			System.out.println(session.getAttribute("kind"));
 		} else {
 			System.out.println("실패");
-			viewpage = "index";
+			viewpage = "redirect:/frontpage.do";
 		}
 
 		return viewpage;
