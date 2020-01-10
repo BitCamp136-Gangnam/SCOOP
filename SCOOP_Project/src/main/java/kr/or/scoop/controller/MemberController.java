@@ -309,6 +309,15 @@ public class MemberController {
 		return "user/Payment";
 	}
 	
+	//알림 페이지 
+	@RequestMapping(value="app-alram.do", method=RequestMethod.GET)
+	public String alarmpage() {
+		return "user/app-alram";
+	}
 	
+	@RequestMapping(value="app-external.do", method=RequestMethod.GET)
+	public String externalpage() {
+		return "user/app-external";
+	}
 
 }
