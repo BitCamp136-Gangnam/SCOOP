@@ -194,20 +194,6 @@ public class MemberController {
 		System.out.println("로그아웃 함수");
 		viewpage = "index";
 		session.invalidate();
-		PrintWriter out;
-		try {
-			out = response.getWriter();
-			out.println("<script>Swal.fire({\r\n" + 
-					"							        	    		  title: \"로그아웃\",\r\n" + 
-					"							        	    		  text: \"로그아웃 성공\",\r\n" + 
-					"							        	    		  icon: \"success\",\r\n" + 
-					"							        	    		  button: \"확인\"\r\n" + 
-					"							        	    		})</script>");
-			out.flush(); 
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
 		return viewpage;
 
 	}
