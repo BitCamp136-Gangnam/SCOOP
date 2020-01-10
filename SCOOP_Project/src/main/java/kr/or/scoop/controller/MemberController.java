@@ -278,8 +278,7 @@ public class MemberController {
 	public String EditProfile(Model model,HttpSession session) {
 		MemberDao dao = sqlsession.getMapper(MemberDao.class);
 		Member member = dao.getMember((String)session.getAttribute("email"));
-		System.out.println("들어오긴하니??");
-		System.out.println("컨트롤" + member);
+		
 		model.addAttribute("member",member);
 		
 		return "user/app-profile";
