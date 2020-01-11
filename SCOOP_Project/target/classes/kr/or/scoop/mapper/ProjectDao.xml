@@ -43,10 +43,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<result column="pjuserrank" property="pjuserrank"/>
 </resultMap>
 <select id="detailPJT" parameterType="kr.or.scoop.dto.TeamPjt" resultMap="TeamPjt">
-	SELECT T.TSEQ ,T.pname,T.pcontent ,S.TISEQ, S.tititle, S.TICONTENT, S.TIDATE FROM TEAMPJT T 
-	JOIN TISSUE S ON T.TSEQ = S.TSEQ WHERE T.TSEQ = #{TSEQ}
+	SELECT TSEQ,PNAME,PCONTENT FROM TEAMPJT WHERE TSEQ = #{TSEQ}
 </select>
 <select id="getPJT" parameterType="kr.or.scoop.dto.Tpmember" resultMap="Tpmember">
 		select m.email, m.TSEQ, t.pname from tpmember m join teampjt t on m.tseq = t.tseq where m.email = #{email}
+</select>
+<select id="getTissue" parameterType="kr.or.scoop.dto.TeamPjt" resultMap="TeamPjt">
+	SELECT T.TSEQ ,T.pname,T.pcontent ,S.TISEQ, S.tititle, S.TICONTENT, S.TIDATE FROM TEAMPJT T 
+	JOIN TISSUE S ON T.TSEQ = S.TSEQ WHERE T.TSEQ = #{TSEQ}
 </select>
 </mapper>

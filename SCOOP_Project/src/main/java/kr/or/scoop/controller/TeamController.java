@@ -1,6 +1,7 @@
 package kr.or.scoop.controller;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -74,7 +75,7 @@ public class TeamController {
 		return "certified/InviteCertified";
 	}
 	
-	//
+	//팀 디테일 
 	@RequestMapping(value = "projectDetail.do" , method = RequestMethod.GET)
 	public String JoinProject(int tseq, Model model) {
 		System.out.println(tseq);
@@ -82,6 +83,17 @@ public class TeamController {
 		TeamPjt pjt = dao.detailPJT(tseq);
 		System.out.println(pjt);
 		model.addAttribute("tpj",pjt);
+		
+		return "user/ProjectDetail";
+		
+	}
+	
+	@RequestMapping(value = "projectDetail.do")
+	public String ProjectIssue(int tseq, Model model) {
+		System.out.println(tseq);
+		ProjectDao dao = sqlsession.getMapper(ProjectDao.class);
+		List<TeamPjt> tp = dao.getTissue(tseq);
+		model.addAttribute("tpis",tp);
 		
 		return "user/ProjectDetail";
 		
