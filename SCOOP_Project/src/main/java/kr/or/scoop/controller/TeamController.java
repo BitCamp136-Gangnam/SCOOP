@@ -53,7 +53,7 @@ public class TeamController {
 		System.out.println("인바이트인서트 들어오니" + member);
 		String mailTo = (String)session.getAttribute("mailTo");
 		String tseq = (String)session.getAttribute("tseq");
-		result = service.insertTeamPjt(mailTo, tseq);
+		result = service.insertTeamPjt2(mailTo, tseq);
 		if (result > 0) {
 			System.out.println("협업공간 초대 성공");
 			viewpage = "redirect:/userindex.do";
@@ -68,6 +68,7 @@ public class TeamController {
 	
 	@RequestMapping(value = "/invitecertified.do")
 	public String certified() {
+		System.out.println("인바이트서티파이드");
 		return "certified/InviteCertified";
 	}
 	
