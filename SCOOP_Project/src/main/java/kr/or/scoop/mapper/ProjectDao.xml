@@ -41,6 +41,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<result column="tseq" property="tseq"/>
 	<result column="email" property="email"/>
 	<result column="pjuserrank" property="pjuserrank"/>
+	<result column="pname" property="pname"/>
 </resultMap>
 <select id="detailPJT" parameterType="kr.or.scoop.dto.TeamPjt" resultMap="TeamPjt">
 	SELECT T.TSEQ ,T.pname,T.pcontent ,S.TISEQ, S.tititle, S.TICONTENT, S.TIDATE FROM TEAMPJT T 
