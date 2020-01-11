@@ -72,6 +72,7 @@ public class TeamController {
 		return "certified/InviteCertified";
 	}
 	
+	//
 	@RequestMapping(value = "projectDetail.do" , method = RequestMethod.GET)
 	public String JoinProject(int tseq, Model model) {
 		System.out.println(tseq);
