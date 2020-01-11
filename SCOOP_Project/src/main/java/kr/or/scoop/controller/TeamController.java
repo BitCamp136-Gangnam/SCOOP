@@ -42,14 +42,16 @@ public class TeamController {
 		
 	}
 	
-	@RequestMapping(value = "InviteOk.do", method = { RequestMethod.POST, RequestMethod.GET })
-	public String normalInsert(Member member, HttpSession session) throws ClassNotFoundException, SQLException {
+	@RequestMapping(value = "inviteOk.do", method = { RequestMethod.POST, RequestMethod.GET })
+	public String normalInsert(HttpSession session) throws ClassNotFoundException, SQLException {
 		int result = 0;
 		String viewpage = "";
-		System.out.println("인바이트인서트 들어오니" + member);
-		String mailTo = (String)session.getAttribute("mailTo");
-		String tseq = (String)session.getAttribute("tseq");
-		result = service.insertTeamPjt2(mailTo, tseq);
+		String email = (String)session.getAttribute("mailTo");
+		String temptseq = (String)session.getAttribute("tseq");
+		int tseq = Integer.parseInt(temptseq);
+		System.out.println("메일투"+email);
+		System.out.println("티에스이큐"+tseq);
+		result = service.insertTeamPjt2(email, tseq);
 		if (result > 0) {
 			System.out.println("협업공간 초대 성공");
 			viewpage = "redirect:/userindex.do";

@@ -23,11 +23,14 @@ public class BoardService {
 		return result;
 		
 	}
-	public int insertTeamPjt2(String mailTo, String tseq) {
+	public int insertTeamPjt2(String email, int tseq) {
 		int result = 0;
 		// 아이디 존재 함 등록 못함
+		System.out.println("매퍼 전");
 		ProjectDao dao = sqlsession.getMapper(ProjectDao.class);
-		result = dao.insertPJT2(mailTo, tseq);
+		System.out.println("매퍼 후");
+		System.out.println(email + tseq);
+		result = dao.insertPJT2(email, tseq);
 		System.out.println("꺄르르륵");
 		return result;
 		

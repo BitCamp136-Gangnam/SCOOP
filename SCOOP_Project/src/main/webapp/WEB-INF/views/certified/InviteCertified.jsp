@@ -14,8 +14,9 @@ session.setAttribute("tseq", tseq);
 System.out.println(tseq);
 String mailTo = request.getParameter("mailTo");
 session.setAttribute("mailTo", mailTo);
-System.out.println(mailTo);
-if(session.getAttribute("email")==mailTo){
+System.out.println("받는사람"+mailTo);
+System.out.println("세션값"+session.getAttribute("email"));
+if(session.getAttribute("email").equals(mailTo)){
 	System.out.println("성공 왔니");
 	%>
 	<script>

@@ -7,11 +7,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  insert into Teampjt (tseq,email,pname,pcontent,ptime,istpalarm,ischarge)
   values (tseq_teampjt_seq.nextval,#{email},#{pname},#{pcontent},sysdate,#{istpalarm},#{ischarge})
 </insert>
-<insert id="insertPJT2" parameterType="kr.or.scoop.dto.TeamPjt" >
- insert into Teampjt (tseq,email,pname,pcontent,ptime,istpalarm,ischarge)
-  values (#{tseq},#{mailTo},select pname from teampjt where tseq=#{tseq},select pcontent from teampjt where tseq=#{tseq},select ptime from teampjt where tseq=#{tseq},select istpalarm from teampjt where tseq=#{tseq},select ischarge from teampjt where tseq=#{tseq})
+<insert id="insertPJT2">
+ insert into tpmember (email,tseq,pjuserrank)
+  values (#{param1},#{param2},100)
 </insert>
-<select id="getPJT" resultType="kr.or.scoop.dto.TeamPjt">
-		SELECT tseq,email,pname,pcontent,ptime,istpalarm,ischarge FROM teampjt WHERE email = #{email}
-</select>
 </mapper>
