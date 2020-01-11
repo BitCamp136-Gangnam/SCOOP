@@ -1,4 +1,4 @@
-SCOOP_Project/target/*
+SCOOP_Project/target/classes/*
 SCOOP_Project/.tern-project
 *.class
 *.classpath
