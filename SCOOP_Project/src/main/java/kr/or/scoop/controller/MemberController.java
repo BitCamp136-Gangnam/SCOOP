@@ -28,6 +28,7 @@ import kr.or.scoop.dao.ProjectDao;
 import kr.or.scoop.dao.MemberDao;
 import kr.or.scoop.dto.Member;
 import kr.or.scoop.dto.TeamPjt;
+import kr.or.scoop.dto.Tpmember;
 import kr.or.scoop.service.MemberService;
 import kr.or.scoop.utils.Mail;
 
@@ -183,9 +184,11 @@ public class MemberController {
 		email = (String)session.getAttribute("email");
 		ProjectDao noticeDao = sqlsession.getMapper(ProjectDao.class);
 		System.out.println("1111");
-		List<TeamPjt> pjtlist = noticeDao.getPJT(email);
+		List<Tpmember> pjtlist = noticeDao.getPJT(email);
 		System.out.println("2222");
-		session.setAttribute("pjtlist", pjtlist);
+		if(pjtlist!=null) {
+			session.setAttribute("pjtlist", pjtlist);
+		}
 		System.out.println("3333");
 		/* System.out.println(pjtlist.get(0)); */
 		return "user/userindex";
@@ -250,8 +253,8 @@ public class MemberController {
 			System.out.println("cnt:"+cnt);
 			String[] invitemem = new String[cnt];
 			for(int i=0;i<cnt;i++) {
-				if(request.getParameter("invite"+i)!=null) {
-					invitemem[i] = request.getParameter("invite"+i);
+				if(request.getParameter("email"+i)!=null) {
+					invitemem[i] = request.getParameter("email"+i);
 					System.out.println(invitemem[i]);
 					messageHelper.setFrom("leeyong1321@gmail.com");
 					messageHelper.setTo(invitemem[i]);

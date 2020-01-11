@@ -1,14 +1,18 @@
 package kr.or.scoop.controller;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.or.scoop.dao.ProjectDao;
 import kr.or.scoop.dto.Member;
 import kr.or.scoop.dto.TeamPjt;
 import kr.or.scoop.service.BoardService;
@@ -16,9 +20,10 @@ import kr.or.scoop.service.BoardService;
 @Controller
 public class TeamController {
 	
-	/*
-	 * @Autowired private SqlSession sqlsession;
-	 */
+	
+	  @Autowired
+	  private SqlSession sqlsession;
+	
 	@Autowired
 	private BoardService service;
 	
@@ -42,14 +47,16 @@ public class TeamController {
 		
 	}
 	
-	@RequestMapping(value = "InviteOk.do", method = { RequestMethod.POST, RequestMethod.GET })
-	public String normalInsert(Member member, HttpSession session) throws ClassNotFoundException, SQLException {
+	@RequestMapping(value = "inviteOk.do", method = { RequestMethod.POST, RequestMethod.GET })
+	public String normalInsert(HttpSession session) throws ClassNotFoundException, SQLException {
 		int result = 0;
 		String viewpage = "";
-		System.out.println("인바이트인서트 들어오니" + member);
-		String mailTo = (String)session.getAttribute("mailTo");
-		String tseq = (String)session.getAttribute("tseq");
-		result = service.insertTeamPjt(mailTo, tseq);
+		String email = (String)session.getAttribute("mailTo");
+		String temptseq = (String)session.getAttribute("tseq");
+		int tseq = Integer.parseInt(temptseq);
+		System.out.println("메일투"+email);
+		System.out.println("티에스이큐"+tseq);
+		result = service.insertTeamPjt2(email, tseq);
 		if (result > 0) {
 			System.out.println("협업공간 초대 성공");
 			viewpage = "redirect:/userindex.do";
@@ -64,8 +71,25 @@ public class TeamController {
 	
 	@RequestMapping(value = "/invitecertified.do")
 	public String certified() {
+		System.out.println("인바이트서티파이드");
 		return "certified/InviteCertified";
 	}
 	
+	//팀 디테일 
+	@RequestMapping(value = "projectDetail.do" , method = RequestMethod.GET)
+	public String JoinProject(int tseq, Model model) {
+		System.out.println(tseq);
+		ProjectDao dao = sqlsession.getMapper(ProjectDao.class);
+		TeamPjt pjt = dao.detailPJT(tseq);
+		List<TeamPjt> tp = dao.getTissue(tseq);
+		System.out.println(pjt);
+		model.addAttribute("tpj",pjt); //프로젝트 이름 , 설명
+		model.addAttribute("tp",tp); //프로젝트 글 목록
+		
+		return "user/ProjectDetail";
+		
+	}
+	
+
 	
 }
