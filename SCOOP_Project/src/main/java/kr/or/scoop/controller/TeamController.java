@@ -98,7 +98,7 @@ public class TeamController {
 		if (selectTeam.equals((String) session.getAttribute("email"))) {
 			path = "writeMyIssue.do";
 		} else {
-			path = "writeTissue.do";
+			path = "writeTissue.do"; // 주석주석
 		}
 		return path;
 
