@@ -10,4 +10,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="getPJT" resultType="kr.or.scoop.dto.TeamPjt">
 		SELECT tseq,email,pname,pcontent,ptime,istpalarm,ischarge FROM teampjt WHERE email = #{email}
 </select>
+<resultMap type="kr.or.scoop.dto.Tissue" id="Tissue">
+	<result column="tiseq" property="tiseq"/>
+	<result column="tseq" property="tseq"/>
+	<result column="email" property="email"/>
+	<result column="tititle" property="tititle"/>
+	<result column="ticontent" property="ticontent"/>
+	<result column="tistart" property="tistart"/>
+	<result column="tiend" property="tiend"/>
+	<result column="isprocess" property="isprocess"/>
+	<result column="tfilename" property="tfilename"/>
+	<result column="tfilesize" property="tfilesize"/>
+	<result column="istbook" property="istbook"/>
+	<result column="issee" property="issee"/>
+	<result column="tidate" property="tidate"/>
+</resultMap>
+<resultMap type="kr.or.scoop.dto.TeamPjt" id="TeamPjt">
+	<result column="tseq" property="tseq"/>
+	<result column="email" property="email"/>
+	<result column="pname" property="pname"/>
+	<result column="pcontent" property="pcontent"/>
+	<result column="ptime" property="ptime"/>
+	<result column="istpalarm" property="istpalarm"/>
+	<result column="ischarge" property="ischarge"/>
+	<collection property="tissue" resultMap="Tissue"/>
+</resultMap>
+<select id="detailPJT" parameterType="kr.or.scoop.dto.TeamPjt" resultMap="TeamPjt">
+	SELECT T.TSEQ ,T.pname,T.pcontent ,S.TISEQ, S.tititle, S.TICONTENT, S.TIDATE FROM TEAMPJT T 
+	JOIN TISSUE S ON T.TSEQ = S.TSEQ WHERE T.TSEQ = #{TSEQ}
+</select>
+
+
 </mapper>

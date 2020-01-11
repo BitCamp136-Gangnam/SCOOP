@@ -1,2 +1,5 @@
 SCOOP_Project/target/*
 SCOOP_Project/.tern-project
+*.class
+*.classpath
+*.component
