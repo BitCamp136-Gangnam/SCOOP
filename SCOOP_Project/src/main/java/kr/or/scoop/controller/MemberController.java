@@ -187,7 +187,7 @@ public class MemberController {
 		System.out.println("2222");
 		session.setAttribute("pjtlist", pjtlist);
 		System.out.println("3333");
-		System.out.println(pjtlist.get(0));
+		/* System.out.println(pjtlist.get(0)); */
 		return "user/userindex";
 	}
 

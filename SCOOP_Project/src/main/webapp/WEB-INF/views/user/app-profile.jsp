@@ -106,7 +106,7 @@
     		<label for="address">주소</label>
     		<input class="form-control myinfo" type="text" id="address" name="address" style="width: 60%" value="${member.address}">
     		<br>
-    		<input type="submit" class="btn" style="background-color: #fff5a5; border-color: #CCCCCC; color: gray; cursor: pointer;" value="수정완료">
+    		<input type="submit" class="btn" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" value="수정완료">
     		</form>	
     	</div>
     	</div>
