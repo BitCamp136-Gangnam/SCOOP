@@ -81,23 +81,15 @@ public class TeamController {
 		System.out.println(tseq);
 		ProjectDao dao = sqlsession.getMapper(ProjectDao.class);
 		TeamPjt pjt = dao.detailPJT(tseq);
-		System.out.println(pjt);
-		model.addAttribute("tpj",pjt);
-		
-		return "user/ProjectDetail";
-		
-	}
-	
-	@RequestMapping(value = "projectDetail.do")
-	public String ProjectIssue(int tseq, Model model) {
-		System.out.println(tseq);
-		ProjectDao dao = sqlsession.getMapper(ProjectDao.class);
 		List<TeamPjt> tp = dao.getTissue(tseq);
-		model.addAttribute("tpis",tp);
+		System.out.println(pjt);
+		model.addAttribute("tpj",pjt); //프로젝트 이름 , 설명
+		model.addAttribute("tp",tp); //프로젝트 글 목록
 		
 		return "user/ProjectDetail";
 		
 	}
 	
+
 	
 }
