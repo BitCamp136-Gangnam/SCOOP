@@ -1,6 +1,2 @@
-SCOOP_Project/target/classes/*
+SCOOP_Project/target/*
 SCOOP_Project/.tern-project
-SCOOP_Project/target/classes/kr/or/scoop/controller/*
-*.class
-*.classpath
-*.component
