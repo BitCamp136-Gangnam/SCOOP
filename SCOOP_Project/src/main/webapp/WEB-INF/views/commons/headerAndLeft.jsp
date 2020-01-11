@@ -1077,7 +1077,7 @@ span{
 		
     });
 
-   /* 프로젝트 비동기 검색 */
+   /* 프로젝트 이름 검색 - 도연 */
    function filter(){
        var value, name, item, i;
        value = document.getElementById("searchpjt").value.toUpperCase();
