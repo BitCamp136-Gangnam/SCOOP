@@ -245,6 +245,7 @@ public class MemberController {
 			MimeMessage message = mailSender.createMimeMessage();
 			MimeMessageHelper messageHelper = new MimeMessageHelper(message,true,"UTF-8");
 			request.setCharacterEncoding("UTF-8");
+			String tseq = request.getParameter("tseq");
 			int cnt = Integer.parseInt(request.getParameter("invitecnt"));
 			System.out.println("cnt:"+cnt);
 			String[] invitemem = new String[cnt];
@@ -258,6 +259,7 @@ public class MemberController {
 					Map model = new HashMap();
 					model.put("mailTo", invitemem[i]);
 					model.put("mailFrom", mailFrom);
+					model.put("tseq", tseq);
 					String mailBody = VelocityEngineUtils.mergeTemplateIntoString(velocityEngineFactoryBean.createVelocityEngine(), "invite_email.vm","UTF-8", model);
 					messageHelper.setText(mailBody,true);
 					mailSender.send(message);

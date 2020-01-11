@@ -699,6 +699,7 @@ span{
 							        </div>
 							       
 							        <!-- Modal body -->
+							        <form action="inviteTeam.do" method="post">
 							        <div class="row" style="margin-bottom: 1%;">
 							        <div class="col-sm-6" style="border-right:1px solid #c8c8c8;padding-left: 20px;" >
 							        <div class="modal-body">
@@ -711,7 +712,7 @@ span{
 							     
 							           </div>
 							          <label for="content">협업 공간</label>
-							          <select id="select_invite" class="form-control" style="border-radius: 0.25rem;" >
+							          <select id="select_invite" name="tseq" class="form-control" style="border-radius: 0.25rem;" >
 							         	<c:forEach items="${pjtlist}" var="p">
 					                    <option value="${p.tseq}">${p.pname}</option>
 										</c:forEach>
@@ -719,7 +720,6 @@ span{
 							        </div>
 							        </div>
 							        <div class="col-sm-6">
-							        <form action="inviteTeam.do" method="post">
 							        	<label for="content" style="margin-top: 3%;margin-bottom: 0px;">초대 리스트</label>
 							        	<div  id="invite_Input"  style="border: 1px solid rgba(124, 119, 119,0.3);border-radius:0.5rem;margin-right: 3%;height: 280px;overflow: auto;margin-bottom: 10px;">
 							        		<span id="invite_Input1" style="margin-left: 35%;margin-top: 18%;">
@@ -729,9 +729,9 @@ span{
 							        	</div>
 							        	<input type="hidden" name="invitecnt" id="invitecnt">
 							        <button type="submit" class="btn btn-secondary" id="invitebtn" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;margin-left: 100px;padding-left: 75px;padding-right: 75px;" disabled="disabled">멤버 초대하기</button>
+							        </div>
+							        </div>
 							        </form>	
-							        </div>
-							        </div>
 							        
 							        
 							      </div>
@@ -1035,7 +1035,7 @@ span{
 		  		if(event.shiftKey&&event.keyCode==50){
 			  		console.log("?????");
 					$('#invite_email_append').hide();
-					$('#invite_Input').append('<span style="border:1px solid rgba(124, 119, 119,0.5);border-radius:0.25rem; padding-top: 1%;padding-bottom: 1%;padding-left: 2%;padding-right: 2%;margin:2%;"><i class="far fa-paper-plane" style="color:#9e6767;padding-right: 5px;"></i><input type="text" value='+$(this).val()+' name=invite'+(number++)+' style="border:0px; width:200px;margin-left:3px;" readonly><button type="button" id=""  class="invite_close" style="border:0;background-color:#fff;border-radius:0.25rem;"><i class="fas fa-times" style="color:#A84747;padding-left: 10px;"></i></button></span>');
+					$('#invite_Input').append('<span style="border:1px solid rgba(124, 119, 119,0.5);border-radius:0.25rem; padding-top: 1%;padding-bottom: 1%;padding-left: 2%;padding-right: 2%;margin:2%;"><i class="far fa-paper-plane" style="color:#9e6767;padding-right: 5px;"></i><input type="text" value='+$(this).val()+' name=email'+(number++)+' style="border:0px; width:200px;margin-left:3px;" readonly><button type="button" id=""  class="invite_close" style="border:0;background-color:#fff;border-radius:0.25rem;"><i class="fas fa-times" style="color:#A84747;padding-left: 10px;"></i></button></span>');
 					$(this).val('');
 					$('#invitebtn').removeAttr('disabled');
 					$('#invitecnt').val(number);
@@ -1043,7 +1043,7 @@ span{
 					$('#invitebtn').prepend($('#invite_Input').children().length - 2+'명의 멤버 초대하기');
 					
 				}else{
-					$('#invite_Input').append('<span style="border:1px solid rgba(124, 119, 119,0.5);border-radius:0.25rem; padding-top: 1%;padding-bottom: 1%;padding-left: 2%;padding-right: 2%;margin:2%;"><i class="far fa-paper-plane" style="color:#9e6767;padding-right: 5px;"></i><input type="text" value='+$('#email_append_'+target).text()+' name=invite'+(number++)+' style="border:0px; width:200px;margin-left:3px;" readonly><button type="button" id=""  class="invite_close" style="border:0;background-color:#fff;border-radius:0.25rem;"><i class="fas fa-times" style="color:#A84747;padding-left: 10px;"></i></button></span>');
+					$('#invite_Input').append('<span style="border:1px solid rgba(124, 119, 119,0.5);border-radius:0.25rem; padding-top: 1%;padding-bottom: 1%;padding-left: 2%;padding-right: 2%;margin:2%;"><i class="far fa-paper-plane" style="color:#9e6767;padding-right: 5px;"></i><input type="text" value='+$('#email_append_'+target).text()+' name=email'+(number++)+' style="border:0px; width:200px;margin-left:3px;" readonly><button type="button" id=""  class="invite_close" style="border:0;background-color:#fff;border-radius:0.25rem;"><i class="fas fa-times" style="color:#A84747;padding-left: 10px;"></i></button></span>');
 					$(this).val('');
 					$('#invitebtn').removeAttr('disabled');
 					$('#invitecnt').val(number);
