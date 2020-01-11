@@ -17,8 +17,6 @@
   <script type="text/javascript">
         $(function(){ 
         	
-        	
-        	
             $('.modal').on('hidden.bs.modal', function (e) {
                console.log('modal close');
                $('#memlist').hide();
@@ -106,9 +104,10 @@
                }
          
          });
+
       
 });
-</script>
+</script> 
 <script type="text/javascript">
    // The Browser API key obtained from the Google API Console.
    var developerKey = 'AIzaSyBIu-Whybpm37l7vHw8O5f48kjpG_bQtzo';
@@ -493,9 +492,9 @@ span{
                     </li>
                     <li class="nav-label" style="padding-bottom: 0"><b>협업 공간</b></li>
                     <li class="nav-label"><button type="button" class="btn" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" data-toggle="modal" data-target="#myModal"><i class="icon-note menu-icon"></i> 새 협업공간 만들기</button></li>
-                    <li class="nav-label" style="padding-top: 0"><input type="search" id="searchpjt" class="form-control" style="border-radius: 0.25rem; height: 20px" placeholder="협업공간 검색"></li>
+                    <li class="nav-label" style="padding-top: 0"><input onkeyup="filter()" type="search" id="searchpjt" class="form-control" style="border-radius: 0.25rem; height: 20px" placeholder="협업공간 검색"></li>
                     <c:forEach items="${pjtlist}" var="p">
-                    <li>
+                    <li class="search_project">
 					<a href="projectDetail.do?tseq=${p.tseq}" aria-expanded="false"><span class="iconify" data-icon="bx:bxs-flag-alt" data-inline="false" style="width: 20px;height: auto;"> </span><span class="nav-text resultsearch"> &nbsp;${p.pname}</span></a>
 					</li>
 					</c:forEach>
@@ -1074,6 +1073,24 @@ span{
 		        
 		        
     	}
+    	
 		
     });
+
+   /* 프로젝트 이름 검색 - 도연 */
+   function filter(){
+       var value, name, item, i;
+       value = document.getElementById("searchpjt").value.toUpperCase();
+       item = document.getElementsByClassName("search_project");
+
+       for(i=0;i<item.length;i++){
+         name = item[i].getElementsByClassName("resultsearch");
+         if(name[0].innerHTML.toUpperCase().indexOf(value) > -1){
+           item[i].style.display = "flex";
+         }else{
+           item[i].style.display = "none";
+         }
+       }
+     }
+   
 </script>

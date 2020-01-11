@@ -22,7 +22,74 @@
 .form-control[readonly]{
 	background-color: white;
 }
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  vertical-align:middle;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #E71D36;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #E71D36;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+p ,d ,c ,f{
+	margin:0px;
+	display:inline-block;
+	font-size:15px;
+	font-weight:bold;
+}
+
 </style>
+
 <body>
 
     <jsp:include page="/WEB-INF/views/commons/preloader.jsp"></jsp:include>
@@ -35,7 +102,7 @@
 
       <jsp:include page="/WEB-INF/views/commons/headerAndLeft.jsp"></jsp:include>
 
-        <!--**********************************
+        <!--*********************************	*
             Content body start
         ***********************************-->
         <div class="content-body">
@@ -65,51 +132,39 @@
 		</div>
 		<hr style="margin-top: 0">
 		<div class="row" style="margin-left: 4%; margin-right: 2%; margin-top: 1%">
-			<div class="media align-items-center mb-4">
-                                    <img class="mr-3" src="<c:url value="/resources/images/avatar/avatar.png" />" width="120" height="120" alt="">
-                                    <div class="media-body">
-                                        <h3 class="mb-0">${member.name}</h3>
-                                        <p class="text-muted mb-0" style="margin-left: 2%; width: 300px;">${member.email}</p>
-                                    </div>
-                                </div>
+			<div class="col-sm-12" style="padding-left: 0">
+				<h4>알림</h4>
+				<br>
+				<h5>프로젝트 알림</h5>
+			<label class="switch">
+  			<input type="checkbox" name="pnalert" id="one" class="danger">
+ 			 <span class="slider round"></span>
+			</label>
+			<p>OFF</p><p style="display:none;">ON</p>
+			<hr>
+			<h5>댓글 알림</h5>
+			<label class="switch">
+  			<input type="checkbox" name="replyalert" id="two">
+ 			 <span class="slider round"></span>
+			</label>
+			<d>OFF</d><d style="display:none;">ON</d>
+			<hr>
+			<h5>팀이슈 알림</h5>
+			<label class="switch">
+  			<input type="checkbox" name="tialert" id="three">
+ 			 <span class="slider round"></span>
+			</label>
+			<c>OFF</c><c  style="display:none;">ON</c>
+			<hr>
+			<h5>의사결정 알림</h5>
+			<label class="switch">
+  			<input type="checkbox" name="votealert" id="four" >
+ 			 <span class="slider round"></span>
+			</label>
+			<f>OFF</f><f style="display:none;">ON</f>
+			</div>
+			<hr>
 		</div>
-		<div class="row" style="margin-left: 4%; margin-top: 2%">
-		<div class="form-group" style="width: 100%">
-			<form action="editCheck.do" method="post">
-    		<label for="email">이메일</label>
-    		<input class="form-control myinfo" type="text" id="email" name="email" style="width: 60%" readonly="readonly" value="${member.email}">
-    		<br>
-    		<c:choose>
-    		<c:when test="${member.pwd == 'google'}">
-    		<label for="pwd">비밀번호</label>
-    		<input class="form-control myinfo" type="text" id="pwd" name="pwd" style="width: 60%" value="구글에 문의하세요" readonly="readonly">
-    		</c:when>
-    		<c:when test="${member.pwd == 'naver'}">
-    		<label for="pwd">비밀번호</label>
-    		<input class="form-control myinfo" type="text" id="pwd" name="pwd" style="width: 60%" value="네이버에 문의하세요" readonly="readonly">
-    		</c:when>
-    		<c:otherwise>
-    		<label for="pwd">비밀번호</label>
-    		<input class="form-control myinfo" type="password" id="pwd" name="pwd" style="width: 60%">
-    		</c:otherwise>
-    		</c:choose>
-    		<br>
-    		<label for="name">이름</label>
-    		<input class="form-control myinfo" type="text" id="name" name="name" style="width: 60%" readonly="readonly" value="${member.name}">
-    		<br>
-    		<label for="dname">부서</label>
-    		<input class="form-control myinfo" type="text" id="dname" name="dname" style="width: 60%" value="${member.dname}">
-    		<br>
-    		<label for="drank">직함</label>
-    		<input class="form-control myinfo" type="text" id="drank" name="drank" style="width: 60%" value="${member.drank}">
-    		<br>
-    		<label for="address">주소</label>
-    		<input class="form-control myinfo" type="text" id="address" name="address" style="width: 60%" value="${member.address}">
-    		<br>
-    		<input type="submit" class="btn" style="background-color: #fff5a5; border-color: #CCCCCC; color: gray; cursor: pointer;" value="수정완료">
-    		</form>	
-    	</div>
-    	</div>
             <!-- #/ container -->
             </div>
             </div>
@@ -117,8 +172,7 @@
         <!--**********************************
             Content body end
         ***********************************-->
-        
-        
+       
         <!--**********************************
             Footer start
         ***********************************-->
@@ -134,12 +188,35 @@
     <!--**********************************
         Scripts
     ***********************************-->
-      <script src="<c:url value="/resources/plugins/common/common.min.js" />"></script>
+ 	<script src="<c:url value="/resources/plugins/common/common.min.js" />"></script>
     <script src="<c:url value="/resources/js/custom.min.js" />"></script>
     <script src="<c:url value="/resources/js/settings.js" />"></script>
     <script src="<c:url value="/resources/js/gleek.js" />"></script>
     <script src="<c:url value="/resources/js/styleSwitcher.js" />"></script>
+	<script type="text/javascript">
+	
+ 	var check1 = $("#one");
+	check1.click(function(){
+		$("p").toggle();
+	});
 
+	var check2 = $("#two");
+	check2.click(function(){
+		$("d").toggle();
+	});
+
+	var check3 = $("#three");
+	check3.click(function(){
+		$("c").toggle();
+	});
+
+	var check4 = $("#four");
+	check4.click(function(){
+		$("f").toggle();
+	}); 
+
+
+</script>
 </body>
 
 </html>

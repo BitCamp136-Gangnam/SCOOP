@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
@@ -9,7 +10,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <jsp:include page="/WEB-INF/views/commons/title.jsp"></jsp:include>
     <!-- Custom Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 
 </head>
 <style>
@@ -49,16 +50,16 @@
 		<div class="row" style="margin-left: 2%;">
 			<ul class="nav nav-pills">
 			    <li class="nav-item">
-			      <a class="nav-link" href="./app-profile.jsp">내 정보</a>
+			      <a class="nav-link" href="memberEdit.do?${sessionScope.email}">내 정보</a>
 			    </li>
 			    <li class="nav-item">
-			      <a class="nav-link" href="./app-alram.jsp">알림</a>
+			      <a class="nav-link" href="app-alram.do">알림</a>
 			    </li>
 			    <li class="nav-item">
-			      <a class="nav-link" href="./app-external.jsp">외부 서비스 연결</a>
+			      <a class="nav-link" href="app-external.do">외부 서비스 연결</a>
 			    </li>
 			    <li class="nav-item">
-			      <a class="nav-link" href="#">가격 및 결제</a>
+			      <a class="nav-link" href="paymentPage.do">가격 및 결제</a>
 			    </li>
 		    </ul>
 		</div>
@@ -100,11 +101,11 @@
     <!--**********************************
         Scripts
     ***********************************-->
-    <script src="plugins/common/common.min.js"></script>
-    <script src="js/custom.min.js"></script>
-    <script src="js/settings.js"></script>
-    <script src="js/gleek.js"></script>
-    <script src="js/styleSwitcher.js"></script>
+  <script src="<c:url value="/resources/plugins/common/common.min.js" />"></script>
+    <script src="<c:url value="/resources/js/custom.min.js" />"></script>
+    <script src="<c:url value="/resources/js/settings.js" />"></script>
+    <script src="<c:url value="/resources/js/gleek.js" />"></script>
+    <script src="<c:url value="/resources/js/styleSwitcher.js" />"></script>
 
 </body>
 
