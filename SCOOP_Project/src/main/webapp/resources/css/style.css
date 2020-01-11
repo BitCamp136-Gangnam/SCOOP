@@ -11114,7 +11114,7 @@ table.dataTable thead .sorting::after {
   color: #464a53; }
   .btn-outline-secondary:active, .btn-outline-secondary:focus, .btn-outline-secondary:hover {
     background: #6f78b2;
-    color: #fff;
+    color: #322;
     border-color: #6f78b2; }
 
 .btn-outline-success:active, .btn-outline-success:focus, .btn-outline-success:hover {
