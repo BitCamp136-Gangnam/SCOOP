@@ -90,6 +90,41 @@ public class TeamController {
 		
 	}
 	
+	// 이슈 작성
+	@RequestMapping(value = "writeIssue.do", method = {RequestMethod.POST,RequestMethod.GET})
+	public String writeIssue(String issuetitle, String fileclick, String issuecontent, String selectTeam, Model model,
+			HttpSession session) {
+		String path = "";
+		if (selectTeam.equals((String) session.getAttribute("email"))) {
+			path = "writeMyIssue.do";
+		} else {
+			path = "writeTissue.do";
+		}
+		return path;
+
+	}
+	
+	
+	// 마이이슈 작성
+	@RequestMapping(value = "writeTissue.do", method = RequestMethod.POST)
+	public String writeTissue(String issuetitle, String fileclick, String issuecontent, String selectTeam, Model model,
+			HttpSession session) {
+		
+
+		return "user/ProjectDetail";
+
+	}
+
+	// 팀 이슈 작성
+	@RequestMapping(value = "writeMyIssue.do", method = RequestMethod.POST)
+	public String writeMyIssue(String issuetitle, String fileclick, String issuecontent, String selectTeam, Model model,
+			HttpSession session) {
+
+
+		return "user/ProjectDetail";
+
+	}
+	
 
 	
 }
