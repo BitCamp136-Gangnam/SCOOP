@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 public class Tpmember {
 	private int tseq;
 	private String email;
+	private int pjuserrank;
 	public int getTseq() {
 		return tseq;
 	}
@@ -18,9 +19,15 @@ public class Tpmember {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public int getPjuserrank() {
+		return pjuserrank;
+	}
+	public void setPjuserrank(int pjuserrank) {
+		this.pjuserrank = pjuserrank;
+	}
 	@Override
 	public String toString() {
-		return "Tpmember [tseq=" + tseq + ", email=" + email + "]";
+		return "Tpmember [tseq=" + tseq + ", email=" + email + ", pjuserrank=" + pjuserrank + "]";
 	}
 	
 }
