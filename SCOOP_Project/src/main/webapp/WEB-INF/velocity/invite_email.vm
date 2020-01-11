@@ -26,5 +26,7 @@
  </td></tr></tbody>
  </table>
  </center>
+<input type="hidden" name="tseq" value="${tseq}">
+<input type="hidden" name="mailTo" value="${mailTo}">
 </body>
 </html>

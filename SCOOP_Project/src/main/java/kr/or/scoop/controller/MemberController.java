@@ -250,8 +250,8 @@ public class MemberController {
 			System.out.println("cnt:"+cnt);
 			String[] invitemem = new String[cnt];
 			for(int i=0;i<cnt;i++) {
-				if(request.getParameter("invite"+i)!=null) {
-					invitemem[i] = request.getParameter("invite"+i);
+				if(request.getParameter("email"+i)!=null) {
+					invitemem[i] = request.getParameter("email"+i);
 					System.out.println(invitemem[i]);
 					messageHelper.setFrom("leeyong1321@gmail.com");
 					messageHelper.setTo(invitemem[i]);
