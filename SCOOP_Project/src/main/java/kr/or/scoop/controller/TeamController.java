@@ -4,11 +4,14 @@ import java.sql.SQLException;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.or.scoop.dao.ProjectDao;
 import kr.or.scoop.dto.Member;
 import kr.or.scoop.dto.TeamPjt;
 import kr.or.scoop.service.BoardService;
@@ -16,9 +19,10 @@ import kr.or.scoop.service.BoardService;
 @Controller
 public class TeamController {
 	
-	/*
-	 * @Autowired private SqlSession sqlsession;
-	 */
+	
+	  @Autowired
+	  private SqlSession sqlsession;
+	
 	@Autowired
 	private BoardService service;
 	
@@ -68,6 +72,18 @@ public class TeamController {
 	public String certified() {
 		System.out.println("인바이트서티파이드");
 		return "certified/InviteCertified";
+	}
+	
+	@RequestMapping(value = "projectDetail.do" , method = RequestMethod.GET)
+	public String JoinProject(int tseq, Model model) {
+		System.out.println(tseq);
+		ProjectDao dao = sqlsession.getMapper(ProjectDao.class);
+		TeamPjt pjt = dao.detailPJT(tseq);
+		System.out.println(pjt);
+		model.addAttribute("tpj",pjt);
+		
+		return "user/ProjectDetail";
+		
 	}
 	
 	

@@ -10,4 +10,5 @@ public interface ProjectDao {
 	public int insertPJT(TeamPjt team);
 	public int insertPJT2(String email, int tseq);
 	public List<Tpmember> getPJT(String email);
+	public TeamPjt detailPJT(int tseq);
 }
