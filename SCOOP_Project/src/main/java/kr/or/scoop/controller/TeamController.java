@@ -46,19 +46,13 @@ public class TeamController {
 	public String normalInsert(Member member, HttpSession session) throws ClassNotFoundException, SQLException {
 		int result = 0;
 		String viewpage = "";
-		System.out.println("인서트 들어오니" + member);
-		member.setPwd((String)session.getAttribute("checkpwd"));
-		member.setEmail((String)session.getAttribute("checkemail"));
-		member.setName((String)session.getAttribute("checkname"));
-		System.out.println(session.getAttribute("checkpwd"));
-		//result = service.insertMember(member);
-
+		System.out.println("인바이트인서트 들어오니" + member);
+		String mailTo = (String)session.getAttribute("mailTo");
+		String tseq = (String)session.getAttribute("tseq");
+		result = service.insertTeamPjt(mailTo, tseq);
 		if (result > 0) {
-			System.out.println("가입성공");
-			viewpage = "redirect:/index.do";
-			session.removeAttribute("checkpwd");
-			session.removeAttribute("checkemail");
-			session.removeAttribute("checkname");
+			System.out.println("협업공간 초대 성공");
+			viewpage = "redirect:/userindex.do";
 		} else {
 			System.out.println("가입실패");
 			viewpage = "index";

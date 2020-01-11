@@ -24,10 +24,6 @@ if(session.getAttribute("email")==mailTo){
 	</script>
 	<%
 	response.sendRedirect("inviteOk.do");
-}else if(session.getAttribute("email")==null){
-%>
-
-<%	
 }else{
 	%>
 	<script>
