@@ -140,14 +140,13 @@ public class MemberController {
 
 	// 일반회원 로그인
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
-	public String login(String email, String pwd, HttpSession session, Model model) {
+	public String login(String email, String pwd, HttpSession session) {
 		MemberDao dao = sqlsession.getMapper(MemberDao.class);
-		Role role = dao.getRole(email);
+		
 		int result = 0;
 		String viewpage = "";
 		result = service.loginMember(email, pwd);
 		if (result > 0) {
-			model.addAttribute("role",role);
 			viewpage = "redirect:/userindex.do";
 			session.setAttribute("email", email);
 			session.setAttribute("kind", "normal");
@@ -185,13 +184,14 @@ public class MemberController {
 		String email = "";
 		email = (String)session.getAttribute("email");
 		ProjectDao noticeDao = sqlsession.getMapper(ProjectDao.class);
-		System.out.println("1111");
+		MemberDao memberdao = sqlsession.getMapper(MemberDao.class);
+		Role role = memberdao.getRole(email);
+		System.out.println(role.getRname());
+		session.setAttribute("role", role.getRname());
 		List<Tpmember> pjtlist = noticeDao.getPJT(email);
-		System.out.println("2222");
 		if(pjtlist!=null) {
 			session.setAttribute("pjtlist", pjtlist);
 		}
-		System.out.println("3333");
 		/* System.out.println(pjtlist.get(0)); */
 		return "user/userindex";
 	}

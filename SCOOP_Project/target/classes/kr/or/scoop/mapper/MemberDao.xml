@@ -72,13 +72,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<result column="idtime" property="idtime"/>
 	<result column="loginnum" property="loginnum"/>
 	<result column="prifile" property="prifile"/>
-	<collection property="tpmember" resultMap="Tpmember"/>
 	</resultMap>
 	<resultMap type="kr.or.scoop.dto.Role" id="Role">
 	<result column="email" property="email"/>
 	<result column="rname" property="rname"/>
+	<collection property="member" resultMap="Member"/>
 	</resultMap>
-	<select id="getRole" parameterType="kr.or.scoop.dto.Member" resultMap="Member">
-	select m.email , r.RNAME from member m join role r on m.email = r.email where m.email= #{email}
+	<select id="getRole" resultType="kr.or.scoop.dto.Role">
+	select m.email , r.RNAME from member m join role r on m.email = r.email where r.email= #{email}
 	</select>
 </mapper>
