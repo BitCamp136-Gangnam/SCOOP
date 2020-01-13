@@ -690,10 +690,13 @@ span {
 						<option value="${sessionScope.email}">프라이빗 공간</option>
 						<c:forEach items="${pjtlist}" var="p">
 									<option value="${p.tseq}">${p.pname}</option>
-									<c:set value="${p.tseq}" var="tseq"></c:set>
+									<%-- <c:set value="${p.pname}" var="pname"></c:set> --%>
+									<input type="hidden" value="${p.pname }" name="pname"  readonly>
 						</c:forEach>
 					</select>
-					<input type="hidden" value="${tseq }"  readonly>
+					<%-- <c:if test="${tseq!=null} }">
+					<input type="hidden" value="${pname }" name="pname"  readonly>
+					</c:if> --%>
 					<button type="submit" class="btn btn-secondary"
 						style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;">만들기</button>
 					<button type="button" class="btn btn-secondary"

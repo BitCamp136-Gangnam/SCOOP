@@ -99,47 +99,37 @@ public class TeamController {
 	// 이슈 작성
 	@RequestMapping(value = "writeIssue.do", method = {RequestMethod.POST,RequestMethod.GET})
 	public String writeIssue(String issuetitle, String fileclick, String issuecontent, String selectTeam, Model model,
-			HttpSession session, String mention) {
-		String path = "";
-		if (selectTeam.equals((String) session.getAttribute("email"))) {
-			path = "writeMyIssue.do";
-		} else {
-			path = "writeTissue.do"; // 주석주석
-		}
-		return path;
-
-	}
-	
-	
-	// 마이이슈 작성
-	@RequestMapping(value = "writeTissue.do", method = {RequestMethod.POST,RequestMethod.GET})
-	public String writeTissue(String issuetitle, String fileclick, String issuecontent, String selectTeam, Model model,
-			HttpSession session, HttpServletRequest request, int tseq) {
+			HttpSession session, String mention, HttpServletRequest request, String pname) {
 		String path = "";
 		System.out.println("issuetitle :"+issuetitle);
 		System.out.println("issuetitle :"+fileclick);
 		System.out.println("issuetitle :"+issuecontent);
 		System.out.println("issuetitle :"+issuetitle);
-		System.out.println("tseq :"+tseq);
-		Tissue tissue = new Tissue();
-		tissue.setEmail((String)session.getAttribute("email"));
-		tissue.setTititle(issuetitle);
-		tissue.setFilename(fileclick);
-		tissue.setTicontent(issuecontent);
-		tissue.setTseq(tseq);
-		int result = teamservice.writeTissue(tissue);
-		if(result >0) {
-			path = "user/ProjectDetail";
-			System.out.println("success insert tissue");
-		}else {
-			path = "user/ProjectDetail";
-			System.out.println("fail insert tissue");
+		System.out.println("tseq :"+selectTeam);
+		System.out.println("pname"+pname);
+		if (pname.equals((String) session.getAttribute("email")) || pname == null) {
+			path = "writeMyIssue.do";
+		} else {
+			
+			Tissue tissue = new Tissue();
+			tissue.setEmail((String)session.getAttribute("email"));
+			tissue.setTititle(issuetitle);
+			tissue.setFilename(fileclick);
+			tissue.setTicontent(issuecontent);
+			tissue.setTseq(Integer.parseInt(selectTeam));
+			int result = teamservice.writeTissue(tissue);
+			if(result >0) {
+				path = "user/ProjectDetail";
+				System.out.println("success insert tissue");
+			}else {
+				path = "user/ProjectDetail";
+				System.out.println("fail insert tissue");
+			}
 		}
-		
-
 		return path;
 
 	}
+	
 
 	// 팀 이슈 작성
 	@RequestMapping(value = "writeMyIssue.do", method = {RequestMethod.POST,RequestMethod.GET})
