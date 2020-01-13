@@ -52,27 +52,15 @@
 				스쿱의 새로운 소식을 전해드립니다.
 			</div>
 		</div>
-		<div class="row" style="margin-left: 2%;">
-			<ul class="nav nav-pills">
-			    <li class="nav-item">
-			      <a class="nav-link" href="private.do">프라이빗 이슈</a>
-			    </li>
-			    <li class="nav-item">
-			      <a class="nav-link" href="calendar.do">캘린더</a>
-			    </li>
-		    </ul>
-		</div>
-		<hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
 		<div class="row" style="margin-left: 2%; margin-right: 2%">
-			<div class="col-sm-2 newissue" >
-			이슈 제목 들어갈곳
-			</div>
-			<div class="col-sm-8 newissue">
-			여기에 내용들어가는데 나중엔 append하면 될듯??
+		<c:forEach items="${notice}" var="n">
+			<div class="col-sm-10 newissue" >
+			${n.bntitle}
 			</div>
 			<div class="col-sm-2 newissue">
-			여기에 시간넣으면됨
+			${n.bntime}
 			</div>
+			</c:forEach>
 		</div>
             <!-- #/ container -->
             </div>

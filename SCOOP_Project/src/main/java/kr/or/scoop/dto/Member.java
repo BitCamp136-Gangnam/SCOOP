@@ -21,6 +21,7 @@ public class Member {
 	 * setProfile(CommonsMultipartFile profile) { this.profile = profile; }
 	 */
 	
+	
 	public String getProfile() {
 		return profile;
 	}
@@ -88,5 +89,7 @@ public class Member {
 	
 	
 	
+	
+
 	
 }

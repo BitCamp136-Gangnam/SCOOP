@@ -62,5 +62,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		set email = #{email}, pwd = #{pwd}, name=#{name}, dname=#{dname}, drank=#{drank} , address = #{address}
 		where email = #{email}
 	</update>
-	
+	<resultMap type="kr.or.scoop.dto.Member" id="Member">
+	<result column="email" property="email"/>
+	<result column="pwd" property="pwd"/>
+	<result column="name" property="name"/>
+	<result column="dname" property="dname"/>
+	<result column="drank" property="drank"/>
+	<result column="address" property="address"/>
+	<result column="idtime" property="idtime"/>
+	<result column="loginnum" property="loginnum"/>
+	<result column="prifile" property="prifile"/>
+	</resultMap>
+	<resultMap type="kr.or.scoop.dto.Role" id="Role">
+	<result column="email" property="email"/>
+	<result column="rname" property="rname"/>
+	<collection property="member" resultMap="Member"/>
+	</resultMap>
+	<select id="getRole" resultType="kr.or.scoop.dto.Role">
+	select m.email , r.RNAME from member m join role r on m.email = r.email where r.email= #{email}
+	</select>
 </mapper>

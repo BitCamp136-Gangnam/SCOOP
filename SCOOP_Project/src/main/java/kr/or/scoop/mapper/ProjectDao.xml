@@ -25,6 +25,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<result column="istbook" property="istbook"/>
 	<result column="issee" property="issee"/>
 	<result column="tidate" property="tidate"/>
+	<result column="tgfilename" property="tgfilename"/>
+	<result column="tmention" property="tmention"/>
+	<result column="turl" property="turl"/>
 </resultMap>
 <resultMap type="kr.or.scoop.dto.TeamPjt" id="TeamPjt">
 	<result column="tseq" property="tseq"/>

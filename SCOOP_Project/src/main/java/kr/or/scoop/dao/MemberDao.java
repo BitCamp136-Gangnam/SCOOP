@@ -1,8 +1,7 @@
 package kr.or.scoop.dao;
 
-import javax.servlet.http.HttpSession;
-
 import kr.or.scoop.dto.Member;
+import kr.or.scoop.dto.Role;
 
 
 public interface MemberDao {
@@ -34,6 +33,7 @@ public interface MemberDao {
 	//회원 수정
 	public int updateMember(Member member);
 	
-	//비밀번호 변경
-	public int changePassword(String pwd, String email);
+	//권한 체크
+	public Role getRole(String email);
+	
 }

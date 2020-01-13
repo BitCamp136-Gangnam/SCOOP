@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="role" value="${sessionScope.role}" />
 <style>
 input::placeholder {
 	color: #fff;
@@ -11,15 +12,27 @@ input::placeholder {
 <link rel="stylesheet"
 	href="<c:url value="/resources/lib/codemirror.css" />">
 <script src="<c:url value="/resources/lib/codemirror.js" />"></script>
+<%-- <link rel="stylesheet"
+	href="<c:url value="/resources/dist/summernote.css" />">
+<script src="<c:url value="/resources/dist/summernote.min.js" />"></script> --%>
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <%-- <link rel="stylesheet" href="<c:url value="/resources/demos/style.css" />"> --%>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 <script type="text/javascript">
 	$(function() {
-
+		 $('#summernote').summernote({
+             height: 300,                 // set editor height
+             minHeight: null,             // set minimum height of editor
+             maxHeight: null,             // set maximum height of editor
+             focus: true                  // set focus to editable area after initializing summernote
+     });
 		$('.modal').on('hidden.bs.modal', function(e) {
 			console.log('modal close');
 			$('#memlist').hide();
@@ -339,10 +352,19 @@ span {
 						id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
 				</div>
 				<input type="search" class="form-control" placeholder="검색하세요"
-					aria-label="Search"> <input type="button"
-					class="form-control"
+					aria-label="Search">
+					<c:choose>
+						<c:when test="${role == 'ROLE_ADMIN'}">
+					<input type="button"class="form-control"
+					style="background-color: #E71D36; border-color: #CCCCCC; margin-left: 2%; color: #fff; cursor: pointer;"
+					value="공지사항 작성" data-toggle="modal" data-target="#makenotice">
+					</c:when>
+					<c:otherwise>
+					<input type="button"class="form-control"
 					style="background-color: #E71D36; border-color: #CCCCCC; margin-left: 2%; color: #fff; cursor: pointer;"
 					value="이슈 작성" data-toggle="modal" data-target="#makeissue">
+					</c:otherwise>
+					</c:choose>
 				<div class="drop-down animated flipInX d-md-none">
 					<form action="#">
 						<input type="text" class="form-control" placeholder="Search">
@@ -481,6 +503,7 @@ span {
         ***********************************-->
 <c:set var="kind" value="${session.kind}}"></c:set>
 <c:set var="email" value="${session.email}}"></c:set>
+
 <div class="nk-sidebar" style="z-index: 0">
 	<div id="scnav" class="nk-nav-scroll">
 		<ul class="metismenu" id="menu">
@@ -489,7 +512,7 @@ span {
 			<li><a href="notice.do" aria-expanded="false"> <span
 					class="iconify" data-icon="bx:bx-file-blank" data-inline="false"
 					style="width: 20px; height: auto;"> </span><span class="nav-text">
-						&nbsp;새로운 소식</span> <!-- <i class="icon-speedometer menu-icon"> -->
+						&nbsp;공지사항</span> <!-- <i class="icon-speedometer menu-icon"> -->
 			</a></li>
 			<li><a href="userindex.do" aria-expanded="false"> <span
 					class="iconify" data-icon="bx:bx-file-blank" data-inline="false"
@@ -639,10 +662,12 @@ span {
 		<div class="modal-content">
 
 			<!-- Modal Header -->
+			
 			<div class="modal-header">
 				<h3 class="modal-title">이슈 작성</h3>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
+	
 			<form action="writeIssue.do" method="POST">
 				<!-- Modal body -->
 				<div class="modal-body">
@@ -659,6 +684,10 @@ span {
 					<textarea class="form-control createmodal" rows="5"
 						id="issuecontent" name="issuecontent" style="width: 100%"
 						placeholder="@를 입력하여 멘션, 할 일, 파일 등을 추가해 보세요."></textarea>
+						<textarea name="content" id="summernote" value=""></textarea>
+						<script type="text/javascript">
+						$('#summernote').summernote();
+						</script>
 					<textarea rows="" id="codemirrorarea" style="display: none"><-- 코드를 입력하세요 --></textarea>
 					<div id="todoresult" style="display: none">
 						<!-- mention -->
@@ -673,8 +702,13 @@ span {
 						<option value="${sessionScope.email}">프라이빗 공간</option>
 						<c:forEach items="${pjtlist}" var="p">
 									<option value="${p.tseq}">${p.pname}</option>
+									<%-- <c:set value="${p.pname}" var="pname"></c:set> --%>
+									<input type="hidden" value="${p.pname }" name="pname"  readonly>
 						</c:forEach>
 					</select>
+					<%-- <c:if test="${tseq!=null} }">
+					<input type="hidden" value="${pname }" name="pname"  readonly>
+					</c:if> --%>
 					<button type="submit" class="btn btn-secondary"
 						style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;">만들기</button>
 					<button type="button" class="btn btn-secondary"
@@ -819,7 +853,42 @@ span {
 		</div>
 	</div>
 </div>
+<div class="modal fade" id="makenotice">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
 
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h3 class="modal-title">공지사항 작성</h3>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+	
+			<form action="noticeWrite.do" method="POST">
+				<!-- Modal body -->
+				<div class="modal-body">
+					<!-- <p style="font-size: 12px">협업공간은 함께 일하는 멤버들끼리만 자료를 공유하고 협업할 수 있는 공간입니다.<br>
+             협업공간을 만들고 함께 일할 멤버들을 초대해보세요.</p> -->
+					<label for="bntitle">공지사항</label> <input
+						class="form-control createmodal" type="text" id="bntitle"
+						name="bntitle" style="width: 100%" placeholder="제목을 입력해 주세요.">
+					<br> <label for="noticecontent">공지 설명</label>
+					<textarea class="form-control createmodal" rows="5"
+						id="bncontent" name="bncontent" style="width: 100%"
+						placeholder="내용을 적어주세요."></textarea>	
+						<input type="hidden" name="email" value="${sessionScope.email}">		
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-secondary"
+						style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;">만들기</button>
+					<button type="button" class="btn btn-secondary"
+						style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;"
+						data-dismiss="modal">취소</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	</div>
 <script type="text/javascript">
 	$('#issuecontent').keydown(
 			function(event) {

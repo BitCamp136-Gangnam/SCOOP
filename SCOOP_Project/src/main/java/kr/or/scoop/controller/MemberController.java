@@ -24,10 +24,10 @@ import org.springframework.ui.velocity.VelocityEngineUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import kr.or.scoop.dao.ProjectDao;
 import kr.or.scoop.dao.MemberDao;
+import kr.or.scoop.dao.ProjectDao;
 import kr.or.scoop.dto.Member;
-import kr.or.scoop.dto.TeamPjt;
+import kr.or.scoop.dto.Role;
 import kr.or.scoop.dto.Tpmember;
 import kr.or.scoop.service.MemberService;
 import kr.or.scoop.utils.Mail;
@@ -141,7 +141,8 @@ public class MemberController {
 	// 일반회원 로그인
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
 	public String login(String email, String pwd, HttpSession session) {
-
+		MemberDao dao = sqlsession.getMapper(MemberDao.class);
+		
 		int result = 0;
 		String viewpage = "";
 		result = service.loginMember(email, pwd);
@@ -183,13 +184,14 @@ public class MemberController {
 		String email = "";
 		email = (String)session.getAttribute("email");
 		ProjectDao noticeDao = sqlsession.getMapper(ProjectDao.class);
-		System.out.println("1111");
+		MemberDao memberdao = sqlsession.getMapper(MemberDao.class);
+		Role role = memberdao.getRole(email);
+		System.out.println(role);
+		session.setAttribute("role", role.getRname());
 		List<Tpmember> pjtlist = noticeDao.getPJT(email);
-		System.out.println("2222");
 		if(pjtlist!=null) {
 			session.setAttribute("pjtlist", pjtlist);
 		}
-		System.out.println("3333");
 		/* System.out.println(pjtlist.get(0)); */
 		return "user/userindex";
 	}
@@ -322,5 +324,6 @@ public class MemberController {
 	public String externalpage() {
 		return "user/app-external";
 	}
-
+	
+	
 }

@@ -20,7 +20,28 @@ public class Tissue {
 	private int istbook;
 	private int issee;
 	private Date tidate;
+	private String tgfilename;
+	private String tmention;
+	private String turl;
 	
+	public String getTgfilename() {
+		return tgfilename;
+	}
+	public void setTgfilename(String tgfilename) {
+		this.tgfilename = tgfilename;
+	}
+	public String getTmention() {
+		return tmention;
+	}
+	public void setTmention(String tmention) {
+		this.tmention = tmention;
+	}
+	public String getTurl() {
+		return turl;
+	}
+	public void setTurl(String turl) {
+		this.turl = turl;
+	}
 	public int getTiseq() {
 		return tiseq;
 	}
@@ -105,7 +126,8 @@ public class Tissue {
 		return "Tissue [tiseq=" + tiseq + ", tseq=" + tseq + ", email=" + email + ", tititle=" + tititle
 				+ ", ticontent=" + ticontent + ", tistart=" + tistart + ", tiend=" + tiend + ", isprocess=" + isprocess
 				+ ", filename=" + filename + ", tfilesize=" + tfilesize + ", istbook=" + istbook + ", issee=" + issee
-				+ ", tidate=" + tidate + "]";
+				+ ", tidate=" + tidate + ", tgfilename=" + tgfilename + ", tmention=" + tmention + ", turl=" + turl
+				+ "]";
 	}
 	
 	
