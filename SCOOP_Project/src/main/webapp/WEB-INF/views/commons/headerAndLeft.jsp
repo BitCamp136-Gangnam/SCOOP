@@ -947,9 +947,7 @@ span {
 							var text = "";
 							text = $('#issuecontent').val().replace("@", "");
 							$('#issuecontent').val(text);
-							$('#todoresult').append(
-									'<div id="mention" name="mention">@'
-											+ $(this).text() + '</div>');
+							$('#todoresult').append('<div><input type="text" id="mention" name="mention" value="@'+ $(this).text() + '" style="border:none" readonly></div>');
 							console.log($(this).text());
 							$('#todoresult').show();
 							$('#memlist').hide();
