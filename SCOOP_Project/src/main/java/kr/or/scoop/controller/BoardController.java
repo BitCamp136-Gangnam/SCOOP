@@ -49,4 +49,10 @@ public class BoardController {
 		
 		return "private/private-place";
 	}
+	
+	@RequestMapping(value="notice.do" , method = RequestMethod.GET)
+	public String noticeJoin() {
+		
+		return null;
+	}
 }

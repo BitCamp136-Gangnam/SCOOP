@@ -6,4 +6,5 @@ public interface BoardDao {
 	
 	public int insertIssue(Issue issue);
 	
+	
 }
