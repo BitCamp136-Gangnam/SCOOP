@@ -5,6 +5,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="kr.or.scoop.dao.MyIssueDao">
 <insert id="writeMyissue" parameterType="kr.or.scoop.dto.MyIssue" >
 insert into myissue (piseq,pfilename,pfilesize,pititle,picontent,pistart, piend, ispibook, email, pidate, mygfilename, mymention, myurl)
-  values (piseq_myissue_seq.nextval, #{pfilename}, #{pfilesize}, #{pititle}, #{picontent}, #{pistart}, #{piend}, 0, #{email}, sysdate, #{mygfilename}, #{mymention}, #{myurl})
+  values (PISEQ_MYISSUE_SEQ.NEXTVAL, #{pfilename,jdbcType=VARCHAR}, #{pfilesize,jdbcType=INTEGER}, #{pititle}, #{picontent}, #{pistart,jdbcType=DATE}, #{piend,jdbcType=DATE}, 0, #{email}, sysdate, #{mygfilename,jdbcType=VARCHAR}, #{mymention,jdbcType=VARCHAR}, #{myurl,jdbcType=VARCHAR})
 </insert>
 </mapper>
