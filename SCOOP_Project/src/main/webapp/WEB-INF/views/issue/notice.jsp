@@ -53,13 +53,14 @@
 			</div>
 		</div>
 		<div class="row" style="margin-left: 2%; margin-right: 2%">
+		<c:forEach items="${notice}" var="n">
 			<div class="col-sm-10 newissue" >
-			이슈 제목 들어갈곳
+			${n.bntitle}
 			</div>
-			
 			<div class="col-sm-2 newissue">
-			여기에 시간넣으면됨
+			${n.bntime}
 			</div>
+			</c:forEach>
 		</div>
             <!-- #/ container -->
             </div>

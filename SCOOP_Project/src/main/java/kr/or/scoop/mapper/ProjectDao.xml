@@ -25,6 +25,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<result column="istbook" property="istbook"/>
 	<result column="issee" property="issee"/>
 	<result column="tidate" property="tidate"/>
+	<result column="tgfilename" property="tgfilename"/>
+	<result column="tmention" property="tmention"/>
+	<result column="turl" property="turl"/>
 </resultMap>
 <resultMap type="kr.or.scoop.dto.TeamPjt" id="TeamPjt">
 	<result column="tseq" property="tseq"/>
@@ -49,7 +52,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="getPJT" parameterType="kr.or.scoop.dto.Tpmember" resultMap="Tpmember">
 		select m.email, m.TSEQ, t.pname from tpmember m join teampjt t on m.tseq = t.tseq where m.email = #{email}
 </select>
-<select id="getTissue" parameterType="kr.or.scoop.dto.TeamPjt" resultMap="TeamPjt">
+<select id="getTissue" parameterType="int" resultMap="Tissue">
 	SELECT T.TSEQ ,S.TISEQ, S.tititle, S.TICONTENT, S.TIDATE FROM TEAMPJT T 
 	JOIN TISSUE S ON T.TSEQ = S.TSEQ WHERE T.TSEQ = #{TSEQ}
 </select>

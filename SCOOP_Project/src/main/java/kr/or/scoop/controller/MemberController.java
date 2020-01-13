@@ -140,14 +140,13 @@ public class MemberController {
 
 	// 일반회원 로그인
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
-	public String login(String email, String pwd, HttpSession session, Model model) {
+	public String login(String email, String pwd, HttpSession session) {
 		MemberDao dao = sqlsession.getMapper(MemberDao.class);
-		Role role = dao.getRole(email);
+		
 		int result = 0;
 		String viewpage = "";
 		result = service.loginMember(email, pwd);
 		if (result > 0) {
-			model.addAttribute("role",role);
 			viewpage = "redirect:/userindex.do";
 			session.setAttribute("email", email);
 			session.setAttribute("kind", "normal");
@@ -185,13 +184,14 @@ public class MemberController {
 		String email = "";
 		email = (String)session.getAttribute("email");
 		ProjectDao noticeDao = sqlsession.getMapper(ProjectDao.class);
-		System.out.println("1111");
+		MemberDao memberdao = sqlsession.getMapper(MemberDao.class);
+		Role role = memberdao.getRole(email);
+		System.out.println(role);
+		session.setAttribute("role", role.getRname());
 		List<Tpmember> pjtlist = noticeDao.getPJT(email);
-		System.out.println("2222");
 		if(pjtlist!=null) {
 			session.setAttribute("pjtlist", pjtlist);
 		}
-		System.out.println("3333");
 		/* System.out.println(pjtlist.get(0)); */
 		return "user/userindex";
 	}
@@ -237,7 +237,99 @@ public class MemberController {
 		return viewpage;
 	}
 
-	// 캘린더
+	// 본인 인증 메일 발송
+	@RequestMapping(value="/forgotpwd.do")
+	public String forgotPwd(Mail mail, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		response.setContentType("text/html; charset=UTF-8");
+		String email = request.getParameter("emailcheck");
+		session.setAttribute("email", email);
+		System.out.println("이메일 받아 오니? : " + email);
+		String viewpage = "";
+
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+			
+			Map model = new HashMap();
+			model.put("title", "협업공간 SCOOP 본인 인증 이메일입니다");
+			// model.put("password", temp);
+			String mailBody = VelocityEngineUtils.mergeTemplateIntoString(
+					velocityEngineFactoryBean.createVelocityEngine(), "forgotPwd.vm", "UTF-8", model);
+			messageHelper.setFrom("leeyong1321@gmail.com");
+			messageHelper.setTo(email);
+			messageHelper.setSubject("회원님의 SCOOP 계정의 본인 인증 이메일입니다");
+			messageHelper.setText(mailBody, true);
+			mailSender.send(message);
+			PrintWriter out = response.getWriter();
+			out.println("<script>Swal.fire({" + 
+					"title: \"비밀번호 변경 인증 메일 전송\"," + 
+					"text: \"본인인증 이메일을 발송했습니다.\"," + 
+					"icon: \"info\"," + 
+					"button: \"확인\"" + 
+					"})</script>");
+			out.flush(); 
+			viewpage = "index";
+			
+			
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			System.out.println("인증 메일 발송 에러");
+			PrintWriter out;
+			try {
+				out = response.getWriter();
+				out.println("<script>Swal.fire({\r\n" + 
+						"title: \"인증 메일 전송 실패\",\r\n" + 
+						"text: \"인증 이메일 발송 도중 에러가 발생했습니다 이메일을 확인해주세요\",\r\n" + 
+						"icon: \"error\",\r\n" + 
+						"button: \"확인\"\r\n" + 
+						"})</script>");
+				out.flush(); 
+			viewpage = "index";
+			} catch (IOException e2) {
+				e2.printStackTrace();
+			}
+		}
+		return viewpage;
+	}
+	
+	// 이메일 인증 확인
+	@RequestMapping(value="/emailCertified.do")
+	public String emailCertified() {
+		System.out.println("return certified");
+		return "certified/emailCertified";
+	}
+	
+	// 비밀번효 변경 페이지
+	@RequestMapping(value="/changePwd.do")
+	public String ChangePwd() {
+		return "user/forgotPwd";
+	}
+	
+	// 비밀번호 변경 완료
+	@RequestMapping("changePwdOk.do")
+	public String changePwdOk(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+		String pwd = this.bCryptPasswordEncoder.encode(request.getParameter("pwd"));
+		String email = (String)session.getAttribute("email");
+		
+		System.out.println("Email : " + email);
+		System.out.println("Password : " + pwd);
+		
+		MemberDao dao = sqlsession.getMapper(MemberDao.class);
+		int result = dao.changePassword(pwd, email);
+		System.out.println("비밀번호 인서트");
+		
+		String viewpage = "";
+		if(result > 0) {
+			System.out.println("인서트 성공");
+			viewpage = "index";
+		}else {
+			System.out.println("인서트 실패");
+			viewpage = "index";
+		}
+		return viewpage;
+	}
+	
+	// 캘린더 // 이게 왜 캘린더야?
 	@RequestMapping(value = "/certified.do")
 	public String certified() {
 		return "certified/Certified";

@@ -6,12 +6,14 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.or.scoop.dao.NoticeDao;
 import kr.or.scoop.dto.Notice;
 import kr.or.scoop.service.BoardService;
+import sun.print.resources.serviceui;
 
 @Controller
 public class BoardController {
@@ -20,7 +22,7 @@ public class BoardController {
 	private SqlSession sqlSession;
 	
 	@Autowired
-	private BoardService boardService;
+	private BoardService service;
 	
 	// 마이이슈 작성
 	@RequestMapping(value = "/myissue.do", method = RequestMethod.GET)
@@ -40,5 +42,22 @@ public class BoardController {
 		List<Notice> n = dao.getNotice();
 		model.addAttribute("notice",n);
 		return "issue/notice";
+	}
+	
+	@RequestMapping(value="noticeWrite.do" , method=RequestMethod.POST)
+	public String noticeWrite(Notice notice) {
+		int result = 0;
+		String viewpage;
+		System.out.println(notice);
+		result = service.insertNotice(notice);
+		
+		if(result > 0) {
+			viewpage = "issue/notice";
+		}else {
+			viewpage = "user/userindex";
+		}
+		
+		return viewpage;
+	
 	}
 }

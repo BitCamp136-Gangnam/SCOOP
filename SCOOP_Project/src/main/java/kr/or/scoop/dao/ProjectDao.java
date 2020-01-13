@@ -3,6 +3,7 @@ package kr.or.scoop.dao;
 import java.util.List;
 
 import kr.or.scoop.dto.TeamPjt;
+import kr.or.scoop.dto.Tissue;
 import kr.or.scoop.dto.Tpmember;
 
 public interface ProjectDao {
@@ -10,5 +11,5 @@ public interface ProjectDao {
 	public int insertPJT2(String email, int tseq);
 	public List<Tpmember> getPJT(String email);
 	public TeamPjt detailPJT(int tseq);
-	public List<TeamPjt> getTissue(int tseq);
+	public List<Tissue> getTissue(int tseq);
 }
