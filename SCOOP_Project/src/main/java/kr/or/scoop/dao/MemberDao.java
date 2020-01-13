@@ -34,4 +34,6 @@ public interface MemberDao {
 	//회원 수정
 	public int updateMember(Member member);
 	
+	//비밀번호 변경
+	public int changePassword(String pwd, String email);
 }
