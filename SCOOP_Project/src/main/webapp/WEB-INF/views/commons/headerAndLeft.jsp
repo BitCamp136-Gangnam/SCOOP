@@ -874,7 +874,8 @@ span {
 					<br> <label for="noticecontent">공지 설명</label>
 					<textarea class="form-control createmodal" rows="5"
 						id="bncontent" name="bncontent" style="width: 100%"
-						placeholder="내용을 적어주세요."></textarea>			
+						placeholder="내용을 적어주세요."></textarea>	
+						<input type="hidden" name="email" value="${sessionScope.email}">		
 				<!-- Modal footer -->
 				<div class="modal-footer">
 					<button type="submit" class="btn btn-secondary"
