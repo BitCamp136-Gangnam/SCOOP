@@ -24,10 +24,10 @@ import org.springframework.ui.velocity.VelocityEngineUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import kr.or.scoop.dao.ProjectDao;
 import kr.or.scoop.dao.MemberDao;
+import kr.or.scoop.dao.ProjectDao;
 import kr.or.scoop.dto.Member;
-import kr.or.scoop.dto.TeamPjt;
+import kr.or.scoop.dto.Role;
 import kr.or.scoop.dto.Tpmember;
 import kr.or.scoop.service.MemberService;
 import kr.or.scoop.utils.Mail;
@@ -140,12 +140,14 @@ public class MemberController {
 
 	// 일반회원 로그인
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
-	public String login(String email, String pwd, HttpSession session) {
-
+	public String login(String email, String pwd, HttpSession session, Model model) {
+		MemberDao dao = sqlsession.getMapper(MemberDao.class);
+		Role role = dao.getRole(email);
 		int result = 0;
 		String viewpage = "";
 		result = service.loginMember(email, pwd);
 		if (result > 0) {
+			model.addAttribute("role",role);
 			viewpage = "redirect:/userindex.do";
 			session.setAttribute("email", email);
 			session.setAttribute("kind", "normal");
@@ -322,5 +324,6 @@ public class MemberController {
 	public String externalpage() {
 		return "user/app-external";
 	}
-
+	
+	
 }

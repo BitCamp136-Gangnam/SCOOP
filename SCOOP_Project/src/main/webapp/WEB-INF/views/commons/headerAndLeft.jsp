@@ -489,7 +489,7 @@ span {
 			<li><a href="notice.do" aria-expanded="false"> <span
 					class="iconify" data-icon="bx:bx-file-blank" data-inline="false"
 					style="width: 20px; height: auto;"> </span><span class="nav-text">
-						&nbsp;새로운 소식</span> <!-- <i class="icon-speedometer menu-icon"> -->
+						&nbsp;공지사항</span> <!-- <i class="icon-speedometer menu-icon"> -->
 			</a></li>
 			<li><a href="userindex.do" aria-expanded="false"> <span
 					class="iconify" data-icon="bx:bx-file-blank" data-inline="false"
@@ -639,6 +639,7 @@ span {
 		<div class="modal-content">
 
 			<!-- Modal Header -->
+		
 			<div class="modal-header">
 				<h3 class="modal-title">이슈 작성</h3>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
