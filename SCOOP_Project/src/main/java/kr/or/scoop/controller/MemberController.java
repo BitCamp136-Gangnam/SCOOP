@@ -186,7 +186,7 @@ public class MemberController {
 		ProjectDao noticeDao = sqlsession.getMapper(ProjectDao.class);
 		MemberDao memberdao = sqlsession.getMapper(MemberDao.class);
 		Role role = memberdao.getRole(email);
-		System.out.println(role.getRname());
+		System.out.println(role);
 		session.setAttribute("role", role.getRname());
 		List<Tpmember> pjtlist = noticeDao.getPJT(email);
 		if(pjtlist!=null) {

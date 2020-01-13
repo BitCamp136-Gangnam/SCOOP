@@ -39,9 +39,11 @@ public class BoardService {
 	}
 	
 	public int insertNotice(Notice notice) {
+		int result = 0;
+		NoticeDao dao = sqlsession.getMapper(NoticeDao.class);
+		result = dao.insertNotice(notice);
 		
-		
-		return 0;
+		return result;
 		
 	}
 
