@@ -3,6 +3,7 @@ package kr.or.scoop.controller;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import kr.or.scoop.dao.ProjectDao;
 import kr.or.scoop.dto.Member;
 import kr.or.scoop.dto.TeamPjt;
+import kr.or.scoop.dto.Tissue;
 import kr.or.scoop.service.BoardService;
+import kr.or.scoop.service.TeamService;
 
 @Controller
 public class TeamController {
@@ -26,6 +29,9 @@ public class TeamController {
 	
 	@Autowired
 	private BoardService service;
+	
+	@Autowired
+	private TeamService teamservice;
 	
 	@RequestMapping(value = "team.do" , method= {RequestMethod.POST,RequestMethod.GET})
 	public String CreateProject(TeamPjt team) {
@@ -106,17 +112,37 @@ public class TeamController {
 	
 	
 	// 마이이슈 작성
-	@RequestMapping(value = "writeTissue.do", method = RequestMethod.POST)
+	@RequestMapping(value = "writeTissue.do", method = {RequestMethod.POST,RequestMethod.GET})
 	public String writeTissue(String issuetitle, String fileclick, String issuecontent, String selectTeam, Model model,
-			HttpSession session) {
+			HttpSession session, HttpServletRequest request, int tseq) {
+		String path = "";
+		System.out.println("issuetitle :"+issuetitle);
+		System.out.println("issuetitle :"+fileclick);
+		System.out.println("issuetitle :"+issuecontent);
+		System.out.println("issuetitle :"+issuetitle);
+		System.out.println("tseq :"+tseq);
+		Tissue tissue = new Tissue();
+		tissue.setEmail((String)session.getAttribute("email"));
+		tissue.setTititle(issuetitle);
+		tissue.setFilename(fileclick);
+		tissue.setTicontent(issuecontent);
+		tissue.setTseq(tseq);
+		int result = teamservice.writeTissue(tissue);
+		if(result >0) {
+			path = "user/ProjectDetail";
+			System.out.println("success insert tissue");
+		}else {
+			path = "user/ProjectDetail";
+			System.out.println("fail insert tissue");
+		}
 		
 
-		return "user/ProjectDetail";
+		return path;
 
 	}
 
 	// 팀 이슈 작성
-	@RequestMapping(value = "writeMyIssue.do", method = RequestMethod.POST)
+	@RequestMapping(value = "writeMyIssue.do", method = {RequestMethod.POST,RequestMethod.GET})
 	public String writeMyIssue(String issuetitle, String fileclick, String issuecontent, String selectTeam, Model model,
 			HttpSession session) {
 
