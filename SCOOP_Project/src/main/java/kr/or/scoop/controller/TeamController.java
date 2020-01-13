@@ -3,10 +3,12 @@ package kr.or.scoop.controller;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -93,12 +95,14 @@ public class TeamController {
 	// 이슈 작성
 	@RequestMapping(value = "writeIssue.do", method = {RequestMethod.POST,RequestMethod.GET})
 	public String writeIssue(String issuetitle, String fileclick, String issuecontent, String selectTeam, Model model,
-			HttpSession session) {
+			HttpSession session, String mention) {
 		String path = "";
 		if (selectTeam.equals((String) session.getAttribute("email"))) {
-			path = "writeMyIssue.do";
+			session.setAttribute("issuetitle", issuetitle);
+			session.setAttribute("issuecontent", issuecontent);
+			path = "redirect:/writeMyIssue.do";
 		} else {
-			path = "writeTissue.do"; // 주석주석
+			path = "redirect:/writeTissue.do"; // 주석주석
 		}
 		return path;
 
@@ -106,7 +110,7 @@ public class TeamController {
 	
 	
 	// 마이이슈 작성
-	@RequestMapping(value = "writeTissue.do", method = RequestMethod.POST)
+	@RequestMapping(value = "writeTissue.do", method = {RequestMethod.POST,RequestMethod.GET})
 	public String writeTissue(String issuetitle, String fileclick, String issuecontent, String selectTeam, Model model,
 			HttpSession session) {
 		
@@ -116,11 +120,12 @@ public class TeamController {
 	}
 
 	// 팀 이슈 작성
-	@RequestMapping(value = "writeMyIssue.do", method = RequestMethod.POST)
-	public String writeMyIssue(String issuetitle, String fileclick, String issuecontent, String selectTeam, Model model,
-			HttpSession session) {
-
-
+	@RequestMapping(value = "writeMyIssue.do", method = {RequestMethod.POST,RequestMethod.GET})
+	public String writeMyIssue(Model model, HttpSession session) {
+		String issuetitle = (String)session.getAttribute("issuetitle");
+		String issuecontent = (String)session.getAttribute("issuecontent");
+		System.out.println("타이틀 : "+ issuetitle);
+		System.out.println("콘텐츠 : "+ issuecontent);
 		return "user/ProjectDetail";
 
 	}
