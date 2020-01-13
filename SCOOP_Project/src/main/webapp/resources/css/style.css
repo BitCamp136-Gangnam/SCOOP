@@ -8119,7 +8119,6 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
 
 .nav-label {
   padding: 0.8125rem 1.5625rem;
-  text-transform: uppercase;
   font-size: 0.75rem;
   letter-spacing: 0.05rem;
   color: #abafb3; }
