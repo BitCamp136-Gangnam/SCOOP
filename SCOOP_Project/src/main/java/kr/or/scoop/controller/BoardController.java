@@ -60,4 +60,12 @@ public class BoardController {
 		return viewpage;
 	
 	}
+	
+	public String noticeDetail(int bnseq,Model model) {
+		NoticeDao dao = sqlSession.getMapper(NoticeDao.class);
+		Notice notice = dao.detailNotice(bnseq);
+		model.addAttribute("n",notice);
+		
+		return "issue/notice";
+	}
 }

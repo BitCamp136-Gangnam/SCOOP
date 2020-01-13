@@ -11,4 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into notice (bnseq,bntitle,bncontent,bntime,email)
 		 values (bnseq_notice_seq.nextval,#{bntitle},#{bncontent},sysdate,#{email})
 	</insert>
+	<select id="detailNotice" resultType="kr.or.scoop.dto.Notice">
+		select bnseq,bntitle,bncontent,bntime from notice where bnseq = #{bnseq}
+	</select>
 </mapper>
