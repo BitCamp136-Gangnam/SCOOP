@@ -36,4 +36,6 @@ public interface MemberDao {
 	//권한 체크
 	public Role getRole(String email);
 	
+	//비밀번호 변경
+	public int changePassword(String pwd, String email);
 }
