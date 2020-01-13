@@ -17,6 +17,30 @@ public class Issue {
 	private int ispibook;
 	private String email;
 	private Date pidate;
+	private String mygfilename;
+	private String mymention;
+	
+	public String getMygfilename() {
+		return mygfilename;
+	}
+	public void setMygfilename(String mygfilename) {
+		this.mygfilename = mygfilename;
+	}
+	public String getMymention() {
+		return mymention;
+	}
+	public void setMymention(String mymention) {
+		this.mymention = mymention;
+	}
+	public String getMyurl() {
+		return myurl;
+	}
+	public void setMyurl(String myurl) {
+		this.myurl = myurl;
+	}
+
+	private String myurl;
+	
 	
 	public int getPiseq() {
 		return piseq;
@@ -83,7 +107,8 @@ public class Issue {
 	public String toString() {
 		return "Issue [piseq=" + piseq + ", filename=" + filename + ", filesize=" + filesize + ", pititle=" + pititle
 				+ ", picontent=" + picontent + ", pistart=" + pistart + ", piend=" + piend + ", ispibook=" + ispibook
-				+ ", email=" + email + ", pidate=" + pidate + "]";
+				+ ", email=" + email + ", pidate=" + pidate + ", mygfilename=" + mygfilename + ", mymention="
+				+ mymention + ", myurl=" + myurl + "]";
 	}
 	
 	

@@ -8,7 +8,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import kr.or.scoop.dao.ProjectDao;
 import kr.or.scoop.dto.Member;
 import kr.or.scoop.dto.TeamPjt;
+import kr.or.scoop.dto.Tissue;
 import kr.or.scoop.service.BoardService;
+import kr.or.scoop.service.TeamService;
 
 @Controller
 public class TeamController {
@@ -28,6 +29,9 @@ public class TeamController {
 	
 	@Autowired
 	private BoardService service;
+	
+	@Autowired
+	private TeamService teamservice;
 	
 	@RequestMapping(value = "team.do" , method= {RequestMethod.POST,RequestMethod.GET})
 	public String CreateProject(TeamPjt team) {
@@ -95,37 +99,44 @@ public class TeamController {
 	// 이슈 작성
 	@RequestMapping(value = "writeIssue.do", method = {RequestMethod.POST,RequestMethod.GET})
 	public String writeIssue(String issuetitle, String fileclick, String issuecontent, String selectTeam, Model model,
-			HttpSession session, String mention) {
+			HttpSession session, String mention, HttpServletRequest request, String pname) {
 		String path = "";
-		if (selectTeam.equals((String) session.getAttribute("email"))) {
-			session.setAttribute("issuetitle", issuetitle);
-			session.setAttribute("issuecontent", issuecontent);
-			path = "redirect:/writeMyIssue.do";
+		System.out.println("issuetitle :"+issuetitle);
+		System.out.println("issuetitle :"+fileclick);
+		System.out.println("issuetitle :"+issuecontent);
+		System.out.println("issuetitle :"+issuetitle);
+		System.out.println("tseq :"+selectTeam);
+		System.out.println("pname"+pname);
+		if (pname.equals((String) session.getAttribute("email")) || pname == null) {
+			path = "writeMyIssue.do";
 		} else {
-			path = "redirect:/writeTissue.do"; // 주석주석
+			
+			Tissue tissue = new Tissue();
+			tissue.setEmail((String)session.getAttribute("email"));
+			tissue.setTititle(issuetitle);
+			tissue.setFilename(fileclick);
+			tissue.setTicontent(issuecontent);
+			tissue.setTseq(Integer.parseInt(selectTeam));
+			int result = teamservice.writeTissue(tissue);
+			if(result >0) {
+				path = "user/ProjectDetail";
+				System.out.println("success insert tissue");
+			}else {
+				path = "user/ProjectDetail";
+				System.out.println("fail insert tissue");
+			}
 		}
 		return path;
 
 	}
 	
-	
-	// 마이이슈 작성
-	@RequestMapping(value = "writeTissue.do", method = {RequestMethod.POST,RequestMethod.GET})
-	public String writeTissue(String issuetitle, String fileclick, String issuecontent, String selectTeam, Model model,
-			HttpSession session) {
-		
-
-		return "user/ProjectDetail";
-
-	}
 
 	// 팀 이슈 작성
 	@RequestMapping(value = "writeMyIssue.do", method = {RequestMethod.POST,RequestMethod.GET})
-	public String writeMyIssue(Model model, HttpSession session) {
-		String issuetitle = (String)session.getAttribute("issuetitle");
-		String issuecontent = (String)session.getAttribute("issuecontent");
-		System.out.println("타이틀 : "+ issuetitle);
-		System.out.println("콘텐츠 : "+ issuecontent);
+	public String writeMyIssue(String issuetitle, String fileclick, String issuecontent, String selectTeam, Model model,
+			HttpSession session) {
+
+
 		return "user/ProjectDetail";
 
 	}
