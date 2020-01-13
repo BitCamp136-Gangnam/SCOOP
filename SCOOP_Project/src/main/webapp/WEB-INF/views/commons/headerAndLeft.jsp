@@ -25,13 +25,7 @@ input::placeholder {
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 <script type="text/javascript">
-	$(function() {
-		 $('#summernote').summernote({
-             height: 300,                 // set editor height
-             minHeight: null,             // set minimum height of editor
-             maxHeight: null,             // set maximum height of editor
-             focus: true                  // set focus to editable area after initializing summernote
-     });
+
 		$('.modal').on('hidden.bs.modal', function(e) {
 			console.log('modal close');
 			$('#memlist').hide();
@@ -674,7 +668,9 @@ span {
 						placeholder="@를 입력하여 멘션, 할 일, 파일 등을 추가해 보세요."></textarea>
 						<textarea name="content" id="summernote" value=""></textarea>
 						<script type="text/javascript">
-						$('#summernote').summernote();
+						$('#summernote').summernote({
+							dialogsInBody: true
+							});
 						</script>
 					<textarea rows="" id="codemirrorarea" style="display: none"><-- 코드를 입력하세요 --></textarea>
 					<div id="todoresult" style="display: none">
@@ -1291,4 +1287,5 @@ span {
 			}
 		}
 	}
+
 </script>
