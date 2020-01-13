@@ -93,7 +93,7 @@ public class TeamController {
 	// 이슈 작성
 	@RequestMapping(value = "writeIssue.do", method = {RequestMethod.POST,RequestMethod.GET})
 	public String writeIssue(String issuetitle, String fileclick, String issuecontent, String selectTeam, Model model,
-			HttpSession session) {
+			HttpSession session, String mention) {
 		String path = "";
 		if (selectTeam.equals((String) session.getAttribute("email"))) {
 			path = "writeMyIssue.do";

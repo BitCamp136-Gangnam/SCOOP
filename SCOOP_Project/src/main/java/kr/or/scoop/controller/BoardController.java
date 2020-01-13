@@ -33,20 +33,4 @@ public class BoardController {
 		return "sidebar/app-calender";
 	}
 
-	// 이슈 작성
-	@RequestMapping(value="writeIssue.do", method=RequestMethod.POST)
-	public String writeIssue(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
-		String email = (String)session.getAttribute("email");
-		String title = request.getParameter("issuetitle");
-		String content = request.getParameter("issuecontent");
-		String mention = request.getParameter("mention");
-		
-		System.out.println("id : " + email);
-		System.out.println("title : " + title);
-		System.out.println("content : " + content);
-		System.out.println("mention : " + mention);
-		
-		
-		return "private/private-place";
-	}
 }
