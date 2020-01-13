@@ -105,14 +105,27 @@ public class TeamController {
 	// 이슈 작성
 	@RequestMapping(value = "writeIssue.do", method = {RequestMethod.POST,RequestMethod.GET})
 	public String writeIssue(String issuetitle, String fileclick, String issuecontent, String selectTeam, Model model,
-			HttpSession session, String[] mentions, HttpServletRequest request, String pname) {
+			HttpSession session, String mentions, HttpServletRequest request) {
 		String path = "";
-		if (pname.equals((String) session.getAttribute("email")) || pname == null) {
-			System.out.println("가나다라마바"+(String)session.getAttribute("email"));
-			session.setAttribute("pititle", issuetitle);
-			session.setAttribute("picontent", issuecontent);
-			//session.setAttribute("mentions", mentions);
-			path = "redirect:/writeMyIssue.do";
+		System.out.println("????"+selectTeam);
+		System.out.println("????"+(String) session.getAttribute("email"));
+		if (selectTeam.equals((String) session.getAttribute("email")) || selectTeam == null) {
+			System.out.println("이프문 타니??");
+			MyIssue myissue = new MyIssue();
+			myissue.setEmail((String) session.getAttribute("email"));
+			myissue.setPititle(issuetitle);
+			myissue.setPicontent(issuecontent);
+			myissue.setIspibook(0);
+			myissue.setMymention(mentions);
+			int result = privateservice.writeMyissue(myissue);
+			if(result >0) {
+				path = "redirect:/userindex.do";
+				System.out.println("success insert Myissue");
+			}else {
+				path = "redirect:/userindex.do";
+				System.out.println("fail insert Myissue");
+			}
+			return path;
 		} else {
 			
 			Tissue tissue = new Tissue();
@@ -133,35 +146,4 @@ public class TeamController {
 		return path;
 
 	}
-	
-
-	// 팀 이슈 작성
-	@RequestMapping(value = "writeMyIssue.do", method = {RequestMethod.POST,RequestMethod.GET})
-	public String writeMyIssue(Model model,	HttpSession session) {
-		String path = "";
-		MyIssue myissue = new MyIssue();
-		System.out.println("가나다라"+(String)session.getAttribute("email"));
-		System.out.println("가나다라"+(String)session.getAttribute("pititle"));
-		System.out.println("가나다라"+(String)session.getAttribute("picontent"));
-		System.out.println("가나다라"+(String)session.getAttribute("mentions"));
-		myissue.setEmail((String)session.getAttribute("email"));
-		myissue.setPititle((String)session.getAttribute("pititle"));
-		myissue.setPicontent((String)session.getAttribute("picontent"));
-		String[] mentions = (String[])session.getAttribute("mentions");
-		myissue.setIspibook(0);
-		for(int i=0;i<mentions.length;i++) {
-			myissue.setMymention(mentions);
-		}
-		int result = privateservice.writeMyissue(myissue);
-		if(result >0) {
-			path = "user/ProjectDetail";
-			System.out.println("success insert Myissue");
-		}else {
-			path = "user/ProjectDetail";
-			System.out.println("fail insert Myissue");
-		}
-		return path;
-	}
-
-	
 }

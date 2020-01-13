@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.scoop.dao.MyIssueDao">
 <insert id="writeMyissue" parameterType="kr.or.scoop.dto.MyIssue" >
-insert into tissue (piseq,pfilename,pfilesize,pititle,picontent,pistart, piend, ispibook, email, pidate, mygfilename, mymention, myurl)
-  values (#{piseq}, #{pfilename}, #{pfilesize}, #{pititle}, #{picontent}, #{pistart}, #{piend}, #{ispibook}, #{email}, sysdate, #{mygfilename}, #{mymention}, #{myurl})
+insert into myissue (piseq,pfilename,pfilesize,pititle,picontent,pistart, piend, ispibook, email, pidate, mygfilename, mymention, myurl)
+  values (PISEQ_MYISSUE_SEQ.NEXTVAL, #{pfilename,jdbcType=VARCHAR}, #{pfilesize,jdbcType=INTEGER}, #{pititle}, #{picontent}, #{pistart,jdbcType=DATE}, #{piend,jdbcType=DATE}, 0, #{email}, sysdate, #{mygfilename,jdbcType=VARCHAR}, #{mymention,jdbcType=VARCHAR}, #{myurl,jdbcType=VARCHAR})
 </insert>
 </mapper>

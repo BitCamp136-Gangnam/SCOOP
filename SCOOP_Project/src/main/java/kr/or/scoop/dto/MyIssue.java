@@ -9,34 +9,34 @@ import org.springframework.stereotype.Repository;
 public class MyIssue {
 	
 	private int piseq;
-	private String[] pfilename;
-	private int[] pfilesize;
+	private String pfilename;
+	private int pfilesize;
 	private String pititle;
 	private String picontent;
-	private Date[] pistart;
-	private Date[] piend;
+	private Date pistart;
+	private Date piend;
 	private int ispibook;
 	private String email;
 	private Date pidate;
-	private String[] mygfilename;
-	private String[] mymention;
-	private String[] myurl;
+	private String mygfilename;
+	private String mymention;
+	private String myurl;
 	public int getPiseq() {
 		return piseq;
 	}
 	public void setPiseq(int piseq) {
 		this.piseq = piseq;
 	}
-	public String[] getPfilename() {
+	public String getPfilename() {
 		return pfilename;
 	}
-	public void setPfilename(String[] pfilename) {
+	public void setPfilename(String pfilename) {
 		this.pfilename = pfilename;
 	}
-	public int[] getPfilesize() {
+	public int getPfilesize() {
 		return pfilesize;
 	}
-	public void setPfilesize(int[] pfilesize) {
+	public void setPfilesize(int pfilesize) {
 		this.pfilesize = pfilesize;
 	}
 	public String getPititle() {
@@ -51,16 +51,16 @@ public class MyIssue {
 	public void setPicontent(String picontent) {
 		this.picontent = picontent;
 	}
-	public Date[] getPistart() {
+	public Date getPistart() {
 		return pistart;
 	}
-	public void setPistart(Date[] pistart) {
+	public void setPistart(Date pistart) {
 		this.pistart = pistart;
 	}
-	public Date[] getPiend() {
+	public Date getPiend() {
 		return piend;
 	}
-	public void setPiend(Date[] piend) {
+	public void setPiend(Date piend) {
 		this.piend = piend;
 	}
 	public int getIspibook() {
@@ -81,31 +81,30 @@ public class MyIssue {
 	public void setPidate(Date pidate) {
 		this.pidate = pidate;
 	}
-	public String[] getMygfilename() {
+	public String getMygfilename() {
 		return mygfilename;
 	}
-	public void setMygfilename(String[] mygfilename) {
+	public void setMygfilename(String mygfilename) {
 		this.mygfilename = mygfilename;
 	}
-	public String[] getMymention() {
+	public String getMymention() {
 		return mymention;
 	}
-	public void setMymention(String[] mymention) {
+	public void setMymention(String mymention) {
 		this.mymention = mymention;
 	}
-	public String[] getMyurl() {
+	public String getMyurl() {
 		return myurl;
 	}
-	public void setMyurl(String[] myurl) {
+	public void setMyurl(String myurl) {
 		this.myurl = myurl;
 	}
 	@Override
 	public String toString() {
-		return "MyIssue [piseq=" + piseq + ", pfilename=" + Arrays.toString(pfilename) + ", pfilesize="
-				+ Arrays.toString(pfilesize) + ", pititle=" + pititle + ", picontent=" + picontent + ", pistart="
-				+ Arrays.toString(pistart) + ", piend=" + Arrays.toString(piend) + ", ispibook=" + ispibook + ", email="
-				+ email + ", pidate=" + pidate + ", mygfilename=" + Arrays.toString(mygfilename) + ", mymention="
-				+ Arrays.toString(mymention) + ", myurl=" + Arrays.toString(myurl) + "]";
+		return "MyIssue [piseq=" + piseq + ", pfilename=" + pfilename + ", pfilesize=" + pfilesize + ", pititle="
+				+ pititle + ", picontent=" + picontent + ", pistart=" + pistart + ", piend=" + piend + ", ispibook="
+				+ ispibook + ", email=" + email + ", pidate=" + pidate + ", mygfilename=" + mygfilename + ", mymention="
+				+ mymention + ", myurl=" + myurl + "]";
 	}
 
 }
