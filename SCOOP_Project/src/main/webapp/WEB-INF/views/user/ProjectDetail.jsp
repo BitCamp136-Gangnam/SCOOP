@@ -28,7 +28,6 @@
 }
 </style>
 <body>
-
     <jsp:include page="/WEB-INF/views/commons/preloader.jsp"></jsp:include>
 
     
@@ -65,15 +64,30 @@
 		<hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
 		<div class="row" style="margin-left: 2%; margin-right: 2%">
 			<div class="col-sm-2 newissue" >
-			이슈 제목 들어갈곳(코드는 주석) 
+			작성자
 			</div>
 			<div class="col-sm-8 newissue">
-			여기에 내용들어가는데 나중엔 append하면 될듯??(코드는 주석) 
+			제목 
 			</div>
 			<div class="col-sm-2 newissue">
-			여기에 시간넣으면됨(코드는 주석) 
+			작성시간 
 			</div>
 		</div>
+		<c:forEach items="${tp  }" var="ti">
+			<div class="row" style="margin-left: 2%; margin-right: 2%">
+			<div class="col-sm-2 newissue" >
+			${ti.email }
+			</div>
+			<div class="col-sm-8 newissue">
+			${ti.tititle} 
+			</div>
+			<div class="col-sm-2 newissue">
+			${ti.tidate} 
+			</div>
+			
+		</div>
+		</c:forEach>
+		
             <!-- #/ container -->
             </div>
             </div>

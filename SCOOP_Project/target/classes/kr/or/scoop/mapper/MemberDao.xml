@@ -81,4 +81,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getRole" resultType="kr.or.scoop.dto.Role">
 	select m.email , r.RNAME from member m join role r on m.email = r.email where r.email= #{email}
 	</select>
+	
+	<update id="changePassword" parameterType="kr.or.scoop.dto.Member">
+		update member
+		set pwd = #{pwd}
+		where email = #{email}
+	</update>
 </mapper>

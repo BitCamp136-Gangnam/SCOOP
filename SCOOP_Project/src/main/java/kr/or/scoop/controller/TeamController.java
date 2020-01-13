@@ -1,6 +1,7 @@
 package kr.or.scoop.controller;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.or.scoop.dao.ProjectDao;
 import kr.or.scoop.dto.Member;
+import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.dto.TeamPjt;
 import kr.or.scoop.dto.Tissue;
 import kr.or.scoop.service.BoardService;
+import kr.or.scoop.service.PrivateService;
 import kr.or.scoop.service.TeamService;
 
 @Controller
@@ -32,6 +35,8 @@ public class TeamController {
 	
 	@Autowired
 	private TeamService teamservice;
+	@Autowired
+	private PrivateService privateservice;
 	
 	@RequestMapping(value = "team.do" , method= {RequestMethod.POST,RequestMethod.GET})
 	public String CreateProject(TeamPjt team) {
@@ -87,8 +92,9 @@ public class TeamController {
 		System.out.println(tseq);
 		ProjectDao dao = sqlsession.getMapper(ProjectDao.class);
 		TeamPjt pjt = dao.detailPJT(tseq);
-		List<Tissue> tp = dao.getTissue(tseq);
 		System.out.println(pjt);
+		List<Tissue> tp = dao.getTissue(tseq);
+		System.out.println(tp);
 		model.addAttribute("tpj",pjt); //프로젝트 이름 , 설명
 		model.addAttribute("tp",tp); //프로젝트 글 목록
 		
@@ -99,16 +105,14 @@ public class TeamController {
 	// 이슈 작성
 	@RequestMapping(value = "writeIssue.do", method = {RequestMethod.POST,RequestMethod.GET})
 	public String writeIssue(String issuetitle, String fileclick, String issuecontent, String selectTeam, Model model,
-			HttpSession session, String mention, HttpServletRequest request, String pname) {
+			HttpSession session, String[] mentions, HttpServletRequest request, String pname) {
 		String path = "";
-		System.out.println("issuetitle :"+issuetitle);
-		System.out.println("issuetitle :"+fileclick);
-		System.out.println("issuetitle :"+issuecontent);
-		System.out.println("issuetitle :"+issuetitle);
-		System.out.println("tseq :"+selectTeam);
-		System.out.println("pname"+pname);
 		if (pname.equals((String) session.getAttribute("email")) || pname == null) {
-			path = "writeMyIssue.do";
+			System.out.println("가나다라마바"+(String)session.getAttribute("email"));
+			session.setAttribute("pititle", issuetitle);
+			session.setAttribute("picontent", issuecontent);
+			//session.setAttribute("mentions", mentions);
+			path = "redirect:/writeMyIssue.do";
 		} else {
 			
 			Tissue tissue = new Tissue();
@@ -133,14 +137,31 @@ public class TeamController {
 
 	// 팀 이슈 작성
 	@RequestMapping(value = "writeMyIssue.do", method = {RequestMethod.POST,RequestMethod.GET})
-	public String writeMyIssue(String issuetitle, String fileclick, String issuecontent, String selectTeam, Model model,
-			HttpSession session) {
-
-
-		return "user/ProjectDetail";
-
+	public String writeMyIssue(Model model,	HttpSession session) {
+		String path = "";
+		MyIssue myissue = new MyIssue();
+		System.out.println("가나다라"+(String)session.getAttribute("email"));
+		System.out.println("가나다라"+(String)session.getAttribute("pititle"));
+		System.out.println("가나다라"+(String)session.getAttribute("picontent"));
+		System.out.println("가나다라"+(String)session.getAttribute("mentions"));
+		myissue.setEmail((String)session.getAttribute("email"));
+		myissue.setPititle((String)session.getAttribute("pititle"));
+		myissue.setPicontent((String)session.getAttribute("picontent"));
+		String[] mentions = (String[])session.getAttribute("mentions");
+		myissue.setIspibook(0);
+		for(int i=0;i<mentions.length;i++) {
+			myissue.setMymention(mentions);
+		}
+		int result = privateservice.writeMyissue(myissue);
+		if(result >0) {
+			path = "user/ProjectDetail";
+			System.out.println("success insert Myissue");
+		}else {
+			path = "user/ProjectDetail";
+			System.out.println("fail insert Myissue");
+		}
+		return path;
 	}
-	
 
 	
 }
