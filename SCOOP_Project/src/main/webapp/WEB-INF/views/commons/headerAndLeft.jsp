@@ -703,7 +703,7 @@ span {
 						<c:forEach items="${pjtlist}" var="p">
 									<option value="${p.tseq}">${p.pname}</option>
 									<%-- <c:set value="${p.pname}" var="pname"></c:set> --%>
-									<input type="hidden" value="${p.pname }" name="pname"  readonly>
+									<%-- <input type="hidden" value="${p.pname}" name="pname"  readonly> --%>
 						</c:forEach>
 					</select>
 					<%-- <c:if test="${tseq!=null} }">

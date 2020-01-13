@@ -18,6 +18,7 @@ public class PrivateService {
 	public int writeMyissue(MyIssue myissue) {
 		int result = 0 ;
 		System.out.println("writeMyissue");
+		System.out.println(myissue);
 		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
 		result = dao.writeMyissue(myissue);
 		return result;

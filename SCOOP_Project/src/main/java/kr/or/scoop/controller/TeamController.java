@@ -105,15 +105,18 @@ public class TeamController {
 	// 이슈 작성
 	@RequestMapping(value = "writeIssue.do", method = {RequestMethod.POST,RequestMethod.GET})
 	public String writeIssue(String issuetitle, String fileclick, String issuecontent, String selectTeam, Model model,
-			HttpSession session, String[] mentions, HttpServletRequest request, String pname) {
+			HttpSession session, String[] mentions, HttpServletRequest request) {
 		String path = "";
-		if (pname.equals((String) session.getAttribute("email")) || pname == null) {
+		System.out.println("????"+selectTeam);
+		System.out.println("????"+(String) session.getAttribute("email"));
+		if (selectTeam.equals((String) session.getAttribute("email")) || selectTeam == null) {
+			System.out.println("이프문 타니??");
 			MyIssue myissue = new MyIssue();
 			myissue.setEmail((String) session.getAttribute("email"));
 			myissue.setPititle(issuetitle);
 			myissue.setPicontent(issuecontent);
 			myissue.setIspibook(0);
-				myissue.setMymention(mentions);
+			myissue.setMymention(mentions);
 			int result = privateservice.writeMyissue(myissue);
 			if(result >0) {
 				path = "redirect:/userindex.do";
