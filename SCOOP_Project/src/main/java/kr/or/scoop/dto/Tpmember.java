@@ -8,6 +8,7 @@ public class Tpmember {
 	private String email;
 	private int pjuserrank;
 	private String pname;
+	
 	public int getTseq() {
 		return tseq;
 	}

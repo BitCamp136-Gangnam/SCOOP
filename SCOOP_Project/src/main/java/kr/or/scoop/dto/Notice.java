@@ -11,6 +11,8 @@ public class Notice {
 	private String bncontent;
 	private Date bntime;
 	private String email;
+	
+	
 	public int getBnseq() {
 		return bnseq;
 	}

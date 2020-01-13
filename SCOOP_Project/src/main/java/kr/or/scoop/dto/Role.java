@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 public class Role {
 	private String email;
 	private String rname;
+	
 	public String getEmail() {
 		return email;
 	}

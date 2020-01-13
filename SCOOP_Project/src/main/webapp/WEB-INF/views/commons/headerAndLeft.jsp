@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="role" value="${sessionScope.role}" />
 <style>
 input::placeholder {
 	color: #fff;
@@ -351,10 +352,19 @@ span {
 						id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
 				</div>
 				<input type="search" class="form-control" placeholder="검색하세요"
-					aria-label="Search"> <input type="button"
-					class="form-control"
+					aria-label="Search">
+					<c:choose>
+						<c:when test="${role == 'ROLE_ADMIN'}">
+					<input type="button"class="form-control"
+					style="background-color: #E71D36; border-color: #CCCCCC; margin-left: 2%; color: #fff; cursor: pointer;"
+					value="공지사항 작성" data-toggle="modal" data-target="#makenotice">
+					</c:when>
+					<c:otherwise>
+					<input type="button"class="form-control"
 					style="background-color: #E71D36; border-color: #CCCCCC; margin-left: 2%; color: #fff; cursor: pointer;"
 					value="이슈 작성" data-toggle="modal" data-target="#makeissue">
+					</c:otherwise>
+					</c:choose>
 				<div class="drop-down animated flipInX d-md-none">
 					<form action="#">
 						<input type="text" class="form-control" placeholder="Search">
@@ -493,6 +503,7 @@ span {
         ***********************************-->
 <c:set var="kind" value="${session.kind}}"></c:set>
 <c:set var="email" value="${session.email}}"></c:set>
+
 <div class="nk-sidebar" style="z-index: 0">
 	<div id="scnav" class="nk-nav-scroll">
 		<ul class="metismenu" id="menu">
@@ -651,11 +662,12 @@ span {
 		<div class="modal-content">
 
 			<!-- Modal Header -->
-		
+			
 			<div class="modal-header">
 				<h3 class="modal-title">이슈 작성</h3>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
+	
 			<form action="writeIssue.do" method="POST">
 				<!-- Modal body -->
 				<div class="modal-body">
@@ -841,7 +853,41 @@ span {
 		</div>
 	</div>
 </div>
+<div class="modal fade" id="makenotice">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
 
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h3 class="modal-title">공지사항 작성</h3>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+	
+			<form action="noticeWrite.do" method="POST">
+				<!-- Modal body -->
+				<div class="modal-body">
+					<!-- <p style="font-size: 12px">협업공간은 함께 일하는 멤버들끼리만 자료를 공유하고 협업할 수 있는 공간입니다.<br>
+             협업공간을 만들고 함께 일할 멤버들을 초대해보세요.</p> -->
+					<label for="bntitle">공지사항</label> <input
+						class="form-control createmodal" type="text" id="bntitle"
+						name="bntitle" style="width: 100%" placeholder="제목을 입력해 주세요.">
+					<br> <label for="noticecontent">공지 설명</label>
+					<textarea class="form-control createmodal" rows="5"
+						id="bncontent" name="bncontent" style="width: 100%"
+						placeholder="내용을 적어주세요."></textarea>			
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-secondary"
+						style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;">만들기</button>
+					<button type="button" class="btn btn-secondary"
+						style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;"
+						data-dismiss="modal">취소</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	</div>
 <script type="text/javascript">
 	$('#issuecontent').keydown(
 			function(event) {
