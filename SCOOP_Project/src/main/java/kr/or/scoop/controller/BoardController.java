@@ -52,7 +52,7 @@ public class BoardController {
 		result = service.insertNotice(notice);
 		
 		if(result > 0) {
-			viewpage = "issue/notice";
+			viewpage = "redirect:/notice.do";
 		}else {
 			viewpage = "user/userindex";
 		}
