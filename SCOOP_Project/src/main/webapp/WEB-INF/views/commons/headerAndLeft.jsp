@@ -486,6 +486,11 @@ span {
 		<ul class="metismenu" id="menu">
 			<li class="nav-label" style="padding-bottom: 10px;"><b
 				style="padding-bottom: 2%;">전체 정보</b></li>
+			<li><a href="notice.do" aria-expanded="false"> <span
+					class="iconify" data-icon="bx:bx-file-blank" data-inline="false"
+					style="width: 20px; height: auto;"> </span><span class="nav-text">
+						&nbsp;새로운 소식</span> <!-- <i class="icon-speedometer menu-icon"> -->
+			</a></li>
 			<li><a href="userindex.do" aria-expanded="false"> <span
 					class="iconify" data-icon="bx:bx-file-blank" data-inline="false"
 					style="width: 20px; height: auto;"> </span><span class="nav-text">

@@ -48,8 +48,8 @@
         <div class="card" style="min-height: 1080px">
 		<div class="row" style="margin: 2%">
 			<div class="col-sm-12" style="padding-left: 0">
-				<h3>프라이빗 공간</h3>
-				나만을 위한 공간에서 아이디어를 마음껏 펼쳐 보세요. 특정 파트너에게 나의 이슈를 공유할 수도 있습니다.
+				<h3>공지사항</h3>
+				스쿱의 새로운 소식을 전해드립니다.
 			</div>
 		</div>
 		<div class="row" style="margin-left: 2%;">

@@ -32,5 +32,4 @@ public class BoardController {
 	public String calendar() {
 		return "sidebar/app-calender";
 	}
-
 }
