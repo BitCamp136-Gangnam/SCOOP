@@ -26,16 +26,27 @@
 		$('.bookmark').click(function(){
 			let icon = $(this).attr('class').split(' ');
 			let status = $(this).attr('name');
+
 			console.log('before : ' + status);
 			console.log('class : ' + icon[0] +" "+ icon[1]+" "+icon[2]);
-			
-			if(status == "bookoff"){
-				$(this).removeAttr("name").attr("name", "bookon");
-				$(this).removeClass(icon[1]+" "+icon[2]).addClass("fas fa-bookmark");
-			}else if(status == "bookon"){
-				$(this).removeAttr("name").attr("name", "bookoff");
-				$(this).removeClass(icon[1]+" "+icon[2]).addClass("far fa-bookmark");
-			}
+
+			$.ajax({
+				url : "bookmark.do",
+				type : "POST",
+				data : "status=" + status,
+				success : function(data){
+					if(data == "bookoff"){
+						$(this).removeAttr("name").attr("name", "bookon");
+						$(this).removeClass(icon[1]+" "+icon[2]).addClass("fas fa-bookmark");
+					}else if(data == "bookon"){
+						$(this).removeAttr("name").attr("name", "bookoff");
+						$(this).removeClass(icon[1]+" "+icon[2]).addClass("far fa-bookmark");
+					}
+				},
+				error : function(status, err){
+					console.log('error' + err + " / " + status);
+				}
+			});
 			console.log('after : ' + $(this).attr('name'));
 			console.log('ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ');
 		});
