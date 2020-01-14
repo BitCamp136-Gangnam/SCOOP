@@ -188,7 +188,7 @@ function project_filter() {
 								<span class="log-user" id="iconAdd" data-toggle="dropdown" style="float: right;top: 0px;padding-top: 10px;">
 									<i class="fas fa-cog" id="admin_EditIcon" style="cursor: pointer;font-size: 20px;color:black;"></i>
 								</span>
-								<div class="drop-down dropdown-language animated fadeIn  dropdown-menu">
+								<div class="drop-down dropdown-language animated fadeIn  dropdown-menu"  >
 								<div class="dropdown-content-body">
 								<ul style="margin-bottom: 0px; padding-bottom: 0px;padding-top: 0px;">
 									<li id="adminPlus">관리자로 설정</li>
