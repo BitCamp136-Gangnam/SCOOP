@@ -16,12 +16,12 @@
 <script language="javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 <script>
 	//회원정보 유효성검사
-	function checkz() {
+	function pwdcheck() {
 		var getCheck = RegExp(/^[a-zA-Z0-9]{4,12}$/);
 		
 		//비밀번호 유효성
 		if (!getCheck.test($("#pwd").val())) {
-			alert("비밀번호 형식에 맞게 입력해주세요.");
+			Swal.fire("비밀번호 형식에 맞게 입력해주세요.");
 			$("#pwd").val("");
 			$("#pwd").focus();
 			return false;
@@ -100,7 +100,7 @@
 		</div>
 		<div class="row" style="margin-left: 4%; margin-top: 2%">
 		<div class="form-group" style="width: 100%">
-			<form onsubmit="return checkz()" action="editCheck.do" method="post">
+			<form onsubmit="return pwdcheck()" action="editCheck.do" method="post">
     		<label for="email">이메일</label>
     		<input class="form-control myinfo" type="text" id="email" name="email" style="width: 60%" readonly="readonly" value="${member.email}">
     		<br>

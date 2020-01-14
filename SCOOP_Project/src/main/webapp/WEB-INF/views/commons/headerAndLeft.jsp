@@ -590,7 +590,7 @@ span {
 				style="border-radius: 0.25rem; height: 20px" placeholder="협업공간 검색"></li>
 			<c:forEach items="${pjtlist}" var="p">
 				<li class="search_project"><a
-					href="projectDetail.do?tseq=${p.tseq}" aria-expanded="false"><span
+					href="projectDetail.do?tseq=${p.tseq}" class="projecthref" aria-expanded="false"><span
 						class="iconify" data-icon="bx:bxs-flag-alt" data-inline="false"
 						style="width: 20px; height: auto;"> </span><span
 						class="nav-text resultsearch"> &nbsp;${p.pname}</span></a></li>
