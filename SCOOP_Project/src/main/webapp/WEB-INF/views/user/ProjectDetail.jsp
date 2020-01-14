@@ -64,7 +64,25 @@ $(function(){
 		$('#adminPlus').show();
 		$('#icon_First').remove();
 	});
+	
+	
 });
+
+/* 프로젝트 이름 검색 - 도연 */
+function project_filter() {
+	var value, name, item, i;
+	value = document.getElementById("searchId").value.toUpperCase();
+	item = document.getElementsByClassName("search_NameEmail");
+	for (i = 0; i < item.length; i++) {
+		name = item[i].getElementsByClassName("finalsearch");
+		console.log(name);
+		if (name[0].innerText.toUpperCase().indexOf(value) > -1 || name[1].innerText.toUpperCase().indexOf(value) > -1) {
+			item[i].style.display = "block";
+		} else {
+			item[i].style.display = "none";
+		}
+	}
+}
 </script>
 <body>
     <jsp:include page="/WEB-INF/views/commons/preloader.jsp"></jsp:include>
@@ -145,14 +163,14 @@ $(function(){
 				<h4 class="modal-title">협업공간 관리</h4>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
-				<div>
+				<div style="padding-left: 25px;">
 				<button id="c_InformationBtn" style=" border:none; border:hidden; ; color: #E71D36;background-color: #fff;padding-left: 16px;padding-top: 16px;padding-right: 16px;"><i class="far fa-edit" style="padding-right: 5px;"></i>협업공간 정보</button>
 				<button id="c_ManagementBtn" style="border:none; color: #000;background-color: #fff;" ><i class="fas fa-user-friends" style="padding-right: 5px;"></i>멤버 관리</button>
 				</div>
 
 			<!-- Modal body -->
 			<form action="" method="post">
-				<div class="modal-body">
+				<div class="modal-body" style="width: 450px;height: 250px;margin-left: 25px;">
 					<div  id="c_Information">
 					<label for="pname_Edit">협업공간 이름</label> 
 					<input class="form-control createmodal" type="text" id="pname_Edit" name="pname_Edit" style="width: 100%" value="${tpj.pname}"> <br> 
@@ -160,17 +178,17 @@ $(function(){
 					<textarea class="form-control createmodal" rows="3" id="pcontent_Edit"name="pcontent_Edit" style="width: 100%">${tpj.pcontent }</textarea>
 					</div>
 
-					<div id="c_Management" class="nav-label" style="display: none;">
-					<input onkeyup="filter()" type="search" id="searchpjt" class="form-control" style="border-radius: 0.25rem; height: 20px" placeholder="이름  또는 이메일 주소로 멤버 검색">
-						<div class="row">
-						<c:forEach items="${projectmember}" var="pm">
-							<div class="search_project col-sm-6">
-							
-								<span class="nav-text resultsearch" style="color: #4d4d46;font-size: 13px;padding-bottom:5px;padding-top: 10px;"> &nbsp;${pm.name}</span>
+					<div id="c_Management" class="nav-label" style="display: none;padding-left: 0px;padding-right: 0px;">
+					<input onkeyup="project_filter()" type="search" id="searchId" class="form-control" style="border-radius: 0.25rem; height: 20px;margin-bottom: 15px;width: 400px;margin-left: 10px;" placeholder="이름  또는 이메일 주소로 멤버 검색">
+						<div class="row"  style="overflow: auto;" >
+						<c:forEach items="${projectmember}" var="pm" varStatus="status">
+							<div class="search_NameEmail col-sm-6">
+								${pm.pjuserrank}
+								<span class="nav-text finalsearch" id="member_Name${status.index}" style="color: #4d4d46;font-size: 13px;padding-bottom:5px;padding-top: 10px;"> &nbsp;${pm.name}</span>
 								<span class="log-user" id="iconAdd" data-toggle="dropdown" style="float: right;top: 0px;padding-top: 10px;">
 									<i class="fas fa-cog" id="admin_EditIcon" style="cursor: pointer;font-size: 20px;color:black;"></i>
 								</span>
-								<div class="drop-down dropdown-language animated fadeIn  dropdown-menu">
+								<div class="drop-down dropdown-language animated fadeIn  dropdown-menu"  >
 								<div class="dropdown-content-body">
 								<ul style="margin-bottom: 0px; padding-bottom: 0px;padding-top: 0px;">
 									<li id="adminPlus">관리자로 설정</li>
@@ -180,7 +198,7 @@ $(function(){
 								</div>
 								</div>
 								
-								<span class="nav-text resultsearch" style="padding-bottom: 1%; padding-top:5px; font-weight: normal;"> &nbsp;${pm.email}</span>
+								<span class="nav-text finalsearch" id="member_Email${status.index}" style="padding-bottom: 1%; padding-top:5px; font-weight: normal;"> &nbsp;${pm.email}</span>
 								
 							</div>
 						</c:forEach>

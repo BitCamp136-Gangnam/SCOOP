@@ -7,6 +7,7 @@ input::placeholder {
 	color: #fff;
 }
 </style>
+<script language="javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 <script type="text/javascript"
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
 <link rel="stylesheet"
@@ -199,6 +200,44 @@ input::placeholder {
 			$('#todoresult').show();
 		}
 	}
+
+	//이슈작성 validation
+	 function checkz() {
+	 //이슈 제목 공백 확인
+	  if($("#issuetitle").val() == ""){
+		  Swal.fire("제목을 입력해주세요.");
+	    $("#issuetitle").focus();
+	    return false;
+	  }
+
+	  //이슈 설명 공백 확인
+	  if($("#issuecontent").val() == ""){
+		  Swal.fire("내용을 입력해주세요.");
+	    $("#issuecontent").focus();
+	    return false;
+	  }
+
+	return true;
+	} 
+
+	//협업공간 생성 validation
+	 function checkz2() {
+	 //협업공간 이름 확인
+	  if($("#pname").val() == ""){
+		  Swal.fire("제목을 입력해주세요.");
+	    $("#pname").focus();
+	    return false;
+	  }
+
+	  //협업공간 내용 확인
+	  if($("#pcontent").val() == ""){
+		  Swal.fire("내용을 입력해주세요.");
+	    $("#pcontent").focus();
+	    return false;
+	  }
+
+	return true;
+	} 
 </script>
 <style>
 .modal-content.modal-fullsize {
@@ -551,7 +590,7 @@ span {
 				style="border-radius: 0.25rem; height: 20px" placeholder="협업공간 검색"></li>
 			<c:forEach items="${pjtlist}" var="p">
 				<li class="search_project"><a
-					href="projectDetail.do?tseq=${p.tseq}" aria-expanded="false"><span
+					href="projectDetail.do?tseq=${p.tseq}" class="projecthref" aria-expanded="false"><span
 						class="iconify" data-icon="bx:bxs-flag-alt" data-inline="false"
 						style="width: 20px; height: auto;"> </span><span
 						class="nav-text resultsearch"> &nbsp;${p.pname}</span></a></li>
@@ -586,7 +625,7 @@ span {
 			</div>
 
 			<!-- Modal body -->
-			<form action="team.do" method="post">
+			<form onsubmit="return checkz2()" action="team.do" method="post">
 				<div class="modal-body">
 					<p style="font-size: 12px">
 						협업공간은 함께 일하는 멤버들끼리만 자료를 공유하고 협업할 수 있는 공간입니다.<br> 협업공간을 만들고 함께
@@ -608,7 +647,7 @@ span {
 				<!-- <input type="hidden" name="istpalarm" value="0"> -->
 				<!-- <input type="hidden" name="ptime" value="20/01/08"> -->
 				<div class="modal-footer">
-					<input type="submit" class="btn btn-secondary" value="만들기"
+					<input type="submit" id="chatmake" class="btn btn-secondary" value="만들기"
 						style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;">
 					<input type="button" class="btn btn-secondary" value="취소"
 						style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;"
@@ -668,7 +707,7 @@ span {
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 	
-			<form action="writeIssue.do" method="POST">
+			<form onsubmit="return checkz()" action="writeIssue.do" method="POST">
 				<!-- Modal body -->
 				<div class="modal-body">
 					<!-- <p style="font-size: 12px">협업공간은 함께 일하는 멤버들끼리만 자료를 공유하고 협업할 수 있는 공간입니다.<br>

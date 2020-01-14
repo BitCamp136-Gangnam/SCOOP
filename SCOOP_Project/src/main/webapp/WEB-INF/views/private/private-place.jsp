@@ -9,17 +9,49 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <jsp:include page="/WEB-INF/views/commons/title.jsp"></jsp:include>
-     <!-- Pignose Calender -->
+    <!-- Pignose Calender -->
     <link href="<c:url value="/resources/plugins/pg-calendar/css/pignose.calendar.min.css" />" rel="stylesheet">
     <!-- Chartist -->
     <link rel="stylesheet" href="<c:url value="/resources/plugins/chartist/css/chartist.min.css" />">
     <link rel="stylesheet" href="<c:url value="/resources/plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css" />">
     <!-- Custom Stylesheet -->
     <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
-
+    
 </head>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		
+		$('.bookmark').click(function(){
+			let icon = $(this).attr('class').split(' ');
+			let status = $(this).attr('name');
+
+			console.log('before : ' + status);
+			console.log('class : ' + icon[0] +" "+ icon[1]+" "+icon[2]);
+
+			$.ajax({
+				url : "bookmark.do",
+				type : "POST",
+				data : "status=" + status,
+				success : function(data){
+					if(data == "bookoff"){
+						$(this).removeAttr("name").attr("name", "bookon");
+						$(this).removeClass(icon[1]+" "+icon[2]).addClass("fas fa-bookmark");
+					}else if(data == "bookon"){
+						$(this).removeAttr("name").attr("name", "bookoff");
+						$(this).removeClass(icon[1]+" "+icon[2]).addClass("far fa-bookmark");
+					}
+				},
+				error : function(status, err){
+					console.log('error' + err + " / " + status);
+				}
+			});
+			console.log('after : ' + $(this).attr('name'));
+			console.log('ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ');
+		});
+	});
+</script>
 <style>
 .newissue{
 	border-bottom: 1px solid #c8c8c8;
@@ -65,15 +97,17 @@
 		<hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
 		<c:forEach items="${myissuelist}" var="m">
 		<div class="row" style="margin-left: 2%; margin-right: 2%">
-		
 			<div class="col-sm-2 newissue" >
-			${m.pititle}
+				${m.pititle}
 			</div>
-			<div class="col-sm-8 newissue">
-			${m.picontent}
+			<div class="col-sm-7 newissue">
+				${m.picontent}
 			</div>
 			<div class="col-sm-2 newissue">
-			${m.pidate}
+				${m.pidate}
+			</div>
+			<div class="col-sm-1 newissue">
+				<i class="bookmark far fa-bookmark" id="bookmark" name="bookoff"></i>
 			</div>
 		</div>
 		</c:forEach>

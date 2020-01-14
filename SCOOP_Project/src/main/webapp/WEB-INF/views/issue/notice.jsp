@@ -21,35 +21,7 @@
 </head>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script type="text/javascript">
-var n = ${n};
-console.log(n);
-var sum = 0;
-var director = new Array();
-var title = new Array();
-var image = new Array();
-var pubdate = new Array();
-function roll(a) {
-                  //alert(a);
-                  console.log(n);
-                  		$('#bntitle').attr('value',${n.bntitle});
-                       /*  $('#director').attr('value',${n.bntime}); */
-                        $('#bncontent').attr('value',${n.bncontent});
-                  
-                  console.log(a);
-                  
-         
-                   /* if(image[a]==""|| image[a]==null){
-                      
-                       $('#release').attr( 'value', pubdate[a]);
-                   } else{
-                   $('#image').attr('src',image[a]);
-                    $('#director').attr('value',director[a]);
-                    $('#title').attr('value',title[a]);
-                   $('#release').attr( 'value', pubdate[a]);
-                   } */
-                }
-</script>
+
 <style>
 .newissue{
 	border-bottom: 1px solid #c8c8c8;
@@ -57,8 +29,14 @@ function roll(a) {
 	padding-bottom: 0.7%;
 }
 </style>
+<script>
+ var array = new Array();
+ var bnseq = new Array();
+ var bntitle = new Array();
+ var bncontent = new Array();
+</script>
 <body>
-	<script>var n = "<c:out value='${n}'/></script>
+	
 
     <jsp:include page="/WEB-INF/views/commons/preloader.jsp"></jsp:include>
 
@@ -83,9 +61,15 @@ function roll(a) {
 				스쿱의 새로운 소식을 전해드립니다.
 			</div>
 		</div>
+		<c:set value="${notice}" var="no" />
 		<c:forEach items="${notice}" var="n">
 		<a href="#" id="${n.bnseq}" name="bnseq" data-target="#noticeDetail" data-toggle="modal" class="bnseq" onclick="roll(this.id)">
 		<div class="row" style="margin-left: 2%; margin-right: 2%">
+			<script>array.push("${n}");
+			bnseq.push("${n.bnseq}");
+			bntitle.push("${n.bntitle}");
+			bncontent.push("${n.bncontent}");
+			</script>
 			<div class="col-sm-3 newissue" >
 			<c:choose>
            		<c:when test="${fn:length(n.bntitle) > 19}">	
@@ -135,11 +119,10 @@ function roll(a) {
 				<div class="modal-body">
 					<!-- <p style="font-size: 12px">협업공간은 함께 일하는 멤버들끼리만 자료를 공유하고 협업할 수 있는 공간입니다.<br>
              협업공간을 만들고 함께 일할 멤버들을 초대해보세요.</p> -->
-					<label for="bntitle">공지사항</label> <input
-						class="form-control createmodal" id="bntitle"type="text"style="width: 100%" readonly="readonly" value="${n.bntitle}">
+					<label for="bntitle">공지사항</label> 
+					<input class="form-control createmodal" id="title" name="title" type="text"style="width: 100%"  value="모시모시">
 					<br> <label for="noticecontent">공지 설명</label>
-					<textarea class="form-control createmodal" rows="5" style="width: 100%"
-						 readonly="readonly" id="bncontent">${n.bncontent}</textarea>	
+					<textarea class="form-control createmodal" rows="5" style="width: 100%" id="content" name="content"></textarea>	
 				<!-- Modal footer -->
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
@@ -188,4 +171,32 @@ function roll(a) {
     <script src="<c:url value="/resources/js/dashboard/dashboard-1.js"/>"></script>
 
 </body>
+<script type="text/javascript">
+
+function roll(a) {
+                  //alert(a);
+                  var no = '<c:out value="${no}"/>';
+                  
+                  console.log(a);
+                  console.log(bnseq);
+                  console.log(bntitle);
+                  console.log(bncontent);
+                  console.log(bnseq[0]);
+                  var seq = 0;
+                  $.each(bnseq, function(i, elt) {
+            
+                      
+                  	  if(elt == a){
+                      	console.log(elt);
+                      	console.log(bntitle[i]);
+                      	console.log(bncontent[i]);
+                      	$("#title").attr("value",bntitle[a-1]);
+                        $("#content").html(bncontent[a-1]);		
+                        seq = a;
+                       }
+                      
+                  });
+                  
+                }
+</script>
 </html>
