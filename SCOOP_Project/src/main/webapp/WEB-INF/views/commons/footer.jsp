@@ -39,36 +39,12 @@
 	crossorigin="anonymous">
 <script type="text/javascript">
 	var wsocket;
-	$('#chatmake').click(function(){
-		let data = { cmd : "createChatRoom", 
-    	    	name : $('#pname').val(), 
-    	    	max : 100,
-    	    	ref : "${ref}"
-    	    		};
-   		wsocket.send(JSON.stringify(data));   
-	})
 	$(function() {
 		connect();
 /* 		$('#dataTable').DataTable({
 		 	"searching": false,
 		 	"ordering": false
  		}); */
- 		$('#chatopen').click(function(){
- 		if($('#dataTable tbody').children().length==0){
-			for(let i=0; i<$('.resultsearch').length;i++){
-			var proname = $('.resultsearch')[i].innerHTML.substr(7);
-			var prohref = $('.resultsearch').parent()[i].getAttribute('href').substr(22);
-				console.log(proname);
-				console.log(prohref);
-			let data = { cmd : "createChatRoom", 
-	    	    	name : proname+"/"+prohref, 
-	    	    	max : 100,
-	    	    	ref : "${ref}"
-	    	    		};
-	   		wsocket.send(JSON.stringify(data));
-			}
-		}
- 		})
 		$("#createChat").click( function() {
 			backAndForth();
 		});
@@ -157,7 +133,7 @@
 		$.each(data.rooms, function(index, element){
 			let room = $("<tr></tr>");
 			//room.append("<td style='padding-top:5%;'>" + (num++) + "</td>");
-			room.append("<td style='padding-top:5%;'>"+element.name.split('/')[0]+"</td>");
+			room.append("<td style='padding-top:5%;'>"+element.name+"</td>");
 			//room.append("<td style='padding-top:5%;'>"+element.users.length+ " / " +element.max+"</td>");
  			let btn = $("<button class='btn btn-primary'>입장</button>");
 			if(element.users.length == element.max)
