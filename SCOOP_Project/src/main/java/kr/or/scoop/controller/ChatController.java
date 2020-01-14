@@ -9,6 +9,6 @@ public class ChatController {
 	@RequestMapping("/Chat.do")
 	public String showView(String room, Model model) {
 		model.addAttribute("room", room);
-		return "Chat";
+		return "/chat/Chat";
 	}
 }
