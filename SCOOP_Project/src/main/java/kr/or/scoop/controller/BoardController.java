@@ -2,6 +2,10 @@ package kr.or.scoop.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.or.scoop.dao.BoardDao;
 import kr.or.scoop.dao.NoticeDao;
 import kr.or.scoop.dto.Notice;
 import kr.or.scoop.service.BoardService;
@@ -67,5 +72,17 @@ public class BoardController {
 		model.addAttribute("n",notice);
 		
 		return "issue/notice";
+	}
+	
+	@RequestMapping("/bookmark.do")
+	public String bookmark(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		String status = request.getParameter("status");
+		String email = (String)session.getAttribute("email");
+		BoardDao dao = sqlSession.getMapper(BoardDao.class);
+		
+		System.out.println("status : " + status);
+		System.out.println("email : " + email);
+		
+		return status;
 	}
 }

@@ -38,24 +38,43 @@
 	integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
 	crossorigin="anonymous">
 <script type="text/javascript">
-	let wsocket;
-	
+	var wsocket;
+	$('#chatmake').click(function(){
+		let data = { cmd : "createChatRoom", 
+    	    	name : $('#pname').val(), 
+    	    	max : 100,
+    	    	ref : "${ref}"
+    	    		};
+   		wsocket.send(JSON.stringify(data));   
+	})
 	$(function() {
 		connect();
-
 /* 		$('#dataTable').DataTable({
 		 	"searching": false,
 		 	"ordering": false
  		}); */
- 		
+ 		$('#chatopen').click(function(){
+ 		if($('#dataTable tbody').children().length==0){
+			for(let i=0; i<$('.resultsearch').length;i++){
+			var proname = $('.resultsearch')[i].innerHTML.substr(7);
+			var prohref = $('.resultsearch').parent()[i].getAttribute('href').substr(22);
+				console.log(proname);
+				console.log(prohref);
+			let data = { cmd : "createChatRoom", 
+	    	    	name : proname+"/"+prohref, 
+	    	    	max : 100,
+	    	    	ref : "${ref}"
+	    	    		};
+	   		wsocket.send(JSON.stringify(data));
+			}
+		}
+ 		})
 		$("#createChat").click( function() {
 			backAndForth();
 		});
-
 		$(window).on("beforeunload", function(){
 			disconnect();
 	    });
-
 	    $('#dataTable tbody').on( 'click', 'button', function () {
 	    	openChat($(this).attr("id"));
 	    });
@@ -112,7 +131,7 @@
 	}
 
 	 function connect() {
-		wsocket = new WebSocket("ws://192.168.6.16:8090/SCOOP/Chat-ws.do?cmd=on"); 
+		wsocket = new WebSocket("ws://192.168.6.16:8090/SCOOP/Chat-ws.do?cmd=on");
 		wsocket.onmessage = onMessage;
 		wsocket.onclose = onClose;
 	}
@@ -122,6 +141,8 @@
 	}
 	
 	function onMessage(evt) { 
+		console.log(evt);
+		console.log(evt.data);
 		var data = JSON.parse(evt.data); 
 		setChatRooms(data);
 		
@@ -132,13 +153,12 @@
 	}
 
 	function setChatRooms(data){
-		let num = 1;
 		$('#dataTable > tbody').empty();
 		$.each(data.rooms, function(index, element){
 			let room = $("<tr></tr>");
-			room.append("<td style='padding-top:5%;'>" + (num++) + "</td>");
-			room.append("<td style='padding-top:5%;'>"+element.name+"</td>");
-			room.append("<td style='padding-top:5%;'>"+element.users.length+ " / " +element.max+"</td>");
+			//room.append("<td style='padding-top:5%;'>" + (num++) + "</td>");
+			room.append("<td style='padding-top:5%;'>"+element.name.split('/')[0]+"</td>");
+			//room.append("<td style='padding-top:5%;'>"+element.users.length+ " / " +element.max+"</td>");
  			let btn = $("<button class='btn btn-primary'>입장</button>");
 			if(element.users.length == element.max)
 				btn.attr("disabled",true);
@@ -384,10 +404,10 @@
 							<table class="table table-bordered" id="dataTable" style="text-align: center; background-color: white">
 								<thead>
 									<tr>
-										<th width="10%">NO</th>
-										<th width="20%">NAME</th>
-										<th width="10%">USER</th>
-										<th width="10%">ENTER</th>
+										<!-- <th width="10%">NO</th> -->
+										<th width="80%">채팅방</th>
+										<!-- <th width="10%">USER</th> -->
+										<th width="20%">입장</th>
 									</tr>
 								</thead>
 								<tbody>
