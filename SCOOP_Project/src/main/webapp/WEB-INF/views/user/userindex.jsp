@@ -79,7 +79,7 @@
         <!--**********************************
             Content body start
         ***********************************-->
-        <div class="content-body" style="min-height: 500px;">
+        <div class="content-body" style="min-height: 680px;">
        
             <div class="container-fluid">
         <div class="card" style="min-height: 590px">

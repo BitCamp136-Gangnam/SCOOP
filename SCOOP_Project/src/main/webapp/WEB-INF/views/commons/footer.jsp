@@ -364,14 +364,14 @@
 	background: rgba(61, 56, 57,0.5);
 }
 </style>
-<div class="footer">
+<!-- <div class="footer">
 	<div class="copyright">
 		<p>
 			Copyright &copy; Designed & Developed by <a
 				href="https://themeforest.net/user/quixlab">Quixlab</a> 2018
 		</p>
 	</div>
-</div>
+</div> -->
 <!-- chat 시작 -->
 			<div id="chatdivopen" class="true">
 				<div class="card" style="border-radius: 10px; margin-bottom: 0;border : 1px solid #ced4da;">

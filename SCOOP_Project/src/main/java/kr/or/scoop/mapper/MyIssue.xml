@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 insert into myissue (piseq,pfilename,pfilesize,pititle,picontent,pistart, piend, ispibook, email, pidate, mygfilename, mymention, myurl)
   values (PISEQ_MYISSUE_SEQ.NEXTVAL, #{pfilename,jdbcType=VARCHAR}, #{pfilesize,jdbcType=INTEGER}, #{pititle}, #{picontent}, #{pistart,jdbcType=DATE}, #{piend,jdbcType=DATE}, 0, #{email}, sysdate, #{mygfilename,jdbcType=VARCHAR}, #{mymention,jdbcType=VARCHAR}, #{myurl,jdbcType=VARCHAR})
 </insert>
-<select id="getMyissue" parameterType="int" resultType="kr.or.scoop.dto.MyIssue">
+<select id="getMyissue" resultType="kr.or.scoop.dto.MyIssue">
 	SELECT pititle,picontent, pidate FROM myissue WHERE email = #{email}
 </select>
 </mapper>
