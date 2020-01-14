@@ -61,8 +61,10 @@ public class BoardController {
 	
 	}
 	
+	@RequestMapping(value="noticeDetail.do" , method=RequestMethod.GET)	
 	public String noticeDetail(int bnseq,Model model) {
 		NoticeDao dao = sqlSession.getMapper(NoticeDao.class);
+		System.out.println(bnseq);
 		Notice notice = dao.detailNotice(bnseq);
 		model.addAttribute("n",notice);
 		
