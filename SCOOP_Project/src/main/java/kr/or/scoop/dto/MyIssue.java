@@ -1,7 +1,7 @@
 package kr.or.scoop.dto;
 
-import java.util.Arrays;
-import java.util.Date;
+
+import java.sql.Date;
 
 import org.springframework.stereotype.Repository;
 

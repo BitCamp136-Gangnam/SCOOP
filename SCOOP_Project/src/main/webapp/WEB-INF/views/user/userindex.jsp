@@ -79,10 +79,10 @@
         <!--**********************************
             Content body start
         ***********************************-->
-        <div class="content-body" style="min-height: 500px;">
+        <div class="content-body">
        
             <div class="container-fluid">
-        <div class="card" style="min-height: 590px">
+        <div class="card">
       <div class="row" style="margin: 2%">
             <h3>새로운 소식</h3>
       </div>
@@ -124,7 +124,8 @@
         ***********************************-->
         
         
-  <jsp:include page="/WEB-INF/views/commons/footer.jsp"></jsp:include>
+    <jsp:include page="/WEB-INF/views/commons/footer.jsp"></jsp:include>
+  
     </div>
     <!--**********************************
         Main wrapper end

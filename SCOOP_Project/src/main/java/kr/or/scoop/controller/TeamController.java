@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import kr.or.scoop.dao.ProjectDao;
 import kr.or.scoop.dto.Member;
 import kr.or.scoop.dto.MyIssue;
+import kr.or.scoop.dto.ProjectMemberlist;
 import kr.or.scoop.dto.TeamPjt;
 import kr.or.scoop.dto.Tissue;
 import kr.or.scoop.service.BoardService;
@@ -92,12 +93,14 @@ public class TeamController {
 		System.out.println(tseq);
 		ProjectDao dao = sqlsession.getMapper(ProjectDao.class);
 		TeamPjt pjt = dao.detailPJT(tseq);
-		System.out.println(pjt);
 		List<Tissue> tp = dao.getTissue(tseq);
+		System.out.println(pjt);
 		System.out.println(tp);
 		model.addAttribute("tpj",pjt); //프로젝트 이름 , 설명
 		model.addAttribute("tp",tp); //프로젝트 글 목록
-		
+		List<ProjectMemberlist> projectMemberlist =dao.projectMemberlist(tseq);
+		model.addAttribute("projectmember", projectMemberlist);
+		System.out.println(projectMemberlist);
 		return "user/ProjectDetail";
 		
 	}

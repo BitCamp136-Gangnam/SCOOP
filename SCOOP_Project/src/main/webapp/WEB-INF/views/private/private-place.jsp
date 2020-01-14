@@ -63,17 +63,20 @@
 		    </ul>
 		</div>
 		<hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
+		<c:forEach items="${myissuelist}" var="m">
 		<div class="row" style="margin-left: 2%; margin-right: 2%">
+		
 			<div class="col-sm-2 newissue" >
-			이슈 제목 들어갈곳
+			${m.pititle}
 			</div>
 			<div class="col-sm-8 newissue">
-			여기에 내용들어가는데 나중엔 append하면 될듯??
+			${m.picontent}
 			</div>
 			<div class="col-sm-2 newissue">
-			여기에 시간넣으면됨
+			${m.pidate}
 			</div>
 		</div>
+		</c:forEach>
             <!-- #/ container -->
             </div>
             </div>

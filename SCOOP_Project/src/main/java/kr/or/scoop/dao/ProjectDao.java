@@ -2,6 +2,7 @@ package kr.or.scoop.dao;
 
 import java.util.List;
 
+import kr.or.scoop.dto.ProjectMemberlist;
 import kr.or.scoop.dto.TeamPjt;
 import kr.or.scoop.dto.Tissue;
 import kr.or.scoop.dto.Tpmember;
@@ -20,5 +21,9 @@ public interface ProjectDao {
 	public TeamPjt detailPJT(int tseq);
 	
 	//팀이슈 리스트
-	public List<Tissue> getTissue(int tseq);
+	public List<Tissue> getTissue(int tseq); 
+	
+	
+	//프로젝트 멤버 리스트 출력 -- 도연
+	public List<ProjectMemberlist> projectMemberlist(int tseq);
 }

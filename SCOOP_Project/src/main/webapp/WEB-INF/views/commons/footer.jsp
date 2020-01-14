@@ -262,7 +262,7 @@
 	width: 400px;
 	position: fixed;
 	bottom: 78px;
-	right: 0px;
+	right: 20px;
 	font-size: 18px;
 	z-index: 1;
 }
@@ -364,17 +364,17 @@
 	background: rgba(61, 56, 57,0.5);
 }
 </style>
-<div class="footer">
+<!-- <div class="footer">
 	<div class="copyright">
 		<p>
 			Copyright &copy; Designed & Developed by <a
 				href="https://themeforest.net/user/quixlab">Quixlab</a> 2018
 		</p>
 	</div>
-</div>
+</div> -->
 <!-- chat 시작 -->
 			<div id="chatdivopen" class="true">
-				<div class="card" style="border-radius: 10px; margin-bottom: 0;border : 1px solid #ced4da;">
+				<div class="card" style="border-radius: 10px; margin-bottom: 0;border : 1px solid #ced4da;min-height: 400px;">
 					<div class="card-header">
 						<i class="fas fa-comments"></i> 실시간 채팅(Ctrl + ,)
 						<button id="createChat" class="btn btn-primary" type="button" style="margin-bottom: 0; margin-left: 45px">채팅방	만들기</button>
