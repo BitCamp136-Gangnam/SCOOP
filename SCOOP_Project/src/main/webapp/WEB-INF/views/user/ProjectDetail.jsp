@@ -65,6 +65,7 @@ $(function(){
 		$('#icon_First').remove();
 	});
 	
+	
 });
 
 /* 프로젝트 이름 검색 - 도연 */
@@ -182,7 +183,7 @@ function project_filter() {
 						<div class="row"  style="overflow: auto;" >
 						<c:forEach items="${projectmember}" var="pm" varStatus="status">
 							<div class="search_NameEmail col-sm-6">
-							
+								
 								<span class="nav-text finalsearch" id="member_Name${status.index}" style="color: #4d4d46;font-size: 13px;padding-bottom:5px;padding-top: 10px;"> &nbsp;${pm.name}</span>
 								<span class="log-user" id="iconAdd" data-toggle="dropdown" style="float: right;top: 0px;padding-top: 10px;">
 									<i class="fas fa-cog" id="admin_EditIcon" style="cursor: pointer;font-size: 20px;color:black;"></i>
