@@ -7,6 +7,7 @@ input::placeholder {
 	color: #fff;
 }
 </style>
+<script language="javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 <script type="text/javascript"
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
 <link rel="stylesheet"
@@ -199,6 +200,25 @@ input::placeholder {
 			$('#todoresult').show();
 		}
 	}
+
+	//이슈작성 validation
+	 function checkz() {
+	 //이슈 제목 공백 확인
+	  if($("#issuetitle").val() == ""){
+		  Swal.fire("제목을 입력해주세요.");
+	    $("#issuetitle").focus();
+	    return false;
+	  }
+
+	  //이슈 설명 공백 확인
+	  if($("#issuecontent").val() == ""){
+		  Swal.fire("내용을 입력해주세요.");
+	    $("#issuecontent").focus();
+	    return false;
+	  }
+
+	return true;
+	} 
 </script>
 <style>
 .modal-content.modal-fullsize {
@@ -668,7 +688,7 @@ span {
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 	
-			<form action="writeIssue.do" method="POST">
+			<form onsubmit="return checkz()" action="writeIssue.do" method="POST">
 				<!-- Modal body -->
 				<div class="modal-body">
 					<!-- <p style="font-size: 12px">협업공간은 함께 일하는 멤버들끼리만 자료를 공유하고 협업할 수 있는 공간입니다.<br>
