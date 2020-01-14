@@ -14,4 +14,7 @@ public interface NoticeDao {
 	
 	//공지사항 디테일
 	public Notice detailNotice(int bnseq);
+	
+	//공지사항 수정
+	public Notice updateNotice(int bnseq);
 }	
