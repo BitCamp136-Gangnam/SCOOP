@@ -79,10 +79,9 @@ $(function(){
         <!--**********************************
             Content body start
         ***********************************-->
-        <div class="content-body" style="min-height: 500px;">
-        <br>
-        <div class="container-fluid" style="padding-top: 0px;">
-        <div class="card" style="min-height: 590px">
+        <div class="content-body">
+        <div class="container-fluid">
+        <div class="card">
 		<div class="row" style="margin: 2%">
 			<div class="col-sm-12" style="padding-left: 0">
 				<h3>${tpj.pname}
