@@ -244,6 +244,7 @@ public class MemberController {
 		String email = request.getParameter("emailcheck");
 		session.setAttribute("email", email);
 		System.out.println("이메일 받아 오니? : " + email);
+		System.out.println("세션 이메일 : " + session.getAttribute("email"));
 		String viewpage = "";
 
 		try {

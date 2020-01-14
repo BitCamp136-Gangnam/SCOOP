@@ -3251,6 +3251,7 @@ input[type="button"].btn-block {
       color: #fff; }
 
 .card {
+  min-height:650px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -8129,7 +8130,7 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
   top: 0.625rem; }
 
 .content-body {
-  min-height:580px;
+  min-height:680px;
   margin-left: 15.1875rem;
   z-index: 0; }
   @media only screen and (min-width: 1200px) and (max-width: 1350px) {
