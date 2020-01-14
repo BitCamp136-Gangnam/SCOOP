@@ -21,13 +21,34 @@
 </head>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script>
-$('.bnseq').click(function($) {
-	
-	$("#noticeDetail").modal();
-});
-
-
+<script type="text/javascript">
+var n = ${n};
+console.log(n);
+var sum = 0;
+var director = new Array();
+var title = new Array();
+var image = new Array();
+var pubdate = new Array();
+function roll(a) {
+                  //alert(a);
+                  console.log(n);
+                  		$('#bntitle').attr('value',${n.bntitle});
+                       /*  $('#director').attr('value',${n.bntime}); */
+                        $('#bncontent').attr('value',${n.bncontent});
+                  
+                  console.log(a);
+                  
+         
+                   /* if(image[a]==""|| image[a]==null){
+                      
+                       $('#release').attr( 'value', pubdate[a]);
+                   } else{
+                   $('#image').attr('src',image[a]);
+                    $('#director').attr('value',director[a]);
+                    $('#title').attr('value',title[a]);
+                   $('#release').attr( 'value', pubdate[a]);
+                   } */
+                }
 </script>
 <style>
 .newissue{
@@ -37,6 +58,7 @@ $('.bnseq').click(function($) {
 }
 </style>
 <body>
+	<script>var n = "<c:out value='${n}'/></script>
 
     <jsp:include page="/WEB-INF/views/commons/preloader.jsp"></jsp:include>
 
@@ -62,11 +84,11 @@ $('.bnseq').click(function($) {
 			</div>
 		</div>
 		<c:forEach items="${notice}" var="n">
-		<a href="#noticeDetail" id="${n.bnseq}" name="bnseq" data-target="">
+		<a href="#" id="${n.bnseq}" name="bnseq" data-target="#noticeDetail" data-toggle="modal" class="bnseq" onclick="roll(this.id)">
 		<div class="row" style="margin-left: 2%; margin-right: 2%">
 			<div class="col-sm-3 newissue" >
 			<c:choose>
-           		<c:when test="${fn:length(n.bntitle) > 19}">
+           		<c:when test="${fn:length(n.bntitle) > 19}">	
             <c:out value="${fn:substring(n.bntitle,0,18)}"/>...
            </c:when>
            <c:otherwise>
@@ -99,7 +121,7 @@ $('.bnseq').click(function($) {
         <!--**********************************
             Content body end
         ***********************************-->
-        <div class="modal fade" id="noticeDetail">
+  <div class="modal fade" id="noticeDetail">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 
@@ -114,10 +136,10 @@ $('.bnseq').click(function($) {
 					<!-- <p style="font-size: 12px">협업공간은 함께 일하는 멤버들끼리만 자료를 공유하고 협업할 수 있는 공간입니다.<br>
              협업공간을 만들고 함께 일할 멤버들을 초대해보세요.</p> -->
 					<label for="bntitle">공지사항</label> <input
-						class="form-control createmodal" type="text"style="width: 100%" readonly="readonly" value="${n.bntitle}">
+						class="form-control createmodal" id="bntitle"type="text"style="width: 100%" readonly="readonly" value="${n.bntitle}">
 					<br> <label for="noticecontent">공지 설명</label>
 					<textarea class="form-control createmodal" rows="5" style="width: 100%"
-						 readonly="readonly">${n.bncontent}</textarea>	
+						 readonly="readonly" id="bncontent">${n.bncontent}</textarea>	
 				<!-- Modal footer -->
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
