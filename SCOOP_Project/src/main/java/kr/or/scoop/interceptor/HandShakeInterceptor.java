@@ -29,6 +29,7 @@ public class HandShakeInterceptor extends HttpSessionHandshakeInterceptor{
     	attributes.put("user", user);
     	if(cmd.equals("join")) {
     		attributes.put("room", req.getParameter("room"));
+    		System.out.println("room : "+ req.getParameter("room"));
     	}
     	
         return super.beforeHandshake(request, response, wsHandler, attributes);

@@ -219,6 +219,25 @@ input::placeholder {
 
 	return true;
 	} 
+
+	//협업공간 생성 validation
+	 function checkz2() {
+	 //협업공간 이름 확인
+	  if($("#pname").val() == ""){
+		  Swal.fire("제목을 입력해주세요.");
+	    $("#pname").focus();
+	    return false;
+	  }
+
+	  //협업공간 내용 확인
+	  if($("#pcontent").val() == ""){
+		  Swal.fire("내용을 입력해주세요.");
+	    $("#pcontent").focus();
+	    return false;
+	  }
+
+	return true;
+	} 
 </script>
 <style>
 .modal-content.modal-fullsize {
@@ -571,7 +590,7 @@ span {
 				style="border-radius: 0.25rem; height: 20px" placeholder="협업공간 검색"></li>
 			<c:forEach items="${pjtlist}" var="p">
 				<li class="search_project"><a
-					href="projectDetail.do?tseq=${p.tseq}" aria-expanded="false"><span
+					href="projectDetail.do?tseq=${p.tseq}" class="projecthref" aria-expanded="false"><span
 						class="iconify" data-icon="bx:bxs-flag-alt" data-inline="false"
 						style="width: 20px; height: auto;"> </span><span
 						class="nav-text resultsearch"> &nbsp;${p.pname}</span></a></li>
@@ -606,7 +625,7 @@ span {
 			</div>
 
 			<!-- Modal body -->
-			<form action="team.do" method="post">
+			<form onsubmit="return checkz2()" action="team.do" method="post">
 				<div class="modal-body">
 					<p style="font-size: 12px">
 						협업공간은 함께 일하는 멤버들끼리만 자료를 공유하고 협업할 수 있는 공간입니다.<br> 협업공간을 만들고 함께
