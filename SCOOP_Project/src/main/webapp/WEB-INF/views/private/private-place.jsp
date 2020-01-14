@@ -20,6 +20,27 @@
 </head>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		
+		$('.bookmark').click(function(){
+			let icon = $(this).attr('class').split(' ');
+			let status = $(this).attr('name');
+			console.log('before : ' + status);
+			console.log('class : ' + icon[0] +" "+ icon[1]+" "+icon[2]);
+			
+			if(status == "bookoff"){
+				$(this).removeAttr("name").attr("name", "bookon");
+				$(this).removeClass(icon[1]+" "+icon[2]).addClass("fas fa-bookmark");
+			}else if(status == "bookon"){
+				$(this).removeAttr("name").attr("name", "bookoff");
+				$(this).removeClass(icon[1]+" "+icon[2]).addClass("far fa-bookmark");
+			}
+			console.log('after : ' + $(this).attr('name'));
+			console.log('ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ');
+		});
+	});
+</script>
 <style>
 .newissue{
 	border-bottom: 1px solid #c8c8c8;
@@ -66,16 +87,16 @@
 		<c:forEach items="${myissuelist}" var="m">
 		<div class="row" style="margin-left: 2%; margin-right: 2%">
 			<div class="col-sm-2 newissue" >
-			${m.pititle}
+				${m.pititle}
 			</div>
 			<div class="col-sm-7 newissue">
-			${m.picontent}
+				${m.picontent}
 			</div>
 			<div class="col-sm-2 newissue">
-			${m.pidate}
+				${m.pidate}
 			</div>
 			<div class="col-sm-1 newissue">
-			<span class="iconify bookmark" id="bookon" data-icon="ic:round-bookmark-border"></span>
+				<i class="bookmark far fa-bookmark" id="bookmark" name="bookoff"></i>
 			</div>
 		</div>
 		</c:forEach>
