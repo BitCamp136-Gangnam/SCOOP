@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <head>
     <meta charset="utf-8">
@@ -20,6 +21,14 @@
 </head>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script>
+$('.bnseq').click(function($) {
+	
+	$("#noticeDetail").modal();
+});
+
+
+</script>
 <style>
 .newissue{
 	border-bottom: 1px solid #c8c8c8;
@@ -52,23 +61,73 @@
 				스쿱의 새로운 소식을 전해드립니다.
 			</div>
 		</div>
-		<div class="row" style="margin-left: 2%; margin-right: 2%">
 		<c:forEach items="${notice}" var="n">
-			<div class="col-sm-10 newissue" >
-			${n.bntitle}
+		<a href="#noticeDetail" id="${n.bnseq}" name="bnseq" data-target="">
+		<div class="row" style="margin-left: 2%; margin-right: 2%">
+			<div class="col-sm-3 newissue" >
+			<c:choose>
+           		<c:when test="${fn:length(n.bntitle) > 19}">
+            <c:out value="${fn:substring(n.bntitle,0,18)}"/>...
+           </c:when>
+           <c:otherwise>
+           		 <c:out value="${n.bntitle}"/>
+           </c:otherwise> 
+          </c:choose>
 			</div>
-			<div class="col-sm-2 newissue">
+			<div class="col-sm-8 newissue" >
+			<c:choose>
+           <c:when test="${fn:length(n.bncontent) > 56}">
+            <c:out value="${fn:substring(n.bncontent,0,55)}"/>...
+           </c:when>
+           <c:otherwise>
+           		 <c:out value="${n.bncontent}"/>
+           </c:otherwise> 
+          </c:choose>
+			</div>
+      
+			<div class="col-sm-1 newissue">
 			${n.bntime}
 			</div>
-			</c:forEach>
 		</div>
+			</a>
+			</c:forEach>
+			</div>
             <!-- #/ container -->
-            </div>
+            
             </div>
         </div>
         <!--**********************************
             Content body end
         ***********************************-->
+        <div class="modal fade" id="noticeDetail">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h3 class="modal-title">공지사항</h3>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+	
+				<!-- Modal body -->
+				<div class="modal-body">
+					<!-- <p style="font-size: 12px">협업공간은 함께 일하는 멤버들끼리만 자료를 공유하고 협업할 수 있는 공간입니다.<br>
+             협업공간을 만들고 함께 일할 멤버들을 초대해보세요.</p> -->
+					<label for="bntitle">공지사항</label> <input
+						class="form-control createmodal" type="text"style="width: 100%" readonly="readonly" value="${n.bntitle}">
+					<br> <label for="noticecontent">공지 설명</label>
+					<textarea class="form-control createmodal" rows="5" style="width: 100%"
+						 readonly="readonly">${n.bncontent}</textarea>	
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;"
+						data-dismiss="modal">취소</button>
+					</div>
+				</div>
+		</div>
+	</div>
+	</div>
         
         
   <jsp:include page="/WEB-INF/views/commons/footer.jsp"></jsp:include>

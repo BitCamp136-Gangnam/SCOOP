@@ -12,4 +12,6 @@ public interface NoticeDao {
 	//공지사항 작성
 	public int insertNotice(Notice notice);
 	
+	//공지사항 디테일
+	public Notice detailNotice(int bnseq);
 }	
