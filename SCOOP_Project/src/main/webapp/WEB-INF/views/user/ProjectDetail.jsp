@@ -179,7 +179,7 @@ function project_filter() {
 
 					<div id="c_Management" class="nav-label" style="display: none;padding-left: 0px;padding-right: 0px;">
 					<input onkeyup="project_filter()" type="search" id="searchId" class="form-control" style="border-radius: 0.25rem; height: 20px;margin-bottom: 15px;width: 400px;margin-left: 10px;" placeholder="이름  또는 이메일 주소로 멤버 검색">
-						<div class="row" style="overflow: auto;">
+						<div class="row"  style="overflow: auto;" >
 						<c:forEach items="${projectmember}" var="pm" varStatus="status">
 							<div class="search_NameEmail col-sm-6">
 							
