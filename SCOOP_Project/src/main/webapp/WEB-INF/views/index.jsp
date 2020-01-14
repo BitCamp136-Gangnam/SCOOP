@@ -38,6 +38,7 @@
    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
     <meta name="google-signin-client_id" content="47797892299-i06tt9qhbs15g8mn89ncu1isa1eneql8.apps.googleusercontent.com">
 </head>
+<script language="javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="https://code.iconify.design/1/1.0.3/iconify.min.js"></script>
@@ -114,6 +115,80 @@ $(function(){
     "pluginKey": "f6d33d63-4c8d-471b-84ca-10dcb27372eb"
   });
 })
+
+	//회원가입 유효성 검사
+    function checkz() {
+      var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
+      var getCheck= RegExp(/^[a-zA-Z0-9]{4,12}$/);
+      var getName= RegExp(/^[가-힣]+$/);
+
+      //이메일 유효성 검사
+      if(!getMail.test($("#mail").val())){
+        alert("이메일 형식에 맞게 입력해주세요.")
+        $("#mail").val("");
+        $("#mail").focus();
+        return false;
+      }
+ 
+      //이름 유효성
+      if (!getName.test($("#name").val())) {
+        alert("이름 형식에 맞게 입력해주세요.");
+        $("#name").val("");
+        $("#name").focus();
+        return false;
+      }
+      
+      //비밀번호 유효성
+      if(!getCheck.test($("#tbPwd").val())) {
+      alert("비밀번호 형식에 맞게 입력해주세요.");
+      $("#tbPwd").val("");
+      $("#tbPwd").focus();
+      return false;
+      }
+ 
+     //이메일 공백 확인
+      if($("#mail").val() == ""){
+        alert("이메일을 입력해주세요");
+        $("#mail").focus();
+        return false;
+      }
+
+      //이름 공백 확인
+      if($("#name").val() == ""){
+        alert("이름을 입력해주세요");
+        $("#name").focus();
+        return false;
+      }
+
+      //비밀번호 공백 확인
+      if($("#tbPwd").val() == ""){
+        alert("비밀번호를 입력해주세요");
+        $("#tbPwd").focus();
+        return false;
+      }
+ 
+    return true;
+  }
+
+
+//로그인 validation
+ function checkz2() {
+ //이메일 공백 확인
+  if($("#mail2").val() == ""){
+	  Swal.fire("이메일을 입력해주세요");
+    $("#mail2").focus();
+    return false;
+  }
+
+  //비밀번호 공백 확인
+  if($("#tbPwd2").val() == ""){
+	  Swal.fire("비밀번호를 입력해주세요");
+    $("#tbPwd2").focus();
+    return false;
+  }
+
+return true;
+} 
 </script>
 <style>
 	.accordion {
@@ -257,15 +332,15 @@ $(function(){
      </div>
      <div class="modal-body p-4 p-lg-5">
       <img class="img-responsive center-block" alt="Scoop로고" src="resources/images/logo/ScoopBig.png" style="width:100%;height:auto;padding-right:15%;padding-left:15%;"/>
-      <form action="login.do" class="login-form text-left" method="post">
+      <form onsubmit="return checkz2()" action="login.do" class="login-form text-left" method="post">
         <h4>로그인</h4>
         <div class="form-group mb-4">
          <label>Email address</label>
-         <input type="email" name="email" id="email" placeholder="name@company.com" class="form-control">
+         <input type="email" name="email" id="mail2" placeholder="name@company.com" class="form-control">
         </div>
         <div class="form-group mb-4">
          <label>Password</label>
-         <input type="password" name="pwd" id="pwd" placeholder="Min 8 characters" class="form-control">
+         <input type="password" name="pwd" id="tbPwd2" placeholder="Min 8 characters" class="form-control">
         </div>
         <div class="form-group">
         	<input type="submit" value="Login" class="btn btn-primary" style="width: 190px;height:38px;text-align: center;padding-top: 5px;">
@@ -354,11 +429,11 @@ $(function(){
      </div>
      <div class="modal-body p-4 p-lg-5">
       <img class="img-responsive center-block" alt="Scoop로고" src="resources/images/logo/ScoopBig.png" style="width:100%;height:auto;padding-right:15%;padding-left:15%;"/>
-      <form action="frontpage.do" class="login-form text-left" method="post">
+      <form onsubmit="return checkz()" action="frontpage.do" class="login-form text-left" method="post">
         <h4>회원가입</h4>
         <div class="form-group mb-4">
          <label>Email address</label>
-         <input type="text" class="form-control signup" id="email" name="email" placeholder="E-mail@company.com" required>
+         <input type="text" class="form-control signup" id="mail" name="email" placeholder="E-mail@company.com" required>
         </div>
         <div class="form-group mb-4">
          <label>Name</label>
@@ -366,7 +441,7 @@ $(function(){
         </div>
         <div class="form-group mb-4">
          <label>Password</label>
-         <input type="password" class="form-control" id="pwd" name="pwd" placeholder="Password" required>
+         <input type="password" class="form-control" id="tbPwd" name="pwd" placeholder="Password" required>
         </div>
         <div class="form-group">
         	<center>
