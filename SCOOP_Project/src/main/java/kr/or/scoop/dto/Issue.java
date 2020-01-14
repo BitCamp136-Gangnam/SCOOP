@@ -14,7 +14,7 @@ public class Issue {
 	private String picontent;
 	private Date pistart;
 	private Date piend;
-	private boolean ispibook;
+	private int ispibook;
 	private String email;
 	private Date pidate;
 	private String mygfilename;
@@ -84,10 +84,10 @@ public class Issue {
 	public void setPiend(Date piend) {
 		this.piend = piend;
 	}
-	public boolean getIspibook() {
+	public int getIspibook() {
 		return ispibook;
 	}
-	public void setIspibook(boolean ispibook) {
+	public void setIspibook(int ispibook) {
 		this.ispibook = ispibook;
 	}
 	public String getEmail() {

@@ -108,7 +108,7 @@
 				${m.pidate}
 			</div>
 			<c:choose>
-				<c:when test="${m.ispibook}">
+				<c:when test="${m.ispibook==0}">
 					<div class="col-sm-1 newissue">
 						<i class="bookmark far fa-bookmark" id="bookmark" name="bookoff"></i>
 					</div>
