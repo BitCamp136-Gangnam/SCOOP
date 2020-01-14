@@ -10,8 +10,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.View;
 
 import kr.or.scoop.dao.BoardDao;
 import kr.or.scoop.dao.NoticeDao;
@@ -27,6 +29,8 @@ public class BoardController {
 	@Autowired
 	private BoardService service;
 	
+	@Autowired
+	private View jsonview;
 	// 마이이슈 작성
 	@RequestMapping(value = "/myissue.do", method = RequestMethod.GET)
 	public String myissue() {
@@ -74,15 +78,17 @@ public class BoardController {
 		return "issue/notice";
 	}
 	
-	@RequestMapping("/bookmark.do")
-	public String bookmark(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+	@RequestMapping(value="bookmark.do", method = RequestMethod.POST)
+	public View bookmark(HttpServletRequest request, HttpServletResponse response, HttpSession session, ModelMap model) {
 		String status = request.getParameter("status");
 		String email = (String)session.getAttribute("email");
 		BoardDao dao = sqlSession.getMapper(BoardDao.class);
 		
+		
+		
 		System.out.println("status : " + status);
 		System.out.println("email : " + email);
 		
-		return status;
+		return jsonview;
 	}
 }
