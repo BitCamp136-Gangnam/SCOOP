@@ -14,8 +14,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="detailNotice" resultType="kr.or.scoop.dto.Notice">
 		select bnseq,bntitle,bncontent,bntime from notice where bnseq = #{bnseq}
 	</select>
-	<update id="updateNotice" parameterType="kr.or.scoop.dto.Notice">
-		update notice 
+	<update id="updateNotice" parameterType="int">
+		UPDATE notice 
 		set bntitle=#{bntitle}, 
 			bncontent=#{bncontent}
 		where bnseq=#{bnseq}
