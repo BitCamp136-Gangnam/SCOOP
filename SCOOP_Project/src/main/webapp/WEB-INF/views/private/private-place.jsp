@@ -35,6 +35,7 @@
 				type : "POST",
 				data : "status=" + status,
 				success : function(data){
+					console.log('success data : ' + data);
 					if(data == "bookoff"){
 						$(this).removeAttr("name").attr("name", "bookon");
 						$(this).removeClass(icon[1]+" "+icon[2]).addClass("fas fa-bookmark");
@@ -106,9 +107,18 @@
 			<div class="col-sm-2 newissue">
 				${m.pidate}
 			</div>
-			<div class="col-sm-1 newissue">
-				<i class="bookmark far fa-bookmark" id="bookmark" name="bookoff"></i>
-			</div>
+			<c:choose>
+				<c:when test="${m.ispibook}">
+					<div class="col-sm-1 newissue">
+						<i class="bookmark far fa-bookmark" id="bookmark" name="bookoff"></i>
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div class="col-sm-1 newissue">
+						<i class="bookmark fas fa-bookmark" id="bookmark" name="bookon"></i>
+					</div>
+				</c:otherwise>
+			</c:choose>
 		</div>
 		</c:forEach>
             <!-- #/ container -->
