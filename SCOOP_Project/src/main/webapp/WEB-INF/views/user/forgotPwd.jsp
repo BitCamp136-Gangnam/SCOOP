@@ -31,7 +31,7 @@
 						</div>
 						<div class="form-group">
 							<center>
-								<input type="submit" value="스쿱 시작하기" class="btn btn-primary"
+								<input type="submit" value="비밀번호 변경하기" class="btn btn-primary"
 									style="width: 300px; height: 38px; text-align: center; padding-top: 5px;">
 							</center>
 						</div>

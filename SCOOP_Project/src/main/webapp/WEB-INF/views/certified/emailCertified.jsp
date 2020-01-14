@@ -9,8 +9,8 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <%
 	System.out.println("이메일 인증 버튼 눌러서 오는곳");
-	System.out.println("세션값 : "+session.getAttribute("emailcheck"));
-	if(session.getAttribute("emailcheck") != null){
+	System.out.println("세션값 : "+session.getAttribute("email"));
+	if(session.getAttribute("email") != null){
 		System.out.println("비밀번호 변경 if문 타니?");
 	%>
 	<script>
