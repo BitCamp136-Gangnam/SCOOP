@@ -9,14 +9,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <jsp:include page="/WEB-INF/views/commons/title.jsp"></jsp:include>
-     <!-- Pignose Calender -->
+    <!-- Pignose Calender -->
     <link href="<c:url value="/resources/plugins/pg-calendar/css/pignose.calendar.min.css" />" rel="stylesheet">
     <!-- Chartist -->
     <link rel="stylesheet" href="<c:url value="/resources/plugins/chartist/css/chartist.min.css" />">
     <link rel="stylesheet" href="<c:url value="/resources/plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css" />">
     <!-- Custom Stylesheet -->
     <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
-
+    
 </head>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -65,15 +65,17 @@
 		<hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
 		<c:forEach items="${myissuelist}" var="m">
 		<div class="row" style="margin-left: 2%; margin-right: 2%">
-		
 			<div class="col-sm-2 newissue" >
 			${m.pititle}
 			</div>
-			<div class="col-sm-8 newissue">
+			<div class="col-sm-7 newissue">
 			${m.picontent}
 			</div>
 			<div class="col-sm-2 newissue">
 			${m.pidate}
+			</div>
+			<div class="col-sm-1 newissue">
+			<span class="iconify bookmark" id="bookon" data-icon="ic:round-bookmark-border"></span>
 			</div>
 		</div>
 		</c:forEach>
