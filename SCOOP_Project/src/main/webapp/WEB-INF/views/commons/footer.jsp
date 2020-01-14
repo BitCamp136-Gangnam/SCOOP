@@ -39,10 +39,16 @@
 	crossorigin="anonymous">
 <script type="text/javascript">
 	let wsocket;
-	
+	$('#chatmake').click(function(){
+		let data = { cmd : "createChatRoom", 
+    	    	name : $('#pname').val(), 
+    	    	max : 100,
+    	    	ref : "${ref}"
+    	    		};
+    wsocket.send(JSON.stringify(data));   
+	})
 	$(function() {
 		connect();
-
 /* 		$('#dataTable').DataTable({
 		 	"searching": false,
 		 	"ordering": false
@@ -132,13 +138,13 @@
 	}
 
 	function setChatRooms(data){
-		let num = 1;
 		$('#dataTable > tbody').empty();
 		$.each(data.rooms, function(index, element){
+			console.log(element);
 			let room = $("<tr></tr>");
-			room.append("<td style='padding-top:5%;'>" + (num++) + "</td>");
+			//room.append("<td style='padding-top:5%;'>" + (num++) + "</td>");
 			room.append("<td style='padding-top:5%;'>"+element.name+"</td>");
-			room.append("<td style='padding-top:5%;'>"+element.users.length+ " / " +element.max+"</td>");
+			//room.append("<td style='padding-top:5%;'>"+element.users.length+ " / " +element.max+"</td>");
  			let btn = $("<button class='btn btn-primary'>입장</button>");
 			if(element.users.length == element.max)
 				btn.attr("disabled",true);
@@ -384,10 +390,10 @@
 							<table class="table table-bordered" id="dataTable" style="text-align: center; background-color: white">
 								<thead>
 									<tr>
-										<th width="10%">NO</th>
-										<th width="20%">NAME</th>
-										<th width="10%">USER</th>
-										<th width="10%">ENTER</th>
+										<!-- <th width="10%">NO</th> -->
+										<th width="90%">채팅방</th>
+										<!-- <th width="10%">USER</th> -->
+										<th width="10%">입장</th>
 									</tr>
 								</thead>
 								<tbody>
