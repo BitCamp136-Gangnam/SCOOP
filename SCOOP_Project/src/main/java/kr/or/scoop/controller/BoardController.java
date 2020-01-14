@@ -76,15 +76,6 @@ public class BoardController {
 		return "issue/noticeDetail";
 	}
 	
-	@RequestMapping(value="noticeEdit.do" , method=RequestMethod.GET)
-	public String noticeUpdate(int bnseq,Model model) {
-		NoticeDao dao = sqlSession.getMapper(NoticeDao.class);
-		System.out.println(bnseq);
-		Notice notice = dao.detailNotice(bnseq);
-		model.addAttribute("n",notice);
-		
-		return "issue/noticeDetail";
-	}
 	
 	@RequestMapping("/bookmark.do")
 	public String bookmark(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
@@ -100,11 +91,18 @@ public class BoardController {
 	
 	@RequestMapping(value="noticeEdit.do" , method=RequestMethod.POST)
 	public String noticeUpdateCheck(int bnseq,Notice notice,Model model) {
-		System.out.println(bnseq);
-		NoticeDao dao = sqlSession.getMapper(NoticeDao.class);
-		notice = dao.updateNotice(bnseq);
-		model.addAttribute("notice",notice);
+		int result = 0;
+		String viewpage = "";
+		result = service.updateNotice(notice);
+		if(result > 0) {
+			model.addAttribute("notice",notice);
+			viewpage = "redirect:/notice.do";
+			
+		}else {
+			viewpage = "issue/notice";
+		}
+			
 	
-		return "issue/notice";
+		return viewpage;
 	}
 }
