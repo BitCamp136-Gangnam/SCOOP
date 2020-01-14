@@ -124,7 +124,7 @@
         ***********************************-->
         
         
-  <jsp:include page="/WEB-INF/views/commons/footer.jsp"></jsp:include>
+  
     </div>
     <!--**********************************
         Main wrapper end
