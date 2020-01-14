@@ -54,11 +54,21 @@ $(function(){
 		$('#c_Management').show();
 		$('#c_Information').hide();
 	});
-	$('#adminPlus').click(function(){
-		$(this).hide();
-		$('#adminCancle').show();
-		$('#iconAdd').prepend('<i class="fas fa-user-cog" id="icon_First" style="font-size: 20px;color:#195ac2;"></i>');
-	});
+	
+	
+	for(let target=0; target<$('#adminPlus').length; target++){
+		console.log($('#adminPlus'+target).val());
+		$('#adminPlus'+target).click(function(){
+			for(let i=0;i<$('.member_Name').length;i++){
+				$('#member_Name'+i);
+				console.log($('#member_Name'+i).val());
+			}
+			$(this).hide();
+			$('#adminCancle').show();
+			$('#iconAdd').prepend('<i class="fas fa-user-cog" id="icon_First" style="font-size: 20px;color:#195ac2;"></i>');
+		});
+	}
+	
 	$('#adminCancle').click(function(){
 		$(this).hide();
 		$('#adminPlus').show();
@@ -82,6 +92,9 @@ function project_filter() {
 			item[i].style.display = "none";
 		}
 	}
+
+	
+
 }
 </script>
 <body>
@@ -184,9 +197,9 @@ function project_filter() {
 						<c:forEach items="${projectmember}" var="pm" varStatus="status">
 							<div class="search_NameEmail col-sm-6">
 								${pm.pjuserrank}
-								<span class="nav-text finalsearch" id="member_Name${status.index}" style="color: #4d4d46;font-size: 13px;padding-bottom:5px;padding-top: 10px;"> &nbsp;${pm.name}</span>
+								<span class="nav-text finalsearch member_Name" id="member_Name${status.index}" style="color: #4d4d46;font-size: 13px;padding-bottom:5px;padding-top: 10px;"> &nbsp;${pm.name}</span>
 								<span class="log-user" id="iconAdd" data-toggle="dropdown" style="float: right;top: 0px;padding-top: 10px;">
-									<i class="fas fa-cog" id="admin_EditIcon" style="cursor: pointer;font-size: 20px;color:black;"></i>
+									<i class="fas fa-cog" id="admin_EditIcon${status.index}" style="cursor: pointer;font-size: 20px;color:black;"></i>
 								</span>
 								<div class="drop-down dropdown-language animated fadeIn  dropdown-menu"  >
 								<div class="dropdown-content-body">
