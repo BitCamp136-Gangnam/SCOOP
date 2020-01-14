@@ -80,6 +80,7 @@
            </c:otherwise> 
           </c:choose>
 			</div>
+			
 			<div class="col-sm-8 newissue" >
 			<c:choose>
            <c:when test="${fn:length(n.bncontent) > 56}">
@@ -98,10 +99,13 @@
 			</a>
 			</c:forEach>
 			</div>
+		ㅌ
             <!-- #/ container -->
             
             </div>
+        	
         </div>
+        
         <!--**********************************
             Content body end
         ***********************************-->
@@ -127,16 +131,56 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
 						style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;"
+						data-target="#noticeEdit" data-toggle="modal">수정</button>
+						<button type="button" class="btn btn-secondary"
+						style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;"
 						data-dismiss="modal">취소</button>
+					</div>
+					
 					</div>
 				</div>
 		</div>
 	</div>
 	</div>
-        
+  <div class="modal fade" id="noticeEdit">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h3 class="modal-title">공지사항 작성</h3>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+	
+			<form action="noticeEdit.do" method="POST">
+				<!-- Modal body -->
+				<div class="modal-body">
+				<input type="hidden" name="bnseq" id="nseq">
+					<!-- <p style="font-size: 12px">협업공간은 함께 일하는 멤버들끼리만 자료를 공유하고 협업할 수 있는 공간입니다.<br>
+             협업공간을 만들고 함께 일할 멤버들을 초대해보세요.</p> -->
+					<label for="bntitle">공지사항</label> <input
+						class="form-control createmodal" type="text" id="ntitle"
+						name="bntitle" style="width: 100%">
+					<br> <label for="noticecontent">공지 설명</label>
+					<textarea class="form-control createmodal" rows="5"
+						id="ncontent" name="bncontent" style="width: 100%"
+						></textarea>	
+						<input type="hidden" name="email" value="${sessionScope.email}">		
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-secondary"
+						style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;">수정</button>
+					<button type="button" class="btn btn-secondary"
+						style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;"
+						data-dismiss="modal">취소</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	</div>
         
   <jsp:include page="/WEB-INF/views/commons/footer.jsp"></jsp:include>
-    </div>
     <!--**********************************
         Main wrapper end
     ***********************************-->
@@ -192,6 +236,9 @@ function roll(a) {
                       	console.log(bncontent[i]);
                       	$("#title").attr("value",bntitle[a-1]);
                         $("#content").html(bncontent[a-1]);		
+                      	$("#ntitle").attr("value",bntitle[a-1]);
+                        $("#ncontent").html(bncontent[a-1]);
+                        $("#nseq").attr("value",a);		
                         seq = a;
                        }
                       

@@ -83,7 +83,7 @@ public class BoardController {
 		Notice notice = dao.detailNotice(bnseq);
 		model.addAttribute("n",notice);
 		
-		return "issue/noticeEdit";
+		return "issue/noticeDetail";
 	}
 	
 	@RequestMapping("/bookmark.do")
@@ -96,5 +96,15 @@ public class BoardController {
 		System.out.println("email : " + email);
 		
 		return status;
+	}
+	
+	@RequestMapping(value="noticeEdit.do" , method=RequestMethod.POST)
+	public String noticeUpdateCheck(int bnseq,Notice notice,Model model) {
+		System.out.println(bnseq);
+		NoticeDao dao = sqlSession.getMapper(NoticeDao.class);
+		notice = dao.updateNotice(bnseq);
+		model.addAttribute("notice",notice);
+	
+		return "issue/notice";
 	}
 }
