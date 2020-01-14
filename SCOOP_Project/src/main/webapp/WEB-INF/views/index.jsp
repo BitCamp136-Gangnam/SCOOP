@@ -12,8 +12,7 @@
 <meta name="robots" content="all,follow">
 <jsp:include page="/WEB-INF/views/commons/title.jsp"></jsp:include>
 <!--vendors styles-->
-<link rel="stylesheet"Chatfuel
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"Chatfuel href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- Bootstrap CSS / Color Scheme -->
 <link rel="stylesheet" href="<c:url value="/resources/css/default.css"/>" id="theme-color">
 
