@@ -4,6 +4,7 @@
 <html lang="en">
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<c:set var="role" value="${sessionScope.role}" />
 
 <head>
     <meta charset="utf-8">
@@ -124,14 +125,18 @@
 					<!-- <p style="font-size: 12px">협업공간은 함께 일하는 멤버들끼리만 자료를 공유하고 협업할 수 있는 공간입니다.<br>
              협업공간을 만들고 함께 일할 멤버들을 초대해보세요.</p> -->
 					<label for="bntitle">공지사항</label> 
-					<input class="form-control createmodal" id="title" name="title" type="text"style="width: 100%"  value="모시모시">
+					<input class="form-control createmodal" id="title" name="title" type="text"style="width: 100%;background-color: #ffa9a94d;border: 1px solid #fffcfc" readonly="readonly">
 					<br> <label for="noticecontent">공지 설명</label>
-					<textarea class="form-control createmodal" rows="5" style="width: 100%" id="content" name="content"></textarea>	
+					<textarea class="form-control createmodal" rows="5" style="width: 100%;background-color: #ffa9a94d;border: 1px solid #fffcfc; resize: none" id="content" name="content" readonly="readonly" ></textarea>	
 				<!-- Modal footer -->
 				<div class="modal-footer">
+				<c:choose>
+						<c:when test="${role == 'ROLE_ADMIN'}">
 					<button type="button" class="btn btn-secondary"
 						style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;"
 						data-target="#noticeEdit" data-toggle="modal">수정</button>
+						</c:when>
+						</c:choose>
 						<button type="button" class="btn btn-secondary"
 						style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;"
 						data-dismiss="modal">취소</button>
