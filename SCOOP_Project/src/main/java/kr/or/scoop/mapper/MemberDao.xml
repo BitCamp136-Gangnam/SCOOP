@@ -72,16 +72,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<result column="idtime" property="idtime"/>
 	<result column="loginnum" property="loginnum"/>
 	<result column="prifile" property="prifile"/>
+	<collection property="projectMemberlist" resultMap="ProjectMemberlist"/>
 	</resultMap>
 	<resultMap type="kr.or.scoop.dto.Role" id="Role">
 	<result column="email" property="email"/>
 	<result column="rname" property="rname"/>
 	<collection property="member" resultMap="Member"/>
 	</resultMap>
+	<resultMap type="kr.or.scoop.dto.ProjectMemberlist" id="ProjectMemberlist">
+	<result column="email" property="email"/>
+	<result column="name" property="name"/>
+	<result column="tseq" property="tseq"/>
+	<result column="pjuserrank" property="pjuserrank"/>
+	</resultMap>
 	<select id="getRole" resultType="kr.or.scoop.dto.Role">
 	select m.email , r.RNAME from member m join role r on m.email = r.email where r.email= #{email,jdbcType=VARCHAR}
 	</select>
-	
+	<select id="projectMemberlist" parameterType="kr.or.scoop.dto.ProjectMemberlist" resultMap="ProjectMemberlist">
+	select m.email, m.name, t.tseq , t.pjuserrank from member m join tpmember t on m.email = t.email where t.tseq = #{tseq}
+</select>
 	<update id="changePassword" parameterType="kr.or.scoop.dto.Member">
 		update member
 		set pwd = #{pwd,jdbcType=VARCHAR}
