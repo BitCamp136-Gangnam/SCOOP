@@ -1,8 +1,11 @@
 package kr.or.scoop.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import kr.or.scoop.dto.Member;
+import kr.or.scoop.dto.ProjectMemberlist;
 import kr.or.scoop.dto.Role;
 
 
@@ -40,4 +43,7 @@ public interface MemberDao {
 	
 	//비밀번호 변경
 	public int changePassword(@Param("pwd")String pwd, @Param("email")String email);
+
+	//프로젝트 멤버 리스트 출력 -- 도연
+	public List<ProjectMemberlist> projectMemberlist(int tseq);
 }
