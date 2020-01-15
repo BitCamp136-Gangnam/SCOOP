@@ -120,7 +120,7 @@
     		</c:choose>
     		<br>
     		<label for="name">이름</label>
-    		<input class="form-control myinfo" type="text" id="name" name="name" style="width: 60%" readonly="readonly" value="${member.name}">
+    		<input class="form-control myinfo" type="text" id="name" name="name" style="width: 60%"  value="${member.name}">
     		<br>
     		<label for="dname">부서</label>
     		<input class="form-control myinfo" type="text" id="dname" name="dname" style="width: 60%" value="${member.dname}">
