@@ -10,13 +10,13 @@ public class Member {
 	private String email;
 	private String pwd;
 	private String name;
-	private String filesrc;
+	private CommonsMultipartFile filesrc;
 	private String dname;
 	private String drank;
 	private String address;
 	private String idtime;
 	private int loginnum;
-	private CommonsMultipartFile profile; 
+	private String profile; 
 
 	public String getEmail() {
 		return email;
@@ -69,18 +69,20 @@ public class Member {
 	public void setIdtime(String idtime) {
 		this.idtime = idtime;
 	}
-	public String getFilesrc() {
+	
+	public CommonsMultipartFile getFilesrc() {
 		return filesrc;
 	}
-	public void setFilesrc(String filesrc) {
+	public void setFilesrc(CommonsMultipartFile filesrc) {
 		this.filesrc = filesrc;
 	}
-	public CommonsMultipartFile getProfile() {
+	public String getProfile() {
 		return profile;
 	}
-	public void setProfile(CommonsMultipartFile profile) {
+	public void setProfile(String profile) {
 		this.profile = profile;
 	}
+	
 	
 	@Override
 	public String toString() {

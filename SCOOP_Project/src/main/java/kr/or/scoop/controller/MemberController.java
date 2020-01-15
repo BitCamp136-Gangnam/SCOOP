@@ -404,8 +404,9 @@ public class MemberController {
 		System.out.println(member);
 		
 				
-			CommonsMultipartFile multifile = member.getProfile();
+			CommonsMultipartFile multifile = member.getFilesrc();
 			String filename = multifile.getOriginalFilename();
+			member.setProfile(filename);
 			String path = request.getServletContext().getRealPath("/user/upload");
 			
 			String fpath = path + "\\"+ filename; 

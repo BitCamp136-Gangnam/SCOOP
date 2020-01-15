@@ -107,13 +107,13 @@ $(document).ready(function(){
 		<div class="row" style="margin-left: 4%; margin-right: 2%; margin-top: 1%">
 			<div class="media align-items-center mb-4">
 					<c:choose>
-						<c:when test="${member.profile == 'null'}">
-							<img id ="profile" class="mr-3 img-circle" src="<c:url value="/resources/images/avatar/avatar.png" />" width="120" height="120" alt="" name="profile">
-							<input type="file" name="profile" id="Photo" accept="image/*">
+						<c:when test="${member.profile==null}">
+							<img id ="profile" class="mr-3 img-circle" src="<c:url value='/resources/images/avatar/avatar.png' />" width="120" height="120" alt="" name="profile">
+							<input type="file" name="filesrc" id="Photo" accept="image/*">
 						</c:when>
 						<c:otherwise>
-                             <img id ="profile" class="mr-3 img-circle" src="${member.profile}/>" width="120" height="120" alt="" name="profile">
-                             <input type="file" name="profile" id="Photo" accept="image/*">
+                             <img id ="profile" class="mr-3 img-circle" src="<c:url value='/user/upload/${member.profile}' />" width="120" height="120" alt="" name="profile">
+                             <input type="file" name="filesrc" id="Photo" accept="image/*">
 						</c:otherwise>
 					</c:choose>
                                     <div class="media-body">
