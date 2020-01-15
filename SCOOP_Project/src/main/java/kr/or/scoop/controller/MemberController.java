@@ -24,8 +24,10 @@ import org.springframework.ui.velocity.VelocityEngineUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.or.scoop.dao.AlarmDao;
 import kr.or.scoop.dao.MemberDao;
 import kr.or.scoop.dao.ProjectDao;
+import kr.or.scoop.dto.Alarm;
 import kr.or.scoop.dto.Member;
 import kr.or.scoop.dto.Role;
 import kr.or.scoop.dto.Tpmember;
@@ -180,7 +182,7 @@ public class MemberController {
 
 	// 로그인 성공
 	@RequestMapping(value = "/userindex.do", method = RequestMethod.GET)
-	public String userindex(HttpSession session) {
+	public String userindex(HttpSession session,Model model) {
 		String email = "";
 		email = (String)session.getAttribute("email");
 		ProjectDao noticeDao = sqlsession.getMapper(ProjectDao.class);
@@ -190,6 +192,16 @@ public class MemberController {
 		List<Tpmember> pjtlist = noticeDao.getPJT(email);
 		if(pjtlist!=null) {
 			session.setAttribute("pjtlist", pjtlist);
+			AlarmDao dao = sqlsession.getMapper(AlarmDao.class);
+			List<Alarm> alarm = dao.getAlarm((String)session.getAttribute("email"));
+			System.out.println(alarm);
+			model.addAttribute("alarm", alarm);
+			if(alarm == null) {
+				
+			} else {
+				
+				
+			}
 		}
 		/* System.out.println(pjtlist.get(0)); */
 		return "user/userindex";
