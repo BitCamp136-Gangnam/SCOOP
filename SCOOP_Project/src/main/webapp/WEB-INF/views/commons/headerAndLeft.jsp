@@ -231,24 +231,6 @@ input::placeholder {
              maxHeight: null,             // set maximum height of editor
              focus: true                  // set focus to editable area after initializing summernote
      });
-		$('.modal').on('hidden.bs.modal', function(e) {
-			console.log('modal close');
-			$('#memlist').hide();
-			$('.CodeMirror').hide();
-			$('#filename').empty();
-			$('#imgpreview').hide();
-			$('#issuecontent').show();
-			$('#todo').hide();
-			$('#todomem').empty();
-			$('#todolist').empty();
-			$('#todoresult').empty();
-			$('#todoresult').hide();
-			$('#datepick').hide();
-			$('#from').empty();
-			$('#to').empty();
-			$('#memlist').attr('class', 'list-group');
-			$(this).find('form')[0].reset()
-		});
 		$('#fileopen').click(function() {
 			$('#filediv').show();
 			$('#fileclose').show();
@@ -958,15 +940,15 @@ span {
 	</div>
 
 	<div class="list-group" id="mentionlist" style="display: none">
-		<a href="#" class="list-group-item list-group-item-action" id="men1"style="padding: 5px">멘션(완료)</a> 
-		<a href="#" class="list-group-item list-group-item-action" id="men2"style="padding: 5px">소스코드(코드미러 하다말았음)</a> 
-		<a href="#" class="list-group-item list-group-item-action" id="men3"style="padding: 5px">구글 드라이브(완료))</a> 
-		<a href="#" class="list-group-item list-group-item-action" id="men4"style="padding: 5px">파일(완료)</a> 
-		<a href="#" class="list-group-item list-group-item-action" id="men5"style="padding: 5px">표(이건 어떻게함;;)</a> 
-		<a href="#" class="list-group-item list-group-item-action" id="men6"style="padding: 5px">관련 이슈</a> 
-		<a href="#" class="list-group-item list-group-item-action" id="men7"style="padding: 5px">의사결정</a> 
-		<a href="#" class="list-group-item list-group-item-action" id="men8"style="padding: 5px">할 일(완료)</a> 
-		<a href="#" class="list-group-item list-group-item-action" id="men9"style="padding: 5px">일정(완료)</a>
+		<a href="#" class="list-group-item list-group-item-action menli" id="men1"style="padding: 5px">멘션(완료)</a> 
+		<a href="#" class="list-group-item list-group-item-action menli" id="men2"style="padding: 5px">소스코드(코드미러 하다말았음)</a> 
+		<a href="#" class="list-group-item list-group-item-action menli" id="men3"style="padding: 5px">구글 드라이브(완료))</a> 
+		<a href="#" class="list-group-item list-group-item-action menli" id="men4"style="padding: 5px">파일(완료)</a> 
+		<a href="#" class="list-group-item list-group-item-action menli" id="men5"style="padding: 5px">표(이건 어떻게함;;)</a> 
+		<a href="#" class="list-group-item list-group-item-action menli" id="men6"style="padding: 5px">관련 이슈</a> 
+		<a href="#" class="list-group-item list-group-item-action menli" id="men7"style="padding: 5px">의사결정</a> 
+		<a href="#" class="list-group-item list-group-item-action menli" id="men8"style="padding: 5px">할 일(완료)</a> 
+		<a href="#" class="list-group-item list-group-item-action menli" id="men9"style="padding: 5px">일정(완료)</a>
 	</div>
 	<!--  -->
 	<!-- 멘션할 사람 목록 -->
@@ -1119,8 +1101,94 @@ span {
 	</div>
 	</div>
 <script type="text/javascript">
+$('.modal').on('hidden.bs.modal', function(e) {
+	console.log('modal close');
+	$('#memlist').hide();
+	$('.CodeMirror').hide();
+	$('#filename').empty();
+	$('#imgpreview').hide();
+	$('#issuecontent').show();
+	$('#todo').hide();
+	$('#todomem').empty();
+	$('#todolist').empty();
+	$('#todoresult').empty();
+	$('#todoresult').hide();
+	$('#datepick').hide();
+	$('#from').empty();
+	$('#to').empty();
+	$('#memlist').attr('class', 'list-group');
+	$(this).find('form')[0].reset()
+});
+var tar = 1;
+var tar2 = 2;
+$('.menli').keydown(function(event) {
+	var key = event.keyCode;
+    switch (key) {
+    case 38:
+       console.log("위");
+       tar2--;
+       break;
+    case 40:
+       tar2++;
+       break;
+    case 39:
+       break;
+    case 37:
+       break;
+    }
+    if (tar2 < 1) {
+       tar2 = 1;
+    }
+    if (tar2 > 9) {
+       tar2 = 9;
+    }
+    $('#men' + tar2).focus();
+    if ($('#men' + tar2).focus()) {
+       $('.menli').css('background-color', '#fff');
+       $('#men' + tar2).css(
+             'background-color',
+             'rgba(225, 225, 225,0.5)');
+    }
+    if(event.keyCode == 13){
+    	$(this).click();
+    }
+});
 	$('#issuecontent').keydown(
 			function(event) {
+				if($('#mentionlist').css('display')==('flex')){
+					console.log('여기서라면?');
+					console.log(event.keyCode);
+					var key = event.keyCode;
+		               switch (key) {
+		               case 38:
+		                  console.log("위");
+		                  tar--;
+		                  break;
+		               case 40:
+		                  tar++;
+		                  break;
+		               case 39:
+		                  break;
+		               case 37:
+		                  break;
+		               }
+		               if (tar < 1) {
+		                  tar = 1;
+		               }
+		               if (tar > 9) {
+		                  tar = 9;
+		               }
+		               $('#men' + tar).focus();
+		               if ($('#men' + tar).focus()) {
+		                  $('.menli').css('background-color', '#fff');
+		                  $('#men' + tar).css(
+		                        'background-color',
+		                        'rgba(225, 225, 225,0.5)');
+		               }
+		               if(event.keyCode == 13){
+		               	$(this).click();
+		               }
+				}
 				var top = ($('#issuecontent').offset().top);
 				var left = ($('#issuecontent').offset().left + 490);
 				if (event.shiftKey && event.keyCode == 50) {

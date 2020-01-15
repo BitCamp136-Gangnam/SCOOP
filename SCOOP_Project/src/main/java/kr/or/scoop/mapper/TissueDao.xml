@@ -8,5 +8,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 insert into tissue (tiseq,tseq,email,tititle,ticontent,isprocess, istbook, issee, tidate)
   values (TISEQ_TISSUE_SEQ.NEXTVAL, #{tseq}, #{email}, #{tititle}, #{ticontent}, 0, 0, 0, sysdate)
 </insert>
+<resultMap type="kr.or.scoop.dto.Member" id="Member">
+	<result column="tseq" property="tseq"/>
+	<result column="email" property="email"/>
+	<result column="pname" property="pname"/>
+	<result column="pcontent" property="pcontent"/>
+	<result column="ptime" property="ptime"/>
+	<result column="istpalarm" property="istpalarm"/>
+	<result column="ischarge" property="ischarge"/>
+	<collection property="tissue" resultMap="Tissue"/>
+	<collection property="tpmember" resultMap="Tpmember"/>
+</resultMap>
+<resultMap type="kr.or.scoop.dto.Tissue" id="Tissue">
+	<result column="tseq" property="tseq"/>
+	<result column="email" property="email"/>
+	<result column="pjuserrank" property="pjuserrank"/>
+	<result column="name" property="name"/>
+</resultMap>
 
 </mapper>
