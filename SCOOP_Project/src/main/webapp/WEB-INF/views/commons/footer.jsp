@@ -45,6 +45,23 @@
 		 	"searching": false,
 		 	"ordering": false
  		}); */
+ 		$('#chatopen').click(function(){
+ 			console.log($('#chattbody').children());
+ 	 		if($('#chattbody').children().length==0){
+ 				for(let i=0; i<$('.resultsearch').length;i++){
+ 				var proname = $('.resultsearch')[i].innerHTML.substr(7);
+ 				var prohref = $('.resultsearch').parent()[i].getAttribute('href').substr(22);
+ 					console.log(proname);
+ 					console.log(prohref);
+ 				let data = { cmd : "createChatRoom", 
+ 		    	    	name : proname+"/"+prohref, 
+ 		    	    	max : 100,
+ 		    	    	ref : "${ref}"
+ 		    	    		};
+ 		   		wsocket.send(JSON.stringify(data));
+ 				}
+ 			}
+ 	 		})
 		$("#createChat").click( function() {
 			backAndForth();
 		});
@@ -151,11 +168,10 @@
 
     function openChat(room){
     	let url = "Chat.do?room="+room;
-    	//let name = room;
-    	//let option = "width = 500, height = 500, top = 100, left = 200, location = no, channelmode = yes";
-        //window.open(url, name, option);
-        //window.location.href=url;
-        $('#chatdivopen').hide();
+    	let name = room;
+    	let option = "width = 500, height = 500, top = 100, left = 200, location = no, channelmode = yes";
+        window.open(url, name, option);
+        /* $('#chatdivopen').hide();
         $('#chatroomdivopen').load(url);
         $('#chatroomdivopen').show();
         $('#chatdivopen').attr('class','false');
@@ -167,7 +183,7 @@
         	$('#chatdivopen').show();
         	$('#chatdivopen').attr('class','true');
             $('#chatroomdivopen').attr('class','false');
-        })
+        }) */
     }
 </script>
 <script type="text/javascript">
@@ -386,7 +402,7 @@
 										<th width="20%">입장</th>
 									</tr>
 								</thead>
-								<tbody>
+								<tbody id="chattbody">
 
 								</tbody>
 							</table>
