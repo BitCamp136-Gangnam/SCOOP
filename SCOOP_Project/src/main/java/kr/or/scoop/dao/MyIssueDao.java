@@ -14,4 +14,6 @@ public interface MyIssueDao {
 	//내가 작성한 이슈 리스트
 	public List<MyIssue> MyWriteIssueList(String email);
 	
+	//내가 작성한 팀 이슈 리스트
+	public List<MyIssue> MyWriteTiisueList(String email);
 }

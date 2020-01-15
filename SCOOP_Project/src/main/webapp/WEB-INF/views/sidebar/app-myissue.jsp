@@ -52,7 +52,7 @@
 		<div class="row" style="margin-left: 2%;">
 			<ul class="nav nav-pills">
 			    <li class="nav-item">
-			      <a class="nav-link" href="#">내가 작성한 이슈</a>
+			      <a class="nav-link" href="myissue.do">내가 작성한 이슈</a>
 			    </li>
 			    <li class="nav-item">
 			      <a class="nav-link" href="#">내가 작성한 댓글</a>
@@ -61,14 +61,16 @@
 		</div>
 		<hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
 		<div class="row" style="margin-left: 2%; margin-right: 2%">
-			<c:forEach items="${my}" var="m">
+			<c:forEach items="${ti}" var="ti">
 			<div class="col-sm-12 newissue" >
-			<a href="#">${m.tititle}</a><br>
-			${m.pname} / ${m.tidate}<br>
+			<a href="#">${ti.tititle}</a><br>
+			${ti.pname} / ${ti.tidate}<br>
 			</div>
+			</c:forEach>
+			<c:forEach items="${pi}" var="pi">
 			<div class="col-sm-12 newissue" >
-			아이콘 + <a href="#">${m.pititle}</a><br>
-			프라이빗 공간 / ${m.pidate} 
+			아이콘 + <a href="#">${pi.pititle}</a><br>
+			프라이빗 공간 / ${pi.pidate} 
 			</div>
 			</c:forEach>
 		</div>

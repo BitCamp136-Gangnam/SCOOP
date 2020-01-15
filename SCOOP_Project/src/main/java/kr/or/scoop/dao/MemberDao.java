@@ -46,4 +46,5 @@ public interface MemberDao {
 
 	//프로젝트 멤버 리스트 출력 -- 도연
 	public List<ProjectMemberlist> projectMemberlist(int tseq);
+
 }
