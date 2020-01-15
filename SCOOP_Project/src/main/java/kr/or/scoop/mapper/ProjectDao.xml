@@ -46,24 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<result column="pjuserrank" property="pjuserrank"/>
 	<result column="pname" property="pname"/>
 </resultMap>
-<resultMap type="kr.or.scoop.dto.ProjectMemberlist" id="ProjectMemberlist">
-	<result column="email" property="email"/>
-	<result column="name" property="name"/>
-	<result column="tseq" property="tseq"/>
-	<result column="pjuserrank" property="pjuserrank"/>
-</resultMap>
-<resultMap type="kr.or.scoop.dto.Member" id="Member">
-	<result column="email" property="email"/>
-	<result column="pwd" property="pwd"/>
-	<result column="name" property="name"/>
-	<result column="dname" property="dname"/>
-	<result column="drank" property="drank"/>
-	<result column="address" property="address"/>
-	<result column="idtime" property="idtime"/>
-	<result column="loginnum" property="loginnum"/>
-	<result column="profile" property="profile"/>
-	<collection property="projectMemberlist" resultMap="ProjectMemberlist"/>
-</resultMap>
+
 <select id="detailPJT" parameterType="int" resultType="kr.or.scoop.dto.TeamPjt">
 	SELECT TSEQ,PNAME,PCONTENT FROM TEAMPJT WHERE TSEQ = #{TSEQ}
 </select>
@@ -74,7 +57,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	SELECT T.TSEQ ,S.TISEQ, S.tititle, S.TICONTENT, S.TIDATE FROM TEAMPJT T 
 	JOIN TISSUE S ON T.TSEQ = S.TSEQ WHERE T.TSEQ = #{TSEQ}
 </select>
-<select id="projectMemberlist" parameterType="kr.or.scoop.dto.ProjectMemberlist" resultMap="ProjectMemberlist">
-	select m.email, m.name, t.tseq , t.pjuserrank from member m join tpmember t on m.email = t.email where t.tseq = #{tseq}
-</select>
+
 </mapper>

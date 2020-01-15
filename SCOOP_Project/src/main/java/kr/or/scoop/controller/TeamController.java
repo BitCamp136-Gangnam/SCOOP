@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.or.scoop.dao.MemberDao;
 import kr.or.scoop.dao.ProjectDao;
 import kr.or.scoop.dto.Member;
 import kr.or.scoop.dto.MyIssue;
@@ -92,9 +93,10 @@ public class TeamController {
 	public String JoinProject(int tseq, Model model) {
 		System.out.println(tseq);
 		ProjectDao dao = sqlsession.getMapper(ProjectDao.class);
+		MemberDao md = sqlsession.getMapper(MemberDao.class);
 		TeamPjt pjt = dao.detailPJT(tseq);
 		List<Tissue> tp = dao.getTissue(tseq);
-		List<ProjectMemberlist> projectMemberlist =dao.projectMemberlist(tseq);
+		List<ProjectMemberlist> projectMemberlist =md.projectMemberlist(tseq);
 		System.out.println(pjt);
 		System.out.println(tp);
 		System.out.println(projectMemberlist);

@@ -23,6 +23,4 @@ public interface ProjectDao {
 	//팀이슈 리스트
 	public List<Tissue> getTissue(int tseq); 
 	
-	//프로젝트 멤버 리스트 출력 -- 도연
-	public List<ProjectMemberlist> projectMemberlist(int tseq);
 }
