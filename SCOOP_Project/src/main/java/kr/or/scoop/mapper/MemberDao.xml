@@ -59,8 +59,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<update id="updateMember" parameterType="kr.or.scoop.dto.Member">
 		update member
-		set email = #{email}, pwd = #{pwd}, name=#{name}, dname=#{dname}, drank=#{drank} , address = #{address}
-		where email = #{email}
+		set email = #{email,jdbcType=VARCHAR}, pwd = #{pwd,jdbcType=VARCHAR}, name=#{name,jdbcType=VARCHAR}, dname=#{dname,jdbcType=VARCHAR}, drank=#{drank} , address = #{address,jdbcType=VARCHAR}
+		where email = #{email,jdbcType=VARCHAR}
 	</update>
 	<resultMap type="kr.or.scoop.dto.Member" id="Member">
 	<result column="email" property="email"/>
@@ -79,12 +79,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<collection property="member" resultMap="Member"/>
 	</resultMap>
 	<select id="getRole" resultType="kr.or.scoop.dto.Role">
-	select m.email , r.RNAME from member m join role r on m.email = r.email where r.email= #{email}
+	select m.email , r.RNAME from member m join role r on m.email = r.email where r.email= #{email,jdbcType=VARCHAR}
 	</select>
 	
 	<update id="changePassword" parameterType="kr.or.scoop.dto.Member">
 		update member
-		set pwd = #{pwd}
-		where email = #{email}
+		set pwd = #{pwd,jdbcType=VARCHAR}
+		where email = #{email,jdbcType=VARCHAR}
 	</update>
 </mapper>
