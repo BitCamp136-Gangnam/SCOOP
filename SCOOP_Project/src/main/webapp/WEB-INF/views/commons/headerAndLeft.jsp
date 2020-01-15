@@ -1155,8 +1155,7 @@ $('.menli').keydown(function(event) {
 });
 	$('#issuecontent').keydown(
 			function(event) {
-				console.log($('#mentionlist').attr('style'));
-				if($('#mentionlist').attr('style')==('position:fixed; width:20%;top:381.5px;left:686.5px; z-index:4')){
+				if($('#mentionlist').css('display')==('flex')){
 					console.log('여기서라면?');
 					console.log(event.keyCode);
 					var key = event.keyCode;
