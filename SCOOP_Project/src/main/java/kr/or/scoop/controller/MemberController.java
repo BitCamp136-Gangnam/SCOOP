@@ -195,12 +195,11 @@ public class MemberController {
 			AlarmDao dao = sqlsession.getMapper(AlarmDao.class);
 			List<Alarm> alarm = dao.getAlarm((String)session.getAttribute("email"));
 			System.out.println(alarm);
-			model.addAttribute("alarm", alarm);
+			
 			if(alarm == null) {
 				
 			} else {
-				
-				
+				model.addAttribute("alarm", alarm);
 			}
 		}
 		/* System.out.println(pjtlist.get(0)); */
