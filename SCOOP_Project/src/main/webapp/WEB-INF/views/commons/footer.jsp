@@ -47,7 +47,7 @@
  		}); */
  		$('#chatopen').click(function(){
  			console.log($('#chattbody').children());
- 	 		if($('#chattbody').children().length==0){
+ 	 		//if($('#chattbody').children().length==0){
  				for(let i=0; i<$('.resultsearch').length;i++){
  				var proname = $('.resultsearch')[i].innerHTML.substr(7);
  				var prohref = $('.resultsearch').parent()[i].getAttribute('href').substr(22);
@@ -60,7 +60,7 @@
  		    	    		};
  		   		wsocket.send(JSON.stringify(data));
  				}
- 			}
+ 			//}
  	 		})
 		$("#createChat").click( function() {
 			backAndForth();
@@ -146,13 +146,20 @@
 	}
 
 	function setChatRooms(data){
+		var room = "";
+		var btn = "";
 		$('#dataTable > tbody').empty();
 		$.each(data.rooms, function(index, element){
-			let room = $("<tr></tr>");
-			//room.append("<td style='padding-top:5%;'>" + (num++) + "</td>");
-			room.append("<td style='padding-top:5%;'>"+element.name+"</td>");
-			//room.append("<td style='padding-top:5%;'>"+element.users.length+ " / " +element.max+"</td>");
- 			let btn = $("<button class='btn btn-primary'>입장</button>");
+			for(let i=0; i<$('.resultsearch').length;i++){
+				if($('.resultsearch').parent()[i].getAttribute('href').substr(22)==data.rooms[index].name.split("/")[1]){
+					console.log("너는 같구나^^");
+					room = $("<tr></tr>");
+					//room.append("<td style='padding-top:5%;'>" + (num++) + "</td>");
+					room.append("<td style='padding-top:5%;'>"+element.name.split("/")[0]+"</td>");
+					//room.append("<td style='padding-top:5%;'>"+element.users.length+ " / " +element.max+"</td>");
+		 			btn = $("<button class='btn btn-primary'>입장</button>");
+				}
+			}
 			if(element.users.length == element.max)
 				btn.attr("disabled",true);
 
@@ -169,7 +176,7 @@
     function openChat(room){
     	let url = "Chat.do?room="+room;
     	let name = room;
-    	let option = "width = 500, height = 500, top = 100, left = 200, location = no, channelmode = yes";
+    	let option = "width = 400, height = 500, top = 230, left = 1180, location = no, channelmode = yes";
         window.open(url, name, option);
         /* $('#chatdivopen').hide();
         $('#chatroomdivopen').load(url);
