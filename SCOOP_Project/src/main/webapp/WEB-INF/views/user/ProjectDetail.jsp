@@ -131,10 +131,10 @@ function project_filter() {
          작성시간 
          </div>
       </div>
-      <c:forEach items="${tp  }" var="ti">
+      <c:forEach items="${tp}" var="ti">
          <div class="row" style="margin-left: 2%; margin-right: 2%">
          <div class="col-sm-2 newissue" >
-         ${ti.email }
+         ${ti.name }
          </div>
          <div class="col-sm-8 newissue">
          ${ti.tititle} 

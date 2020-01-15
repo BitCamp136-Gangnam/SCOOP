@@ -10,6 +10,7 @@ public class ChatController {
 	public String showView(String room, Model model) {
 		model.addAttribute("room", room);
 		System.out.println("오냐");
-		return "/chat/Chat";
+		
+		return "chat/Chat";
 	}
 }

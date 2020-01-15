@@ -594,6 +594,9 @@ span {
 					<input type="button"class="form-control"
 					style="background-color: #E71D36; border-color: #CCCCCC; margin-left: 2%; color: #fff; cursor: pointer;"
 					value="공지사항 작성" data-toggle="modal" data-target="#makenotice">
+					<input type="button"class="form-control"
+					style="background-color: #E71D36; border-color: #CCCCCC; margin-left: 2%; color: #fff; cursor: pointer;"
+					value="이슈 작성" data-toggle="modal" data-target="#makeissue">
 					</c:when>
 					<c:otherwise>
 					<input type="button"class="form-control"
@@ -745,9 +748,8 @@ span {
 		<ul class="metismenu" id="menu">
 			<li class="nav-label" style="padding-bottom: 10px;"><b
 				style="padding-bottom: 2%;">전체 정보</b></li>
-			<li><a href="notice.do" aria-expanded="false"> <span
-					class="iconify" data-icon="bx:bx-file-blank" data-inline="false"
-					style="width: 20px; height: auto;"> </span><span class="nav-text">
+			<li><a href="notice.do" aria-expanded="false"><span class="iconify" data-icon="ps:megaphone" data-inline="false"></span>
+			<span class="nav-text">
 						&nbsp;공지사항</span> <!-- <i class="icon-speedometer menu-icon"> -->
 			</a></li>
 			<li><a href="userindex.do" aria-expanded="false"> <span
