@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.or.scoop.dao.BoardDao;
+import kr.or.scoop.dao.MyIssueDao;
 import kr.or.scoop.dao.NoticeDao;
+import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.dto.Notice;
 import kr.or.scoop.service.BoardService;
 import sun.print.resources.serviceui;
@@ -31,7 +33,12 @@ public class BoardController {
 	
 	// 마이이슈 작성
 	@RequestMapping(value = "/myissue.do", method = RequestMethod.GET)
-	public String myissue() {
+	public String myissue(HttpSession session, Model model) {
+		String email = "";
+		email = (String)session.getAttribute("email");
+		MyIssueDao dao = sqlSession.getMapper(MyIssueDao.class);
+		List<MyIssue> my = dao.MyWriteIssueList(email);
+		model.addAttribute("my",my);
 		return "sidebar/app-myissue";
 	}
 

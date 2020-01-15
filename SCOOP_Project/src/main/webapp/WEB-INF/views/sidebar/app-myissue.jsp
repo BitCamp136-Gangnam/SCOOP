@@ -61,10 +61,16 @@
 		</div>
 		<hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
 		<div class="row" style="margin-left: 2%; margin-right: 2%">
+			<c:forEach items="${my}" var="m">
 			<div class="col-sm-12 newissue" >
-			아이콘 + 이슈 제목 들어갈곳<br>
-			여기에 프로젝트명 그리고 작성시간
+			<a href="#">${m.tititle}</a><br>
+			${m.pname} / ${m.tidate}<br>
 			</div>
+			<div class="col-sm-12 newissue" >
+			아이콘 + <a href="#">${m.pititle}</a><br>
+			프라이빗 공간 / ${m.pidate} 
+			</div>
+			</c:forEach>
 		</div>
             <!-- #/ container -->
             </div>

@@ -9,18 +9,23 @@ import org.springframework.stereotype.Repository;
 public class MyIssue {
 	
 	private int piseq;
+	private int tiseq;
 	private String pfilename;
 	private int pfilesize;
 	private String pititle;
+	private String tititle;
 	private String picontent;
 	private Date pistart;
 	private Date piend;
 	private int ispibook;
 	private String email;
 	private Date pidate;
+	private Date tidate;
 	private String mygfilename;
 	private String mymention;
 	private String myurl;
+	private String pname;
+	
 	public int getPiseq() {
 		return piseq;
 	}
@@ -99,12 +104,40 @@ public class MyIssue {
 	public void setMyurl(String myurl) {
 		this.myurl = myurl;
 	}
+	public int getTiseq() {
+		return tiseq;
+	}
+	public void setTiseq(int tiseq) {
+		this.tiseq = tiseq;
+	}
+	public String getTititle() {
+		return tititle;
+	}
+	public void setTititle(String tititle) {
+		this.tititle = tititle;
+	}
+	public Date getTidate() {
+		return tidate;
+	}
+	public void setTidate(Date tidate) {
+		this.tidate = tidate;
+	}
+	public String getPname() {
+		return pname;
+	}
+	public void setPname(String pname) {
+		this.pname = pname;
+	}
+	
 	@Override
 	public String toString() {
-		return "MyIssue [piseq=" + piseq + ", pfilename=" + pfilename + ", pfilesize=" + pfilesize + ", pititle="
-				+ pititle + ", picontent=" + picontent + ", pistart=" + pistart + ", piend=" + piend + ", ispibook="
-				+ ispibook + ", email=" + email + ", pidate=" + pidate + ", mygfilename=" + mygfilename + ", mymention="
-				+ mymention + ", myurl=" + myurl + "]";
+		return "MyIssue [piseq=" + piseq + ", tiseq=" + tiseq + ", pfilename=" + pfilename + ", pfilesize=" + pfilesize
+				+ ", pititle=" + pititle + ", tititle=" + tititle + ", picontent=" + picontent + ", pistart=" + pistart
+				+ ", piend=" + piend + ", ispibook=" + ispibook + ", email=" + email + ", pidate=" + pidate
+				+ ", tidate=" + tidate + ", mygfilename=" + mygfilename + ", mymention=" + mymention + ", myurl="
+				+ myurl + ", pname=" + pname + "]";
 	}
+	
+	
 
 }
