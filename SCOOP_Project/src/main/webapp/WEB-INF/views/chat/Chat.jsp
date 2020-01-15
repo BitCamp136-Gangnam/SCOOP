@@ -141,7 +141,7 @@
 <body id="page-top">
 <div class="col-md-12">
       <!-- DIRECT CHAT PRIMARY -->
-      <div class="box box-primary direct-chat direct-chat-primary" style="width: 400px;">
+      <div class="box box-primary direct-chat direct-chat-primary">
         <div class="box-header with-border">
           <h3 class="box-title"> <%=request.getParameter("room") %></h3>
 <!--           <div class="box-tools pull-right">
@@ -160,7 +160,7 @@
           </div> -->
         </div>
         <!-- /.box-header -->
-        <div class="box-body" style="height: 350px">
+        <div class="box-body">
           <!-- Conversations are loaded here -->
           <div id="chatMessageArea" class="direct-chat-messages">
            
