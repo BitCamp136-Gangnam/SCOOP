@@ -28,6 +28,203 @@ input::placeholder {
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 <script type="text/javascript">
 	$(function() {
+		var number = 0;
+
+		var target = 1;
+		/* var regExp  = /([w-.]+)@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.)|(([w-]+.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(]?)$/;
+		
+		if('!$("#invite_Submit").val()'){
+			 alert("이메일주소를 입력 해 주세요"); 
+			   $("#invite_Submit").focus(); 
+			   return false; 
+		} else { 
+		   if(!regExp.test($("#invite_Submit").val())) { 
+			      alert("이메일 주소가 유효하지 않습니다"); 
+			      $("#invite_Submit").focus(); 
+			      return false; 
+			   } 
+		}  */
+		$('#invite_Submit').keyup(function(event) {
+			console.log("gggg");
+			$('#invite_email_append').show();
+			$('#invite_email_append').empty();
+
+			if ($('#invite_Submit').val().match('@')){
+				$('#invite_email_append')
+						.append(
+								'<div id="email_append_1" class="email_append" style="margin:10px;color:#000;">'
+										+ $(this).val());
+			} else {
+				$('#invite_email_append')
+						.append(
+								'<div id="email_append_1" class="email_append" style="margin:10px 7px 10px 7px;color:#000;">'
+										+ $(this).val()
+										+ '@naver.com</div>');
+				$('#invite_email_append')
+						.append(
+								'<div id="email_append_2" class="email_append" style="margin:10px 7px 10px 7px;color:#000;">'
+										+ $(this).val()
+										+ '@gmail.com</div>');
+				$('#invite_email_append')
+						.append(
+								'<div id="email_append_3" class="email_append" style="margin:10px 7px 10px 7px;color:#000;">'
+										+ $(this).val()
+										+ '@daum.net</div>');
+			}
+
+			if ($('#invite_Submit').val() == "") {
+				$('#invite_email_append').hide();
+			} else {
+				$('#invite_email_append').show();
+			}
+
+			if (event.keyCode == 13) {
+				$('#invite_email_append').hide();
+			}
+
+			var key = event.keyCode;
+			console.log(key);
+			switch (key) {
+			case 38:
+				console.log("위");
+				target--;
+				break;
+			case 40:
+				target++;
+				break;
+			case 39:
+				break;
+			case 37:
+				break;
+			}
+			if (target < 1) {
+				target = 1;
+			}
+			if (target > 3) {
+				target = 3;
+			}
+			$('#email_append_' + target).focus();
+			if ($('#email_append_' + target).focus()) {
+				$('.email_append').css('background-color', '#fff');
+				$('#email_append_' + target).css(
+						'background-color',
+						'rgba(225, 225, 225,0.5)');
+
+				if (event.keyCode == 13) {
+
+					var u_email = $('#email_append_' + target);
+					var regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+					console.log(u_email.text());
+					if (u_email.text() == "@naver.com") {
+						alert("이메일을 입력하세요");
+						u_email.focus();
+						return false;
+					} else {
+						if (!regEmail.test(u_email.text())) {
+							alert("유효한 이메일 형식이 아닙니다.");
+							u_email.focus();
+							return false;
+						}
+					}
+					if (event.shiftKey && event.keyCode == 50) {
+						console.log("?????");
+						$('#invite_email_append').hide();
+						$('#invite_Input')
+								.append(
+										'<span style="border:1px solid rgba(124, 119, 119,0.5);border-radius:0.25rem; padding-top: 1%;padding-bottom: 1%;padding-left: 2%;padding-right: 2%;margin:2%;"><i class="far fa-paper-plane" style="color:#9e6767;padding-right: 5px;"></i><input type="text" value='
+												+ $(this).val()
+												+ ' name=email'
+												+ (number++)
+												+ ' style="border:0px; width:200px;margin-left:3px;" readonly><button type="button" id=""  class="invite_close" style="border:0;background-color:#fff;border-radius:0.25rem;"><i class="fas fa-times" style="color:#A84747;padding-left: 10px;"></i></button></span>');
+						$(this).val('');
+						$('#invitebtn').removeAttr('disabled');
+						$('#invitecnt').val(number);
+						$('#invitebtn').empty();
+						$('#invitebtn')
+								.prepend(
+										$('#invite_Input')
+												.children().length
+												- 2 + '명의 멤버 초대하기');
+
+					} else {
+						$('#invite_Input')
+								.append(
+										'<span style="border:1px solid rgba(124, 119, 119,0.5);border-radius:0.25rem; padding-top: 1%;padding-bottom: 1%;padding-left: 2%;padding-right: 2%;margin:2%;"><i class="far fa-paper-plane" style="color:#9e6767;padding-right: 5px;"></i><input type="text" value='
+												+ $(
+														'#email_append_'
+																+ target)
+														.text()
+												+ ' name=email'
+												+ (number++)
+												+ ' style="border:0px; width:200px;margin-left:3px;" readonly><button type="button" id=""  class="invite_close" style="border:0;background-color:#fff;border-radius:0.25rem;"><i class="fas fa-times" style="color:#A84747;padding-left: 10px;"></i></button></span>');
+						$(this).val('');
+						$('#invitebtn').removeAttr('disabled');
+						$('#invitecnt').val(number);
+						$('#invitebtn').empty();
+						$('#invitebtn')
+								.prepend(
+										$('#invite_Input')
+												.children().length
+												- 2 + '명의 멤버 초대하기');
+
+					}
+				}
+
+				$('.invite_close')
+						.click(
+								function() {
+									$('#invitebtn').empty();
+									$('#invitebtn')
+											.prepend(
+													$(
+															'#invite_Input')
+															.children().length
+															- 2
+															+ '명의 멤버 초대하기');
+									$(this).parent().remove();
+									if ($('#invite_Input')
+											.children().length == 2) {
+										$('#invitebtn').empty();
+										$('#invitebtn').prepend(
+												'멤버 초대하기');
+										$('#invitebtn').attr(
+												'disabled',
+												'disabled');
+										$('#invite_Input1').show();
+										$('#invite_Input2').show();
+									}
+								});
+
+				if ($('#invite_Input').children().length > 2) {
+					$('#invite_Input1').hide();
+					$('#invite_Input2').hide();
+				}
+
+			}
+
+		});
+
+
+
+
+
+		/* 프로젝트 이름 검색 - 도연 */
+		function filter() {
+			var value, name, item, i;
+			value = document.getElementById("searchpjt").value.toUpperCase();
+			item = document.getElementsByClassName("search_project");
+
+			for (i = 0; i < item.length; i++) {
+				name = item[i].getElementsByClassName("resultsearch");
+				if (name[0].innerHTML.toUpperCase().indexOf(value) > -1) {
+					item[i].style.display = "flex";
+				} else {
+					item[i].style.display = "none";
+				}
+			}
+		}
+
+		
 		 $('#summernote').summernote({
              height: 300,                 // set editor height
              minHeight: null,             // set minimum height of editor
@@ -759,24 +956,15 @@ span {
 	</div>
 
 	<div class="list-group" id="mentionlist" style="display: none">
-		<a href="#" class="list-group-item list-group-item-action" id="men1"
-			style="padding: 5px">멘션(완료)</a> <a href="#"
-			class="list-group-item list-group-item-action" id="men2"
-			style="padding: 5px">소스코드(코드미러 하다말았음)</a> <a href="#"
-			class="list-group-item list-group-item-action" id="men3"
-			style="padding: 5px">구글 드라이브(완료))</a> <a href="#"
-			class="list-group-item list-group-item-action" id="men4"
-			style="padding: 5px">파일(완료)</a> <a href="#"
-			class="list-group-item list-group-item-action" id="men5"
-			style="padding: 5px">표(이건 어떻게함;;)</a> <a href="#"
-			class="list-group-item list-group-item-action" id="men6"
-			style="padding: 5px">관련 이슈</a> <a href="#"
-			class="list-group-item list-group-item-action" id="men7"
-			style="padding: 5px">의사결정</a> <a href="#"
-			class="list-group-item list-group-item-action" id="men8"
-			style="padding: 5px">할 일(완료)</a> <a href="#"
-			class="list-group-item list-group-item-action" id="men9"
-			style="padding: 5px">일정(완료)</a>
+		<a href="#" class="list-group-item list-group-item-action" id="men1"style="padding: 5px">멘션(완료)</a> 
+		<a href="#" class="list-group-item list-group-item-action" id="men2"style="padding: 5px">소스코드(코드미러 하다말았음)</a> 
+		<a href="#" class="list-group-item list-group-item-action" id="men3"style="padding: 5px">구글 드라이브(완료))</a> 
+		<a href="#" class="list-group-item list-group-item-action" id="men4"style="padding: 5px">파일(완료)</a> 
+		<a href="#" class="list-group-item list-group-item-action" id="men5"style="padding: 5px">표(이건 어떻게함;;)</a> 
+		<a href="#" class="list-group-item list-group-item-action" id="men6"style="padding: 5px">관련 이슈</a> 
+		<a href="#" class="list-group-item list-group-item-action" id="men7"style="padding: 5px">의사결정</a> 
+		<a href="#" class="list-group-item list-group-item-action" id="men8"style="padding: 5px">할 일(완료)</a> 
+		<a href="#" class="list-group-item list-group-item-action" id="men9"style="padding: 5px">일정(완료)</a>
 	</div>
 	<!--  -->
 	<!-- 멘션할 사람 목록 -->
@@ -1182,197 +1370,4 @@ span {
 										'cursor: pointer;color:#535359;font-size: 18px;padding-bottom: 12px;');
 					});
 
-	var number = 0;
-
-	var target = 1;
-	/* var regExp  = /([w-.]+)@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.)|(([w-]+.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(]?)$/;
-	
-	if('!$("#invite_Submit").val()'){
-		 alert("이메일주소를 입력 해 주세요"); 
-		   $("#invite_Submit").focus(); 
-		   return false; 
-	} else { 
-	   if(!regExp.test($("#invite_Submit").val())) { 
-		      alert("이메일 주소가 유효하지 않습니다"); 
-		      $("#invite_Submit").focus(); 
-		      return false; 
-		   } 
-	}  */
-
-	$('#invite_Submit')
-			.keyup(
-					function(event) {
-						$('#invite_email_append').show();
-						$('#invite_email_append').empty();
-
-						if ($('#invite_Submit').val().match('@')) {
-							$('#invite_email_append')
-									.append(
-											'<div id="email_append_1" class="email_append" style="margin:10px;color:#000;">'
-													+ $(this).val());
-						} else {
-							$('#invite_email_append')
-									.append(
-											'<div id="email_append_1" class="email_append" style="margin:10px 7px 10px 7px;color:#000;">'
-													+ $(this).val()
-													+ '@naver.com</div>');
-							$('#invite_email_append')
-									.append(
-											'<div id="email_append_2" class="email_append" style="margin:10px 7px 10px 7px;color:#000;">'
-													+ $(this).val()
-													+ '@gmail.com</div>');
-							$('#invite_email_append')
-									.append(
-											'<div id="email_append_3" class="email_append" style="margin:10px 7px 10px 7px;color:#000;">'
-													+ $(this).val()
-													+ '@daum.net</div>');
-						}
-
-						if ($('#invite_Submit').val() == "") {
-							$('#invite_email_append').hide();
-						} else {
-							$('#invite_email_append').show();
-						}
-
-						if (event.keyCode == 13) {
-							$('#invite_email_append').hide();
-						}
-
-						var key = event.keyCode;
-						console.log(key);
-						switch (key) {
-						case 38:
-							console.log("위");
-							target--;
-							break;
-						case 40:
-							target++;
-							break;
-						case 39:
-							break;
-						case 37:
-							break;
-						}
-						if (target < 1) {
-							target = 1;
-						}
-						if (target > 3) {
-							target = 3;
-						}
-						$('#email_append_' + target).focus();
-						if ($('#email_append_' + target).focus()) {
-							$('.email_append').css('background-color', '#fff');
-							$('#email_append_' + target).css(
-									'background-color',
-									'rgba(225, 225, 225,0.5)');
-
-							if (event.keyCode == 13) {
-
-								var u_email = $('#email_append_' + target);
-								var regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-								console.log(u_email.text());
-								if (u_email.text() == "@naver.com") {
-									alert("이메일을 입력하세요");
-									u_email.focus();
-									return false;
-								} else {
-									if (!regEmail.test(u_email.text())) {
-										alert("유효한 이메일 형식이 아닙니다.");
-										u_email.focus();
-										return false;
-									}
-								}
-								if (event.shiftKey && event.keyCode == 50) {
-									console.log("?????");
-									$('#invite_email_append').hide();
-									$('#invite_Input')
-											.append(
-													'<span style="border:1px solid rgba(124, 119, 119,0.5);border-radius:0.25rem; padding-top: 1%;padding-bottom: 1%;padding-left: 2%;padding-right: 2%;margin:2%;"><i class="far fa-paper-plane" style="color:#9e6767;padding-right: 5px;"></i><input type="text" value='
-															+ $(this).val()
-															+ ' name=email'
-															+ (number++)
-															+ ' style="border:0px; width:200px;margin-left:3px;" readonly><button type="button" id=""  class="invite_close" style="border:0;background-color:#fff;border-radius:0.25rem;"><i class="fas fa-times" style="color:#A84747;padding-left: 10px;"></i></button></span>');
-									$(this).val('');
-									$('#invitebtn').removeAttr('disabled');
-									$('#invitecnt').val(number);
-									$('#invitebtn').empty();
-									$('#invitebtn')
-											.prepend(
-													$('#invite_Input')
-															.children().length
-															- 2 + '명의 멤버 초대하기');
-
-								} else {
-									$('#invite_Input')
-											.append(
-													'<span style="border:1px solid rgba(124, 119, 119,0.5);border-radius:0.25rem; padding-top: 1%;padding-bottom: 1%;padding-left: 2%;padding-right: 2%;margin:2%;"><i class="far fa-paper-plane" style="color:#9e6767;padding-right: 5px;"></i><input type="text" value='
-															+ $(
-																	'#email_append_'
-																			+ target)
-																	.text()
-															+ ' name=email'
-															+ (number++)
-															+ ' style="border:0px; width:200px;margin-left:3px;" readonly><button type="button" id=""  class="invite_close" style="border:0;background-color:#fff;border-radius:0.25rem;"><i class="fas fa-times" style="color:#A84747;padding-left: 10px;"></i></button></span>');
-									$(this).val('');
-									$('#invitebtn').removeAttr('disabled');
-									$('#invitecnt').val(number);
-									$('#invitebtn').empty();
-									$('#invitebtn')
-											.prepend(
-													$('#invite_Input')
-															.children().length
-															- 2 + '명의 멤버 초대하기');
-
-								}
-							}
-
-							$('.invite_close')
-									.click(
-											function() {
-												$('#invitebtn').empty();
-												$('#invitebtn')
-														.prepend(
-																$(
-																		'#invite_Input')
-																		.children().length
-																		- 2
-																		+ '명의 멤버 초대하기');
-												$(this).parent().remove();
-												if ($('#invite_Input')
-														.children().length == 2) {
-													$('#invitebtn').empty();
-													$('#invitebtn').prepend(
-															'멤버 초대하기');
-													$('#invitebtn').attr(
-															'disabled',
-															'disabled');
-													$('#invite_Input1').show();
-													$('#invite_Input2').show();
-												}
-											});
-
-							if ($('#invite_Input').children().length > 2) {
-								$('#invite_Input1').hide();
-								$('#invite_Input2').hide();
-							}
-
-						}
-
-					});
-
-	/* 프로젝트 이름 검색 - 도연 */
-	function filter() {
-		var value, name, item, i;
-		value = document.getElementById("searchpjt").value.toUpperCase();
-		item = document.getElementsByClassName("search_project");
-
-		for (i = 0; i < item.length; i++) {
-			name = item[i].getElementsByClassName("resultsearch");
-			if (name[0].innerHTML.toUpperCase().indexOf(value) > -1) {
-				item[i].style.display = "flex";
-			} else {
-				item[i].style.display = "none";
-			}
-		}
-	}
 </script>
