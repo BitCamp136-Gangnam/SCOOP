@@ -54,18 +54,21 @@ $(function(){
       $('#c_Management').show();
       $('#c_Information').hide();
    });
-   $('#adminPlus').click(function(){
-      $(this).hide();
-      $('#adminCancle').show();
-      $('#iconAdd').prepend('<i class="fas fa-user-cog" id="icon_First" style="font-size: 20px;color:#195ac2;"></i>');
-   });
-   $('#adminCancle').click(function(){
-      $(this).hide();
-      $('#adminPlus').show();
-      $('#icon_First').remove();
-   });
-   
-   
+   for(let i=0;i<$('.admPlus').length;i++){
+	   $('#adminPlus'+i).click(function(){
+		   console.log("admplus 포문")
+	      $(this).hide();
+	      $('#adminCancle'+i).show();
+	      $('#iconAdd'+i).prepend('<i class="fas fa-user-cog" id="icon_First'+i+'" style="font-size: 20px;color:#195ac2;"></i>');
+	   });
+   }
+   for(let i=0;i<$('.admCancle').length;i++){
+	   $('#adminCancle'+i).click(function(){
+		      $(this).hide();
+		      $('#adminPlus'+i).show();
+		      $('#icon_First'+i).remove();
+		   });
+   }
 });
 
 /* 프로젝트 이름 검색 - 도연 */
@@ -185,14 +188,14 @@ function project_filter() {
                      <div class="search_NameEmail col-sm-6">
                         ${pm.pjuserrank}
                         <span class="nav-text finalsearch" id="member_Name${status.index}" style="color: #4d4d46;font-size: 13px;padding-bottom:5px;padding-top: 10px;"> &nbsp;${pm.name}</span>
-                        <span class="log-user" id="iconAdd" data-toggle="dropdown" style="float: right;top: 0px;padding-top: 10px;">
+                        <span class="log-user" id="iconAdd${status.index}" data-toggle="dropdown" style="float: right;top: 0px;padding-top: 10px;">
                            <i class="fas fa-cog" id="admin_EditIcon" style="cursor: pointer;font-size: 20px;color:black;"></i>
                         </span>
                         <div class="drop-down dropdown-language animated fadeIn  dropdown-menu"  >
                         <div class="dropdown-content-body">
                         <ul style="margin-bottom: 0px; padding-bottom: 0px;padding-top: 0px;">
-                           <li id="adminPlus">관리자로 설정</li>
-                           <li id="adminCancle" style="display: none;">관리자 권한 해제</li>
+                           <li id="adminPlus${status.index}" class="admPlus">관리자로 설정</li>
+                           <li id="adminCancle${status.index}" class="admCancle" style="display: none;">관리자 권한 해제</li>
                            <li>멤버 탈퇴</li>
                         </ul> 
                         </div>
