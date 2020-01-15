@@ -15,6 +15,7 @@
 
 <script language="javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 <script>
+$(document).ready(function(){
 	//회원정보 유효성검사
 	function pwdcheck() {
 		var getCheck = RegExp(/^[a-zA-Z0-9]{4,12}$/);
@@ -36,6 +37,19 @@
 
 		return true;
 	}
+
+	$('#Photo').change(function(){
+		var reader = new FileReader();
+		
+		reader.onload = function(e) {
+			
+			document.getElementById("profile").src = e.target.result;
+		};
+		
+		reader.readAsDataURL(this.files[0]);
+	});
+	
+	});
 </script>
 
 <style>
@@ -89,9 +103,19 @@
 		    </ul>
 		</div>
 		<hr style="margin-top: 0">
+	<form onsubmit="return pwdcheck()" action="editCheck.do" method="post" enctype="multipart/form-data">
 		<div class="row" style="margin-left: 4%; margin-right: 2%; margin-top: 1%">
 			<div class="media align-items-center mb-4">
-                                    <img class="mr-3" src="<c:url value="/resources/images/avatar/avatar.png" />" width="120" height="120" alt="">
+					<c:choose>
+						<c:when test="${member.profile == 'null'}">
+							<img id ="profile" class="mr-3 img-circle" src="<c:url value="/resources/images/avatar/avatar.png" />" width="120" height="120" alt="" name="profile">
+							<input type="file" name="profile" id="Photo" accept="image/*">
+						</c:when>
+						<c:otherwise>
+                             <img id ="profile" class="mr-3 img-circle" src="${member.profile}/>" width="120" height="120" alt="" name="profile">
+                             <input type="file" name="profile" id="Photo" accept="image/*">
+						</c:otherwise>
+					</c:choose>
                                     <div class="media-body">
                                         <h3 class="mb-0">${member.name}</h3>
                                         <p class="text-muted mb-0" style="margin-left: 2%; width: 300px;">${member.email}</p>
@@ -100,7 +124,6 @@
 		</div>
 		<div class="row" style="margin-left: 4%; margin-top: 2%">
 		<div class="form-group" style="width: 100%">
-			<form onsubmit="return pwdcheck()" action="editCheck.do" method="post">
     		<label for="email">이메일</label>
     		<input class="form-control myinfo" type="text" id="email" name="email" style="width: 60%" readonly="readonly" value="${member.email}">
     		<br>
@@ -132,13 +155,17 @@
     		<input class="form-control myinfo" type="text" id="address" name="address" style="width: 60%" value="${member.address}">
     		<br>
     		<input type="submit" class="btn" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;" value="수정완료">
+    		</div>
+    		</div>
     		</form>	
+    
     	</div>
+    	
     	</div>
             <!-- #/ container -->
             </div>
             </div>
-        </div>
+        
         <!--**********************************
             Content body end
         ***********************************-->
@@ -151,7 +178,6 @@
         <!--**********************************
             Footer end
         ***********************************-->
-    </div>
     <!--**********************************
         Main wrapper end
     ***********************************-->
