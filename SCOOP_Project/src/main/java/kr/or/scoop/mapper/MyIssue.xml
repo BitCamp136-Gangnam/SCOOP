@@ -10,4 +10,11 @@ insert into myissue (piseq,pfilename,pfilesize,pititle,picontent,pistart, piend,
 <select id="getMyissue" resultType="kr.or.scoop.dto.MyIssue">
 	SELECT pititle,picontent, pidate, ispibook FROM myissue WHERE email = #{email}
 </select>
+<select id="MyWriteIssueList" resultType="kr.or.scoop.dto.MyIssue">
+select piseq,pititle,pidate from myissue where email = #{email}
+</select>
+<select id="MyWriteTiisueList" resultType="kr.or.scoop.dto.MyIssue">
+select t.tseq,t.tititle,t.tidate,p.pname from tissue t join teampjt p on t.tseq = p.tseq where t.email = #{email}
+</select>
+
 </mapper>

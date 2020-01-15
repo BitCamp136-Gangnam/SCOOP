@@ -403,9 +403,8 @@ public class MemberController {
 		result = service.update(member);
 		if(result > 0) {
 			System.out.println("업데이트 성공");
-			viewpage = "user/userindex";
+			viewpage = "redirect:/memberEdit.do";
 		}else {
-			System.out.println("업데이트 성공");
 			viewpage = "user/app-profile";
 		}
 		

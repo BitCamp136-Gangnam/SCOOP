@@ -24,6 +24,7 @@ public class Tissue {
 	private String tgfilename;
 	private String tmention;
 	private String turl;
+	private String name;
 	
 	public String getTgfilename() {
 		return tgfilename;
@@ -122,14 +123,22 @@ public class Tissue {
 		this.tidate = tidate;
 	}
 	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	@Override
 	public String toString() {
 		return "Tissue [tiseq=" + tiseq + ", tseq=" + tseq + ", email=" + email + ", tititle=" + tititle
 				+ ", ticontent=" + ticontent + ", tistart=" + tistart + ", tiend=" + tiend + ", isprocess=" + isprocess
 				+ ", filename=" + filename + ", tfilesize=" + tfilesize + ", istbook=" + istbook + ", issee=" + issee
 				+ ", tidate=" + tidate + ", tgfilename=" + tgfilename + ", tmention=" + tmention + ", turl=" + turl
-				+ "]";
+				+ ", name=" + name + "]";
 	}
+	
 	
 	
 }

@@ -11,6 +11,6 @@ public class ChatController {
 		model.addAttribute("room", room);
 		System.out.println("오냐");
 		
-		return "chat/Chat";
+		return "chatting/Chat";
 	}
 }

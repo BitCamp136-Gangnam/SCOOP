@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,24 +47,32 @@
             <div class="container-fluid">
         <div class="card" style="min-height: 1080px">
 		<div class="row" style="margin: 2%">
-				<h3>³»°¡ ÀÛ¼ºÇÑ ÀÌ½´</h3>
+				<h3>ë‚´ê°€ ìž‘ì„±í•œ ì´ìŠˆ</h3>
 		</div>
 		<div class="row" style="margin-left: 2%;">
 			<ul class="nav nav-pills">
 			    <li class="nav-item">
-			      <a class="nav-link" href="#">³»°¡ ÀÛ¼ºÇÑ ÀÌ½´</a>
+			      <a class="nav-link" href="myissue.do">ë‚´ê°€ ìž‘ì„±í•œ ì´ìŠˆ</a>
 			    </li>
 			    <li class="nav-item">
-			      <a class="nav-link" href="#">³»°¡ ÀÛ¼ºÇÑ ´ñ±Û</a>
+			      <a class="nav-link" href="#">ë‚´ê°€ ìž‘ì„±í•œ ëŒ“ê¸€</a>
 			    </li>
 		    </ul>
 		</div>
 		<hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
 		<div class="row" style="margin-left: 2%; margin-right: 2%">
+			<c:forEach items="${ti}" var="ti">
 			<div class="col-sm-12 newissue" >
-			¾ÆÀÌÄÜ + ÀÌ½´ Á¦¸ñ µé¾î°¥°÷<br>
-			¿©±â¿¡ ÇÁ·ÎÁ§Æ®¸í ±×¸®°í ÀÛ¼º½Ã°£
+			<a href="#">${ti.tititle}</a><br>
+			${ti.pname} / ${ti.tidate}<br>
 			</div>
+			</c:forEach>
+			<c:forEach items="${pi}" var="pi">
+			<div class="col-sm-12 newissue" >
+			ì•„ì´ì½˜ + <a href="#">${pi.pititle}</a><br>
+			í”„ë¼ì´ë¹— ê³µê°„ / ${pi.pidate} 
+			</div>
+			</c:forEach>
 		</div>
             <!-- #/ container -->
             </div>

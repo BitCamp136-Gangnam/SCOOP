@@ -54,18 +54,21 @@ $(function(){
       $('#c_Management').show();
       $('#c_Information').hide();
    });
-   $('#adminPlus').click(function(){
-      $(this).hide();
-      $('#adminCancle').show();
-      $('#iconAdd').prepend('<i class="fas fa-user-cog" id="icon_First" style="font-size: 20px;color:#195ac2;"></i>');
-   });
-   $('#adminCancle').click(function(){
-      $(this).hide();
-      $('#adminPlus').show();
-      $('#icon_First').remove();
-   });
-   
-   
+   for(let i=0;i<$('.admin_EditIcon').length;i++){
+	   $('#adminPlus'+i).click(function(){
+		   console.log("admplus 포문")
+	      $(this).hide();
+	      $('#adminCancle'+i).show();
+	      $('#iconAdd'+i).prepend('<i class="fas fa-user-cog" id="icon_First'+i+'" style="font-size: 20px;color:#195ac2;"></i>');
+	   });
+   }
+   for(let i=0;i<$('.admCancle').length;i++){
+	   $('#adminCancle'+i).click(function(){
+		      $(this).hide();
+		      $('#adminPlus'+i).show();
+		      $('#icon_First'+i).remove();
+		   });
+   }
 });
 
 /* 프로젝트 이름 검색 - 도연 */
@@ -131,10 +134,10 @@ function project_filter() {
          작성시간 
          </div>
       </div>
-      <c:forEach items="${tp  }" var="ti">
+      <c:forEach items="${tp}" var="ti">
          <div class="row" style="margin-left: 2%; margin-right: 2%">
          <div class="col-sm-2 newissue" >
-         ${ti.email }
+         ${ti.name }
          </div>
          <div class="col-sm-8 newissue">
          ${ti.tititle} 
@@ -183,16 +186,19 @@ function project_filter() {
                   <div class="row">
                   <c:forEach items="${projectmember}" var="pm" varStatus="status">
                      <div class="search_NameEmail col-sm-6">
-                        ${pm.pjuserrank}
                         <span class="nav-text finalsearch" id="member_Name${status.index}" style="color: #4d4d46;font-size: 13px;padding-bottom:5px;padding-top: 10px;"> &nbsp;${pm.name}</span>
-                        <span class="log-user" id="iconAdd" data-toggle="dropdown" style="float: right;top: 0px;padding-top: 10px;">
-                           <i class="fas fa-cog" id="admin_EditIcon" style="cursor: pointer;font-size: 20px;color:black;"></i>
+                        <span class="log-user" id="iconAdd${status.index}" data-toggle="dropdown" style="float: right;top: 0px;padding-top: 10px;">
+                        <c:choose>
+                        	<c:when test="${pm.pjuserrank==100}"><i class="fas fa-user-cog" id="icon_First${status.index}" style="font-size: 20px;color:#195ac2;"></i></c:when>
+                        	<c:when test="${pm.pjuserrank==200}">매니저</c:when>
+                        </c:choose>
+                           <i class="fas fa-cog admin_EditIcon" id="admin_EditIcon${status.index}" style="cursor: pointer;font-size: 20px;color:black;"></i>
                         </span>
                         <div class="drop-down dropdown-language animated fadeIn  dropdown-menu"  >
                         <div class="dropdown-content-body">
                         <ul style="margin-bottom: 0px; padding-bottom: 0px;padding-top: 0px;">
-                           <li id="adminPlus">관리자로 설정</li>
-                           <li id="adminCancle" style="display: none;">관리자 권한 해제</li>
+                           <li id="adminPlus${status.index}" class="admPlus">관리자로 설정</li>
+                           <li id="adminCancle${status.index}" class="admCancle" style="display: none;">관리자 권한 해제</li>
                            <li>멤버 탈퇴</li>
                         </ul> 
                         </div>
