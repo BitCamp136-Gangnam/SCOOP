@@ -143,7 +143,7 @@
       <!-- DIRECT CHAT PRIMARY -->
       <div class="box box-primary direct-chat direct-chat-primary">
         <div class="box-header with-border">
-          <h3 class="box-title"> <%=request.getParameter("room") %></h3>
+          <h3 class="box-title"> <%=request.getParameter("room").split("/")[0] %></h3>
 <!--           <div class="box-tools pull-right">
 
              <div class="btn-group gurdeepoushan">
