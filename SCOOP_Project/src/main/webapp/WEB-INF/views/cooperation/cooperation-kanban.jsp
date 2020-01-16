@@ -225,16 +225,6 @@ function drop(ev) {
 			      </div>
 			  	  </c:if>
 			  </c:forEach>
-			  <div draggable="true" ondragstart="drag(event)" id="drag1" class="drags">발의안건 1</div>
-			  <div draggable="true" ondragstart="drag(event)" id="drag2" class="drags">발의안건 2</div>
-			  <div draggable="true" ondragstart="drag(event)" id="drag3" class="drags">발의안건 3</div>
-			  <div draggable="true" ondragstart="drag(event)" id="drag4" class="drags">발의안건 4</div>
-			  <div draggable="true" ondragstart="drag(event)" id="drag5" class="drags">발의안건 5</div>
-			  <div draggable="true" ondragstart="drag(event)" id="drag6" class="drags">발의안건 6</div>
-			  <div draggable="true" ondragstart="drag(event)" id="drag7" class="drags">발의안건 7</div>
-			  <div draggable="true" ondragstart="drag(event)" id="drag8" class="drags">발의안건 8</div>
-			  <div draggable="true" ondragstart="drag(event)" id="drag9" class="drags">발의안건 9</div>
-			  <div draggable="true" ondragstart="drag(event)" id="drag10" class="drags">발의안건 10</div>
 			</div>
 			</div>
 			<div id="doing" class="col-sm-3 kanban">
