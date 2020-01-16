@@ -28,4 +28,13 @@ public class TeamService {
 		List<Tissue> tissuelist = dao.loadKanban(tseq);
 		return tissuelist;
 	}
+	
+	public int EditKanban(int tseq, int tiseq, int isprocess) {
+		int result = 0;
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		result = dao.kanbanEdit(tseq, tiseq, isprocess);
+		return result;
+	}
+	
+	
 }

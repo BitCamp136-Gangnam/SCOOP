@@ -11,4 +11,7 @@ public interface TissueDao {
 	//칸반 불러오기
 	public List<Tissue> loadKanban(int tseq);
 	
+	//칸반 수정
+	public int kanbanEdit(int tseq, int tiseq, int isprocess);
+	
 }

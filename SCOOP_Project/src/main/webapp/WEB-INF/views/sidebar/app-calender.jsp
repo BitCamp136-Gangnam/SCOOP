@@ -18,8 +18,28 @@
 </head>
 <script>
 $(function(){
+		//var dateArray=document.querySelectorAll('.fc-day.fc-widget-content');
+		var dateArray=document.querySelectorAll('.fc-content-skeleton thead td');
+		var eventArray=document.querySelectorAll('.fc-content-skeleton tbody td');
+ 		for(var i=0;i<dateArray.length;i++){
+			console.log($(dateArray[i]).attr('data-date'));
+			$(eventArray[i]).attr('id',$(dateArray[i]).attr('data-date'));
+		}
+	$('.fc-content-skeleton tbody td').change(function(){
+		console.log("변햇다");
+		for(var i=0;i<dateArray.length;i++){
+			console.log($(dateArray[i]).attr('data-date'));
+			$(eventArray[i]).attr('id',$(dateArray[i]).attr('data-date'));
+		}
+	})
+	$('#modalSave').click(function(){
+		console.log($('#category-name').val());
+		console.log($('#calTeam').val());
+	})
 	$('#calSave').click(function(){
 		console.log("클릭클릭");
+		$('.fc-day').attr('style','overflow:auto;');
+		$('.fc-day').append('<br><button>눌러눌러</button><button>눌러눌러</button><button>눌러눌러</button>')
 	})
 })
 </script>
@@ -88,7 +108,7 @@ $(function(){
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <label class="control-label">Category Name</label>
-                                                                <input class="form-control form-white" placeholder="Enter name" type="text" name="category-name">
+                                                                <input class="form-control form-white" placeholder="Enter name" type="text" id="category-name" name="category-name">
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <label class="control-label">Choose Category Color</label>
@@ -115,7 +135,7 @@ $(function(){
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal">Save</button>
+                                                    <button type="button" id="modalSave" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal">Save</button>
                                                 </div>
                                             </div>
                                         </div>

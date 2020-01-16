@@ -53,19 +53,125 @@ function allowDrop(ev) {
 function drag(ev) {
   ev.dataTransfer.setData("text", ev.target.id);
 }
-
+var tseq = document.location.href.split("tseq=")[1]; 
 function drop(ev) {
   ev.preventDefault();
   var data = ev.dataTransfer.getData("text");
+ 
+
+  console.log(document.getElementById(data).getAttribute("name"));
   if(ev.target.parentElement.getAttribute("id")=="todolist"){
+	  if(document.getElementById(data).getAttribute("name")!=0){
 	    ev.target.appendChild(document.getElementById(data));
+	    $.ajax({
+		    url:'kanbanEdit.do', //request 보낼 서버의 경로
+		    type:'post', // 메소드(get, post, put 등)
+		    data:{'tiseq':document.getElementById(data).getAttribute("id"),
+		    	'isprocess':0,
+		    	'tseq':tseq
+		    	}, //보낼 데이터
+		    success: function(data) {
+		    	Swal.fire({
+		    		  title: "변경 성공",
+		    		  text: "변경 성공",
+		    		  icon: "success",
+		    		  button: "확인"
+		    		})
+		    },
+		    error: function(err) {
+		    	Swal.fire({
+		    		  title: "변경 실패",
+		    		  text: "변경 실패",
+		    		  icon: "error",
+		    		  button: "확인"
+		    		})
+		    }
+		});
+	  }
 	} else if(ev.target.parentElement.getAttribute("id")=="doing"){
-		ev.target.appendChild(document.getElementById(data));
+		if(document.getElementById(data).getAttribute("name")!=1){
+		    ev.target.appendChild(document.getElementById(data));
+		    $.ajax({
+			    url:'kanbanEdit.do', //request 보낼 서버의 경로
+			    type:'post', // 메소드(get, post, put 등)
+			    data:{'tiseq':document.getElementById(data).getAttribute("id"),
+			    	'isprocess':1,
+			    	'tseq':tseq
+			    	}, //보낼 데이터
+			    success: function(data) {
+			    	Swal.fire({
+			    		  title: "변경 성공",
+			    		  text: "변경 성공",
+			    		  icon: "success",
+			    		  button: "확인"
+			    		})
+			    },
+			    error: function(err) {
+			    	Swal.fire({
+			    		  title: "변경 실패",
+			    		  text: "변경 실패",
+			    		  icon: "error",
+			    		  button: "확인"
+			    		})
+			    }
+			});
+		  }
 	} else if(ev.target.parentElement.getAttribute("id")=="validate"){
-		ev.target.appendChild(document.getElementById(data));
+		if(document.getElementById(data).getAttribute("name")!=2){
+		    ev.target.appendChild(document.getElementById(data));
+		    $.ajax({
+			    url:'kanbanEdit.do', //request 보낼 서버의 경로
+			    type:'post', // 메소드(get, post, put 등)
+			    data:{'tiseq':document.getElementById(data).getAttribute("id"),
+			    	'isprocess':2,
+			    	'tseq':tseq
+			    	}, //보낼 데이터
+			    success: function(data) {
+			    	Swal.fire({
+			    		  title: "변경 성공",
+			    		  text: "변경 성공",
+			    		  icon: "success",
+			    		  button: "확인"
+			    		})
+			    },
+			    error: function(err) {
+			    	Swal.fire({
+			    		  title: "변경 실패",
+			    		  text: "변경 실패",
+			    		  icon: "error",
+			    		  button: "확인"
+			    		})
+			    }
+			});
+		  }
 	} else if(ev.target.parentElement.getAttribute("id")=="complete"){
-		ev.target.appendChild(document.getElementById(data));
-		
+		if(document.getElementById(data).getAttribute("name")!=3){
+		    ev.target.appendChild(document.getElementById(data));
+		    $.ajax({
+			    url:'kanbanEdit.do', //request 보낼 서버의 경로
+			    type:'post', // 메소드(get, post, put 등)
+			    data:{'tiseq':document.getElementById(data).getAttribute("id"),
+			    	'isprocess':3,
+			    	'tseq':tseq
+			    	}, //보낼 데이터
+			    success: function(data) {
+			    	Swal.fire({
+			    		  title: "변경 성공",
+			    		  text: "변경 성공",
+			    		  icon: "success",
+			    		  button: "확인"
+			    		})
+			    },
+			    error: function(err) {
+			    	Swal.fire({
+			    		  title: "변경 실패",
+			    		  text: "변경 실패",
+			    		  icon: "error",
+			    		  button: "확인"
+			    		})
+			    }
+			});
+		  }
 	}
  
 }
@@ -113,39 +219,45 @@ function drop(ev) {
 			<div class="realkan" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #888">
 			<h5>발의됨</h5>
 			  <c:forEach items="${tissuelist}" var="tl">
-			  
-			  	  <div draggable="true" ondragstart="drag(event)" id="${tl.tiseq }" class="drags">${tl.tititle}
+			  	  <c:set value="${tl.tseq}" var="tseq"></c:set>
+			  	  <c:if test="${tl.isprocess==0 }">
+			  	  <div draggable="true" ondragstart="drag(event)" id="${tl.tiseq }" name="${tl.isprocess }" class="drags">${tl.tititle}
 			      </div>
-			  
+			  	  </c:if>
 			  </c:forEach>
-			  <div draggable="true" ondragstart="drag(event)" id="drag1" class="drags">발의안건 1</div>
-			  <div draggable="true" ondragstart="drag(event)" id="drag2" class="drags">발의안건 2</div>
-			  <div draggable="true" ondragstart="drag(event)" id="drag3" class="drags">발의안건 3</div>
-			  <div draggable="true" ondragstart="drag(event)" id="drag4" class="drags">발의안건 4</div>
-			  <div draggable="true" ondragstart="drag(event)" id="drag5" class="drags">발의안건 5</div>
-			  <div draggable="true" ondragstart="drag(event)" id="drag6" class="drags">발의안건 6</div>
-			  <div draggable="true" ondragstart="drag(event)" id="drag7" class="drags">발의안건 7</div>
-			  <div draggable="true" ondragstart="drag(event)" id="drag8" class="drags">발의안건 8</div>
-			  <div draggable="true" ondragstart="drag(event)" id="drag9" class="drags">발의안건 9</div>
-			  <div draggable="true" ondragstart="drag(event)" id="drag10" class="drags">발의안건 10</div>
 			</div>
 			</div>
 			<div id="doing" class="col-sm-3 kanban">
 				<div class="realkan" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #2671bd">
 				<h5>진행중</h5>
-
+				<c:forEach items="${tissuelist}" var="tl">
+			  	  <c:if test="${tl.isprocess==1 }">
+			  	  <div draggable="true" ondragstart="drag(event)" id="${tl.tiseq }" name="${tl.isprocess }" class="drags">${tl.tititle}
+			      </div>
+			  	  </c:if>
+				  </c:forEach>
 				</div>
 			</div>
 			<div id="validate" class="col-sm-3 kanban" ondrop="drop(event)">
 				<div class="realkan" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #cca352">
 				<h5>일시중지</h5>
-				
+				<c:forEach items="${tissuelist}" var="tl">
+			  	  <c:if test="${tl.isprocess==2 }">
+			  	  <div draggable="true" ondragstart="drag(event)" id="${tl.tiseq }" name="${tl.isprocess }" class="drags">${tl.tititle}
+			      </div>
+			  	  </c:if>
+			  </c:forEach>
 				</div>
 			</div>
 			<div id="complete" class="col-sm-3 kanban" ondrop="drop(event)">
 				<div class="realkan" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #26805c">
 				<h5>완료</h5>
-				
+				<c:forEach items="${tissuelist}" var="tl">
+			  	  <c:if test="${tl.isprocess==3 }">
+			  	  <div draggable="true" ondragstart="drag(event)" id="${tl.tiseq }" name="${tl.isprocess }" class="drags">${tl.tititle}
+			      </div>
+			  	  </c:if>
+			  </c:forEach>
 				</div>
 			</div>
 		</div>
