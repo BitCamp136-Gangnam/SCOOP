@@ -210,12 +210,12 @@ function project_filter() {
                         <c:choose>
                         	<c:when test="${pm.pjuserrank==100}">
 	                           <li id="adminCancle${status.index}" value="off" class="adm">관리자 권한 해제</li>
-	                           <li>멤버 탈퇴</li>
+	                           <li id="banMember${status.index}">멤버 탈퇴</li>
                         	</c:when>
                         	<%-- <c:when test="${pm.pjuserrank==200}">매니저</c:when> --%>
                         	<c:when test="${pm.pjuserrank==300}">
 	                           <li id="adminPlus${status.index}" value="on" class="adm">관리자로 설정</li>
-                        	   <li>멤버 탈퇴</li>
+                        	   <li id="banMember${status.index}">멤버 탈퇴</li>
                         	</c:when>
                         </c:choose>
                         </ul> 
