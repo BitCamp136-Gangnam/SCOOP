@@ -45,21 +45,28 @@
         <div class="container-fluid row" style="padding-right: 0px; margin-right: 0px;margin-left: 0px; padding-left: 15px;">
         <div class="card" style="padding-left: 2%;padding-right: 0px; padding-top:1%;min-width:900px;height: auto;">
 		<div class="row"style="margin:2% 2% 0 2%" >
-				<h3 style="padding-top: 2%;padding-left: 1%;">여기에 제목 출력</h3>
+				<h3 id="myissueSubject" style="padding-top: 2%;padding-left: 1%;">여기에 제목 출력</h3>
 		</div>
-		<div style="font-size: 17px;margin-left: 3%;"><i class="far fa-calendar-check"style="margin-right:1%;"></i>2019.08.07 ~ 2020.2.12</div>
-		
+		<div id="myissueDate" style="font-size: 17px;margin-left: 3%;margin-bottom:2%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#026ef5;"></i>2019.08.07 ~ 2020.2.12(캘린더 설정 날짜 넣으면 됨)</div>
+		<div id="myissueMention" style="font-size: 17px;margin-left: 3%;margin-bottom:2%;"><i class="fas fa-quote-left" style="padding-right:1%;color:#ca0000;"></i> 멘션 멤버 이름 넣는 곳 <i class="fas fa-quote-right"style="padding-left:1%;color:#ca0000;"></i></div>
+		<div></div>
             <!-- #/ container -->
             </div> 
-            <div class="card" style="float:right;background-color: #fff;margin-left:10px;padding-left: 0px;padding-right: 0px;width:400px; ">
+            <div class="card" style="float:right;background-color: #fff;margin-left:10px;padding-left: 0px;padding-right: 0px;width:400px;">
             <div style="min-height:450px;padding-left: 3%;padding-top: 5%;border-right-width: 3%;padding-right: 3%;padding-bottom: 5%;">
+            <div class="row">
+            <div class="col-sm-1" style="margin-top: 10px;">
+            <img id="memberImage" class="img-circle" alt="멤버 프로필 사진" src="resources/images/avatar/avatar.png" style="width:35px;height: auto;padding-top: 1%;margin-left: 10px;margin-right: 10px;">
+            </div>
+            <div class="col-sm-11">
             <div id="commentMain" style="margin: 3% 5% 3% 5%;" >
             <div style="margin-bottom: 1%;">
             <span>도연(이름)</span><span style="padding-left:3%"><i class="far fa-clock" style="color:#E71D36 "></i>오후 16:03(시간)</span>
             <br>
             <div>보쌈 먹고 시퍼요(댓글 내용)</div>
             </div>
-            
+            </div>
+            </div>
             
             
             
