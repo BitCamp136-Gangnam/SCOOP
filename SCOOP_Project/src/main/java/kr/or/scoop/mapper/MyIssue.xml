@@ -17,4 +17,10 @@ select piseq,pititle,pidate from myissue where email = #{email}
 select t.tseq,t.tititle,t.tidate,p.pname from tissue t join teampjt p on t.tseq = p.tseq where t.email = #{email}
 </select>
 
+<!-- 북마크 -->
+<update id="bookMark">
+	update myissue
+	set ispibook = #{bookMark}
+	where piseq = #{piseq}
+</update>
 </mapper>
