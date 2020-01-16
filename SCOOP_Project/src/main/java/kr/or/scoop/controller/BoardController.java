@@ -10,17 +10,14 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import kr.or.scoop.dao.BoardDao;
 import kr.or.scoop.dao.MyIssueDao;
 import kr.or.scoop.dao.NoticeDao;
 import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.dto.Notice;
 import kr.or.scoop.service.BoardService;
-import sun.print.resources.serviceui;
 
 @Controller
 public class BoardController {
@@ -87,13 +84,16 @@ public class BoardController {
 	
 	
 	@RequestMapping("/bookmark.do")
-	public String bookmark(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+	public String bookMark(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		String status = request.getParameter("status");
 		String email = (String)session.getAttribute("email");
-		BoardDao dao = sqlSession.getMapper(BoardDao.class);
+		String piseq = request.getParameter("piseq");
+		
+		MyIssueDao dao = sqlSession.getMapper(MyIssueDao.class);
 		
 		System.out.println("status : " + status);
 		System.out.println("email : " + email);
+		System.out.println("piseq : " + piseq);
 		
 		return status;
 	}
