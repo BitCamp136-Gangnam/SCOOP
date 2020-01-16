@@ -13,9 +13,36 @@
     <!-- Custom Stylesheet -->
     <link href="<c:url value="/resources/plugins/fullcalendar/css/fullcalendar.min.css" />" rel="stylesheet">
     <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 </head>
-
+<script>
+$(function(){
+		//var dateArray=document.querySelectorAll('.fc-day.fc-widget-content');
+		var dateArray=document.querySelectorAll('.fc-content-skeleton thead td');
+		var eventArray=document.querySelectorAll('.fc-content-skeleton tbody td');
+ 		for(var i=0;i<dateArray.length;i++){
+			console.log($(dateArray[i]).attr('data-date'));
+			$(eventArray[i]).attr('id',$(dateArray[i]).attr('data-date'));
+		}
+	$('.fc-content-skeleton tbody td').change(function(){
+		console.log("변햇다");
+		for(var i=0;i<dateArray.length;i++){
+			console.log($(dateArray[i]).attr('data-date'));
+			$(eventArray[i]).attr('id',$(dateArray[i]).attr('data-date'));
+		}
+	})
+	$('#modalSave').click(function(){
+		console.log($('#category-name').val());
+		console.log($('#calTeam').val());
+	})
+	$('#calSave').click(function(){
+		console.log("클릭클릭");
+		$('.fc-day').attr('style','overflow:auto;');
+		$('.fc-day').append('<br><button>눌러눌러</button><button>눌러눌러</button><button>눌러눌러</button>')
+	})
+})
+</script>
 <body>
 
     <jsp:include page="/WEB-INF/views/commons/preloader.jsp"></jsp:include>
@@ -31,7 +58,6 @@
             Content body start
         ***********************************-->
         <div class="content-body">
-        <br>
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
@@ -42,6 +68,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-2 mt-5">
+                                    <button type="button" id="calSave" class="btn btn-primary btn-block">저장</button>
                                         <a href="#" data-toggle="modal" data-target="#add-category" class="btn btn-primary btn-block"><i class="ti-plus f-s-12 m-r-5"></i> 일정추가</a>
                                         <div id="external-events" class="m-t-20">
                                         </div>
@@ -81,7 +108,7 @@
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <label class="control-label">Category Name</label>
-                                                                <input class="form-control form-white" placeholder="Enter name" type="text" name="category-name">
+                                                                <input class="form-control form-white" placeholder="Enter name" type="text" id="category-name" name="category-name">
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <label class="control-label">Choose Category Color</label>
@@ -94,12 +121,21 @@
                                                                     <option value="warning">Warning</option>
                                                                 </select>
                                                             </div>
+                                                            <br>
+                                                            <div class="col-md-12">
+                                                            	<label class="control-label">Select Team</label>
+                                                            	<select id="calTeam" name="calTeam" class="form-control">
+																	<c:forEach items="${pjtlist}" var="p">
+																				<option value="${p.tseq}">${p.pname}</option>
+																	</c:forEach>
+																</select>
+                                                            </div>
                                                         </div>
                                                     </form>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal">Save</button>
+                                                    <button type="button" id="modalSave" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal">Save</button>
                                                 </div>
                                             </div>
                                         </div>
