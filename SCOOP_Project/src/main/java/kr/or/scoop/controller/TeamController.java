@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.or.scoop.dao.MemberDao;
 import kr.or.scoop.dao.ProjectDao;
+import kr.or.scoop.dao.TissueDao;
 import kr.or.scoop.dto.Member;
 import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.dto.ProjectMemberlist;
@@ -153,7 +154,7 @@ public class TeamController {
 	}
 	
 	
-	// 칸반
+	// 칸반 받기
 	@RequestMapping(value = "cooperation-kanban.do", method = RequestMethod.GET)
 	public String kanbanView(int tseq, Model model) {
 		String path = "";
@@ -187,4 +188,21 @@ public class TeamController {
 		return viewpage;
 		
 	}
+	// 칸반 수정
+	@RequestMapping(value = "kanbanEdit.do", method = RequestMethod.POST)
+	public String kanbanEdit(int tseq, int tiseq, int isprocess, Model model) {
+		String path = "";
+		int result = 0;
+		System.out.println("result kanban edit 전");
+		result = teamservice.EditKanban(tseq, tiseq, isprocess);
+		if(result>0) {
+			path = "redirect:/cooperation-kanban.do?tseq="+tseq;
+			System.out.println("result kanban edit 성공");
+		} else {
+			path = "redirect:/cooperation-kanban.do?tseq="+tseq;
+			System.out.println("result kanban edit 실패");
+		}
+		return path;
+	}
+
 }

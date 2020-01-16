@@ -12,4 +12,7 @@ public interface TissueDao {
 	public List<Tissue> loadKanban(int tseq);
 	
 	public int teamSetting(int pjuserrank, int tseq, String email);
+	//칸반 수정
+	public int kanbanEdit(int tseq, int tiseq, int isprocess);
+	
 }
