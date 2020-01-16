@@ -39,4 +39,9 @@ insert into tissue (tiseq,tseq,email,tititle,ticontent,isprocess, istbook, issee
 	from tissue
 	where tseq = #{tseq}
 </select>
+<update id="kanbanEdit">
+	UPDATE tissue 
+	SET isprocess=#{param3}
+	WHERE tiseq = #{param2} and tseq = #{param1}
+</update>
 </mapper>
