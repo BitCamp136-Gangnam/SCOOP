@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <head>
     <meta charset="utf-8">
@@ -10,54 +10,15 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <jsp:include page="/WEB-INF/views/commons/title.jsp"></jsp:include>
     <!-- Pignose Calender -->
-    <link href="<c:url value="/resources/plugins/pg-calendar/css/pignose.calendar.min.css" />" rel="stylesheet">
+   <link href="<c:url value="/resources/plugins/pg-calendar/css/pignose.calendar.min.css" />" rel="stylesheet">
     <!-- Chartist -->
-    <link rel="stylesheet" href="<c:url value="/resources/plugins/chartist/css/chartist.min.css" />">
+     <link rel="stylesheet" href="<c:url value="/resources/plugins/chartist/css/chartist.min.css" />">
     <link rel="stylesheet" href="<c:url value="/resources/plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css" />">
     <!-- Custom Stylesheet -->
-    <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
-    
+     <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
+
 </head>
-
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script type="text/javascript">
-	$(function(){
-		
-		$('.bookmark').click(function(){
-			let icon = $(this).attr('class').split(' ');
-			let status = $(this).attr('name');
-			let piseq = $('input[name=piseq]').val();
-
-			console.log('before : ' + status);
-			console.log('class : ' + icon[0] +" "+ icon[1]+" "+icon[2]);
-			console.log('piseq : ' + piseq);
-
-			let bookMark = {piseq : piseq , status : status};
-			console.log(bookMark);
-
-			$.ajax({
-				url : "bookmark.do",
-				type : "POST",
-				data : "status=" + status,
-				success : function(data){
-					console.log('success data : ' + data);
-					if(data == "bookoff"){
-						$(this).removeAttr("name").attr("name", "bookon");
-						$(this).removeClass(icon[1]+" "+icon[2]).addClass("fas fa-bookmark");
-					}else if(data == "bookon"){
-						$(this).removeAttr("name").attr("name", "bookoff");
-						$(this).removeClass(icon[1]+" "+icon[2]).addClass("far fa-bookmark");
-					}
-				},
-				error : function(status, err){
-					console.log('error' + err + " / " + status);
-				}
-			});
-			console.log('after : ' + $(this).attr('name'));
-			console.log('ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ');
-		});
-	});
-</script>
 <style>
 .newissue{
 	border-bottom: 1px solid #c8c8c8;
@@ -65,6 +26,9 @@
 	padding-bottom: 0.7%;
 }
 </style>
+<script type="text/javascript">
+$('')
+</script>
 <body>
 
     <jsp:include page="/WEB-INF/views/commons/preloader.jsp"></jsp:include>
@@ -81,53 +45,43 @@
             Content body start
         ***********************************-->
         <div class="content-body">
-        <br>
-            <div class="container-fluid">
-        <div class="card" style="min-height: 1080px">
-		<div class="row" style="margin: 2%">
-			<div class="col-sm-12" style="padding-left: 0">
-				<h3>프라이빗 공간</h3>
-				나만을 위한 공간에서 아이디어를 마음껏 펼쳐 보세요. 특정 파트너에게 나의 이슈를 공유할 수도 있습니다.
-			</div>
+        <div class="container-fluid row" style="padding-right: 0px; margin-right: 0px;margin-left: 0px; padding-left: 15px;">
+        <div class="card" style="padding-left: 0px;padding-right: 0px;min-width:900px;height: auto;">
+		<div class="row"style="margin: 2%" >
+				<h3 style="padding-top: 2%;padding-left: 1%;">여기에 제목 출력</h3>
 		</div>
 		<div class="row" style="margin-left: 2%;">
 			<ul class="nav nav-pills">
 			    <li class="nav-item">
-			      <a class="nav-link" href="private.do">프라이빗 이슈</a>
+			      <a class="nav-link" href="myissue.do">내가 작성한 이슈</a>
 			    </li>
 			    <li class="nav-item">
-			      <a class="nav-link" href="calendar.do">캘린더</a>
+			      <a class="nav-link" href="#">내가 작성한 댓글</a>
 			    </li>
 		    </ul>
 		</div>
 		<hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
-		<c:forEach items="${myissuelist}" var="m">
 		<div class="row" style="margin-left: 2%; margin-right: 2%">
-			<input type="hidden" name="piseq" value="${m.piseq}">
-			<div class="col-sm-2 newissue" >
-				${m.pititle}
+			<c:forEach items="${ti}" var="ti">
+			<div class="col-sm-12 newissue" >
+			<a href="#">${ti.tititle}</a><br>
+			${ti.pname} / ${ti.tidate}<br>
 			</div>
-			<div class="col-sm-7 newissue">
-				${m.picontent}
+			</c:forEach>
+			<c:forEach items="${pi}" var="pi">
+			<div class="col-sm-12 newissue" >
+			아이콘 + <a href="#">${pi.pititle}</a><br>
+			프라이빗 공간 / ${pi.pidate} 
 			</div>
-			<div class="col-sm-2 newissue">
-				${m.pidate}
-			</div>
-			<c:choose>
-				<c:when test="${m.ispibook==0}">
-					<div class="col-sm-1 newissue">
-						<i class="bookmark far fa-bookmark" id="bookmark" name="bookoff"></i>
-					</div>
-				</c:when>
-				<c:otherwise>
-					<div class="col-sm-1 newissue">
-						<i class="bookmark fas fa-bookmark" id="bookmark" name="bookon"></i>
-					</div>
-				</c:otherwise>
-			</c:choose>
+			</c:forEach>
 		</div>
-		</c:forEach>
             <!-- #/ container -->
+            </div> 
+            <div class="card" style="float:right;background-color: #fff;margin-left:10px;padding-left: 0px;padding-right: 0px;width:400px; ">
+            <div style="min-height:450px;">
+            <img src="resources/images/logo/ScoopTitle.png" style="width:150px;height: auto;opacity:0.6;position:absolute;top:25%;left: 32%;">
+            </div>
+            <textarea id="enter" rows="5" placeholder="말하지 않아도 아는것은 초코파이뿐입니다                        댓글 입력 후 Enter해주세요" style="resize: none;height:180px;width:auto;border: 1px solid #c8c8c8;border-radius: 0.5rem;margin-left: 15px;margin-bottom: 2%;margin-right: 15px;overflow:auto;padding: 4%"></textarea>
             </div>
             </div>
         </div>
@@ -156,20 +110,22 @@
     <!-- Circle progress -->
     <script src="<c:url value="/resources/plugins/circle-progress/circle-progress.min.js" />"></script>
     <!-- Datamap -->
-    <script src="<c:url value="/resources/plugins/d3v3/index.js"/>"></script>
+  <script src="<c:url value="/resources/plugins/d3v3/index.js"/>"></script>
     <script src="<c:url value="/resources/plugins/topojson/topojson.min.js"/>"></script>
     <script src="<c:url value="/resources/plugins/datamaps/datamaps.world.min.js"/>"></script>
     <!-- Morrisjs -->
     <script src="<c:url value="/resources/plugins/raphael/raphael.min.js"/>"></script>
     <script src="<c:url value="/resources/plugins/morris/morris.min.js"/>"></script>
     <!-- Pignose Calender -->
-    <script src="<c:url value="/resources/plugins/moment/moment.min.js"/>"></script>
+     <script src="<c:url value="/resources/plugins/moment/moment.min.js"/>"></script>
     <script src="<c:url value="/resources/plugins/pg-calendar/js/pignose.calendar.min.js"/>"></script>
     <!-- ChartistJS -->
-    <script src="<c:url value="/resources/plugins/chartist/js/chartist.min.js"/>"></script>
+   <script src="<c:url value="/resources/plugins/chartist/js/chartist.min.js"/>"></script>
     <script src="<c:url value="/resources/plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"/>"></script>
 
-    <script src="<c:url value="/resources/js/dashboard/dashboard-1.js"/>"></script>
+
+
+     <script src="<c:url value="/resources/js/dashboard/dashboard-1.js"/>"></script>
 
 </body>
 </html>

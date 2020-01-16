@@ -151,4 +151,21 @@ public class TeamController {
 		return path;
 
 	}
+	
+	
+	// 칸반
+	@RequestMapping(value = "cooperation-kanban.do", method = RequestMethod.GET)
+	public String kanbanView(int tseq, Model model) {
+		String path = "";
+		List<Tissue> tissuelist = teamservice.loadKanban(tseq);
+		if(tissuelist.isEmpty()) {
+			path = "cooperation/cooperation-kanban";
+		} else {
+			path = "cooperation/cooperation-kanban";
+			model.addAttribute("tissuelist", tissuelist);
+			System.out.println();
+		}
+		return path;
+
+	}
 }
