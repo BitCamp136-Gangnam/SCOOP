@@ -39,7 +39,7 @@ public class PrivateController {
 	}
 	
 	//북마크 공간 이동
-		@RequestMapping(value = "/bookmark.do",method = RequestMethod.GET)
+		@RequestMapping(value = "/privatebookmark.do",method = RequestMethod.GET)
 		public String bookmark() {
 			return "private/private-bookmark";
 		}

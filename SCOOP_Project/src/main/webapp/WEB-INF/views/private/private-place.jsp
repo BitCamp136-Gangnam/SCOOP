@@ -26,9 +26,14 @@
 		$('.bookmark').click(function(){
 			let icon = $(this).attr('class').split(' ');
 			let status = $(this).attr('name');
+			let piseq = $('input[name=piseq]').val();
 
 			console.log('before : ' + status);
 			console.log('class : ' + icon[0] +" "+ icon[1]+" "+icon[2]);
+			console.log('piseq : ' + piseq);
+
+			let bookMark = {piseq : piseq , status : status};
+			console.log(bookMark);
 
 			$.ajax({
 				url : "bookmark.do",
@@ -98,6 +103,7 @@
 		<hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
 		<c:forEach items="${myissuelist}" var="m">
 		<div class="row" style="margin-left: 2%; margin-right: 2%">
+			<input type="hidden" name="piseq" value="${m.piseq}">
 			<div class="col-sm-2 newissue" >
 				${m.pititle}
 			</div>

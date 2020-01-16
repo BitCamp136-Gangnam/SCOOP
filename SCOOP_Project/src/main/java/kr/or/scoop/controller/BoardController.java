@@ -84,13 +84,16 @@ public class BoardController {
 	
 	
 	@RequestMapping("/bookmark.do")
-	public String bookmark(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+	public String bookMark(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		String status = request.getParameter("status");
 		String email = (String)session.getAttribute("email");
-		/* BoardDao dao = sqlSession.getMapper(BoardDao.class); 수정 */ 
+		String piseq = request.getParameter("piseq");
+		
+		MyIssueDao dao = sqlSession.getMapper(MyIssueDao.class);
 		
 		System.out.println("status : " + status);
 		System.out.println("email : " + email);
+		System.out.println("piseq : " + piseq);
 		
 		return status;
 	}

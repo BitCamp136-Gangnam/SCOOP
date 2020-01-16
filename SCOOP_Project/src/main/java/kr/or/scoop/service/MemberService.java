@@ -53,6 +53,7 @@ public class MemberService {
 		
 	}
 	
+	// 비밀번호 확인 
 	public Member pwdCheck(String email) {
 		Member member = null;
 		System.out.println("pwd check");
