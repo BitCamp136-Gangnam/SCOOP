@@ -1154,292 +1154,291 @@ $('.menli').keydown(function(event) {
        $(this).click();
     }
 });
-   $('#issuecontent').keydown(
-         function(event) {
-            console.log($('#mentionlist').attr('style'));
-            if($('#mentionlist').attr('style')==('position:fixed; width:20%;top:381.5px;left:686.5px; z-index:4')){
-               console.log('여기서라면?');
-               console.log(event.keyCode);
-               var key = event.keyCode;
-                     switch (key) {
-                     case 38:
-                        console.log("위");
-                        tar--;
-                        break;
-                     case 40:
-                        tar++;
-                        break;
-                     case 39:
-                        break;
-                     case 37:
-                        break;
-                     }
-                     if (tar < 1) {
-                        tar = 1;
-                     }
-                     if (tar > 9) {
-                        tar = 9;
-                     }
-                     $('#men' + tar).focus();
-                     if ($('#men' + tar).focus()) {
-                        $('.menli').css('background-color', '#fff');
-                        $('#men' + tar).css(
-                              'background-color',
-                              'rgba(225, 225, 225,0.5)');
-                     }
-                     if(event.keyCode == 13){
-                        $(this).click();
-                     }
-            }
-            var top = ($('#issuecontent').offset().top);
-            var left = ($('#issuecontent').offset().left + 490);
-            if (event.shiftKey && event.keyCode == 50) {
-               console.log("top&left" + top + ", " + left);
-               $('#mentionlist').attr(
-                     'style',
-                     'position:fixed; width:20%;top:' + top + 'px;left:'
-                           + left + 'px; z-index:4');
-               $('#mentionlist').show();
-               $('div').not('#mentionlist').click(function() {
-                  $('#mentionlist').hide();
-               });
-            }
-         });
-   $('#men1').click(
-         function() {
-            var top = ($('#issuecontent').offset().top);
-            var left = ($('#issuecontent').offset().left + 490);
-            $('#mentionlist').hide();
-            $('#memlist').attr(
-                  'style',
-                  'position:fixed; width:20%;top:' + top + 'px;left:'
-                        + left + 'px; z-index:4');
-            $('#memlist').show();
-            $('#memlist').attr('class', 'list-group mem');
-            $('.modal-content').not('#memlist').click(function() {
-               $('#memlist').hide();
-               $('#memlist').attr('class', 'list-group');
-            });
-         });
-   $('#men2').click(function() {
-      $('#mentionlist').hide();
-      $('#issuecontent').empty();
-      $('#issuecontent').hide();
-      var textarea = document.getElementById('codemirrorarea');
-      var editor = CodeMirror.fromTextArea(textarea, {
-         mode : "javascript",
-         lineNumbers : true,
-         lineWrapping : true,
-         theme : "eclipse",
-         val : textarea.value
-      });
-   });
-   $('#men3').click(function() {
-      $('#mentionlist').hide();
-      var text = "";
-      text = $('#issuecontent').val().replace("@", "");
-      $('#issuecontent').val(text);
-      $('#auth').click();
-      $('#issuecontent').append($('.picker-dialog'));
+	$('#issuecontent').keydown(
+			function(event) {
+				if($('#mentionlist').css('display')==('flex')){
+					console.log('여기서라면?');
+					console.log(event.keyCode);
+					var key = event.keyCode;
+		               switch (key) {
+		               case 38:
+		                  console.log("위");
+		                  tar--;
+		                  break;
+		               case 40:
+		                  tar++;
+		                  break;
+		               case 39:
+		                  break;
+		               case 37:
+		                  break;
+		               }
+		               if (tar < 1) {
+		                  tar = 1;
+		               }
+		               if (tar > 9) {
+		                  tar = 9;
+		               }
+		               $('#men' + tar).focus();
+		               if ($('#men' + tar).focus()) {
+		                  $('.menli').css('background-color', '#fff');
+		                  $('#men' + tar).css(
+		                        'background-color',
+		                        'rgba(225, 225, 225,0.5)');
+		               }
+		               if(event.keyCode == 13){
+		               	$(this).click();
+		               }
+				}
+				var top = ($('#issuecontent').offset().top);
+				var left = ($('#issuecontent').offset().left + 490);
+				if (event.shiftKey && event.keyCode == 50) {
+					console.log("top&left" + top + ", " + left);
+					$('#mentionlist').attr(
+							'style',
+							'position:fixed; width:20%;top:' + top + 'px;left:'
+									+ left + 'px; z-index:4');
+					$('#mentionlist').show();
+					$('div').not('#mentionlist').click(function() {
+						$('#mentionlist').hide();
+					});
+				}
+			});
+	$('#men1').click(
+			function() {
+				var top = ($('#issuecontent').offset().top);
+				var left = ($('#issuecontent').offset().left + 490);
+				$('#mentionlist').hide();
+				$('#memlist').attr(
+						'style',
+						'position:fixed; width:20%;top:' + top + 'px;left:'
+								+ left + 'px; z-index:4');
+				$('#memlist').show();
+				$('#memlist').attr('class', 'list-group mem');
+				$('.modal-content').not('#memlist').click(function() {
+					$('#memlist').hide();
+					$('#memlist').attr('class', 'list-group');
+				});
+			});
+	$('#men2').click(function() {
+		$('#mentionlist').hide();
+		$('#issuecontent').empty();
+		$('#issuecontent').hide();
+		var textarea = document.getElementById('codemirrorarea');
+		var editor = CodeMirror.fromTextArea(textarea, {
+			mode : "javascript",
+			lineNumbers : true,
+			lineWrapping : true,
+			theme : "eclipse",
+			val : textarea.value
+		});
+	});
+	$('#men3').click(function() {
+		$('#mentionlist').hide();
+		var text = "";
+		text = $('#issuecontent').val().replace("@", "");
+		$('#issuecontent').val(text);
+		$('#auth').click();
+		$('#issuecontent').append($('.picker-dialog'));
 
-   });
-   $('#men4').click(function() {
-      $('#mentionlist').hide();
-      $('#fileclick').click();
-   });
-   function readURL(input) {
-      if (input.files && input.files[0]) {
-         var reader = new FileReader();
-         reader.onload = function(e) {
-            $('#imgpreview').attr('src', e.target.result);
-            if (e.target.result.substring(5, 10) == 'image') {
-               $('#imgpreview').show();
-            } else {
-               $('#imgpreview').hide();
-            }
-         }
-         reader.readAsDataURL(input.files[0]);
-      }
-   }
-   $("#fileclick").change(function() {
-      readURL(this);
-      $('#filename').empty();
-      $('#filename').append($("#fileclick").val().substring(12));
-      var text = "";
-      text = $('#issuecontent').val().replace("@", "");
-      $('#issuecontent').val(text);
+	});
+	$('#men4').click(function() {
+		$('#mentionlist').hide();
+		$('#fileclick').click();
+	});
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$('#imgpreview').attr('src', e.target.result);
+				if (e.target.result.substring(5, 10) == 'image') {
+					$('#imgpreview').show();
+				} else {
+					$('#imgpreview').hide();
+				}
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+	$("#fileclick").change(function() {
+		readURL(this);
+		$('#filename').empty();
+		$('#filename').append($("#fileclick").val().substring(12));
+		var text = "";
+		text = $('#issuecontent').val().replace("@", "");
+		$('#issuecontent').val(text);
 
-   });
-   $('#men8').click(
-         function() {
-            var text = "";
-            text = $('#issuecontent').val().replace("@", "");
-            $('#issuecontent').val(text);
-            var top = ($('#issuecontent').offset().top);
-            var left = ($('#issuecontent').offset().left + 490);
-            $('#mentionlist').hide();
-            $('#memlist').attr(
-                  'style',
-                  'position:fixed; width:20%;top:' + top + 'px;left:'
-                        + left + 'px; z-index:4');
-            $('#memlist').show();
-         });
-   $('.todo')
-         .click(
-               function() {
-                  var top = ($('#issuecontent').offset().top);
-                  var left = ($('#issuecontent').offset().left + 490);
-                  if ($(this).parents('#memlist').attr('class') == 'list-group mem') {
-                     var text = "";
-                     text = $('#issuecontent').val().replace("@", "");
-                     $('#issuecontent').val(text);
-                     $('#todoresult').append('<div><input type="text" id="mention" name="mention" value="@'+ $(this).text() + '" style="border:none" readonly></div>');
-                     console.log($(this).text());
-                     $('#todoresult').show();
-                     $('#memlist').hide();
-                     $('#memlist').attr('class', 'list-group');
-                  } else {
-                     $('#memlist').hide();
-                     $('#todo')
-                           .attr(
-                                 'style',
-                                 'border-radius:0.25em;padding:1%;position:fixed; width:20%;top:'
-                                       + (top - 208)
-                                       + 'px;left:'
-                                       + left
-                                       + 'px; z-index:4;background-color:white');
-                     $('#todo').show();
-                     $('#todomem').val($(this).text());
-                  }
+	});
+	$('#men8').click(
+			function() {
+				var text = "";
+				text = $('#issuecontent').val().replace("@", "");
+				$('#issuecontent').val(text);
+				var top = ($('#issuecontent').offset().top);
+				var left = ($('#issuecontent').offset().left + 490);
+				$('#mentionlist').hide();
+				$('#memlist').attr(
+						'style',
+						'position:fixed; width:20%;top:' + top + 'px;left:'
+								+ left + 'px; z-index:4');
+				$('#memlist').show();
+			});
+	$('.todo')
+			.click(
+					function() {
+						var top = ($('#issuecontent').offset().top);
+						var left = ($('#issuecontent').offset().left + 490);
+						if ($(this).parents('#memlist').attr('class') == 'list-group mem') {
+							var text = "";
+							text = $('#issuecontent').val().replace("@", "");
+							$('#issuecontent').val(text);
+							$('#todoresult').append('<div><input type="text" id="mention" name="mention" value="@'+ $(this).text() + '" style="border:none" readonly></div>');
+							console.log($(this).text());
+							$('#todoresult').show();
+							$('#memlist').hide();
+							$('#memlist').attr('class', 'list-group');
+						} else {
+							$('#memlist').hide();
+							$('#todo')
+									.attr(
+											'style',
+											'border-radius:0.25em;padding:1%;position:fixed; width:20%;top:'
+													+ (top - 208)
+													+ 'px;left:'
+													+ left
+													+ 'px; z-index:4;background-color:white');
+							$('#todo').show();
+							$('#todomem').val($(this).text());
+						}
 
-                  $('.modal-content').not('#todo').click(function() {
-                     $('#todo').hide();
-                  });
-               });
-   $('#todomake')
-         .click(
-               function() {
-                  $('#todo').hide();
-                  var text = "";
-                  text = $('#issuecontent').val().replace("@", "");
-                  $('#issuecontent').val(text);
-                  $('#todoresult')
-                        .append(
-                              '<div><span class="iconify" data-icon="bx:bx-check-circle" data-inline="false"></span>'
-                                    + $('#todomem').val()
-                                    + ' <span class="iconify" data-icon="bytesize:arrow-right" data-inline="false"></span> '
-                                    + $('#todolist').val()
-                                    + '</div>');
-                  $('#todoresult').show();
-                  $('#todolist').val('');
-               })
-   $('#todocancle').click(function() {
-      $('#todo').hide();
-      var text = "";
-      text = $('#issuecontent').val().replace("@", "");
-      $('#issuecontent').val(text);
-      $('#todolist').val('');
-   });
+						$('.modal-content').not('#todo').click(function() {
+							$('#todo').hide();
+						});
+					});
+	$('#todomake')
+			.click(
+					function() {
+						$('#todo').hide();
+						var text = "";
+						text = $('#issuecontent').val().replace("@", "");
+						$('#issuecontent').val(text);
+						$('#todoresult')
+								.append(
+										'<div><span class="iconify" data-icon="bx:bx-check-circle" data-inline="false"></span>'
+												+ $('#todomem').val()
+												+ ' <span class="iconify" data-icon="bytesize:arrow-right" data-inline="false"></span> '
+												+ $('#todolist').val()
+												+ '</div>');
+						$('#todoresult').show();
+						$('#todolist').val('');
+					})
+	$('#todocancle').click(function() {
+		$('#todo').hide();
+		var text = "";
+		text = $('#issuecontent').val().replace("@", "");
+		$('#issuecontent').val(text);
+		$('#todolist').val('');
+	});
 
-   $('#men9').click(
-         function() {
-            var top = ($('#issuecontent').offset().top);
-            var left = ($('#issuecontent').offset().left + 490);
-            $('#mentionlist').hide();
-            var text = "";
-            text = $('#issuecontent').val().replace("@", "");
-            $('#issuecontent').val(text);
-            $('#datepick').attr(
-                  'style',
-                  'border-radius:0.25em;padding:1%;position:fixed; width:20%;top:'
-                        + top + 'px;left:' + left
-                        + 'px; z-index:4;background-color:white');
-            $('#datepick').show();
-            $('.modal-content').not('#datepick').click(function() {
-               $('#datepick').hide();
-            });
-            $('.hasDatepicker').click(function() {
-               $('#datepick').append($('#ui-datepicker-div'));
-            });
-         });
-   $('#datemake')
-         .click(
-               function() {
-                  $('#datepick').hide();
-                  var text = "";
-                  text = $('#issuecontent').val().replace("@", "");
-                  $('#issuecontent').val(text);
-                  $('#todoresult')
-                        .append(
-                              '<div><span class="iconify" data-icon="bx:bx-calendar" data-inline="false"></span>'
-                                    + $('#from').val()
-                                    + '~'
-                                    + $('#to').val()
-                                    + ' <span class="iconify" data-icon="bytesize:arrow-right" data-inline="false"></span> '
-                                    + $('#datecontent').val()
-                                    + '</div>');
-                  $('#todoresult').show();
-                  $('#todolist').val('');
-               })
-   $('#datecancle').click(function() {
-      $('#datepick').hide();
-      var text = "";
-      text = $('#issuecontent').val().replace("@", "");
-      $('#issuecontent').val(text);
-      $('#todolist').val('');
-   });
+	$('#men9').click(
+			function() {
+				var top = ($('#issuecontent').offset().top);
+				var left = ($('#issuecontent').offset().left + 490);
+				$('#mentionlist').hide();
+				var text = "";
+				text = $('#issuecontent').val().replace("@", "");
+				$('#issuecontent').val(text);
+				$('#datepick').attr(
+						'style',
+						'border-radius:0.25em;padding:1%;position:fixed; width:20%;top:'
+								+ top + 'px;left:' + left
+								+ 'px; z-index:4;background-color:white');
+				$('#datepick').show();
+				$('.modal-content').not('#datepick').click(function() {
+					$('#datepick').hide();
+				});
+				$('.hasDatepicker').click(function() {
+					$('#datepick').append($('#ui-datepicker-div'));
+				});
+			});
+	$('#datemake')
+			.click(
+					function() {
+						$('#datepick').hide();
+						var text = "";
+						text = $('#issuecontent').val().replace("@", "");
+						$('#issuecontent').val(text);
+						$('#todoresult')
+								.append(
+										'<div><span class="iconify" data-icon="bx:bx-calendar" data-inline="false"></span>'
+												+ $('#from').val()
+												+ '~'
+												+ $('#to').val()
+												+ ' <span class="iconify" data-icon="bytesize:arrow-right" data-inline="false"></span> '
+												+ $('#datecontent').val()
+												+ '</div>');
+						$('#todoresult').show();
+						$('#todolist').val('');
+					})
+	$('#datecancle').click(function() {
+		$('#datepick').hide();
+		var text = "";
+		text = $('#issuecontent').val().replace("@", "");
+		$('#issuecontent').val(text);
+		$('#todolist').val('');
+	});
 
-   var dateFormat = "mm/dd/yy", from = $("#from").datepicker({
-      defaultDate : "+1w",
-      changeMonth : true,
-      numberOfMonths : 3
-   }).on("change", function() {
-      to.datepicker("option", "minDate", getDate(this));
-   }), to = $("#to").datepicker({
-      defaultDate : "+1w",
-      changeMonth : true,
-      numberOfMonths : 3
-   }).on("change", function() {
-      from.datepicker("option", "maxDate", getDate(this));
-   });
-   function getDate(element) {
-      var date;
-      try {
-         date = $.datepicker.parseDate(dateFormat, element.value);
-      } catch (error) {
-         date = null;
-      }
-      return date;
-   }
+	var dateFormat = "mm/dd/yy", from = $("#from").datepicker({
+		defaultDate : "+1w",
+		changeMonth : true,
+		numberOfMonths : 3
+	}).on("change", function() {
+		to.datepicker("option", "minDate", getDate(this));
+	}), to = $("#to").datepicker({
+		defaultDate : "+1w",
+		changeMonth : true,
+		numberOfMonths : 3
+	}).on("change", function() {
+		from.datepicker("option", "maxDate", getDate(this));
+	});
+	function getDate(element) {
+		var date;
+		try {
+			date = $.datepicker.parseDate(dateFormat, element.value);
+		} catch (error) {
+			date = null;
+		}
+		return date;
+	}
 
-   function signOut() {
-      var auth2 = gapi.auth2.getAuthInstance();
-      auth2.signOut().then(function() {
-         location.href = "logout.do";
-      });
-      auth2.disconnect();
+	function signOut() {
+		var auth2 = gapi.auth2.getAuthInstance();
+		auth2.signOut().then(function() {
+			location.href = "logout.do";
+		});
+		auth2.disconnect();
 
-   }
+	}
 
-   function onLoad() {
-      gapi.load('auth2', function() {
-         gapi.auth2.init();
-      });
-   }
+	function onLoad() {
+		gapi.load('auth2', function() {
+			gapi.auth2.init();
+		});
+	}
 
-   $('#inviteModal_id')
-         .mouseover(
-               function() {
-                  $(this)
-                        .attr('style',
-                              'cursor: pointer;color:#e71d36;font-size: 18px;padding-bottom: 12px;');
-               });
-   $('#inviteModal_id')
-         .mouseleave(
-               function() {
-                  $(this)
-                        .attr('style',
-                              'cursor: pointer;color:#535359;font-size: 18px;padding-bottom: 12px;');
-               });
+	$('#inviteModal_id')
+			.mouseover(
+					function() {
+						$(this)
+								.attr('style',
+										'cursor: pointer;color:#e71d36;font-size: 18px;padding-bottom: 12px;');
+					});
+	$('#inviteModal_id')
+			.mouseleave(
+					function() {
+						$(this)
+								.attr('style',
+										'cursor: pointer;color:#535359;font-size: 18px;padding-bottom: 12px;');
+					});
 
 </script>

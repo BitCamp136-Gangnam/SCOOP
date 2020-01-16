@@ -74,7 +74,7 @@
 	})
 	
 		
-	const steps = ['방 제목', '최대 인원'];
+/* 	const steps = ['방 제목', '최대 인원'];
 	const swalQueueStep = Swal.mixin({
 	  confirmButtonText: 'Next',
 	  cancelButtonText: 'Back',
@@ -121,7 +121,7 @@
 	    wsocket.send(JSON.stringify(data));   
 	    openChat(data.name);
 	  }
-	}
+	} */
 
 	 function connect() {
 		wsocket = new WebSocket("ws://192.168.6.16:8090/SCOOP/Chat-ws.do?cmd=on");
@@ -145,9 +145,26 @@
 		
 	}
 
-	function setChatRooms(data){
+/* 	function setChatRooms(data){
 		var room = "";
 		var btn = "";
+		$('#dataTable > tbody').empty();
+		$.each(data.rooms, function(index, element){
+			for(let i=0; i<$('.resultsearch').length;i++){
+				if($('.resultsearch').parent()[i].getAttribute('href').substr(22)==data.rooms[index].name.split("/")[1]){
+					console.log("너는 같구나^^");
+					room = $("<tr></tr>");
+					//room.append("<td style='padding-top:5%;'>" + (num++) + "</td>");
+					room.append("<td style='padding-top:5%;'>"+element.name+"</td>");
+					//room.append("<td style='padding-top:5%;'>"+element.users.length+ " / " +element.max+"</td>");
+		 			btn = $("<button id="+element.name+" class='btn btn-primary'>입장</button>");
+					room.append($("<td></td>").append(btn));
+					$('#dataTable > tbody').append(room);
+				}
+			}
+		})
+	} */
+	function setChatRooms(data){
 		$('#dataTable > tbody').empty();
 		$.each(data.rooms, function(index, element){
 			for(let i=0; i<$('.resultsearch').length;i++){
@@ -158,14 +175,11 @@
 					room.append("<td style='padding-top:5%;'>"+element.name.split("/")[0]+"</td>");
 					//room.append("<td style='padding-top:5%;'>"+element.users.length+ " / " +element.max+"</td>");
 		 			btn = $("<button class='btn btn-primary'>입장</button>");
+					btn.attr("id", element.name);
+					room.append($("<td></td>").append(btn));
+					$('#dataTable > tbody').append(room);
 				}
 			}
-			if(element.users.length == element.max)
-				btn.attr("disabled",true);
-
-			btn.attr("id", element.name);
-			room.append($("<td></td>").append(btn));
-			 $('#dataTable > tbody').append(room);
 		})
 	}
 		
@@ -176,7 +190,7 @@
     function openChat(room){
     	let url = "Chat.do?room="+room;
     	let name = room;
-    	let option = "width = 400, height = 500, top = 230, left = 1180, location = no, channelmode = yes";
+    	let option = "width = 400, height = 500, top = 230, left = 1170, location = no, channelmode = yes";
         window.open(url, name, option);
         /* $('#chatdivopen').hide();
         $('#chatroomdivopen').load(url);
@@ -396,15 +410,15 @@
 				<div class="card" style="border-radius: 10px; margin-bottom: 0;border : 1px solid #ced4da;min-height: 400px;">
 					<div class="card-header">
 						<i class="fas fa-comments"></i> 실시간 채팅(Ctrl + ,)
-						<button id="createChat" class="btn btn-primary" type="button" style="margin-bottom: 0; margin-left: 45px">채팅방	만들기</button>
+						<!-- <button id="createChat" class="btn btn-primary" type="button" style="margin-bottom: 0; margin-left: 45px">채팅방	만들기</button> -->
 					</div>
 					<div class="card-body" style="padding-top: 0">
-						<div class="table"  style="height: 200px;overflow: auto;">
+						<div class="table"  style="height: 400px;overflow: auto;border-top:1px solid #f3f3f3">
 							<table class="table table-bordered" id="dataTable" style="text-align: center; background-color: white">
 								<thead>
 									<tr>
 										<!-- <th width="10%">NO</th> -->
-										<th width="80%">채팅방</th>
+										<th width="80%">협업공간</th>
 										<!-- <th width="10%">USER</th> -->
 										<th width="20%">입장</th>
 									</tr>

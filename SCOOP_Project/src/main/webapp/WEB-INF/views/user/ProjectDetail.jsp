@@ -54,7 +54,7 @@ $(function(){
       $('#c_Management').show();
       $('#c_Information').hide();
    });
-   for(let i=0;i<$('.admPlus').length;i++){
+   for(let i=0;i<$('.admin_EditIcon').length;i++){
 	   $('#adminPlus'+i).click(function(){
 		   console.log("admplus 포문")
 	      $(this).hide();
@@ -188,7 +188,11 @@ function project_filter() {
                      <div class="search_NameEmail col-sm-6">
                         <span class="nav-text finalsearch" id="member_Name${status.index}" style="color: #4d4d46;font-size: 13px;padding-bottom:5px;padding-top: 10px;"> &nbsp;${pm.name}</span>
                         <span class="log-user" id="iconAdd${status.index}" data-toggle="dropdown" style="float: right;top: 0px;padding-top: 10px;">
-                           <i class="fas fa-cog" id="admin_EditIcon" style="cursor: pointer;font-size: 20px;color:black;"></i>
+                        <c:choose>
+                        	<c:when test="${pm.pjuserrank==100}"><i class="fas fa-user-cog" id="icon_First${status.index}" style="font-size: 20px;color:#195ac2;"></i></c:when>
+                        	<c:when test="${pm.pjuserrank==200}">매니저</c:when>
+                        </c:choose>
+                           <i class="fas fa-cog admin_EditIcon" id="admin_EditIcon${status.index}" style="cursor: pointer;font-size: 20px;color:black;"></i>
                         </span>
                         <div class="drop-down dropdown-language animated fadeIn  dropdown-menu"  >
                         <div class="dropdown-content-body">

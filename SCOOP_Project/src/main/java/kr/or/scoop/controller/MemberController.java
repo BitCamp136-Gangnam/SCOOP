@@ -1,8 +1,11 @@
 package kr.or.scoop.controller;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,9 +26,13 @@ import org.springframework.ui.velocity.VelocityEngineFactoryBean;
 import org.springframework.ui.velocity.VelocityEngineUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import kr.or.scoop.dao.AlarmDao;
 import kr.or.scoop.dao.MemberDao;
+import kr.or.scoop.dao.NoticeDao;
 import kr.or.scoop.dao.ProjectDao;
+import kr.or.scoop.dto.Alarm;
 import kr.or.scoop.dto.Member;
 import kr.or.scoop.dto.Role;
 import kr.or.scoop.dto.Tpmember;
@@ -180,7 +187,7 @@ public class MemberController {
 
 	// 로그인 성공
 	@RequestMapping(value = "/userindex.do", method = RequestMethod.GET)
-	public String userindex(HttpSession session) {
+	public String userindex(HttpSession session,Model model) {
 		String email = "";
 		email = (String)session.getAttribute("email");
 		ProjectDao noticeDao = sqlsession.getMapper(ProjectDao.class);
@@ -190,6 +197,15 @@ public class MemberController {
 		List<Tpmember> pjtlist = noticeDao.getPJT(email);
 		if(pjtlist!=null) {
 			session.setAttribute("pjtlist", pjtlist);
+			AlarmDao dao = sqlsession.getMapper(AlarmDao.class);
+			List<Alarm> alarm = dao.getAlarm((String)session.getAttribute("email"));
+			System.out.println(alarm);
+			
+			if(alarm == null) {
+				
+			} else {
+				model.addAttribute("alarm", alarm);
+			}
 		}
 		/* System.out.println(pjtlist.get(0)); */
 		return "user/userindex";
@@ -384,19 +400,44 @@ public class MemberController {
 	
 	//회원수정 체크
 	@RequestMapping(value="editCheck.do" , method = RequestMethod.POST)
-	public String UpdateProfile(Member member) {
-		int result = 0;
-		String viewpage;
-		member.setPwd(this.bCryptPasswordEncoder.encode(member.getPwd()));
-		result = service.update(member);
-		if(result > 0) {
-			System.out.println("업데이트 성공");
-			viewpage = "redirect:/memberEdit.do";
-		}else {
-			viewpage = "user/app-profile";
-		}
+	public String UpdateProfile(Member member,HttpServletRequest request) {
+		System.out.println(member);
 		
-		return viewpage;
+				
+			CommonsMultipartFile multifile = member.getFilesrc();
+			String filename = multifile.getOriginalFilename();
+			member.setProfile(filename);
+			String path = request.getServletContext().getRealPath("/user/upload");
+			
+			String fpath = path + "\\"+ filename; 
+				
+				if(!filename.equals("")) { //실 파일 업로드
+					FileOutputStream fs = null;
+					try {
+						fs = new FileOutputStream(fpath);
+					} catch (FileNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						
+					}finally {
+						try {
+							fs.write(multifile.getBytes());
+							fs.close();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					
+				
+				}
+		
+		
+		MemberDao dao = sqlsession.getMapper(MemberDao.class);
+		member.setPwd(this.bCryptPasswordEncoder.encode(member.getPwd()));
+		dao.updateMember(member);
+		
+		return "redirect:/memberEdit.do";
 	}
 	
 	// 결재페이지
