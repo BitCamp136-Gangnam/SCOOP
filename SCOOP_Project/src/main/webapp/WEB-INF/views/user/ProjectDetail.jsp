@@ -54,37 +54,28 @@ $(function(){
       $('#c_Management').show();
       $('#c_Information').hide();
    });
-/*    $('.adm').click(function(){
-	   if($(this).val()=='on'){
-		   $(this).parent().parent().parent().hide();
-		   $(this).text('관리자 권한 해제')
-		   $(this).parent().parent().parent().prev().prepend('<i class="fas fa-user-cog" id="icon_First" style="font-size: 20px;color:#195ac2;"></i>')
-		   $(this).val('off')
+   $('.adm').click(function(){
+	   if($(this).closest(".drop-down").prev().children().length==1){
+		   $(this).closest(".drop-down").prev().prepend('<i class="fas fa-user-cog" id="icon_First" style="font-size: 20px;color:#195ac2;"></i>');
+		   $(this).text('관리자 권한 해제');
 	   }else{
-		   $(this).parent().parent().parent().hide();
-		   $(this).text('관리자 권한 설정')
-		   $(this).parent().parent().parent().prev().eq(0).remove();
-		   $(this).val('on')
+		   $(this).closest(".drop-down").prev().children().first().remove();
+		   $(this).text('관리자 권한 설정');
 	   }
-   }) */
-  for(let i=0;i<$('.admin_EditIcon').length;i++){
-	   $('#adminPlus'+i).click(function(){
-		   console.log("플러스")
-		  $(this).text('관리자 권한 해제')
-		  $(this).attr('id','adminCancle'+i);
-		  $(this).attr('class','adminCancle');
-	      $('#iconAdd'+i).prepend('<i class="fas fa-user-cog" id="icon_First'+i+'" style="font-size: 20px;color:#195ac2;"></i>');
-	   });
-   }
-   for(let i=0;i<$('.admCancle').length;i++){
-	   $('#adminCancle'+i).click(function(){
-		   console.log("캔슬")
-		   $(this).text('관리자 권한 설정')
-		   $(this).attr('id','adminPlus'+i);
-		  $(this).attr('class','adminPlus');
-		   $('#icon_First'+i).remove();
-		   });
-   }
+   })
+   $('#admSubmit').click(function(){
+	   console.log("gd");
+	   for(let i=0; i<$('.log-user').length-1; i++){
+		   if($('#iconAdd'+i).first().children().eq(0).attr('class')=='fas fa-user-cog'){
+			   console.log("관리자");
+			   $('#admDiv').append('<input type="hidden" value="'+100+'" name="pjuserrank">')
+		   }else{
+			   console.log("일반");
+			   $('#admDiv').append('<input type="hidden" value="'+300+'" name="pjuserrank">')
+		   }
+	   }
+	   
+   })
 });
 
 /* 프로젝트 이름 검색 - 도연 */
@@ -191,8 +182,8 @@ function project_filter() {
             </div>
 
          <!-- Modal body -->
-         <form action="" method="post">
-            <div class="modal-body" style="width: 450px;height: 250px;margin-left: 25px;">
+         <form action="teamSetting.do" method="post">
+            <div class="modal-body" id="admDiv" style="width: 450px;height: 250px;margin-left: 25px;">
                <div  id="c_Information">
                <label for="pname_Edit">협업공간 이름</label> 
                <input class="form-control createmodal" type="text" id="pname_Edit" name="pname_Edit" style="width: 100%" value="${tpj.pname}"> <br> 
@@ -232,6 +223,7 @@ function project_filter() {
                         </div>
                         
                         <span class="nav-text finalsearch" id="member_Email${status.index}" style="padding-bottom: 1%; padding-top:5px; font-weight: normal;"> &nbsp;${pm.email}</span>
+			            <input type="hidden" name="email" value="${pm.email}">
                         
                      </div>
                   </c:forEach>
@@ -241,13 +233,12 @@ function project_filter() {
 
             <!-- Modal footer -->
 
-            <!-- <input type="hidden" name="tseq" value="1"> -->
+            <input type="hidden" name="tseq" value="${tpj.tseq}">
             <!-- <input type="hidden" name="ischarge" value="0"> -->
-            <input type="hidden" name="email" value="${sessionScope.email}">
             <!-- <input type="hidden" name="istpalarm" value="0"> -->
             <!-- <input type="hidden" name="ptime" value="20/01/08"> -->
             <div class="modal-footer" id="c_InformationSubmit">
-               <input type="submit" class="btn btn-secondary" value="수정 완료"
+               <input type="submit" class="btn btn-secondary" id="admSubmit" value="수정 완료"
                   style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;">
                <input type="button" class="btn btn-secondary" value="취소"
                   style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;"

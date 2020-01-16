@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.or.scoop.dao.MemberDao;
 import kr.or.scoop.dao.ProjectDao;
+import kr.or.scoop.dao.TissueDao;
 import kr.or.scoop.dto.Member;
 import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.dto.ProjectMemberlist;
@@ -153,12 +154,55 @@ public class TeamController {
 	}
 	
 	
-	// 칸반
+	// 칸반 받기
 	@RequestMapping(value = "cooperation-kanban.do", method = RequestMethod.GET)
 	public String kanbanView(int tseq, Model model) {
-		String path = "cooperation/cooperation-kanban";
-		
+		String path = "";
+		List<Tissue> tissuelist = teamservice.loadKanban(tseq);
+		if(tissuelist.isEmpty()) {
+			path = "cooperation/cooperation-kanban";
+		} else {
+			path = "cooperation/cooperation-kanban";
+			model.addAttribute("tissuelist", tissuelist);
+			System.out.println();
+		}
 		return path;
 
 	}
+	
+	//협업공간 권한설정
+	@RequestMapping(value = "teamSetting.do", method = {RequestMethod.POST,RequestMethod.GET})
+	public String teamSetting(int tseq, String[] email, int[] pjuserrank, Model model) {
+		int result = 0;
+		String viewpage;
+		
+		result = teamservice.teamSetting(pjuserrank, tseq, email);
+		
+		if(result > 0) {
+			System.out.println("권한 설정성공");
+			viewpage = "redirect:/userindex.do";
+		}else {
+			System.out.println("권한 설정 실패");
+			viewpage = "redirect:/userindex.do";
+		}
+		return viewpage;
+		
+	}
+	// 칸반 수정
+	@RequestMapping(value = "kanbanEdit.do", method = RequestMethod.POST)
+	public String kanbanEdit(int tseq, int tiseq, int isprocess, Model model) {
+		String path = "";
+		int result = 0;
+		System.out.println("result kanban edit 전");
+		result = teamservice.EditKanban(tseq, tiseq, isprocess);
+		if(result>0) {
+			path = "redirect:/cooperation-kanban.do?tseq="+tseq;
+			System.out.println("result kanban edit 성공");
+		} else {
+			path = "redirect:/cooperation-kanban.do?tseq="+tseq;
+			System.out.println("result kanban edit 실패");
+		}
+		return path;
+	}
+
 }

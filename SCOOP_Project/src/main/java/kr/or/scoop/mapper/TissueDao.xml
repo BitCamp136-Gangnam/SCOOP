@@ -20,10 +20,31 @@ insert into tissue (tiseq,tseq,email,tititle,ticontent,isprocess, istbook, issee
 	<collection property="tpmember" resultMap="Tpmember"/>
 </resultMap>
 <resultMap type="kr.or.scoop.dto.Tissue" id="Tissue">
+	<result column="tiseq" property="tiseq"/>
 	<result column="tseq" property="tseq"/>
 	<result column="email" property="email"/>
-	<result column="pjuserrank" property="pjuserrank"/>
-	<result column="name" property="name"/>
+	<result column="tititle" property="tititle"/>
+	<result column="ticontent" property="ticontent"/>
+	<result column="tistart" property="tistart"/>
+	<result column="tiend" property="tiend"/>
+	<result column="isprocess" property="isprocess"/>
+	<result column="isbook" property="isbook"/>
+	<result column="issee" property="issee"/>
+	<result column="tidate" property="tidate"/>
+	<result column="tgfilename" property="tgfilename"/>
+	<result column="turl" property="turl"/>
 </resultMap>
-
+<select id="loadKanban" parameterType="int" resultMap="Tissue">
+	select *
+	from tissue
+	where tseq = #{tseq}
+</select>
+<update id="teamSetting">
+	update tpmember set pjuserrank=#{param1} where tseq=#{param2} and email=#{param3}
+</update>
+<update id="kanbanEdit">
+	UPDATE tissue 
+	SET isprocess=#{param3}
+	WHERE tiseq = #{param2} and tseq = #{param1}
+</update>
 </mapper>
