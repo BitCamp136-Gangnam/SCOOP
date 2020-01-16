@@ -89,7 +89,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<select id="projectMemberlist" parameterType="kr.or.scoop.dto.ProjectMemberlist" resultMap="ProjectMemberlist">
 	select m.email, m.name, t.tseq , t.pjuserrank from member m join tpmember t on m.email = t.email where t.tseq = #{tseq}
-</select>
+	</select>
 	<update id="changePassword" parameterType="kr.or.scoop.dto.Member">
 		update member
 		set pwd = #{pwd,jdbcType=VARCHAR}
