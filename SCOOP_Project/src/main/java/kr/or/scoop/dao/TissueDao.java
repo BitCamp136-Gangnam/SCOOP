@@ -11,4 +11,5 @@ public interface TissueDao {
 	//칸반 불러오기
 	public List<Tissue> loadKanban(int tseq);
 	
+	public int teamSetting(int pjuserrank, int tseq, String email);
 }

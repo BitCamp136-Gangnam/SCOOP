@@ -28,4 +28,18 @@ public class TeamService {
 		List<Tissue> tissuelist = dao.loadKanban(tseq);
 		return tissuelist;
 	}
+	
+	public int teamSetting(int[] pjuserrank, int tseq, String[] email) {
+		int result = 0 ;
+		System.out.println("teamSetting");
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		for(int i=0; i<email.length;i++) {
+			System.out.println(tseq);
+			System.out.println(email[i]);
+			System.out.println(pjuserrank[i]);
+			result = dao.teamSetting(pjuserrank[i], tseq, email[i]);
+			System.out.println(result);
+		}
+		return result;
+	}
 }

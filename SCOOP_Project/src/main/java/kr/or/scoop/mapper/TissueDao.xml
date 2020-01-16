@@ -39,4 +39,7 @@ insert into tissue (tiseq,tseq,email,tititle,ticontent,isprocess, istbook, issee
 	from tissue
 	where tseq = #{tseq}
 </select>
+<update id="teamSetting">
+	update tpmember set pjuserrank=#{param1} where tseq=#{param2} and email=#{param3}
+</update>
 </mapper>

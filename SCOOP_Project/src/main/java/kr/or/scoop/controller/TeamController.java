@@ -168,4 +168,23 @@ public class TeamController {
 		return path;
 
 	}
+	
+	//협업공간 권한설정
+	@RequestMapping(value = "teamSetting.do", method = {RequestMethod.POST,RequestMethod.GET})
+	public String teamSetting(int tseq, String[] email, int[] pjuserrank, Model model) {
+		int result = 0;
+		String viewpage;
+		
+		result = teamservice.teamSetting(pjuserrank, tseq, email);
+		
+		if(result > 0) {
+			System.out.println("권한 설정성공");
+			viewpage = "redirect:/userindex.do";
+		}else {
+			System.out.println("권한 설정 실패");
+			viewpage = "redirect:/userindex.do";
+		}
+		return viewpage;
+		
+	}
 }
