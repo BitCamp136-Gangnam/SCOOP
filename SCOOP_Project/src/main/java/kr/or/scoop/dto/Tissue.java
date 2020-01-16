@@ -2,27 +2,30 @@ package kr.or.scoop.dto;
 
 
 import java.sql.Date;
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 @Repository
 public class Tissue {
 	
 	private int tiseq;
 	private int tseq;
+	private int tmseq;
 	private String email;
 	private String tititle;
-	private String ticontent;
+	private String ticontent;	
 	private Date tistart;
 	private Date tiend;
 	private String isprocess;
-	private String filename;
+
 	private int tfilesize;
 	private int istbook;
 	private int issee;
 	private Date tidate;
 	private String tgfilename;
-	private String tmention;
+	private String tmemail;
 	private String turl;
 	private String name;
 	
@@ -32,12 +35,7 @@ public class Tissue {
 	public void setTgfilename(String tgfilename) {
 		this.tgfilename = tgfilename;
 	}
-	public String getTmention() {
-		return tmention;
-	}
-	public void setTmention(String tmention) {
-		this.tmention = tmention;
-	}
+
 	public String getTurl() {
 		return turl;
 	}
@@ -92,12 +90,7 @@ public class Tissue {
 	public void setIsprocess(String isprocess) {
 		this.isprocess = isprocess;
 	}
-	public String getFilename() {
-		return filename;
-	}
-	public void setFilename(String filename) {
-		this.filename = filename;
-	}
+
 	public int getTfilesize() {
 		return tfilesize;
 	}
@@ -129,16 +122,30 @@ public class Tissue {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+	public int getTmseq() {
+		return tmseq;
+	}
+	public void setTmseq(int tmseq) {
+		this.tmseq = tmseq;
+	}
+	public String getTmemail() {
+		return tmemail;
+	}
+	public void setTmemail(String tmemail) {
+		this.tmemail = tmemail;
+	}
 	@Override
 	public String toString() {
-		return "Tissue [tiseq=" + tiseq + ", tseq=" + tseq + ", email=" + email + ", tititle=" + tititle
-				+ ", ticontent=" + ticontent + ", tistart=" + tistart + ", tiend=" + tiend + ", isprocess=" + isprocess
-				+ ", filename=" + filename + ", tfilesize=" + tfilesize + ", istbook=" + istbook + ", issee=" + issee
-				+ ", tidate=" + tidate + ", tgfilename=" + tgfilename + ", tmention=" + tmention + ", turl=" + turl
-				+ ", name=" + name + "]";
+		return "Tissue [tiseq=" + tiseq + ", tseq=" + tseq + ", tmseq=" + tmseq + ", email=" + email + ", tititle="
+				+ tititle + ", ticontent=" + ticontent + ", tistart=" + tistart + ", tiend=" + tiend + ", isprocess="
+				+ isprocess + ", tfilesize=" + tfilesize + ", istbook=" + istbook + ", issee=" + issee + ", tidate="
+				+ tidate + ", tgfilename=" + tgfilename + ", tmemail=" + tmemail + ", turl=" + turl + ", name=" + name
+				+ "]";
 	}
 	
+	
+	
+
 	
 	
 }

@@ -35,13 +35,19 @@ $(function(){
 	$('#modalSave').click(function(){
 		console.log($('#category-name').val());
 		console.log($('#calTeam').val());
+		var bar = $('.fc-title');
+		console.log(bar);
 	})
 	$('#calSave').click(function(){
 		console.log("클릭클릭");
+		
+		
 		$('.fc-day').attr('style','overflow:auto;');
 		$('.fc-day').append('<br><button>눌러눌러</button><button>눌러눌러</button><button>눌러눌러</button>')
 	})
 })
+
+
 </script>
 <body>
 
