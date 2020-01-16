@@ -104,17 +104,63 @@
           </ul>
       </div>
       <hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
+      <c:if test="${alarm !=null }">
+      <c:forEach items="${alarm }" var="al">
       <div class="row" style="margin-left: 2%; margin-right: 2%">
+      
          <div class="col-sm-2 newissue" >
-         이슈 제목 들어갈곳
+         <c:choose>
+         	<c:when test="${al.pnseq!=0 }">
+         	새로운 팀프로젝트 공지사항이 생성됐습니다.
+         	</c:when>
+         	<c:when test="${al.replyseq!=0 }">
+         	새로운 댓글이 달렸습니다.
+         	</c:when>
+         	<c:when test="${al.tiseq!=0 }">
+         	새로운 팀 이슈가 생성되었습니다.
+         	</c:when>
+         	<c:when test="${al.vseq!=0 }">
+         	새로운 의사결정이 생성되었습니다.
+         	</c:when>
+         </c:choose>
          </div>
          <div class="col-sm-8 newissue">
-         아이콘도 넣고 여기에 내용들어가는데 나중엔 append하면 될듯?? 정렬이랑 @멘션은 비동기로?
+         
+         <c:choose>
+         	<c:when test="${al.pnseq!=0 }">
+         	${al.pnatitle }
+         	</c:when>
+         	<c:when test="${al.replyseq!=0 }">
+         	${al.ratitle }
+         	</c:when>
+         	<c:when test="${al.tiseq!=0 }">
+         	${al.tiatitle }
+         	</c:when>
+         	<c:when test="${al.vseq!=0 }">
+         	${al.vatitle }
+         	</c:when>
+         </c:choose>
          </div>
          <div class="col-sm-2 newissue">
          여기에 시간넣으면됨
+         <c:choose>
+         	<c:when test="${al.pnseq!=0 }">
+         	
+         	</c:when>
+         	<c:when test="${al.replyseq!=0 }">
+         	
+         	</c:when>
+         	<c:when test="${al.tiseq!=0 }">
+         	
+         	</c:when>
+         	<c:when test="${al.vseq!=0 }">
+         	
+         	</c:when>
+         </c:choose>
          </div>
       </div>
+      </c:forEach>
+      </c:if>
             <!-- #/ container -->
             </div>
             </div>

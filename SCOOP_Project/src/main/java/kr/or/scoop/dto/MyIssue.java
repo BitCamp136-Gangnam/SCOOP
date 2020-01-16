@@ -4,6 +4,7 @@ package kr.or.scoop.dto;
 import java.sql.Date;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 @Repository
 public class MyIssue {
@@ -25,6 +26,7 @@ public class MyIssue {
 	private String mymention;
 	private String myurl;
 	private String pname;
+	private CommonsMultipartFile file;
 	
 	public int getPiseq() {
 		return piseq;
@@ -128,6 +130,12 @@ public class MyIssue {
 	public void setPname(String pname) {
 		this.pname = pname;
 	}
+	public CommonsMultipartFile getFile() {
+		return file;
+	}
+	public void setFile(CommonsMultipartFile file) {
+		this.file = file;
+	}
 	
 	@Override
 	public String toString() {
@@ -135,8 +143,9 @@ public class MyIssue {
 				+ ", pititle=" + pititle + ", tititle=" + tititle + ", picontent=" + picontent + ", pistart=" + pistart
 				+ ", piend=" + piend + ", ispibook=" + ispibook + ", email=" + email + ", pidate=" + pidate
 				+ ", tidate=" + tidate + ", mygfilename=" + mygfilename + ", mymention=" + mymention + ", myurl="
-				+ myurl + ", pname=" + pname + "]";
+				+ myurl + ", pname=" + pname + ", file=" + file + "]";
 	}
+	
 	
 	
 

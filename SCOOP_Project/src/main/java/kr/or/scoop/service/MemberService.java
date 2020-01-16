@@ -114,12 +114,6 @@ public class MemberService {
 		return result;
 	}
 	
-	public int update(Member member) {
-		int result = 0;
-		MemberDao dao = sqlsession.getMapper(MemberDao.class);
-		result = dao.updateMember(member);
-		
-		return result;
-	}
+	
 	
 }

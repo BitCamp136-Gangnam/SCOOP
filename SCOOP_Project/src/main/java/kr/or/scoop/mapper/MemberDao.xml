@@ -53,14 +53,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="getMember" resultType="kr.or.scoop.dto.Member">
-		select email,name,pwd,dname,drank,address from member 
+		select email,name,pwd,dname,drank,address,profile from member 
 		where email = #{email}
 	</select>
 	
 	<update id="updateMember" parameterType="kr.or.scoop.dto.Member">
 		update member
-		set email = #{email,jdbcType=VARCHAR}, pwd = #{pwd,jdbcType=VARCHAR}, name=#{name,jdbcType=VARCHAR}, dname=#{dname,jdbcType=VARCHAR}, drank=#{drank} , address = #{address,jdbcType=VARCHAR}
-		where email = #{email,jdbcType=VARCHAR}
+		set email = #{email,jdbcType=VARCHAR}, pwd = #{pwd,jdbcType=VARCHAR}, name=#{name,jdbcType=VARCHAR}, dname=#{dname,jdbcType=VARCHAR}, drank=#{drank,jdbcType=INTEGER} , address = #{address,jdbcType=VARCHAR}, profile= #{profile,jdbcType=VARCHAR} where email = #{email,jdbcType=VARCHAR}
 	</update>
 	<resultMap type="kr.or.scoop.dto.Member" id="Member">
 	<result column="email" property="email"/>
@@ -90,7 +89,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<select id="projectMemberlist" parameterType="kr.or.scoop.dto.ProjectMemberlist" resultMap="ProjectMemberlist">
 	select m.email, m.name, t.tseq , t.pjuserrank from member m join tpmember t on m.email = t.email where t.tseq = #{tseq}
-</select>
+	</select>
 	<update id="changePassword" parameterType="kr.or.scoop.dto.Member">
 		update member
 		set pwd = #{pwd,jdbcType=VARCHAR}
