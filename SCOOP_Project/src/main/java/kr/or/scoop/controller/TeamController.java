@@ -1,12 +1,10 @@
 package kr.or.scoop.controller;
 
-import java.io.File;
-import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -15,16 +13,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import kr.or.scoop.dao.MemberDao;
 import kr.or.scoop.dao.ProjectDao;
 import kr.or.scoop.dao.TissueDao;
+import kr.or.scoop.dto.Member;
 import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.dto.ProjectMemberlist;
 import kr.or.scoop.dto.TeamPjt;
-import kr.or.scoop.dto.Tifile;
 import kr.or.scoop.dto.Tissue;
 import kr.or.scoop.service.BoardService;
 import kr.or.scoop.service.PrivateService;
@@ -115,7 +111,7 @@ public class TeamController {
 	// 이슈 작성
 	@RequestMapping(value = "writeIssue.do", method = {RequestMethod.POST,RequestMethod.GET})
 	public String writeIssue(String issuetitle, String fileclick, String issuecontent, String selectTeam, Model model,
-			HttpSession session, String mentions, MultipartHttpServletRequest request,Tifile tf) {
+			HttpSession session, String mentions, HttpServletRequest request) {
 		String path = "";
 		System.out.println("????"+selectTeam);
 		System.out.println("????"+(String) session.getAttribute("email"));
@@ -141,76 +137,14 @@ public class TeamController {
 			Tissue tissue = new Tissue();
 			tissue.setEmail((String)session.getAttribute("email"));
 			tissue.setTititle(issuetitle);
+			tissue.setFilename(fileclick);
 			tissue.setTicontent(issuecontent);
 			tissue.setTseq(Integer.parseInt(selectTeam));
-			String realFolder = "c:/upload2/";
-	        File dir = new File(realFolder);
-	        if (!dir.isDirectory()) {
-	            dir.mkdirs();
-	        }
-	 
-	        // 넘어온 파일을 리스트로 저장
-	       
 			int result = teamservice.writeTissue(tissue);
 			if(result >0) {
-				// 여기는 insert 성고
-				int upload = 0;
-				TissueDao dao = sqlsession.getMapper(TissueDao.class);
-				upload = dao.getSeq(tissue);
-				// 여기는 이제 select문해서 마지막 sequence값 받기
-					if(upload > 0) {
-						 List<MultipartFile> mf = new ArrayList<>();
-					        mf.add(request.getFile("files[]"));
-					        if (mf.size() == 0 && mf.get(0).getOriginalFilename().equals("")) {
-					             System.out.println("파일이없는경우");
-					        } else {
-					        	System.out.println("파일은있다");
-					            for (int i = 0; i < mf.size(); i++) {
-					            	
-					                // 파일 중복명 처리
-					                String genId = UUID.randomUUID().toString();
-					                // 본래 파일명
-					                String originalfileName = mf.get(i).getOriginalFilename();
-					                 Tifile tifile = null;
-					                int tiseq = 0; 
-					                tifile.setTiseq(tissue.getTiseq());
-					                tiseq = tifile.getTiseq();
-					                // 저장되는 파일 이름
-					 
-					                String savePath = realFolder; // 저장 될 파일 경로
-					 
-					                long fileSize = mf.get(i).getSize(); // 파일 사이즈
-					 
-					                try {
-										mf.get(i).transferTo(new File(savePath));
-									} catch (IllegalStateException e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
-										System.out.println("파일 저장 전에 터짐");
-									} catch (IOException e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
-									} // 파일 저장
-					 
-					                teamservice.fileUpload(originalfileName, fileSize, tf);
-					                System.out.println(originalfileName);
-					                System.out.println(fileSize);
-					            }
-					            
-					        }
-						 	System.out.println("result가 들어간다잉");
-					}
-				// 여기서 select한 값을 가지고 dto.getTiseq를 리턴
-				
-				// 리턴값에 Tifile.setTiseq(tissue.getTiseq);
-				
-				// 다음은 tifile insert into .... mapper . return 받아서 page뿌려줌
-				
-			        path = "user/ProjectDetail";
-				
+				path = "user/ProjectDetail";
 				System.out.println("success insert tissue");
 			}else {
-				System.out.println("에러다잉");
 				path = "user/ProjectDetail";
 				System.out.println("fail insert tissue");
 			}
@@ -218,4 +152,57 @@ public class TeamController {
 		return path;
 
 	}
+	
+	
+	// 칸반 받기
+	@RequestMapping(value = "cooperation-kanban.do", method = RequestMethod.GET)
+	public String kanbanView(int tseq, Model model) {
+		String path = "";
+		List<Tissue> tissuelist = teamservice.loadKanban(tseq);
+		if(tissuelist.isEmpty()) {
+			path = "cooperation/cooperation-kanban";
+		} else {
+			path = "cooperation/cooperation-kanban";
+			model.addAttribute("tissuelist", tissuelist);
+			System.out.println();
+		}
+		return path;
+
+	}
+	
+	//협업공간 권한설정
+	@RequestMapping(value = "teamSetting.do", method = {RequestMethod.POST,RequestMethod.GET})
+	public String teamSetting(int tseq, String[] email, int[] pjuserrank, Model model) {
+		int result = 0;
+		String viewpage;
+		
+		result = teamservice.teamSetting(pjuserrank, tseq, email);
+		
+		if(result > 0) {
+			System.out.println("권한 설정성공");
+			viewpage = "redirect:/userindex.do";
+		}else {
+			System.out.println("권한 설정 실패");
+			viewpage = "redirect:/userindex.do";
+		}
+		return viewpage;
+		
+	}
+	// 칸반 수정
+	@RequestMapping(value = "kanbanEdit.do", method = RequestMethod.POST)
+	public String kanbanEdit(int tseq, int tiseq, int isprocess, Model model) {
+		String path = "";
+		int result = 0;
+		System.out.println("result kanban edit 전");
+		result = teamservice.EditKanban(tseq, tiseq, isprocess);
+		if(result>0) {
+			path = "redirect:/cooperation-kanban.do?tseq="+tseq;
+			System.out.println("result kanban edit 성공");
+		} else {
+			path = "redirect:/cooperation-kanban.do?tseq="+tseq;
+			System.out.println("result kanban edit 실패");
+		}
+		return path;
+	}
+
 }

@@ -1,6 +1,8 @@
 package kr.or.scoop.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.scoop.dao.MyIssueDao;
 import kr.or.scoop.dao.NoticeDao;
@@ -82,17 +85,28 @@ public class BoardController {
 		return "issue/noticeDetail";
 	}
 	
-	
+	@ResponseBody 
 	@RequestMapping("/bookmark.do")
-	public String bookmark(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-		String status = request.getParameter("status");
-		String email = (String)session.getAttribute("email");
-		/* BoardDao dao = sqlSession.getMapper(BoardDao.class); 수정 */ 
+	public Map<String, Object> bookMark(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+
+		System.out.println(request.getParameter("piseq"));
+		/*
+		String piseq = request.getParameter("piseq"); String status =
+		request.getParameter("status");
+
+
+		System.out.println("piseq: "+piseq);
+		System.out.println("status: "+status);
+
+		*/
+		Map<String, Object> map = new HashMap<String, Object>();
 		
-		System.out.println("status : " + status);
-		System.out.println("email : " + email);
 		
-		return status;
+		MyIssueDao dao = sqlSession.getMapper(MyIssueDao.class);
+
+		
+		
+		return null;
 	}
 	
 	@RequestMapping(value="noticeEdit.do" , method=RequestMethod.POST)
