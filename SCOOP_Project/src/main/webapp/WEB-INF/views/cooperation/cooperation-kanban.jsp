@@ -112,6 +112,12 @@ function drop(ev) {
 			<div id="todolist" class="col-sm-3 kanban">
 			<div class="realkan" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #888">
 			<h5>발의됨</h5>
+			  <c:forEach items="${tissuelist}" var="tl">
+			  
+			  	  <div draggable="true" ondragstart="drag(event)" id="${tl.tiseq }" class="drags">${tl.tititle}
+			      </div>
+			  
+			  </c:forEach>
 			  <div draggable="true" ondragstart="drag(event)" id="drag1" class="drags">발의안건 1</div>
 			  <div draggable="true" ondragstart="drag(event)" id="drag2" class="drags">발의안건 2</div>
 			  <div draggable="true" ondragstart="drag(event)" id="drag3" class="drags">발의안건 3</div>
@@ -127,16 +133,19 @@ function drop(ev) {
 			<div id="doing" class="col-sm-3 kanban">
 				<div class="realkan" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #2671bd">
 				<h5>진행중</h5>
+
 				</div>
 			</div>
 			<div id="validate" class="col-sm-3 kanban" ondrop="drop(event)">
 				<div class="realkan" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #cca352">
 				<h5>일시중지</h5>
+				
 				</div>
 			</div>
 			<div id="complete" class="col-sm-3 kanban" ondrop="drop(event)">
 				<div class="realkan" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #26805c">
 				<h5>완료</h5>
+				
 				</div>
 			</div>
 		</div>

@@ -1,5 +1,7 @@
 package kr.or.scoop.service;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,5 +21,11 @@ public class TeamService {
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		result = dao.writeTissue(tissue);
 		return result;
+	}
+	
+	public List<Tissue> loadKanban(int tseq) {
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		List<Tissue> tissuelist = dao.loadKanban(tseq);
+		return tissuelist;
 	}
 }
