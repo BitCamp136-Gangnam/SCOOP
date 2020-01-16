@@ -18,7 +18,6 @@
      <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 
 </head>
-
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <style>
 .newissue{
@@ -27,6 +26,9 @@
 	padding-bottom: 0.7%;
 }
 </style>
+<script type="text/javascript">
+$('')
+</script>
 <body>
 
     <jsp:include page="/WEB-INF/views/commons/preloader.jsp"></jsp:include>
@@ -43,10 +45,10 @@
             Content body start
         ***********************************-->
         <div class="content-body">
-            <div class="container-fluid">
-        <div class="card">
-		<div class="row" style="margin: 2%">
-				<h3>내가 작성한 이슈</h3>
+        <div class="container-fluid row" style="padding-right: 0px; margin-right: 0px;margin-left: 0px; padding-left: 15px;">
+        <div class="card" style="padding-left: 0px;padding-right: 0px;min-width:900px;height: auto;">
+		<div class="row"style="margin: 2%" >
+				<h3 style="padding-top: 2%;padding-left: 1%;">여기에 제목 출력</h3>
 		</div>
 		<div class="row" style="margin-left: 2%;">
 			<ul class="nav nav-pills">
@@ -74,6 +76,12 @@
 			</c:forEach>
 		</div>
             <!-- #/ container -->
+            </div> 
+            <div class="card" style="float:right;background-color: #fff;margin-left:10px;padding-left: 0px;padding-right: 0px;width:400px; ">
+            <div style="min-height:450px;">
+            <img src="resources/images/logo/ScoopTitle.png" style="width:150px;height: auto;opacity:0.6;position:absolute;top:25%;left: 32%;">
+            </div>
+            <textarea id="enter" rows="5" placeholder="말하지 않아도 아는것은 초코파이뿐입니다                        댓글 입력 후 Enter해주세요" style="resize: none;height:180px;width:auto;border: 1px solid #c8c8c8;border-radius: 0.5rem;margin-left: 15px;margin-bottom: 2%;margin-right: 15px;overflow:auto;padding: 4%"></textarea>
             </div>
             </div>
         </div>
