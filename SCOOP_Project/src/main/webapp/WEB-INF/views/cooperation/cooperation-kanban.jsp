@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
@@ -9,7 +10,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <jsp:include page="/WEB-INF/views/commons/title.jsp"></jsp:include>
     <!-- Custom Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="<c:url value='/resources/css/style.css' />" rel="stylesheet">
 
 </head>
 <style>
@@ -153,11 +154,11 @@ function drop(ev) {
     <!--**********************************
         Scripts
     ***********************************-->
-    <script src="plugins/common/common.min.js"></script>
-    <script src="js/custom.min.js"></script>
-    <script src="js/settings.js"></script>
-    <script src="js/gleek.js"></script>
-    <script src="js/styleSwitcher.js"></script>
+    <script src="<c:url value='/resources/plugins/common/common.min.js' />"></script>
+    <script src="<c:url value='/resources/js/custom.min.js' />"></script>
+    <script src="<c:url value='/resources/js/settings.js' />"></script>
+    <script src="<c:url value='/resources/js/gleek.js' />"></script>
+    <script src="<c:url value='/resources/js/styleSwitcher.js' />"></script>
 
 </body>
 

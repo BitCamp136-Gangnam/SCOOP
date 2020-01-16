@@ -120,6 +120,9 @@ function project_filter() {
              <li class="nav-item">
                <a class="nav-link" href="./private-cal.jsp">팀 캘린더</a>
              </li>
+             <li class="nav-item">
+               <a class="nav-link" href="cooperation-kanban.do?tseq=${tpj.tseq}">칸반</a>
+             </li>
           </ul>
       </div>
       <hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">

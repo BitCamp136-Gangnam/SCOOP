@@ -151,4 +151,14 @@ public class TeamController {
 		return path;
 
 	}
+	
+	
+	// 칸반
+	@RequestMapping(value = "cooperation-kanban.do", method = RequestMethod.GET)
+	public String kanbanView(int tseq, Model model) {
+		String path = "cooperation/cooperation-kanban";
+		
+		return path;
+
+	}
 }
