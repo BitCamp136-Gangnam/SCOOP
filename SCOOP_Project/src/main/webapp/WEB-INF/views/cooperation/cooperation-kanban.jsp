@@ -57,7 +57,17 @@ function drag(ev) {
 function drop(ev) {
   ev.preventDefault();
   var data = ev.dataTransfer.getData("text");
-  ev.target.appendChild(document.getElementById(data));
+  if(ev.target.parentElement.getAttribute("id")=="todolist"){
+	    ev.target.appendChild(document.getElementById(data));
+	} else if(ev.target.parentElement.getAttribute("id")=="doing"){
+		ev.target.appendChild(document.getElementById(data));
+	} else if(ev.target.parentElement.getAttribute("id")=="validate"){
+		ev.target.appendChild(document.getElementById(data));
+	} else if(ev.target.parentElement.getAttribute("id")=="complete"){
+		ev.target.appendChild(document.getElementById(data));
+		
+	}
+ 
 }
 </script>
 <body>
@@ -99,7 +109,7 @@ function drop(ev) {
 		</div>
 		<hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
 		<div class="row" style="margin-left: 2%; margin-right: 2%;">
-			<div id="div1" class="col-sm-3 kanban">
+			<div id="todolist" class="col-sm-3 kanban">
 			<div class="realkan" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #888">
 			<h5>발의됨</h5>
 			  <div draggable="true" ondragstart="drag(event)" id="drag1" class="drags">발의안건 1</div>
@@ -114,17 +124,17 @@ function drop(ev) {
 			  <div draggable="true" ondragstart="drag(event)" id="drag10" class="drags">발의안건 10</div>
 			</div>
 			</div>
-			<div id="div2" class="col-sm-3 kanban">
+			<div id="doing" class="col-sm-3 kanban">
 				<div class="realkan" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #2671bd">
 				<h5>진행중</h5>
 				</div>
 			</div>
-			<div id="div3" class="col-sm-3 kanban" ondrop="drop(event)">
+			<div id="validate" class="col-sm-3 kanban" ondrop="drop(event)">
 				<div class="realkan" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #cca352">
 				<h5>일시중지</h5>
 				</div>
 			</div>
-			<div id="div4" class="col-sm-3 kanban" ondrop="drop(event)">
+			<div id="complete" class="col-sm-3 kanban" ondrop="drop(event)">
 				<div class="realkan" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #26805c">
 				<h5>완료</h5>
 				</div>
