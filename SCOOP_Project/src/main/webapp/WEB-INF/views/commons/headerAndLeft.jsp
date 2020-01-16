@@ -889,7 +889,7 @@ span {
             <button type="button" class="close" data-dismiss="modal">&times;</button>
          </div>
    
-         <form onsubmit="return checkz()" action="writeIssue.do" method="POST">
+         <form onsubmit="return checkz()" action="writeIssue.do" method="POST" enctype="multipart/form-data">
             <!-- Modal body -->
             <div class="modal-body">
                <!-- <p style="font-size: 12px">협업공간은 함께 일하는 멤버들끼리만 자료를 공유하고 협업할 수 있는 공간입니다.<br>
@@ -899,8 +899,8 @@ span {
                   name="issuetitle" style="width: 100%" placeholder="제목을 입력해 주세요.">
                <br> <label for="content">이슈 설명</label> <span id="filename"></span>
                <img id="imgpreview" alt="사진 미리보기 자리"
-                  style="display: none; width: 40px; height: 40px" src="#" /> <input
-                  type="file" id="fileclick" name="files[0]" hidden="">
+                  style="display: none; width: 40px; height: 40px" src="#" /> 
+                  <input type="file" multiple="multiple"  id="fileclick" name="files[]" hidden="">
                <button type="button" id="auth" disabled hidden="">Authenticate</button>
                <textarea class="form-control createmodal" rows="5"
                   id="issuecontent" name="issuecontent" style="width: 100%"

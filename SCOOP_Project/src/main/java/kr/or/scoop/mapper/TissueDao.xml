@@ -8,6 +8,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 insert into tissue (tiseq,tseq,email,tititle,ticontent,isprocess, istbook, issee, tidate)
   values (TISEQ_TISSUE_SEQ.NEXTVAL, #{tseq}, #{email}, #{tititle}, #{ticontent}, 0, 0, 0, sysdate)
 </insert>
+<insert id="uploadFiles" parameterType="kr.or.scoop.dto.Tifile">
+	insert into tifile (tiseq , tfilename,tfilesize) values (#{tiseq},#{files},#{filesize})
+</insert>
+<select id="getSeq" resultType="kr.or.scoop.dto.Tissue">
+select max(tiseq) from tissue
+</select>
 <resultMap type="kr.or.scoop.dto.Member" id="Member">
 	<result column="tseq" property="tseq"/>
 	<result column="email" property="email"/>
