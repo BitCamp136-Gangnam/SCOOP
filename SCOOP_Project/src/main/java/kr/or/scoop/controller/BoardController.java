@@ -10,7 +10,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -20,7 +19,6 @@ import kr.or.scoop.dao.NoticeDao;
 import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.dto.Notice;
 import kr.or.scoop.service.BoardService;
-import sun.print.resources.serviceui;
 
 @Controller
 public class BoardController {

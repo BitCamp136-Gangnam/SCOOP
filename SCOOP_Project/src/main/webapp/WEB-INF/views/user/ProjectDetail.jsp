@@ -54,19 +54,35 @@ $(function(){
       $('#c_Management').show();
       $('#c_Information').hide();
    });
-   for(let i=0;i<$('.admin_EditIcon').length;i++){
+/*    $('.adm').click(function(){
+	   if($(this).val()=='on'){
+		   $(this).parent().parent().parent().hide();
+		   $(this).text('관리자 권한 해제')
+		   $(this).parent().parent().parent().prev().prepend('<i class="fas fa-user-cog" id="icon_First" style="font-size: 20px;color:#195ac2;"></i>')
+		   $(this).val('off')
+	   }else{
+		   $(this).parent().parent().parent().hide();
+		   $(this).text('관리자 권한 설정')
+		   $(this).parent().parent().parent().prev().eq(0).remove();
+		   $(this).val('on')
+	   }
+   }) */
+  for(let i=0;i<$('.admin_EditIcon').length;i++){
 	   $('#adminPlus'+i).click(function(){
-		   console.log("admplus 포문")
-	      $(this).hide();
-	      $('#adminCancle'+i).show();
+		   console.log("플러스")
+		  $(this).text('관리자 권한 해제')
+		  $(this).attr('id','adminCancle'+i);
+		  $(this).attr('class','adminCancle');
 	      $('#iconAdd'+i).prepend('<i class="fas fa-user-cog" id="icon_First'+i+'" style="font-size: 20px;color:#195ac2;"></i>');
 	   });
    }
    for(let i=0;i<$('.admCancle').length;i++){
 	   $('#adminCancle'+i).click(function(){
-		      $(this).hide();
-		      $('#adminPlus'+i).show();
-		      $('#icon_First'+i).remove();
+		   console.log("캔슬")
+		   $(this).text('관리자 권한 설정')
+		   $(this).attr('id','adminPlus'+i);
+		  $(this).attr('class','adminPlus');
+		   $('#icon_First'+i).remove();
 		   });
    }
 });
@@ -190,16 +206,24 @@ function project_filter() {
                         <span class="log-user" id="iconAdd${status.index}" data-toggle="dropdown" style="float: right;top: 0px;padding-top: 10px;">
                         <c:choose>
                         	<c:when test="${pm.pjuserrank==100}"><i class="fas fa-user-cog" id="icon_First${status.index}" style="font-size: 20px;color:#195ac2;"></i></c:when>
-                        	<c:when test="${pm.pjuserrank==200}">매니저</c:when>
+                        	<%-- <c:when test="${pm.pjuserrank==200}">매니저</c:when> --%>
                         </c:choose>
                            <i class="fas fa-cog admin_EditIcon" id="admin_EditIcon${status.index}" style="cursor: pointer;font-size: 20px;color:black;"></i>
                         </span>
-                        <div class="drop-down dropdown-language animated fadeIn  dropdown-menu"  >
+                        <div class="drop-down dropdown-language animated fadeIn  dropdown-menu"  id="admindrop">
                         <div class="dropdown-content-body">
                         <ul style="margin-bottom: 0px; padding-bottom: 0px;padding-top: 0px;">
-                           <li id="adminPlus${status.index}" class="admPlus">관리자로 설정</li>
-                           <li id="adminCancle${status.index}" class="admCancle" style="display: none;">관리자 권한 해제</li>
-                           <li>멤버 탈퇴</li>
+                        <c:choose>
+                        	<c:when test="${pm.pjuserrank==100}">
+	                           <li id="adminCancle${status.index}" value="off" class="adm">관리자 권한 해제</li>
+	                           <li>멤버 탈퇴</li>
+                        	</c:when>
+                        	<%-- <c:when test="${pm.pjuserrank==200}">매니저</c:when> --%>
+                        	<c:when test="${pm.pjuserrank==300}">
+	                           <li id="adminPlus${status.index}" value="on" class="adm">관리자로 설정</li>
+                        	   <li>멤버 탈퇴</li>
+                        	</c:when>
+                        </c:choose>
                         </ul> 
                         </div>
                         </div>
