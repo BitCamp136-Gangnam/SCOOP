@@ -439,9 +439,7 @@ public class MemberController {
 		
 		
 		MemberDao dao = sqlsession.getMapper(MemberDao.class);
-		System.out.println("가나다라");
 		member.setPwd(this.bCryptPasswordEncoder.encode(member.getPwd()));
-		System.out.println("마바사아");
 		dao.updateMember(member);
 		
 		return "redirect:/memberEdit.do";
