@@ -1255,6 +1255,7 @@ $('.menli').keydown(function(event) {
 	}
 	$("#fileclick").change(function() {
 		readURL(this);
+		console.log($("#fileclick").val());
 		$('#filename').empty();
 		$('#filename').append($("#fileclick").val().substring(12));
 		var text = "";
