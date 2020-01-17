@@ -7,19 +7,13 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 public class Tifile {
 	private int tiseq;
 	private List<CommonsMultipartFile> files;
-	private String tfilesize;
+	private String tfilename;
+	private long tfilesize;
 	public int getTiseq() {
 		return tiseq;
 	}
 	public void setTiseq(int tiseq) {
 		this.tiseq = tiseq;
-	}
-	
-	public String getTfilesize() {
-		return tfilesize;
-	}
-	public void setTfilesize(String tfilesize) {
-		this.tfilesize = tfilesize;
 	}
 	public List<CommonsMultipartFile> getFiles() {
 		return files;
@@ -27,13 +21,24 @@ public class Tifile {
 	public void setFiles(List<CommonsMultipartFile> files) {
 		this.files = files;
 	}
+	public String getTfilename() {
+		return tfilename;
+	}
+	public void setTfilename(String tfilename) {
+		this.tfilename = tfilename;
+	}
+	public long getTfilesize() {
+		return tfilesize;
+	}
+	public void setTfilesize(long tfilesize) {
+		this.tfilesize = tfilesize;
+	}
 	
 	@Override
 	public String toString() {
-		return "Tifile [tiseq=" + tiseq + ", files=" + files + ", tfilesize=" + tfilesize + "]";
+		return "Tifile [tiseq=" + tiseq + ", files=" + files + ", tfilename=" + tfilename + ", tfilesize=" + tfilesize
+				+ "]";
 	}
-	
-	
 	
 	
 	

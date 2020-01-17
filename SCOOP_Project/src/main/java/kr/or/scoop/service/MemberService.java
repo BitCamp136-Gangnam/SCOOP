@@ -115,6 +115,11 @@ public class MemberService {
 		return result;
 	}
 	
-	
+	public int updateRole(String email) {
+		int result = 0;
+		MemberDao dao = sqlsession.getMapper(MemberDao.class);
+		result = dao.updateRole(email);
+		return result;
+	}
 	
 }

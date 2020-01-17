@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 public class Role {
 	private String email;
 	private String rname;
+	private int count;
 	
 	public String getEmail() {
 		return email;
@@ -19,11 +20,19 @@ public class Role {
 	public void setRname(String rname) {
 		this.rname = rname;
 	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
 	
 	@Override
 	public String toString() {
-		return "Role [email=" + email + ", rname=" + rname + "]";
+		return "Role [email=" + email + ", rname=" + rname + ", count=" + count + "]";
 	}
+	
+	
 	
 	
 }

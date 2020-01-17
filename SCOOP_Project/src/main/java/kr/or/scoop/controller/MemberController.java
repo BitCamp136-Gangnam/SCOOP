@@ -24,6 +24,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.velocity.VelocityEngineFactoryBean;
 import org.springframework.ui.velocity.VelocityEngineUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
@@ -189,17 +190,21 @@ public class MemberController {
 	@RequestMapping(value = "/userindex.do", method = RequestMethod.GET)
 	public String userindex(HttpSession session,Model model) {
 		String email = "";
+		
 		email = (String)session.getAttribute("email");
 		ProjectDao noticeDao = sqlsession.getMapper(ProjectDao.class);
 		MemberDao memberdao = sqlsession.getMapper(MemberDao.class);
 		Role role = memberdao.getRole(email);
+		int count = memberdao.getCount(email);
+		System.out.println(count);
+		System.out.println(role);
 		session.setAttribute("role", role.getRname());
+		session.setAttribute("count", count);
 		List<Tpmember> pjtlist = noticeDao.getPJT(email);
 		if(pjtlist!=null) {
 			session.setAttribute("pjtlist", pjtlist);
 			AlarmDao dao = sqlsession.getMapper(AlarmDao.class);
 			List<Alarm> alarm = dao.getAlarm((String)session.getAttribute("email"));
-			System.out.println(alarm);
 			
 			if(alarm == null) {
 				
@@ -457,5 +462,18 @@ public class MemberController {
 		return "user/app-external";
 	}
 	
+	@RequestMapping(value="updateRole.do", method=RequestMethod.POST)
+	public String updateRole(HttpSession session) {
+		int result = 0;
+		String viewpage;
+		result = service.updateRole((String)session.getAttribute("email"));
+		if(result > 0) {
+			viewpage = "redirect:/paymentPage.do";
+		}else {
+			viewpage = "user/userindex";
+		}
+		return viewpage;
+		
+	}
 	
 }

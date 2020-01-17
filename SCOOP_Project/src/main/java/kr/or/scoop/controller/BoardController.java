@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.scoop.dao.MyIssueDao;
 import kr.or.scoop.dao.NoticeDao;
+import kr.or.scoop.dao.TissueDao;
 import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.dto.Notice;
+import kr.or.scoop.dto.Tissue;
 import kr.or.scoop.service.BoardService;
 
 @Controller
@@ -41,7 +43,26 @@ public class BoardController {
 		List<MyIssue> pi = dao.MyWriteIssueList(email);
 		model.addAttribute("pi",pi);
 		model.addAttribute("ti",ti);
-		return "sidebar/app-myissue";
+		return "issue/myissue";
+	}
+	
+	// 마이이슈디테일 
+	@RequestMapping(value = "/myissueDetail.do", method = {RequestMethod.POST,RequestMethod.GET})
+	public String myissueDetail(int piseq, Model model) {
+		
+		MyIssueDao dao = sqlSession.getMapper(MyIssueDao.class);
+		MyIssue myissue = dao.myissueDetail(piseq);
+		model.addAttribute("myissue", myissue);
+		return "issue/myissueDetail";
+	}
+	
+	// 팀이슈디테일 
+	@RequestMapping(value="/teamissueDetail.do",method = {RequestMethod.POST,RequestMethod.GET})
+	public String teamissueDetail(int tiseq, Model model) {
+		TissueDao dao = sqlSession.getMapper(TissueDao.class);
+		Tissue tissue = dao.teamissueDetail(tiseq);
+		model.addAttribute("tissue", tissue);
+		return "issue/teamissueDetail";
 	}
 
 	// 캘린더
@@ -85,33 +106,28 @@ public class BoardController {
 		return "issue/noticeDetail";
 	}
 	
-	@RequestMapping(value="/bookmark.do", method=RequestMethod.POST)
-	public String bookMark(HttpSession session, int piseq, String status, Model model) {
-		String email = (String)session.getAttribute("email");
-		String viewpage = "";
+	@ResponseBody 
+	@RequestMapping("/bookmark.do")
+	public Map<String, Object> bookMark(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		
+		System.out.println(request.getParameter("piseq"));
+		/*
+		String piseq = request.getParameter("piseq"); String status =
+		request.getParameter("status");
+
+
+		System.out.println("piseq: "+piseq);
+		System.out.println("status: "+status);
+
+		*/
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		
 		MyIssueDao dao = sqlSession.getMapper(MyIssueDao.class);
+
 		
-		int ispibook = (status.equals("bookoff")) ? 1 : 0;
 		
-		System.out.println("piseq : " + piseq);
-		System.out.println("ispibook : " + ispibook);
-		System.out.println("email : " + email);
-		
-		int result = dao.bookMark(piseq, ispibook, email);
-		
-		if(status.equals("bookoff") && result > 0) {
-			status = "bookon";
-			viewpage = "redirect:private.do";
-		}else if(status.equals("bookon") && result > 0) {
-			status = "bookoff";
-			viewpage = "redirect:private.do";
-		}
-		
-		model.addAttribute("status", status);
-		
-		System.out.println(model);
-		
-		return viewpage;
+		return null;
 	}
 	
 	@RequestMapping(value="noticeEdit.do" , method=RequestMethod.POST)

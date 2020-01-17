@@ -6,14 +6,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <insert id="writeTissue" parameterType="kr.or.scoop.dto.Tissue" >
 insert into tissue (tiseq,tseq,email,tititle,ticontent,isprocess, istbook, issee, tidate)
-  values (TISEQ_TISSUE_SEQ.NEXTVAL, #{tseq}, #{email}, #{tititle}, #{ticontent}, 0, 0, 0, sysdate)
+  values (TISEQ_TISSUE_SEQ.NEXTVAL, #{tseq}, #{email}, #{tititle}, #{ticontent}, 0, 0, 0, sysdate,)
 </insert>
-<insert id="uploadFiles" parameterType="kr.or.scoop.dto.Tifile">
-	insert into tifile (tiseq , tfilename,tfilesize) values (#{tiseq},#{files},#{filesize})
-</insert>
-<select id="getSeq" resultType="kr.or.scoop.dto.Tissue">
-select max(tiseq) from tissue
-</select>
 <resultMap type="kr.or.scoop.dto.Member" id="Member">
 	<result column="tseq" property="tseq"/>
 	<result column="email" property="email"/>
@@ -44,6 +38,9 @@ select max(tiseq) from tissue
 	select *
 	from tissue
 	where tseq = #{tseq}
+</select>
+<select id="teamissueDetail" resultType="kr.or.scoop.dto.Tissue">
+	SELECT * FROM tissue WHERE tiseq = #{tiseq, jdbcType=INTEGER}
 </select>
 <update id="teamSetting">
 	update tpmember set pjuserrank=#{param1} where tseq=#{param2} and email=#{param3}

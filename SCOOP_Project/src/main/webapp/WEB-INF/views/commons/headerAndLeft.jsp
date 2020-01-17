@@ -2,6 +2,7 @@
    pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="role" value="${sessionScope.role}" />
+<c:set var="count" value="${sessionScope.count}" />
 <style>
 input::placeholder {
    color: #fff;
@@ -755,11 +756,24 @@ span {
                   &nbsp;북마크</span>
          </a></li>
          <li class="nav-label" style="padding-bottom: 0"><b>협업 공간</b></li>
-         <li class="nav-label"><button type="button" class="btn"
+         <li class="nav-label">
+         <c:choose>
+         <c:when test="${count == 3 and role == 'ROLE_USER'}">
+         <button type="button" class="btn"
+               style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;"
+               data-toggle="modal" data-target="#myModal" disabled="disabled">
+               <i class="icon-note menu-icon"></i> 갯수 초과
+        </button>
+        </c:when>
+        <c:otherwise>
+         <button type="button" class="btn"
                style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;"
                data-toggle="modal" data-target="#myModal">
                <i class="icon-note menu-icon"></i> 새 협업공간 만들기
-            </button></li>
+        </button>
+        </c:otherwise>
+        </c:choose>
+            </li>
          <li class="nav-label" style="padding-top: 0"><input
             onkeyup="filter()" type="search" id="searchpjt" class="form-control"
             style="border-radius: 0.25rem; height: 20px" placeholder="협업공간 검색"></li>
@@ -1255,6 +1269,7 @@ $('.menli').keydown(function(event) {
 	}
 	$("#fileclick").change(function() {
 		readURL(this);
+		console.log($("#fileclick").val());
 		$('#filename').empty();
 		$('#filename').append($("#fileclick").val().substring(12));
 		var text = "";
