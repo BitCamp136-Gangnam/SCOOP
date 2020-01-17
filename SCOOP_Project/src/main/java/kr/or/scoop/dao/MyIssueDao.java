@@ -16,7 +16,7 @@ public interface MyIssueDao {
 	public List<MyIssue> MyWriteIssueList(String email);
 	
 	//내가 작성한 팀 이슈 리스트
-	public List<Tissue> MyWriteTiisueList(String email);
+	public List<MyIssue> MyWriteTiisueList(String email);
 	
 	//북마크 추가 제거
 	public int bookMark(int piseq, int ispibook);

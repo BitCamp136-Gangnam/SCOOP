@@ -8,7 +8,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 @Repository
 public class MyIssue {
-	
+	private int tseq;
 	private int piseq;
 	private int tiseq;
 	private String pfilename;
@@ -28,6 +28,13 @@ public class MyIssue {
 	private String pname;
 	private CommonsMultipartFile file;
 	
+	
+	public int getTseq() {
+		return tseq;
+	}
+	public void setTseq(int tseq) {
+		this.tseq = tseq;
+	}
 	public int getPiseq() {
 		return piseq;
 	}
@@ -136,15 +143,15 @@ public class MyIssue {
 	public void setFile(CommonsMultipartFile file) {
 		this.file = file;
 	}
-	
 	@Override
 	public String toString() {
-		return "MyIssue [piseq=" + piseq + ", tiseq=" + tiseq + ", pfilename=" + pfilename + ", pfilesize=" + pfilesize
-				+ ", pititle=" + pititle + ", tititle=" + tititle + ", picontent=" + picontent + ", pistart=" + pistart
-				+ ", piend=" + piend + ", ispibook=" + ispibook + ", email=" + email + ", pidate=" + pidate
-				+ ", tidate=" + tidate + ", mygfilename=" + mygfilename + ", mymention=" + mymention + ", myurl="
-				+ myurl + ", pname=" + pname + ", file=" + file + "]";
+		return "MyIssue [tseq=" + tseq + ", piseq=" + piseq + ", tiseq=" + tiseq + ", pfilename=" + pfilename
+				+ ", pfilesize=" + pfilesize + ", pititle=" + pititle + ", tititle=" + tititle + ", picontent="
+				+ picontent + ", pistart=" + pistart + ", piend=" + piend + ", ispibook=" + ispibook + ", email="
+				+ email + ", pidate=" + pidate + ", tidate=" + tidate + ", mygfilename=" + mygfilename + ", mymention="
+				+ mymention + ", myurl=" + myurl + ", pname=" + pname + ", file=" + file + "]";
 	}
+	
 	
 	
 	
