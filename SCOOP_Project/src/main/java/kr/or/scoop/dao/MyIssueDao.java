@@ -19,7 +19,7 @@ public interface MyIssueDao {
 	public List<MyIssue> MyWriteTiisueList(String email);
 	
 	//북마크 추가 제거
-	public int bookMark(int piseq, int ispibook);
+	public int bookMark(int piseq, int ispibook, String email);
 	
 	//내가 작성한 이슈 디테일
 	public MyIssue myissueDetail(int piseq);

@@ -6,8 +6,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.or.scoop.dao.ProjectDao;
 import kr.or.scoop.dao.TissueDao;
-import kr.or.scoop.dto.Tifile;
+import kr.or.scoop.dto.TeamPjt;
 import kr.or.scoop.dto.Tissue;
 
 @Service
@@ -55,6 +56,12 @@ public class TeamService {
 		System.out.println(email);
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		result = dao.banMember(tseq, email);
+		return result;
+	}
+	public int teamUpdate(TeamPjt teampjt) {
+		int result = 0;
+		ProjectDao dao = sqlsession.getMapper(ProjectDao.class);
+		result = dao.updatePjt(teampjt);
 		return result;
 	}
 }
