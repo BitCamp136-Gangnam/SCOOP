@@ -46,5 +46,8 @@ public interface MemberDao {
 
 	//프로젝트 멤버 리스트 출력 -- 도연
 	public List<ProjectMemberlist> projectMemberlist(int tseq);
+	
+	//롤 권한 변경
+	public int updateRole(String email);
 
 }

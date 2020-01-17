@@ -24,15 +24,6 @@ public class TeamService {
 		return result;
 	}
 	
-
-	public int fileUpload(String originalfileName, long fileSize,Tifile tf) {
-		int upload = 0;
-		System.out.println("파일 서비스 왐마");
-		TissueDao dao = sqlsession.getMapper(TissueDao.class);
-		upload = dao.uploadFiles(tf);
-		return upload;
-	}
-	
 	public List<Tissue> loadKanban(int tseq) {
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		List<Tissue> tissuelist = dao.loadKanban(tseq);

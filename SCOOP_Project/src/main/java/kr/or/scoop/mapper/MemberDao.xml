@@ -97,4 +97,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		set pwd = #{pwd,jdbcType=VARCHAR}
 		where email = #{email,jdbcType=VARCHAR}
 	</update>
+	<update id="updateRole" parameterType="kr.or.scoop.dto.Role">
+		update role set rname = 'role_charge' where email = #{email}
+	</update>
 </mapper>
