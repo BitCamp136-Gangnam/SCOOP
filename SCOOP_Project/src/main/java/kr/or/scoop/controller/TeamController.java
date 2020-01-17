@@ -1,11 +1,8 @@
 package kr.or.scoop.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,16 +12,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import kr.or.scoop.dao.MemberDao;
 import kr.or.scoop.dao.ProjectDao;
-import kr.or.scoop.dao.TissueDao;
 import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.dto.ProjectMemberlist;
 import kr.or.scoop.dto.TeamPjt;
-import kr.or.scoop.dto.Tifile;
 import kr.or.scoop.dto.Tissue;
 import kr.or.scoop.service.BoardService;
 import kr.or.scoop.service.PrivateService;

@@ -39,6 +39,9 @@ insert into tissue (tiseq,tseq,email,tititle,ticontent,isprocess, istbook, issee
 	from tissue
 	where tseq = #{tseq}
 </select>
+<select id="teamissueDetail" resultType="kr.or.scoop.dto.Tissue">
+	SELECT * FROM tissue WHERE tiseq = #{tiseq, jdbcType=INTEGER}
+</select>
 <update id="teamSetting">
 	update tpmember set pjuserrank=#{param1} where tseq=#{param2} and email=#{param3}
 </update>

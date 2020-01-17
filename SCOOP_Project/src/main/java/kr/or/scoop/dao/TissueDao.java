@@ -16,4 +16,7 @@ public interface TissueDao {
 	public int kanbanEdit(int tseq, int tiseq, int isprocess);
 		
 	public int banMember(int tseq, String email);
+	
+	//팀 이슈 디테일
+	public Tissue teamissueDetail(int tiseq);
 }
