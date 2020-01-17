@@ -50,7 +50,7 @@
         <div class="container-fluid row" style="padding-right: 0px; margin-right: 0px;margin-left: 0px; padding-left: 15px;">
         <div class="card" style="padding-left: 2%;padding-right: 0px; padding-top:1%;min-width:900px;height: auto;overflow: auto;">
 		<div class="row"style="margin:2% 2% 0 2%" >
-				<h3 id="myissueSubject" style="padding-top: 2%;padding-left: 1%;">${myissue.pititle}</h3>
+				<h3 id="myissueSubject" style="padding-top: 2%;padding-left: 1%;">${tissue.tititle}</h3>
 		</div>
 		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>2019.08.07 ~ 2020.2.12(캘린더 설정 날짜 넣으면 됨)</div>
 		<div class="myissueDetail" id="myissueMention"><sup><i class="fas fa-quote-left" style="color:#ca0000;"></i></sup> 멘션 멤버 이름 넣는 곳 <sup><i class="fas fa-quote-right"style="color:#ca0000;"></i></sup></div>
@@ -59,7 +59,7 @@
 		</div>
 		<div class="myissueDetail" id="myissueTodo"><i class="far fa-check-circle"style="padding-right: 5px;"></i>From 멤버이름<i class="fas fa-long-arrow-alt-right" style="margin-left:5px;margin-right: 5px;"></i>To 멤버 이름 </div>
         <div class="myissueDetail">
-        ${myissue.picontent}
+        ${tissue.ticontent}
         </div>    
             <!-- #/ container -->
             </div> 

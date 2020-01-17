@@ -13,16 +13,16 @@ insert into myissue (piseq,pfilename,pfilesize,pititle,picontent,pistart, piend,
 <select id="MyWriteIssueList" resultType="kr.or.scoop.dto.MyIssue">
 select piseq,pititle,pidate from myissue where email = #{email}
 </select>
-<select id="MyWriteTiisueList" resultType="kr.or.scoop.dto.Tissue">
+<select id="MyWriteTiisueList" resultType="kr.or.scoop.dto.MyIssue">
 select t.tseq,t.tititle,t.tidate,t.tiseq,p.pname from tissue t join teampjt p on t.tseq = p.tseq where t.email = #{email}
 </select>
 <select id="myissueDetail" resultType="kr.or.scoop.dto.MyIssue">
 	SELECT piseq, pititle, picontent, pidate, ispibook FROM myissue WHERE piseq = #{piseq, jdbcType=INTEGER}
 </select>
 <!-- 북마크 -->
-<update id="bookMark">
+<update id="bookMark" parameterType="kr.or.scoop.dto.MyIssue">
 	update myissue
-	set ispibook = #{bookMark}
-	where piseq = #{piseq}
+	set ispibook = #{param2}
+	where piseq=#{param1} and email=#{param3}
 </update>
 </mapper>

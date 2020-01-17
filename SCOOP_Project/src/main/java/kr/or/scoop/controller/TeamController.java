@@ -88,7 +88,8 @@ public class TeamController {
 	
 	//팀 디테일 
 	@RequestMapping(value = "projectDetail.do" , method = RequestMethod.GET)
-	public String JoinProject(int tseq, Model model) {
+	public String JoinProject(HttpSession session, int tseq, Model model) {
+		String email = (String)session.getAttribute("email");
 		System.out.println(tseq);
 		ProjectDao dao = sqlsession.getMapper(ProjectDao.class);
 		MemberDao md = sqlsession.getMapper(MemberDao.class);
@@ -98,9 +99,15 @@ public class TeamController {
 		System.out.println(pjt);
 		System.out.println(tp);
 		System.out.println(projectMemberlist);
+		
+		int rank = dao.searchRank(tseq, email);
+		
+		System.out.println("rank : " + rank);
+		
 		model.addAttribute("tpj",pjt); //프로젝트 이름 , 설명
 		model.addAttribute("tp",tp); //프로젝트 글 목록
 		model.addAttribute("projectmember", projectMemberlist);
+		model.addAttribute("rank", rank);
 		return "user/ProjectDetail";
 		
 	}
