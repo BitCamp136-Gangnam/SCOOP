@@ -58,4 +58,12 @@ public class TeamService {
 		result = dao.kanbanEdit(tseq, tiseq, isprocess);
 		return result;
 	}
+	public int banMember(int tseq, String email) {
+		int result = 0;
+		System.out.println(tseq);
+		System.out.println(email);
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		result = dao.banMember(tseq, email);
+		return result;
+	}
 }
