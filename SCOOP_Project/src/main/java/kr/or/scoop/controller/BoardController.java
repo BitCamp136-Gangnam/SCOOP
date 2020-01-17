@@ -39,7 +39,7 @@ public class BoardController {
 		String email = "";
 		email = (String)session.getAttribute("email");
 		MyIssueDao dao = sqlSession.getMapper(MyIssueDao.class);
-		List<MyIssue> ti = dao.MyWriteTiisueList(email);
+		List<Tissue> ti = dao.MyWriteTiisueList(email);
 		List<MyIssue> pi = dao.MyWriteIssueList(email);
 		model.addAttribute("pi",pi);
 		model.addAttribute("ti",ti);
