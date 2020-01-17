@@ -3,6 +3,7 @@ package kr.or.scoop.dao;
 import java.util.List;
 
 import kr.or.scoop.dto.Tifile;
+import kr.or.scoop.dto.Tiseq;
 import kr.or.scoop.dto.Tissue;
 
 public interface TissueDao {
@@ -20,6 +21,6 @@ public interface TissueDao {
 		public int uploadFiles(Tifile tf);
 		
 		//팀이슈 마지막 시퀀스 
-		public int getSeq(Tissue tissue);
+		public int getSeq(Tiseq tiseq);
 
 }
