@@ -59,6 +59,15 @@ function requestPay(){
             	    		  icon: "error",
             	    		  button: "확인"
             	    		})
+            	    		 jQuery.ajax({
+                   			 url: "updateRole.do", //cross-domain error가 발생하지 않도록 주의해주세요
+                   			 type: 'POST',
+                   			 dataType: 'json',
+                    			data: {
+                        		imp_uid : rsp.imp_uid
+                        //기타 필요한 데이터가 있으면 추가 전달
+                    		}
+            	    		
                     } else {
                         //[3] 아직 제대로 결제가 되지 않았습니다.
                         //[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.

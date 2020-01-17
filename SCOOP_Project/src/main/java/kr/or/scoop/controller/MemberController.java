@@ -24,6 +24,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.velocity.VelocityEngineFactoryBean;
 import org.springframework.ui.velocity.VelocityEngineUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
@@ -457,5 +458,17 @@ public class MemberController {
 		return "user/app-external";
 	}
 	
-	
+	@RequestMapping(value="updateRole.do", method=RequestMethod.POST)
+	public String updateRole(HttpSession session) {
+		int result = 0;
+		String viewpage;
+		result = service.updateRole((String)session.getAttribute("email"));
+		if(result > 0) {
+			viewpage = "redirect:/paymentPage.do";
+		}else {
+			viewpage = "user/userindex";
+		}
+		return viewpage;
+		
+	}
 }
