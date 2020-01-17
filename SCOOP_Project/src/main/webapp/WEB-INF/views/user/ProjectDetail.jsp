@@ -76,23 +76,54 @@ $(function(){
 	   }
 	   
    })
-});
+   
+   $('.banMember').click(function(){
+	   var memDiv = $(this).parents(".search_NameEmail");
+	   Swal.fire({
+		   title: '정말로 삭제하시겠습니까?',
+		   text: "확인을 누르시면 되돌릴수 없습니다!",
+		   icon: 'warning',
+		   showCancelButton: true,
+		   confirmButtonColor: '#d33',
+		   cancelButtonColor: '#c8c8c8',
+		   confirmButtonText: '확인',
+		   cancelButtonText: '취소'
+		 }).then((result) => {
+		   if (result.value) {
+				$.ajax({
+					type : 'post',
+					url : 'banMember.do',
+					data : {
+						tseq:$('#getTseq').val(),
+						email:$(this).attr('value')
+					},
+					success : function(data) {
+						console.log("ajax success"+data);
+						console.log(memDiv);
+						$(memDiv).remove();
+					}
+				});
+		   }
+		 })
+		})
+	});
 
-/* 프로젝트 이름 검색 - 도연 */
-function project_filter() {
-   var value, name, item, i;
-   value = document.getElementById("searchId").value.toUpperCase();
-   item = document.getElementsByClassName("search_NameEmail");
-   for (i = 0; i < item.length; i++) {
-      name = item[i].getElementsByClassName("finalsearch");
-      console.log(name);
-      if (name[0].innerText.toUpperCase().indexOf(value) > -1 || name[1].innerText.toUpperCase().indexOf(value) > -1) {
-         item[i].style.display = "block";
-      } else {
-         item[i].style.display = "none";
-      }
-   }
-}
+	/* 프로젝트 이름 검색 - 도연 */
+	function project_filter() {
+		var value, name, item, i;
+		value = document.getElementById("searchId").value.toUpperCase();
+		item = document.getElementsByClassName("search_NameEmail");
+		for (i = 0; i < item.length; i++) {
+			name = item[i].getElementsByClassName("finalsearch");
+			console.log(name);
+			if (name[0].innerText.toUpperCase().indexOf(value) > -1
+					|| name[1].innerText.toUpperCase().indexOf(value) > -1) {
+				item[i].style.display = "block";
+			} else {
+				item[i].style.display = "none";
+			}
+		}
+	}
 </script>
 <body>
     <jsp:include page="/WEB-INF/views/commons/preloader.jsp"></jsp:include>
@@ -210,12 +241,12 @@ function project_filter() {
                         <c:choose>
                         	<c:when test="${pm.pjuserrank==100}">
 	                           <li id="adminCancle${status.index}" value="off" class="adm">관리자 권한 해제</li>
-	                           <li>멤버 탈퇴</li>
+	                           <li class="banMember" value="${pm.email}">멤버 탈퇴</li>
                         	</c:when>
                         	<%-- <c:when test="${pm.pjuserrank==200}">매니저</c:when> --%>
                         	<c:when test="${pm.pjuserrank==300}">
 	                           <li id="adminPlus${status.index}" value="on" class="adm">관리자로 설정</li>
-                        	   <li>멤버 탈퇴</li>
+                        	   <li class="banMember" value="${pm.email}">멤버 탈퇴</li>
                         	</c:when>
                         </c:choose>
                         </ul> 
@@ -233,7 +264,7 @@ function project_filter() {
 
             <!-- Modal footer -->
 
-            <input type="hidden" name="tseq" value="${tpj.tseq}">
+            <input type="hidden" id="getTseq" name="tseq" value="${tpj.tseq}">
             <!-- <input type="hidden" name="ischarge" value="0"> -->
             <!-- <input type="hidden" name="istpalarm" value="0"> -->
             <!-- <input type="hidden" name="ptime" value="20/01/08"> -->
