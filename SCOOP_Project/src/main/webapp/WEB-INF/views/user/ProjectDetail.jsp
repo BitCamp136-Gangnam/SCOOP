@@ -30,10 +30,10 @@
 <script type="text/javascript">
 $(function(){
    $('#myModal_Edit_Icon').mouseover(function(){
-      $(this).attr("style","margin-left: 5px;cursor: pointer;color:#E71D36;");
+      $(this).attr("style","margin-left: 5px;cursor: pointer;font-size: 15px;color:#E71D36;");
    });
    $('#myModal_Edit_Icon').mouseout(function(){
-      $(this).attr("style","margin-left: 5px;cursor: pointer;");
+      $(this).attr("style","margin-left: 5px;cursor: pointer;font-size: 15px;");
       });
    $('#admin_EditIcon').mouseover(function(){
       $(this).attr("style","cursor: pointer;font-size: 20px;color:#195ac2;");
@@ -144,10 +144,11 @@ $(function(){
       <div class="row" style="margin: 2%">
          <div class="col-sm-12" style="padding-left: 0">
             <h3>${tpj.pname}
-            <i class="fas fa-cog" id="myModal_Edit_Icon" style="margin-left: 5px;cursor: pointer;" data-toggle="modal" data-target="#myModal_Edit" >
-            </i>
+            	<c:if test="${rank > 100}">
+            		<i class="fas fa-cog" id="myModal_Edit_Icon" style="margin-left: 5px;cursor: pointer; font-size: 15px" data-toggle="modal" data-target="#myModal_Edit" ></i>
+            	</c:if>
             </h3>
-            ${tpj.pcontent }
+            ${tpj.pcontent}
          </div>
       </div>
       <div class="row" style="margin-left: 2%;">
@@ -217,9 +218,9 @@ $(function(){
             <div class="modal-body" id="admDiv" style="width: 450px;height: 250px;margin-left: 25px;">
                <div  id="c_Information">
                <label for="pname_Edit">협업공간 이름</label> 
-               <input class="form-control createmodal" type="text" id="pname_Edit" name="pname_Edit" style="width: 100%" value="${tpj.pname}"> <br> 
+               <input class="form-control createmodal" type="text" id="pname_Edit" name="pname" style="width: 100%" value="${tpj.pname}"> <br> 
                   <label for="pcontent_Edit">협업공간 설명</label>
-               <textarea class="form-control createmodal" rows="3" id="pcontent_Edit"name="pcontent_Edit" style="width: 100%">${tpj.pcontent }</textarea>
+               <textarea class="form-control createmodal" rows="3" id="pcontent_Edit"name="pcontent" style="width: 100%">${tpj.pcontent }</textarea>
                </div>
 
                <div id="c_Management" class="nav-label" style="display: none;padding-left: 0px;padding-right: 0px;">
