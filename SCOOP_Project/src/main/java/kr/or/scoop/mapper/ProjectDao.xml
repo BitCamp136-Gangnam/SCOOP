@@ -61,4 +61,11 @@ SELECT T.TSEQ , M.NAME, S.TISEQ, S.tititle, S.TICONTENT, S.TIDATE FROM TEAMPJT T
 		set pjuserrank=#{pjuserrank,jdbcType=INTEGER} 
 		where tseq=#{tseq,jdbcType=INTEGER} and email=#{email,jdbcType=VARCHAR}
 </update>
+
+<select id="searchRank" parameterType="kr.or.scoop.dto.Tpmember" resultType="int">
+	select m.pjuserrank 
+	from tpmember m join teampjt p 
+                	on m.tseq = p.tseq 
+	where p.tseq=#{param1} and m.email = #{param2}
+</select>
 </mapper>

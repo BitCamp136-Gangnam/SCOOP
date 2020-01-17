@@ -30,10 +30,10 @@
 <script type="text/javascript">
 $(function(){
    $('#myModal_Edit_Icon').mouseover(function(){
-      $(this).attr("style","margin-left: 5px;cursor: pointer;color:#E71D36;");
+      $(this).attr("style","margin-left: 5px;cursor: pointer;font-size: 15px;color:#E71D36;");
    });
    $('#myModal_Edit_Icon').mouseout(function(){
-      $(this).attr("style","margin-left: 5px;cursor: pointer;");
+      $(this).attr("style","margin-left: 5px;cursor: pointer;font-size: 15px;");
       });
    $('#admin_EditIcon').mouseover(function(){
       $(this).attr("style","cursor: pointer;font-size: 20px;color:#195ac2;");
@@ -144,10 +144,11 @@ $(function(){
       <div class="row" style="margin: 2%">
          <div class="col-sm-12" style="padding-left: 0">
             <h3>${tpj.pname}
-            <i class="fas fa-cog" id="myModal_Edit_Icon" style="margin-left: 5px;cursor: pointer;" data-toggle="modal" data-target="#myModal_Edit" >
-            </i>
+            	<c:if test="${rank > 100}">
+            		<i class="fas fa-cog" id="myModal_Edit_Icon" style="margin-left: 5px;cursor: pointer; font-size: 15px" data-toggle="modal" data-target="#myModal_Edit" ></i>
+            	</c:if>
             </h3>
-            ${tpj.pcontent }
+            ${tpj.pcontent}
          </div>
       </div>
       <div class="row" style="margin-left: 2%;">

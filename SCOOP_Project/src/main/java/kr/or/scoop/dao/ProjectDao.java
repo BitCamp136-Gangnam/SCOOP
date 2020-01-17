@@ -23,4 +23,6 @@ public interface ProjectDao {
 	//팀이슈 리스트
 	public List<Tissue> getTissue(int tseq); 
 	
+	//팀 권한 조회
+	public int searchRank(int tseq, String email);
 }

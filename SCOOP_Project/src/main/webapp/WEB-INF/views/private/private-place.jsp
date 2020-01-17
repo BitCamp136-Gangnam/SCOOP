@@ -39,8 +39,6 @@
 						"status" : status
 				       },
 				success : function(datadata){
-
-					dat = datadata.trim();
 					mark = book.attr('class').split(' ');
 
 					if(status == "bookoff"){
