@@ -190,12 +190,16 @@ public class MemberController {
 	@RequestMapping(value = "/userindex.do", method = RequestMethod.GET)
 	public String userindex(HttpSession session,Model model) {
 		String email = "";
+		
 		email = (String)session.getAttribute("email");
 		ProjectDao noticeDao = sqlsession.getMapper(ProjectDao.class);
 		MemberDao memberdao = sqlsession.getMapper(MemberDao.class);
 		Role role = memberdao.getRole(email);
+		int count = memberdao.getCount(email);
+		System.out.println(count);
 		System.out.println(role);
 		session.setAttribute("role", role.getRname());
+		session.setAttribute("count", count);
 		List<Tpmember> pjtlist = noticeDao.getPJT(email);
 		if(pjtlist!=null) {
 			session.setAttribute("pjtlist", pjtlist);
@@ -471,4 +475,5 @@ public class MemberController {
 		return viewpage;
 		
 	}
+	
 }
