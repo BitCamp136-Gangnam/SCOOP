@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.scoop.dao.MyIssueDao;
 import kr.or.scoop.dao.NoticeDao;
+import kr.or.scoop.dao.TissueDao;
 import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.dto.Notice;
+import kr.or.scoop.dto.Tissue;
 import kr.or.scoop.service.BoardService;
 
 @Controller
@@ -37,21 +39,30 @@ public class BoardController {
 		String email = "";
 		email = (String)session.getAttribute("email");
 		MyIssueDao dao = sqlSession.getMapper(MyIssueDao.class);
-		List<MyIssue> ti = dao.MyWriteTiisueList(email);
+		List<Tissue> ti = dao.MyWriteTiisueList(email);
 		List<MyIssue> pi = dao.MyWriteIssueList(email);
 		model.addAttribute("pi",pi);
 		model.addAttribute("ti",ti);
-		return "sidebar/app-myissue";
+		return "issue/myissue";
 	}
 	
-	// 마이이슈디테일 작성
+	// 마이이슈디테일 
 	@RequestMapping(value = "/myissueDetail.do", method = {RequestMethod.POST,RequestMethod.GET})
 	public String myissueDetail(int piseq, Model model) {
 		
 		MyIssueDao dao = sqlSession.getMapper(MyIssueDao.class);
 		MyIssue myissue = dao.myissueDetail(piseq);
 		model.addAttribute("myissue", myissue);
-		return "sidebar/app-myissueDetail";
+		return "issue/myissueDetail";
+	}
+	
+	// 팀이슈디테일 
+	@RequestMapping(value="/teamissueDetail.do",method = {RequestMethod.POST,RequestMethod.GET})
+	public String teamissueDetail(int tiseq, Model model) {
+		TissueDao dao = sqlSession.getMapper(TissueDao.class);
+		Tissue tissue = dao.teamissueDetail(tiseq);
+		model.addAttribute("tissue", tissue);
+		return "issue/teamissueDetail";
 	}
 
 	// 캘린더

@@ -3,6 +3,7 @@ package kr.or.scoop.dao;
 import java.util.List;
 
 import kr.or.scoop.dto.MyIssue;
+import kr.or.scoop.dto.Tissue;
 
 public interface MyIssueDao {
 	//나의 이슈 작성
@@ -15,7 +16,7 @@ public interface MyIssueDao {
 	public List<MyIssue> MyWriteIssueList(String email);
 	
 	//내가 작성한 팀 이슈 리스트
-	public List<MyIssue> MyWriteTiisueList(String email);
+	public List<Tissue> MyWriteTiisueList(String email);
 	
 	//북마크 추가 제거
 	public int bookMark(int piseq, int ispibook);

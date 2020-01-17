@@ -62,7 +62,7 @@
 		<div class="row" style="margin-left: 2%; margin-right: 2%">
 			<c:forEach items="${ti}" var="ti">
 			<div class="col-sm-12 newissue" >
-			<a href="#">${ti.tititle}</a><br>
+			<a href="teamissueDetail.do?tiseq=${ti.tiseq}">${ti.tititle}</a><br>
 			${ti.pname} / ${ti.tidate}<br>
 			</div>
 			</c:forEach>
