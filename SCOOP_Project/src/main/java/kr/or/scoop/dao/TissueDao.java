@@ -21,5 +21,6 @@ public interface TissueDao {
 		
 		//팀이슈 마지막 시퀀스 
 		public int getSeq(Tissue tissue);
-
+		
+	public int banMember(int tseq, String email);
 }

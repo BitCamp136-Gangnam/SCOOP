@@ -271,4 +271,25 @@ public class TeamController {
 		return path;
 	}
 
+	//협업공간 멤버탈퇴
+	@RequestMapping(value = "banMember.do", method = {RequestMethod.POST,RequestMethod.GET})
+	public String banMember(int tseq, String email, Model model) {
+		int result = 0;
+		String viewpage;
+		System.out.println("tseq" + tseq);
+		System.out.println("email" + email);
+		result = teamservice.banMember(tseq, email);
+		
+		if(result > 0) {
+			System.out.println("멤버 탈퇴성공");
+			model.addAttribute("ajax", "멤버탈퇴 성공했습니다");
+			viewpage = "ajax/ajax";
+		}else {
+			System.out.println("멤버 탈퇴실패");
+			model.addAttribute("ajax", "멤버탈퇴 실패했습니다");
+			viewpage = "ajax/ajax";
+		}
+		return viewpage;
+		
+	}
 }

@@ -53,4 +53,7 @@ select max(tiseq) from tissue
 	SET isprocess=#{param3}
 	WHERE tiseq = #{param2} and tseq = #{param1}
 </update>
+<delete id="banMember">
+	delete from tpmember where tseq=#{param1} and email=#{param2}
+</delete>
 </mapper>

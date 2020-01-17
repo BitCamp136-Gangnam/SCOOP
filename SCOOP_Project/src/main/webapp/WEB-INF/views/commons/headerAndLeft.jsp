@@ -204,28 +204,6 @@ input::placeholder {
          }
 
       });
-
-
-
-
-
-      /* 프로젝트 이름 검색 - 도연 */
-      function filter() {
-         var value, name, item, i;
-         value = document.getElementById("searchpjt").value.toUpperCase();
-         item = document.getElementsByClassName("search_project");
-
-         for (i = 0; i < item.length; i++) {
-            name = item[i].getElementsByClassName("resultsearch");
-            if (name[0].innerHTML.toUpperCase().indexOf(value) > -1) {
-               item[i].style.display = "flex";
-            } else {
-               item[i].style.display = "none";
-            }
-         }
-      }
-
-      
        $('#summernote').summernote({
              height: 300,                 // set editor height
              minHeight: null,             // set minimum height of editor
@@ -303,6 +281,21 @@ input::placeholder {
       });
 
    });
+   /* 프로젝트 이름 검색 - 도연 */
+   function filter() {
+      var value, name, item, i;
+      value = document.getElementById("searchpjt").value.toUpperCase();
+      item = document.getElementsByClassName("search_project");
+
+      for (i = 0; i < item.length; i++) {
+         name = item[i].getElementsByClassName("resultsearch");
+         if (name[0].innerHTML.toUpperCase().indexOf(value) > -1) {
+            item[i].style.display = "flex";
+         } else {
+            item[i].style.display = "none";
+         }
+      }
+   }
 </script>
 <script type="text/javascript">
    // The Browser API key obtained from the Google API Console.
