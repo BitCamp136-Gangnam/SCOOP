@@ -194,13 +194,13 @@ public class MemberController {
 		ProjectDao noticeDao = sqlsession.getMapper(ProjectDao.class);
 		MemberDao memberdao = sqlsession.getMapper(MemberDao.class);
 		Role role = memberdao.getRole(email);
+		System.out.println(role);
 		session.setAttribute("role", role.getRname());
 		List<Tpmember> pjtlist = noticeDao.getPJT(email);
 		if(pjtlist!=null) {
 			session.setAttribute("pjtlist", pjtlist);
 			AlarmDao dao = sqlsession.getMapper(AlarmDao.class);
 			List<Alarm> alarm = dao.getAlarm((String)session.getAttribute("email"));
-			System.out.println(alarm);
 			
 			if(alarm == null) {
 				
