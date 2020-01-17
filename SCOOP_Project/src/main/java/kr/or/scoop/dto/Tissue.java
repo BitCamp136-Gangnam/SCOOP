@@ -16,11 +16,13 @@ public class Tissue {
 	private String email;
 	private String tititle;
 	private String ticontent;	
+	private List<CommonsMultipartFile> files;
+	private String tfilename;
 	private Date tistart;
 	private Date tiend;
 	private String isprocess;
 
-	private int tfilesize;
+	private long tfilesize;
 	private int istbook;
 	private int issee;
 	private Date tidate;
@@ -91,10 +93,11 @@ public class Tissue {
 		this.isprocess = isprocess;
 	}
 
-	public int getTfilesize() {
+	
+	public long getTfilesize() {
 		return tfilesize;
 	}
-	public void setTfilesize(int tfilesize) {
+	public void setTfilesize(long tfilesize) {
 		this.tfilesize = tfilesize;
 	}
 	public int getIstbook() {
@@ -134,13 +137,26 @@ public class Tissue {
 	public void setTmemail(String tmemail) {
 		this.tmemail = tmemail;
 	}
+	public List<CommonsMultipartFile> getFiles() {
+		return files;
+	}
+	public void setFiles(List<CommonsMultipartFile> files) {
+		this.files = files;
+	}
+	public String getTfilename() {
+		return tfilename;
+	}
+	public void setTfilename(String tfilename) {
+		this.tfilename = tfilename;
+	}
+	
 	@Override
 	public String toString() {
 		return "Tissue [tiseq=" + tiseq + ", tseq=" + tseq + ", tmseq=" + tmseq + ", email=" + email + ", tititle="
-				+ tititle + ", ticontent=" + ticontent + ", tistart=" + tistart + ", tiend=" + tiend + ", isprocess="
-				+ isprocess + ", tfilesize=" + tfilesize + ", istbook=" + istbook + ", issee=" + issee + ", tidate="
-				+ tidate + ", tgfilename=" + tgfilename + ", tmemail=" + tmemail + ", turl=" + turl + ", name=" + name
-				+ "]";
+				+ tititle + ", ticontent=" + ticontent + ", files=" + files + ", tfilename=" + tfilename + ", tistart="
+				+ tistart + ", tiend=" + tiend + ", isprocess=" + isprocess + ", tfilesize=" + tfilesize + ", istbook="
+				+ istbook + ", issee=" + issee + ", tidate=" + tidate + ", tgfilename=" + tgfilename + ", tmemail="
+				+ tmemail + ", turl=" + turl + ", name=" + name + "]";
 	}
 	
 	

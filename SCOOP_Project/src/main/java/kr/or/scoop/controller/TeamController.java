@@ -153,58 +153,40 @@ public class TeamController {
 		       
 				int result = teamservice.writeTissue(tissue);
 				if(result >0) {
-					// 여기는 insert 성고
-					int upload = 0;
-					TissueDao dao = sqlsession.getMapper(TissueDao.class);
-					upload = dao.getSeq(tissue);
-					// 여기는 이제 select문해서 마지막 sequence값 받기
-						if(upload > 0) {
-							 List<MultipartFile> mf = new ArrayList<>();
-						        mf.add(request.getFile("files[]"));
-						        if (mf.size() == 0 && mf.get(0).getOriginalFilename().equals("")) {
-						             System.out.println("파일이없는경우");
-						        } else {
-						        	System.out.println("파일은있다");
-						            for (int i = 0; i < mf.size(); i++) {
-						            	
-						                // 파일 중복명 처리
-						                String genId = UUID.randomUUID().toString();
-						                // 본래 파일명
-						                String originalfileName = mf.get(i).getOriginalFilename();
-						                 Tifile tifile = null;
-						                int tiseq = 0; 
-						                tifile.setTiseq(tissue.getTiseq());
-						                tiseq = tifile.getTiseq();
-						                // 저장되는 파일 이름
-						 
-						                String savePath = realFolder; // 저장 될 파일 경로
-						 
-						                long fileSize = mf.get(i).getSize(); // 파일 사이즈
-						 
-						                try {
-											mf.get(i).transferTo(new File(savePath));
-										} catch (IllegalStateException e) {
-											// TODO Auto-generated catch block
-											e.printStackTrace();
-											System.out.println("파일 저장 전에 터짐");
-										} catch (IOException e) {
-											// TODO Auto-generated catch block
-											e.printStackTrace();
-										} // 파일 저장
-						 
-						                teamservice.fileUpload(originalfileName, fileSize, tf);
-						                System.out.println(originalfileName);
-						                System.out.println(fileSize);
-						            }
-						            
-						        }
-							 	System.out.println("result가 들어간다잉");
+					/*	// 여기는 insert 성고
+					List<Tissue> list = new ArrayList<Tissue>();
+					  System.out.println(tissue);
+					  List<CommonsMultipartFile> files = tissue.getFiles();
+					  for(CommonsMultipartFile file : files) {
+					   
+					   if(!file.getOriginalFilename().isEmpty() && !file.isEmpty()) {
+					    File uploadFile = new File("c:/upload/", file.getOriginalFilename());
+					    
+					    // 실제 업로드
+					    try {
+							file.transferTo(uploadFile);
+						} catch (IllegalStateException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
 						}
-					// 여기서 select한 값을 가지고 dto.getTiseq를 리턴
+					    
+					    Tissue ti = new Tissue();
+
+					    ti.setTfilename(file.getOriginalFilename());
+					    ti.setTfilesize(file.getSize());
+					       
+					    list.add(ti);    
+					   }
+					   else {
+					   }
+					  }*/
+
+
+							 	
 					
-					// 리턴값에 Tifile.setTiseq(tissue.getTiseq);
-					
-					// 다음은 tifile insert into .... mapper . return 받아서 page뿌려줌
 					
 				        path = "user/ProjectDetail";
 					
