@@ -22,43 +22,45 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript">
 	$(function(){
-		
 		$('.bookmark').click(function(){
-			let icon = $(this).attr('class').split(' ');
-			let status = $(this).attr('name');
-			let piseq = $(this).closest('div.row').children('input[name]').val();
+			let book = $(this);
+			
+			let icon = book.attr('class').split(' ');
+			let status = book.attr('name');
+			let piseq = book.closest('div.row').children('input[name]').val();
 
-			console.log('before : ' + status);
-			console.log('class : ' + icon[0] +" "+ icon[1]+" "+icon[2]);
-			console.log('piseq : ' + piseq);
-
-			let bookMark = {"piseq" : piseq , 
-							"status" : status
-						   };
-			console.log('bookmark : ' + bookMark.piseq + ' / ' + bookMark.status);
-
+			let dat;
+			let mark;
+			
 			$.ajax({
 				url : "bookmark.do",
 				type : "POST",
-				data : "piseq="+piseq,
-				dataType : "JSON",
-				contentType : "application/json; charset=UTF-8",
-				success : function(data){
-					console.log('success data : ' + data);
-					if(data == "bookoff"){
-						$(this).removeAttr("name").attr("name", "bookon");
-						$(this).removeClass(icon[1]+" "+icon[2]).addClass("fas fa-bookmark");
-					}else if(data == "bookon"){
-						$(this).removeAttr("name").attr("name", "bookoff");
-						$(this).removeClass(icon[1]+" "+icon[2]).addClass("far fa-bookmark");
+				data : {"piseq" : piseq , 
+						"status" : status
+				       },
+				success : function(datadata){
+
+					dat = datadata.trim();
+					mark = book.attr('class').split(' ');
+
+					if(status == "bookoff"){
+						console.log('bookclass ? ' + book.attr('class'));
+						console.log('icon : ' + mark);
+						console.log('bookoff if');
+						book.removeAttr('name').attr('name', 'bookon');
+						book.removeClass(mark[1]+" "+mark[2]).addClass("fas fa-bookmark");
+					}else if(status == "bookon"){
+						console.log('bookon if');
+						book.removeAttr("name").attr("name", "bookoff");
+						book.removeClass(mark[1]+" "+mark[2]).addClass("far fa-bookmark");
 					}
+
 				},
-				error : function(status, err){
-					console.log('error' + err + " / " + status);
+				error : function(err){
+					console.log('error' + err);
+					return false;
 				}
 			});
-			console.log('after : ' + $(this).attr('name'));
-			console.log('ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ');
 		});
 	});
 </script>
