@@ -18,9 +18,9 @@ select t.tseq,t.tititle,t.tidate,p.pname from tissue t join teampjt p on t.tseq 
 </select>
 
 <!-- 북마크 -->
-<update id="bookMark">
+<update id="bookMark" parameterType="kr.or.scoop.dto.MyIssue">
 	update myissue
-	set ispibook = #{bookMark}
-	where piseq = #{piseq}
+	set ispibook = #{param2}
+	where piseq=#{param1} and email=#{param3}
 </update>
 </mapper>

@@ -18,5 +18,5 @@ public interface MyIssueDao {
 	public List<MyIssue> MyWriteTiisueList(String email);
 	
 	//북마크 추가 제거
-	public int bookMark(int piseq, int ispibook);
+	public int bookMark(int piseq, int ispibook, String email);
 }
