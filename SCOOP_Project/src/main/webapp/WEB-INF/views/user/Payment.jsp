@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<c:set var="role" value="${sessionScope.role}" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,9 +40,9 @@ function requestPay(){
             if ( rsp.success ) {
                 //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
                 jQuery.ajax({
-                    url: "/payments/complete", //cross-domain error가 발생하지 않도록 주의해주세요
-                    type: 'POST',
-                    dataType: 'json',
+                	 url: "updateRole.do", //cross-domain error가 발생하지 않도록 주의해주세요
+          			 type: 'POST',
+          			 dataType: 'json',
                     data: {
                         imp_uid : rsp.imp_uid
                         //기타 필요한 데이터가 있으면 추가 전달
@@ -49,7 +50,7 @@ function requestPay(){
                 }).done(function(data) {
                     //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
                     if ( everythings_fine ) {
-                        
+
                         Swal.fire({
             	    		  title: "결제에 성공하였습니다",
             	    		  text: rsp.imp_uid+"\n"
@@ -59,14 +60,7 @@ function requestPay(){
             	    		  icon: "error",
             	    		  button: "확인"
             	    		})
-            	    		 jQuery.ajax({
-                   			 url: "updateRole.do", //cross-domain error가 발생하지 않도록 주의해주세요
-                   			 type: 'POST',
-                   			 dataType: 'json',
-                    			data: {
-                        		imp_uid : rsp.imp_uid
-                        //기타 필요한 데이터가 있으면 추가 전달
-                    		}
+            	    		 
             	    		
                     } else {
                         //[3] 아직 제대로 결제가 되지 않았습니다.
@@ -88,6 +82,8 @@ function requestPay(){
         });
         
     });
+    
+	
 }
 </script>
 
@@ -213,6 +209,8 @@ function requestPay(){
 													class="btn btn-secondary"> Get started </a>
 											</div>
 										</div>
+										 <c:choose>
+                  							<c:when test="${role == 'ROLE_CHARGE' || role == 'ROLE_ADMIN'}">
 										<div class="card text-center" style="border-color: #fff">
 											<div class="card-body">
 												<h4 class="card-title text-primary pt-3">Premium</h4>
@@ -237,7 +235,7 @@ function requestPay(){
 													<li>무제한</li>
 													<li>-</li>
 												</ul>
-												<button class="btn btn-primary" onclick="requestPay()" 
+												<button class="btn btn-primary" onclick="charge();" 
 													type="button">Get Started</button>
 												<!-- <a href="#" data-toggle="modal"
 													class="btn btn-primary" id="check_module"> Get
@@ -245,7 +243,42 @@ function requestPay(){
 
 											</div>
 										</div>
+										</c:when>
+										<c:otherwise>
+										<div class="card text-center" style="border-color: #fff">
+											<div class="card-body">
+												<h4 class="card-title text-primary pt-3">Premium</h4>
+												<h2 class="card-title text-primary pt-4">$4</h2>
+												<div class="text-muted mt-4">per month</div>
+												<ul class="list-unstyled pricing-list">
+													<li>무제한</li>
+													<li>무제한</li>
+													<li>50MB</li>
+													<li><span class="iconify" data-icon="bx:bx-check"
+														data-inline="false" style="color: #E71D36;"></span></li>
+													<li><span class="iconify" data-icon="bx:bx-check"
+														data-inline="false" style="color: #E71D36;"></span></li>
+													<li><span class="iconify" data-icon="bx:bx-check"
+														data-inline="false" style="color: #E71D36;"></span></li>
+													<li><span class="iconify" data-icon="bx:bx-check"
+														data-inline="false" style="color: #E71D36;"></span></li>
+													<li>무제한</li>
+													<li>무제한</li>
+													<li><span class="iconify" data-icon="bx:bx-check"
+														data-inline="false" style="color: #E71D36;"></span></li>
+													<li>무제한</li>
+													<li>-</li>
+												</ul>
+												<button class="btn btn-primary" onclick="requestPay()"
+													type="button">Get Started</button>
+												<!-- <a href="#" data-toggle="modal"
+													class="btn btn-primary" id="check_module"> Get
+													Started </a> -->
 
+											</div>
+										</div>
+										</c:otherwise>
+										</c:choose>
 									</div>
 								</div>
 							</div>
@@ -282,7 +315,16 @@ function requestPay(){
 	<script src="<c:url value="/resources/js/settings.js"/>"></script>
 	<script src="<c:url value="/resources/js/gleek.js"/>"></script>
 	<script src="<c:url value="/resources/js/styleSwitcher.js"/>"></script>
-
+	<script type="text/javascript">
+	function charge(){
+		Swal.fire({
+    		  title: "이미 결제를 했습니다.",
+    		  text: "이미 결제를 했습니다.",
+    		  icon: "error",
+    		  button: "확인"
+    		})
+		}
+	</script>
 </body>
 
 </html>
