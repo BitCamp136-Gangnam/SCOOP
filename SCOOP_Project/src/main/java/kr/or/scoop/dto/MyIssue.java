@@ -2,9 +2,11 @@ package kr.or.scoop.dto;
 
 
 import java.sql.Date;
+import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.multipart.MultipartFile;
 
 @Repository
 public class MyIssue {
@@ -12,7 +14,7 @@ public class MyIssue {
 	private int piseq;
 	private int tiseq;
 	private String pfilename;
-	private int pfilesize;
+	private String pfilesize;
 	private String pititle;
 	private String tititle;
 	private String picontent;
@@ -26,9 +28,9 @@ public class MyIssue {
 	private String mymention;
 	private String myurl;
 	private String pname;
-	private CommonsMultipartFile file;
-	
-	
+	private MultipartFile[] files;
+	private String tfilename;
+	private String tfilesize;
 	public int getTseq() {
 		return tseq;
 	}
@@ -41,16 +43,22 @@ public class MyIssue {
 	public void setPiseq(int piseq) {
 		this.piseq = piseq;
 	}
+	public int getTiseq() {
+		return tiseq;
+	}
+	public void setTiseq(int tiseq) {
+		this.tiseq = tiseq;
+	}
 	public String getPfilename() {
 		return pfilename;
 	}
 	public void setPfilename(String pfilename) {
 		this.pfilename = pfilename;
 	}
-	public int getPfilesize() {
+	public String getPfilesize() {
 		return pfilesize;
 	}
-	public void setPfilesize(int pfilesize) {
+	public void setPfilesize(String pfilesize) {
 		this.pfilesize = pfilesize;
 	}
 	public String getPititle() {
@@ -58,6 +66,12 @@ public class MyIssue {
 	}
 	public void setPititle(String pititle) {
 		this.pititle = pititle;
+	}
+	public String getTititle() {
+		return tititle;
+	}
+	public void setTititle(String tititle) {
+		this.tititle = tititle;
 	}
 	public String getPicontent() {
 		return picontent;
@@ -95,6 +109,12 @@ public class MyIssue {
 	public void setPidate(Date pidate) {
 		this.pidate = pidate;
 	}
+	public Date getTidate() {
+		return tidate;
+	}
+	public void setTidate(Date tidate) {
+		this.tidate = tidate;
+	}
 	public String getMygfilename() {
 		return mygfilename;
 	}
@@ -113,35 +133,29 @@ public class MyIssue {
 	public void setMyurl(String myurl) {
 		this.myurl = myurl;
 	}
-	public int getTiseq() {
-		return tiseq;
-	}
-	public void setTiseq(int tiseq) {
-		this.tiseq = tiseq;
-	}
-	public String getTititle() {
-		return tititle;
-	}
-	public void setTititle(String tititle) {
-		this.tititle = tititle;
-	}
-	public Date getTidate() {
-		return tidate;
-	}
-	public void setTidate(Date tidate) {
-		this.tidate = tidate;
-	}
 	public String getPname() {
 		return pname;
 	}
 	public void setPname(String pname) {
 		this.pname = pname;
 	}
-	public CommonsMultipartFile getFile() {
-		return file;
+	public MultipartFile[] getFiles() {
+		return files;
 	}
-	public void setFile(CommonsMultipartFile file) {
-		this.file = file;
+	public void setFiles(MultipartFile[] files) {
+		this.files = files;
+	}
+	public String getTfilename() {
+		return tfilename;
+	}
+	public void setTfilename(String tfilename) {
+		this.tfilename = tfilename;
+	}
+	public String getTfilesize() {
+		return tfilesize;
+	}
+	public void setTfilesize(String tfilesize) {
+		this.tfilesize = tfilesize;
 	}
 	@Override
 	public String toString() {
@@ -149,11 +163,8 @@ public class MyIssue {
 				+ ", pfilesize=" + pfilesize + ", pititle=" + pititle + ", tititle=" + tititle + ", picontent="
 				+ picontent + ", pistart=" + pistart + ", piend=" + piend + ", ispibook=" + ispibook + ", email="
 				+ email + ", pidate=" + pidate + ", tidate=" + tidate + ", mygfilename=" + mygfilename + ", mymention="
-				+ mymention + ", myurl=" + myurl + ", pname=" + pname + ", file=" + file + "]";
+				+ mymention + ", myurl=" + myurl + ", pname=" + pname + ", files=" + Arrays.toString(files)
+				+ ", tfilename=" + tfilename + ", tfilesize=" + tfilesize + "]";
 	}
 	
-	
-	
-	
-
 }

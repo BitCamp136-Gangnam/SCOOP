@@ -25,8 +25,8 @@ input::placeholder {
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+<!-- <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script> -->
 <script type="text/javascript">
    $(function() {
       var number = 0;
@@ -205,12 +205,6 @@ input::placeholder {
          }
 
       });
-       $('#summernote').summernote({
-             height: 300,                 // set editor height
-             minHeight: null,             // set minimum height of editor
-             maxHeight: null,             // set maximum height of editor
-             focus: true                  // set focus to editable area after initializing summernote
-     });
       $('#fileopen').click(function() {
          $('#filediv').show();
          $('#fileclose').show();
@@ -297,6 +291,12 @@ input::placeholder {
          }
       }
    }
+/*    $('#summernote').summernote({
+       height: 300,                 // set editor height
+       minHeight: null,             // set minimum height of editor
+       maxHeight: null,             // set maximum height of editor
+       focus: true                  // set focus to editable area after initializing summernote
+}); */
 </script>
 <script type="text/javascript">
    // The Browser API key obtained from the Google API Console.
@@ -679,9 +679,9 @@ span {
                      <ul>
                         <li><a href="memberEdit.do?${sessionScope.email}"><i
                               class="icon-user"></i> <span>내 정보</span></a></li>
-                        <li><a href="#" id="fileopen"><span class="iconify"
+                        <li><span id="fileopen" style="cursor: pointer;"><span class="iconify"
                               data-icon="ion:folder-open-outline" data-inline="false"
-                              style="font-size: 15px"></span> <span> &nbsp;&nbsp;파일함</span></a>
+                              style="font-size: 15px"></span> <span> &nbsp;&nbsp;파일함</span></span>
                         </li>
                         <hr class="my-2">
                         <li><a href="page-lock.jsp"><i class="icon-lock"></i><span>잠금모드</span></a>
@@ -907,7 +907,7 @@ span {
                <br> <label for="content">이슈 설명</label> <span id="filename"></span>
                <img id="imgpreview" alt="사진 미리보기 자리"
                   style="display: none; width: 40px; height: 40px" src="#" /> 
-                  <input type="file" multiple="multiple"  id="fileclick" name="files[]" hidden="">
+                  <input type="file" multiple="multiple"  id="fileclick" name="files" hidden="">
                <button type="button" id="auth" disabled hidden="">Authenticate</button>
                <textarea class="form-control createmodal" rows="5"
                   id="issuecontent" name="issuecontent" style="width: 100%"
