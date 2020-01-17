@@ -49,5 +49,8 @@ public interface MemberDao {
 	
 	//롤 권한 변경
 	public int updateRole(String email);
+	
+	//프로젝트 갯수 
+	public int getCount(String email);
 
 }
