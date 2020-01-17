@@ -43,6 +43,15 @@ public class BoardController {
 		model.addAttribute("ti",ti);
 		return "sidebar/app-myissue";
 	}
+	
+	// 마이이슈디테일 작성
+	@RequestMapping(value = "/myissueDetail.do", method = RequestMethod.POST)
+	public String myissueDetail(int piseq, Model model) {
+		
+		MyIssueDao dao = sqlSession.getMapper(MyIssueDao.class);
+		MyIssue myissue = dao.myissueDetail(piseq);  
+		return "sidebar/app-myissueDetail";
+	}
 
 	// 캘린더
 	@RequestMapping(value = "/calendar.do", method = RequestMethod.GET)

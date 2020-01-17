@@ -68,7 +68,7 @@
 			</c:forEach>
 			<c:forEach items="${pi}" var="pi">
 			<div class="col-sm-12 newissue" >
-			아이콘 + <a href="#">${pi.pititle}</a><br>
+			아이콘 + <a href="myissueDetail.do?piseq=${pi.piseq}">${pi.pititle}</a><br>
 			프라이빗 공간 / ${pi.pidate} 
 			</div>
 			</c:forEach>
