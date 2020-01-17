@@ -217,9 +217,9 @@ $(function(){
             <div class="modal-body" id="admDiv" style="width: 450px;height: 250px;margin-left: 25px;">
                <div  id="c_Information">
                <label for="pname_Edit">협업공간 이름</label> 
-               <input class="form-control createmodal" type="text" id="pname_Edit" name="pname_Edit" style="width: 100%" value="${tpj.pname}"> <br> 
+               <input class="form-control createmodal" type="text" id="pname_Edit" name="pname" style="width: 100%" value="${tpj.pname}"> <br> 
                   <label for="pcontent_Edit">협업공간 설명</label>
-               <textarea class="form-control createmodal" rows="3" id="pcontent_Edit"name="pcontent_Edit" style="width: 100%">${tpj.pcontent }</textarea>
+               <textarea class="form-control createmodal" rows="3" id="pcontent_Edit"name="pcontent" style="width: 100%">${tpj.pcontent }</textarea>
                </div>
 
                <div id="c_Management" class="nav-label" style="display: none;padding-left: 0px;padding-right: 0px;">

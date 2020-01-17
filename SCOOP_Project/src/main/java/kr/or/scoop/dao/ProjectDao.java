@@ -23,4 +23,7 @@ public interface ProjectDao {
 	//팀이슈 리스트
 	public List<Tissue> getTissue(int tseq); 
 	
+	//프로젝트 수정
+	public int updatePjt(TeamPjt teampjt);
+	
 }

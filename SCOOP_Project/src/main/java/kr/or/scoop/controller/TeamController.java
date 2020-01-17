@@ -267,4 +267,19 @@ public class TeamController {
 		return viewpage;
 		
 	}
+	
+	@RequestMapping(value="teamSetting.do",method = RequestMethod.POST)
+	public String teamPjtUpdate(TeamPjt teampjt) {
+		int result = 0;
+		String viewpage;
+		result = teamservice.teamUpdate(teampjt);
+		if(result > 0) {
+			viewpage = "redirect:/projectDetail.do?tseq="+teampjt.getTseq();
+		}else {
+			viewpage = "user/userindex";
+		}
+		
+		return viewpage;
+	}
+	
 }

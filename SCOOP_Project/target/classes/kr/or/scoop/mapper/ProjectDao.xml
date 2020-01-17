@@ -61,4 +61,7 @@ SELECT T.TSEQ , M.NAME, S.TISEQ, S.tititle, S.TICONTENT, S.TIDATE FROM TEAMPJT T
 		set pjuserrank=#{pjuserrank,jdbcType=INTEGER} 
 		where tseq=#{tseq,jdbcType=INTEGER} and email=#{email,jdbcType=VARCHAR}
 </update>
+<update id="updatePjt" parameterType="kr.or.scoop.dto.TeamPjt">
+	update Teampjt set pname = #{pname} , pcontent = #{pcontent} where tseq = #{tseq}
+</update>
 </mapper>
