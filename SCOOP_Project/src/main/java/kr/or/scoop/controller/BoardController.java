@@ -101,8 +101,8 @@ public class BoardController {
 		return "issue/noticeDetail";
 	}
 	
-	@RequestMapping(value="/bookmark.do", method=RequestMethod.POST)
-	public String bookMark(HttpSession session, int piseq, String status, Model model) {
+	@RequestMapping(value="/pibookmark.do", method=RequestMethod.POST)
+	public String piBookMark(HttpSession session, int piseq, String status, Model model) {
 		String email = (String)session.getAttribute("email");
 		String viewpage = "";
 		MyIssueDao dao = sqlSession.getMapper(MyIssueDao.class);
@@ -113,7 +113,7 @@ public class BoardController {
 		System.out.println("ispibook : " + ispibook);
 		System.out.println("email : " + email);
 		
-		int result = dao.bookMark(piseq, ispibook, email);
+		int result = dao.piBookMark(piseq, ispibook, email);
 		
 		if(status.equals("bookoff") && result > 0) {
 			status = "bookon";
@@ -126,6 +126,28 @@ public class BoardController {
 		model.addAttribute("status", status);
 		
 		System.out.println(model);
+		
+		return viewpage;
+	}
+	
+	@RequestMapping(value="/tibookmark.do", method = RequestMethod.POST)
+	public String tiBookMark (HttpSession session, int tseq, String status, Model model) {
+		String email = (String)session.getAttribute("email");
+		String viewpage = "";
+		int istbook = (status.equals("bookoff")) ? 1 : 0;
+		TissueDao dao = sqlSession.getMapper(TissueDao.class);
+		
+		System.out.println("email: " + email + " / status: " + istbook);
+		
+		int result = dao.tiBookMark(tseq, istbook, email);
+		
+		if(status.equals("bookoff") && result > 0) {
+			status = "bookon";
+			viewpage = "redirect:projectDetail.do";
+		}else if(status.equals("bookon") && result > 0) {
+			status = "bookoff";
+			viewpage = "redirect:projectDetail.do";
+		}
 		
 		return viewpage;
 	}

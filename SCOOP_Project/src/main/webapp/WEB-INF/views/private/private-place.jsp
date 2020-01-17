@@ -33,7 +33,7 @@
 			let mark;
 			
 			$.ajax({
-				url : "bookmark.do",
+				url : "pibookmark.do",
 				type : "POST",
 				data : {"piseq" : piseq , 
 						"status" : status

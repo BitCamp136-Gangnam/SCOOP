@@ -106,6 +106,45 @@ $(function(){
 		   }
 		 })
 		})
+
+		$('.bookmark').click(function(){
+			let book = $(this);
+			
+			let icon = book.attr('class').split(' ');
+			let status = book.attr('name');
+			let piseq = book.closest('div.row').children('input[name]').val();
+
+			let dat;
+			let mark;
+			
+			$.ajax({
+				url : "tibookmark.do",
+				type : "POST",
+				data : {"piseq" : piseq , 
+						"status" : status
+				       },
+				success : function(datadata){
+					mark = book.attr('class').split(' ');
+
+					if(status == "bookoff"){
+						console.log('bookclass ? ' + book.attr('class'));
+						console.log('icon : ' + mark);
+						console.log('bookoff if');
+						book.removeAttr('name').attr('name', 'bookon');
+						book.removeClass(mark[1]+" "+mark[2]).addClass("fas fa-bookmark");
+					}else if(status == "bookon"){
+						console.log('bookon if');
+						book.removeAttr("name").attr("name", "bookoff");
+						book.removeClass(mark[1]+" "+mark[2]).addClass("far fa-bookmark");
+					}
+
+				},
+				error : function(err){
+					console.log('error' + err);
+					return false;
+				}
+			});
+		});
 	});
 
 	/* 프로젝트 이름 검색 - 도연 */
@@ -178,16 +217,28 @@ $(function(){
       </div>
       <c:forEach items="${tp}" var="ti">
          <div class="row" style="margin-left: 2%; margin-right: 2%">
+         <input type="hidden" name="tiseq" value="${ti.tiseq}" />
          <div class="col-sm-2 newissue" >
          ${ti.name }
          </div>
-         <div class="col-sm-8 newissue">
+         <div class="col-sm-7 newissue">
          ${ti.tititle} 
          </div>
          <div class="col-sm-2 newissue">
          ${ti.tidate} 
          </div>
-         
+         <c:choose>
+			<c:when test="${ti.istbook==0}">
+				<div class="col-sm-1 newissue">
+					<i class="bookmark far fa-bookmark" id="bookmark" name="bookoff"></i>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<div class="col-sm-1 newissue">
+					<i class="bookmark fas fa-bookmark" id="bookmark" name="bookon"></i>
+				</div>
+			</c:otherwise>
+		</c:choose>
       </div>
       </c:forEach>
       

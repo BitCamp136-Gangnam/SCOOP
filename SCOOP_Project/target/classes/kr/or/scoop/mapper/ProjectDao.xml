@@ -54,11 +54,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select m.email, m.TSEQ, t.pname from tpmember m join teampjt t on m.tseq = t.tseq where m.email = #{email}
 </select>
 <select id="getTissue" parameterType="kr.or.scoop.dto.Tissue" resultMap="Tissue">
-SELECT T.TSEQ , M.NAME, S.TISEQ, S.tititle, S.TICONTENT, S.TIDATE FROM TEAMPJT T JOIN TISSUE S ON T.TSEQ = S.TSEQ JOIN MEMBER M ON M.EMAIL = S.EMAIL WHERE T.TSEQ = #{TSEQ}
+	SELECT T.TSEQ , M.NAME, S.TISEQ, S.tititle, S.TICONTENT, S.TIDATE, S.ISTBOOK 
+	FROM TEAMPJT T JOIN TISSUE S ON T.TSEQ = S.TSEQ 
+				   JOIN MEMBER M ON M.EMAIL = S.EMAIL 
+	WHERE T.TSEQ = #{TSEQ}
 </select>
 <update id="admin_setting" parameterType="kr.or.scoop.dto.Tpmember">
 		update tpmember 
 		set pjuserrank=#{pjuserrank,jdbcType=INTEGER} 
 		where tseq=#{tseq,jdbcType=INTEGER} and email=#{email,jdbcType=VARCHAR}
 </update>
+
+<select id="searchRank" parameterType="kr.or.scoop.dto.Tpmember" resultType="int">
+	select m.pjuserrank 
+	from tpmember m join teampjt p 
+                	on m.tseq = p.tseq 
+	where p.tseq=#{param1} and m.email = #{param2}
+</select>
 </mapper>
