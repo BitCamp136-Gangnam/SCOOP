@@ -19,4 +19,7 @@ public interface MyIssueDao {
 	
 	//북마크 추가 제거
 	public int bookMark(int piseq, int ispibook);
+	
+	//내가 작성한 이슈 디테일
+	public MyIssue myissueDetail(int piseq);
 }
