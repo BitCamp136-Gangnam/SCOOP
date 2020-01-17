@@ -88,7 +88,7 @@ public class BoardController {
 	@ResponseBody 
 	@RequestMapping("/bookmark.do")
 	public Map<String, Object> bookMark(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-
+		
 		System.out.println(request.getParameter("piseq"));
 		/*
 		String piseq = request.getParameter("piseq"); String status =
