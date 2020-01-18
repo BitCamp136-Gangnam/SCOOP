@@ -374,7 +374,7 @@ public class MemberController {
 				invitemem[i] = request.getParameter("email"+i);
 				int rank = dao.searchRank(Integer.parseInt(tseq), invitemem[i]);
 				if(rank>0) {
-					return "ajax/swal";
+					return "ajax/emailSwal";
 				}
 			}
 			for(int i=0;i<cnt;i++) {

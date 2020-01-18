@@ -16,8 +16,8 @@ String mailTo = request.getParameter("mailTo");
 session.setAttribute("mailTo", mailTo);
 System.out.println("받는사람"+mailTo);
 System.out.println("세션값"+session.getAttribute("email"));
-if(session.getAttribute("email").equals(mailTo)){
-	System.out.println("성공 왔니");
+/* if(session.getAttribute("email").equals(mailTo)){
+	System.out.println("성공 왔니"); */
 	%>
 	<script>
 	alert('성공');
@@ -30,8 +30,8 @@ if(session.getAttribute("email").equals(mailTo)){
 	</script>
 	<%
 	response.sendRedirect("inviteOk.do");
-}else{
 	%>
+<%-- }else{
 	<script>
 	System.out.println("실패 왔니");
 	alert('에러');
@@ -45,7 +45,7 @@ if(session.getAttribute("email").equals(mailTo)){
 	<%
 	response.sendRedirect("index.do");
 }
-%>
+%> --%>
 </head>
 <body>
 
