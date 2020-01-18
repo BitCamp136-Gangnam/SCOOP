@@ -3,6 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="role" value="${sessionScope.role}" />
 <c:set var="count" value="${sessionScope.count}" />
+<c:set var="img" value="${sessionScope.img}" />
 <style>
 input::placeholder {
    color: #fff;
@@ -669,9 +670,17 @@ span {
             <li class="icons dropdown">
                <div class="user-img c-pointer position-relative"
                   data-toggle="dropdown">
-                  <span class="activity active"></span> <img
-                     src="<c:url value="/resources/images/avatar/avatar.png" />"
+                  <span class="activity active"></span>
+                  <c:choose>
+                  	<c:when test="${img=='null'}">
+                  <img src="<c:url value="/resources/images/avatar/avatar.png" />"
                      height="40" width="40" alt="">
+                  	</c:when>
+                  	<c:otherwise>
+                  	<img src="<c:url value="/user/upload/${img}" />"
+                     height="40" width="40" alt="">
+                  	</c:otherwise>
+                  </c:choose> 
                </div>
                <div
                   class="drop-down dropdown-profile animated fadeIn dropdown-menu">
@@ -779,7 +788,7 @@ span {
             style="border-radius: 0.25rem; height: 20px" placeholder="협업공간 검색"></li>
          <c:forEach items="${pjtlist}" var="p">
             <li class="search_project"><a
-               href="projectDetail.do?tseq=${p.tseq}" class="projecthref" aria-expanded="false"><span
+               href="projectDetail.do?tseq=${p.tseq}&email="${session.email}" class="projecthref" aria-expanded="false"><span
                   class="iconify" data-icon="bx:bxs-flag-alt" data-inline="false"
                   style="width: 20px; height: auto;"> </span><span
                   class="nav-text resultsearch"> &nbsp;${p.pname}</span></a></li>
