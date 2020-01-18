@@ -78,10 +78,10 @@ public class TeamController {
 		result = service.insertTeamPjt2(email, tseq);
 		if (result > 0) {
 			System.out.println("협업공간 초대 성공");
-			viewpage = "redirect:/userindex.do";
+			viewpage = "ajax/inviteSuccessSwal";
 		} else {
 			System.out.println("가입실패");
-			viewpage = "index";
+			viewpage = "ajax/inviteFailSwal";
 		}
 
 		return viewpage; // 주의 (website/index.htm
