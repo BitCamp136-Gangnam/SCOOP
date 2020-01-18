@@ -255,15 +255,16 @@ public class TeamController {
 	
 	//협업공간 권한설정
 	@RequestMapping(value = "teamSetting.do", method = {RequestMethod.POST,RequestMethod.GET})
-	public String teamSetting(int tseq, String[] email, int[] pjuserrank, Model model) {
+	public String teamSetting(int tseq, String[] email, int[] pjuserrank, Model model,TeamPjt teampjt) {
 		int result = 0;
 		String viewpage;
 		
 		result = teamservice.teamSetting(pjuserrank, tseq, email);
+		result = teamservice.teamUpdate(teampjt);
 		
 		if(result > 0) {
 			System.out.println("권한 설정성공");
-			viewpage = "redirect:/userindex.do";
+			viewpage = "redirect:/projectDetail.do?tseq="+tseq;
 		}else {
 			System.out.println("권한 설정 실패");
 			viewpage = "redirect:/userindex.do";
@@ -308,20 +309,6 @@ public class TeamController {
 		}
 		return viewpage;
 		
-	}
-	
-	@RequestMapping(value="teamSetting.do",method = RequestMethod.POST)
-	public String teamPjtUpdate(TeamPjt teampjt) {
-		int result = 0;
-		String viewpage;
-		result = teamservice.teamUpdate(teampjt);
-		if(result > 0) {
-			viewpage = "redirect:/projectDetail.do?tseq="+teampjt.getTseq();
-		}else {
-			viewpage = "user/userindex";
-		}
-		
-		return viewpage;
 	}
 	
 }
