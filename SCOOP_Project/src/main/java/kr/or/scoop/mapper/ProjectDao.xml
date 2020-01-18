@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </insert>
 <insert id="insertPJT2">
  insert into tpmember (email,tseq,pjuserrank)
-  values (#{param1},#{param2},100)
+  values (#{param1},#{param2},300)
 </insert>
 <resultMap type="kr.or.scoop.dto.Tissue" id="Tissue">
 	<result column="tiseq" property="tiseq"/>
