@@ -612,7 +612,7 @@ span {
 
             <li class="icons dropdown d-none d-md-flex"><i
                class="fas fa-user-plus" data-toggle="modal" id="inviteModal_id"
-               data-target="#inviteModal" data-keyboard="false"
+               data-target="#inviteModal"
                style="cursor: pointer; color: #535359; font-size: 18px; padding-bottom: 12px;"></i>
 
             </li>

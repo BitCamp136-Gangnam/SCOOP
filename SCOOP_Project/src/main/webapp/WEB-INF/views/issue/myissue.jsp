@@ -80,7 +80,7 @@
 			<div  style="float: right;min-width:97%;">
 			<a href="teamissueDetail.do?tiseq=${ti.tiseq}">${ti.tititle}</a>			
 			<br>
-			<a href="projectDetail.do?tseq=${ti.tseq}&email='${session.email}'">${ti.pname}</a>&nbsp;&nbsp;&nbsp;${ti.tidate}<br>
+			<a href="projectDetail.do?tseq=${ti.tseq}">${ti.pname}</a>&nbsp;&nbsp;&nbsp;${ti.tidate}<br>
 			</div>
 			
 			</div>

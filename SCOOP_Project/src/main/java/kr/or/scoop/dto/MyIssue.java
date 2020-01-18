@@ -31,6 +31,13 @@ public class MyIssue {
 	private MultipartFile[] files;
 	private String tfilename;
 	private String tfilesize;
+	private int isprocess;
+	public int getIsprocess() {
+		return isprocess;
+	}
+	public void setIsprocess(int isprocess) {
+		this.isprocess = isprocess;
+	}
 	public int getTseq() {
 		return tseq;
 	}
@@ -164,7 +171,8 @@ public class MyIssue {
 				+ picontent + ", pistart=" + pistart + ", piend=" + piend + ", ispibook=" + ispibook + ", email="
 				+ email + ", pidate=" + pidate + ", tidate=" + tidate + ", mygfilename=" + mygfilename + ", mymention="
 				+ mymention + ", myurl=" + myurl + ", pname=" + pname + ", files=" + Arrays.toString(files)
-				+ ", tfilename=" + tfilename + ", tfilesize=" + tfilesize + "]";
+				+ ", tfilename=" + tfilename + ", tfilesize=" + tfilesize + ", isprocess=" + isprocess + "]";
 	}
+
 	
 }
