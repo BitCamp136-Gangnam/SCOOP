@@ -9,17 +9,59 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <jsp:include page="/WEB-INF/views/commons/title.jsp"></jsp:include>
-     <!-- Pignose Calender -->
+    <!-- Pignose Calender -->
     <link href="<c:url value="/resources/plugins/pg-calendar/css/pignose.calendar.min.css" />" rel="stylesheet">
     <!-- Chartist -->
     <link rel="stylesheet" href="<c:url value="/resources/plugins/chartist/css/chartist.min.css" />">
     <link rel="stylesheet" href="<c:url value="/resources/plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css" />">
     <!-- Custom Stylesheet -->
     <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
-
+    
 </head>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('.bookmark').click(function(){
+			let book = $(this);
+			
+			let icon = book.attr('class').split(' ');
+			let status = book.attr('name');
+			let piseq = book.closest('div.row').children('input[name]').val();
+
+			let dat;
+			let mark;
+			
+			$.ajax({
+				url : "pibookmark.do",
+				type : "POST",
+				data : {"piseq" : piseq , 
+						"status" : status
+				       },
+				success : function(datadata){
+					mark = book.attr('class').split(' ');
+
+					if(status == "bookoff"){
+						console.log('bookclass ? ' + book.attr('class'));
+						console.log('icon : ' + mark);
+						console.log('bookoff if');
+						book.removeAttr('name').attr('name', 'bookon');
+						book.removeClass(mark[1]+" "+mark[2]).addClass("fas fa-bookmark");
+					}else if(status == "bookon"){
+						console.log('bookon if');
+						book.removeAttr("name").attr("name", "bookoff");
+						book.removeClass(mark[1]+" "+mark[2]).addClass("far fa-bookmark");
+					}
+
+				},
+				error : function(err){
+					console.log('error' + err);
+					return false;
+				}
+			});
+		});
+	});
+</script>
 <style>
 .newissue{
 	border-bottom: 1px solid #c8c8c8;
@@ -55,25 +97,40 @@
 		<div class="row" style="margin-left: 2%;">
 			<ul class="nav nav-pills">
 			    <li class="nav-item">
-			      <a class="nav-link" href="./private-place.jsp">프라이빗 이슈</a>
+			      <a class="nav-link" href="private.do">프라이빗 이슈</a>
 			    </li>
 			    <li class="nav-item">
-			      <a class="nav-link" href="./private-cal.jsp">캘린더</a>
+			      <a class="nav-link" href="calendar.do">캘린더</a>
 			    </li>
 		    </ul>
 		</div>
 		<hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
+		<c:forEach items="${myissuelist}" var="m">
 		<div class="row" style="margin-left: 2%; margin-right: 2%">
+			<input type="hidden" name="piseq" value="${m.piseq}" /> <!-- bookmark에 온클릭 걸려있어서 이거는 this 못가져옴 다른 방법으로 가져와야함 -->
 			<div class="col-sm-2 newissue" >
-			이슈 제목 들어갈곳
+				${m.pititle}
 			</div>
-			<div class="col-sm-8 newissue">
-			여기에 내용들어가는데 나중엔 append하면 될듯??
+			<div class="col-sm-7 newissue">
+				${m.picontent}
 			</div>
 			<div class="col-sm-2 newissue">
-			여기에 시간넣으면됨
+				${m.pidate}
 			</div>
+			<c:choose>
+				<c:when test="${m.ispibook==0}">
+					<div class="col-sm-1 newissue">
+						<i class="bookmark far fa-bookmark" id="bookmark" name="bookoff"></i>
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div class="col-sm-1 newissue">
+						<i class="bookmark fas fa-bookmark" id="bookmark" name="bookon"></i>
+					</div>
+				</c:otherwise>
+			</c:choose>
 		</div>
+		</c:forEach>
             <!-- #/ container -->
             </div>
             </div>

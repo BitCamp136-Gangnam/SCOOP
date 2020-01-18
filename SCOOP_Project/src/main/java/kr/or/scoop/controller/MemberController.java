@@ -1,8 +1,11 @@
 package kr.or.scoop.controller;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,13 +24,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.velocity.VelocityEngineFactoryBean;
 import org.springframework.ui.velocity.VelocityEngineUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import kr.or.scoop.dao.ProjectDao;
+import kr.or.scoop.dao.AlarmDao;
 import kr.or.scoop.dao.MemberDao;
+import kr.or.scoop.dao.NoticeDao;
+import kr.or.scoop.dao.ProjectDao;
+import kr.or.scoop.dto.Alarm;
 import kr.or.scoop.dto.Member;
-import kr.or.scoop.dto.TeamPjt;
+import kr.or.scoop.dto.Role;
+import kr.or.scoop.dto.Tpmember;
 import kr.or.scoop.service.MemberService;
 import kr.or.scoop.utils.Mail;
 
@@ -140,7 +149,8 @@ public class MemberController {
 	// 일반회원 로그인
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
 	public String login(String email, String pwd, HttpSession session) {
-
+		MemberDao dao = sqlsession.getMapper(MemberDao.class);
+		
 		int result = 0;
 		String viewpage = "";
 		result = service.loginMember(email, pwd);
@@ -178,16 +188,29 @@ public class MemberController {
 
 	// 로그인 성공
 	@RequestMapping(value = "/userindex.do", method = RequestMethod.GET)
-	public String userindex(HttpSession session) {
+	public String userindex(HttpSession session,Model model) {
 		String email = "";
+		
 		email = (String)session.getAttribute("email");
 		ProjectDao noticeDao = sqlsession.getMapper(ProjectDao.class);
-		System.out.println("1111");
-		List<TeamPjt> pjtlist = noticeDao.getPJT(email);
-		System.out.println("2222");
-		session.setAttribute("pjtlist", pjtlist);
-		System.out.println("3333");
-		System.out.println(pjtlist.get(0));
+		MemberDao memberdao = sqlsession.getMapper(MemberDao.class);
+		Role role = memberdao.getRole(email);
+		int count = memberdao.getCount(email);
+		session.setAttribute("role", role.getRname());
+		session.setAttribute("count", count);
+		List<Tpmember> pjtlist = noticeDao.getPJT(email);
+		if(pjtlist!=null) {
+			session.setAttribute("pjtlist", pjtlist);
+			AlarmDao dao = sqlsession.getMapper(AlarmDao.class);
+			List<Alarm> alarm = dao.getAlarm((String)session.getAttribute("email"));
+			
+			if(alarm == null) {
+				
+			} else {
+				model.addAttribute("alarm", alarm);
+			}
+		}
+		/* System.out.println(pjtlist.get(0)); */
 		return "user/userindex";
 	}
 
@@ -232,7 +255,100 @@ public class MemberController {
 		return viewpage;
 	}
 
-	// 캘린더
+	// 본인 인증 메일 발송
+	@RequestMapping(value="/forgotpwd.do")
+	public String forgotPwd(Mail mail, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		response.setContentType("text/html; charset=UTF-8");
+		String email = request.getParameter("emailcheck");
+		session.setAttribute("email", email);
+		System.out.println("이메일 받아 오니? : " + email);
+		System.out.println("세션 이메일 : " + session.getAttribute("email"));
+		String viewpage = "";
+
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+			
+			Map model = new HashMap();
+			model.put("title", "협업공간 SCOOP 본인 인증 이메일입니다");
+			// model.put("password", temp);
+			String mailBody = VelocityEngineUtils.mergeTemplateIntoString(
+					velocityEngineFactoryBean.createVelocityEngine(), "forgotPwd.vm", "UTF-8", model);
+			messageHelper.setFrom("leeyong1321@gmail.com");
+			messageHelper.setTo(email);
+			messageHelper.setSubject("회원님의 SCOOP 계정의 본인 인증 이메일입니다");
+			messageHelper.setText(mailBody, true);
+			mailSender.send(message);
+			PrintWriter out = response.getWriter();
+			out.println("<script>Swal.fire({" + 
+					"title: \"비밀번호 변경 인증 메일 전송\"," + 
+					"text: \"본인인증 이메일을 발송했습니다.\"," + 
+					"icon: \"info\"," + 
+					"button: \"확인\"" + 
+					"})</script>");
+			out.flush(); 
+			viewpage = "index";
+			
+			
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			System.out.println("인증 메일 발송 에러");
+			PrintWriter out;
+			try {
+				out = response.getWriter();
+				out.println("<script>Swal.fire({\r\n" + 
+						"title: \"인증 메일 전송 실패\",\r\n" + 
+						"text: \"인증 이메일 발송 도중 에러가 발생했습니다 이메일을 확인해주세요\",\r\n" + 
+						"icon: \"error\",\r\n" + 
+						"button: \"확인\"\r\n" + 
+						"})</script>");
+				out.flush(); 
+			viewpage = "index";
+			} catch (IOException e2) {
+				e2.printStackTrace();
+			}
+		}
+		return viewpage;
+	}
+	
+	// 이메일 인증 확인
+	@RequestMapping(value="/emailCertified.do")
+	public String emailCertified() {
+		System.out.println("return certified");
+		return "certified/emailCertified";
+	}
+	
+	// 비밀번효 변경 페이지
+	@RequestMapping(value="/changePwd.do")
+	public String ChangePwd() {
+		return "user/forgotPwd";
+	}
+	
+	// 비밀번호 변경 완료
+	@RequestMapping("changePwdOk.do")
+	public String changePwdOk(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+		String pwd = this.bCryptPasswordEncoder.encode(request.getParameter("pwd"));
+		String email = (String)session.getAttribute("email");
+		
+		System.out.println("Email : " + email);
+		System.out.println("Password : " + pwd);
+		
+		MemberDao dao = sqlsession.getMapper(MemberDao.class);
+		int result = dao.changePassword(pwd, email);
+		System.out.println("비밀번호 인서트");
+		
+		String viewpage = "";
+		if(result > 0) {
+			System.out.println("인서트 성공");
+			viewpage = "index";
+		}else {
+			System.out.println("인서트 실패");
+			viewpage = "index";
+		}
+		return viewpage;
+	}
+	
+	// 캘린더 // 이게 왜 캘린더야?
 	@RequestMapping(value = "/certified.do")
 	public String certified() {
 		return "certified/Certified";
@@ -245,12 +361,13 @@ public class MemberController {
 			MimeMessage message = mailSender.createMimeMessage();
 			MimeMessageHelper messageHelper = new MimeMessageHelper(message,true,"UTF-8");
 			request.setCharacterEncoding("UTF-8");
+			String tseq = request.getParameter("tseq");
 			int cnt = Integer.parseInt(request.getParameter("invitecnt"));
 			System.out.println("cnt:"+cnt);
 			String[] invitemem = new String[cnt];
 			for(int i=0;i<cnt;i++) {
-				if(request.getParameter("invite"+i)!=null) {
-					invitemem[i] = request.getParameter("invite"+i);
+				if(request.getParameter("email"+i)!=null) {
+					invitemem[i] = request.getParameter("email"+i);
 					System.out.println(invitemem[i]);
 					messageHelper.setFrom("leeyong1321@gmail.com");
 					messageHelper.setTo(invitemem[i]);
@@ -258,6 +375,7 @@ public class MemberController {
 					Map model = new HashMap();
 					model.put("mailTo", invitemem[i]);
 					model.put("mailFrom", mailFrom);
+					model.put("tseq", tseq);
 					String mailBody = VelocityEngineUtils.mergeTemplateIntoString(velocityEngineFactoryBean.createVelocityEngine(), "invite_email.vm","UTF-8", model);
 					messageHelper.setText(mailBody,true);
 					mailSender.send(message);
@@ -285,20 +403,44 @@ public class MemberController {
 	
 	//회원수정 체크
 	@RequestMapping(value="editCheck.do" , method = RequestMethod.POST)
-	public String UpdateProfile(Member member) {
-		int result = 0;
-		String viewpage;
-		member.setPwd(this.bCryptPasswordEncoder.encode(member.getPwd()));
-		result = service.update(member);
-		if(result > 0) {
-			System.out.println("업데이트 성공");
-			viewpage = "user/userindex";
-		}else {
-			System.out.println("업데이트 성공");
-			viewpage = "user/app-profile";
-		}
+	public String UpdateProfile(Member member,HttpServletRequest request) {
+		System.out.println(member);
 		
-		return viewpage;
+				
+			CommonsMultipartFile multifile = member.getFilesrc();
+			String filename = multifile.getOriginalFilename();
+			member.setProfile(filename);
+			String path = request.getServletContext().getRealPath("/user/upload");
+			
+			String fpath = path + "\\"+ filename; 
+				
+				if(!filename.equals("")) { //실 파일 업로드
+					FileOutputStream fs = null;
+					try {
+						fs = new FileOutputStream(fpath);
+					} catch (FileNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						
+					}finally {
+						try {
+							fs.write(multifile.getBytes());
+							fs.close();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					
+				
+				}
+		
+		
+		MemberDao dao = sqlsession.getMapper(MemberDao.class);
+		member.setPwd(this.bCryptPasswordEncoder.encode(member.getPwd()));
+		dao.updateMember(member);
+		
+		return "redirect:/memberEdit.do";
 	}
 	
 	// 결재페이지
@@ -307,6 +449,29 @@ public class MemberController {
 		return "user/Payment";
 	}
 	
+	//알림 페이지 
+	@RequestMapping(value="app-alram.do", method=RequestMethod.GET)
+	public String alarmpage() {
+		return "user/app-alram";
+	}
 	
-
+	@RequestMapping(value="app-external.do", method=RequestMethod.GET)
+	public String externalpage() {
+		return "user/app-external";
+	}
+	
+	@RequestMapping(value="updateRole.do", method=RequestMethod.POST)
+	public String updateRole(HttpSession session) {
+		int result = 0;
+		String viewpage;
+		result = service.updateRole((String)session.getAttribute("email"));
+		if(result > 0) {
+			viewpage = "redirect:/paymentPage.do";
+		}else {
+			viewpage = "user/userindex";
+		}
+		return viewpage;
+		
+	}
+	
 }

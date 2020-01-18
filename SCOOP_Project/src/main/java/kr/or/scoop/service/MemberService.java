@@ -53,6 +53,7 @@ public class MemberService {
 		
 	}
 	
+	// 비밀번호 확인 
 	public Member pwdCheck(String email) {
 		Member member = null;
 		System.out.println("pwd check");
@@ -114,11 +115,10 @@ public class MemberService {
 		return result;
 	}
 	
-	public int update(Member member) {
+	public int updateRole(String email) {
 		int result = 0;
 		MemberDao dao = sqlsession.getMapper(MemberDao.class);
-		result = dao.updateMember(member);
-		
+		result = dao.updateRole(email);
 		return result;
 	}
 	

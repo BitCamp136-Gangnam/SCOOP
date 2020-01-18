@@ -53,14 +53,54 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="getMember" resultType="kr.or.scoop.dto.Member">
-		select email,name,pwd,dname,drank,address from member 
+		select email,name,pwd,dname,drank,address,profile from member 
 		where email = #{email}
 	</select>
 	
 	<update id="updateMember" parameterType="kr.or.scoop.dto.Member">
 		update member
-		set email = #{email}, pwd = #{pwd}, name=#{name}, dname=#{dname}, drank=#{drank} , address = #{address}
-		where email = #{email}
+		set email = #{email,jdbcType=VARCHAR}, pwd = #{pwd,jdbcType=VARCHAR}, name=#{name,jdbcType=VARCHAR}, dname=#{dname,jdbcType=VARCHAR}, drank=#{drank,jdbcType=INTEGER} , address = #{address,jdbcType=VARCHAR}, profile= #{profile,jdbcType=VARCHAR} where email = #{email,jdbcType=VARCHAR}
 	</update>
+	<resultMap type="kr.or.scoop.dto.Member" id="Member">
+	<result column="email" property="email"/>
+	<result column="pwd" property="pwd"/>
+	<result column="name" property="name"/>
+	<result column="dname" property="dname"/>
+	<result column="drank" property="drank"/>
+	<result column="address" property="address"/>
+	<result column="idtime" property="idtime"/>
+	<result column="loginnum" property="loginnum"/>
+	<result column="prifile" property="prifile"/>
+	<collection property="projectMemberlist" resultMap="ProjectMemberlist"/>
+	</resultMap>
+	<resultMap type="kr.or.scoop.dto.Role" id="Role">
+	<result column="email" property="email"/>
+	<result column="rname" property="rname"/>
+	<collection property="member" resultMap="Member"/>
+	</resultMap>
+	<resultMap type="kr.or.scoop.dto.ProjectMemberlist" id="ProjectMemberlist">
+	<result column="email" property="email"/>
+	<result column="name" property="name"/>
+	<result column="tseq" property="tseq"/>
+	<result column="pjuserrank" property="pjuserrank"/>
+	</resultMap>
+	<select id="getRole" resultType="kr.or.scoop.dto.Role">
+	select m.email , r.RNAME from member m join role r on m.email = r.email where r.email= #{email,jdbcType=VARCHAR}
+	</select>
+	<select id="projectMemberlist" parameterType="kr.or.scoop.dto.ProjectMemberlist" resultMap="ProjectMemberlist">
+	select m.email, m.name, t.tseq , t.pjuserrank from member m join tpmember t on m.email = t.email where t.tseq = #{tseq}
+	</select>
 	
+	<!-- 비밀번호 변경 -->
+	<update id="changePassword" parameterType="kr.or.scoop.dto.Member">
+		update member
+		set pwd = #{pwd,jdbcType=VARCHAR}
+		where email = #{email,jdbcType=VARCHAR}
+	</update>
+	<update id="updateRole" parameterType="kr.or.scoop.dto.Role">
+		update role set rname = 'ROLE_CHARGE' where email = #{email}
+	</update>
+	<select id="getCount" parameterType="kr.or.scoop.dto.Role" resultType="int">
+	select count(*) from teampjt where email = #{email}
+	</select>
 </mapper>

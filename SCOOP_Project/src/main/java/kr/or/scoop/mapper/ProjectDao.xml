@@ -7,7 +7,70 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  insert into Teampjt (tseq,email,pname,pcontent,ptime,istpalarm,ischarge)
   values (tseq_teampjt_seq.nextval,#{email},#{pname},#{pcontent},sysdate,#{istpalarm},#{ischarge})
 </insert>
-<select id="getPJT" resultType="kr.or.scoop.dto.TeamPjt">
-		SELECT tseq,email,pname,pcontent,ptime,istpalarm,ischarge FROM teampjt WHERE email = #{email}
+<insert id="insertPJT2">
+ insert into tpmember (email,tseq,pjuserrank)
+  values (#{param1},#{param2},100)
+</insert>
+<resultMap type="kr.or.scoop.dto.Tissue" id="Tissue">
+	<result column="tiseq" property="tiseq"/>
+	<result column="tseq" property="tseq"/>
+	<result column="email" property="email"/>
+	<result column="tititle" property="tititle"/>
+	<result column="ticontent" property="ticontent"/>
+	<result column="tistart" property="tistart"/>
+	<result column="tiend" property="tiend"/>
+	<result column="isprocess" property="isprocess"/>
+	<result column="tfilename" property="tfilename"/>
+	<result column="tfilesize" property="tfilesize"/>
+	<result column="istbook" property="istbook"/>
+	<result column="issee" property="issee"/>
+	<result column="tidate" property="tidate"/>
+	<result column="tgfilename" property="tgfilename"/>
+	<result column="tmention" property="tmention"/>
+	<result column="turl" property="turl"/>
+</resultMap>
+<resultMap type="kr.or.scoop.dto.TeamPjt" id="TeamPjt">
+	<result column="tseq" property="tseq"/>
+	<result column="email" property="email"/>
+	<result column="pname" property="pname"/>
+	<result column="pcontent" property="pcontent"/>
+	<result column="ptime" property="ptime"/>
+	<result column="istpalarm" property="istpalarm"/>
+	<result column="ischarge" property="ischarge"/>
+	<collection property="tissue" resultMap="Tissue"/>
+	<collection property="tpmember" resultMap="Tpmember"/>
+</resultMap>
+<resultMap type="kr.or.scoop.dto.Tpmember" id="Tpmember">
+	<result column="tseq" property="tseq"/>
+	<result column="email" property="email"/>
+	<result column="pjuserrank" property="pjuserrank"/>
+	<result column="pname" property="pname"/>
+</resultMap>
+
+<select id="detailPJT" parameterType="int" resultType="kr.or.scoop.dto.TeamPjt">
+	SELECT TSEQ,PNAME,PCONTENT FROM TEAMPJT WHERE TSEQ = #{TSEQ}
+</select>
+<select id="getPJT" parameterType="kr.or.scoop.dto.Tpmember" resultMap="Tpmember">
+		select m.email, m.TSEQ, t.pname from tpmember m join teampjt t on m.tseq = t.tseq where m.email = #{email}
+</select>
+<select id="getTissue" parameterType="kr.or.scoop.dto.Tissue" resultMap="Tissue">
+	SELECT T.TSEQ , M.NAME, S.TISEQ, S.tititle, S.TICONTENT, S.TIDATE, S.ISTBOOK 
+	FROM TEAMPJT T JOIN TISSUE S ON T.TSEQ = S.TSEQ 
+				   JOIN MEMBER M ON M.EMAIL = S.EMAIL 
+	WHERE T.TSEQ = #{TSEQ}
+</select>
+<update id="admin_setting" parameterType="kr.or.scoop.dto.Tpmember">
+		update tpmember 
+		set pjuserrank=#{pjuserrank,jdbcType=INTEGER} 
+		where tseq=#{tseq,jdbcType=INTEGER} and email=#{email,jdbcType=VARCHAR}
+</update>
+<update id="updatePjt" parameterType="kr.or.scoop.dto.TeamPjt">
+	update Teampjt set pname = #{pname} , pcontent = #{pcontent} where tseq = #{tseq}
+</update>
+<select id="searchRank" parameterType="kr.or.scoop.dto.Tpmember" resultType="int">
+	select m.pjuserrank 
+	from tpmember m join teampjt p 
+                	on m.tseq = p.tseq 
+	where p.tseq=#{param1} and m.email = #{param2}
 </select>
 </mapper>

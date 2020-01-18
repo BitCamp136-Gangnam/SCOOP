@@ -200,7 +200,7 @@ a {
   background-color: transparent;
   -webkit-text-decoration-skip: objects; }
   a:hover {
-    color: #2e28f6;
+    color: #E71D36;
     text-decoration: underline; }
 
 a:not([href]):not([tabindex]) {
@@ -3251,6 +3251,7 @@ input[type="button"].btn-block {
       color: #fff; }
 
 .card {
+  min-height:650px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -7784,8 +7785,8 @@ sub {
   top: 0rem !important;
   position: absolute;
   right: 0 !important;
-  left: auto !important;
-  transform: translate3d(0px, 75px, 0px) !important;
+  left: 0!important;
+ /*  transform: translate3d(0px, 75px, 0px) !important; */
   transition: all 0.4s ease-in-out;
   border-top: 0;
   background: #fff;
@@ -8119,7 +8120,6 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
 
 .nav-label {
   padding: 0.8125rem 1.5625rem;
-  text-transform: uppercase;
   font-size: 0.75rem;
   letter-spacing: 0.05rem;
   color: #abafb3; }
@@ -8130,7 +8130,7 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
   top: 0.625rem; }
 
 .content-body {
-  min-height:580px;
+  min-height:680px;
   margin-left: 15.1875rem;
   z-index: 0; }
   @media only screen and (min-width: 1200px) and (max-width: 1350px) {
@@ -11114,7 +11114,7 @@ table.dataTable thead .sorting::after {
   color: #464a53; }
   .btn-outline-secondary:active, .btn-outline-secondary:focus, .btn-outline-secondary:hover {
     background: #6f78b2;
-    color: #fff;
+    color: #322;
     border-color: #6f78b2; }
 
 .btn-outline-success:active, .btn-outline-success:focus, .btn-outline-success:hover {
@@ -11317,7 +11317,7 @@ table.dataTable thead .sorting::after {
   margin-bottom: 30px;
   border: 0px;
   border-radius: 0.625rem;
-  box-shadow: 6px 11px 41px -28px #a99de7; }
+ /*  box-shadow: 6px 11px 41px -28px #a99de7; */ }
   .card-title {
     font-size: 18px;
     font-weight: 500;

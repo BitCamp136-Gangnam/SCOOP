@@ -11,8 +11,122 @@
     <jsp:include page="/WEB-INF/views/commons/title.jsp"></jsp:include>
     <!-- Custom Stylesheet -->
     <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
-
 </head>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script language="javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+<script>
+function sample6_execDaumPostcode() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+            var addr = ''; // 주소 변수
+            var extraAddr = ''; // 참고항목 변수
+
+            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                addr = data.roadAddress;
+            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                addr = data.jibunAddress;
+            }
+
+            // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+            if(data.userSelectedType === 'R'){
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraAddr += data.bname;
+                }
+                // 건물명이 있고, 공동주택일 경우 추가한다.
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                if(extraAddr !== ''){
+                    extraAddr = ' (' + extraAddr + ')';
+                }
+                // 조합된 참고항목을 해당 필드에 넣는다.
+                document.getElementById("sample6_extraAddress").value = extraAddr;
+            
+            } else {
+                document.getElementById("sample6_extraAddress").value = '';
+            }
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            document.getElementById('sample6_postcode').value = data.zonecode;
+            document.getElementById("sample6_address").value = addr;
+            // 커서를 상세주소 필드로 이동한다.
+            document.getElementById("sample6_detailAddress").focus();
+        }
+    }).open();
+}
+
+$(function(){
+  $('#address_btn').click(function(){
+     console.log("함수 시작 ~~");
+     var realaddr = $('#sample6_postcode').val() + "/" + $('#sample6_address').val() + "/" + $('#sample6_detailAddress').val();
+     console.log(realaddr);
+     $('#address').val(realaddr);
+  });
+  if($('#address').val()!=''){
+     var addr1 = ""; 
+     var addr2 = ""; 
+     var addr3 = "";
+     var tempaddress = $('#address').val().split("/"); 
+     addr1 = tempaddress[0];
+     addr2 = tempaddress[1];
+     addr3 = tempaddress[2];
+     $('#sample6_postcode').val(addr1);
+     $('#sample6_address').val(addr2);
+     $('#sample6_detailAddress').val(addr3);
+     }
+  $('#sample6_postcode').change(function(){
+     console.log("바뀌니?");
+     })
+});
+
+//sample6_postcode sample6_address sample6_detailAddress
+
+$(document).ready(function(){
+	//회원정보 유효성검사
+	function pwdcheck() {
+		var getCheck = RegExp(/^[a-zA-Z0-9]{4,12}$/);
+		
+		//비밀번호 유효성
+		if (!getCheck.test($("#pwd").val())) {
+			Swal.fire("비밀번호 형식에 맞게 입력해주세요.");
+			$("#pwd").val("");
+			$("#pwd").focus();
+			return false;
+		}
+
+		//비밀번호 공백 확인
+		if ($("#pwd").val() == "") {
+			Swal.fire("비밀번호를 입력해주세요");
+			$("#pwd").focus();
+			return false;
+		}
+
+		return true;
+	}
+
+	$('#Photo').change(function(){
+		var reader = new FileReader();
+		
+		reader.onload = function(e) {
+			
+			document.getElementById("profile").src = e.target.result;
+		};
+		
+		reader.readAsDataURL(this.files[0]);
+	});
+	
+	});
+</script>
+
 <style>
 .myinfo{
  border: 0;
@@ -50,13 +164,13 @@
 		<div class="row" style="margin-left: 2%;">
 			<ul class="nav nav-pills">
 			    <li class="nav-item">
-			      <a class="nav-link" href="./app-profile.jsp">내 정보</a>
+			      <a class="nav-link" href="memberEdit.do?${sessionScope.email}">내 정보</a>
 			    </li>
 			    <li class="nav-item">
-			      <a class="nav-link" href="./app-alram.jsp">알림</a>
+			      <a class="nav-link" href="app-alram.do">알림</a>
 			    </li>
 			    <li class="nav-item">
-			      <a class="nav-link" href="./app-external.jsp">외부 서비스 연결</a>
+			      <a class="nav-link" href="app-external.do">외부 서비스 연결</a>
 			    </li>
 			    <li class="nav-item">
 			      <a class="nav-link" href="paymentPage.do">가격 및 결제</a>
@@ -64,9 +178,19 @@
 		    </ul>
 		</div>
 		<hr style="margin-top: 0">
+	<form onsubmit="return pwdcheck()" action="editCheck.do" method="post" enctype="multipart/form-data">
 		<div class="row" style="margin-left: 4%; margin-right: 2%; margin-top: 1%">
 			<div class="media align-items-center mb-4">
-                                    <img class="mr-3" src="<c:url value="/resources/images/avatar/avatar.png" />" width="120" height="120" alt="">
+					<c:choose>
+						<c:when test="${member.profile==null}">
+							<img id ="profile" class="mr-3 img-circle" src="<c:url value='/resources/images/avatar/avatar.png' />" width="120" height="120" alt="" name="profile">
+							<input type="file" name="filesrc" id="Photo" accept="image/*">
+						</c:when>
+						<c:otherwise>
+                             <img id ="profile" class="mr-3 img-circle" src="<c:url value='/user/upload/${member.profile}' />" width="120" height="120" alt="" name="profile">
+                             <input type="file" name="filesrc" id="Photo" accept="image/*">
+						</c:otherwise>
+					</c:choose>
                                     <div class="media-body">
                                         <h3 class="mb-0">${member.name}</h3>
                                         <p class="text-muted mb-0" style="margin-left: 2%; width: 300px;">${member.email}</p>
@@ -75,18 +199,17 @@
 		</div>
 		<div class="row" style="margin-left: 4%; margin-top: 2%">
 		<div class="form-group" style="width: 100%">
-			<form action="editCheck.do" method="post">
     		<label for="email">이메일</label>
     		<input class="form-control myinfo" type="text" id="email" name="email" style="width: 60%" readonly="readonly" value="${member.email}">
     		<br>
     		<c:choose>
     		<c:when test="${member.pwd == 'google'}">
     		<label for="pwd">비밀번호</label>
-    		<input class="form-control myinfo" type="text" id="pwd" name="pwd" style="width: 60%" value="구글에 문의하세요" readonly="readonly">
+    		<input class="form-control myinfo" type="text" id="pwd_google" name="pwd" style="width: 60%" value="구글에 문의하세요" readonly="readonly">
     		</c:when>
     		<c:when test="${member.pwd == 'naver'}">
     		<label for="pwd">비밀번호</label>
-    		<input class="form-control myinfo" type="text" id="pwd" name="pwd" style="width: 60%" value="네이버에 문의하세요" readonly="readonly">
+    		<input class="form-control myinfo" type="text" id="pwd_naver" name="pwd" style="width: 60%" value="네이버에 문의하세요" readonly="readonly">
     		</c:when>
     		<c:otherwise>
     		<label for="pwd">비밀번호</label>
@@ -95,7 +218,7 @@
     		</c:choose>
     		<br>
     		<label for="name">이름</label>
-    		<input class="form-control myinfo" type="text" id="name" name="name" style="width: 60%" readonly="readonly" value="${member.name}">
+    		<input class="form-control myinfo" type="text" id="name" name="name" style="width: 60%"  value="${member.name}">
     		<br>
     		<label for="dname">부서</label>
     		<input class="form-control myinfo" type="text" id="dname" name="dname" style="width: 60%" value="${member.dname}">
@@ -104,16 +227,27 @@
     		<input class="form-control myinfo" type="text" id="drank" name="drank" style="width: 60%" value="${member.drank}">
     		<br>
     		<label for="address">주소</label>
-    		<input class="form-control myinfo" type="text" id="address" name="address" style="width: 60%" value="${member.address}">
-    		<br>
-    		<input type="submit" class="btn" style="background-color: #fff5a5; border-color: #CCCCCC; color: gray; cursor: pointer;" value="수정완료">
+    		<input class="form-control myinfo" type="hidden" id="address" name="address" style="width: 60%; " value="${member.address}">
+          	<input type="text" id="sample6_postcode" style="border-radius: 0.25rem;" placeholder="우편번호">
+         	<input type="button" onclick="sample6_execDaumPostcode()" style="margin-bottom: 1%;border-radius: 0.25rem; " value="우편번호 찾기"><br>
+         	<input type="text" id="sample6_address" style="min-width:500px;border-radius: 0.25rem;" placeholder="주소"><br>
+         	<input type="text" id="sample6_detailAddress"style="min-width:250px;border-radius: 0.25rem;" placeholder="상세주소">
+         	<input type="text" id="sample6_extraAddress"style="min-width:247px;margin-top: 1%;border-radius: 0.25rem; " placeholder="참고항목">
+          	<br>
+    		
+    		<input type="submit" id="address_btn" class="btn" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;margin-top: 3%;" value="수정완료">
+    		
+    		</div>
+    		</div>
     		</form>	
+    
     	</div>
+    	
     	</div>
             <!-- #/ container -->
             </div>
             </div>
-        </div>
+        
         <!--**********************************
             Content body end
         ***********************************-->
@@ -126,7 +260,6 @@
         <!--**********************************
             Footer end
         ***********************************-->
-    </div>
     <!--**********************************
         Main wrapper end
     ***********************************-->

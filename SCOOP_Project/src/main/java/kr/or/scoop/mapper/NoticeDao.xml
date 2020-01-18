@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.scoop.dao.NoticeDao">
+	<select id="getNotice" resultType="kr.or.scoop.dto.Notice">
+		select bnseq,bntitle,bncontent,bntime,email from notice
+	</select>
+	
+	<insert id="insertNotice" parameterType="kr.or.scoop.dto.Notice">
+		insert into notice (bnseq,bntitle,bncontent,bntime,email)
+		 values (bnseq_notice_seq.nextval,#{bntitle},#{bncontent},sysdate,#{email})
+	</insert>
+	<select id="detailNotice" resultType="kr.or.scoop.dto.Notice">
+		select bnseq,bntitle,bncontent,bntime from notice where bnseq = #{bnseq}
+	</select>
+	<update id="updateNotice" parameterType="int">
+		UPDATE notice 
+		set bntitle=#{bntitle}, 
+			bncontent=#{bncontent}
+		where bnseq=#{bnseq}
+	</update>
+</mapper>

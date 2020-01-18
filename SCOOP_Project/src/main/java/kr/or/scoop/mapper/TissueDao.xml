@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.scoop.dao.TissueDao">
+
+<insert id="writeTissue" parameterType="kr.or.scoop.dto.Tissue" >
+insert into tissue (tiseq,tseq,email,tititle,ticontent,isprocess, istbook, issee, tidate)
+  values (TISEQ_TISSUE_SEQ.NEXTVAL, #{tseq}, #{email}, #{tititle}, #{ticontent}, 0, 0, 0, sysdate,)
+</insert>
+<resultMap type="kr.or.scoop.dto.Member" id="Member">
+	<result column="tseq" property="tseq"/>
+	<result column="email" property="email"/>
+	<result column="pname" property="pname"/>
+	<result column="pcontent" property="pcontent"/>
+	<result column="ptime" property="ptime"/>
+	<result column="istpalarm" property="istpalarm"/>
+	<result column="ischarge" property="ischarge"/>
+	<collection property="tissue" resultMap="Tissue"/>
+	<collection property="tpmember" resultMap="Tpmember"/>
+</resultMap>
+<resultMap type="kr.or.scoop.dto.Tissue" id="Tissue">
+	<result column="tiseq" property="tiseq"/>
+	<result column="tseq" property="tseq"/>
+	<result column="email" property="email"/>
+	<result column="tititle" property="tititle"/>
+	<result column="ticontent" property="ticontent"/>
+	<result column="tistart" property="tistart"/>
+	<result column="tiend" property="tiend"/>
+	<result column="isprocess" property="isprocess"/>
+	<result column="isbook" property="isbook"/>
+	<result column="issee" property="issee"/>
+	<result column="tidate" property="tidate"/>
+	<result column="tgfilename" property="tgfilename"/>
+	<result column="turl" property="turl"/>
+</resultMap>
+<select id="loadKanban" parameterType="int" resultMap="Tissue">
+	select *
+	from tissue
+	where tseq = #{tseq}
+</select>
+<select id="teamissueDetail" resultType="kr.or.scoop.dto.Tissue">
+	SELECT * FROM tissue WHERE tiseq = #{tiseq, jdbcType=INTEGER}
+</select>
+<update id="teamSetting">
+	update tpmember set pjuserrank=#{param1} where tseq=#{param2} and email=#{param3}
+</update>
+<update id="kanbanEdit">
+	UPDATE tissue 
+	SET isprocess=#{param3}
+	WHERE tiseq = #{param2} and tseq = #{param1}
+</update>
+<delete id="banMember">
+	delete from tpmember where tseq=#{param1} and email=#{param2}
+</delete>
+<update id="tiBookMark" parameterType="kr.or.scoop.dto.Tissue">
+	update Tissue
+	set istbook = #{param2}
+	where tseq=#{param1} and email=#{param3}
+</update>
+</mapper>

@@ -1,32 +1,23 @@
 package kr.or.scoop.dto;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 @Repository
 public class Member {
 	private String email;
 	private String pwd;
 	private String name;
+	private CommonsMultipartFile filesrc;
 	private String dname;
 	private String drank;
 	private String address;
 	private String idtime;
 	private int loginnum;
-	private String profile;
-	/*
-	 * private CommonsMultipartFile profile;
-	 * 
-	 * 
-	 * public CommonsMultipartFile getProfile() { return profile; } public void
-	 * setProfile(CommonsMultipartFile profile) { this.profile = profile; }
-	 */
-	
-	public String getProfile() {
-		return profile;
-	}
-	public void setProfile(String profile) {
-		this.profile = profile;
-	}
+	private String profile; 
+
 	public String getEmail() {
 		return email;
 	}
@@ -78,15 +69,26 @@ public class Member {
 	public void setIdtime(String idtime) {
 		this.idtime = idtime;
 	}
-	@Override
-	public String toString() {
-		return "Member [email=" + email + ", pwd=" + pwd + ", name=" + name + ", dname=" + dname + ", drank=" + drank
-				+ ", address=" + address + ", idtime=" + idtime + ", loginnum=" + loginnum + ", profile=" + profile
-				+ "]";
+	
+	public CommonsMultipartFile getFilesrc() {
+		return filesrc;
+	}
+	public void setFilesrc(CommonsMultipartFile filesrc) {
+		this.filesrc = filesrc;
+	}
+	public String getProfile() {
+		return profile;
+	}
+	public void setProfile(String profile) {
+		this.profile = profile;
 	}
 	
 	
-	
-	
+	@Override
+	public String toString() {
+		return "Member [email=" + email + ", pwd=" + pwd + ", name=" + name + ", filesrc=" + filesrc + ", dname="
+				+ dname + ", drank=" + drank + ", address=" + address + ", idtime=" + idtime + ", loginnum=" + loginnum
+				+ ", profile=" + profile + "]";
+	}
 	
 }

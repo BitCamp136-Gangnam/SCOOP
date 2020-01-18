@@ -38,31 +38,43 @@
 	integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
 	crossorigin="anonymous">
 <script type="text/javascript">
-	let wsocket;
-	
+	var wsocket;
 	$(function() {
 		connect();
-
 /* 		$('#dataTable').DataTable({
 		 	"searching": false,
 		 	"ordering": false
  		}); */
- 		
+ 		$('#chatopen').click(function(){
+ 			console.log($('#chattbody').children());
+ 	 		//if($('#chattbody').children().length==0){
+ 				for(let i=0; i<$('.resultsearch').length;i++){
+ 				var proname = $('.resultsearch')[i].innerHTML.substr(7);
+ 				var prohref = $('.resultsearch').parent()[i].getAttribute('href').substr(22);
+ 					console.log(proname);
+ 					console.log(prohref);
+ 				let data = { cmd : "createChatRoom", 
+ 		    	    	name : proname+"/"+prohref, 
+ 		    	    	max : 100,
+ 		    	    	ref : "${ref}"
+ 		    	    		};
+ 		   		wsocket.send(JSON.stringify(data));
+ 				}
+ 			//}
+ 	 		})
 		$("#createChat").click( function() {
 			backAndForth();
 		});
-
 		$(window).on("beforeunload", function(){
 			disconnect();
 	    });
-
 	    $('#dataTable tbody').on( 'click', 'button', function () {
 	    	openChat($(this).attr("id"));
 	    });
 	})
 	
 		
-	const steps = ['방 제목', '최대 인원'];
+/* 	const steps = ['방 제목', '최대 인원'];
 	const swalQueueStep = Swal.mixin({
 	  confirmButtonText: 'Next',
 	  cancelButtonText: 'Back',
@@ -109,10 +121,10 @@
 	    wsocket.send(JSON.stringify(data));   
 	    openChat(data.name);
 	  }
-	}
+	} */
 
 	 function connect() {
-		wsocket = new WebSocket("ws://192.168.6.16:8090/SCOOP/Chat-ws.do?cmd=on"); 
+		wsocket = new WebSocket("ws://192.168.6.16:8090/SCOOP/Chat-ws.do?cmd=on");
 		wsocket.onmessage = onMessage;
 		wsocket.onclose = onClose;
 	}
@@ -122,6 +134,8 @@
 	}
 	
 	function onMessage(evt) { 
+		console.log(evt);
+		console.log(evt.data);
 		var data = JSON.parse(evt.data); 
 		setChatRooms(data);
 		
@@ -131,21 +145,41 @@
 		
 	}
 
-	function setChatRooms(data){
-		let num = 1;
+/* 	function setChatRooms(data){
+		var room = "";
+		var btn = "";
 		$('#dataTable > tbody').empty();
 		$.each(data.rooms, function(index, element){
-			let room = $("<tr></tr>");
-			room.append("<td style='padding-top:5%;'>" + (num++) + "</td>");
-			room.append("<td style='padding-top:5%;'>"+element.name+"</td>");
-			room.append("<td style='padding-top:5%;'>"+element.users.length+ " / " +element.max+"</td>");
- 			let btn = $("<button class='btn btn-primary'>입장</button>");
-			if(element.users.length == element.max)
-				btn.attr("disabled",true);
-
-			btn.attr("id", element.name);
-			room.append($("<td></td>").append(btn));
-			 $('#dataTable > tbody').append(room);
+			for(let i=0; i<$('.resultsearch').length;i++){
+				if($('.resultsearch').parent()[i].getAttribute('href').substr(22)==data.rooms[index].name.split("/")[1]){
+					console.log("너는 같구나^^");
+					room = $("<tr></tr>");
+					//room.append("<td style='padding-top:5%;'>" + (num++) + "</td>");
+					room.append("<td style='padding-top:5%;'>"+element.name+"</td>");
+					//room.append("<td style='padding-top:5%;'>"+element.users.length+ " / " +element.max+"</td>");
+		 			btn = $("<button id="+element.name+" class='btn btn-primary'>입장</button>");
+					room.append($("<td></td>").append(btn));
+					$('#dataTable > tbody').append(room);
+				}
+			}
+		})
+	} */
+	function setChatRooms(data){
+		$('#dataTable > tbody').empty();
+		$.each(data.rooms, function(index, element){
+			for(let i=0; i<$('.resultsearch').length;i++){
+				if($('.resultsearch').parent()[i].getAttribute('href').substr(22)==data.rooms[index].name.split("/")[1]){
+					console.log("너는 같구나^^");
+					room = $("<tr></tr>");
+					//room.append("<td style='padding-top:5%;'>" + (num++) + "</td>");
+					room.append("<td style='padding-top:5%;'>"+element.name.split("/")[0]+"</td>");
+					//room.append("<td style='padding-top:5%;'>"+element.users.length+ " / " +element.max+"</td>");
+		 			btn = $("<button class='btn btn-primary'>입장</button>");
+					btn.attr("id", element.name);
+					room.append($("<td></td>").append(btn));
+					$('#dataTable > tbody').append(room);
+				}
+			}
 		})
 	}
 		
@@ -155,11 +189,10 @@
 
     function openChat(room){
     	let url = "Chat.do?room="+room;
-    	//let name = room;
-    	//let option = "width = 500, height = 500, top = 100, left = 200, location = no, channelmode = yes";
-        //window.open(url, name, option);
-        //window.location.href=url;
-        $('#chatdivopen').hide();
+    	let name = room;
+    	let option = "width = 400, height = 500, top = 230, left = 1170, location = no, channelmode = yes";
+        window.open(url, name, option);
+        /* $('#chatdivopen').hide();
         $('#chatroomdivopen').load(url);
         $('#chatroomdivopen').show();
         $('#chatdivopen').attr('class','false');
@@ -171,7 +204,7 @@
         	$('#chatdivopen').show();
         	$('#chatdivopen').attr('class','true');
             $('#chatroomdivopen').attr('class','false');
-        })
+        }) */
     }
 </script>
 <script type="text/javascript">
@@ -262,7 +295,7 @@
 	width: 400px;
 	position: fixed;
 	bottom: 78px;
-	right: 0px;
+	right: 20px;
 	font-size: 18px;
 	z-index: 1;
 }
@@ -364,33 +397,33 @@
 	background: rgba(61, 56, 57,0.5);
 }
 </style>
-<div class="footer">
+<!-- <div class="footer">
 	<div class="copyright">
 		<p>
 			Copyright &copy; Designed & Developed by <a
 				href="https://themeforest.net/user/quixlab">Quixlab</a> 2018
 		</p>
 	</div>
-</div>
+</div> -->
 <!-- chat 시작 -->
 			<div id="chatdivopen" class="true">
-				<div class="card" style="border-radius: 10px; margin-bottom: 0;border : 1px solid #ced4da;">
+				<div class="card" style="border-radius: 10px; margin-bottom: 0;border : 1px solid #ced4da;min-height: 400px;">
 					<div class="card-header">
 						<i class="fas fa-comments"></i> 실시간 채팅(Ctrl + ,)
-						<button id="createChat" class="btn btn-primary" type="button" style="margin-bottom: 0; margin-left: 45px">채팅방	만들기</button>
+						<!-- <button id="createChat" class="btn btn-primary" type="button" style="margin-bottom: 0; margin-left: 45px">채팅방	만들기</button> -->
 					</div>
 					<div class="card-body" style="padding-top: 0">
-						<div class="table"  style="height: 200px;overflow: auto;">
+						<div class="table"  style="height: 400px;overflow: auto;border-top:1px solid #f3f3f3">
 							<table class="table table-bordered" id="dataTable" style="text-align: center; background-color: white">
 								<thead>
 									<tr>
-										<th width="10%">NO</th>
-										<th width="20%">NAME</th>
-										<th width="10%">USER</th>
-										<th width="10%">ENTER</th>
+										<!-- <th width="10%">NO</th> -->
+										<th width="80%">협업공간</th>
+										<!-- <th width="10%">USER</th> -->
+										<th width="20%">입장</th>
 									</tr>
 								</thead>
-								<tbody>
+								<tbody id="chattbody">
 
 								</tbody>
 							</table>

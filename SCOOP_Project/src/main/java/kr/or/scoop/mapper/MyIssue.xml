@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.scoop.dao.MyIssueDao">
+<insert id="writeMyissue" parameterType="kr.or.scoop.dto.MyIssue" >
+insert into myissue (piseq,pfilename,pfilesize,pititle,picontent,pistart, piend, ispibook, email, pidate, mygfilename, mymention, myurl)
+  values (PISEQ_MYISSUE_SEQ.NEXTVAL, #{pfilename,jdbcType=VARCHAR}, #{pfilesize,jdbcType=BIGINT}, #{pititle}, #{picontent}, #{pistart,jdbcType=DATE}, #{piend,jdbcType=DATE}, 0, #{email,jdbcType=VARCHAR}, sysdate, #{mygfilename,jdbcType=VARCHAR}, #{mymention,jdbcType=VARCHAR}, #{myurl,jdbcType=VARCHAR})
+</insert>
+<select id="getMyissue" resultType="kr.or.scoop.dto.MyIssue">
+	SELECT piseq, pititle, picontent, pidate, ispibook FROM myissue WHERE email = #{email, jdbcType=VARCHAR}
+</select>
+<select id="MyWriteIssueList" resultType="kr.or.scoop.dto.MyIssue">
+select piseq,pititle,pidate from myissue where email = #{email}
+</select>
+<select id="MyWriteTiisueList" resultType="kr.or.scoop.dto.MyIssue">
+select t.tseq,t.tititle,t.tidate,t.tiseq,p.pname from tissue t join teampjt p on t.tseq = p.tseq where t.email = #{email}
+</select>
+<select id="myissueDetail" resultType="kr.or.scoop.dto.MyIssue">
+	SELECT piseq, pititle, picontent, pidate, ispibook FROM myissue WHERE piseq = #{piseq, jdbcType=INTEGER}
+</select>
+<!-- 북마크 -->
+<update id="piBookMark" parameterType="kr.or.scoop.dto.MyIssue">
+	update myissue
+	set ispibook = #{param2}
+	where piseq=#{param1} and email=#{param3}
+</update>
+</mapper>
