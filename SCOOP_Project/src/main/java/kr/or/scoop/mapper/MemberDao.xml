@@ -103,4 +103,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getCount" parameterType="kr.or.scoop.dto.Role" resultType="int">
 	select count(*) from teampjt where email = #{email}
 	</select>
+	<select id="getProfile" parameterType="kr.or.scoop.dto.Member" resultType="String">
+		select profile from member where email = #{email}
+	</select>
 </mapper>

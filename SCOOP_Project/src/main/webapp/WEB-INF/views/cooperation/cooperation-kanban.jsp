@@ -192,12 +192,11 @@ function drop(ev) {
             Content body start
         ***********************************-->
         <div class="content-body">
-        <br>
             <div class="container-fluid">
-        <div class="card" style="min-height: 1080px">
-		<div class="row" style="margin: 2%">
+        <div class="card">
+		<div class="row" style="margin: 2% 2% 0 2%">
 			<div class="col-sm-12" style="padding-left: 0">
-				<h3>쫀쬬니</h3>
+				<h3 style="padding-left: 15px;">쫀쬬니</h3>
 			</div>
 		</div>
 		<div class="row" style="margin-left: 2%;">
@@ -216,45 +215,61 @@ function drop(ev) {
 		<hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
 		<div class="row" style="margin-left: 2%; margin-right: 2%;">
 			<div id="todolist" class="col-sm-3 kanban">
-			<div class="realkan" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #888">
-			<h5>발의됨</h5>
+			<div class="realkan" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #888;height: 500px;overflow: auto;">
+			<div style="margin-bottom: 7%;">
+			<div class="iconify" data-icon="uil:file-exclamation-alt" data-inline="false" style="width: 25px;height: auto;"></div>
+			<div style="font-size:15px;float:right;padding-right: 170px;padding-top:1%;">발의됨</div>
+			</div>
+			
 			  <c:forEach items="${tissuelist}" var="tl">
 			  	  <c:set value="${tl.tseq}" var="tseq"></c:set>
 			  	  <c:if test="${tl.isprocess==0 }">
-			  	  <div draggable="true" ondragstart="drag(event)" id="${tl.tiseq }" name="${tl.isprocess }" class="drags">${tl.tititle}
+			  	  <div draggable="true" ondragstart="drag(event)" id="${tl.tiseq }" name="${tl.isprocess }" class="drags" style="margin-bottom: 5%;">${tl.tititle}
 			      </div>
 			  	  </c:if>
 			  </c:forEach>
 			</div>
 			</div>
 			<div id="doing" class="col-sm-3 kanban">
-				<div class="realkan" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #2671bd">
-				<h5>진행중</h5>
+				<div class="realkan" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #2671bd;height: 500px;overflow: auto">
+				<div style="margin-bottom: 7%;">
+				<div class="iconify" data-icon="uil:file-edit-alt" data-inline="false"style="width: 25px;height: auto;color:#2671bd"></div>
+				<div style="font-size:15px;float:right;padding-right: 170px;padding-top:1%;">진행중</div>
+				</div>
+				
 				<c:forEach items="${tissuelist}" var="tl">
 			  	  <c:if test="${tl.isprocess==1 }">
-			  	  <div draggable="true" ondragstart="drag(event)" id="${tl.tiseq }" name="${tl.isprocess }" class="drags">${tl.tititle}
+			  	  <div draggable="true" ondragstart="drag(event)" id="${tl.tiseq }" name="${tl.isprocess }" class="drags" style="margin-bottom: 5%;">${tl.tititle}
 			      </div>
 			  	  </c:if>
 				  </c:forEach>
 				</div>
 			</div>
 			<div id="validate" class="col-sm-3 kanban" ondrop="drop(event)">
-				<div class="realkan" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #cca352">
-				<h5>일시중지</h5>
+				<div class="realkan" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #cca352;height: 500px;overflow: auto">
+				<div style="margin-bottom: 7%;">
+				<div class="iconify" data-icon="uil:file-block-alt" data-inline="false" style="width: 25px;height: auto;color:#cca352"></div>
+				<div style="font-size:15px;float:right;padding-right: 155px;padding-top:1%;">일시중지</div>
+				</div>
+				
 				<c:forEach items="${tissuelist}" var="tl">
 			  	  <c:if test="${tl.isprocess==2 }">
-			  	  <div draggable="true" ondragstart="drag(event)" id="${tl.tiseq }" name="${tl.isprocess }" class="drags">${tl.tititle}
+			  	  <div draggable="true" ondragstart="drag(event)" id="${tl.tiseq }" name="${tl.isprocess }" class="drags" style="margin-bottom: 5%;">${tl.tititle}
 			      </div>
 			  	  </c:if>
 			  </c:forEach>
 				</div>
 			</div>
 			<div id="complete" class="col-sm-3 kanban" ondrop="drop(event)">
-				<div class="realkan" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #26805c">
-				<h5>완료</h5>
+				<div class="realkan" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #26805c;height: 500px;overflow: auto">
+				<div style="margin-bottom: 7%;">
+				<div class="iconify" data-icon="uil:file-check-alt" data-inline="false" style="width: 25px;height: auto;color:#26805c"></div>
+				<div style="font-size:15px;float:right;padding-right: 185px;padding-top:1%;">완료</div>
+				</div>
+				
 				<c:forEach items="${tissuelist}" var="tl">
 			  	  <c:if test="${tl.isprocess==3 }">
-			  	  <div draggable="true" ondragstart="drag(event)" id="${tl.tiseq }" name="${tl.isprocess }" class="drags">${tl.tititle}
+			  	  <div draggable="true" ondragstart="drag(event)" id="${tl.tiseq }" name="${tl.isprocess }" class="drags" style="margin-bottom: 5%;">${tl.tititle}
 			      </div>
 			  	  </c:if>
 			  </c:forEach>

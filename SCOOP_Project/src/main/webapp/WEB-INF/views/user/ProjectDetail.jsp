@@ -113,15 +113,22 @@ $(function(){
 			
 			let icon = book.attr('class').split(' ');
 			let status = book.attr('name');
-			let tseq = book.closest('div.row').children('input[name]').val();
+			let tiseq = book.closest('div.row').children('input[name=tiseq]').val();
+			let tseq = book.closest('div.row').children('input[name=tseq]').val();
 
+			console.log(icon);
+			console.log(status);
+			console.log(tiseq);
+			console.log(tseq);
+			
 			let dat;
 			let mark;
 			
 			$.ajax({
 				url : "tibookmark.do",
 				type : "POST",
-				data : {"tseq" : tseq , 
+				data : {"tiseq" : tiseq ,
+						"tseq" : tseq, 
 						"status" : status
 				       },
 				success : function(datadata){
@@ -219,6 +226,7 @@ $(function(){
       <c:forEach items="${tp}" var="ti">
          <div class="row" style="margin-left: 2%; margin-right: 2%">
          <input type="hidden" name="tiseq" value="${ti.tiseq}" />
+         <input type="hidden" name="tseq" value="${tpj.tseq}" />
          <div class="col-sm-2 newissue" >
          ${ti.name }
          </div>

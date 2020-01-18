@@ -62,9 +62,13 @@
 		<div class="row" style="margin-left: 2%; margin-right: 2%">
 			<c:forEach items="${ti}" var="ti">
 			<div class="col-sm-12 newissue" >
+			<div>
 			<span class="iconify" data-icon="uil:file-exclamation-alt" data-inline="false" style="width:25px;height: auto;"></span>
-			<a href="teamissueDetail.do?tiseq=${ti.tiseq}">${ti.tititle}</a><br>
+			<a href="teamissueDetail.do?tiseq=${ti.tiseq}">${ti.tititle}</a>			
+			</div>
+			<div>
 			<a href="projectDetail.do?tseq=${ti.tseq}&email='${session.email}'">${ti.pname}</a>&nbsp;&nbsp;&nbsp;${ti.tidate}<br>
+			</div>
 			</div>
 			</c:forEach>
 			<c:forEach items="${pi}" var="pi">
