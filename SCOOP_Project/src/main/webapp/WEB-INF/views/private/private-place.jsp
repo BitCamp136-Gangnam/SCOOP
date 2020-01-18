@@ -42,13 +42,9 @@
 					mark = book.attr('class').split(' ');
 
 					if(status == "bookoff"){
-						console.log('bookclass ? ' + book.attr('class'));
-						console.log('icon : ' + mark);
-						console.log('bookoff if');
 						book.removeAttr('name').attr('name', 'bookon');
 						book.removeClass(mark[1]+" "+mark[2]).addClass("fas fa-bookmark");
 					}else if(status == "bookon"){
-						console.log('bookon if');
 						book.removeAttr("name").attr("name", "bookoff");
 						book.removeClass(mark[1]+" "+mark[2]).addClass("far fa-bookmark");
 					}

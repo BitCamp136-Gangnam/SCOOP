@@ -21,5 +21,5 @@ public interface TissueDao {
 	public Tissue teamissueDetail(int tiseq);
 	
 	//북마크
-	public int tiBookMark(int tseq, int istbook, String email);
+	public int tiBookMark(int tiseq, int istbook, String email);
 }

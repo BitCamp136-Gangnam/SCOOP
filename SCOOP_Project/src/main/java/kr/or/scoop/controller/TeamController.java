@@ -109,7 +109,6 @@ public class TeamController {
 		System.out.println(projectMemberlist);
 		
 		int rank = dao.searchRank(tseq, email);
-		
 		System.out.println("rank : " + rank);
 		
 		model.addAttribute("tpj",pjt); //프로젝트 이름 , 설명
