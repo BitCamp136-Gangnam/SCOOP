@@ -58,8 +58,10 @@ $(function(){
 	$(".fc-content-skeleton thead td").mousedown(function(e){
 		var da = $(this).attr('data-date');	
 		console.log(typeof(da));
-		$('#begin').val(da);
-		$('.modal-body input[name=begin]').attr('value',da);
+		$('#beginDate')
+		/* $('#beginDate').val(da);
+		console.log('2020-01-29'==da);	
+		$('.modal-body input[name=begin]').attr('value',da); */
 		console.log("값좀 들어가라 ㅡㅡ begin");
 		console.log(da);
 		
@@ -69,8 +71,8 @@ $('#calcal').append('<br><div class="col-md-12"><label class="control-label">Sel
 $(function(){
 	$(".fc-content-skeleton thead td").mouseup(function(e){
 		var du = $(this).attr('data-date');
-		$('#end').val(du);
-		$('.modal-body input[name=end]').attr('value',du);
+		/* $('#endDate').val(du);
+		$('.modal-body input[name=end]').attr('value',du); */
 		console.log("값좀 들어가라 ㅡㅡ end");
 		console.log(du);
 	});
