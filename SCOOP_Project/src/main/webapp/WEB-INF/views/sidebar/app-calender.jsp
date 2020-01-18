@@ -56,18 +56,33 @@ var $item = $('.item').on('click', function() {
 
 $(function(){
 	$(".fc-content-skeleton thead td").mousedown(function(e){
-		var da = $(this).attr('data-date');
-		$("#begin").val(da);
+		var da = $(this).attr('data-date');	
+		console.log(typeof(da));
+		$('#begin').val(da);
+		$('.modal-body input[name=begin]').attr('value',da);
+		console.log("값좀 들어가라 ㅡㅡ begin");
 		console.log(da);
+		
 	});
 });
+$('#calcal').append('<br><div class="col-md-12"><label class="control-label">Select Team</label><select id="calTeam" name="calTeam" class="form-control"><c:forEach items="${pjtlist}" var="p"><option value="${p.tseq}">${p.pname}</option></c:forEach></select></div>');
 $(function(){
 	$(".fc-content-skeleton thead td").mouseup(function(e){
 		var du = $(this).attr('data-date');
-		$("#end").val(du);
+		$('#end').val(du);
+		$('.modal-body input[name=end]').attr('value',du);
+		console.log("값좀 들어가라 ㅡㅡ end");
 		console.log(du);
 	});
 });
+function returnBegin(){
+	return da;
+}
+
+function returnEnd(){
+	return du;
+}
+
 
 
 function showCoords(event) {
