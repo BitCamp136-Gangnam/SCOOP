@@ -53,4 +53,9 @@ insert into tissue (tiseq,tseq,email,tititle,ticontent,isprocess, istbook, issee
 <delete id="banMember">
 	delete from tpmember where tseq=#{param1} and email=#{param2}
 </delete>
+<update id="">
+	update Tissue
+	set istbook = #{param2}
+	where tseq=#{param1} and email=#{param3};
+</update>
 </mapper>

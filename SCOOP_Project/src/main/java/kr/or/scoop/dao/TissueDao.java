@@ -19,4 +19,7 @@ public interface TissueDao {
 	
 	//팀 이슈 디테일
 	public Tissue teamissueDetail(int tiseq);
+	
+	//북마크
+	public int tiBookMark(int piseq, int ispibook, String email);
 }

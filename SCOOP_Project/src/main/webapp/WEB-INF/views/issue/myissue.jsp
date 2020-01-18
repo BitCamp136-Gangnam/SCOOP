@@ -62,14 +62,15 @@
 		<div class="row" style="margin-left: 2%; margin-right: 2%">
 			<c:forEach items="${ti}" var="ti">
 			<div class="col-sm-12 newissue" >
+			<span class="iconify" data-icon="uil:file-exclamation-alt" data-inline="false" style="width:25px;height: auto;"></span>
 			<a href="teamissueDetail.do?tiseq=${ti.tiseq}">${ti.tititle}</a><br>
-			${ti.pname} / ${ti.tidate}<br>
+			<a href="projectDetail.do?tseq=${ti.tseq}&email='${session.email}'">${ti.pname}</a>&nbsp;&nbsp;&nbsp;${ti.tidate}<br>
 			</div>
 			</c:forEach>
 			<c:forEach items="${pi}" var="pi">
 			<div class="col-sm-12 newissue" >
 			아이콘 + <a href="myissueDetail.do?piseq=${pi.piseq}">${pi.pititle}</a><br>
-			프라이빗 공간 / ${pi.pidate} 
+			<a href="private.do">프라이빗 공간</a>&nbsp;&nbsp;&nbsp;${pi.pidate} 
 			</div>
 			</c:forEach>
 		</div>
