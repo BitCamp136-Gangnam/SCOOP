@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
+    <c:set var="img" value="${sessionScope.img}" />
 <html>
 
 <head>
@@ -182,12 +183,12 @@ $(document).ready(function(){
 		<div class="row" style="margin-left: 4%; margin-right: 2%; margin-top: 1%">
 			<div class="media align-items-center mb-4">
 					<c:choose>
-						<c:when test="${member.profile==null}">
+						<c:when test="${img=='null'}">
 							<img id ="profile" class="mr-3 img-circle" src="<c:url value='/resources/images/avatar/avatar.png' />" width="120" height="120" alt="" name="profile">
 							<input type="file" name="filesrc" id="Photo" accept="image/*">
 						</c:when>
 						<c:otherwise>
-                             <img id ="profile" class="mr-3 img-circle" src="<c:url value='/user/upload/${member.profile}' />" width="120" height="120" alt="" name="profile">
+                             <img id ="profile" class="mr-3 img-circle" src="<c:url value='/user/upload/${img}' />" width="120" height="120" alt="" name="profile">
                              <input type="file" name="filesrc" id="Photo" accept="image/*">
 						</c:otherwise>
 					</c:choose>
@@ -231,8 +232,8 @@ $(document).ready(function(){
           	<input type="text" id="sample6_postcode" style="border-radius: 0.25rem;" placeholder="우편번호">
          	<input type="button" onclick="sample6_execDaumPostcode()" style="margin-bottom: 1%;border-radius: 0.25rem; " value="우편번호 찾기"><br>
          	<input type="text" id="sample6_address" style="min-width:500px;border-radius: 0.25rem;" placeholder="주소"><br>
-         	<input type="text" id="sample6_extraAddress"style="min-width:247px;margin-top: 1%;border-radius: 0.25rem; " placeholder="참고항목">
          	<input type="text" id="sample6_detailAddress"style="min-width:250px;border-radius: 0.25rem;" placeholder="상세주소">
+         	<input type="text" id="sample6_extraAddress"style="min-width:247px;margin-top: 1%;border-radius: 0.25rem; " placeholder="참고항목">
           	<br>
     		
     		<input type="submit" id="address_btn" class="btn" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;margin-top: 3%;" value="수정완료">
