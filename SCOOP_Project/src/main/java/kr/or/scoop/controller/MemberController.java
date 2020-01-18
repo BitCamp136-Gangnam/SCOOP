@@ -4,18 +4,21 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
+import org.apache.velocity.exception.VelocityException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -355,8 +358,42 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "inviteTeam.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String inviteTeam(HttpServletRequest request, HttpSession session) {
+	public String inviteTeam(HttpServletRequest request, HttpSession session) throws MessagingException, VelocityException, IOException {
 		try {
+			ProjectDao dao = sqlsession.getMapper(ProjectDao.class);
+			String mailFrom = (String)session.getAttribute("email");
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper messageHelper = new MimeMessageHelper(message,true,"UTF-8");
+			request.setCharacterEncoding("UTF-8");
+			String tseq = request.getParameter("tseq");
+			int cnt = Integer.parseInt(request.getParameter("invitecnt"));
+			System.out.println("cnt:"+cnt);
+			String[] invitemem = new String[cnt];
+			for(int i=0;i<cnt;i++) {
+				invitemem[i] = request.getParameter("email"+i);
+				int rank = dao.searchRank(Integer.parseInt(tseq), invitemem[i]);
+				if(rank>0) {
+					return "ajax/swal";
+				}
+			}
+			for(int i=0;i<cnt;i++) {
+				if(request.getParameter("email"+i)!=null) {
+					invitemem[i] = request.getParameter("email"+i);
+					System.out.println(invitemem[i]);
+					messageHelper.setFrom("leeyong1321@gmail.com");
+					messageHelper.setTo(invitemem[i]);
+					messageHelper.setSubject("협업공간 SCOOP 팀 멤버 초대 인증 이메일입니다");
+					Map model = new HashMap();
+					model.put("mailTo", invitemem[i]);
+					model.put("mailFrom", mailFrom);
+					model.put("tseq", tseq);
+					String mailBody = VelocityEngineUtils.mergeTemplateIntoString(velocityEngineFactoryBean.createVelocityEngine(), "invite_email.vm","UTF-8", model);
+					messageHelper.setText(mailBody,true);
+					mailSender.send(message);
+				}
+			}
+			
+		} catch (Exception e) {
 			String mailFrom = (String)session.getAttribute("email");
 			MimeMessage message = mailSender.createMimeMessage();
 			MimeMessageHelper messageHelper = new MimeMessageHelper(message,true,"UTF-8");
@@ -381,9 +418,6 @@ public class MemberController {
 					mailSender.send(message);
 				}
 			}
-			
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
 			
 		} 
 		return "redirect:userindex.do";
