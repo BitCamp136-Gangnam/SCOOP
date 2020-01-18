@@ -107,12 +107,13 @@ $(function(){
 		 })
 		})
 
+		/* 북마크 */
 		$('.bookmark').click(function(){
 			let book = $(this);
 			
 			let icon = book.attr('class').split(' ');
 			let status = book.attr('name');
-			let piseq = book.closest('div.row').children('input[name]').val();
+			let tseq = book.closest('div.row').children('input[name]').val();
 
 			let dat;
 			let mark;
@@ -120,7 +121,7 @@ $(function(){
 			$.ajax({
 				url : "tibookmark.do",
 				type : "POST",
-				data : {"piseq" : piseq , 
+				data : {"tseq" : tseq , 
 						"status" : status
 				       },
 				success : function(datadata){
@@ -183,7 +184,7 @@ $(function(){
       <div class="row" style="margin: 2%">
          <div class="col-sm-12" style="padding-left: 0">
             <h3>${tpj.pname}
-            	<c:if test="${rank > 100}">
+            	<c:if test="${rank == 100}">
             		<i class="fas fa-cog" id="myModal_Edit_Icon" style="margin-left: 5px;cursor: pointer; font-size: 15px" data-toggle="modal" data-target="#myModal_Edit" ></i>
             	</c:if>
             </h3>

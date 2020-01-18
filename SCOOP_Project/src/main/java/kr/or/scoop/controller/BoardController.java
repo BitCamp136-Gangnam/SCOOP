@@ -149,6 +149,8 @@ public class BoardController {
 			viewpage = "redirect:projectDetail.do";
 		}
 		
+		model.addAttribute("status", status);
+		
 		return viewpage;
 	}
 	
