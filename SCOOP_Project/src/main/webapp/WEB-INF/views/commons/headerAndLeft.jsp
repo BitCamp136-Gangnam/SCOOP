@@ -30,6 +30,10 @@ input::placeholder {
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script> -->
 <script type="text/javascript">
    $(function() {
+	   $('#invitebtn').click(function(){
+		   $('#inviteForm').append($('#inviteContent'));
+		   $('#invitebtn').click();
+	   });
       var number = 0;
 
       var target = 1;
@@ -113,7 +117,6 @@ input::placeholder {
                   'rgba(225, 225, 225,0.5)');
 
             if (event.keyCode == 13) {
-
                var u_email = $('#email_append_' + target);
                var regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
                console.log(u_email.text());
@@ -130,6 +133,7 @@ input::placeholder {
                }
                
                if (event.shiftKey && event.keyCode == 50) {
+            	   target=1;
                   console.log("?????");
                   $('#invite_email_append').hide();
                   $('#invite_Input')
@@ -608,7 +612,7 @@ span {
 
             <li class="icons dropdown d-none d-md-flex"><i
                class="fas fa-user-plus" data-toggle="modal" id="inviteModal_id"
-               data-target="#inviteModal"
+               data-target="#inviteModal" data-keyboard="false"
                style="cursor: pointer; color: #535359; font-size: 18px; padding-bottom: 12px;"></i>
 
             </li>
@@ -788,7 +792,7 @@ span {
             style="border-radius: 0.25rem; height: 20px" placeholder="협업공간 검색"></li>
          <c:forEach items="${pjtlist}" var="p">
             <li class="search_project"><a
-               href="projectDetail.do?tseq=${p.tseq}&email="${session.email}" class="projecthref" aria-expanded="false"><span
+               href="projectDetail.do?tseq=${p.tseq}" class="projecthref" aria-expanded="false"><span
                   class="iconify" data-icon="bx:bxs-flag-alt" data-inline="false"
                   style="width: 20px; height: auto;"> </span><span
                   class="nav-text resultsearch"> &nbsp;${p.pname}</span></a></li>
@@ -1028,8 +1032,9 @@ span {
          </div>
 
          <!-- Modal body -->
-         <form action="inviteTeam.do" method="post">
-            <div class="row" style="margin-bottom: 1%;">
+         <form action="inviteTeam.do" method="post" id="inviteForm">
+         </form>
+            <div class="row" style="margin-bottom: 1%;" id="inviteContent">
                <div class="col-sm-6"
                   style="border-right: 1px solid #c8c8c8; padding-left: 20px;">
                   <div class="modal-body">
@@ -1075,7 +1080,7 @@ span {
                      disabled="disabled">멤버 초대하기</button>
                </div>
             </div>
-         </form>
+
 
 
       </div>
