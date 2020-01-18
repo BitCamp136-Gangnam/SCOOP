@@ -22,6 +22,7 @@ public class PrivateController {
 	@Autowired
 	private MemberService service;
 
+	
 	@Autowired
 	private SqlSession sqlsession;
 	//프라이빗 공간 이동
@@ -47,13 +48,11 @@ public class PrivateController {
 		
 		
 	
-	/*
-	 * //북마크 처리
-	 * 
-	 * @RequestMapping(value = "/bookmark.do",method = RequestMethod.POST) public
-	 * String bookmarkcheck() { return null;
-	 * 
-	 * }
-	 */
 	
+	 @RequestMapping(value = "/bookmark.do",method = RequestMethod.POST) public
+	 String bookMarkList() { 
+		 
+		 
+		 return "private/private-bookmark";
+	 }
 }
