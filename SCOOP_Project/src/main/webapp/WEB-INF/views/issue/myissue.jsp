@@ -77,7 +77,7 @@
 				</c:when>	
 			</c:choose>
 			
-			<div  style="float: right;min-width:97%;">
+			<div style="float: right;min-width:97%;">
 			<a href="teamissueDetail.do?tiseq=${ti.tiseq}">${ti.tititle}</a>			
 			<br>
 			<a href="projectDetail.do?tseq=${ti.tseq}">${ti.pname}</a>&nbsp;&nbsp;&nbsp;${ti.tidate}<br>
@@ -88,8 +88,12 @@
 			
 			<c:forEach items="${pi}" var="pi">
 			<div class="col-sm-12 newissue" >
-			아이콘 + <a href="myissueDetail.do?piseq=${pi.piseq}">${pi.pititle}</a><br>
+			<div class="iconify" data-icon="uil:file-lock-alt" data-inline="false" style="width:27px;height: auto;"></div>
+			<div style="float: right;min-width:97%;">
+			<a href="myissueDetail.do?piseq=${pi.piseq}">${pi.pititle}</a>
+			<br>
 			<a href="private.do">프라이빗 공간</a>&nbsp;&nbsp;&nbsp;${pi.pidate} 
+			</div>
 			</div>
 			</c:forEach>
 		</div>
