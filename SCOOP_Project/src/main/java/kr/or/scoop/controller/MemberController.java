@@ -127,7 +127,6 @@ public class MemberController {
 
 		int result = 0;
 		String viewpage = "";
-		System.out.println("인서트 들어오니" + member);
 		member.setPwd((String)session.getAttribute("checkpwd"));
 		member.setEmail((String)session.getAttribute("checkemail"));
 		member.setName((String)session.getAttribute("checkname"));
@@ -135,7 +134,6 @@ public class MemberController {
 		result = service.insertMember(member);
 
 		if (result > 0) {
-			System.out.println("가입성공");
 			viewpage = "redirect:/index.do";
 			session.removeAttribute("checkpwd");
 			session.removeAttribute("checkemail");
@@ -180,14 +178,13 @@ public class MemberController {
 			viewpage = "redirect:/userindex.do";
 			session.setAttribute("email", email);
 			session.setAttribute("kind", "google");
-			System.out.println(session.getAttribute("kind"));
 		} else {
-			System.out.println("실패");
 			viewpage = "redirect:/index.do";
 		}
 
 		return viewpage;
 	}
+	
 
 	// 로그인 성공
 	@RequestMapping(value = "/userindex.do", method = RequestMethod.GET)
@@ -199,6 +196,10 @@ public class MemberController {
 		MemberDao memberdao = sqlsession.getMapper(MemberDao.class);
 		Role role = memberdao.getRole(email);
 		int count = memberdao.getCount(email);
+		
+		  String img = memberdao.getProfile(email); 
+		 
+		session.setAttribute("img", img);  
 		session.setAttribute("role", role.getRname());
 		session.setAttribute("count", count);
 		List<Tpmember> pjtlist = noticeDao.getPJT(email);
@@ -507,5 +508,6 @@ public class MemberController {
 		return viewpage;
 		
 	}
+	
 	
 }

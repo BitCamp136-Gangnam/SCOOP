@@ -52,5 +52,8 @@ public interface MemberDao {
 	
 	//프로젝트 갯수 
 	public int getCount(String email);
+	
+	//프로필 사진
+	public String getProfile(String email);
 
 }
