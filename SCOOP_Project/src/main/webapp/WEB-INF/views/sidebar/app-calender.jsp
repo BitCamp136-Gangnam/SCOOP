@@ -55,6 +55,8 @@ var $item = $('.item').on('click', function() {
 });
 
 $(function(){
+	$('#event-modal').on('show.bs.modal', function (event) {
+
 	$(".fc-content-skeleton thead td").mousedown(function(e){
 		var da = $(this).attr('data-date');	
 		console.log(typeof(da));
@@ -65,7 +67,8 @@ $(function(){
 		/* $('.modal-body input[name=begin]').attr('value',da); */
 		console.log("값좀 들어가라 ㅡㅡ begin");
 		console.log(da);
-		
+		console.log($(event.relatedTarget));
+		});
 	});
 });
 
@@ -73,6 +76,7 @@ $(function(){
 	$(".fc-content-skeleton thead td").mouseup(function(e){
 		var du = $(this).attr('data-date');
 		$('#ending').attr('value',du);
+		$("#sosi").attr('value',du);
 		/* $('#ending').val(du); */
 		/* $('.modal-body input[name=end]').attr('value',du); */
 		console.log("값좀 들어가라 ㅡㅡ end");
@@ -128,7 +132,8 @@ function allowDrop(ev) {
                                     <div class="col-lg-2 mt-5">
                                     <button type="button" id="calSave" class="btn btn-primary btn-block">저장</button>
                                         <a href="#" data-toggle="modal" data-target="#add-category" class="btn btn-primary btn-block"><i class="ti-plus f-s-12 m-r-5"></i> 일정추가</a>
-                                        <input type="date" id="soso" pattern="yyyy-MM-dd"s>
+                                        <input type="date" id="soso" pattern="yyyy-MM-dd">
+                                        <input type="date" id="sosi" pattern="yyyy-MM-dd">
                                         <div id="external-events" class="m-t-20">
                                         </div>
                                     </div>
