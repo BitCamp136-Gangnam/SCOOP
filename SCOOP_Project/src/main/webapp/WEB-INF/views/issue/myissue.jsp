@@ -62,9 +62,20 @@
 		<div class="row" style="margin-left: 2%; margin-right: 2%">
 			<c:forEach items="${ti}" var="ti">
 			<div class="col-sm-12 newissue" >
-			
-			<div id="create" class="iconify" data-icon="uil:file-exclamation-alt" data-inline="false" style="width:27px;height: auto;"></div>
-			<div id="stop" class="iconify" data-icon="uil:file-block-alt" data-inline="false" style="width:27px;height: auto;color:#cca352"></div>
+			<c:choose>
+				<c:when test="${ti.isprocess==0}">
+				<div id="create" class="iconify" data-icon="uil:file-exclamation-alt" data-inline="false" style="width:27px;height: auto;"></div>
+				</c:when>
+				<c:when test="${ti.isprocess==1}">
+				<div id="ing" class="iconify" data-icon="uil:file-edit-alt" data-inline="false" style="width:27px;height: auto;color: #2671bd;"></div>
+				</c:when>
+				<c:when test="${ti.isprocess==2}">
+				<div id="stop" class="iconify" data-icon="uil:file-block-alt" data-inline="false" style="width:27px;height: auto;color:#cca352"></div>
+				</c:when>
+				<c:when test="${ti.isprocess==3}">
+				<div id="finish" class="iconify" data-icon="uil:file-check-alt" data-inline="false" style="width:27px;height: auto;color:#26805c"></div>
+				</c:when>	
+			</c:choose>
 			
 			<div  style="float: right;min-width:97%;">
 			<a href="teamissueDetail.do?tiseq=${ti.tiseq}">${ti.tititle}</a>			
@@ -74,6 +85,7 @@
 			
 			</div>
 			</c:forEach>
+			
 			<c:forEach items="${pi}" var="pi">
 			<div class="col-sm-12 newissue" >
 			아이콘 + <a href="myissueDetail.do?piseq=${pi.piseq}">${pi.pititle}</a><br>
