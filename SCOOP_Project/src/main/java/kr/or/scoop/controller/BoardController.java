@@ -13,11 +13,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.or.scoop.dao.MyIssueDao;
 import kr.or.scoop.dao.NoticeDao;
+import kr.or.scoop.dao.ProjectDao;
 import kr.or.scoop.dao.TissueDao;
 import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.dto.Notice;
+import kr.or.scoop.dto.TeamPjt;
 import kr.or.scoop.dto.Tissue;
 import kr.or.scoop.service.BoardService;
+import kr.or.scoop.service.TeamService;
 
 @Controller
 public class BoardController {
@@ -27,6 +30,9 @@ public class BoardController {
 	
 	@Autowired
 	private BoardService service;
+	
+	@Autowired
+	private TeamService tservice;
 	
 	// 마이이슈 작성
 	@RequestMapping(value = "/myissue.do", method = RequestMethod.GET)
@@ -131,22 +137,24 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="/tibookmark.do", method = RequestMethod.POST)
-	public String tiBookMark (HttpSession session, int tseq, String status, Model model) {
+	public String tiBookMark (HttpSession session, int tseq, int tiseq, String status, Model model) {
 		String email = (String)session.getAttribute("email");
 		String viewpage = "";
 		int istbook = (status.equals("bookoff")) ? 1 : 0;
-		TissueDao dao = sqlSession.getMapper(TissueDao.class);
 		
 		System.out.println("email: " + email + " / status: " + istbook);
 		
-		int result = dao.tiBookMark(tseq, istbook, email);
+		int result = tservice.bookMark(tiseq, istbook, email);
+		
+		System.out.println("bookmark : " + status);
+		System.out.println("result : " + result);
 		
 		if(status.equals("bookoff") && result > 0) {
 			status = "bookon";
-			viewpage = "redirect:projectDetail.do";
+			viewpage = "redirect:projectDetail.do?tseq="+tseq;
 		}else if(status.equals("bookon") && result > 0) {
 			status = "bookoff";
-			viewpage = "redirect:projectDetail.do";
+			viewpage = "redirect:projectDetail.do?tseq="+tseq;
 		}
 		
 		model.addAttribute("status", status);
