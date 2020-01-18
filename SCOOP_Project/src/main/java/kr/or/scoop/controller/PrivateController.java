@@ -49,7 +49,7 @@ public class PrivateController {
 		
 	
 	
-	 @RequestMapping(value = "/bookmark.do",method = RequestMethod.POST) public
+	 @RequestMapping(value = "/bookmark.do",method = RequestMethod.GET) public
 	 String bookMarkList() { 
 		 
 		 
