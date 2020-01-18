@@ -450,11 +450,6 @@ return true;
         </div>
         <div>
         </div>
-        <input type="hidden" name="dname" value="abc">
-        <input type="hidden" name="drank" value="10">
-        <input type="hidden" name="address" value="서울시 강남구">
-        <input type="hidden" name="profile" value="a.png">
-        <input type="hidden" name="idtime" value="20-01-04">
       	</form>								   
      </div>
    </div>
