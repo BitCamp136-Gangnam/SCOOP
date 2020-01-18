@@ -1013,7 +1013,7 @@ span {
       <div class="modal-content modal-fullsize"
          style="border-radius: 0.5rem;">
          <!-- Modal Header -->
-         <div class="modal-header" style="padding-bottom: 0px;">
+         <div class="modal-header" style="padding-bottom: 0px;height: 67px;">
             <h5 style="padding-top: 2%; padding-left: 5px;">멤버 초대</h5>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
          </div>
