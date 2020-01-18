@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </insert>
 <insert id="insertPJT2">
  insert into tpmember (email,tseq,pjuserrank)
-  values (#{param1},#{param2},100)
+  values (#{param1},#{param2},300)
 </insert>
 <resultMap type="kr.or.scoop.dto.Tissue" id="Tissue">
 	<result column="tiseq" property="tiseq"/>
@@ -67,8 +67,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <update id="updatePjt" parameterType="kr.or.scoop.dto.TeamPjt">
 	update Teampjt set pname = #{pname} , pcontent = #{pcontent} where tseq = #{tseq}
 </update>
+
 <select id="searchRank" parameterType="kr.or.scoop.dto.Tpmember" resultType="int">
-	select m.pjuserrank 
+	select m.pjuserrank, m.tseq, m.email
 	from tpmember m join teampjt p 
                 	on m.tseq = p.tseq 
 	where p.tseq=#{param1} and m.email = #{param2}

@@ -56,10 +56,70 @@ var $item = $('.item').on('click', function() {
 
 $(function(){
 	$(".fc-content-skeleton thead td").mousedown(function(e){
-		var da = this.text();
+		var da = $(this).attr('data-date');
+		$("#begin").val(da);
 		console.log(da);
 	});
 });
+$(function(){
+	$(".fc-content-skeleton thead td").mouseup(function(e){
+		var du = $(this).attr('data-date');
+		$("#end").val(du);
+		console.log(du);
+	});
+});
+
+
+function showCoords(event) {
+
+    var targ;
+
+    if (!e) {
+
+        var e = window.event;
+
+    }
+
+    if (e.target) {
+
+        targ=e.target;
+
+    } else if (e.srcElement) {
+
+        targ=e.srcElement;
+
+    }
+
+    var tname;
+
+    tname = targ.tagName;
+
+    alert("지금 클릭된 태그명은" + tname + " 입니다 ");
+
+}
+
+$( "td" )
+.mouseup(function() {
+  $( this ).append( "<span style='color:#f00;'>Mouse up.</span>" );
+})
+.mousedown(function() {
+  $( this ).append( "<span style='color:#00f;'>Mouse down.</span>" );
+});
+
+function allowDrop(ev) {
+	  ev.preventDefault();
+	}
+
+	function drag(ev) {
+	  ev.dataTransfer.setData("text", ev.target.id);
+	  console.log(ev.target);
+	}
+	var tseq = document.location.href.split("tseq=")[1]; 
+	function drop(ev) {
+	  ev.preventDefault();
+	  var data = ev.dataTransfer.getData("text");
+	  console.log(ev.target);
+	}
 
 </script>
 <body>
