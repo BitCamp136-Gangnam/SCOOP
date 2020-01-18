@@ -58,70 +58,32 @@ $(function(){
 	$(".fc-content-skeleton thead td").mousedown(function(e){
 		var da = $(this).attr('data-date');	
 		console.log(typeof(da));
-		$('#beginDate')
-		/* $('#beginDate').val(da);
+		$('#beginning').attr('value',da);
+		$("#soso").attr('value',da);
+		/* $('#beginning').val(da); */
 		console.log('2020-01-29'==da);	
-		$('.modal-body input[name=begin]').attr('value',da); */
+		/* $('.modal-body input[name=begin]').attr('value',da); */
 		console.log("값좀 들어가라 ㅡㅡ begin");
 		console.log(da);
 		
 	});
 });
-$('#calcal').append('<br><div class="col-md-12"><label class="control-label">Select Team</label><select id="calTeam" name="calTeam" class="form-control"><c:forEach items="${pjtlist}" var="p"><option value="${p.tseq}">${p.pname}</option></c:forEach></select></div>');
+
 $(function(){
 	$(".fc-content-skeleton thead td").mouseup(function(e){
 		var du = $(this).attr('data-date');
-		/* $('#endDate').val(du);
-		$('.modal-body input[name=end]').attr('value',du); */
+		$('#ending').attr('value',du);
+		/* $('#ending').val(du); */
+		/* $('.modal-body input[name=end]').attr('value',du); */
 		console.log("값좀 들어가라 ㅡㅡ end");
 		console.log(du);
+		var pjtlist = '<c:out value="${pjtlist}"/>';
+		for (var i = 0; i < pjtlist.length; i++) {
+			$('#calTeam').append('<option value="'+pjtlist[i].tseq+'">'+pjtlist[i].tseq.pname+'</option>');
+		}
 	});
 });
-function returnBegin(){
-	return da;
-}
 
-function returnEnd(){
-	return du;
-}
-
-
-
-function showCoords(event) {
-
-    var targ;
-
-    if (!e) {
-
-        var e = window.event;
-
-    }
-
-    if (e.target) {
-
-        targ=e.target;
-
-    } else if (e.srcElement) {
-
-        targ=e.srcElement;
-
-    }
-
-    var tname;
-
-    tname = targ.tagName;
-
-    alert("지금 클릭된 태그명은" + tname + " 입니다 ");
-
-}
-
-$( "td" )
-.mouseup(function() {
-  $( this ).append( "<span style='color:#f00;'>Mouse up.</span>" );
-})
-.mousedown(function() {
-  $( this ).append( "<span style='color:#00f;'>Mouse down.</span>" );
-});
 
 function allowDrop(ev) {
 	  ev.preventDefault();
@@ -166,6 +128,7 @@ function allowDrop(ev) {
                                     <div class="col-lg-2 mt-5">
                                     <button type="button" id="calSave" class="btn btn-primary btn-block">저장</button>
                                         <a href="#" data-toggle="modal" data-target="#add-category" class="btn btn-primary btn-block"><i class="ti-plus f-s-12 m-r-5"></i> 일정추가</a>
+                                        <input type="date" id="soso" pattern="yyyy-MM-dd"s>
                                         <div id="external-events" class="m-t-20">
                                         </div>
                                     </div>
