@@ -25,19 +25,21 @@ $(function(){
 			console.log($(dateArray[i]).attr('data-date'));
 			$(eventArray[i]).attr('id',$(dateArray[i]).attr('data-date'));
 		}
-	$('.fc-content-skeleton tbody td').change(function(){
+	$('.fc-content-skeleton tbody fc-event-container fc-day-grid-event fc-h-event fc-event fc-start fc-not-end bg-pink fc-draggable fc-title').change(function(){
+		var end = $('.fc-content-skeleton tbody fc-event-container fc-day-grid-event fc-h-event fc-event fc-not-start fc-end bg-pink fc-draggable fc-title').text;
+		console.log(end);
 		console.log("변햇다");
 		for(var i=0;i<dateArray.length;i++){
 			console.log($(dateArray[i]).attr('data-date'));
 			$(eventArray[i]).attr('id',$(dateArray[i]).attr('data-date'));
 		}
-	})
+	});
 	$('#modalSave').click(function(){
 		console.log($('#category-name').val());
 		console.log($('#calTeam').val());
 		var bar = $('.fc-title');
 		console.log(bar);
-	})
+	});
 	$('#calSave').click(function(){
 		console.log("클릭클릭");
 		
@@ -47,6 +49,17 @@ $(function(){
 	})
 })
 
+var $item = $('.item').on('click', function() {
+  var idx = $(this).index();
+  console.log(idx);
+});
+
+$(function(){
+	$(".fc-content-skeleton thead td").mousedown(function(e){
+		var da = this.text();
+		console.log(da);
+	});
+});
 
 </script>
 <body>
