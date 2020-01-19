@@ -55,19 +55,25 @@ var $item = $('.item').on('click', function() {
 });
 
 $(function(){
-	$('#event-modal').on('show.bs.modal', function (event) {
+	
 
 	$(".fc-content-skeleton thead td").mousedown(function(e){
 		var da = $(this).attr('data-date');	
 		console.log(typeof(da));
-		$('#beginning').attr('value',da);
+		
 		$("#soso").attr('value',da);
-		/* $('#beginning').val(da); */
+		/*  */
 		console.log('2020-01-29'==da);	
 		/* $('.modal-body input[name=begin]').attr('value',da); */
 		console.log("값좀 들어가라 ㅡㅡ begin");
 		console.log(da);
-		console.log($(event.relatedTarget));
+		
+		$('#event-modal').on('show.bs.modal', function (event) {
+			
+			
+			$('#beginning').val(da);
+			console.log(this.children);
+			
 		});
 	});
 });
@@ -83,8 +89,14 @@ $(function(){
 		console.log(du);
 		var pjtlist = '<c:out value="${pjtlist}"/>';
 		for (var i = 0; i < pjtlist.length; i++) {
-			$('#calTeam').append('<option value="'+pjtlist[i].tseq+'">'+pjtlist[i].tseq.pname+'</option>');
+			$('#calTeam').append('<option value="'+pjtlist[i].tseq+'">'+pjtlist[i].pname+'</option>');
 		}
+		$('#event-modal').on('show.bs.modal', function (event) {
+			
+			console.log(this.children.target);
+			$('#ending').val(du);
+			
+		});
 	});
 });
 
