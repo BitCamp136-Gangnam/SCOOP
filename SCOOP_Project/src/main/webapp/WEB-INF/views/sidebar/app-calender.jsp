@@ -87,12 +87,12 @@ $(function(){
 		/* $('.modal-body input[name=end]').attr('value',du); */
 		console.log("값좀 들어가라 ㅡㅡ end");
 		console.log(du);
-		var pjtlist = '<c:out value="${pjtlist}"/>';
-		for (var i = 0; i < pjtlist.length; i++) {
-			$('#calTeam').append('<option value="'+pjtlist[i].tseq+'">'+pjtlist[i].pname+'</option>');
-		}
+		
 		$('#event-modal').on('show.bs.modal', function (event) {
-			
+			var pjtlist = '<c:out value="${pjtlist}"/>';
+			for (var i = 0; i < pjtlist.length; i++) {
+				$('#calTeam').append('<option value="'+pjtlist[i].tseq+'">'+pjtlist[i].pname+'</option>');
+			}
 			console.log(this.children.target);
 			$('#ending').val(du);
 			
