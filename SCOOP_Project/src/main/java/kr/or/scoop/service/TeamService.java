@@ -67,8 +67,16 @@ public class TeamService {
 	public int bookMark(int tiseq, int istbook, String email) {
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		
-		int result = dao.tiBookMark(tiseq, istbook, email);
+		int result = dao.addBookMark(tiseq, email);
 		System.out.println("service result : " + result);
+		return result;
+	}
+	public int teamComment(int tiseq,String rcontent,String email) {
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		System.out.println("가나다라"+tiseq+rcontent+email);
+		int result = dao.teamComment(tiseq,rcontent,email);
+		System.out.println("마바사아"+tiseq+rcontent+email);
+
 		return result;
 	}
 }

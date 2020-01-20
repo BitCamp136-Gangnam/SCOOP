@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -90,7 +91,7 @@ $(function(){
 			<div style="float: right;min-width:97%;">
 			<a href="teamissueDetail.do?tiseq=${ti.tiseq}">${ti.tititle}</a>			
 			<br>
-			<a class="pnameHover" href="projectDetail.do?tseq=${ti.tseq}" style="color:#2c9aa8;">${ti.pname}</a>&nbsp;&nbsp;&nbsp;${ti.tidate}<br>
+			<a class="pnameHover" href="projectDetail.do?tseq=${ti.tseq}" style="color:#2c9aa8;">${ti.pname}</a>&nbsp;&nbsp;&nbsp;${fn:substring(ti.tidate,0,16)}<br>
 			</div>
 			
 			</div>
@@ -102,7 +103,7 @@ $(function(){
 			<div style="float: right;min-width:97%;">
 			<a href="myissueDetail.do?piseq=${pi.piseq}">${pi.pititle}</a>
 			<br>
-			<a class="pnameHover" href="private.do" style="color:#2c9aa8;">프라이빗 공간</a>&nbsp;&nbsp;&nbsp;${pi.pidate} 
+			<a class="pnameHover" href="private.do" style="color:#2c9aa8;">프라이빗 공간</a>&nbsp;&nbsp;&nbsp;${fn:substring(pi.pidate,0,16)} 
 			</div>
 			</div>
 			</c:forEach>

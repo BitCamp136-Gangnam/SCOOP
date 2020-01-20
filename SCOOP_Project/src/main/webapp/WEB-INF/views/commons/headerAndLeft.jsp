@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <c:set var="role" value="${sessionScope.role}" />
 <c:set var="count" value="${sessionScope.count}" />
 <c:set var="img" value="${sessionScope.img}" />
@@ -688,7 +689,7 @@ span {
                   data-toggle="dropdown">
                   <span class="activity active"></span>
                   <c:choose>
-                  	<c:when test="${img=='null'}">
+                  	<c:when test="${img==null}">
                   <img src="<c:url value="/resources/images/avatar/avatar.png" />"
                      height="40" width="40" alt="">
                   	</c:when>
@@ -937,10 +938,7 @@ span {
                <textarea class="form-control createmodal" rows="5"
                   id="issuecontent" name="issuecontent" style="width: 100%"
                   placeholder="@를 입력하여 멘션, 할 일, 파일 등을 추가해 보세요."></textarea>
-                  <textarea name="content" id="summernote" value=""></textarea>
-                  <script type="text/javascript">
-                  $('#summernote').summernote();
-                  </script>
+                
                <textarea rows="" id="codemirrorarea" style="display: none"><-- 코드를 입력하세요 --></textarea>
                <div id="todoresult" style="display: none">
                   <!-- mention -->

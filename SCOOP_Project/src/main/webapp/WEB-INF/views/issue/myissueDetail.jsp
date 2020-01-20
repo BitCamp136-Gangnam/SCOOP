@@ -19,6 +19,28 @@
 
 </head>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('#myissueCommentBtn').click(function(){
+			console.log("들어오니");
+			$.ajax({
+				type:"POST",
+				url:"teamComment.do",
+				data:{
+					rcontent: $("#teamComment").val(),
+					email: ${sessionScope.email}
+				},
+				success:function(data){
+					alert(data);
+				},
+				error:function(error){
+					alert(error);
+				}
+					
+			});
+		});
+	});
+</script>
 <style>
 .newissue{
 	border-bottom: 1px solid #c8c8c8;
@@ -85,8 +107,8 @@
             <img src="resources/images/logo/ScoopTitle.png" style="width:150px;height: auto;opacity:0.3;position:absolute;top:25%;left: 32%;">
             </div>
             </div>
-            <textarea id="enter" rows="5" placeholder="말하지 않아도 아는것은 초코파이뿐입니다                        댓글 입력 후 저장을 클릭해주세요" style="resize: none;height:180px;width:auto;border: 1px solid #c8c8c8;border-radius: 0.5rem;margin-left: 15px;margin-bottom: 20px;margin-right: 15px;overflow:auto;padding: 4%"></textarea>
-            <input type="submit" value="저장" style="width: 90px;border-radius:0.5rem ;padding-top:7px;padding-bottom:7px; background-color: #E71D36;color: #fff; cursor: pointer;position: absolute;top:590px;left: 290px;">
+            <textarea id="myissueComment" rows="5" placeholder="말하지 않아도 아는것은 초코파이뿐입니다                        댓글 입력 후 저장을 클릭해주세요" style="resize: none;height:180px;width:auto;border: 1px solid #c8c8c8;border-radius: 0.5rem;margin-left: 15px;margin-bottom: 20px;margin-right: 15px;overflow:auto;padding: 4%"></textarea>
+            <input id="myissueCommentBtn" type="button" value="저장" style="width: 90px;border-radius:0.5rem ;padding-top:7px;padding-bottom:7px; background-color: #E71D36;color: #fff; cursor: pointer;position: absolute;top:590px;left: 290px;">
             </div>
             </div>
         </div>
