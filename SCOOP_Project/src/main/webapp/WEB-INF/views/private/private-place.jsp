@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 <head>
     <meta charset="utf-8">
@@ -113,9 +114,23 @@
 		    </ul>
 		</div>
 		<hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
+			<div class="row" style="margin-left: 2%; margin-right: 2%">
+				<div class="col-sm-2 newissue" >
+					제목
+				</div>
+				<div class="col-sm-7 newissue">
+				내용
+				</div>
+				<div class="col-sm-2 newissue">
+				날짜
+				</div>
+				<div class="col-sm-1 newissue">
+				북마크
+				</div>
+			</div>
 		<c:forEach items="${myissuelist}" var="m">
 		<div class="row" style="margin-left: 2%; margin-right: 2%">
-			<input type="hidden" name="piseq" value="${m.piseq}" /> <!-- bookmark에 온클릭 걸려있어서 이거는 this 못가져옴 다른 방법으로 가져와야함 -->
+			<input type="hidden" name="piseq" value="${m.piseq}" /> 
 			<div class="col-sm-2 newissue" >
 				${m.pititle}
 			</div>
@@ -123,12 +138,15 @@
 				${m.picontent}
 			</div>
 			<div class="col-sm-2 newissue">
-				${m.pidate}
+				${fn:substring(m.pidate,0,16)}
 			</div>
 			<c:set var="mark" value="true" />
+			<c:set var="loop" value="false" />
 			<c:forEach items="${bookMark}" var="book">
+				<c:if test="${not loop}" />
 				<c:if test="${m.piseq == book.piseq}">
-					<c:set var="mark" value="true" />
+					<c:set var="mark" value="false" />
+					<c:set var="loop" value="true" />
 				</c:if>
 			</c:forEach>
 				<c:choose>

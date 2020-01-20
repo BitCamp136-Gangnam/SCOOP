@@ -22,7 +22,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import kr.or.scoop.dao.MemberDao;
+import kr.or.scoop.dao.MyIssueDao;
 import kr.or.scoop.dao.ProjectDao;
+import kr.or.scoop.dto.BookMark;
 import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.dto.ProjectMemberlist;
 import kr.or.scoop.dto.TeamPjt;
@@ -99,11 +101,16 @@ public class TeamController {
 	public String JoinProject(HttpSession session, int tseq, Model model) {
 		String email = (String)session.getAttribute("email");
 		System.out.println(tseq);
+		
 		ProjectDao dao = sqlsession.getMapper(ProjectDao.class);
 		MemberDao md = sqlsession.getMapper(MemberDao.class);
+		MyIssueDao mydao = sqlsession.getMapper(MyIssueDao.class);
+		
 		TeamPjt pjt = dao.detailPJT(tseq);
 		List<Tissue> tp = dao.getTissue(tseq);
 		List<ProjectMemberlist> projectMemberlist =md.projectMemberlist(tseq);
+		List<BookMark> bookMark = mydao.getBookMark(email);
+		
 		System.out.println(pjt);
 		System.out.println(tp);
 		System.out.println(projectMemberlist);
@@ -115,6 +122,8 @@ public class TeamController {
 		model.addAttribute("tp",tp); //프로젝트 글 목록
 		model.addAttribute("projectmember", projectMemberlist);
 		model.addAttribute("rank", rank);
+		model.addAttribute("bookMark", bookMark);
+		
 		return "user/ProjectDetail";
 		
 	}

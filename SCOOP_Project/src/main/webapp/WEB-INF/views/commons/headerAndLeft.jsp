@@ -897,13 +897,15 @@ span {
       </ul>
    </div>
    <div class="row" style="margin: 2%; overflow: auto; height: 600px">
+   <c:forEach items="${file}" var="f">
       <div style="width: 10%; margin: 1%; cursor: pointer;">
          <img width="100%" height="auto" style="margin: 1%"
-            src="<c:url value="/resources/images/chat/questionmark.png" />"><br>
+            src="<c:url value="/upload/${f.fdname}" />"><br>
          <p style="font-size: 15px; text-align: center">
-            이미지이름.jpg<br> 프로젝트 이름
+            ${f.fdname}<br> 프로젝트 이름
          </p>
       </div>
+   </c:forEach>
    </div>
 </div>
 <div id="filediv2" style="display: none;"></div>

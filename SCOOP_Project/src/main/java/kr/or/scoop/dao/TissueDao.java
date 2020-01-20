@@ -25,10 +25,12 @@ public interface TissueDao {
 	public int teamComment(int tiseq,String rcontent,String email);
 	
 	//팀이슈 댓글 리스트 출력
-	public List<Reply> teamCommentList(int tiseq);
+	public List<Reply> teamCommentOk(int tiseq);
 
 	public int addBookMark(int tiseq, String email);
 	public int delBookMark(int tiseq, String email);
 	
 	public int fileInsert(String fdname, long fdcapa, String email);
+	
+	
 }

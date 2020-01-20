@@ -37,6 +37,7 @@ import kr.or.scoop.dao.MemberDao;
 import kr.or.scoop.dao.NoticeDao;
 import kr.or.scoop.dao.ProjectDao;
 import kr.or.scoop.dto.Alarm;
+import kr.or.scoop.dto.FileDrive;
 import kr.or.scoop.dto.Member;
 import kr.or.scoop.dto.Role;
 import kr.or.scoop.dto.Tpmember;
@@ -197,13 +198,14 @@ public class MemberController {
 		Role role = memberdao.getRole(email);
 		int count = memberdao.getCount(email);	
 		String img = memberdao.getProfile(email); 
-		
-		session.setAttribute("img",img); 
-		session.setAttribute("role", role.getRname());
-		session.setAttribute("count", count);
+		List<FileDrive> filedrive = memberdao.getFileDrive(email);
+		model.addAttribute("img",img); 
+		model.addAttribute("role", role.getRname());
+		model.addAttribute("count", count);
+		model.addAttribute("file", filedrive);
 		List<Tpmember> pjtlist = noticeDao.getPJT(email);
 		if(pjtlist!=null) {
-			session.setAttribute("pjtlist", pjtlist);
+			model.addAttribute("pjtlist", pjtlist);
 			AlarmDao dao = sqlsession.getMapper(AlarmDao.class);
 			List<Alarm> alarm = dao.getAlarm((String)session.getAttribute("email"));
 			
