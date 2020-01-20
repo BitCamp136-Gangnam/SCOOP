@@ -72,11 +72,12 @@ $(function(){
 			//alert(da);
 			//var begin = $(document.getElementsByName('beginning'));
 			//alert(begin.val());
-			console.log($("-----");
+			console.log("-----");
 			console.log($("#beginning"));
 			/* console.log(begin.item); */
 			$("#beginning").attr('value',$("#soso").attr('value'));
-			
+			console.log(event.delegateTarget.childNodes.item(1).childNodes.item(1).childNodes.item(3).childNodes);
+			console.log(event.delegateTarget.childNodes.item(1).childNodes.item(1).childNodes.item(3).childNodes.item(0));
 			console.log($("#beginning").val());
 			
 			console.log(this.children);
