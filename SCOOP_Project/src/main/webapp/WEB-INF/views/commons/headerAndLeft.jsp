@@ -31,6 +31,15 @@ input::placeholder {
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script> -->
 <script type="text/javascript">
    $(function() {
+	   $('#sIssue').focus(function(){
+		   $('#sIssue').keypress(function(event) {
+			   if (event.keyCode == 13) {
+		            //console.log($('#sIssue').val());
+		            //console.log($('#searchEmail').val())
+		            $('#searchSubmit').submit();
+		         }
+		   })
+	   })
 	   $('#invitebtn').click(function(){
 		   $('#inviteForm').append($('#inviteContent'));
 		   $('#invitebtn').click();
@@ -570,8 +579,11 @@ span {
                <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3"
                   id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
             </div>
-            <input type="search" class="form-control" placeholder="검색하세요"
+            <form action="searchIssue.do" id="searchSubmit">
+            <input type="search" id="sIssue" name="word" class="form-control" placeholder="검색하세요"
                aria-label="Search">
+            <input type="hidden" id="searchEmail" name="email" value=<%=session.getAttribute("email")%>>
+            </form>
                <c:choose>
                   <c:when test="${role == 'ROLE_ADMIN'}">
                <input type="button"class="form-control"

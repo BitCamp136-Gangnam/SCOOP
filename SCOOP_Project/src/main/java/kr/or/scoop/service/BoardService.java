@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import kr.or.scoop.dao.NoticeDao;
 import kr.or.scoop.dao.ProjectDao;
+import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.dto.Notice;
 import kr.or.scoop.dto.TeamPjt;
 
@@ -54,6 +55,7 @@ public class BoardService {
 		
 		return result;
 	}
+	
 	
 	
 }

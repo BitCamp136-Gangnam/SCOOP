@@ -64,6 +64,8 @@ public class TeamService {
 		result = dao.updatePjt(teampjt);
 		return result;
 	}
+	
+	// 안씀
 	public int bookMark(int tiseq, int istbook, String email) {
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		
@@ -77,6 +79,13 @@ public class TeamService {
 		int result = dao.teamComment(tiseq,rcontent,email);
 		System.out.println("마바사아"+tiseq+rcontent+email);
 
+		return result;
+	}
+	
+	public int fileInsert(String fdname, long fdcapa, String email) {
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		int result = dao.fileInsert(fdname, fdcapa, email);
+		
 		return result;
 	}
 }
