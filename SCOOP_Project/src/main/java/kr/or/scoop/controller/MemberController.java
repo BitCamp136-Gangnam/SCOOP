@@ -468,7 +468,7 @@ public class MemberController {
 					}
 				}
 				
-				}
+				
 		
 		
 		MemberDao dao = sqlsession.getMapper(MemberDao.class);
