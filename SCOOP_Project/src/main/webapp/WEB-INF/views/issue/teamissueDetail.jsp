@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,7 +26,7 @@ $(function(){
 		var tiseqq = ${tissue.tiseq};
 		console.log("들어오니");
 		$.ajax({
-			type:"POST",
+			
 			url:"teamComment.do",
 			data:{
 				rcontent: $("#teamComment").val(),
@@ -34,17 +35,41 @@ $(function(){
 			},
 			success:function(data){
 				console.log(data);
-				/* $('#commentMain').append( 
-				'<div class="row" style="margin-left: 3%;margin-right: 3%;">'+
-	            '<div class="col-sm-1" style="margin-top: 10px;margin-right:10px;padding-left:0;">'+
-	            '<img id="memberImage" class="img-circle" alt="멤버 프로필 사진 넣는 곳" src="resources/images/avatar/avatar.png" style="width:40px;height: auto;padding-top: 1%;margin-left: 10px;margin-right: 10px;"></div>'+
-	            '<div class="col-sm-10">'+
-	            '<div id="commentMain" style="margin: 3% 5% 3% 5%;" >'+
-	            '<div style="margin-bottom: 1%;">'+
-	            '<span>${r.name}</span><span style="padding-left:3%"><i class="far fa-clock" style="color:#E71D36 "></i>${r.rdate}</span><br>'+
-	            '<div>${r.rcontent}</div></div></div></div></div>'
-	            ) */
-	            location.href ='teamissueDetail.do?tiseq='+tiseqq;
+				$.ajax({
+					type:"GET",
+					dataType:"json",
+					url:"teamCommentOk.do",
+					data:{
+						tiseq: "${tissue.tiseq}"						
+					},
+					success:function(event){
+						console.log(event);
+						$('#commentMain').empty();
+						$.each(event,function(index,object){
+						$('#commentMain').append(
+
+					            '<div class="row" style="margin-left: 3%;margin-right: 3%;">'+
+					            '<div class="col-sm-1" style="margin-top: 10px;margin-right:10px;padding-left:0;">'+
+					            '<img id="memberImage" class="img-circle" alt="멤버 프로필 사진 넣는 곳" src="resources/images/avatar/avatar.png" style="width:40px;height: auto;padding-top: 1%;margin-left: 10px;margin-right: 10px;"></div>'+
+					            '<div class="col-sm-10">'+
+					            '<div id="commentMain" style="margin: 3% 5% 3% 5%;" >'+
+					            '<div style="margin-bottom: 1%;">'+
+					            '<span>'+object.name+'</span><span style="padding-left:3%"><i class="far fa-clock" style="color:#E71D36 "></i>'+object.rdate+'</span>'+
+					            '<br><div>'+object.rcontent+'</div></div></div></div></div>'
+						           
+							);
+							console.log(object)
+						})
+						
+						
+			            
+					},
+					error:function(error){
+						alert("에러");
+					}
+						
+				});
+	            
 			},
 			error:function(error){
 				alert(error);
@@ -111,7 +136,7 @@ $(function(){
             <div class="col-sm-10">
             <div id="commentMain" style="margin: 3% 5% 3% 5%;" >
             <div style="margin-bottom: 1%;">
-            <span>${r.name}</span><span style="padding-left:3%"><i class="far fa-clock" style="color:#E71D36 "></i>${r.rdate}</span>
+            <span>${r.name}</span><span style="padding-left:3%"><i class="far fa-clock" style="color:#E71D36 "></i>${fn:substring(r.rdate,0,16)}</span>
             <br>
             <div>${r.rcontent}</div>
             </div>

@@ -431,7 +431,11 @@ public class MemberController {
 		MemberDao dao = sqlsession.getMapper(MemberDao.class);
 		Member member = dao.getMember((String)session.getAttribute("email"));
 		
+		String pwd = this.bCryptPasswordEncoder.encode(member.getPwd());
+		
+		System.out.println(pwd);
 		model.addAttribute("member",member);
+		model.addAttribute("pass",pwd);
 		session.setAttribute("img", member.getProfile());
 		
 		return "user/app-profile";
@@ -442,7 +446,7 @@ public class MemberController {
 	@RequestMapping(value="editCheck.do" , method = RequestMethod.POST)
 	public String UpdateProfile(Member member,HttpServletRequest request,HttpSession session) {
 		    System.out.println(member);
-		
+		    
 				
 			CommonsMultipartFile multifile = member.getFilesrc();
 			String filename = multifile.getOriginalFilename();
@@ -470,13 +474,18 @@ public class MemberController {
 						}
 					}
 				}
-				
-				
+			String regex = "^[a-zA-Z0-9]{8,16}$";
+		   MemberDao dao = sqlsession.getMapper(MemberDao.class);
+		if(member.getPwd().equals("") || member.getPwd().matches(regex)) {
+			Member checkmember = dao.getMember((String)session.getAttribute("email"));
+			member.setPwd(checkmember.getPwd());
+			dao.updateMember(member);
+		} else {
+			member.setPwd(this.bCryptPasswordEncoder.encode(member.getPwd()));
+			dao.updateMember(member);
+		}
 		
 		
-		MemberDao dao = sqlsession.getMapper(MemberDao.class);
-		member.setPwd(this.bCryptPasswordEncoder.encode(member.getPwd()));
-		dao.updateMember(member);
 		
 		return "redirect:/userindex.do";
 	}

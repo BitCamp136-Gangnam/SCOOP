@@ -248,8 +248,18 @@ $(function(){
          <div class="col-sm-2 newissue">
          ${ti.tidate} 
          </div>
+         
+         <c:set var="mark" value="true" />
+			<c:set var="loop" value="false" />
+			<c:forEach items="${bookMark}" var="book">
+				<c:if test="${not loop}" />
+				<c:if test="${ti.tiseq == book.tiseq}">
+					<c:set var="mark" value="false" />
+					<c:set var="loop" value="true" />
+				</c:if>
+         	</c:forEach>
          <c:choose>
-			<c:when test="${ti.istbook==0}">
+			<c:when test="${mark}">
 				<div class="col-sm-1 newissue">
 					<i class="bookmark far fa-bookmark" id="bookmark" name="bookoff"></i>
 				</div>
