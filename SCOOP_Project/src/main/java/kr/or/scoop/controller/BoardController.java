@@ -128,9 +128,6 @@ public class BoardController {
 			result = dao.delBookMark(piseq, email);
 		}
 		
-		List<BookMark> bookMark = dao.getBookMark(email);
-		
-		System.out.println("bookMark" + bookMark);
 		System.out.println("piseq : " + piseq);
 		System.out.println("email : " + email);
 		
@@ -144,7 +141,6 @@ public class BoardController {
 		}
 		
 		model.addAttribute("status", status);
-		model.addAttribute("bookMark", bookMark);
 		
 		System.out.println(model);
 		
