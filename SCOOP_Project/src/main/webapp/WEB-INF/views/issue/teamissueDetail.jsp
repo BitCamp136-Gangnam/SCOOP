@@ -19,6 +19,42 @@
 
 </head>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('#teamCommentBtn').click(function(){
+		var tiseqq = ${tissue.tiseq};
+		console.log("들어오니");
+		$.ajax({
+			type:"POST",
+			url:"teamComment.do",
+			data:{
+				rcontent: $("#teamComment").val(),
+				tiseq: "${tissue.tiseq}",
+				email:"${sessionScope.email}"
+			},
+			success:function(data){
+				console.log(data);
+				/* $('#commentMain').append( 
+				'<div class="row" style="margin-left: 3%;margin-right: 3%;">'+
+	            '<div class="col-sm-1" style="margin-top: 10px;margin-right:10px;padding-left:0;">'+
+	            '<img id="memberImage" class="img-circle" alt="멤버 프로필 사진 넣는 곳" src="resources/images/avatar/avatar.png" style="width:40px;height: auto;padding-top: 1%;margin-left: 10px;margin-right: 10px;"></div>'+
+	            '<div class="col-sm-10">'+
+	            '<div id="commentMain" style="margin: 3% 5% 3% 5%;" >'+
+	            '<div style="margin-bottom: 1%;">'+
+	            '<span>${r.name}</span><span style="padding-left:3%"><i class="far fa-clock" style="color:#E71D36 "></i>${r.rdate}</span><br>'+
+	            '<div>${r.rcontent}</div></div></div></div></div>'
+	            ) */
+	            location.href ='teamissueDetail.do?tiseq='+tiseqq;
+			},
+			error:function(error){
+				alert(error);
+			}
+				
+		});
+	});
+});
+</script>
+
 <style>
 .newissue{
 	border-bottom: 1px solid #c8c8c8;
@@ -63,30 +99,32 @@
         </div>    
             <!-- #/ container -->
             </div> 
-            <div class="card" style="float:right;background-color: #fff;margin-left:10px;padding-left: 0px;padding-right: 0px;width:400px;">
-            <div class="card" style="min-height:430px;padding-left: 3%;padding-top: 5%;padding-right: 3%;padding-bottom: 5%;overflow: auto;">
+            <div class="card" style="height: 600px;float:right;background-color: #fff;margin-left:10px;padding-left: 0px;padding-right: 0px;width:400px;">
+            <div id="commentMain" style="height:450px;padding-left: 3%;padding-top: 5%;padding-right: 3%;padding-bottom: 5%;overflow: auto;margin:5%;">
+            <c:forEach items="${reply}" var="r">
             
             <div class="row" style="margin-left: 3%;margin-right: 3%;">
+            
             <div class="col-sm-1" style="margin-top: 10px;margin-right:10px;padding-left:0;">
             <img id="memberImage" class="img-circle" alt="멤버 프로필 사진 넣는 곳" src="resources/images/avatar/avatar.png" style="width:40px;height: auto;padding-top: 1%;margin-left: 10px;margin-right: 10px;">
             </div>
             <div class="col-sm-10">
             <div id="commentMain" style="margin: 3% 5% 3% 5%;" >
             <div style="margin-bottom: 1%;">
-            <span>도연(이름)</span><span style="padding-left:3%"><i class="far fa-clock" style="color:#E71D36 "></i>오후 16:03(시간)</span>
+            <span>${r.name}</span><span style="padding-left:3%"><i class="far fa-clock" style="color:#E71D36 "></i>${r.rdate}</span>
             <br>
-            <div>보쌈 먹고 시퍼요(댓글 내용)</div>
+            <div>${r.rcontent}</div>
             </div>
             </div>
             </div>
             
+            </div>
+            </c:forEach>
             
-            
+            </div>
             <img src="resources/images/logo/ScoopTitle.png" style="width:150px;height: auto;opacity:0.3;position:absolute;top:25%;left: 32%;">
-            </div>
-            </div>
-            <textarea id="enter" rows="5" placeholder="말하지 않아도 아는것은 초코파이뿐입니다                        댓글 입력 후 저장을 클릭해주세요" style="resize: none;height:180px;width:auto;border: 1px solid #c8c8c8;border-radius: 0.5rem;margin-left: 15px;margin-bottom: 20px;margin-right: 15px;overflow:auto;padding: 4%"></textarea>
-            <input type="submit" value="저장" style="width: 90px;border-radius:0.5rem ;padding-top:7px;padding-bottom:7px; background-color: #E71D36;color: #fff; cursor: pointer;position: absolute;top:590px;left: 290px;">
+            <textarea id="teamComment" rows="5" placeholder="말하지 않아도 아는것은 초코파이뿐입니다                        댓글 입력 후 저장을 클릭해주세요" style="resize: none;height:180px;width:auto;border: 1px solid #c8c8c8;border-radius: 0.5rem;margin-left: 15px;margin-bottom: 20px;margin-right: 15px;overflow:auto;padding: 4%"></textarea>
+            <input id="teamCommentBtn" type="submit" value="저장" style="width: 90px;border-radius:0.5rem ;padding-top:7px;padding-bottom:7px; background-color: #E71D36;color: #fff; cursor: pointer;position: absolute;top:585px;left: 290px;">
             </div>
             </div>
         </div>

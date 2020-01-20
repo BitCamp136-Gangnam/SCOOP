@@ -1,5 +1,6 @@
 package kr.or.scoop.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -19,6 +20,7 @@ import kr.or.scoop.dao.TissueDao;
 import kr.or.scoop.dto.BookMark;
 import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.dto.Notice;
+import kr.or.scoop.dto.Reply;
 import kr.or.scoop.dto.TeamPjt;
 import kr.or.scoop.dto.Tissue;
 import kr.or.scoop.service.BoardService;
@@ -61,10 +63,12 @@ public class BoardController {
 	
 	// 팀이슈디테일 
 	@RequestMapping(value="/teamissueDetail.do",method = {RequestMethod.POST,RequestMethod.GET})
-	public String teamissueDetail(int tiseq, Model model) {
+	public String teamissueDetail(int tiseq, Model model){
 		TissueDao dao = sqlSession.getMapper(TissueDao.class);
 		Tissue tissue = dao.teamissueDetail(tiseq);
+		List<Reply> reply = dao.teamCommentList(tiseq);
 		model.addAttribute("tissue", tissue);
+		model.addAttribute("reply",reply);
 		return "issue/teamissueDetail";
 	}
 
@@ -190,7 +194,49 @@ public class BoardController {
 			viewpage = "issue/notice";
 		}
 			
+		return viewpage;
+	}
+	@RequestMapping(value="searchIssue.do", method = {RequestMethod.POST,RequestMethod.GET})
+	public String searchIssue(String email,String word,Model model) {
+		int result = 0;
+		System.out.println(email + word);
+		String viewpage = "";
+		NoticeDao dao = sqlSession.getMapper(NoticeDao.class);
+		List<MyIssue> teamIssue = dao.searchTeamIssue(email, word);
+		System.out.println(teamIssue);
+		List<MyIssue> myIssue = dao.searchMyIssue(email, word);
+		model.addAttribute("teamIssue", teamIssue);
+		model.addAttribute("myIssue", myIssue);
+		if(result > 0) {
+			viewpage = "issue/searchIssue";
+			
+		}else {
+			viewpage = "issue/searchIssue";
+		}
+		
+		
+		return viewpage;
+	}
 	
+	//팀이슈 댓글 비동기
+	@RequestMapping(value = "teamComment.do", method = {RequestMethod.POST,RequestMethod.GET})
+	public String teamCommentAjax(int tiseq,String rcontent,String email,Model model) {
+		int result = 0;	
+		System.out.println(tiseq + rcontent + email);
+		String viewpage = "";
+		result = tservice.teamComment(tiseq, rcontent, email);
+		List insertResult = new ArrayList();
+		insertResult.add(tiseq);
+		insertResult.add(rcontent);
+		insertResult.add(email);
+		if(result > 0) {
+			model.addAttribute("ajax",insertResult);
+			viewpage = "ajax/ajax";
+			
+		}else {
+			model.addAttribute("ajax","댓글 실패ㅠㅠ");
+			viewpage = "ajax/ajax";
+		}
 		return viewpage;
 	}
 }

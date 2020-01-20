@@ -73,4 +73,19 @@ public class TeamService {
 		System.out.println("service result : " + result);
 		return result;
 	}
+	public int teamComment(int tiseq,String rcontent,String email) {
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		System.out.println("가나다라"+tiseq+rcontent+email);
+		int result = dao.teamComment(tiseq,rcontent,email);
+		System.out.println("마바사아"+tiseq+rcontent+email);
+
+		return result;
+	}
+	
+	public int fileInsert(String fdname, long fdcapa, String email) {
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		int result = dao.fileInsert(fdname, fdcapa, email);
+		
+		return result;
+	}
 }

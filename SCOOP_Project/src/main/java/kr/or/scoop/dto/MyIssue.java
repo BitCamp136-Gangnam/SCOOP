@@ -2,8 +2,8 @@ package kr.or.scoop.dto;
 
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Arrays;
-import java.util.List;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,8 +22,8 @@ public class MyIssue {
 	private Date piend;
 	private int ispibook;
 	private String email;
-	private Date pidate;
-	private Date tidate;
+	private Timestamp pidate;
+	private Timestamp tidate;
 	private String mygfilename;
 	private String mymention;
 	private String myurl;
@@ -110,18 +110,20 @@ public class MyIssue {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Date getPidate() {
+
+	public Timestamp getPidate() {
 		return pidate;
 	}
-	public void setPidate(Date pidate) {
+	public void setPidate(Timestamp pidate) {
 		this.pidate = pidate;
 	}
-	public Date getTidate() {
+	public Timestamp getTidate() {
 		return tidate;
 	}
-	public void setTidate(Date tidate) {
+	public void setTidate(Timestamp tidate) {
 		this.tidate = tidate;
 	}
+	
 	public String getMygfilename() {
 		return mygfilename;
 	}
