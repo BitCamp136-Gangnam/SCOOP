@@ -19,8 +19,7 @@ public interface TissueDao {
 	
 	//팀 이슈 디테일
 	public Tissue teamissueDetail(int tiseq);
-	
-	//북마크
+
+	//북마크 
 	public int addBookMark(int tiseq, String email);
-	public int delBookMark(int tiseq, String email);
 }

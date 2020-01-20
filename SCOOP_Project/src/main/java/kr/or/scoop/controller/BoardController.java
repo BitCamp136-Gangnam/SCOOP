@@ -141,11 +141,14 @@ public class BoardController {
 	public String tiBookMark (HttpSession session, int tseq, int tiseq, String status, Model model) {
 		String email = (String)session.getAttribute("email");
 		String viewpage = "";
-		int istbook = (status.equals("bookoff")) ? 1 : 0;
+		int result = 0;
+		if(status.equals("bookoff")) {
+			
+		}
 		
-		System.out.println("email: " + email + " / status: " + istbook);
 		
-		int result = tservice.bookMark(tiseq, istbook, email);
+		
+		result = tservice.banMember(tseq, email);
 		
 		System.out.println("bookmark : " + status);
 		System.out.println("result : " + result);
