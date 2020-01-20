@@ -1,5 +1,7 @@
 ! function(e) {
     "use strict";
+    var ts = '2020-01-10';
+    var te = '2020-01-21';
     var t = function() {
         this.$body = e("body"), this.$modal = e("#event-modal"), this.$event = "#external-events div.external-event", this.$calendar = e("#calendar"), this.$saveCategoryBtn = e(".save-category"), this.$categoryForm = e("#add-category form"), this.$extEvents = e("#external-events"), this.$calendarObj = null
     };
@@ -26,15 +28,17 @@
             backdrop: "static"
         });
         var i = e("<form id='calcal'></form>");
-        i.append("<div class='row'></div>"), i.find(".row").append("<div class='col-md-6'><div class='form-group'><label class='control-label'>Event Name</label><input class='form-control' placeholder='Insert Event Name' type='text' name='title'/><input class='form-control' type='text' name='begin' value='"+i.find("input[name='beginning']").val()+"'/><input class='form-control' type='text' name='end' value='"+i.find("input[name='ending']").val()+"'/></div></div>").append("<div class='col-md-6'><div class='form-group'><label class='control-label'>Category</label><select class='form-control' name='category'></select></div></div>").find("select[name='category']").append("<option value='bg-danger'>Danger</option>").append("<option value='bg-success'>Success</option>").append("<option value='bg-dark'>Dark</option>").append("<option value='bg-primary'>Primary</option>").append("<option value='bg-pink'>Pink</option>").append("<option value='bg-info'>Info</option>").append("<option value='bg-warning'>Warning</option></div></div>"), o.$modal.find(".delete-event").hide().end().find(".save-event").show().end().find(".modal-body").empty().prepend(i).end().find(".save-event").unbind("click").on("click", function() {
+        i.append("<div class='row'></div>"), i.find(".row").append("<div class='col-md-6'><div class='form-group'><label class='control-label'>Event Name</label><input class='form-control' placeholder='Insert Event Name' type='text' name='title'/><input class='form-control' type='date' name='beginning' id='beginning' pattern='yyyy-MM-dd' value='2020-01-01'/><input class='form-control' type='date' name='ending' id='ending' pattern='yyyy-MM-dd' value='2020-01-20'/></div></div>").append("<div class='col-md-6'><div class='form-group'><label class='control-label'>Category</label><select class='form-control' name='category'></select></div></div>"+'<br><div class="col-md-12"><label class="control-label">Select Team</label><select id="calTeam" name="calTeam" class="form-control"></select></div>').find("select[name='category']").append("<option value='bg-danger'>Danger</option>").append("<option value='bg-success'>Success</option>").append("<option value='bg-dark'>Dark</option>").append("<option value='bg-primary'>Primary</option>").append("<option value='bg-pink'>Pink</option>").append("<option value='bg-info'>Info</option>").append("<option value='bg-warning'>Warning</option></div></div>"), o.$modal.find(".delete-event").hide().end().find(".save-event").show().end().find(".modal-body").empty().prepend(i).end().find(".save-event").unbind("click").on("click", function() {
             i.submit()
         }), o.$modal.find("form").on("submit", function() {
             var e = i.find("input[name='title']").val(),
+            	ts = i.find("input[name='beginning']").val(),
+            	te = i.find("input[name='ending']").val(),
                 a = (i.find("input[name='beginning']").val(), i.find("input[name='ending']").val(), i.find("select[name='category'] option:checked").val());
             return null !== e && 0 != e.length ? (o.$calendarObj.fullCalendar("renderEvent", {
                 title: e,
-                start: t,
-                end: n,
+                start: ts,
+                end: te,
                 allDay: !1,
                 className: a
             }, !0), o.$modal.modal("hide")) : alert("You have to give a title to your event"), !1

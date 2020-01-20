@@ -48,10 +48,22 @@
 						book.removeAttr("name").attr("name", "bookoff");
 						book.removeClass(mark[1]+" "+mark[2]).addClass("far fa-bookmark");
 					}
+					Swal.fire({
+			    		  title: "북마크 성공",
+			    		  text: "북마크 성공",
+			    		  icon: "success",
+			    		  button: "확인"
+			    		})
 
 				},
 				error : function(err){
 					console.log('error' + err);
+					Swal.fire({
+			    		  title: "북마크 중 에러 발생",
+			    		  text: "북마크 중 에러 발생",
+			    		  icon: "error",
+			    		  button: "확인"
+			    		})
 					return false;
 				}
 			});

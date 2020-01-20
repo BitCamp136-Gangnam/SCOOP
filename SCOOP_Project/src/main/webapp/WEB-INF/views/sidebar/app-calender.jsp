@@ -55,11 +55,69 @@ var $item = $('.item').on('click', function() {
 });
 
 $(function(){
+	
+
 	$(".fc-content-skeleton thead td").mousedown(function(e){
-		var da = this.text();
+		var da = $(this).attr('data-date');	
+		console.log(typeof(da));
+		
+		$("#soso").attr('value',da);
+		/*  */
+		console.log('2020-01-29'==da);	
+		/* $('.modal-body input[name=begin]').attr('value',da); */
+		console.log("값좀 들어가라 ㅡㅡ begin");
 		console.log(da);
+		
+		$('#event-modal').on('show.bs.modal', function (event) {
+			var begin = document.getElementsByName('beginning');
+			console.log("모달이 떳니?????");
+			console.log(begin);
+			$("#beginning").attr('value',$("#soso").attr('value'));
+			
+			$('#beginning').val(da);
+			console.log(this.children);
+			
+		});
 	});
 });
+
+$(function(){
+	$(".fc-content-skeleton thead td").mouseup(function(e){
+		var du = $(this).attr('data-date');
+		$('#ending').attr('value',du);
+		$("#sosi").attr('value',du);
+		/* $('#ending').val(du); */
+		/* $('.modal-body input[name=end]').attr('value',du); */
+		console.log("값좀 들어가라 ㅡㅡ end");
+		console.log(du);
+		
+		$('#event-modal').on('show.bs.modal', function (event) {
+			var pjtlist = '<c:out value="${pjtlist}"/>';
+			for (var i = 0; i < pjtlist.length; i++) {
+				$('#calTeam').append('<option value="'+pjtlist[i].tseq+'">'+pjtlist[i].pname+'</option>');
+			}
+			console.log(this.children.target);
+			$('#ending').val(du);
+			
+		});
+	});
+});
+
+
+function allowDrop(ev) {
+	  ev.preventDefault();
+	}
+
+	function drag(ev) {
+	  ev.dataTransfer.setData("text", ev.target.id);
+	  console.log(ev.target);
+	}
+	var tseq = document.location.href.split("tseq=")[1]; 
+	function drop(ev) {
+	  ev.preventDefault();
+	  var data = ev.dataTransfer.getData("text");
+	  console.log(ev.target);
+	}
 
 </script>
 <body>
@@ -89,6 +147,8 @@ $(function(){
                                     <div class="col-lg-2 mt-5">
                                     <button type="button" id="calSave" class="btn btn-primary btn-block">저장</button>
                                         <a href="#" data-toggle="modal" data-target="#add-category" class="btn btn-primary btn-block"><i class="ti-plus f-s-12 m-r-5"></i> 일정추가</a>
+                                        <input type="date" id="soso" pattern="yyyy-MM-dd">
+                                        <input type="date" id="sosi" pattern="yyyy-MM-dd">
                                         <div id="external-events" class="m-t-20">
                                         </div>
                                     </div>
