@@ -17,6 +17,7 @@ import kr.or.scoop.dao.ProjectDao;
 import kr.or.scoop.dao.TissueDao;
 import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.dto.Notice;
+import kr.or.scoop.dto.Reply;
 import kr.or.scoop.dto.TeamPjt;
 import kr.or.scoop.dto.Tissue;
 import kr.or.scoop.service.BoardService;
@@ -59,10 +60,12 @@ public class BoardController {
 	
 	// 팀이슈디테일 
 	@RequestMapping(value="/teamissueDetail.do",method = {RequestMethod.POST,RequestMethod.GET})
-	public String teamissueDetail(int tiseq, Model model) {
+	public String teamissueDetail(int tiseq, Model model){
 		TissueDao dao = sqlSession.getMapper(TissueDao.class);
 		Tissue tissue = dao.teamissueDetail(tiseq);
+		List<Reply> reply = dao.teamCommentList(tiseq);
 		model.addAttribute("tissue", tissue);
+		model.addAttribute("reply",reply);
 		return "issue/teamissueDetail";
 	}
 
@@ -179,7 +182,26 @@ public class BoardController {
 			viewpage = "issue/notice";
 		}
 			
-	
 		return viewpage;
 	}
+	
+	//팀이슈 댓글 비동기
+	@RequestMapping(value = "teamComment.do", method = {RequestMethod.POST,RequestMethod.GET})
+	public int teamCommentAjax(int tiseq,String rcontent,String email,Model model) {
+		int result = 0;	
+		System.out.println(tiseq + rcontent + email);
+		String viewpage = "";
+		result = tservice.teamComment(tiseq, rcontent, email);
+		if(result > 0) {
+			model.addAttribute("ajax","댓글 성공!");
+			viewpage = "ajax/ajax";
+			
+		}else {
+			model.addAttribute("ajax","댓글 실패ㅠㅠ");
+			viewpage = "ajax/ajax";
+		}
+		return result;
+	}
+	
+	
 }
