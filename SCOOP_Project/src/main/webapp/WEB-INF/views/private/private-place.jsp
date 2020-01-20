@@ -126,9 +126,12 @@
 				${m.pidate}
 			</div>
 			<c:set var="mark" value="true" />
+			<c:set var="loop" value="false" />
 			<c:forEach items="${bookMark}" var="book">
+				<c:if test="${not loop}" />
 				<c:if test="${m.piseq == book.piseq}">
-					<c:set var="mark" value="true" />
+					<c:set var="mark" value="false" />
+					<c:set var="loop" value="true" />
 				</c:if>
 			</c:forEach>
 				<c:choose>
