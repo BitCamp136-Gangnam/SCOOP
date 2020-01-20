@@ -69,7 +69,10 @@ $(function(){
 		console.log(da);
 		
 		$('#event-modal').on('show.bs.modal', function (event) {
-			
+			var begin = document.getElementsByName('beginning');
+			console.log("모달이 떳니?????");
+			console.log(begin);
+			$("#beginning").attr('value',$("#soso").attr('value'));
 			
 			$('#beginning').val(da);
 			console.log(this.children);
