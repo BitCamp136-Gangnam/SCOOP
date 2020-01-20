@@ -195,11 +195,10 @@ public class MemberController {
 		ProjectDao noticeDao = sqlsession.getMapper(ProjectDao.class);
 		MemberDao memberdao = sqlsession.getMapper(MemberDao.class);
 		Role role = memberdao.getRole(email);
-		int count = memberdao.getCount(email);
+		int count = memberdao.getCount(email);	
+		String img = memberdao.getProfile(email); 
 		
-		  String img = memberdao.getProfile(email); 
-		 
-		session.setAttribute("img", img);  
+		session.setAttribute("img",img); 
 		session.setAttribute("role", role.getRname());
 		session.setAttribute("count", count);
 		List<Tpmember> pjtlist = noticeDao.getPJT(email);
@@ -431,6 +430,7 @@ public class MemberController {
 		Member member = dao.getMember((String)session.getAttribute("email"));
 		
 		model.addAttribute("member",member);
+		session.setAttribute("img", member.getProfile());
 		
 		return "user/app-profile";
 		
@@ -438,8 +438,8 @@ public class MemberController {
 	
 	//회원수정 체크
 	@RequestMapping(value="editCheck.do" , method = RequestMethod.POST)
-	public String UpdateProfile(Member member,HttpServletRequest request) {
-		System.out.println(member);
+	public String UpdateProfile(Member member,HttpServletRequest request,HttpSession session) {
+		    System.out.println(member);
 		
 				
 			CommonsMultipartFile multifile = member.getFilesrc();
@@ -460,22 +460,23 @@ public class MemberController {
 					}finally {
 						try {
 							fs.write(multifile.getBytes());
+							System.out.println(multifile.getBytes());
 							fs.close();
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					}
-					
-				
 				}
+				
+				
 		
 		
 		MemberDao dao = sqlsession.getMapper(MemberDao.class);
 		member.setPwd(this.bCryptPasswordEncoder.encode(member.getPwd()));
 		dao.updateMember(member);
 		
-		return "redirect:/memberEdit.do";
+		return "redirect:/userindex.do";
 	}
 	
 	// 결재페이지

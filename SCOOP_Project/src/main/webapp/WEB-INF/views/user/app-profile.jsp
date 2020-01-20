@@ -183,7 +183,7 @@ $(document).ready(function(){
 		<div class="row" style="margin-left: 4%; margin-right: 2%; margin-top: 1%">
 			<div class="media align-items-center mb-4">
 					<c:choose>
-						<c:when test="${img=='null'}">
+						<c:when test="${img==null}">
 							<img id ="profile" class="mr-3 img-circle" src="<c:url value='/resources/images/avatar/avatar.png' />" width="120" height="120" alt="" name="profile">
 							<input type="file" name="filesrc" id="Photo" accept="image/*">
 						</c:when>
@@ -204,11 +204,11 @@ $(document).ready(function(){
     		<input class="form-control myinfo" type="text" id="email" name="email" style="width: 60%" readonly="readonly" value="${member.email}">
     		<br>
     		<c:choose>
-    		<c:when test="${member.pwd == 'google'}">
+    		<c:when test="${kind == 'google'}">
     		<label for="pwd">비밀번호</label>
     		<input class="form-control myinfo" type="text" id="pwd_google" name="pwd" style="width: 60%" value="구글에 문의하세요" readonly="readonly">
     		</c:when>
-    		<c:when test="${member.pwd == 'naver'}">
+    		<c:when test="${kind == 'naver'}">
     		<label for="pwd">비밀번호</label>
     		<input class="form-control myinfo" type="text" id="pwd_naver" name="pwd" style="width: 60%" value="네이버에 문의하세요" readonly="readonly">
     		</c:when>

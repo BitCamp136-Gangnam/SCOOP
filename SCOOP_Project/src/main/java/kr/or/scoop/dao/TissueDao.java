@@ -21,12 +21,12 @@ public interface TissueDao {
 	//팀 이슈 디테일
 	public Tissue teamissueDetail(int tiseq);
 	
-	//북마크
-	public int tiBookMark(int tiseq, int istbook, String email);
-	
 	//팀이슈 댓글
 	public int teamComment(int tiseq,String rcontent,String email);
 	
 	//팀이슈 댓글 리스트 출력
 	public List<Reply> teamCommentList(int tiseq);
+
+	//북마크 
+	public int addBookMark(int tiseq, String email);
 }

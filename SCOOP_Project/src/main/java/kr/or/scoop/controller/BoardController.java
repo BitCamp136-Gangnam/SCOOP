@@ -115,14 +115,15 @@ public class BoardController {
 		String email = (String)session.getAttribute("email");
 		String viewpage = "";
 		MyIssueDao dao = sqlSession.getMapper(MyIssueDao.class);
-		
-		int ispibook = (status.equals("bookoff")) ? 1 : 0;
+		int result = 0;
+		if(status.equals("bookoff")) {
+			result = dao.addBookMark(piseq, email);
+		}else if(status.equals("bookon")) {
+			result = dao.delBookMark(piseq, email);
+		}
 		
 		System.out.println("piseq : " + piseq);
-		System.out.println("ispibook : " + ispibook);
 		System.out.println("email : " + email);
-		
-		int result = dao.piBookMark(piseq, ispibook, email);
 		
 		if(status.equals("bookoff") && result > 0) {
 			status = "bookon";
@@ -143,11 +144,14 @@ public class BoardController {
 	public String tiBookMark (HttpSession session, int tseq, int tiseq, String status, Model model) {
 		String email = (String)session.getAttribute("email");
 		String viewpage = "";
-		int istbook = (status.equals("bookoff")) ? 1 : 0;
+		int result = 0;
+		if(status.equals("bookoff")) {
+			
+		}
 		
-		System.out.println("email: " + email + " / status: " + istbook);
 		
-		int result = tservice.bookMark(tiseq, istbook, email);
+		
+		result = tservice.banMember(tseq, email);
 		
 		System.out.println("bookmark : " + status);
 		System.out.println("result : " + result);

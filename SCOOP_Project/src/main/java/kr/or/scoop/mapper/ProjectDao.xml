@@ -74,4 +74,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 	on m.tseq = p.tseq 
 	where p.tseq=#{param1} and m.email = #{param2}
 </select>
+<!-- 북마크 -->
+<insert id="addBookMark">
+	insert into bookmark(tiseq, email) 
+	values(#{tiseq}, #{email})
+</insert>
+<delete id="delBookMark">
+	delete from bookmark 
+	where tiseq=#{tiseq} and email=#{email}
+</delete>
 </mapper>
