@@ -460,6 +460,7 @@ public class MemberController {
 					}finally {
 						try {
 							fs.write(multifile.getBytes());
+							System.out.println(multifile.getBytes());
 							fs.close();
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
@@ -475,7 +476,7 @@ public class MemberController {
 		member.setPwd(this.bCryptPasswordEncoder.encode(member.getPwd()));
 		dao.updateMember(member);
 		
-		return "redirect:/memberEdit.do";
+		return "redirect:/userindex.do";
 	}
 	
 	// 결재페이지

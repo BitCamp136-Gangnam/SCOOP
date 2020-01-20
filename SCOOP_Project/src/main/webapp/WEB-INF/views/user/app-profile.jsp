@@ -204,11 +204,11 @@ $(document).ready(function(){
     		<input class="form-control myinfo" type="text" id="email" name="email" style="width: 60%" readonly="readonly" value="${member.email}">
     		<br>
     		<c:choose>
-    		<c:when test="${member.pwd == 'google'}">
+    		<c:when test="${kind == 'google'}">
     		<label for="pwd">비밀번호</label>
     		<input class="form-control myinfo" type="text" id="pwd_google" name="pwd" style="width: 60%" value="구글에 문의하세요" readonly="readonly">
     		</c:when>
-    		<c:when test="${member.pwd == 'naver'}">
+    		<c:when test="${kind == 'naver'}">
     		<label for="pwd">비밀번호</label>
     		<input class="form-control myinfo" type="text" id="pwd_naver" name="pwd" style="width: 60%" value="네이버에 문의하세요" readonly="readonly">
     		</c:when>
