@@ -11,6 +11,7 @@ insert into tissue (tiseq,tseq,email,tititle,ticontent,isprocess, istbook, issee
 <resultMap type="kr.or.scoop.dto.Member" id="Member">
 	<result column="tseq" property="tseq"/>
 	<result column="email" property="email"/>
+	<result column="name" property="name"/>
 	<result column="pname" property="pname"/>
 	<result column="pcontent" property="pcontent"/>
 	<result column="ptime" property="ptime"/>
@@ -18,6 +19,7 @@ insert into tissue (tiseq,tseq,email,tititle,ticontent,isprocess, istbook, issee
 	<result column="ischarge" property="ischarge"/>
 	<collection property="tissue" resultMap="Tissue"/>
 	<collection property="tpmember" resultMap="Tpmember"/>
+	<collection property="reply" resultMap="Reply"/>
 </resultMap>
 <resultMap type="kr.or.scoop.dto.Tissue" id="Tissue">
 	<result column="tiseq" property="tiseq"/>
@@ -33,6 +35,13 @@ insert into tissue (tiseq,tseq,email,tititle,ticontent,isprocess, istbook, issee
 	<result column="tidate" property="tidate"/>
 	<result column="tgfilename" property="tgfilename"/>
 	<result column="turl" property="turl"/>
+</resultMap>
+<resultMap type="kr.or.scoop.dto.Reply" id="Reply">
+	<result column="replyseq" property="replyseq"/>
+	<result column="rcontent" property="rcontent"/>
+	<result column="email" property="email"/>
+	<result column="rdate" property="rdate"/>
+	<result column="tiseq" property="tiseq"/>
 </resultMap>
 <select id="loadKanban" parameterType="int" resultMap="Tissue">
 	select *
@@ -58,4 +67,12 @@ insert into tissue (tiseq,tseq,email,tititle,ticontent,isprocess, istbook, issee
 	set istbook = #{param2}
 	where tiseq=#{param1} and email=#{param3}
 </update>
+<insert id="teamComment">
+	insert into reply(replyseq, rcontent, email, rdate, tiseq)
+  	values(replyseq_reply_seq.nextval, #{param2}, #{param3}, sysdate, #{param1})
+</insert>
+<select id="teamCommentList" resultType="kr.or.scoop.dto.Reply">
+	select * from reply r join member m on r.email=m.email where tiseq = #{tiseq}
+</select>
+
 </mapper>

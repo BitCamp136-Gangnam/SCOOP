@@ -2,6 +2,7 @@ package kr.or.scoop.dao;
 
 import java.util.List;
 
+import kr.or.scoop.dto.Reply;
 import kr.or.scoop.dto.Tissue;
 
 public interface TissueDao {
@@ -22,4 +23,10 @@ public interface TissueDao {
 	
 	//북마크
 	public int tiBookMark(int tiseq, int istbook, String email);
+	
+	//팀이슈 댓글
+	public int teamComment(int tiseq,String rcontent,String email);
+	
+	//팀이슈 댓글 리스트 출력
+	public List<Reply> teamCommentList(int tiseq);
 }
