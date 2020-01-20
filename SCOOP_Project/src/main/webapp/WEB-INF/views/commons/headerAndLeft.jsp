@@ -926,10 +926,7 @@ span {
                <textarea class="form-control createmodal" rows="5"
                   id="issuecontent" name="issuecontent" style="width: 100%"
                   placeholder="@를 입력하여 멘션, 할 일, 파일 등을 추가해 보세요."></textarea>
-                  <textarea name="content" id="summernote" value=""></textarea>
-                  <script type="text/javascript">
-                  $('#summernote').summernote();
-                  </script>
+                
                <textarea rows="" id="codemirrorarea" style="display: none"><-- 코드를 입력하세요 --></textarea>
                <div id="todoresult" style="display: none">
                   <!-- mention -->
