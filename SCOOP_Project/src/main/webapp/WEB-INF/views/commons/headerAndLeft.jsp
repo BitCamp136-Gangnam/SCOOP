@@ -676,7 +676,7 @@ span {
                   data-toggle="dropdown">
                   <span class="activity active"></span>
                   <c:choose>
-                  	<c:when test="${img=='null'}">
+                  	<c:when test="${img==null}">
                   <img src="<c:url value="/resources/images/avatar/avatar.png" />"
                      height="40" width="40" alt="">
                   	</c:when>
