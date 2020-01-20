@@ -119,7 +119,7 @@ $(function(){
 	//회원가입 유효성 검사
     function checkz() {
       var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
-      var getCheck= RegExp(/^[a-zA-Z0-9]{4,12}$/);
+      var getCheck= RegExp(/^[a-zA-Z0-9]{8,16}$/);
       var getName= RegExp(/^[가-힣]+$/);
 
       //이메일 유효성 검사

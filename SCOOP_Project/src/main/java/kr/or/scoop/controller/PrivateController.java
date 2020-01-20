@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.or.scoop.dao.MyIssueDao;
+import kr.or.scoop.dto.BookMark;
 import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.service.MemberService;
 
@@ -30,12 +31,23 @@ public class PrivateController {
 	public String privateIn(HttpSession session, Model model) {
 		String email = "";
 		email = (String)session.getAttribute("email");
+		
 		System.out.println("private Controller email : " + email);
+		
 		MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
 		List<MyIssue> myissuelist = myissuedao.getMyissue(email);
+		List<BookMark> bookMark = myissuedao.getBookMark(email);
+		
+		System.out.println("bookMark" + bookMark);
+		
 		model.addAttribute("myissuelist", myissuelist);
+		model.addAttribute("bookMark", bookMark);
+		
 		System.out.println(myissuelist);
+		System.out.println("bookMark : " + bookMark);
+		
 		String viewpage = "private/private-place";
+		
 		return viewpage;
 		
 	}

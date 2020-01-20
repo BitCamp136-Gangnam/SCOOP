@@ -68,6 +68,15 @@ insert into tissue (tiseq,tseq,email,tititle,ticontent,isprocess, istbook, issee
 	set istbook = #{param2}
 	where tiseq=#{param1} and email=#{param3}
 </update>
+<!-- 북마크 -->
+<insert id="addBookMark">
+	insert into bookmark(tiseq, email) 
+	values(#{param1}, #{param2})
+</insert>
+<delete id="delBookMark">
+	delete from bookmark 
+	where tiseq=#{param1} and email=#{param2}
+</delete>
 <insert id="teamComment">
 	insert into reply(replyseq, rcontent, email, rdate, tiseq)
   	values(replyseq_reply_seq.nextval, #{param2}, #{param3}, sysdate, #{param1})

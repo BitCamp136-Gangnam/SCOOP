@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.mapping.SqlMapperException;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import kr.or.scoop.dao.MyIssueDao;
 import kr.or.scoop.dao.NoticeDao;
 import kr.or.scoop.dao.ProjectDao;
 import kr.or.scoop.dao.TissueDao;
+import kr.or.scoop.dto.BookMark;
 import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.dto.Notice;
 import kr.or.scoop.dto.Reply;
@@ -112,12 +114,15 @@ public class BoardController {
 		return "issue/noticeDetail";
 	}
 	
+	// 개인 이슈 북마크
 	@RequestMapping(value="/pibookmark.do", method=RequestMethod.POST)
 	public String piBookMark(HttpSession session, int piseq, String status, Model model) {
 		String email = (String)session.getAttribute("email");
 		String viewpage = "";
 		MyIssueDao dao = sqlSession.getMapper(MyIssueDao.class);
 		int result = 0;
+		
+		// 북마크 추가/제거
 		if(status.equals("bookoff")) {
 			result = dao.addBookMark(piseq, email);
 		}else if(status.equals("bookon")) {
@@ -127,6 +132,7 @@ public class BoardController {
 		System.out.println("piseq : " + piseq);
 		System.out.println("email : " + email);
 		
+		// 북마크 성공시 북마크 상태 변경
 		if(status.equals("bookoff") && result > 0) {
 			status = "bookon";
 			viewpage = "redirect:private.do";
@@ -147,13 +153,13 @@ public class BoardController {
 		String email = (String)session.getAttribute("email");
 		String viewpage = "";
 		int result = 0;
+		TissueDao dao = sqlSession.getMapper(TissueDao.class);
+		
 		if(status.equals("bookoff")) {
-			
+			result = dao.addBookMark(tiseq, email);
+		}else if(status.equals("bookon")) {
+			result = dao.delBookMark(tiseq, email);
 		}
-		
-		
-		
-		result = tservice.banMember(tseq, email);
 		
 		System.out.println("bookmark : " + status);
 		System.out.println("result : " + result);
@@ -167,6 +173,7 @@ public class BoardController {
 		}
 		
 		model.addAttribute("status", status);
+		System.out.println(model);
 		
 		return viewpage;
 	}
