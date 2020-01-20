@@ -112,14 +112,15 @@ public class BoardController {
 		String email = (String)session.getAttribute("email");
 		String viewpage = "";
 		MyIssueDao dao = sqlSession.getMapper(MyIssueDao.class);
-		
-		int ispibook = (status.equals("bookoff")) ? 1 : 0;
+		int result = 0;
+		if(status.equals("bookoff")) {
+			result = dao.addBookMark(piseq, email);
+		}else if(status.equals("bookon")) {
+			result = dao.delBookMark(piseq, email);
+		}
 		
 		System.out.println("piseq : " + piseq);
-		System.out.println("ispibook : " + ispibook);
 		System.out.println("email : " + email);
-		
-		int result = dao.piBookMark(piseq, ispibook, email);
 		
 		if(status.equals("bookoff") && result > 0) {
 			status = "bookon";
