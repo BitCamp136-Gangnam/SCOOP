@@ -2,6 +2,7 @@ package kr.or.scoop.dao;
 
 import java.util.List;
 
+import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.dto.Notice;
 
 public interface NoticeDao {
@@ -17,4 +18,8 @@ public interface NoticeDao {
 	
 	//공지사항 수정
 	public int updateNotice(Notice notice);
+	
+	public List<MyIssue> searchTeamIssue(String email, String word);
+	
+	public List<MyIssue> searchMyIssue(String email, String word);
 }	
