@@ -29,4 +29,6 @@ public interface TissueDao {
 
 	//북마크 
 	public int addBookMark(int tiseq, String email);
+	
+	public int fileInsert(String fdname, long fdcapa, String email);
 }

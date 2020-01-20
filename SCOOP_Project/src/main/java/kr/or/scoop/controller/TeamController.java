@@ -140,6 +140,7 @@ public class TeamController {
 						 fs.write(mutifile.getBytes());
 						 fs.close();
 					 }
+					 teamservice.fileInsert(filename, fsize, (String) session.getAttribute("email"));
 					 filenames.add(filename);
 					 filesizes.add(fsize);
 				 }
