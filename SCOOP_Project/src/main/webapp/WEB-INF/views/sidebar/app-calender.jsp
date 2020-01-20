@@ -69,12 +69,16 @@ $(function(){
 		console.log(da);
 		
 		$('#event-modal').on('show.bs.modal', function (event) {
-			var begin = document.getElementsByName('beginning');
-			console.log("모달이 떳니?????");
-			console.log(begin);
+			//alert(da);
+			//var begin = $(document.getElementsByName('beginning'));
+			//alert(begin.val());
+			console.log($("-----");
+			console.log($("#beginning"));
+			/* console.log(begin.item); */
 			$("#beginning").attr('value',$("#soso").attr('value'));
 			
-			$('#beginning').val(da);
+			console.log($("#beginning").val());
+			
 			console.log(this.children);
 			
 		});
@@ -92,11 +96,12 @@ $(function(){
 		console.log(du);
 		
 		$('#event-modal').on('show.bs.modal', function (event) {
+			/* alert(du); */
 			var pjtlist = '<c:out value="${pjtlist}"/>';
 			for (var i = 0; i < pjtlist.length; i++) {
 				$('#calTeam').append('<option value="'+pjtlist[i].tseq+'">'+pjtlist[i].pname+'</option>');
 			}
-			console.log(this.children.target);
+			/* console.log(this.children.target); */
 			$('#ending').val(du);
 			
 		});
