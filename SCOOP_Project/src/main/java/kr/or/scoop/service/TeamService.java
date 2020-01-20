@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import kr.or.scoop.dao.ProjectDao;
 import kr.or.scoop.dao.TissueDao;
+import kr.or.scoop.dto.Reply;
 import kr.or.scoop.dto.TeamPjt;
 import kr.or.scoop.dto.Tissue;
 
@@ -79,6 +80,12 @@ public class TeamService {
 
 		return result;
 	}
+	public List<Reply> teamCommentOk(int tiseq){
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		
+		List<Reply> result = dao.teamCommentOk(tiseq);
+		return result;
+	}
 	
 	public int fileInsert(String fdname, long fdcapa, String email) {
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
@@ -86,4 +93,5 @@ public class TeamService {
 		
 		return result;
 	}
+	
 }

@@ -23,6 +23,7 @@ import kr.or.scoop.dto.TeamPjt;
 import kr.or.scoop.dto.Tissue;
 import kr.or.scoop.service.BoardService;
 import kr.or.scoop.service.TeamService;
+import net.sf.json.JSONArray;
 
 @Controller
 public class BoardController {
@@ -64,7 +65,7 @@ public class BoardController {
 	public String teamissueDetail(int tiseq, Model model){
 		TissueDao dao = sqlSession.getMapper(TissueDao.class);
 		Tissue tissue = dao.teamissueDetail(tiseq);
-		List<Reply> reply = dao.teamCommentList(tiseq);
+		List<Reply> reply = dao.teamCommentOk(tiseq);
 		model.addAttribute("tissue", tissue);
 		model.addAttribute("reply",reply);
 		return "issue/teamissueDetail";
@@ -214,18 +215,24 @@ public class BoardController {
 		System.out.println(tiseq + rcontent + email);
 		String viewpage = "";
 		result = tservice.teamComment(tiseq, rcontent, email);
-		List insertResult = new ArrayList();
-		insertResult.add(tiseq);
-		insertResult.add(rcontent);
-		insertResult.add(email);
+		
 		if(result > 0) {
-			model.addAttribute("ajax",insertResult);
+			model.addAttribute("ajax","댓글 성공");
 			viewpage = "ajax/ajax";
 			
 		}else {
 			model.addAttribute("ajax","댓글 실패ㅠㅠ");
 			viewpage = "ajax/ajax";
 		}
+		return viewpage;
+	}
+	//팀이슈 댓글 비동기 뿌리기
+	@RequestMapping(value = "teamCommentOk.do",method = {RequestMethod.POST,RequestMethod.GET})
+	public String teamCommentOk(int tiseq,Model model) {
+		String viewpage = "ajax/ajax";
+		List<Reply> reply = tservice.teamCommentOk(tiseq);
+		JSONArray jsonlist = JSONArray.fromObject(reply);
+		model.addAttribute("ajax",jsonlist);
 		return viewpage;
 	}
 }

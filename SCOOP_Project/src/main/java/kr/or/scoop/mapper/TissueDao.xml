@@ -72,7 +72,7 @@ insert into tissue (tiseq,tseq,email,tititle,ticontent,isprocess, istbook, issee
 	insert into reply(replyseq, rcontent, email, rdate, tiseq)
   	values(replyseq_reply_seq.nextval, #{param2}, #{param3}, sysdate, #{param1})
 </insert>
-<select id="teamCommentList" resultType="kr.or.scoop.dto.Reply">
+<select id="teamCommentOk" resultType="kr.or.scoop.dto.Reply">
 	select * from reply r join member m on r.email=m.email where tiseq = #{tiseq}
 </select>
 <insert id="fileInsert">
