@@ -20,6 +20,16 @@
 </head>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript">
+$(function(){	
+	$('.pnameHover').hover(function(){
+		$(this).css("color","#117a8a");
+	},function(){
+		$(this).css("color","#2c9aa8");
+	});
+});
+	
+</script>
 <style>
 .newissue{
 	border-bottom: 1px solid #c8c8c8;
@@ -80,7 +90,7 @@
 			<div style="float: right;min-width:97%;">
 			<a href="teamissueDetail.do?tiseq=${ti.tiseq}">${ti.tititle}</a>			
 			<br>
-			<a href="projectDetail.do?tseq=${ti.tseq}">${ti.pname}</a>&nbsp;&nbsp;&nbsp;${ti.tidate}<br>
+			<a class="pnameHover" href="projectDetail.do?tseq=${ti.tseq}" style="color:#2c9aa8;">${ti.pname}</a>&nbsp;&nbsp;&nbsp;${ti.tidate}<br>
 			</div>
 			
 			</div>
@@ -92,7 +102,7 @@
 			<div style="float: right;min-width:97%;">
 			<a href="myissueDetail.do?piseq=${pi.piseq}">${pi.pititle}</a>
 			<br>
-			<a href="private.do">프라이빗 공간</a>&nbsp;&nbsp;&nbsp;${pi.pidate} 
+			<a class="pnameHover" href="private.do" style="color:#2c9aa8;">프라이빗 공간</a>&nbsp;&nbsp;&nbsp;${pi.pidate} 
 			</div>
 			</div>
 			</c:forEach>
