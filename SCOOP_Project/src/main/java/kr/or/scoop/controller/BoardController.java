@@ -179,4 +179,25 @@ public class BoardController {
 	
 		return viewpage;
 	}
+	@RequestMapping(value="searchIssue.do", method = {RequestMethod.POST,RequestMethod.GET})
+	public String searchIssue(String email,String word,Model model) {
+		int result = 0;
+		System.out.println(email + word);
+		String viewpage = "";
+		NoticeDao dao = sqlSession.getMapper(NoticeDao.class);
+		List<MyIssue> teamIssue = dao.searchTeamIssue(email, word);
+		System.out.println(teamIssue);
+		List<MyIssue> myIssue = dao.searchMyIssue(email, word);
+		model.addAttribute("teamIssue", teamIssue);
+		model.addAttribute("myIssue", myIssue);
+		if(result > 0) {
+			viewpage = "issue/searchIssue";
+			
+		}else {
+			viewpage = "issue/searchIssue";
+		}
+		
+		
+		return viewpage;
+	}
 }

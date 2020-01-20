@@ -20,4 +20,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			bncontent=#{bncontent}
 		where bnseq=#{bnseq}
 	</update>
+	<select id="searchTeamIssue" resultType="kr.or.scoop.dto.MyIssue">
+		 select * from tissue t join teampjt p on t.tseq = p.tseq where t.email=#{param1} and t.tititle like '%'||#{param2}||'%' or t.ticontent like '%'||#{param2}||'%'
+	</select>
+	<select id="searchMyIssue" resultType="kr.or.scoop.dto.MyIssue">
+		select * from myissue where email=#{param1} and pititle like '%'||#{param2}||'%' or picontent like '%'||#{param2}||'%'
+	</select>
 </mapper>
