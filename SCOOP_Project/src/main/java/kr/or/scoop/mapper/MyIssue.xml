@@ -22,11 +22,18 @@ select t.tseq,t.tititle,t.tidate,t.tiseq, t.isprocess,p.pname from tissue t join
 <!-- 북마크 -->
 <insert id="addBookMark">
 	insert into bookmark(piseq, email) 
-	values(#{piseq}, #{email})
+	values(#{param1}, #{param2})
 </insert>
 <delete id="delBookMark">
 	delete from bookmark 
-	where piseq=#{piseq} and email=#{email}
+	where piseq=#{param1} and email=#{param2}
 </delete>
+<select id="getBookMark" resultType="kr.or.scoop.dto.BookMark">
+	select nvl(b.piseq, 0) as piseq, b.email, nvl(b.tiseq, 0) as tiseq 
+	from bookmark b full outer join myissue m on b.piseq=m.piseq 
+                	full outer join tissue t on b.tiseq=t.tiseq 
+	where b.email = #{email}
+</select>
+
 
 </mapper>

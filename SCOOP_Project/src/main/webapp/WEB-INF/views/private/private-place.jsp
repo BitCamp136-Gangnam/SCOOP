@@ -125,18 +125,20 @@
 			<div class="col-sm-2 newissue">
 				${m.pidate}
 			</div>
-			<c:choose>
-				<c:when test="${m.ispibook==0}">
-					<div class="col-sm-1 newissue">
-						<i class="bookmark far fa-bookmark" id="bookmark" name="bookoff"></i>
-					</div>
-				</c:when>
-				<c:otherwise>
-					<div class="col-sm-1 newissue">
-						<i class="bookmark fas fa-bookmark" id="bookmark" name="bookon"></i>
-					</div>
-				</c:otherwise>
-			</c:choose>
+			<c:forEach items="${bookMark}" var="book">
+				<c:choose>
+					<c:when test="${m.piseq != book.piseq}">
+						<div class="col-sm-1 newissue">
+							<i class="bookmark far fa-bookmark" id="bookmark" name="bookoff"></i>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="col-sm-1 newissue">
+							<i class="bookmark fas fa-bookmark" id="bookmark" name="bookon"></i>
+						</div>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
 		</div>
 		</c:forEach>
             <!-- #/ container -->

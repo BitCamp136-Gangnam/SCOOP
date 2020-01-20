@@ -53,4 +53,13 @@ insert into tissue (tiseq,tseq,email,tititle,ticontent,isprocess, istbook, issee
 <delete id="banMember">
 	delete from tpmember where tseq=#{param1} and email=#{param2}
 </delete>
+<!-- 북마크 -->
+<insert id="addBookMark">
+	insert into bookmark(tiseq, email) 
+	values(#{param1}, #{param2})
+</insert>
+<delete id="delBookMark">
+	delete from bookmark 
+	where tiseq=#{param1} and email=#{param2}
+</delete>
 </mapper>

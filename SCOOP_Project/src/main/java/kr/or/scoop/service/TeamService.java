@@ -64,6 +64,8 @@ public class TeamService {
 		result = dao.updatePjt(teampjt);
 		return result;
 	}
+	
+	// 안씀
 	public int bookMark(int tiseq, int istbook, String email) {
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		

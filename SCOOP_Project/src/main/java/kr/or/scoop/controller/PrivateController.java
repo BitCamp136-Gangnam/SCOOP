@@ -30,9 +30,12 @@ public class PrivateController {
 	public String privateIn(HttpSession session, Model model) {
 		String email = "";
 		email = (String)session.getAttribute("email");
+		
 		System.out.println("private Controller email : " + email);
+		
 		MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
 		List<MyIssue> myissuelist = myissuedao.getMyissue(email);
+		
 		model.addAttribute("myissuelist", myissuelist);
 		System.out.println(myissuelist);
 		String viewpage = "private/private-place";
