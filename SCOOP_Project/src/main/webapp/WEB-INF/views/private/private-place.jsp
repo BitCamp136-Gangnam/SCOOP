@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 <head>
     <meta charset="utf-8">
@@ -137,7 +138,7 @@
 				${m.picontent}
 			</div>
 			<div class="col-sm-2 newissue">
-				${m.pidate}
+				${fn:substring(m.pidate,0,16)}
 			</div>
 			<c:set var="mark" value="true" />
 			<c:set var="loop" value="false" />
