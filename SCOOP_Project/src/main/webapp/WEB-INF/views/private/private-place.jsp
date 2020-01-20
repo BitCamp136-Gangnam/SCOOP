@@ -125,9 +125,14 @@
 			<div class="col-sm-2 newissue">
 				${m.pidate}
 			</div>
+			<c:set var="mark" value="true" />
 			<c:forEach items="${bookMark}" var="book">
+				<c:if test="${m.piseq == book.piseq}">
+					<c:set var="mark" value="true" />
+				</c:if>
+			</c:forEach>
 				<c:choose>
-					<c:when test="${m.piseq != book.piseq}">
+					<c:when test="${mark}">
 						<div class="col-sm-1 newissue">
 							<i class="bookmark far fa-bookmark" id="bookmark" name="bookoff"></i>
 						</div>
@@ -138,7 +143,7 @@
 						</div>
 					</c:otherwise>
 				</c:choose>
-			</c:forEach>
+			
 		</div>
 		</c:forEach>
             <!-- #/ container -->
