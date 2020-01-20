@@ -29,7 +29,7 @@ select t.tseq,t.tititle,t.tidate,t.tiseq, t.isprocess,p.pname from tissue t join
 	where piseq=#{param1} and email=#{param2}
 </delete>
 <select id="getBookMark" resultType="kr.or.scoop.dto.BookMark">
-	select nvl(b.piseq, 0) as piseq, b.email, nvl(b.tiseq, 0) as tiseq 
+	select nvl(b.piseq, 0) as piseq, nvl(b.tiseq, 0) as tiseq, b.email
 	from bookmark b full outer join myissue m on b.piseq=m.piseq 
                 	full outer join tissue t on b.tiseq=t.tiseq 
 	where b.email = #{email}
