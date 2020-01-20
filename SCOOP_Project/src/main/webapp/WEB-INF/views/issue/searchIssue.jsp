@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,16 +20,6 @@
 </head>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script type="text/javascript">
-$(function(){	
-	$('.pnameHover').hover(function(){
-		$(this).css("color","#117a8a");
-	},function(){
-		$(this).css("color","#2c9aa8");
-	});
-});
-	
-</script>
 <style>
 .newissue{
 	border-bottom: 1px solid #c8c8c8;
@@ -57,21 +46,24 @@ $(function(){
             <div class="container-fluid">
         <div class="card">
 		<div class="row" style="margin: 2%">
-				<h3>내가 작성한 이슈</h3>
-		</div>
-		<div class="row" style="margin-left: 2%;">
-			<ul class="nav nav-pills">
-			    <li class="nav-item">
-			      <a class="nav-link" href="myissue.do">내가 작성한 이슈</a>
-			    </li>
-			    <li class="nav-item">
-			      <a class="nav-link" href="#">내가 작성한 댓글</a>
-			    </li>
-		    </ul>
+				<h3>검색 결과</h3>
 		</div>
 		<hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
 		<div class="row" style="margin-left: 2%; margin-right: 2%">
-			<c:forEach items="${ti}" var="ti">
+			<c:forEach items="${myIssue}" var="my">
+			<div class="col-sm-12 newissue" >
+				<div class="iconify" data-icon="uil:file-lock-alt" data-inline="false" style="width:27px;height: auto;color:black"></div>
+							
+			<div style="float: right;min-width:97%;">
+			<a href="myissueDetail.do?piseq=${my.piseq}">${my.pititle}</a>			
+			<br>
+			<a class="pnameHover" href="private.do" style="color:#2c9aa8;">프라이빗 공간</a>&nbsp;&nbsp;&nbsp;${my.pidate}<br>
+			</div>
+			
+			</div>
+			</c:forEach>
+			
+			<c:forEach items="${teamIssue}" var="ti">
 			<div class="col-sm-12 newissue" >
 			<c:choose>
 				<c:when test="${ti.isprocess==0}">
@@ -91,22 +83,22 @@ $(function(){
 			<div style="float: right;min-width:97%;">
 			<a href="teamissueDetail.do?tiseq=${ti.tiseq}">${ti.tititle}</a>			
 			<br>
-			<a class="pnameHover" href="projectDetail.do?tseq=${ti.tseq}" style="color:#2c9aa8;">${ti.pname}</a>&nbsp;&nbsp;&nbsp;${fn:substring(ti.tidate,0,16)}<br>
+			<a class="pnameHover" href="projectDetail.do?tseq=${ti.tseq}" style="color:#2c9aa8;">${ti.pname}</a>&nbsp;&nbsp;&nbsp;${ti.tidate}<br>
 			</div>
 			
 			</div>
 			</c:forEach>
 			
-			<c:forEach items="${pi}" var="pi">
+<%-- 			<c:forEach items="${pi}" var="pi">
 			<div class="col-sm-12 newissue" >
 			<div class="iconify" data-icon="uil:file-lock-alt" data-inline="false" style="width:27px;height: auto;"></div>
 			<div style="float: right;min-width:97%;">
 			<a href="myissueDetail.do?piseq=${pi.piseq}">${pi.pititle}</a>
 			<br>
-			<a class="pnameHover" href="private.do" style="color:#2c9aa8;">프라이빗 공간</a>&nbsp;&nbsp;&nbsp;${fn:substring(pi.pidate,0,16)} 
+			<a class="pnameHover" href="private.do" style="color:#2c9aa8;">프라이빗 공간</a>&nbsp;&nbsp;&nbsp;${pi.pidate} 
 			</div>
 			</div>
-			</c:forEach>
+			</c:forEach> --%>
 		</div>
             <!-- #/ container -->
             </div>

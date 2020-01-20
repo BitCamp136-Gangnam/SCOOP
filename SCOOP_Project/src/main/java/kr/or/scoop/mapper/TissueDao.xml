@@ -75,5 +75,9 @@ insert into tissue (tiseq,tseq,email,tititle,ticontent,isprocess, istbook, issee
 <select id="teamCommentList" resultType="kr.or.scoop.dto.Reply">
 	select * from reply r join member m on r.email=m.email where tiseq = #{tiseq}
 </select>
+<insert id="fileInsert">
+	insert into filedrive(fdseq, fdcapa, fdname, email, fddate)
+  	values(fdseq_filedrive_seq.nextval, #{param2}, #{param1}, #{param3}, sysdate)
+</insert>
 
 </mapper>

@@ -69,12 +69,17 @@ $(function(){
 		console.log(da);
 		
 		$('#event-modal').on('show.bs.modal', function (event) {
-			var begin = document.getElementsByName('beginning');
-			console.log("모달이 떳니?????");
-			console.log(begin);
+			//alert(da);
+			//var begin = $(document.getElementsByName('beginning'));
+			//alert(begin.val());
+			console.log("-----");
+			console.log($("#beginning"));
+			/* console.log(begin.item); */
 			$("#beginning").attr('value',$("#soso").attr('value'));
+			console.log(event.delegateTarget.childNodes.item(1).childNodes.item(1).childNodes.item(3).childNodes);
+			console.log(event.delegateTarget.childNodes.item(1).childNodes.item(1).childNodes.item(3).childNodes.item(0));
+			console.log($("#beginning").val());
 			
-			$('#beginning').val(da);
 			console.log(this.children);
 			
 		});
@@ -92,11 +97,12 @@ $(function(){
 		console.log(du);
 		
 		$('#event-modal').on('show.bs.modal', function (event) {
+			/* alert(du); */
 			var pjtlist = '<c:out value="${pjtlist}"/>';
 			for (var i = 0; i < pjtlist.length; i++) {
 				$('#calTeam').append('<option value="'+pjtlist[i].tseq+'">'+pjtlist[i].pname+'</option>');
 			}
-			console.log(this.children.target);
+			/* console.log(this.children.target); */
 			$('#ending').val(du);
 			
 		});
