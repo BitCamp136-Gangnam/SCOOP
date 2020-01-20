@@ -1,15 +1,16 @@
 package kr.or.scoop.dto;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class Reply {
 	
 	private int replyseq;
 	private String rcontent;
 	private String email;
-	private Date rdate;
+	private Timestamp rdate;
 	private int tiseq;
 	private String name;
+	
 	public int getReplyseq(){
 		return replyseq;
 	}
@@ -28,12 +29,7 @@ public class Reply {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Date getRdate() {
-		return rdate;
-	}
-	public void setRdate(Date rdate) {
-		this.rdate = rdate;
-	}
+	
 	public int getTiseq() {
 		return tiseq;
 	}
@@ -46,6 +42,13 @@ public class Reply {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public Timestamp getRdate() {
+		return rdate;
+	}
+	public void setRdate(Timestamp rdate) {
+		this.rdate = rdate;
 	}
 	@Override
 	public String toString() {
