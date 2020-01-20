@@ -1,5 +1,6 @@
 package kr.or.scoop.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -187,20 +188,24 @@ public class BoardController {
 	
 	//팀이슈 댓글 비동기
 	@RequestMapping(value = "teamComment.do", method = {RequestMethod.POST,RequestMethod.GET})
-	public int teamCommentAjax(int tiseq,String rcontent,String email,Model model) {
+	public String teamCommentAjax(int tiseq,String rcontent,String email,Model model) {
 		int result = 0;	
 		System.out.println(tiseq + rcontent + email);
 		String viewpage = "";
 		result = tservice.teamComment(tiseq, rcontent, email);
+		List insertResult = new ArrayList();
+		insertResult.add(tiseq);
+		insertResult.add(rcontent);
+		insertResult.add(email);
 		if(result > 0) {
-			model.addAttribute("ajax","댓글 성공!");
+			model.addAttribute("ajax",insertResult);
 			viewpage = "ajax/ajax";
 			
 		}else {
 			model.addAttribute("ajax","댓글 실패ㅠㅠ");
 			viewpage = "ajax/ajax";
 		}
-		return result;
+		return viewpage;
 	}
 	
 	
