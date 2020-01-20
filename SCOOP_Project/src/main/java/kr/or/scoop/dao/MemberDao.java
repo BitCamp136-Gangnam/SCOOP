@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import kr.or.scoop.dto.FileDrive;
 import kr.or.scoop.dto.Member;
 import kr.or.scoop.dto.ProjectMemberlist;
 import kr.or.scoop.dto.Role;
@@ -55,5 +56,7 @@ public interface MemberDao {
 	
 	//프로필 사진
 	public String getProfile(String email);
-
+	
+	//파일함 불러오기
+	public List<FileDrive> getFileDrive(String email);
 }
