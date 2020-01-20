@@ -199,13 +199,13 @@ public class MemberController {
 		int count = memberdao.getCount(email);	
 		String img = memberdao.getProfile(email); 
 		List<FileDrive> filedrive = memberdao.getFileDrive(email);
-		model.addAttribute("img",img); 
-		model.addAttribute("role", role.getRname());
-		model.addAttribute("count", count);
-		model.addAttribute("file", filedrive);
+		session.setAttribute("img",img); 
+		session.setAttribute("role", role.getRname());
+		session.setAttribute("count", count);
+		session.setAttribute("file", filedrive);
 		List<Tpmember> pjtlist = noticeDao.getPJT(email);
 		if(pjtlist!=null) {
-			model.addAttribute("pjtlist", pjtlist);
+			session.setAttribute("pjtlist", pjtlist);
 			AlarmDao dao = sqlsession.getMapper(AlarmDao.class);
 			List<Alarm> alarm = dao.getAlarm((String)session.getAttribute("email"));
 			
