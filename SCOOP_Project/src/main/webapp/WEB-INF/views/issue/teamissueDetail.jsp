@@ -47,14 +47,22 @@ $(function(){
 						console.log(event);
 						$('#commentMain').empty();
 						$.each(event,function(index,object){
+							var src = "";
+		                     if(object.profile==null){
+		                        src = '/SCOOP/resources/images/avatar/avatar.png';
+		                     }else{
+		                        src = '/SCOOP/user/upload/'+object.profile;
+		                     }
+							
 						$('#commentMain').append(
 
-					            '<div class="row" style="margin-left: 3%;margin-right: 3%;">'+
-					            '<div class="col-sm-1" style="margin-top: 10px;margin-right:10px;padding-left:0;">'+
-					            '<img id="memberImage" class="img-circle" alt="멤버 프로필 사진 넣는 곳" src="resources/images/avatar/avatar.png" style="width:40px;height: auto;padding-top: 1%;margin-left: 10px;margin-right: 10px;"></div>'+
+					            '<div class="row" style="margin:2% 3% 2% 3%;">'+
+					            '<div class="col-sm-1" style="margin-top: 5px;margin-right:10px;padding-left:0;">'+
+					            '<img class="img-circle" alt="멤버 프로필 사진 넣는 곳" src="'+src+'" style="width:40px;height: 40px;padding-top: 1%;margin-left: 10px;margin-right: 10px;">'+
+					            '</div>'+
 					            '<div class="col-sm-10">'+
 					            '<div id="commentMain" style="margin: 3% 5% 3% 5%;" >'+
-					            '<div style="margin-bottom: 1%;">'+
+					            '<div style="margin-bottom: 1%;width: 260px;">'+
 					            '<span>'+object.name+'</span><span style="padding-left:3%"><i class="far fa-clock" style="color:#E71D36 "></i>'+object.rdate.year+"-"+object.rdate.day+"-"+object.rdate.date+" "+object.rdate.hours+":"+object.rdate.minutes+'</span>'+
 					            '<br><div>'+object.rcontent+'</div></div></div></div></div>'
 						           
@@ -134,14 +142,21 @@ $(function(){
             <div id="commentMain" style="height:450px;padding-left: 3%;padding-top: 5%;padding-right: 3%;padding-bottom: 5%;overflow: auto;margin:5%;">
             <c:forEach items="${reply}" var="r">
             
-            <div class="row" style="margin-left: 3%;margin-right: 3%;">
+            <div class="row" style="margin:2% 3% 2% 3%;">
             
-            <div class="col-sm-1" style="margin-top: 10px;margin-right:10px;padding-left:0;">
-            <img id="memberImage" class="img-circle" alt="멤버 프로필 사진 넣는 곳" src="resources/images/avatar/avatar.png" style="width:40px;height: auto;padding-top: 1%;margin-left: 10px;margin-right: 10px;">
+            <div class="col-sm-1" style="margin-top: 5px;margin-right:10px;padding-left:0;">
+            <c:choose>
+            <c:when test="${r.profile==null}">
+            <img class="img-circle" alt="프로필 사진" src="<c:url value="/resources/images/avatar/avatar.png"/>" style="width:40px;height: 40px;padding-top: 1%;margin-left: 10px;margin-right: 10px;">
+            </c:when>
+            <c:otherwise>
+            <img  class="img-circle" alt="프로필 사진 " src="<c:url value="/user/upload/${r.profile}"/>" style="width:40px;height:40px;padding-top: 1%;margin-left: 10px;margin-right: 10px;">
+            </c:otherwise>
+            </c:choose>
             </div>
             <div class="col-sm-10">
             <div id="commentMain" style="margin: 3% 5% 3% 5%;" >
-            <div style="margin-bottom: 1%;">
+            <div style="margin-bottom: 1%;width: 260px;">
             <span>${r.name}</span><span style="padding-left:3%"><i class="far fa-clock" style="color:#E71D36 "></i>${fn:substring(r.rdate,0,16)}</span>
             <br>
             <div>${r.rcontent}</div>
