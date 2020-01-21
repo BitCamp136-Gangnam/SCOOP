@@ -26,4 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="searchMyIssue" resultType="kr.or.scoop.dto.MyIssue">
 		select * from myissue where email=#{param1} and pititle like '%'||#{param2}||'%' or picontent like '%'||#{param2}||'%'
 	</select>
+	<delete id="deleteNotice">
+		delete notice where bnseq = #{bnseq}
+	</delete>
 </mapper>

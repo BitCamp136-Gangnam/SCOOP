@@ -252,4 +252,19 @@ public class BoardController {
 		model.addAttribute("ajax",jsonlist);
 		return viewpage;
 	}
+	
+	@RequestMapping(value="noticeDelete.do",method = RequestMethod.POST)
+	public String deleteNotice(int bnseq) {
+		int result = 0;
+		String viewpage;
+		
+		result = service.deleteNotice(bnseq);
+		if(result > 0) {
+			viewpage = "ajax/adminService";
+		}else {
+			viewpage = "redirect:/index.do";
+		}
+				
+		return viewpage;
+	}
 }
