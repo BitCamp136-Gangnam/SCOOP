@@ -44,8 +44,8 @@
 <script src="https://code.iconify.design/1/1.0.3/iconify.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-  <script src="sweetalert2.all.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+<script src="sweetalert2.all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
 <script type="text/javascript">
 $(document).ready(function($) {
 	$("#pricing_area").click(function(event){
@@ -444,9 +444,9 @@ return true;
          <input type="password" class="form-control" id="tbPwd" name="pwd" placeholder="Password" required>
         </div>
         <div class="form-group">
-        	<center>
+        	<ins>
         		<input type="submit" value="스쿱 시작하기" class="btn btn-primary" style="width: 300px;height:38px;text-align: center;padding-top: 5px;">
-    		</center>
+    		</ins>
         </div>
         <div>
         </div>
