@@ -52,51 +52,44 @@
 		</div>
 		<hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
 		<div class="row" style="margin-left: 2%; margin-right: 2%">
-			<div class="row col-sm-11 newissue" >
-				<div class="col-sm-3">협업 공간</div>
-				<div class="col-sm-4">글 제목</div>
-				<div class="col-sm-4">글쓴이</div>
+			<div class="row col-sm-12">
+				<div class="col-sm-3 newissue"><b>협업 공간</b></div>
+				<div class="col-sm-5 newissue"><b>글 제목</b></div>
+				<div class="col-sm-4 newissue"><b>글쓴이</b></div>
+				<div class="col-sm-1"></div>
 			</div>
+			
 		</div>
 		<c:forEach items="${bookMarkList}" var="blist">
-		<!-- 실험 -->
-		<c:set var="tiseq" value="false" />
-		<c:set var="piseq" value="false" />
-		<c:if test="${blist.tiseq != null}">
-			<c:set var="tiseq" value="true" />
-		</c:if>
-		<c:if test="${blist.piseq != null}">
-			<c:set var="piseq" value="true" />
-		</c:if>
 		<div class="row" style="margin-left: 2%; margin-right: 2%">
-			<div class="row col-sm-11 newissue" >
+			<div class="row col-sm-12" >
 			<c:choose>
-				<c:when test="${tiseq}">
-					<div class="col-sm-3"><!-- <i class="fas fa-angle-double-right" id="" name=""></i> -->
-						${blist.pname}
+				<c:when test="${blist.tiseq != null}">
+					<div class="col-sm-3 newissue"><!-- <i class="fas fa-angle-double-right" id="" name=""></i> -->
+						<a href="projectDetail.do?tseq=${blist.tseq}">${blist.pname}</a>
 					</div>
-					<div class="col-sm-4">
+					<div class="col-sm-5 newissue">
 						${blist.tititle}
 					</div>
-					<div class="col-sm-4">
+					<div class="col-sm-3 newissue">
 						${blist.tiname}
 					</div>
 				</c:when>
-				<c:when test="${piseq}">
-					<div class="col-sm-3" >
-						${blist.pname}
+				<c:when test="${blist.piseq != null}">
+					<div class="col-sm-3 newissue" >
+						<a href="projectDetail.do?tseq=${blist.tseq}">${blist.pname}</a>
 					</div>
-					<div class="col-sm-4" >
-						${blist.pititle}
+					<div class="col-sm-5 newissue" >
+						<a href="myissueDetail.do?piseq=${blist.piseq}">${blist.pititle}</a>
 					</div>
-					<div class="col-sm-4" >
+					<div class="col-sm-3 newissue" >
 						${blist.piname}
 					</div>
 				</c:when>
 			</c:choose>
-			</div>
-			<div class="col-sm-1" >
+			<div class="col-sm-1 newissue">
 				<i class="fas fa-bookmark" id="bookmark" name="bookon"></i>
+			</div>
 			</div>
 		</div>
 		</c:forEach>

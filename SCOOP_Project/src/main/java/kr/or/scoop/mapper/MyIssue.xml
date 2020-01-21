@@ -33,7 +33,7 @@ select r.replyseq, r.rcontent, r.email, r.rdate, t.tiseq, t.tititle from reply r
 </delete>
 <select id="getBookMark" resultType="kr.or.scoop.dto.BookMark">
 	select b.bseq, nvl(b.piseq, 0) as piseq, b.email, nvl(b.tiseq, 0) as tiseq, 
-       	   t.tititle, t.ticontent, p.pititle, p.picontent, tp.pname, m.name as piname, n.name as tiname
+       	   t.tititle, t.ticontent, p.pititle, p.picontent, tp.pname, m.name as piname, n.name as tiname, t.tseq
 	from bookmark b full outer join myissue p on b.piseq=p.piseq
                		full outer join tissue t on b.tiseq=t.tiseq
                 	full outer join teampjt tp on tp.email=b.email
