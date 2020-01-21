@@ -83,19 +83,30 @@
 		let data = { message : message
 						, cmd : "message"
 						, room : "${room}"
+						, img : "${sessionScope.img}"
 						 };
 		
 		wsocket.send(JSON.stringify(data));
+		console.log(data.img);
 		$("#message").val("");
 	}
 
 	function appendMessage(data) {
-		if (data.type == "my") {
+		console.log(data);
+		console.log(data.img);
+		var src = "";
+        if(data.img==''){
+           src = '/SCOOP/resources/images/avatar/avatar.png';
+        }else{
+           src = '/SCOOP/user/upload/'+data.img;
+        }
+        console.log(src);
+ 		if (data.type == "my") {
 			 let messageBox = "<div class='direct-chat-msg right clearfix'>"
 									+ "	<div class='direct-chat-info text-right'>"
-									+ "	<span class='direct-chat-name'>"+ ${sessionScope.memberName} +"</span>"
+									+ "	<span class='direct-chat-name'>"+ data.sender +"</span>"
 									+ "	</div>"
-									+ "	<div class='direct-chat-text text-right'>" + data.message + "</div>"
+									+ "	<div class='direct-chat-text' style='float:right;'>" + data.message + "</div>"
 									+ "</div>";
 									
 			$("#chatMessageArea").append(messageBox);
@@ -103,11 +114,16 @@
 			$("#chatMessageArea").append( "<div class='center-message clearfix'>" + data.message + "</div>");
 			setChattingMember(data.users);
 		} else {
-			let messageBox = "<div class='direct-chat-msg clearfix'>"
+			let messageBox = "<div class='direct-chat-msg clearfix row'>"
+									+ "<div class = 'col-sm-1'>"
+									+'<img class="img-circle" alt="멤버 프로필 사진 넣는 곳" src="'+src+'" style="float:left;width:40px;height: 40px;padding-top: 1%;margin-left: 10px;margin-right: 10px;">'
+									+ "</div>"
+									+ "<div class = 'col-sm-11'>"
 									+ "	<div class='direct-chat-info'>"
-									+ "	<span class='direct-chat-name pull-left'>"+ ${sessionScope.memberName} +"</span>"
+									+ "	<span class='direct-chat-name pull-left'>"+ data.sender +"</span>"
 									+ "	</div>"
 									+ "	<div class='direct-chat-text'>" + data.message + "</div>"
+									+ "</div>"
 									+ "</div>";
 									
 			$("#chatMessageArea").append(messageBox);
