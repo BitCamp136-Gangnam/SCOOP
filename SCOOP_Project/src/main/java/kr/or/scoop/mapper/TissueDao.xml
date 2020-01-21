@@ -88,5 +88,9 @@ insert into tissue (tiseq,tseq,email,tititle,ticontent,isprocess, istbook, issee
 	insert into filedrive(fdseq, fdcapa, fdname, email, fddate, tseq)
   	values(fdseq_filedrive_seq.nextval, #{param3}, #{param2}, #{param4, jdbcType=VARCHAR}, sysdate, #{param1, jdbcType=INTEGER})
 </insert>
+<insert id="myFileInsert">
+	insert into pfiledrive(pfdseq, pfdcapa, pfdname, email, pfddate)
+  	values(pfdseq_pfiledrive_seq.nextval, #{param2}, #{param1}, #{param3, jdbcType=VARCHAR}, sysdate)
+</insert>
 
 </mapper>

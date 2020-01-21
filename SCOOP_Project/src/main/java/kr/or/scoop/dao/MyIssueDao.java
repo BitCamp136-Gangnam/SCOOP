@@ -4,6 +4,7 @@ import java.util.List;
 
 import kr.or.scoop.dto.BookMark;
 import kr.or.scoop.dto.MyIssue;
+import kr.or.scoop.dto.Reply;
 import kr.or.scoop.dto.Tissue;
 
 public interface MyIssueDao {
@@ -18,6 +19,9 @@ public interface MyIssueDao {
 	
 	//내가 작성한 팀 이슈 리스트
 	public List<MyIssue> MyWriteTiisueList(String email);
+	
+	//내가 작성한 댓글 리스트
+	public List<Reply> MyWriteReplyList(String email);
 	
 	//북마크
 	public int addBookMark(int piseq, String email);

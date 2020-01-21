@@ -150,7 +150,7 @@ public class MemberController {
 
 	// 일반회원 로그인
 	@RequestMapping(value = "login.do", method = RequestMethod.POST)
-	public String login(String email, String pwd, HttpSession session) {
+	public String login(String email, String pwd, HttpSession session, HttpServletResponse response) {
 		MemberDao dao = sqlsession.getMapper(MemberDao.class);
 		
 		int result = 0;
@@ -161,7 +161,7 @@ public class MemberController {
 			session.setAttribute("email", email);
 			session.setAttribute("kind", "normal");
 		} else {
-			viewpage = "redirect:/index.do";
+			viewpage = "ajax/loginFail";
 		}
 
 		return viewpage;

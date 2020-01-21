@@ -122,30 +122,30 @@
 		</div>
 		<hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
 			<div class="row" style="margin-left: 2%; margin-right: 2%">
-				<div class="col-sm-2 newissue" >
+				<div class="col-sm-3 newissue" >
 					제목
 				</div>
-				<div class="col-sm-7 newissue">
+				<div class="col-sm-6 newissue">
 				내용
 				</div>
 				<div class="col-sm-2 newissue">
 				날짜
 				</div>
-				<div class="col-sm-1 newissue">
+				<div class="col-sm-1 newissue" style="text-align: center">
 				북마크
 				</div>
 			</div>
 		<c:forEach items="${myissuelist}" var="m">
 		<div class="row" style="margin-left: 2%; margin-right: 2%">
 			<input type="hidden" name="piseq" value="${m.piseq}" /> 
-			<div class="col-sm-2 newissue" >
-				${m.pititle}
+			<div class="col-sm-3 newissue" >
+				<a href="myissueDetail.do?piseq=${m.piseq}">${m.pititle}</a>
 			</div>
-			<div class="col-sm-7 newissue">
-				${m.picontent}
+			<div class="col-sm-6 newissue">
+				<a href="myissueDetail.do?piseq=${m.piseq}">${m.picontent}</a>
 			</div>
 			<div class="col-sm-2 newissue">
-				${fn:substring(m.pidate,0,16)}
+				<a href="myissueDetail.do?piseq=${m.piseq}">${fn:substring(m.pidate,0,16)}</a>
 			</div>
 			<c:set var="mark" value="true" />
 			<c:set var="loop" value="false" />
@@ -158,12 +158,12 @@
 			</c:forEach>
 				<c:choose>
 					<c:when test="${mark}">
-						<div class="col-sm-1 newissue">
+						<div class="col-sm-1 newissue" style="text-align: center">
 							<i class="bookmark far fa-bookmark" id="bookmark" name="bookoff"></i>
 						</div>
 					</c:when>
 					<c:otherwise>
-						<div class="col-sm-1 newissue">
+						<div class="col-sm-1 newissue" style="text-align: center">
 							<i class="bookmark fas fa-bookmark" id="bookmark" name="bookon"></i>
 						</div>
 					</c:otherwise>
