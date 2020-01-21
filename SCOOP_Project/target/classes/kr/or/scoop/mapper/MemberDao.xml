@@ -107,6 +107,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select profile from member where email = #{email}
 	</select>
 	<select id="getFileDrive" resultType="kr.or.scoop.dto.FileDrive">
-		select * from filedrive where email=#{email}
+		select * from filedrive where email=#{email,jdbcType=VARCHAR}
 	</select>
 </mapper>

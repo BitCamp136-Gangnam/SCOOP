@@ -51,15 +51,52 @@
 				<h3>북마크</h3>
 		</div>
 		<hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
-		
-		<c:forEach items="${bookMarkList}" var="bList">
 		<div class="row" style="margin-left: 2%; margin-right: 2%">
-			<div class="col-sm-11 newissue" >
-			아이콘 + ${blist.title}<br>
-			여기에 프로젝트명 그리고 작성자
+			<div class="row col-sm-11 newissue" >
+				<div class="col-sm-3">협업 공간</div>
+				<div class="col-sm-4">글 제목</div>
+				<div class="col-sm-4">글쓴이</div>
 			</div>
-			<div class="col-sm-1 newissue" >
-			북마크아이콘자리
+		</div>
+		<c:forEach items="${bookMarkList}" var="blist">
+		<!-- 실험 -->
+		<c:set var="tiseq" value="false" />
+		<c:set var="piseq" value="false" />
+		<c:if test="${blist.tiseq != null}">
+			<c:set var="tiseq" value="true" />
+		</c:if>
+		<c:if test="${blist.piseq != null}">
+			<c:set var="piseq" value="true" />
+		</c:if>
+		<div class="row" style="margin-left: 2%; margin-right: 2%">
+			<div class="row col-sm-11 newissue" >
+			<c:choose>
+				<c:when test="${tiseq}">
+					<div class="col-sm-3"><!-- <i class="fas fa-angle-double-right" id="" name=""></i> -->
+						${blist.pname}
+					</div>
+					<div class="col-sm-4">
+						${blist.tititle}
+					</div>
+					<div class="col-sm-4">
+						${blist.tiname}
+					</div>
+				</c:when>
+				<c:when test="${piseq}">
+					<div class="col-sm-3" >
+						${blist.pname}
+					</div>
+					<div class="col-sm-4" >
+						${blist.pititle}
+					</div>
+					<div class="col-sm-4" >
+						${blist.piname}
+					</div>
+				</c:when>
+			</c:choose>
+			</div>
+			<div class="col-sm-1" >
+				<i class="fas fa-bookmark" id="bookmark" name="bookon"></i>
 			</div>
 		</div>
 		</c:forEach>
