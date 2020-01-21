@@ -95,5 +95,11 @@ public class TeamService {
 		
 		return result;
 	}
+	public int myFileInsert(String pfdname, long pfdcapa, String email) {
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		int result = dao.myFileInsert(pfdname, pfdcapa, email);
+		
+		return result;
+	}
 	
 }
