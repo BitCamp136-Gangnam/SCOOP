@@ -46,7 +46,7 @@
 	    		})
 	    	location.href="userindex.do";
 	    },
-	    error: function(err) {
+	    error: function(request, err) {
 	    	Swal.fire({
 	    		  title: "네이버 로그인 실패",
 	    		  text: "로그인 중 에러가 발생했습니다",
