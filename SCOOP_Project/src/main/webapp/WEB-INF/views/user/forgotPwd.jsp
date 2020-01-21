@@ -30,10 +30,10 @@
 								class="form-control" id="pwdchk" name="pwdchk" placeholder="Password" required>
 						</div>
 						<div class="form-group">
-							<center>
+							<ins>
 								<input type="submit" value="비밀번호 변경하기" class="btn btn-primary"
 									style="width: 300px; height: 38px; text-align: center; padding-top: 5px;">
-							</center>
+							</ins>
 						</div>
 
 					</form>
