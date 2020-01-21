@@ -434,6 +434,7 @@ return true;
         <div class="form-group mb-4">
          <label>Email address</label>
          <input type="text" class="form-control signup" id="mail" name="email" placeholder="E-mail@company.com" required>
+         <button type="button" id="scoop_input" class="btn btn-primary"><spring:message code="register" /></button>
         </div>
         <div class="form-group mb-4">
          <label>Name</label>
@@ -497,7 +498,7 @@ return true;
          <div class="form-group">
            <label>Email</label>
            <input type="text" name="email" id="emailTo" placeholder="E-mail@company.com" class="form-control">
-        <button type="button" id="scoop_input" data-toggle="modal" data-target="#signUp"class="btn btn-primary"><spring:message code="register" /></button>     
+     	   <button type="button" id="scoop_input" data-toggle="modal" data-target="#signUp"class="btn btn-primary"><spring:message code="register" /></button>     
          </div>
             <span><spring:message code="login.content" /></span>
             <a href="" data-toggle="modal" data-target="#login"style="color:#cf455c;"><spring:message code="login.main" /></a>    

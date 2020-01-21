@@ -535,5 +535,12 @@ public class MemberController {
 		return "ajax/naverCertified";
 	}
 	
+	// 이메일 인증 확인
+	@RequestMapping(value = "/emailCheck.do")
+	public String emailCheck() {
+		System.out.println("return certified");
+		return "ajax/naverCertified";
+	}
+	
 	
 }
