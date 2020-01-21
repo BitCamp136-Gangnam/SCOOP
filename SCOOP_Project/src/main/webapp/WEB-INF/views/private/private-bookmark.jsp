@@ -142,6 +142,7 @@
 
     <script src="<c:url value="/resources/js/dashboard/dashboard-1.js"/>"></script>
 <script type="text/javascript">
+	/* 북마크 제거 */
 	$(function(){
 		$('.bookmark').click(function(){
 			console.log('click fnc');
