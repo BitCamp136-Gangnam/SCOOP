@@ -35,6 +35,8 @@
  var bnseq = new Array();
  var bntitle = new Array();
  var bncontent = new Array();
+
+
 </script>
 <body>
 	
@@ -135,6 +137,9 @@
 					<button type="button" class="btn btn-secondary"
 						style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;"
 						data-target="#noticeEdit" data-toggle="modal">수정</button>
+					<button type="button" class="btn btn-secondary" id="del"
+						style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;"
+						>삭제</button>
 						</c:when>
 						</c:choose>
 						<button type="button" class="btn btn-secondary"
@@ -237,16 +242,51 @@ function roll(a) {
                       
                   	  if(elt == a){
                       	console.log(elt);
+                      	console.log(a);
                       	console.log(bntitle[i]);
                       	console.log(bncontent[i]);
-                      	$("#title").attr("value",bntitle[a-1]);
-                        $("#content").html(bncontent[a-1]);		
-                      	$("#ntitle").attr("value",bntitle[a-1]);
-                        $("#ncontent").html(bncontent[a-1]);
+
+                      	
+                      	$("#title").attr("value",bntitle[i]);
+                        $("#content").html(bncontent[i]);		
+                      	$("#ntitle").attr("value",bntitle[i]);
+                        $("#ncontent").html(bncontent[i]);
                         $("#nseq").attr("value",a);		
                         seq = a;
-                       }
-                      
+						var bnseq = a;
+						console.log("b : " + bnseq);
+						$("#del").click(function(){
+							 $.ajax({
+								    url:'noticeDelete.do', //request 보낼 서버의 경로
+								    type:'post', // 메소드(get, post, put 등)
+								    data:{
+								    	'bnseq':bnseq
+								    	}, //보낼 데이터
+								    
+								    success: function(data) {
+								   	Swal.fire(
+								  		  '게시물 삭제에 성공했습니다',
+								  		  '게시물 삭제 성공',
+								  		  'success'
+								  		)
+								  		window.setTimeout(function() {
+								  		location.href='notice.do';	
+								  		}, 1500);
+								    		
+								    },
+								    error: function(err) {
+								    	Swal.fire({
+								    		  title: "변경 실패",
+								    		  text: "변경 실패",
+								    		  icon: "error",
+								    		  button: "확인"
+								    		})
+								    }
+								});
+							})
+						
+
+                        }                  
                   });
                   
                 }

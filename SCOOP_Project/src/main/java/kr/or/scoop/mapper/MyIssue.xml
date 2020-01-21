@@ -32,11 +32,15 @@ select r.replyseq, r.rcontent, r.email, r.rdate, t.tiseq, t.tititle from reply r
 	where piseq=#{param1} and email=#{param2}
 </delete>
 <select id="getBookMark" resultType="kr.or.scoop.dto.BookMark">
-	select b.bseq, nvl(b.piseq, 0) as piseq, nvl(b.tiseq, 0) as tiseq, b.email
-	from bookmark b full outer join myissue m on b.piseq=m.piseq 
-                	full outer join tissue t on b.tiseq=t.tiseq 
+	select b.bseq, nvl(b.piseq, 0) as piseq, b.email, nvl(b.tiseq, 0) as tiseq, 
+       	   t.tititle, t.ticontent, p.pititle, p.picontent, tp.pname, m.name as piname, n.name as tiname
+	from bookmark b full outer join myissue p on b.piseq=p.piseq
+               		full outer join tissue t on b.tiseq=t.tiseq
+                	full outer join teampjt tp on tp.email=b.email
+                	full outer join member m on m.email=p.email
+                	full outer join member n on n.email=t.email
 	where b.email = #{email}
-	order by b.bseq asc
+	order by bseq asc
 </select>
 
 

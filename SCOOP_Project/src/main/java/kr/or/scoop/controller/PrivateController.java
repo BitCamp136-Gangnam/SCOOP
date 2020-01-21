@@ -53,26 +53,19 @@ public class PrivateController {
 	}
 	
 	//북마크 공간 이동
-	@RequestMapping(value = "/privatebookmark.do",method = RequestMethod.GET)
+	@RequestMapping(value = "/bookmark.do",method = RequestMethod.GET)
 	public String bookmark(HttpSession session, Model model) {
 		String email = (String)session.getAttribute("email");
 		MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
 		List<BookMark>bookMarkList = myissuedao.getBookMark(email);
 		
 		model.addAttribute("bookMarkList", bookMarkList);
-		System.out.println(bookMarkList);
+
+		for(int i = 0; i < bookMarkList.size(); i++) {
+			System.out.println(bookMarkList);
+		}
 		
 		
 		return "private/private-bookmark";
 	}
-		
-		
-	
-	
-	 @RequestMapping(value = "/bookmark.do",method = RequestMethod.GET) public
-	 String bookMarkList() { 
-		 
-		 
-		 return "private/private-bookmark";
-	 }
 }

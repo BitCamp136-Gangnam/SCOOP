@@ -379,7 +379,7 @@ return true;
 							        	    		  icon: "success",
 							        	    		  button: "확인"
 							        	    		})
-							        	    	location.href="userindex.do"
+							        	    	location.href="userindex.do";
 							        	    },
 							        	    error: function(err) {
 							        	    	Swal.fire({
