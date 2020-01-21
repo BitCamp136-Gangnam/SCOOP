@@ -81,7 +81,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 		String sendUser = getAttribute(session, "user");
 		JSONObject json = new JSONObject().put("message", data.getString("message"))
 																.put("sender", sendUser);
-
+		json.put("img", data.getString("img"));
 		ChatRoom room = roomInfos.get(data.get("room"));
 		for (Map.Entry<String, WebSocketSession> userInfo : room.getUsers().entrySet()) {
 			String type = sendUser.equals(userInfo.getKey()) ? "my" : "other";

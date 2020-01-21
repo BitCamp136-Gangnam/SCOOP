@@ -25,7 +25,7 @@ input::placeholder {
 <meta name="google-signin-client_id" content="47797892299-i06tt9qhbs15g8mn89ncu1isa1eneql8.apps.googleusercontent.com">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script src="https://apis.google.com/js/platform.js?onload=loadAuthClient" async defer></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
 <!-- <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
@@ -719,7 +719,7 @@ span {
                            </c:when>
                            <c:when test="${kind=='google'}">
                               <li><a href="#" onclick="signOut();"><i
-                                    class="icon-key" ng-app="app" ui-view id="app"></i> <span>로그아웃</span></a></li>
+                                    class="icon-key" ></i> <span>로그아웃</span></a></li>
                            </c:when>
                            <c:when test="${kind=='naver'}">
                               <li><a href="logout.do"><i class="icon-key"></i> <span>로그아웃</span></a></li>
@@ -1450,15 +1450,39 @@ $('.menli').keydown(function(event) {
 		        gapi.auth2.init();
 		    });
 		 }
-
+	 
 	function signOut() {
-		document.location.href = "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost/application-name/logoutUser";
+		window.gapi.auth2.init({
+			client_id: "47797892299-i06tt9qhbs15g8mn89ncu1isa1eneql8.apps.googleusercontent.com",
+			scope,
+			}).then(() => {
+		        console.log('signed in', gapi.auth2.getAuthInstance().isSignedIn.get());
+		        var auth2 = gapi.auth2.getAuthInstance();
+		        console.log(auth2);				
+				auth2.disconnect();
+				console.log("오이오이");
+				location.href="logout.do";
+		        /* window.gapi.auth2.signOut().then(function() {
+					console.log("google logout");			
+				});
+				auth2.disconnect(); */
+		      });
+		/* console.log(gapi.auth2);
 		var auth2 = gapi.auth2.getAuthInstance();
 		auth2.signOut().then(function() {
-			location.href = "logout.do";
+			console.log("google logout");			
 		});
-		auth2.disconnect();
+		auth2.disconnect(); */
 	}
+	function googleSignOut() { 
+		var auth2 = gapi.auth2.getAuthInstance();
+		auth2.signOut().then(function () {
+			
+		});
+		
+		console.log("오이오이");
+	}
+
 
 	function onLoad() {
 		gapi.load('auth2', function() {
@@ -1481,5 +1505,4 @@ $('.menli').keydown(function(event) {
 										'cursor: pointer;color:#535359;font-size: 18px;padding-bottom: 12px;');
 					});
 	
-
 </script>

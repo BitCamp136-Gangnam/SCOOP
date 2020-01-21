@@ -20,42 +20,8 @@
 
 </head>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript">
-  var naver_id_login = new naver_id_login("UQIzvQsqqo7IfCBE1GH1", "http://localhost:8090/Scoop_Project/index.jsp");
-  // 접근 토큰 값 출력
-  console.log("토큰값 : "+ naver_id_login.oauthParams.access_token);
-  // 네이버 사용자 프로필 조회
-  naver_id_login.get_naver_userprofile("naverSignInCallback()");
-  // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
-  function naverSignInCallback() {
-    console.log(naver_id_login.getProfileData('email'));
-    console.log(naver_id_login.getProfileData('name'));
-    $.ajax({
-	    url:'naverLogin.do', //request 보낼 서버의 경로
-	    type:'post', // 메소드(get, post, put 등)
-	    data:{'email':naver_id_login.getProfileData('email'),
-	    	'name':naver_id_login.getProfileData('name')
-	    	}, //보낼 데이터
-	    success: function(data) {
-	    	Swal.fire({
-	    		  title: "네이버 로그인 성공",
-	    		  text: "WELCOME",
-	    		  icon: "success",
-	    		  button: "확인"
-	    		})
-	    	location.href="userindex.do";
-	    },
-	    error: function(err) {
-	    	Swal.fire({
-	    		  title: "네이버 로그인 실패",
-	    		  text: "로그인 중 에러가 발생했습니다",
-	    		  icon: "error",
-	    		  button: "확인"
-	    		})
-	    }
-	});
-  }
+  
 </script>
 <style>
 .newissue{
