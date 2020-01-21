@@ -199,10 +199,13 @@ public class MemberController {
 		int count = memberdao.getCount(email);	
 		String img = memberdao.getProfile(email); 
 		List<FileDrive> filedrive = memberdao.getFileDrive(email);
+		Member member = memberdao.getMember(email);
+		String name = member.getName();
 		session.setAttribute("img",img); 
 		session.setAttribute("role", role.getRname());
 		session.setAttribute("count", count);
 		session.setAttribute("file", filedrive);
+		session.setAttribute("memberName", name);
 		List<Tpmember> pjtlist = noticeDao.getPJT(email);
 		if(pjtlist!=null) {
 			session.setAttribute("pjtlist", pjtlist);
