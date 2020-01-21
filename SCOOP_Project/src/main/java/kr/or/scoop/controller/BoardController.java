@@ -188,6 +188,25 @@ public class BoardController {
 		return viewpage;
 	}
 	
+	@RequestMapping("delbook.do")
+	public String delBookMark(HttpSession session, int piseq, int tiseq) {
+		String email = (String)session.getAttribute("email");
+		String viewpage = "";
+		int result = 0;
+		
+		MyIssueDao pidao = sqlSession.getMapper(MyIssueDao.class);
+		TissueDao tidao = sqlSession.getMapper(TissueDao.class);
+		
+		if(tiseq > 0) {
+			result = tidao.delBookMark(tiseq, email);
+		}else if(piseq > 0) {
+			result = pidao.delBookMark(piseq, email);
+		}
+		viewpage = "redirect:bookmark.do";
+		
+		return viewpage;
+	}
+	
 	@RequestMapping(value="noticeEdit.do" , method=RequestMethod.POST)
 	public String noticeUpdateCheck(int bnseq,Notice notice,Model model) {
 		int result = 0;
