@@ -466,7 +466,7 @@ public class MemberController {
 					}finally {
 						try {
 							fs.write(multifile.getBytes());
-							System.out.println(multifile.getBytes());
+							System.out.println(multifile.getBytes()[0]);
 							fs.close();
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
