@@ -574,13 +574,13 @@ span {
          </div>
       </div>
       <div class="header-left">
-         <div class="input-group icons">
+         <div class="input-group icons" style="width: 350px;">
             <div class="input-group-prepend">
                <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3"
                   id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
             </div>
             <form action="searchIssue.do" id="searchSubmit">
-            <input type="search" id="sIssue" name="word" class="form-control" placeholder="검색하세요"
+            <input type="search" id="sIssue" name="word" class="form-control" placeholder="검색 후 Enter치세요"
                aria-label="Search">
             <input type="hidden" id="searchEmail" name="email" value=<%=session.getAttribute("email")%>>
             </form>
