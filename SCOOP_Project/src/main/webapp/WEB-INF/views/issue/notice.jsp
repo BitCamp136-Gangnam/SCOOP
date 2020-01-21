@@ -84,7 +84,7 @@
           </c:choose>
 			</div>
 			
-			<div class="col-sm-8 newissue" >
+			<div class="col-sm-7 newissue" >
 			<c:choose>
            <c:when test="${fn:length(n.bncontent) > 56}">
             <c:out value="${fn:substring(n.bncontent,0,55)}"/>...
@@ -95,8 +95,8 @@
           </c:choose>
 			</div>
       
-			<div class="col-sm-1 newissue">
-			${n.bntime}
+			<div class="col-sm-2 newissue">
+			${fn:substring(n.bntime,0,16)}
 			</div>
 		</div>
 			</a>
