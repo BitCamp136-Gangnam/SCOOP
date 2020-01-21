@@ -21,6 +21,7 @@
 </head>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
 <style>
 .newissue{
 	border-bottom: 1px solid #c8c8c8;
@@ -64,20 +65,23 @@
 		<div class="row" style="margin-left: 2%; margin-right: 2%">
 			<div class="row col-sm-12" >
 			<c:choose>
-				<c:when test="${blist.tiseq != null}">
+				<c:when test="${blist.tiseq != 0}">
 					<div class="col-sm-3 newissue"><!-- <i class="fas fa-angle-double-right" id="" name=""></i> -->
 						<a href="projectDetail.do?tseq=${blist.tseq}">${blist.pname}</a>
 					</div>
 					<div class="col-sm-5 newissue">
-						${blist.tititle}
+						<a href="teamissueDetail.do?tiseq=${blist.tiseq}">${blist.tititle}</a>
 					</div>
 					<div class="col-sm-3 newissue">
 						${blist.tiname}
 					</div>
+					<div class="col-sm-1 newissue">
+						<i class="fas fa-times bookmark" id="timark" name="${blist.tiseq}"></i>
+					</div>
 				</c:when>
-				<c:when test="${blist.piseq != null}">
+				<c:when test="${blist.piseq != 0}">
 					<div class="col-sm-3 newissue" >
-						<a href="projectDetail.do?tseq=${blist.tseq}">${blist.pname}</a>
+						<a href="private.do">프라이빗 공간</a>
 					</div>
 					<div class="col-sm-5 newissue" >
 						<a href="myissueDetail.do?piseq=${blist.piseq}">${blist.pititle}</a>
@@ -85,11 +89,12 @@
 					<div class="col-sm-3 newissue" >
 						${blist.piname}
 					</div>
+					<div class="col-sm-1 newissue">
+						<i class="fas fa-times bookmark" id="pimark" name="${blist.piseq}"></i>
+					</div>
 				</c:when>
 			</c:choose>
-			<div class="col-sm-1 newissue">
-				<i class="fas fa-bookmark" id="bookmark" name="bookon"></i>
-			</div>
+			
 			</div>
 		</div>
 		</c:forEach>
@@ -136,6 +141,54 @@
     <script src="<c:url value="/resources/plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"/>"></script>
 
     <script src="<c:url value="/resources/js/dashboard/dashboard-1.js"/>"></script>
+<script type="text/javascript">
+	$(function(){
+		$('.bookmark').click(function(){
+			console.log('click fnc');
+		 	let seq = $(this).attr('name');
+			let id = $(this).attr('id');
+			let tiseq; let piseq;
+			console.log('seq : ' + seq + " / id : " + id);
 
+			if(id == "timark"){
+				console.log('if문 ti');
+				tiseq = seq;
+				piseq = -1;
+			}else if(id == "pimark"){
+				console.log('if문 pi');
+				piseq = seq;
+				tiseq = -1;
+			}
+
+			seq = {"tiseq":tiseq, "piseq":piseq};
+			console.log("data : " + seq);
+			console.log("data : " + seq.tiseq + " / piseq : " + seq.piseq);
+
+			$.ajax({
+				url : "delbook.do",
+				type : "POST",
+				data : seq,
+				success : function(data){
+					console.log('성공');
+					Swal.fire({
+			    		  title: "북마크 삭제",
+			    		  text: "북마크 삭제",
+			    		  icon: "success",
+			    		  button: "확인"
+			    	})
+				},
+				error : function(err){
+					console.log('실패');
+					Swal.fire({
+			    		  title: "북마크 취소",
+			    		  text: "북마크 취소",
+			    		  icon: "info",
+			    		  button: "확인"
+			    	})
+				}
+			});
+		})
+	});
+</script>
 </body>
 </html>
