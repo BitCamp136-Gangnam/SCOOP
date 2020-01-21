@@ -95,6 +95,7 @@ public class MemberService {
 	public int naverIdCheck(String email, String name) {
 		int result = 0;
 		MemberDao dao = sqlsession.getMapper(MemberDao.class);
+		System.out.println(email+"/"+name);
 		result = dao.googleIdCheck(email, name);
 		if(result>0) {
 			System.out.println("네이버아이디 존재");
