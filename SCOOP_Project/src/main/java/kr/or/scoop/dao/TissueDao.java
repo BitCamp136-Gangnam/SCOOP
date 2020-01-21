@@ -30,7 +30,7 @@ public interface TissueDao {
 	public int addBookMark(int tiseq, String email);
 	public int delBookMark(int tiseq, String email);
 	
-	public int fileInsert(String fdname, long fdcapa, String email);
+	public int fileInsert(int tseq, String fdname, long fdcapa, String email);
 	
 	
 }

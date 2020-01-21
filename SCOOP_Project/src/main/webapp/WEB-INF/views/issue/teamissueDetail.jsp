@@ -22,6 +22,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript">
 $(function(){
+	$('#commentMain').scrollTop($('#commentMain')[0].scrollHeight);
 	$('#teamCommentBtn').click(function(){
 		var tiseqq = ${tissue.tiseq};
 		console.log("들어오니");
@@ -58,6 +59,8 @@ $(function(){
 					            '<br><div>'+object.rcontent+'</div></div></div></div></div>'
 						           
 							);
+						$('#teamComment').val("");
+						$('#commentMain').scrollTop($('#commentMain')[0].scrollHeight);
 						
 							console.log(object)
 						})

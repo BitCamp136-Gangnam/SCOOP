@@ -135,6 +135,8 @@ public class TeamController {
 			String path = "";
 			List<String> filenames = new ArrayList<String>();
 			List<Long> filesizes = new ArrayList<Long>();
+			String email = (String)session.getAttribute("email");
+			int tseq = Integer.parseInt(selectTeam);
 			 if(files != null && files.length > 0) {
 				 //업로드한 파일이 하나라도 있다면
 				 for(MultipartFile mutifile : files) {
@@ -149,7 +151,7 @@ public class TeamController {
 						 fs.write(mutifile.getBytes());
 						 fs.close();
 					 }
-					 teamservice.fileInsert(filename, fsize, (String) session.getAttribute("email"));
+					 teamservice.fileInsert(tseq, filename, fsize, email);
 					 filenames.add(filename);
 					 filesizes.add(fsize);
 				 }

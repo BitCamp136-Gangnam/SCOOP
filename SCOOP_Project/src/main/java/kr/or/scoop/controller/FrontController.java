@@ -37,4 +37,18 @@ public class FrontController {
 		return "index";
 	}
 	
+	@RequestMapping("/calendar2.do")
+	public String object(@RequestParam(required = false, name="lang") String language, HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("calendar 왔냐?");
+		if(language == null) {
+			language = "ko";
+		}
+		
+		Locale locale  = new Locale(language);
+		System.out.println("locale : " + locale + "\n language : " + language);
+		localeResolver.setLocale(request, response, locale);
+		
+		return "sidebar/calendar";
+	}
+	
 }
