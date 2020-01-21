@@ -42,8 +42,10 @@
 		connect();
 		$('#message').keypress(function(event) {
 			var keycode = (event.keyCode ? event.keyCode : event.which);
-			if (keycode == '13')
+			if (keycode == '13'){
 				send($('#message').val());
+				window.scrollTo(500, 500);
+			}
 
 			event.stopPropagation();
 		});
@@ -91,9 +93,9 @@
 		if (data.type == "my") {
 			 let messageBox = "<div class='direct-chat-msg right clearfix'>"
 									+ "	<div class='direct-chat-info text-right'>"
-									+ "	<span class='direct-chat-name'>"+ data.sender +"</span>"
+									+ "	<span class='direct-chat-name'>"+ ${sessionScope.memberName} +"</span>"
 									+ "	</div>"
-									+ "	<div class='direct-chat-text'>" + data.message + "</div>"
+									+ "	<div class='direct-chat-text text-right'>" + data.message + "</div>"
 									+ "</div>";
 									
 			$("#chatMessageArea").append(messageBox);
@@ -103,21 +105,21 @@
 		} else {
 			let messageBox = "<div class='direct-chat-msg clearfix'>"
 									+ "	<div class='direct-chat-info'>"
-									+ "	<span class='direct-chat-name pull-left'>"+ data.sender +"</span>"
+									+ "	<span class='direct-chat-name pull-left'>"+ ${sessionScope.memberName} +"</span>"
 									+ "	</div>"
 									+ "	<div class='direct-chat-text'>" + data.message + "</div>"
 									+ "</div>";
 									
 			$("#chatMessageArea").append(messageBox);
 		}
-
-		let chatAreaHeight = $(".box-body").height();
+		/* let chatAreaHeight = $(".box-body").height();
 		console.log(chatAreaHeight);
 		console.log($("#chatMessageArea").height());
 		let maxScroll = $("#chatMessageArea").height() - chatAreaHeight;
 		console.log("scroll");
 		console.log(maxScroll);
-		$(".box-body").scrollTop(maxScroll); 
+		$(".box-body").scrollTop(maxScroll); */
+		$('#chatMessageArea').scrollTop($('#chatMessageArea')[0].scrollHeight);
 	}
 	
 	function setChattingMember(members){
@@ -162,14 +164,14 @@
         <!-- /.box-header -->
         <div class="box-body">
           <!-- Conversations are loaded here -->
-          <div id="chatMessageArea" class="direct-chat-messages">
+          <div id="chatMessageArea" class="direct-chat-messages" style="height: 300px">
            
           </div>
     
           <!-- /.direct-chat-pane -->
         </div>
 
-        <div class="box-footer">
+        <div id="allChatDiv" class="box-footer" style="position: fixed; bottom: 0">
             <div class="input-group">
               <input type="text" id="message" placeholder="Message" class="form-control">
                   <span class="input-group-btn">

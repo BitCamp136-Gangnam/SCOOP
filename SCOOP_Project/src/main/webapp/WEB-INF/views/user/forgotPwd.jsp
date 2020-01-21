@@ -30,14 +30,15 @@ $(function(){
 	<div id="changpwd" class="row">
 		<div class="col-sm-12">
 
-			<img class="img-responsive center-block" alt="Scoop로고"src="resources/images/logo/ScoopBig.png" style="width: 500px;height: auto;margin-left:35%;margin-top:10%;" />
-			<form action="changePwdOk.do" method="post">
+			<img class="img-responsive center-block" alt="Scoop로고"src="resources/images/logo/ScoopBig.png" style="width: 500px;height: auto;margin-left:35%;/* margin-top:10%; */" />
+			<form action="changePwdOk.do" method="post" class="pwdform">
 				<p style="margin-left: 45%;font-size:35px;margin-top: 0px;">비밀번호 변경</p>
 				<div id="firstPw" style="margin-left:41%;margin-bottom:1%;">
 					<input type=password id="pwd" name="pwd" style="width: 310px;height: 35px;border:1px solid #E71D36;border-radius:0.5rem;padding-right:2%;padding-left: 2%;" placeholder="새 비밀번호 " required>
 				</div>
 				<div id="secondPw" style="margin-left:41%;">
 					<input type="password" id="pwdchk" name="pwdchk" style="width: 310px;height: 35px; border:1px solid #E71D36;border-radius:0.5rem;padding-right:2%;padding-left: 2%;" placeholder="새 비밀번호 확인" required>
+					<br><br><span></span>
 				</div> 
 				<div style="margin-left: 42%;margin-top:2%;mar">
 					<input id="pwdBtn" type="submit" value="비밀번호 변경하기" style="width: 310px; height: 38px; color:#fff ;text-align: center; padding-top: 5px;background-color:#E71D36;border-radius:0.5rem;border: 1px solid #E71D36;padding-bottom: 5px;">

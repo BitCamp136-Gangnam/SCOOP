@@ -4,6 +4,7 @@ public class BookMark {
 	private int piseq;
 	private String pititle;
 	private String picontent;
+	private int tseq;
 	private int tiseq;
 	private String tititle;
 	private String ticontent;
@@ -12,6 +13,12 @@ public class BookMark {
 	private String tiname;
 	private String pname;
 	
+	public int getTseq() {
+		return tseq;
+	}
+	public void setTseq(int tseq) {
+		this.tseq = tseq;
+	}
 	public String getPname() {
 		return pname;
 	}

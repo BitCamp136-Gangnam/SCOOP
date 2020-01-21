@@ -14,6 +14,7 @@ public class Reply {
 	private int tiseq;
 	private String name;
 	private String tititle;
+	private String profile;
 	public int getReplyseq() {
 		return replyseq;
 	}
@@ -56,10 +57,17 @@ public class Reply {
 	public void setTititle(String tititle) {
 		this.tititle = tititle;
 	}
+	
+	public String getProfile() {
+		return profile;
+	}
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
 	@Override
 	public String toString() {
 		return "Reply [replyseq=" + replyseq + ", rcontent=" + rcontent + ", email=" + email + ", rdate=" + rdate
-				+ ", tiseq=" + tiseq + ", name=" + name + ", tititle=" + tititle + "]";
+				+ ", tiseq=" + tiseq + ", name=" + name + ", tititle=" + tititle + ", profile=" + profile + "]";
 	}
 	
 	
