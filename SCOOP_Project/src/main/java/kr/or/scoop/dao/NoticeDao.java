@@ -22,4 +22,6 @@ public interface NoticeDao {
 	public List<MyIssue> searchTeamIssue(String email, String word);
 	
 	public List<MyIssue> searchMyIssue(String email, String word);
+	
+	public int deleteNotice(int bnseq);
 }	

@@ -56,6 +56,12 @@ public class BoardService {
 		return result;
 	}
 	
-	
+	public int deleteNotice(int bnseq) {
+		int result = 0;
+		NoticeDao dao = sqlsession.getMapper(NoticeDao.class);
+		result = dao.deleteNotice(bnseq);
+		
+		return result;		
+	}
 	
 }
