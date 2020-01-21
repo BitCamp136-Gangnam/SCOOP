@@ -22,7 +22,7 @@ public interface MyIssueDao {
 	//북마크
 	public int addBookMark(int piseq, String email);
 	public int delBookMark(int piseq, String email);
-	
+	//북마크 리스트
 	public List<BookMark> getBookMark(String email);
 	
 	//내가 작성한 이슈 디테일

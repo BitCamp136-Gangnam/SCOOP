@@ -51,15 +51,18 @@
 				<h3>북마크</h3>
 		</div>
 		<hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
+		
+		<c:forEach items="${bookMarkList}" var="bList">
 		<div class="row" style="margin-left: 2%; margin-right: 2%">
 			<div class="col-sm-11 newissue" >
-			아이콘 + 이슈 제목 들어갈곳<br>
+			아이콘 + ${blist.title}<br>
 			여기에 프로젝트명 그리고 작성자
 			</div>
 			<div class="col-sm-1 newissue" >
 			북마크아이콘자리
 			</div>
 		</div>
+		</c:forEach>
             <!-- #/ container -->
             </div>
             </div>
