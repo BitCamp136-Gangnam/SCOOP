@@ -124,6 +124,8 @@ $(document).ready(function(){
 		
 		reader.readAsDataURL(this.files[0]);
 	});
+
+	
 	
 	});
 </script>
@@ -227,13 +229,13 @@ $(document).ready(function(){
     		<label for="drank">직함</label>
     		<input class="form-control myinfo" type="text" id="drank" name="drank" style="width: 60%" value="${member.drank}">
     		<br>
-    		<label for="address">주소</label>
+    		<label for="address">주소</label><br>
     		<input class="form-control myinfo" type="hidden" id="address" name="address" style="width: 60%; " value="${member.address}">
-          	<input type="text" id="sample6_postcode" style="border-radius: 0.25rem;" placeholder="우편번호">
-         	<input type="button" onclick="sample6_execDaumPostcode()" style="margin-bottom: 1%;border-radius: 0.25rem; " value="우편번호 찾기"><br>
-         	<input type="text" id="sample6_address" style="min-width:500px;border-radius: 0.25rem;" placeholder="주소"><br>
-         	<input type="text" id="sample6_detailAddress"style="min-width:250px;border-radius: 0.25rem;" placeholder="상세주소">
-         	<input type="text" id="sample6_extraAddress"style="min-width:247px;margin-top: 1%;border-radius: 0.25rem; " placeholder="참고항목">
+          	<input type="text" id="sample6_postcode" style="border-radius: 0.25rem;padding-left:5px;padding-right: 5px;" placeholder="우편번호">
+         	<input type="button" onclick="sample6_execDaumPostcode()" style="margin-bottom: 1%;margin-left:5px;border-radius: 0.25rem;padding-left:5px;padding-right: 5px;background-color: #E71D36;color:#fff;border-color: #E71D36; " value="우편번호 찾기"><br>
+         	<input type="text" id="sample6_address" style="min-width:500px;border-radius: 0.25rem;padding-left:5px;padding-right: 5px;" placeholder="주소"><br>
+         	<input type="text" id="sample6_detailAddress"style="min-width:250px;border-radius: 0.25rem;padding-left:5px;padding-right: 5px;" placeholder="상세주소">
+         	<input type="text" id="sample6_extraAddress"style="min-width:247px;margin-top: 1%;border-radius: 0.25rem;padding-left:5px;padding-right: 5px; " placeholder="참고항목">
           	<br>
     		
     		<input type="submit" id="address_btn" class="btn" style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;margin-top: 3%;" value="수정완료">
