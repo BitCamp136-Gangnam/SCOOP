@@ -200,6 +200,47 @@ $(function(){
 return true;
 } 
 
+function idOver(a){
+	console.log($('#mail').val());
+	$.ajax({
+	    url:'idOverlab.do', //request 보낼 서버의 경로
+	    type:'post', // 메소드(get, post, put 등)
+	    data:{'email':$('#mail').val()
+	    	}, //보낼 데이터
+	    success: function(data) {
+		    if(data==0){
+		    	$("#signUpBtn").removeAttr('disabled');
+		    	Swal.fire({
+		    		  title: "사용 가능한 아이디",
+		    		  text: "사용 가능한 아이디입니다",
+		    		  icon: "success",
+		    		  button: "확인"
+		    		})
+		    }else{
+		    	Swal.fire({
+		    		  title: "중복된 이메일 존재",
+		    		  text: "중복된 이메일이 있습니다",
+		    		  icon: "warning",
+		    		  button: "확인"
+		    		})
+			}
+		    console.log(data);
+	    	
+	    	
+	    },
+	    error: function(err) {
+		    console.log(err);
+		    Swal.fire({
+	    		  title: "에러 발생",
+	    		  text: "에러가 발생했습니다",
+	    		  icon: "error",
+	    		  button: "확인"
+	    		})
+	    }
+	});
+}
+
+
 
 
 </script>
@@ -447,7 +488,8 @@ return true;
         <div class="form-group mb-4">
          <label>Email address</label>
          <input type="text" class="form-control signup" id="mail" name="email" placeholder="E-mail@company.com" required>
-         <button type="button" id="scoop_input" class="btn btn-primary"><spring:message code="register" /></button>
+         <br>
+         <button type="button" id="idcheck" class="btn btn-primary" style="width: 150px;height:38px;padding-top: 10px;" onclick="idOver(this.id)">아이디 중복체크</button>
         </div>
         <div class="form-group mb-4">
          <label>Name</label>
@@ -458,7 +500,7 @@ return true;
          <input type="password" class="form-control" id="tbPwd" name="pwd" placeholder="Password" required>
         </div>
         <div class="form-group" style="margin-left:27%;margin-right: 30%;">
-        		<input type="submit" id="signUpBtn" value="스쿱 시작하기" class="btn btn-primary" style="width: 300px;height:38px;text-align: center;padding-top: 5px;">
+        		<input type="submit" id="signUpBtn" value="스쿱 시작하기" class="btn btn-primary" style="width: 300px;height:38px;text-align: center;padding-top: 5px;" disabled="disabled">
         </div>
         <div>
         </div>

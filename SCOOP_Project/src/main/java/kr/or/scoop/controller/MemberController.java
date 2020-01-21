@@ -30,6 +30,7 @@ import org.springframework.ui.velocity.VelocityEngineUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import kr.or.scoop.dao.AlarmDao;
@@ -535,11 +536,15 @@ public class MemberController {
 		return "ajax/naverCertified";
 	}
 	
-	// 이메일 인증 확인
-	@RequestMapping(value = "/emailCheck.do")
-	public String emailCheck() {
-		System.out.println("return certified");
-		return "ajax/naverCertified";
+	// 아이디 중복 확인
+	@RequestMapping(value = "/idOverlab.do")
+	@ResponseBody
+	public int emailCheck(String email) {
+		System.out.println(email);
+		int result = 0;
+		MemberDao dao = sqlsession.getMapper(MemberDao.class);
+		result = dao.idCheck(email);
+		return result;
 	}
 	
 	
