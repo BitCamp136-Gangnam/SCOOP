@@ -23,7 +23,6 @@ input::placeholder {
    href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <%-- <link rel="stylesheet" href="<c:url value="/resources/demos/style.css" />"> --%>
 <meta name="google-signin-client_id" content="47797892299-i06tt9qhbs15g8mn89ncu1isa1eneql8.apps.googleusercontent.com">
-<meta name="google-signin-scope" content="profile email">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
@@ -1453,6 +1452,7 @@ $('.menli').keydown(function(event) {
 		 }
 
 	function signOut() {
+		document.location.href = "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost/application-name/logoutUser";
 		var auth2 = gapi.auth2.getAuthInstance();
 		auth2.signOut().then(function() {
 			location.href = "logout.do";
