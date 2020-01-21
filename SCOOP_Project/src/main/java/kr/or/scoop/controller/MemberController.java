@@ -352,6 +352,9 @@ public class MemberController {
 			System.out.println("인서트 실패");
 			viewpage = "index";
 		}
+		
+		session.removeAttribute("email");
+		
 		return viewpage;
 	}
 	

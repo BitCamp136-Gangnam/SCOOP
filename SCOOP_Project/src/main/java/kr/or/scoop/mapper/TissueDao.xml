@@ -63,11 +63,11 @@ insert into tissue (tiseq,tseq,email,tititle,ticontent,isprocess, istbook, issee
 	delete from tpmember where tseq=#{param1} and email=#{param2}
 </delete>
 
-<update id="tiBookMark" parameterType="kr.or.scoop.dto.Tissue">
+<!-- <update id="tiBookMark" parameterType="kr.or.scoop.dto.Tissue">
 	update Tissue
 	set istbook = #{param2}
 	where tiseq=#{param1} and email=#{param3}
-</update>
+</update> -->
 <!-- 북마크 -->
 <insert id="addBookMark">
 	insert into bookmark(bseq, tiseq, email) 
