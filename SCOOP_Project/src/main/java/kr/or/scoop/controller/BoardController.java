@@ -39,7 +39,7 @@ public class BoardController {
 	@Autowired
 	private TeamService tservice;
 	
-	// 마이이슈 작성
+	// 내가 작성한 이슈
 	@RequestMapping(value = "/myissue.do", method = RequestMethod.GET)
 	public String myissue(HttpSession session, Model model) {
 		String email = "";
@@ -50,6 +50,16 @@ public class BoardController {
 		model.addAttribute("pi",pi);
 		model.addAttribute("ti",ti);
 		return "issue/myissue";
+	}
+	// 내가 작성한 이슈
+	@RequestMapping(value = "/myissueReply.do", method = RequestMethod.GET)
+	public String myissueReply(HttpSession session, Model model) {
+		String email = "";
+		email = (String)session.getAttribute("email");
+		MyIssueDao dao = sqlSession.getMapper(MyIssueDao.class);
+		List<Reply> reply = dao.MyWriteReplyList(email);
+		model.addAttribute("re",reply);
+		return "issue/myissueReply";
 	}
 	
 	// 마이이슈디테일 

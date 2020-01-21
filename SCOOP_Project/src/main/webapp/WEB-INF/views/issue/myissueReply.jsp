@@ -57,7 +57,7 @@ $(function(){
             <div class="container-fluid">
         <div class="card">
 		<div class="row" style="margin: 2%">
-				<h3>내가 작성한 이슈</h3>
+				<h3>내가 작성한 댓글</h3>
 		</div>
 		<div class="row" style="margin-left: 2%;">
 			<ul class="nav nav-pills">
@@ -71,40 +71,15 @@ $(function(){
 		</div>
 		<hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
 		<div class="row" style="margin-left: 2%; margin-right: 2%">
-			<c:forEach items="${ti}" var="ti">
+			<c:forEach items="${re}" var="re">
 			<div class="col-sm-12 newissue" >
-			<c:choose>
-				<c:when test="${ti.isprocess==0}">
-				<div id="create" class="iconify" data-icon="uil:file-exclamation-alt" data-inline="false" style="width:27px;height: auto;"></div>
-				</c:when>
-				<c:when test="${ti.isprocess==1}">
-				<div id="ing" class="iconify" data-icon="uil:file-edit-alt" data-inline="false" style="width:27px;height: auto;color: #2671bd;"></div>
-				</c:when>
-				<c:when test="${ti.isprocess==2}">
-				<div id="stop" class="iconify" data-icon="uil:file-block-alt" data-inline="false" style="width:27px;height: auto;color:#cca352"></div>
-				</c:when>
-				<c:when test="${ti.isprocess==3}">
-				<div id="finish" class="iconify" data-icon="uil:file-check-alt" data-inline="false" style="width:27px;height: auto;color:#26805c"></div>
-				</c:when>	
-			</c:choose>
-			
+				<div id="finish" class="iconify" data-icon="fa-solid:reply-all" data-inline="false" style="width:27px;height: auto;color:#26805c"></div>
 			<div style="float: right;min-width:97%;">
-			<a href="teamissueDetail.do?tiseq=${ti.tiseq}">${ti.tititle}</a>			
+			<a href="teamissueDetail.do?tiseq=${re.tiseq}">${re.rcontent}</a>			
 			<br>
-			<a class="pnameHover" href="projectDetail.do?tseq=${ti.tseq}" style="color:#2c9aa8;">${ti.pname}</a>&nbsp;&nbsp;&nbsp;${fn:substring(ti.tidate,0,16)}<br>
+			<a class="pnameHover" href="teamissueDetail.do?tiseq=${re.tiseq}" style="color:#2c9aa8;">${re.tititle}</a>&nbsp;&nbsp;&nbsp;${fn:substring(re.rdate,0,16)}<br>
 			</div>
 			
-			</div>
-			</c:forEach>
-			
-			<c:forEach items="${pi}" var="pi">
-			<div class="col-sm-12 newissue" >
-			<div class="iconify" data-icon="uil:file-lock-alt" data-inline="false" style="width:27px;height: auto;"></div>
-			<div style="float: right;min-width:97%;">
-			<a href="myissueDetail.do?piseq=${pi.piseq}">${pi.pititle}</a>
-			<br>
-			<a class="pnameHover" href="private.do" style="color:#2c9aa8;">프라이빗 공간</a>&nbsp;&nbsp;&nbsp;${fn:substring(pi.pidate,0,16)} 
-			</div>
 			</div>
 			</c:forEach>
 		</div>
