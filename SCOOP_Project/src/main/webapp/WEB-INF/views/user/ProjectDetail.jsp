@@ -225,28 +225,31 @@ $(function(){
       </div>
       <hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
       <div class="row" style="margin-left: 2%; margin-right: 2%">
-         <div class="col-sm-2 newissue" >
+         <div class="col-sm-3 newissue" >
          작성자
          </div>
-         <div class="col-sm-8 newissue">
+         <div class="col-sm-6 newissue">
          제목 
          </div>
          <div class="col-sm-2 newissue">
          작성시간 
+         </div>
+         <div class="col-sm-1 newissue">
+         북마크
          </div>
       </div>
       <c:forEach items="${tp}" var="ti">
          <div class="row" style="margin-left: 2%; margin-right: 2%">
          <input type="hidden" name="tiseq" value="${ti.tiseq}" />
          <input type="hidden" name="tseq" value="${tpj.tseq}" />
-         <div class="col-sm-2 newissue" >
-         ${ti.name }
+         <div class="col-sm-3 newissue" >
+         <a href="teamissueDetail.do?tiseq=${ti.tiseq}">${ti.name}</a>
          </div>
-         <div class="col-sm-7 newissue">
-         ${ti.tititle} 
+         <div class="col-sm-6 newissue">
+         <a href="teamissueDetail.do?tiseq=${ti.tiseq}">${ti.tititle}</a> 
          </div>
          <div class="col-sm-2 newissue">
-         ${ti.tidate} 
+         <a href="teamissueDetail.do?tiseq=${ti.tiseq}">${ti.tidate}</a> 
          </div>
          
          <c:set var="mark" value="true" />
