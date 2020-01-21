@@ -2,6 +2,9 @@ package kr.or.scoop.dto;
 
 import java.sql.Timestamp;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class Reply {
 	
 	private int replyseq;
@@ -10,8 +13,8 @@ public class Reply {
 	private Timestamp rdate;
 	private int tiseq;
 	private String name;
-	
-	public int getReplyseq(){
+	private String tititle;
+	public int getReplyseq() {
 		return replyseq;
 	}
 	public void setReplyseq(int replyseq) {
@@ -29,32 +32,36 @@ public class Reply {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	public int getTiseq() {
-		return tiseq;
-	}
-	public void setTiseq(int tiseq) {
-		this.tiseq = tiseq;
-	}
-	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	
 	public Timestamp getRdate() {
 		return rdate;
 	}
 	public void setRdate(Timestamp rdate) {
 		this.rdate = rdate;
 	}
+	public int getTiseq() {
+		return tiseq;
+	}
+	public void setTiseq(int tiseq) {
+		this.tiseq = tiseq;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getTititle() {
+		return tititle;
+	}
+	public void setTititle(String tititle) {
+		this.tititle = tititle;
+	}
 	@Override
 	public String toString() {
 		return "Reply [replyseq=" + replyseq + ", rcontent=" + rcontent + ", email=" + email + ", rdate=" + rdate
-				+ ", tiseq=" + tiseq + ", name=" + name + "]";
+				+ ", tiseq=" + tiseq + ", name=" + name + ", tititle=" + tititle + "]";
 	}
+	
 	
 	
 }

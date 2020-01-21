@@ -22,6 +22,8 @@ input::placeholder {
 <link rel="stylesheet"
    href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <%-- <link rel="stylesheet" href="<c:url value="/resources/demos/style.css" />"> --%>
+<meta name="google-signin-client_id" content="47797892299-i06tt9qhbs15g8mn89ncu1isa1eneql8.apps.googleusercontent.com">
+<meta name="google-signin-scope" content="profile email">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://apis.google.com/js/platform.js" async defer></script>
@@ -718,7 +720,7 @@ span {
                            </c:when>
                            <c:when test="${kind=='google'}">
                               <li><a href="#" onclick="signOut();"><i
-                                    class="icon-key"></i> <span>로그아웃</span></a></li>
+                                    class="icon-key" ng-app="app" ui-view id="app"></i> <span>로그아웃</span></a></li>
                            </c:when>
                            <c:when test="${kind=='naver'}">
                               <li><a href="logout.do"><i class="icon-key"></i> <span>로그아웃</span></a></li>
@@ -1444,6 +1446,11 @@ $('.menli').keydown(function(event) {
 		}
 		return date;
 	}
+	 if(!gapi.auth2){
+		    gapi.load('auth2', function() {
+		        gapi.auth2.init();
+		    });
+		 }
 
 	function signOut() {
 		var auth2 = gapi.auth2.getAuthInstance();
@@ -1451,7 +1458,6 @@ $('.menli').keydown(function(event) {
 			location.href = "logout.do";
 		});
 		auth2.disconnect();
-
 	}
 
 	function onLoad() {
@@ -1474,5 +1480,6 @@ $('.menli').keydown(function(event) {
 								.attr('style',
 										'cursor: pointer;color:#535359;font-size: 18px;padding-bottom: 12px;');
 					});
+	
 
 </script>
