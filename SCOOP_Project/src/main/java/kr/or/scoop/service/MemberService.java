@@ -38,15 +38,19 @@ public class MemberService {
 	
 	public int loginMember(String email, String pwd) {
 		int result = 0;
-		Member member = pwdCheck(email);
-		String encodePwd = member.getPwd();
-		boolean istrue = bCryptPasswordEncoder.matches(pwd, encodePwd);
-		MemberDao dao = sqlsession.getMapper(MemberDao.class);
-		if(istrue) {
-			System.out.println("true");
-			result = dao.loginCheck(email,encodePwd);
-		} else {
-			System.out.println("false");
+		try {
+			Member member = pwdCheck(email);
+			String encodePwd = member.getPwd();
+			boolean istrue = bCryptPasswordEncoder.matches(pwd, encodePwd);
+			MemberDao dao = sqlsession.getMapper(MemberDao.class);
+			if(istrue) {
+				System.out.println("true");
+				result = dao.loginCheck(email,encodePwd);
+			} else {
+				System.out.println("false");
+				result = 0;
+			}
+		} catch (Exception e) {
 			result = 0;
 		}
 		return result;
