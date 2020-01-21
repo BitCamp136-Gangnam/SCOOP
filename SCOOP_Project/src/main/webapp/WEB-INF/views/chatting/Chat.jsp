@@ -34,6 +34,7 @@
 <link href="https://fonts.googleapis.com/css?family=Gothic+A1|Hi+Melody|Jua|Nanum+Pen+Script&display=swap"
 	rel="stylesheet">
 <link href="<c:url value="/resources/chat/css/style_message.css" />" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <script type="text/javascript">
 	//웹소켓 변수 선언
 	//var wsocket;
@@ -114,16 +115,12 @@
 			$("#chatMessageArea").append( "<div class='center-message clearfix'>" + data.message + "</div>");
 			setChattingMember(data.users);
 		} else {
-			let messageBox = "<div class='direct-chat-msg clearfix row'>"
-									+ "<div class = 'col-sm-1'>"
+			let messageBox = "<div class='direct-chat-msg clearfix'>"
 									+'<img class="img-circle" alt="멤버 프로필 사진 넣는 곳" src="'+src+'" style="float:left;width:40px;height: 40px;padding-top: 1%;margin-left: 10px;margin-right: 10px;">'
-									+ "</div>"
-									+ "<div class = 'col-sm-11'>"
 									+ "	<div class='direct-chat-info'>"
 									+ "	<span class='direct-chat-name pull-left'>"+ data.sender +"</span>"
 									+ "	</div>"
 									+ "	<div class='direct-chat-text'>" + data.message + "</div>"
-									+ "</div>"
 									+ "</div>";
 									
 			$("#chatMessageArea").append(messageBox);
@@ -187,15 +184,13 @@
           <!-- /.direct-chat-pane -->
         </div>
 
-        <div id="allChatDiv" class="box-footer" style="position: fixed; bottom: 0">
+        <!-- /.box-footer-->
+        <div id="allChatDiv" class="box-footer">
             <div class="input-group">
-              <input type="text" id="message" placeholder="Message" class="form-control">
-                  <span class="input-group-btn">
-                    <button id="sendBtn" class="btn btn-primary btn-flat">Send</button>
-                  </span>
+              <input type="text" id="message" placeholder="Message" class="form-control" style="width: 60%; margin-right: 5px;">
+              <button id="sendBtn" class="btn btn-primary btn-flat" style="width: 20%;background-color: #E71D36; border-color: #E71D36;">Send</button>
             </div>
         </div>
-        <!-- /.box-footer-->
       </div>
       <!--/.direct-chat -->
     </div>
