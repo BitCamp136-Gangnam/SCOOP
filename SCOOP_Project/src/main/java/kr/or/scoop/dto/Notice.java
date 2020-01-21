@@ -1,7 +1,7 @@
 package kr.or.scoop.dto;
 
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +10,7 @@ public class Notice {
 	private int bnseq;
 	private String bntitle;
 	private String bncontent;
-	private Date bntime;
+	private Timestamp bntime;
 	private String email;
 	
 	
@@ -32,10 +32,11 @@ public class Notice {
 	public void setBncontent(String bncontent) {
 		this.bncontent = bncontent;
 	}
-	public Date getBntime() {
+	
+	public Timestamp getBntime() {
 		return bntime;
 	}
-	public void setBntime(Date bntime) {
+	public void setBntime(Timestamp bntime) {
 		this.bntime = bntime;
 	}
 	public String getEmail() {

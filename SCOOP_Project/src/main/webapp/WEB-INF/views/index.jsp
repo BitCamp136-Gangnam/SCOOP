@@ -166,6 +166,16 @@ $(function(){
         $("#tbPwd").focus();
         return false;
       }
+      
+   		//회원가입 시 메일 보낼 때 얼럿창
+   		
+   			Swal.fire({
+   				  icon: 'success',
+   				  title: '회원가입 이메일 발송완료!',
+   				  showConfirmButton: false,
+   				  timer: 2000
+   				})
+    		
  
     return true;
   }
@@ -189,6 +199,9 @@ $(function(){
 
 return true;
 } 
+
+
+
 </script>
 <style>
 	.accordion {
@@ -354,7 +367,7 @@ return true;
       	</form>
 		<!-- 네이버아이디로로그인 버튼 노출 영역 -->
 								  <script type="text/javascript">
-								  	var naver_id_login = new naver_id_login("idXo9CECDTdxmjiuAWdC", "http://localhost:8090/SCOOP/userindex.do");
+								  	var naver_id_login = new naver_id_login("idXo9CECDTdxmjiuAWdC", "http://localhost:8090/SCOOP/naverCertified.do");
 								  	var state = naver_id_login.getUniqState();
 								  	naver_id_login.setButton("white", 3,40);
 								  	naver_id_login.setDomain("http://localhost:8090/");
@@ -443,10 +456,8 @@ return true;
          <label>Password</label>
          <input type="password" class="form-control" id="tbPwd" name="pwd" placeholder="Password" required>
         </div>
-        <div class="form-group">
-        	<ins>
-        		<input type="submit" value="스쿱 시작하기" class="btn btn-primary" style="width: 300px;height:38px;text-align: center;padding-top: 5px;">
-    		</ins>
+        <div class="form-group" style="margin-left:27%;margin-right: 30%;">
+        		<input type="submit" id="signUpBtn" value="스쿱 시작하기" class="btn btn-primary" style="width: 300px;height:38px;text-align: center;padding-top: 5px;">
         </div>
         <div>
         </div>
