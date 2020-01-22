@@ -13,20 +13,17 @@
 	src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript">
 $(function(){
-	console.log('abc');
 	
-	 $('#pwd').keypress(function(event) {
+	$('#pwd').keypress(function(event) {
 		if(event.keyCode==13){
 			$('#pwdchk').focus();
 		}
 	});
-
 	$('#pwdchk').keypress(function(){
 		if(event.keyCode==13){
 			$('#pwdBtn').submit();
 		}
 	});
-
 	$('#pwd').keyup(function(){
 		console.log('pwd');
 		let pwd = $('#pwd').val();
@@ -39,26 +36,35 @@ $(function(){
 				$('#chkmsg').empty().css("color", "blue").text('비밀번호가 일치합니다.');
 			} 
 		}
-		console.log(pwd);
+		if(pwd == "" && chk == ""){
+			$('#chkmsg').empty().append('<br>');
+		}
 	});
 	$('#pwdchk').keyup(function(event) {
 		console.log('pwdchk');
 		let pwd = $('#pwd').val();
 		let chk = $('#pwdchk').val();
 
-		console.log(chk);
 		if(pwd != chk){
-			$('#chkmsg').empty().css("color", "red").text('비밀번호가 일치하지 않습니다.');
+			$('#chkmsg').empty().css("color", "red").text('비밀번호가 일치하지 않습니다');
 		} else{
-			$('#chkmsg').empty().css("color", "blue").text('비밀번호가 일치합니다.');
+			$('#chkmsg').empty().css("color", "blue").text('비밀번호가 일치합니다');
 		} 
+		if(pwd == "" && chk == ""){
+			$('#chkmsg').empty().append('<br>');
+		}
 	});
-
 	$('.pwdform').submit(function(){
+		let pwdCheck= RegExp(/^[a-zA-Z0-9]{8,16}$/);
 		let pwd = $('#pwd').val();
 		let chk = $('#pwdchk').val();
 		if(pwd != chk){
 			$('#pwdchk').val('').focus();
+			return false;
+		}else if(!pwdCheck.test(pwd)) {
+			$('#pwd').val('').focus();
+			$('#pwdchk').val('');
+			$('#chkmsg').empty().css("color", "red").text('비밀번호는 8~16 자리로 입력해주세요');
 			return false;
 		}
 	})

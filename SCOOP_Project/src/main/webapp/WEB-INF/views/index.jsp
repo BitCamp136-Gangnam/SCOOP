@@ -122,25 +122,22 @@ $(function(){
 
 		if(!getMail.test($('#emailcheck').val())) {
 			Swal.fire({
- 				  icon: 'warning',
  				  title: '이메일 형식이 맞지 않습니다.',
  				  showConfirmButton: false,
+ 				  icon: 'warning',
  				  timer: 2000
  				})
 			$("#emailcheck").val("");
 			$("#emailcheck").focus();
 			return false;
-	      }else{
-	    	  Swal.fire({
-   				  icon: 'success',
-   				  title: '인증 이메일 발송완료!',
-   				  showConfirmButton: false,
-   				  timer: 2000
-   				})
-
-			}
-
-	      
+		}else{
+			Swal.fire({
+   				icon: 'success',
+   				title: '인증 이메일 발송완료!',
+   				showConfirmButton: false,
+   				timer: 2000
+   			})
+		}
 	}
 	//회원가입 유효성 검사
     function checkz() {
