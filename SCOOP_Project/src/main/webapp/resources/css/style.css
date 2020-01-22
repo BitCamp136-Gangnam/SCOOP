@@ -25,7 +25,8 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
 @import url(../plugins/metismenu/css/metisMenu.min.css);
 @import url(../plugins/bootstrap-select/dist/css/bootstrap-select.min.css);
 @font-face { 
-	font-family: 'Binggrae'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Binggrae.woff') format('woff'); 
+	font-family: 'BinggraeMelona'; 
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/BinggraeMelona.woff') format('woff'); 
 	font-weight: normal; 
 	font-style: normal; 
 	}
@@ -119,7 +120,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 
 body {
   margin: 0;
-  font-family: "Roboto", sans-serif;
+  font-family: "BinggraeMelona";
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.5;
