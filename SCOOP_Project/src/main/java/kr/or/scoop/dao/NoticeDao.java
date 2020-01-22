@@ -19,8 +19,10 @@ public interface NoticeDao {
 	//공지사항 수정
 	public int updateNotice(Notice notice);
 	
+	//팀이슈 검색
 	public List<MyIssue> searchTeamIssue(String email, String word);
 	
+	//마이이슈 검색
 	public List<MyIssue> searchMyIssue(String email, String word);
 	
 	public int deleteNotice(int bnseq);

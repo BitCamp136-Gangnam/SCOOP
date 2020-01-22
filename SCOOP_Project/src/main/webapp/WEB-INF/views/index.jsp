@@ -116,12 +116,39 @@ $(function(){
   });
 })
 
+	// 비밀번호 변경 이메일 유효성
+	function chgpwdchk() {
+		let getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
+
+		if(!getMail.test($('#emailcheck').val())) {
+			Swal.fire({
+ 				  title: '이메일 형식이 맞지 않습니다.',
+ 				  showConfirmButton: false,
+ 				  icon: 'warning',
+ 				  timer: 2000
+ 				})
+			$("#emailcheck").val("");
+			$("#emailcheck").focus();
+			return false;
+		}else{
+			Swal.fire({
+   				icon: 'success',
+   				title: '인증 이메일 발송완료!',
+   				showConfirmButton: false,
+   				timer: 2000
+   			})
+		}
+	}
 	//회원가입 유효성 검사
     function checkz() {
       var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
       var getCheck= RegExp(/^[a-zA-Z0-9]{8,16}$/);
       var getName= RegExp(/^[가-힣]+$/);
-
+		if($('#name').val().length>7){
+			alert("name은 7자 까지 입력가능합니다.")
+			return false;
+		}
+		
       //이메일 유효성 검사
       if(!getMail.test($("#mail").val())){
         alert("이메일 형식에 맞게 입력해주세요.")
@@ -129,7 +156,7 @@ $(function(){
         $("#mail").focus();
         return false;
       }
- 
+
       //이름 유효성
       if (!getName.test($("#name").val())) {
         alert("이름 형식에 맞게 입력해주세요.");
@@ -200,55 +227,47 @@ $(function(){
 return true;
 } 
 
+function idOver(a){
+	console.log($('#mail').val());
+	$.ajax({
+	    url:'idOverlab.do', //request 보낼 서버의 경로
+	    type:'post', // 메소드(get, post, put 등)
+	    data:{'email':$('#mail').val()
+	    	}, //보낼 데이터
+	    success: function(data) {
+		    if(data==0){
+		    	$("#signUpBtn").removeAttr('disabled');
+		    	Swal.fire({
+		    		  title: "사용 가능한 아이디",
+		    		  text: "사용 가능한 아이디입니다",
+		    		  icon: "success",
+		    		  button: "확인"
+		    		})
+		    }else{
+		    	Swal.fire({
+		    		  title: "중복된 이메일 존재",
+		    		  text: "중복된 이메일이 있습니다",
+		    		  icon: "warning",
+		    		  button: "확인"
+		    		})
+			}
+		    console.log(data);
+	    	
+	    	
+	    },
+	    error: function(err) {
+		    console.log(err);
+		    Swal.fire({
+	    		  title: "에러 발생",
+	    		  text: "에러가 발생했습니다",
+	    		  icon: "error",
+	    		  button: "확인"
+	    		})
+	    }
+	});
+}
 
-	function idOver(a) {
-		console.log($('#mail').val());
-		if ($('#mail').val() != "" || $('#mail').val() == null) {
-			$.ajax({
-				url : 'idOverlab.do', //request 보낼 서버의 경로
-				type : 'post', // 메소드(get, post, put 등)
-				data : {
-					'email' : $('#mail').val()
-				}, //보낼 데이터
-				success : function(data) {
-					if (data == 0) {
-						$("#signUpBtn").removeAttr('disabled');
-						Swal.fire({
-							title : "사용 가능한 아이디",
-							text : "사용 가능한 아이디입니다",
-							icon : "success",
-							button : "확인"
-						})
-					} else {
-						Swal.fire({
-							title : "중복된 이메일 존재",
-							text : "중복된 이메일이 있습니다",
-							icon : "warning",
-							button : "확인"
-						})
-					}
-					console.log(data);
 
-				},
-				error : function(err) {
-					console.log(err);
-					Swal.fire({
-						title : "에러 발생",
-						text : "에러가 발생했습니다",
-						icon : "error",
-						button : "확인"
-					})
-				}
-			});
-		} else{
-			Swal.fire({
-				title : "에러 발생",
-				text : "이메일을 입력해주세요",
-				icon : "error",
-				button : "확인"
-		})
-		}
-	}
 </script>
 <style>
 	.accordion {
@@ -296,7 +315,7 @@ return true;
 <header class="header">
   <nav class="navbar navbar-expand-lg">
    <div class="container">
-     <!-- Navbar brand--><a href="index.do" class="navbar-nav font-weight-bold"><img src="resources/images/logo/ScoopBig.png" style="width:200px;height: 75px; " alt="..." ></a>
+     <!-- Navbar brand--><a href="frontpage.jsp" class="navbar-nav font-weight-bold"><img src="resources/images/logo/ScoopBig.png" style="width:200px;height: 75px; " alt="..." ></a>
      <!-- Navbar toggler button-->
      <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right">Menu<i class="icon ion-md-list ml-2"></i></button>
      <div id="navbarSupportedContent" class="collapse navbar-collapse">
@@ -499,11 +518,11 @@ return true;
         </div>
         <div class="form-group mb-4">
          <label>Name</label>
-         <input type="text" class="form-control" id="name" name ="name" placeholder="Name" required>
+         <input type="text" class="form-control" id="name" name ="name" placeholder="7자까지 입력가능합니다" required>
         </div>
         <div class="form-group mb-4">
          <label>Password</label>
-         <input type="password" class="form-control" id="tbPwd" name="pwd" placeholder="Password" required>
+         <input type="password" class="form-control" id="tbPwd" name="pwd" placeholder="8~16자리를 입력해주세요" required>
         </div>
         <div class="form-group" style="margin-left:27%;margin-right: 30%;">
         		<input type="submit" id="signUpBtn" value="스쿱 시작하기" class="btn btn-primary" style="width: 300px;height:38px;text-align: center;padding-top: 5px;" disabled="disabled">
@@ -526,10 +545,10 @@ return true;
      </div>
      <div class="modal-body p-4 p-lg-5">
       <img class="img-responsive center-block" alt="Scoop로고" src="resources/images/logo/ScoopBig.png" style="width:100%;height:auto;padding-right:15%;padding-left:15%;"/>
-      <form action="forgotpwd.do" class="login-form text-left">
+      <form action="forgotpwd.do" class="login-form text-left" id="pwdchg" name="pwdchg" onsubmit="return chgpwdchk();">
         <div class="form-group mb-4">
          <label>Email address</label>
-         <input type="text" class="form-control" id="emailcheck" name="emailcheck" placeholder="E-mail@company.com" required>
+         <input type="email" class="form-control" id="emailcheck" name="emailcheck" placeholder="E-mail@company.com" required>
         </div>
        
         <div class="form-group">

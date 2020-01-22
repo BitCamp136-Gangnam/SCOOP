@@ -101,9 +101,8 @@
             Content body start
         ***********************************-->
         <div class="content-body">
-        <br>
-            <div class="container-fluid">
-        <div class="card" style="min-height: 1080px">
+            <div class="container-fluid" style=" padding-left: 15px;padding-right: 15px;">
+        <div class="card">
 		<div class="row" style="margin: 2%">
 			<div class="col-sm-12" style="padding-left: 0">
 				<h3>프라이빗 공간</h3>

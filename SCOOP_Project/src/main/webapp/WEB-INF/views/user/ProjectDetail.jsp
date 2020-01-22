@@ -310,7 +310,7 @@ $(function(){
 
                <div id="c_Management" class="nav-label" style="display: none;padding-left: 0px;padding-right: 0px;">
                <input onkeyup="project_filter()" type="search" id="searchId" class="form-control" style="border-radius: 0.25rem; height: 20px;margin-bottom: 15px;width: 400px;margin-left: 10px;" placeholder="이름  또는 이메일 주소로 멤버 검색">
-                  <div class="row">
+                  <div class="row" style="overflow: auto;height: 150px;">
                   <c:forEach items="${projectmember}" var="pm" varStatus="status">
                      <div class="search_NameEmail col-sm-6">
                         <span class="nav-text finalsearch" id="member_Name${status.index}" style="color: #4d4d46;font-size: 13px;padding-bottom:5px;padding-top: 10px;"> &nbsp;${pm.name}</span>

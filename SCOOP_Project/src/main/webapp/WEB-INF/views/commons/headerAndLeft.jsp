@@ -32,6 +32,32 @@ input::placeholder {
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script> -->
 <script type="text/javascript">
    $(function() {
+	   $('#selectFile').change(function(){
+		   console.log("바뀜");
+		   var tseq = $(this).val();
+ 			$.ajax({
+				url : 'fileChange.do',
+				dataType:"json",
+				data : {
+					tseq:tseq,
+				},
+				success : function(data) {
+					console.log(data);
+					$('#fileLocation').empty();
+					$.each(data,function(index,object){
+						$('#fileLocation').append(
+								'<div class="fileDown" id="'+object.fdname+'" style="width: 150px; height:150px; margin: 1%;">'+
+						      	'<a href="fileDownload.do?fileName='+object.fdname+'">'+
+						         '<img id="'+object.tseq+'" width="100px" height="100px" style="margin: 1%; display: block; margin-left: auto; margin-right: auto"'+
+						            'src="<c:url value="/upload/'+object.fdname+'" />">'+
+						        '</a><p style="font-size: 15px; text-align: center">'+
+						        object.fdname+'<br>'+object.pname+
+						         '</p></div>'		
+						)
+					})	
+				}
+			}); 
+	   })
 	   $('#sIssue').focus(function(){
 		   $('#sIssue').keypress(function(event) {
 			   if (event.keyCode == 13) {
@@ -128,6 +154,9 @@ input::placeholder {
                   'rgba(225, 225, 225,0.5)');
 
             if (event.keyCode == 13) {
+            	if ($('#invite_Submit').val().match('@')){
+            		target=1;
+            	}
                var u_email = $('#email_append_' + target);
                var regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
                console.log(u_email.text());
@@ -149,7 +178,7 @@ input::placeholder {
                   $('#invite_email_append').hide();
                   $('#invite_Input')
                         .append(
-                              '<span style="border:1px solid rgba(124, 119, 119,0.5);border-radius:0.25rem; padding-top: 1%;padding-bottom: 1%;padding-left: 2%;padding-right: 2%;margin:2%;"><i class="far fa-paper-plane" style="color:#9e6767;padding-right: 5px;"></i><input type="text" value='
+                              '<span class="emailList" style="border:1px solid rgba(124, 119, 119,0.5);border-radius:0.25rem; padding-top: 1%;padding-bottom: 1%;padding-left: 2%;padding-right: 2%;margin:2%;"><i class="far fa-paper-plane" style="color:#9e6767;padding-right: 5px;"></i><input type="text" value='
                                     + $(this).val()
                                     + ' name=email'
                                     + (number++)
@@ -167,7 +196,7 @@ input::placeholder {
                } else {
                   $('#invite_Input')
                         .append(
-                              '<span style="border:1px solid rgba(124, 119, 119,0.5);border-radius:0.25rem; padding-top: 1%;padding-bottom: 1%;padding-left: 2%;padding-right: 2%;margin:2%;"><i class="far fa-paper-plane" style="color:#9e6767;padding-right: 5px;"></i><input type="text" value='
+                              '<span class="emailList" style="border:1px solid rgba(124, 119, 119,0.5);border-radius:0.25rem; padding-top: 1%;padding-bottom: 1%;padding-left: 2%;padding-right: 2%;margin:2%;"><i class="far fa-paper-plane" style="color:#9e6767;padding-right: 5px;"></i><input type="text" value='
                                     + $(
                                           '#email_append_'
                                                 + target)
@@ -186,6 +215,7 @@ input::placeholder {
                                     - 2 + '명의 멤버 초대하기');
 
                }
+               target = 1;
             }
 
             $('.invite_close')
@@ -885,25 +915,28 @@ span {
    <div class="row" style="margin: 2%;">
       <ul class="nav nav-pills">
          <li class="nav-item"><a class="nav-link" href="#">내 파일</a></li>
-         <li class="nav-item"><a class="nav-link" href="#">전체 파일</a></li>
-         <li class="nav-item dropdown"><a
-            class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">프로젝트</a>
-            <div class="dropdown-menu">
-               <a class="dropdown-item" href="#">쫀쬬니</a> <a class="dropdown-item"
-                  href="#">스쿱</a>
-            </div></li>
+         <li class="nav-item" style="margin-right: 10px">
+          <select id="selectFile" name="tseq" class="form-control" style="border: none; color: #76838f; font-size: 18px; padding-top: 0;">
+                 <option value="0">전체 파일</option>
+              <c:forEach items="${pjtlist}" var="p">
+                 <option value="${p.tseq}">${p.pname}</option>
+              </c:forEach>
+          </select>
+         </li>
          <li class="nav-item"><input type="search" class="form-control"
             style="border-radius: 0.25rem; height: 20px" placeholder="파일 검색">
          </li>
       </ul>
    </div>
-   <div class="row" style="margin: 2%; overflow: auto; height: 600px">
+   <div class="row" id="fileLocation" style="margin: 2%; overflow: auto; height: 600px">
    <c:forEach items="${file}" var="f">
-      <div style="width: 10%; margin: 1%; cursor: pointer;">
-         <img width="100%" height="auto" style="margin: 1%"
-            src="<c:url value="/upload/${f.fdname}" />"><br>
+      <div class="fileDown" id="${f.fdname}" style="width: 150px; height:150px; margin: 1%;">
+      	<a href="fileDownload.do?fileName=${f.fdname}">
+         <img id="${f.tseq}" width="100px" height="100px" style="margin: 1%; display: block; margin-left: auto; margin-right: auto"
+            src="<c:url value="/upload/${f.fdname}" />">
+        </a>
          <p style="font-size: 15px; text-align: center">
-            ${f.fdname}<br> 프로젝트 이름
+            ${f.fdname}<br> ${f.pname}
          </p>
       </div>
    </c:forEach>
@@ -1152,7 +1185,15 @@ $('.modal').on('hidden.bs.modal', function(e) {
    $('#from').empty();
    $('#to').empty();
    $('#memlist').attr('class', 'list-group');
-   $(this).find('form')[0].reset()
+   $(this).find('form')[0].reset();
+   $('#invite_Input').children('.emailList').remove();
+   $('#invite_Submit').val('');
+   $('#invite_email_append').hide();
+   $('.emailList').remove();
+   $('#invite_Submit').val('');
+   $('#invite_email_append').hide();
+   $('#invite_Input1').show();
+   $('#invite_Input2').show();
 });
 var tar = 1;
 var tar2 = 2;

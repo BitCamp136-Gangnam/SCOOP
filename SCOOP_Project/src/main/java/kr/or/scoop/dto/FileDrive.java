@@ -8,6 +8,8 @@ public class FileDrive {
 	private String fdname;
 	private String email;
 	private Timestamp fddate;
+	private String pname;
+	private int tseq;
 	public int getFdseq() {
 		return fdseq;
 	}
@@ -38,10 +40,22 @@ public class FileDrive {
 	public void setFddate(Timestamp fddate) {
 		this.fddate = fddate;
 	}
+	public String getPname() {
+		return pname;
+	}
+	public void setPname(String pname) {
+		this.pname = pname;
+	}
+	public int getTseq() {
+		return tseq;
+	}
+	public void setTseq(int tseq) {
+		this.tseq = tseq;
+	}
 	@Override
 	public String toString() {
 		return "FileDrive [fdseq=" + fdseq + ", fdcapa=" + fdcapa + ", fdname=" + fdname + ", email=" + email
-				+ ", fddate=" + fddate + "]";
+				+ ", fddate=" + fddate + ", pname=" + pname + ", tseq=" + tseq + "]";
 	}
-	
+
 }
