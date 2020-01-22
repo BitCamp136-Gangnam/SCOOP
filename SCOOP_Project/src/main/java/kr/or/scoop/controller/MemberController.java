@@ -242,7 +242,12 @@ public class MemberController {
 		session.setAttribute("role", role.getRname());
 		session.setAttribute("count", count);
 		session.setAttribute("file", filedrive);
-		List<Tpmember> pjtlist = noticeDao.getPJT(email);
+		List<Tpmember> pjtlist = null;
+		try {
+			pjtlist = noticeDao.getPJT(email);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		if(pjtlist!=null) {
 			session.setAttribute("pjtlist", pjtlist);
 			AlarmDao dao = sqlsession.getMapper(AlarmDao.class);
