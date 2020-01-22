@@ -230,8 +230,13 @@ public class MemberController {
 		Member member = memberdao.getMember((String)session.getAttribute("email"));
 		Role role = memberdao.getRole(email);
 		int count = memberdao.getCount(email);	
-		String img = memberdao.getProfile(email); 
-		List<FileDrive> filedrive = memberdao.getFileDrive(email);
+		String img = memberdao.getProfile(email);
+		List<FileDrive> filedrive = null;
+		try {
+			 filedrive = memberdao.getFileDrive(email);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		session.setAttribute("name", member.getName());
 		session.setAttribute("img",img); 
 		session.setAttribute("role", role.getRname());
