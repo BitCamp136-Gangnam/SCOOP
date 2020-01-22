@@ -208,11 +208,11 @@ public class TeamController {
 					 }
 				 }
 				if(result >0) {
-				    path = "user/ProjectDetail";
+				    path = "redirect:/projectDetail.do?tseq="+tseq;
 					System.out.println("success insert tissue");
 				}else {
 					System.out.println("에러다잉");
-					path = "user/ProjectDetail";
+					path = "redirect:/projectDetail.do?tseq="+tseq;
 					System.out.println("fail insert tissue");
 				}
 			}

@@ -11,27 +11,41 @@ input::placeholder {
 }
 </style>
 <script language="javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
-<script type="text/javascript"
-   src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
-<link rel="stylesheet"
-   href="<c:url value="/resources/lib/codemirror.css" />">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
+<link rel="stylesheet" href="<c:url value="/resources/lib/codemirror.css" />">
 <script src="<c:url value="/resources/lib/codemirror.js" />"></script>
-<%-- <link rel="stylesheet"
-   href="<c:url value="/resources/dist/summernote.css" />">
-<script src="<c:url value="/resources/dist/summernote.min.js" />"></script> --%>
-<link rel="stylesheet"
-   href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<%-- <link rel="stylesheet" href="<c:url value="/resources/demos/style.css" />"> --%>
 <meta name="google-signin-client_id" content="47797892299-i06tt9qhbs15g8mn89ncu1isa1eneql8.apps.googleusercontent.com">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://apis.google.com/js/platform.js?onload=loadAuthClient" async defer></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
-<!-- <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script> -->
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script type="text/javascript">
    $(function() {
+	   $('#myFile').click(function(){
+		   console.log("마이파일");
+		   var tseq = $(this).val();
+ 			$.ajax({
+				url : 'myFileSelect.do',
+				dataType:"json",
+				success : function(data) {
+					console.log(data);
+					$('#fileLocation').empty();
+					$.each(data,function(index,object){
+						$('#fileLocation').append(
+								'<div class="fileDown" id="'+object.pfdname+'" style="width: 150px; height:150px; margin: 1%;">'+
+						      	'<a href="fileDownload.do?fileName='+object.pfdname+'">'+
+						         '<img id="'+object.tseq+'" width="100px" height="100px" style="margin: 1%; display: block; margin-left: auto; margin-right: auto"'+
+						            'src="<c:url value="/upload/'+object.pfdname+'" />">'+
+						        '</a><p style="font-size: 15px; text-align: center">'+
+						        object.pfdname+'<br>프라이빗 공간'+
+						         '</p></div>'		
+						)
+					})	
+				}
+			}); 
+	   })
 	   $('#selectFile').change(function(){
 		   console.log("바뀜");
 		   var tseq = $(this).val();
@@ -415,7 +429,7 @@ input::placeholder {
       if (url != '') {
          $('#todoresult')
                .append(
-                     '<div><a href='+url+'><span class="iconify" data-icon="whh:googledrive" data-inline="false"></span>'
+                     '<div style="padding:5px"><a href='+url+'><span class="iconify" data-icon="whh:googledrive" data-inline="false"></span>'
                            + drivename + '</a></div>');
          $('#todoresult').show();
       }
@@ -780,8 +794,8 @@ span {
 <div class="nk-sidebar" style="z-index: 0">
    <div id="scnav" class="nk-nav-scroll">
       <ul class="metismenu" id="menu">
-         <li class="nav-label" style="padding-bottom: 10px;"><b
-            style="padding-bottom: 2%;">전체 정보</b></li>
+         <li class="nav-label" style="padding-bottom: 10px;">
+         <b style="padding-bottom: 2%;font-size:15px;">전체 정보</b></li>
          <li><a href="notice.do" aria-expanded="false"><span class="iconify" data-icon="ps:megaphone" data-inline="false"></span>
          <span class="nav-text">
                   &nbsp;공지사항</span> <!-- <i class="icon-speedometer menu-icon"> -->
@@ -793,7 +807,7 @@ span {
          </a></li>
          <li><a href="myissue.do" aria-expanded="false"> <span
                class="iconify" data-icon="simple-line-icons:emotsmile"
-               data-inline="false" style="width: 20px; height: auto;"> </span><span
+               data-inline="false" style="width: 17px; height: auto;font: bold;"> </span><span
                class="nav-text"> &nbsp;내가 작성한 이슈</span>
          </a></li>
          <li><a href="calendar.do" aria-expanded="false"> <span
@@ -812,7 +826,7 @@ span {
                style="width: 20px; height: auto;"> </span><span class="nav-text">
                   &nbsp;북마크</span>
          </a></li>
-         <li class="nav-label" style="padding-bottom: 0"><b>협업 공간</b></li>
+         <li class="nav-label" style="padding-bottom: 0"><b style="font-size:15px;">협업 공간</b></li>
          <li class="nav-label">
          <c:choose>
          <c:when test="${count == 3 and role == 'ROLE_USER'}">
@@ -914,7 +928,7 @@ span {
    </div>
    <div class="row" style="margin: 2%;">
       <ul class="nav nav-pills">
-         <li class="nav-item"><a class="nav-link" href="#">내 파일</a></li>
+         <li class="nav-item"><a class="nav-link" id="myFile" style="cursor: pointer;">내 파일</a></li>
          <li class="nav-item" style="margin-right: 10px">
           <select id="selectFile" name="tseq" class="form-control" style="border: none; color: #76838f; font-size: 18px; padding-top: 0;">
                  <option value="0">전체 파일</option>
@@ -1085,15 +1099,16 @@ span {
                   style="border-right: 1px solid #c8c8c8; padding-left: 20px;">
                   <div class="modal-body">
                      <p style="font-size: 12px">
-                        더 많은 사람들을 초대하여 원활한 소통으로 업무를 효율적으로 처리해보세요.<br> 회사 동료뿐만 아니라
-                        외부 협업자도 파트너로 초대할 수 있습니다.
+		                        더 많은 사람들을 초대하여 원활한 소통으로 업무를 효율적으로 처리해보세요.<br> 회사 동료뿐만 아니라
+		                        외부 협업자도 파트너로 초대할 수 있습니다.
                      </p>
                      <label for="title">파트너 초대</label> <input
                         class="form-control createmodal" type="text" id="invite_Submit"
                         placeholder="이메일 주소를 입력하고 Enter키를 눌러주세요"
                         style="width: 100%; border-radius: 0.25rem;">
-                     <p style="font-size: 13px; margin-top: 2%; margin-left: 1%;">이메일
-                        주소를 입력하고 Enter키를 눌러 동료들을 초대해 보세요.</p>
+                     <p style="font-size: 13px; margin-top: 2%; margin-left: 1%;">
+                     	이메일 주소를 입력하고 Enter키를 눌러 동료들을 초대해 보세요.
+                     </p>
                      <div id="invite_email_append"
                         style="min-width: 35%; border: 1px solid #c8c8c8; border-radius: 0.25rem; background-color: #fff; display: none; position: absolute; top: 145px; left: 18px;">
 
@@ -1327,7 +1342,7 @@ $('.menli').keydown(function(event) {
 			reader.onload = function(e) {
 				$('#imgpreview').attr('src', e.target.result);
 				if (e.target.result.substring(5, 10) == 'image') {
-					$('#imgpreview').show();
+					//$('#imgpreview').show();
 				} else {
 					$('#imgpreview').hide();
 				}
@@ -1337,13 +1352,22 @@ $('.menli').keydown(function(event) {
 	}
 	$("#fileclick").change(function() {
 		readURL(this);
-		console.log($("#fileclick").val());
+		console.log($("#fileclick")[0].files);
+		var files = $("#fileclick")[0].files;
 		$('#filename').empty();
-		$('#filename').append($("#fileclick").val().substring(12));
+		//$('#filename').append($("#fileclick").val().substring(12));
 		var text = "";
 		text = $('#issuecontent').val().replace("@", "");
-		$('#issuecontent').val(text);
-
+		//$('#issuecontent').val(text);
+		for(let i=0; i<$("#fileclick")[0].files.length;i++){
+		$('#todoresult')
+		.append(
+				'<div style="padding:5px"><span class="iconify" data-icon="si-glyph:file-box" data-inline="false"></span> '
+						+ files[i].name
+						+ '</div>');
+		}
+$('#todoresult').show();
+		
 	});
 	$('#men8').click(
 			function() {
@@ -1368,7 +1392,7 @@ $('.menli').keydown(function(event) {
 							var text = "";
 							text = $('#issuecontent').val().replace("@", "");
 							$('#issuecontent').val(text);
-							$('#todoresult').append('<div><input type="text" id="mention" name="mention" value="@'+ $(this).text() + '" style="border:none" readonly></div>');
+							$('#todoresult').append('<div style="padding:5px"><input type="text" id="mention" name="mention" value="@'+ $(this).text() + '" style="border:none" readonly></div>');
 							console.log($(this).text());
 							$('#todoresult').show();
 							$('#memlist').hide();
@@ -1400,7 +1424,7 @@ $('.menli').keydown(function(event) {
 						$('#issuecontent').val(text);
 						$('#todoresult')
 								.append(
-										'<div><span class="iconify" data-icon="bx:bx-check-circle" data-inline="false"></span>'
+										'<div style="padding:5px"><span class="iconify" data-icon="bx:bx-check-circle" data-inline="false"></span>'
 												+ $('#todomem').val()
 												+ ' <span class="iconify" data-icon="bytesize:arrow-right" data-inline="false"></span> '
 												+ $('#todolist').val()
@@ -1415,7 +1439,6 @@ $('.menli').keydown(function(event) {
 		$('#issuecontent').val(text);
 		$('#todolist').val('');
 	});
-
 	$('#men9').click(
 			function() {
 				var top = ($('#issuecontent').offset().top);
@@ -1446,7 +1469,7 @@ $('.menli').keydown(function(event) {
 						$('#issuecontent').val(text);
 						$('#todoresult')
 								.append(
-										'<div><span class="iconify" data-icon="bx:bx-calendar" data-inline="false"></span>'
+										'<div style="padding:5px"><span class="iconify" data-icon="bx:bx-calendar" data-inline="false"></span>'
 												+ $('#from').val()
 												+ '~'
 												+ $('#to').val()
@@ -1463,17 +1486,16 @@ $('.menli').keydown(function(event) {
 		$('#issuecontent').val(text);
 		$('#todolist').val('');
 	});
-
 	var dateFormat = "mm/dd/yy", from = $("#from").datepicker({
 		defaultDate : "+1w",
 		changeMonth : true,
-		numberOfMonths : 3
+		numberOfMonths : 1
 	}).on("change", function() {
 		to.datepicker("option", "minDate", getDate(this));
 	}), to = $("#to").datepicker({
 		defaultDate : "+1w",
 		changeMonth : true,
-		numberOfMonths : 3
+		numberOfMonths : 1
 	}).on("change", function() {
 		from.datepicker("option", "maxDate", getDate(this));
 	});
@@ -1486,6 +1508,7 @@ $('.menli').keydown(function(event) {
 		}
 		return date;
 	}
+
 	 if(!gapi.auth2){
 		    gapi.load('auth2', function() {
 		        gapi.auth2.init();

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.or.scoop.dao.MemberDao;
 import kr.or.scoop.dto.FileDrive;
+import kr.or.scoop.dto.PrivateFileDrive;
 import net.sf.json.JSONArray;
 
 @Controller
@@ -68,6 +69,15 @@ public class FileController {
 			JSONArray jsonlist = JSONArray.fromObject(filedrive);
 			model.addAttribute("ajax",jsonlist);
 		}
+		return "ajax/ajax";
+	}
+	@RequestMapping("/myFileSelect.do")
+	public String myFileSelect(HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model) throws Exception {
+		MemberDao memberdao = sqlsession.getMapper(MemberDao.class);
+		String email = (String)session.getAttribute("email");
+			List<PrivateFileDrive> filedrive = memberdao.getMyFile(email);
+			JSONArray jsonlist = JSONArray.fromObject(filedrive);
+			model.addAttribute("ajax",jsonlist);
 		return "ajax/ajax";
 	}
 	
