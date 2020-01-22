@@ -230,14 +230,24 @@ public class MemberController {
 		Member member = memberdao.getMember((String)session.getAttribute("email"));
 		Role role = memberdao.getRole(email);
 		int count = memberdao.getCount(email);	
-		String img = memberdao.getProfile(email); 
-		List<FileDrive> filedrive = memberdao.getFileDrive(email);
+		String img = memberdao.getProfile(email);
+		List<FileDrive> filedrive = null;
+		try {
+			 filedrive = memberdao.getFileDrive(email);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		session.setAttribute("name", member.getName());
 		session.setAttribute("img",img); 
 		session.setAttribute("role", role.getRname());
 		session.setAttribute("count", count);
 		session.setAttribute("file", filedrive);
-		List<Tpmember> pjtlist = noticeDao.getPJT(email);
+		List<Tpmember> pjtlist = null;
+		try {
+			pjtlist = noticeDao.getPJT(email);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		if(pjtlist!=null) {
 			session.setAttribute("pjtlist", pjtlist);
 			AlarmDao dao = sqlsession.getMapper(AlarmDao.class);
