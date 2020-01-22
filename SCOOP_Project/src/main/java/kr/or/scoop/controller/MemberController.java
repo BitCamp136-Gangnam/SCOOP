@@ -100,6 +100,7 @@ public class MemberController {
 					"							        	    		})</script>");
 			out.flush(); 
 			viewpage = "index";
+			System.out.println("메일발송완료");
 		} catch (Exception e) {
 			System.out.println("모시모시" + e.getMessage());
 			viewpage = "index";
@@ -112,7 +113,8 @@ public class MemberController {
 						"							        	    		  icon: \"error\",\r\n" + 
 						"							        	    		  button: \"확인\"\r\n" + 
 						"							        	    		})</script>");
-				out.flush(); 
+				out.flush();
+				System.out.println("메일발송에러");
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -125,8 +127,8 @@ public class MemberController {
 
 	// 일반 회원가입 인증 후 가입
 	@RequestMapping(value = "registerOk.do", method = { RequestMethod.POST, RequestMethod.GET })
-	public String normalInsert(Member member, HttpSession session) throws ClassNotFoundException, SQLException {
-
+	public String normalInsert(Member member, HttpSession session, HttpServletResponse response) throws ClassNotFoundException, SQLException {
+		response.setContentType("text/html; charset=UTF-8");
 		int result = 0;
 		String viewpage = "";
 		member.setPwd((String)session.getAttribute("checkpwd"));
@@ -136,11 +138,40 @@ public class MemberController {
 		result = service.insertMember(member);
 
 		if (result > 0) {
+			try {
+				PrintWriter out = response.getWriter();
+				out.println("<script>Swal.fire({\r\n" + 
+						"		  title: \"회원가입 인증 성공\",\r\n" + 
+						"		  text: \"회원가입 인증에 성공하셨습니다\",\r\n" + 
+						"		  icon: \"success\",\r\n" + 
+						"		  button: \"확인\"\r\n" + 
+						"		})</script>");
+				out.flush();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			viewpage = "redirect:/index.do";
 			session.removeAttribute("checkpwd");
 			session.removeAttribute("checkemail");
 			session.removeAttribute("checkname");
 		} else {
+			PrintWriter out;
+			try {
+				out = response.getWriter();
+				out.println("<script>Swal.fire({\r\n" + 
+						"		  title: \"회원가입 인증 성공\",\r\n" + 
+						"		  text: \"회원가입 인증에 성공하셨습니다\",\r\n" + 
+						"		  icon: \"success\",\r\n" + 
+						"		  button: \"확인\"\r\n" + 
+						"		})</script>");
+				out.flush();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			System.out.println("가입실패");
 			viewpage = "index";
 		}

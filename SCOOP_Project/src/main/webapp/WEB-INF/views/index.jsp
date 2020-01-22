@@ -200,49 +200,55 @@ $(function(){
 return true;
 } 
 
-function idOver(a){
-	console.log($('#mail').val());
-	$.ajax({
-	    url:'idOverlab.do', //request 보낼 서버의 경로
-	    type:'post', // 메소드(get, post, put 등)
-	    data:{'email':$('#mail').val()
-	    	}, //보낼 데이터
-	    success: function(data) {
-		    if(data==0){
-		    	$("#signUpBtn").removeAttr('disabled');
-		    	Swal.fire({
-		    		  title: "사용 가능한 아이디",
-		    		  text: "사용 가능한 아이디입니다",
-		    		  icon: "success",
-		    		  button: "확인"
-		    		})
-		    }else{
-		    	Swal.fire({
-		    		  title: "중복된 이메일 존재",
-		    		  text: "중복된 이메일이 있습니다",
-		    		  icon: "warning",
-		    		  button: "확인"
-		    		})
-			}
-		    console.log(data);
-	    	
-	    	
-	    },
-	    error: function(err) {
-		    console.log(err);
-		    Swal.fire({
-	    		  title: "에러 발생",
-	    		  text: "에러가 발생했습니다",
-	    		  icon: "error",
-	    		  button: "확인"
-	    		})
-	    }
-	});
-}
 
+	function idOver(a) {
+		console.log($('#mail').val());
+		if ($('#mail').val() != "" || $('#mail').val() == null) {
+			$.ajax({
+				url : 'idOverlab.do', //request 보낼 서버의 경로
+				type : 'post', // 메소드(get, post, put 등)
+				data : {
+					'email' : $('#mail').val()
+				}, //보낼 데이터
+				success : function(data) {
+					if (data == 0) {
+						$("#signUpBtn").removeAttr('disabled');
+						Swal.fire({
+							title : "사용 가능한 아이디",
+							text : "사용 가능한 아이디입니다",
+							icon : "success",
+							button : "확인"
+						})
+					} else {
+						Swal.fire({
+							title : "중복된 이메일 존재",
+							text : "중복된 이메일이 있습니다",
+							icon : "warning",
+							button : "확인"
+						})
+					}
+					console.log(data);
 
-
-
+				},
+				error : function(err) {
+					console.log(err);
+					Swal.fire({
+						title : "에러 발생",
+						text : "에러가 발생했습니다",
+						icon : "error",
+						button : "확인"
+					})
+				}
+			});
+		} else{
+			Swal.fire({
+				title : "에러 발생",
+				text : "이메일을 입력해주세요",
+				icon : "error",
+				button : "확인"
+		})
+		}
+	}
 </script>
 <style>
 	.accordion {
@@ -290,7 +296,7 @@ function idOver(a){
 <header class="header">
   <nav class="navbar navbar-expand-lg">
    <div class="container">
-     <!-- Navbar brand--><a href="frontpage.jsp" class="navbar-nav font-weight-bold"><img src="resources/images/logo/ScoopBig.png" style="width:200px;height: 75px; " alt="..." ></a>
+     <!-- Navbar brand--><a href="index.do" class="navbar-nav font-weight-bold"><img src="resources/images/logo/ScoopBig.png" style="width:200px;height: 75px; " alt="..." ></a>
      <!-- Navbar toggler button-->
      <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right">Menu<i class="icon ion-md-list ml-2"></i></button>
      <div id="navbarSupportedContent" class="collapse navbar-collapse">
