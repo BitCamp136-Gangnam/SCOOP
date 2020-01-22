@@ -24,6 +24,7 @@
 <script type="text/javascript">
 	$(function(){
 		$('.bookmark').click(function(){
+			console.log('북마크 클릭');
 			let book = $(this);
 			
 			let icon = book.attr('class').split(' ');

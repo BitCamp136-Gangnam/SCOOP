@@ -3,6 +3,10 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.scoop.dao.MyIssueDao">
+<insert id="writeTissue" parameterType="kr.or.scoop.dto.MyIssue" >
+insert into tissue (tiseq,tseq,email,tititle,ticontent,isprocess, istbook, issee, tidate)
+  values (TISEQ_TISSUE_SEQ.NEXTVAL, #{tseq}, #{email}, #{tititle}, #{ticontent}, 0, 0, 0, sysdate)
+</insert>
 <insert id="writeMyissue" parameterType="kr.or.scoop.dto.MyIssue" >
 insert into myissue (piseq,pititle,picontent,pistart, piend, ispibook, email, pidate, mygfilename, mymention, myurl)
   values (PISEQ_MYISSUE_SEQ.NEXTVAL, #{pititle}, #{picontent}, #{pistart,jdbcType=DATE}, #{piend,jdbcType=DATE}, 0, #{email,jdbcType=VARCHAR}, sysdate, #{mygfilename,jdbcType=VARCHAR}, #{mymention,jdbcType=VARCHAR}, #{myurl,jdbcType=VARCHAR})

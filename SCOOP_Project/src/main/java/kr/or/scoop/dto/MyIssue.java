@@ -18,26 +18,27 @@ public class MyIssue {
 	private String pititle;
 	private String tititle;
 	private String picontent;
+	private String ticontent;
 	private Date pistart;
 	private Date piend;
+	private Date tistart;
+	private Date tiend;
 	private int ispibook;
+	private int istbook;
 	private String email;
 	private Timestamp pidate;
 	private Timestamp tidate;
 	private String mygfilename;
+	private String tgfilename;
 	private String mymention;
 	private String myurl;
+	private String turl;
 	private String pname;
 	private MultipartFile[] files;
 	private String tfilename;
 	private String tfilesize;
 	private int isprocess;
-	public int getIsprocess() {
-		return isprocess;
-	}
-	public void setIsprocess(int isprocess) {
-		this.isprocess = isprocess;
-	}
+	private int issee;
 	public int getTseq() {
 		return tseq;
 	}
@@ -86,6 +87,12 @@ public class MyIssue {
 	public void setPicontent(String picontent) {
 		this.picontent = picontent;
 	}
+	public String getTicontent() {
+		return ticontent;
+	}
+	public void setTicontent(String ticontent) {
+		this.ticontent = ticontent;
+	}
 	public Date getPistart() {
 		return pistart;
 	}
@@ -98,11 +105,29 @@ public class MyIssue {
 	public void setPiend(Date piend) {
 		this.piend = piend;
 	}
+	public Date getTistart() {
+		return tistart;
+	}
+	public void setTistart(Date tistart) {
+		this.tistart = tistart;
+	}
+	public Date getTiend() {
+		return tiend;
+	}
+	public void setTiend(Date tiend) {
+		this.tiend = tiend;
+	}
 	public int getIspibook() {
 		return ispibook;
 	}
 	public void setIspibook(int ispibook) {
 		this.ispibook = ispibook;
+	}
+	public int getIstbook() {
+		return istbook;
+	}
+	public void setIstbook(int istbook) {
+		this.istbook = istbook;
 	}
 	public String getEmail() {
 		return email;
@@ -110,7 +135,6 @@ public class MyIssue {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 	public Timestamp getPidate() {
 		return pidate;
 	}
@@ -123,12 +147,17 @@ public class MyIssue {
 	public void setTidate(Timestamp tidate) {
 		this.tidate = tidate;
 	}
-	
 	public String getMygfilename() {
 		return mygfilename;
 	}
 	public void setMygfilename(String mygfilename) {
 		this.mygfilename = mygfilename;
+	}
+	public String getTgfilename() {
+		return tgfilename;
+	}
+	public void setTgfilename(String tgfilename) {
+		this.tgfilename = tgfilename;
 	}
 	public String getMymention() {
 		return mymention;
@@ -141,6 +170,12 @@ public class MyIssue {
 	}
 	public void setMyurl(String myurl) {
 		this.myurl = myurl;
+	}
+	public String getTurl() {
+		return turl;
+	}
+	public void setTurl(String turl) {
+		this.turl = turl;
 	}
 	public String getPname() {
 		return pname;
@@ -166,15 +201,28 @@ public class MyIssue {
 	public void setTfilesize(String tfilesize) {
 		this.tfilesize = tfilesize;
 	}
+	public int getIsprocess() {
+		return isprocess;
+	}
+	public void setIsprocess(int isprocess) {
+		this.isprocess = isprocess;
+	}
+	public int getIssee() {
+		return issee;
+	}
+	public void setIssee(int issee) {
+		this.issee = issee;
+	}
 	@Override
 	public String toString() {
 		return "MyIssue [tseq=" + tseq + ", piseq=" + piseq + ", tiseq=" + tiseq + ", pfilename=" + pfilename
 				+ ", pfilesize=" + pfilesize + ", pititle=" + pititle + ", tititle=" + tititle + ", picontent="
-				+ picontent + ", pistart=" + pistart + ", piend=" + piend + ", ispibook=" + ispibook + ", email="
-				+ email + ", pidate=" + pidate + ", tidate=" + tidate + ", mygfilename=" + mygfilename + ", mymention="
-				+ mymention + ", myurl=" + myurl + ", pname=" + pname + ", files=" + Arrays.toString(files)
-				+ ", tfilename=" + tfilename + ", tfilesize=" + tfilesize + ", isprocess=" + isprocess + "]";
+				+ picontent + ", ticontent=" + ticontent + ", pistart=" + pistart + ", piend=" + piend + ", tistart="
+				+ tistart + ", tiend=" + tiend + ", ispibook=" + ispibook + ", istbook=" + istbook + ", email=" + email
+				+ ", pidate=" + pidate + ", tidate=" + tidate + ", mygfilename=" + mygfilename + ", tgfilename="
+				+ tgfilename + ", mymention=" + mymention + ", myurl=" + myurl + ", turl=" + turl + ", pname=" + pname
+				+ ", files=" + Arrays.toString(files) + ", tfilename=" + tfilename + ", tfilesize=" + tfilesize
+				+ ", isprocess=" + isprocess + ", issee=" + issee + "]";
 	}
-
 	
 }

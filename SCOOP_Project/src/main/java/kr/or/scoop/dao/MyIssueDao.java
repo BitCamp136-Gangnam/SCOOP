@@ -5,9 +5,10 @@ import java.util.List;
 import kr.or.scoop.dto.BookMark;
 import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.dto.Reply;
-import kr.or.scoop.dto.Tissue;
 
 public interface MyIssueDao {
+	//팀이슈 작성
+	public int writeTissue(MyIssue tissue);
 	//나의 이슈 작성
 	public int writeMyissue(MyIssue myissue);
 	
