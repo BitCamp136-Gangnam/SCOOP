@@ -99,7 +99,7 @@ public class MemberController {
 					"							        	    		  button: \"확인\"" + 
 					"							        	    		})</script>");
 			out.flush(); 
-			viewpage = "index";
+			viewpage = "ajax/signUp";
 			System.out.println("메일발송완료");
 		} catch (Exception e) {
 			System.out.println("모시모시" + e.getMessage());
@@ -470,7 +470,7 @@ public class MemberController {
 			}
 			
 		} 
-		return "redirect:userindex.do";
+		return "ajax/emailSwalOk";
 	}
 	
 	//회원수정 페이지 이동
