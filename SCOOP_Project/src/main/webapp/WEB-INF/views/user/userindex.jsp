@@ -72,25 +72,25 @@
       <hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
       <c:if test="${alarm !=null }">
       <c:forEach items="${alarm }" var="al">
-      <div class="row" style="margin-left: 2%; margin-right: 2%">
+      <div class="row" style="margin-left: 2%; margin-right: 2%" id="ialarm">
       
-         <div class="col-sm-2 newissue" >
+         <div class="col-sm-2 newissue" id="al">
          <c:choose>
          	<c:when test="${al.pnseq!=0 }">
-         	새로운 팀프로젝트 공지사항이 생성됐습니다.
+         	<p>새로운 팀프로젝트 공지사항이 생성됐습니다.</p>
          	</c:when>
          	<c:when test="${al.replyseq!=0 }">
-         	새로운 댓글이 달렸습니다.
+         	<p>새로운 댓글이 달렸습니다.</p>
          	</c:when>
          	<c:when test="${al.tiseq!=0 }">
-         	새로운 팀 이슈가 생성되었습니다.
+         	<p>새로운 팀 이슈가 생성되었습니다.</p>
          	</c:when>
          	<c:when test="${al.vseq!=0 }">
-         	새로운 의사결정이 생성되었습니다.
+         	<p>새로운 의사결정이 생성되었습니다.</p>
          	</c:when>
          </c:choose>
          </div>
-         <div class="col-sm-8 newissue">
+         <div class="col-sm-8 newissue" id="ti">
          
          <c:choose>
          	<c:when test="${al.pnseq!=0 }">
@@ -107,7 +107,7 @@
          	</c:when>
          </c:choose>
          </div>
-         <div class="col-sm-2 newissue">
+         <div class="col-sm-2 newissue" id="day">
          여기에 시간넣으면됨
          <c:choose>
          	<c:when test="${al.pnseq!=0 }">
@@ -127,6 +127,7 @@
       </div>
       </c:forEach>
       </c:if>
+      		<button id="load" >더 보기</button>
             <!-- #/ container -->
             </div>
             </div>
@@ -171,6 +172,19 @@
     <script src="<c:url value="/resources/plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"/>"></script>
 
     <script src="<c:url value="/resources/js/dashboard/dashboard-1.js"/>"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("p").slice(0,10).show();
+			$("#load").click(function(e){
+				e.prevenDefault();
+				$("p").slice(0,10).show();
+					if($("#ialarm").length == 0){
+					alert("더 이상 글이 없습니다.");
+						}
+				
+				});
 
+			});
+	</script>
 </body>
 </html>
