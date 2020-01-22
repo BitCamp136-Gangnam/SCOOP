@@ -127,7 +127,7 @@
       </div>
       </c:forEach>
       </c:if>
-      		<button id="load" >더 보기</button>
+      		<!-- <button id="load" >더 보기</button> -->
             <!-- #/ container -->
             </div>
             </div>
@@ -174,11 +174,11 @@
     <script src="<c:url value="/resources/js/dashboard/dashboard-1.js"/>"></script>
 	<script type="text/javascript">
 		$(function(){
-			$("#ialarm").slice(0,10).show();
+			$("p").slice(0,10).show();
 			$("#load").click(function(e){
 				console.log(e);
 				e.prevenDefault();
-				$("<p>").slice(0,10).show();
+				$("p hidden").slice(0,10).show();
 					if($("<p>").length == 0){
 					alert("더 이상 글이 없습니다.");
 						}
