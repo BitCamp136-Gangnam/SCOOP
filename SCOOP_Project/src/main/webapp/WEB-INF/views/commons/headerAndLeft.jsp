@@ -128,6 +128,9 @@ input::placeholder {
                   'rgba(225, 225, 225,0.5)');
 
             if (event.keyCode == 13) {
+            	if ($('#invite_Submit').val().match('@')){
+            		target=1;
+            	}
                var u_email = $('#email_append_' + target);
                var regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
                console.log(u_email.text());
