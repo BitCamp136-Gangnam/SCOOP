@@ -19,8 +19,7 @@ input::placeholder {
 <%-- <link rel="stylesheet"
    href="<c:url value="/resources/dist/summernote.css" />">
 <script src="<c:url value="/resources/dist/summernote.min.js" />"></script> --%>
-<link rel="stylesheet"
-   href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <%-- <link rel="stylesheet" href="<c:url value="/resources/demos/style.css" />"> --%>
 <meta name="google-signin-client_id" content="47797892299-i06tt9qhbs15g8mn89ncu1isa1eneql8.apps.googleusercontent.com">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -438,7 +437,7 @@ input::placeholder {
       if (url != '') {
          $('#todoresult')
                .append(
-                     '<div><a href='+url+'><span class="iconify" data-icon="whh:googledrive" data-inline="false"></span>'
+                     '<div style="padding:5px"><a href='+url+'><span class="iconify" data-icon="whh:googledrive" data-inline="false"></span>'
                            + drivename + '</a></div>');
          $('#todoresult').show();
       }
@@ -1350,7 +1349,7 @@ $('.menli').keydown(function(event) {
 			reader.onload = function(e) {
 				$('#imgpreview').attr('src', e.target.result);
 				if (e.target.result.substring(5, 10) == 'image') {
-					$('#imgpreview').show();
+					//$('#imgpreview').show();
 				} else {
 					$('#imgpreview').hide();
 				}
@@ -1360,13 +1359,22 @@ $('.menli').keydown(function(event) {
 	}
 	$("#fileclick").change(function() {
 		readURL(this);
-		console.log($("#fileclick").val());
+		console.log($("#fileclick")[0].files);
+		var files = $("#fileclick")[0].files;
 		$('#filename').empty();
-		$('#filename').append($("#fileclick").val().substring(12));
+		//$('#filename').append($("#fileclick").val().substring(12));
 		var text = "";
 		text = $('#issuecontent').val().replace("@", "");
-		$('#issuecontent').val(text);
-
+		//$('#issuecontent').val(text);
+		for(let i=0; i<$("#fileclick")[0].files.length;i++){
+		$('#todoresult')
+		.append(
+				'<div style="padding:5px"><span class="iconify" data-icon="si-glyph:file-box" data-inline="false"></span> '
+						+ files[i].name
+						+ '</div>');
+		}
+$('#todoresult').show();
+		
 	});
 	$('#men8').click(
 			function() {
@@ -1391,7 +1399,7 @@ $('.menli').keydown(function(event) {
 							var text = "";
 							text = $('#issuecontent').val().replace("@", "");
 							$('#issuecontent').val(text);
-							$('#todoresult').append('<div><input type="text" id="mention" name="mention" value="@'+ $(this).text() + '" style="border:none" readonly></div>');
+							$('#todoresult').append('<div style="padding:5px"><input type="text" id="mention" name="mention" value="@'+ $(this).text() + '" style="border:none" readonly></div>');
 							console.log($(this).text());
 							$('#todoresult').show();
 							$('#memlist').hide();
@@ -1423,7 +1431,7 @@ $('.menli').keydown(function(event) {
 						$('#issuecontent').val(text);
 						$('#todoresult')
 								.append(
-										'<div><span class="iconify" data-icon="bx:bx-check-circle" data-inline="false"></span>'
+										'<div style="padding:5px"><span class="iconify" data-icon="bx:bx-check-circle" data-inline="false"></span>'
 												+ $('#todomem').val()
 												+ ' <span class="iconify" data-icon="bytesize:arrow-right" data-inline="false"></span> '
 												+ $('#todolist').val()
@@ -1438,7 +1446,6 @@ $('.menli').keydown(function(event) {
 		$('#issuecontent').val(text);
 		$('#todolist').val('');
 	});
-
 	$('#men9').click(
 			function() {
 				var top = ($('#issuecontent').offset().top);
@@ -1469,7 +1476,7 @@ $('.menli').keydown(function(event) {
 						$('#issuecontent').val(text);
 						$('#todoresult')
 								.append(
-										'<div><span class="iconify" data-icon="bx:bx-calendar" data-inline="false"></span>'
+										'<div style="padding:5px"><span class="iconify" data-icon="bx:bx-calendar" data-inline="false"></span>'
 												+ $('#from').val()
 												+ '~'
 												+ $('#to').val()
@@ -1486,7 +1493,6 @@ $('.menli').keydown(function(event) {
 		$('#issuecontent').val(text);
 		$('#todolist').val('');
 	});
-
 	var dateFormat = "mm/dd/yy", from = $("#from").datepicker({
 		defaultDate : "+1w",
 		changeMonth : true,
@@ -1509,6 +1515,7 @@ $('.menli').keydown(function(event) {
 		}
 		return date;
 	}
+
 	 if(!gapi.auth2){
 		    gapi.load('auth2', function() {
 		        gapi.auth2.init();
