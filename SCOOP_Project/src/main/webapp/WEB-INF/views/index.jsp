@@ -116,6 +116,32 @@ $(function(){
   });
 })
 
+	// 비밀번호 변경 이메일 유효성
+	function chgpwdchk() {
+		let getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
+
+		if(!getMail.test($('#emailcheck').val())) {
+			Swal.fire({
+ 				  icon: 'warning',
+ 				  title: '이메일 형식이 맞지 않습니다.',
+ 				  showConfirmButton: false,
+ 				  timer: 2000
+ 				})
+			$("#emailcheck").val("");
+			$("#emailcheck").focus();
+			return false;
+	      }else{
+	    	  Swal.fire({
+   				  icon: 'success',
+   				  title: '인증 이메일 발송완료!',
+   				  showConfirmButton: false,
+   				  timer: 2000
+   				})
+
+			}
+
+	      
+	}
 	//회원가입 유효성 검사
     function checkz() {
       var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
@@ -133,7 +159,7 @@ $(function(){
         $("#mail").focus();
         return false;
       }
- 
+
       //이름 유효성
       if (!getName.test($("#name").val())) {
         alert("이름 형식에 맞게 입력해주세요.");
@@ -243,8 +269,6 @@ function idOver(a){
 	    }
 	});
 }
-
-
 
 
 </script>
@@ -524,10 +548,10 @@ function idOver(a){
      </div>
      <div class="modal-body p-4 p-lg-5">
       <img class="img-responsive center-block" alt="Scoop로고" src="resources/images/logo/ScoopBig.png" style="width:100%;height:auto;padding-right:15%;padding-left:15%;"/>
-      <form action="forgotpwd.do" class="login-form text-left">
+      <form action="forgotpwd.do" class="login-form text-left" id="pwdchg" name="pwdchg" onsubmit="return chgpwdchk();">
         <div class="form-group mb-4">
          <label>Email address</label>
-         <input type="text" class="form-control" id="emailcheck" name="emailcheck" placeholder="E-mail@company.com" required>
+         <input type="email" class="form-control" id="emailcheck" name="emailcheck" placeholder="E-mail@company.com" required>
         </div>
        
         <div class="form-group">
