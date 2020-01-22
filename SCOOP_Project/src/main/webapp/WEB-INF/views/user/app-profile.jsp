@@ -93,8 +93,20 @@ $(function(){
      })
 });
 
-//sample6_postcode sample6_address sample6_detailAddress
 
+$(function(){
+	
+	$('#Photo').change(function(){
+		var reader = new FileReader();
+		
+		reader.onload = function(e) {
+			
+			document.getElementById("profile").src = e.target.result;
+		};
+		
+		reader.readAsDataURL(this.files[0]);
+	});
+});
 
 	//회원정보 유효성검사
 	function pwdcheck() {
@@ -143,16 +155,6 @@ $(function(){
 			return true;
 	}
 
-	$('#Photo').change(function(){
-		var reader = new FileReader();
-		
-		reader.onload = function(e) {
-			
-			document.getElementById("profile").src = e.target.result;
-		};
-		
-		reader.readAsDataURL(this.files[0]);
-	});
 
 	
 	
