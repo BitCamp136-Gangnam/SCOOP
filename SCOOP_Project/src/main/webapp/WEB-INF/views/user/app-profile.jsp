@@ -66,6 +66,10 @@ function sample6_execDaumPostcode() {
 }
 
 $(function(){
+	$('[data-toggle="tooltip"]').tooltip();
+	$('#profile').click(function(){
+		$('#Photo').click();
+	})
   $('#address_btn').click(function(){
      console.log("함수 시작 ~~");
      var realaddr = $('#sample6_postcode').val() + "/" + $('#sample6_address').val() + "/" + $('#sample6_detailAddress').val();
@@ -186,12 +190,12 @@ $(document).ready(function(){
 			<div class="media align-items-center mb-4">
 					<c:choose>
 						<c:when test="${img==null}">
-							<img id ="profile" class="mr-3 img-circle" src="<c:url value='/resources/images/avatar/avatar.png' />" width="120" height="120" alt="" name="profile">
-							<input type="file" name="filesrc" id="Photo" accept="image/*">
+							<img id ="profile" class="mr-3 img-circle" src="<c:url value='/resources/images/avatar/avatar.png' />" width="120" height="120" alt="" name="profile" style="cursor: pointer;" data-placement="bottom" data-toggle="tooltip" title="변경하려면 클릭하세요!">
+							<input type="file" name="filesrc" id="Photo" accept="image/*" hidden="">
 						</c:when>
 						<c:otherwise>
-                             <img id ="profile" class="mr-3 img-circle" src="<c:url value='/user/upload/${img}' />" width="120" height="120" alt="" name="profile">
-                             <input type="file" name="filesrc" id="Photo" accept="image/*">
+                             <img id ="profile" class="mr-3 img-circle" src="<c:url value='/user/upload/${img}' />" width="120" height="120" alt="" name="profile" style="cursor: pointer;" data-placement="bottom" data-toggle="tooltip" title="변경하려면 클릭하세요!">
+                             <input type="file" name="filesrc" id="Photo" accept="image/*" hidden="">
 						</c:otherwise>
 					</c:choose>
                                     <div class="media-body">
