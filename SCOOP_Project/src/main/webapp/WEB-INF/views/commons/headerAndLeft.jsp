@@ -32,6 +32,29 @@ input::placeholder {
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script> -->
 <script type="text/javascript">
    $(function() {
+	   $('#myFile').click(function(){
+		   console.log("마이파일");
+		   var tseq = $(this).val();
+ 			$.ajax({
+				url : 'myFileSelect.do',
+				dataType:"json",
+				success : function(data) {
+					console.log(data);
+					$('#fileLocation').empty();
+					$.each(data,function(index,object){
+						$('#fileLocation').append(
+								'<div class="fileDown" id="'+object.pfdname+'" style="width: 150px; height:150px; margin: 1%;">'+
+						      	'<a href="fileDownload.do?fileName='+object.pfdname+'">'+
+						         '<img id="'+object.tseq+'" width="100px" height="100px" style="margin: 1%; display: block; margin-left: auto; margin-right: auto"'+
+						            'src="<c:url value="/upload/'+object.pfdname+'" />">'+
+						        '</a><p style="font-size: 15px; text-align: center">'+
+						        object.pfdname+'<br>프라이빗 공간'+
+						         '</p></div>'		
+						)
+					})	
+				}
+			}); 
+	   })
 	   $('#selectFile').change(function(){
 		   console.log("바뀜");
 		   var tseq = $(this).val();
@@ -914,7 +937,7 @@ span {
    </div>
    <div class="row" style="margin: 2%;">
       <ul class="nav nav-pills">
-         <li class="nav-item"><a class="nav-link" href="#">내 파일</a></li>
+         <li class="nav-item"><a class="nav-link" id="myFile" style="cursor: pointer;">내 파일</a></li>
          <li class="nav-item" style="margin-right: 10px">
           <select id="selectFile" name="tseq" class="form-control" style="border: none; color: #76838f; font-size: 18px; padding-top: 0;">
                  <option value="0">전체 파일</option>

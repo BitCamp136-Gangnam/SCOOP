@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import kr.or.scoop.dto.FileDrive;
 import kr.or.scoop.dto.Member;
+import kr.or.scoop.dto.PrivateFileDrive;
 import kr.or.scoop.dto.ProjectMemberlist;
 import kr.or.scoop.dto.Role;
 
@@ -62,4 +63,7 @@ public interface MemberDao {
 	
 	//파일함 불러오기
 	public List<FileDrive> getFileProject(String email, int tseq);
+	
+	//내 파일함 불러오기
+	public List<PrivateFileDrive> getMyFile(String email);
 }
