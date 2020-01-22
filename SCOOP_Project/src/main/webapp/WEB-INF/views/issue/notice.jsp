@@ -36,7 +36,70 @@
  var bntitle = new Array();
  var bncontent = new Array();
 
+ function roll(a) {
+     //alert(a);
+     var no = '<c:out value="${no}"/>';
+     console.log(no);
+     console.log(a);
+     console.log(bnseq);
+     console.log(bntitle);
+     console.log(bncontent);
+     console.log(bnseq[0]);
+     var seq = 0;
+     $.each(bnseq, function(i, elt) {
 
+         
+     	  if(elt == a){
+         	console.log(elt);
+         	console.log(a);
+         	console.log(bntitle[i]);
+         	console.log(bncontent[i]);
+
+         	
+         	$("#title").attr("value",bntitle[i]);
+           $("#content").html(bncontent[i]);		
+         	$("#ntitle").attr("value",bntitle[i]);
+           $("#ncontent").html(bncontent[i]);
+           $("#nseq").attr("value",a);		
+           seq = a;
+			var bnseq = a;
+			console.log("b : " + bnseq);
+			$("#del").click(function(){
+				 $.ajax({
+					    url:'noticeDelete.do', //request 보낼 서버의 경로
+					    type:'post', // 메소드(get, post, put 등)
+					    data:{
+					    	'bnseq':bnseq
+					    	}, //보낼 데이터
+					    
+					    success: function(data) {
+					   	Swal.fire(
+					  		  '게시물 삭제에 성공했습니다',
+					  		  '게시물 삭제 성공',
+					  		  'success'
+					  		)
+					  		window.setTimeout(function() {
+					  		location.href='notice.do';	
+					  		}, 1500);
+					    		
+					    },
+					    error: function(err) {
+					    	Swal.fire({
+					    		  title: "변경 실패",
+					    		  text: "변경 실패",
+					    		  icon: "error",
+					    		  button: "확인"
+					    		})
+					    }
+					});
+				})
+			
+
+           }                  
+     });
+     
+   }
+	
 </script>
 <body>
 	
@@ -227,69 +290,8 @@
 
 </body>
 <script type="text/javascript">
+$(document).ready(function(){
 
-function roll(a) {
-                  //alert(a);
-                  var no = '<c:out value="${no}"/>';
-                  
-                  console.log(a);
-                  console.log(bnseq);
-                  console.log(bntitle);
-                  console.log(bncontent);
-                  console.log(bnseq[0]);
-                  var seq = 0;
-                  $.each(bnseq, function(i, elt) {
-            
-                      
-                  	  if(elt == a){
-                      	console.log(elt);
-                      	console.log(a);
-                      	console.log(bntitle[i]);
-                      	console.log(bncontent[i]);
-
-                      	
-                      	$("#title").attr("value",bntitle[i]);
-                        $("#content").html(bncontent[i]);		
-                      	$("#ntitle").attr("value",bntitle[i]);
-                        $("#ncontent").html(bncontent[i]);
-                        $("#nseq").attr("value",a);		
-                        seq = a;
-						var bnseq = a;
-						console.log("b : " + bnseq);
-						$("#del").click(function(){
-							 $.ajax({
-								    url:'noticeDelete.do', //request 보낼 서버의 경로
-								    type:'post', // 메소드(get, post, put 등)
-								    data:{
-								    	'bnseq':bnseq
-								    	}, //보낼 데이터
-								    
-								    success: function(data) {
-								   	Swal.fire(
-								  		  '게시물 삭제에 성공했습니다',
-								  		  '게시물 삭제 성공',
-								  		  'success'
-								  		)
-								  		window.setTimeout(function() {
-								  		location.href='notice.do';	
-								  		}, 1500);
-								    		
-								    },
-								    error: function(err) {
-								    	Swal.fire({
-								    		  title: "변경 실패",
-								    		  text: "변경 실패",
-								    		  icon: "error",
-								    		  button: "확인"
-								    		})
-								    }
-								});
-							})
-						
-
-                        }                  
-                  });
-                  
-                }
+});
 </script>
 </html>
