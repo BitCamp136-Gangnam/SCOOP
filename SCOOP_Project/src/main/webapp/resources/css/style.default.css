@@ -5,6 +5,14 @@
 * ===========================================================
 *
 */
+
+@font-face { 
+	font-family: 'BinggraeMelona'; 
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/BinggraeMelona.woff') format('woff'); 
+	font-weight: normal; 
+	font-style: normal; 
+}
+
 .text-small {
   font-size: 0.9rem !important;
 }
@@ -1524,7 +1532,7 @@ STYLE SWITCHER FOR DEMO
  * 3. TYPE
  */
 body {
-  font-family: "Source Sans Pro", sans-serif;
+  font-family: "BinggraeMelona";
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
