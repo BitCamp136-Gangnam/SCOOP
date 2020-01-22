@@ -31,7 +31,7 @@ public interface TissueDao {
 	public int delBookMark(int tiseq, String email);
 	
 	public int fileInsert(int tseq, String fdname, long fdcapa, String email);
-	public int myFileInsert(String pfdname, long pfdcapa, String email);
+	public int myFileInsert(String pfdname, long pdcapa, String email);
 	
 	
 }
