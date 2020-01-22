@@ -68,7 +68,8 @@
 		<c:forEach items="${notice}" var="n">
 		<a href="#" id="${n.bnseq}" name="bnseq" data-target="#noticeDetail" data-toggle="modal" class="bnseq" onclick="roll(this.id)">
 		<div class="row" style="margin-left: 2%; margin-right: 2%">
-			<script>array.push("${n}");
+			<script>
+			array.push("${n}");
 			bnseq.push("${n.bnseq}");
 			bntitle.push("${n.bntitle}");
 			bncontent.push("${n.bncontent}");

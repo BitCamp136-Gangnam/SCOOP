@@ -233,6 +233,7 @@ public class MemberController {
 		String img = memberdao.getProfile(email);
 		List<FileDrive> filedrive = null;
 		try {
+			
 			 filedrive = memberdao.getFileDrive(email);
 		} catch (Exception e) {
 			// TODO: handle exception

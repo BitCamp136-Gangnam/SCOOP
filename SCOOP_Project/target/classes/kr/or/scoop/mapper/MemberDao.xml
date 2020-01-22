@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="googleIdCheck" resultType="int">
 		select count(*)
 		from member 
-		where email = #{param1} and name = #{param2}
+		where email = #{param1}
 	</select>
 	
 	<insert id="googleInsertCheck">
@@ -107,6 +107,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select profile from member where email = #{email}
 	</select>
 	<select id="getFileDrive" resultType="kr.or.scoop.dto.FileDrive">
-		select * from filedrive where email=#{email,jdbcType=VARCHAR}
+		select * from filedrive f join teampjt t on f.tseq=t.tseq where f.email=#{email,jdbcType=VARCHAR}
+	</select>
+	<select id="getFileProject" resultType="kr.or.scoop.dto.FileDrive">
+		select * from filedrive f join teampjt t on f.tseq=t.tseq where f.email=#{param1} and f.tseq=#{param2}
 	</select>
 </mapper>
