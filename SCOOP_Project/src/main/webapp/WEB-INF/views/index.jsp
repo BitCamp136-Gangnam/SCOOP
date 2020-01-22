@@ -241,8 +241,6 @@ function idOver(a){
 }
 
 
-
-
 </script>
 <style>
 	.accordion {
@@ -520,7 +518,7 @@ function idOver(a){
      </div>
      <div class="modal-body p-4 p-lg-5">
       <img class="img-responsive center-block" alt="Scoop로고" src="resources/images/logo/ScoopBig.png" style="width:100%;height:auto;padding-right:15%;padding-left:15%;"/>
-      <form action="forgotpwd.do" class="login-form text-left">
+      <form action="forgotpwd.do" class="login-form text-left" id="pwdchg" name="pwdchg">
         <div class="form-group mb-4">
          <label>Email address</label>
          <input type="text" class="form-control" id="emailcheck" name="emailcheck" placeholder="E-mail@company.com" required>

@@ -295,7 +295,7 @@ public class MemberController {
 					"button: \"확인\"" + 
 					"})</script>");
 			out.flush(); 
-			viewpage = "index";
+			viewpage = "redirect:index.do";
 			
 			
 		} catch (Exception e1) {
@@ -311,7 +311,7 @@ public class MemberController {
 						"button: \"확인\"\r\n" + 
 						"})</script>");
 				out.flush(); 
-			viewpage = "index";
+			viewpage = "redirect:index.do";
 			} catch (IOException e2) {
 				e2.printStackTrace();
 			}
