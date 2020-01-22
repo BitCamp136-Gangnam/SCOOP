@@ -780,8 +780,8 @@ span {
 <div class="nk-sidebar" style="z-index: 0">
    <div id="scnav" class="nk-nav-scroll">
       <ul class="metismenu" id="menu">
-         <li class="nav-label" style="padding-bottom: 10px;"><b
-            style="padding-bottom: 2%;">전체 정보</b></li>
+         <li class="nav-label" style="padding-bottom: 10px;">
+         <b style="padding-bottom: 2%;font-size:15px;">전체 정보</b></li>
          <li><a href="notice.do" aria-expanded="false"><span class="iconify" data-icon="ps:megaphone" data-inline="false"></span>
          <span class="nav-text">
                   &nbsp;공지사항</span> <!-- <i class="icon-speedometer menu-icon"> -->
@@ -793,7 +793,7 @@ span {
          </a></li>
          <li><a href="myissue.do" aria-expanded="false"> <span
                class="iconify" data-icon="simple-line-icons:emotsmile"
-               data-inline="false" style="width: 20px; height: auto;"> </span><span
+               data-inline="false" style="width: 17px; height: auto;font: bold;"> </span><span
                class="nav-text"> &nbsp;내가 작성한 이슈</span>
          </a></li>
          <li><a href="calendar.do" aria-expanded="false"> <span
@@ -812,7 +812,7 @@ span {
                style="width: 20px; height: auto;"> </span><span class="nav-text">
                   &nbsp;북마크</span>
          </a></li>
-         <li class="nav-label" style="padding-bottom: 0"><b>협업 공간</b></li>
+         <li class="nav-label" style="padding-bottom: 0"><b style="font-size:15px;">협업 공간</b></li>
          <li class="nav-label">
          <c:choose>
          <c:when test="${count == 3 and role == 'ROLE_USER'}">
@@ -1085,15 +1085,16 @@ span {
                   style="border-right: 1px solid #c8c8c8; padding-left: 20px;">
                   <div class="modal-body">
                      <p style="font-size: 12px">
-                        더 많은 사람들을 초대하여 원활한 소통으로 업무를 효율적으로 처리해보세요.<br> 회사 동료뿐만 아니라
-                        외부 협업자도 파트너로 초대할 수 있습니다.
+		                        더 많은 사람들을 초대하여 원활한 소통으로 업무를 효율적으로 처리해보세요.<br> 회사 동료뿐만 아니라
+		                        외부 협업자도 파트너로 초대할 수 있습니다.
                      </p>
                      <label for="title">파트너 초대</label> <input
                         class="form-control createmodal" type="text" id="invite_Submit"
                         placeholder="이메일 주소를 입력하고 Enter키를 눌러주세요"
                         style="width: 100%; border-radius: 0.25rem;">
-                     <p style="font-size: 13px; margin-top: 2%; margin-left: 1%;">이메일
-                        주소를 입력하고 Enter키를 눌러 동료들을 초대해 보세요.</p>
+                     <p style="font-size: 13px; margin-top: 2%; margin-left: 1%;">
+                     	이메일 주소를 입력하고 Enter키를 눌러 동료들을 초대해 보세요.
+                     </p>
                      <div id="invite_email_append"
                         style="min-width: 35%; border: 1px solid #c8c8c8; border-radius: 0.25rem; background-color: #fff; display: none; position: absolute; top: 145px; left: 18px;">
 
