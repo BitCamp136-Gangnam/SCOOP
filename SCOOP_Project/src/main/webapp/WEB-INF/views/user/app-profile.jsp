@@ -95,27 +95,52 @@ $(function(){
 
 //sample6_postcode sample6_address sample6_detailAddress
 
-$(document).ready(function(){
+
 	//회원정보 유효성검사
 	function pwdcheck() {
-		var getCheck = RegExp(/^[a-zA-Z0-9]{4,12}$/);
-		
-		//비밀번호 유효성
-		if (!getCheck.test($("#pwd").val())) {
-			Swal.fire("비밀번호 형식에 맞게 입력해주세요.");
-			$("#pwd").val("");
-			$("#pwd").focus();
-			return false;
-		}
-
-		//비밀번호 공백 확인
-		if ($("#pwd").val() == "") {
-			Swal.fire("비밀번호를 입력해주세요");
-			$("#pwd").focus();
-			return false;
-		}
-
-		return true;
+			var getCheck = RegExp(/^[a-zA-Z0-9]{4,12}$/);
+			var getName= RegExp(/^[가-힣]+$/);
+			if($('#name').val().length>7){
+				alert("name은 7자 까지 입력가능합니다.")
+				return false;
+			}
+			
+			 //이름 유효성
+		      if (!getName.test($("#name").val())) {
+		    	Swal.fire("이름 형식에 맞게 입력해주세요.");
+		        $("#name").val("");
+		        $("#name").focus();
+		        return false;
+		      }
+		    //이름 공백 확인
+		      if($("#name").val() == ""){
+		    	Swal.fire("이름을 입력해주세요");
+		        $("#name").focus();
+		        return false;
+		      }
+				//비밀번호 유효성
+			if (!getCheck.test($("#pwd").val())) {
+				Swal.fire("비밀번호 형식에 맞게 입력해주세요.");
+				$("#pwd").val("");
+				$("#pwd").focus();
+				return false;
+			}
+			
+			//비밀번호 공백 확인
+			if ($("#pwd").val() == "") {
+				Swal.fire("비밀번호를 입력해주세요");
+				$("#pwd").focus();
+				return false;
+			}
+			//회원가입 시 메일 보낼 때 얼럿창
+	   		
+   			Swal.fire({
+   				  icon: 'success',
+   				  title: '정보수정 완료!',
+   				  showConfirmButton: false,
+   				  timer: 2000
+   				})
+			return true;
 	}
 
 	$('#Photo').change(function(){
@@ -131,7 +156,7 @@ $(document).ready(function(){
 
 	
 	
-	});
+
 </script>
 
 <style>
@@ -225,7 +250,7 @@ $(document).ready(function(){
     		</c:choose>
     		<br>
     		<label for="name">이름</label>
-    		<input class="form-control myinfo" type="text" id="name" name="name" style="width: 60%"  value="${member.name}">
+    		<input class="form-control myinfo" type="text" id="name" name="name" style="width: 60%" placeholder="7자까지 입력가능합니다" value="${member.name}">
     		<br>
     		<label for="dname">부서</label>
     		<input class="form-control myinfo" type="text" id="dname" name="dname" style="width: 60%" value="${member.dname}">
