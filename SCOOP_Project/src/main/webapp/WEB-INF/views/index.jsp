@@ -121,8 +121,8 @@ $(function(){
       var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
       var getCheck= RegExp(/^[a-zA-Z0-9]{8,16}$/);
       var getName= RegExp(/^[가-힣]+$/);
-		if($('#name').val().length>5){
-			alert("name은 5자 까지 입력가능합니다.")
+		if($('#name').val().length>7){
+			alert("name은 7자 까지 입력가능합니다.")
 			return false;
 		}
 		
@@ -497,7 +497,7 @@ function idOver(a){
         </div>
         <div class="form-group mb-4">
          <label>Name</label>
-         <input type="text" class="form-control" id="name" name ="name" placeholder="5자까지 입력가능합니다" required>
+         <input type="text" class="form-control" id="name" name ="name" placeholder="7자까지 입력가능합니다" required>
         </div>
         <div class="form-group mb-4">
          <label>Password</label>
