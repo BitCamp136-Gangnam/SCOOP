@@ -76,6 +76,14 @@ $(document).ready(function($) {
 	
 });
 
+function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+    auth2.disconnect();
+  }
+
 $(function(){
     var w = window;
     if (w.ChannelIO) {
@@ -89,6 +97,7 @@ $(function(){
     ch.c = function(args) {
       ch.q.push(args);
     };
+    signOut();
     w.ChannelIO = ch;
     function l() {
       if (w.ChannelIOInitialized) {
