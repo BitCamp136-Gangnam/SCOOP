@@ -14,7 +14,14 @@ public class PrivateService {
 	
 	@Autowired
 	private SqlSession sqlsession;
-	
+	public int writeTissue(MyIssue tissue) {
+		int result = 0 ;
+		System.out.println("writetissue");
+		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
+		result = dao.writeTissue(tissue);
+		System.out.println("writetissue2");
+		return result;
+	}
 	public int writeMyissue(MyIssue myissue) {
 		int result = 0 ;
 		System.out.println("writeMyissue");
