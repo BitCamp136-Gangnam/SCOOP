@@ -12,7 +12,7 @@ insert into myissue (piseq,pititle,picontent,pistart, piend, ispibook, email, pi
   values (PISEQ_MYISSUE_SEQ.NEXTVAL, #{pititle}, #{picontent}, #{pistart,jdbcType=DATE}, #{piend,jdbcType=DATE}, 0, #{email,jdbcType=VARCHAR}, sysdate, #{mygfilename,jdbcType=VARCHAR}, #{mymention,jdbcType=VARCHAR}, #{myurl,jdbcType=VARCHAR})
 </insert>
 <select id="getMyissue" resultType="kr.or.scoop.dto.MyIssue">
-	SELECT piseq, pititle, picontent, pidate, ispibook FROM myissue WHERE email = #{email, jdbcType=VARCHAR}
+	SELECT piseq, pititle, picontent, pidate, ispibook FROM myissue WHERE email = #{email, jdbcType=VARCHAR} order by pidate desc
 </select>
 <select id="MyWriteIssueList" resultType="kr.or.scoop.dto.MyIssue">
 select piseq,pititle,pidate from myissue where email = #{email}

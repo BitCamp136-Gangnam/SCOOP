@@ -98,7 +98,7 @@ public class TeamController {
 	
 	//팀 디테일 
 	@RequestMapping(value = "projectDetail.do" , method = RequestMethod.GET)
-	public String JoinProject(HttpSession session, int tseq, Model model) {
+	public String projectDetail(HttpSession session, int tseq, Model model) {
 		String email = (String)session.getAttribute("email");
 		System.out.println(tseq);
 		
