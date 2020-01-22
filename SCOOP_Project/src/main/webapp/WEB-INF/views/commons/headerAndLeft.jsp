@@ -128,6 +128,9 @@ input::placeholder {
                   'rgba(225, 225, 225,0.5)');
 
             if (event.keyCode == 13) {
+            	if ($('#invite_Submit').val().match('@')){
+            		target=1;
+            	}
                var u_email = $('#email_append_' + target);
                var regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
                console.log(u_email.text());
@@ -149,7 +152,7 @@ input::placeholder {
                   $('#invite_email_append').hide();
                   $('#invite_Input')
                         .append(
-                              '<span style="border:1px solid rgba(124, 119, 119,0.5);border-radius:0.25rem; padding-top: 1%;padding-bottom: 1%;padding-left: 2%;padding-right: 2%;margin:2%;"><i class="far fa-paper-plane" style="color:#9e6767;padding-right: 5px;"></i><input type="text" value='
+                              '<span class="emailList" style="border:1px solid rgba(124, 119, 119,0.5);border-radius:0.25rem; padding-top: 1%;padding-bottom: 1%;padding-left: 2%;padding-right: 2%;margin:2%;"><i class="far fa-paper-plane" style="color:#9e6767;padding-right: 5px;"></i><input type="text" value='
                                     + $(this).val()
                                     + ' name=email'
                                     + (number++)
@@ -167,7 +170,7 @@ input::placeholder {
                } else {
                   $('#invite_Input')
                         .append(
-                              '<span style="border:1px solid rgba(124, 119, 119,0.5);border-radius:0.25rem; padding-top: 1%;padding-bottom: 1%;padding-left: 2%;padding-right: 2%;margin:2%;"><i class="far fa-paper-plane" style="color:#9e6767;padding-right: 5px;"></i><input type="text" value='
+                              '<span class="emailList" style="border:1px solid rgba(124, 119, 119,0.5);border-radius:0.25rem; padding-top: 1%;padding-bottom: 1%;padding-left: 2%;padding-right: 2%;margin:2%;"><i class="far fa-paper-plane" style="color:#9e6767;padding-right: 5px;"></i><input type="text" value='
                                     + $(
                                           '#email_append_'
                                                 + target)
@@ -186,6 +189,7 @@ input::placeholder {
                                     - 2 + '명의 멤버 초대하기');
 
                }
+               target = 1;
             }
 
             $('.invite_close')
@@ -1152,7 +1156,15 @@ $('.modal').on('hidden.bs.modal', function(e) {
    $('#from').empty();
    $('#to').empty();
    $('#memlist').attr('class', 'list-group');
-   $(this).find('form')[0].reset()
+   $(this).find('form')[0].reset();
+   $('#invite_Input').children('.emailList').remove();
+   $('#invite_Submit').val('');
+   $('#invite_email_append').hide();
+   $('.emailList').remove();
+   $('#invite_Submit').val('');
+   $('#invite_email_append').hide();
+   $('#invite_Input1').show();
+   $('#invite_Input2').show();
 });
 var tar = 1;
 var tar2 = 2;
