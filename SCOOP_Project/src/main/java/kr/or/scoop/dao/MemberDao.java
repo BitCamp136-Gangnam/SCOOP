@@ -59,4 +59,7 @@ public interface MemberDao {
 	
 	//파일함 불러오기
 	public List<FileDrive> getFileDrive(String email);
+	
+	//파일함 불러오기
+	public List<FileDrive> getFileProject(String email, int tseq);
 }

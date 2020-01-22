@@ -5,8 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!-- sweetalert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+  <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <%
 	System.out.println("이메일 인증 버튼 눌러서 오는곳");
 	System.out.println("세션값 : "+session.getAttribute("email"));
@@ -15,7 +17,7 @@
 	%>
 	<script>
 	alert('인증 성공');
-	swal({
+	Swal.fire({
 		  title: "본인 인증 성공",
 		  text: "비밀번호를 변경해 주세요",
 		  icon: "success",
@@ -29,7 +31,7 @@
 	<script>
 	System.out.println("인증 실패");
 	alert('error');
-	swal({
+	Swal.fire({
 		  title: "본인 인증 실패",
 		  text: "인증 실패 새로운 이메일을 받아 인증해주세요",
 		  icon: "error",
