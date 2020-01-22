@@ -138,36 +138,6 @@ public class TeamController {
 			String email = (String)session.getAttribute("email");
 			int tseq = 0;
 			System.out.println("파일??"+files);
-			 if(files != null && files.length > 0) {
-				 //업로드한 파일이 하나라도 있다면
-				 for(MultipartFile mutifile : files) {
-					 String filename = mutifile.getOriginalFilename();
-					 long fsize = mutifile.getSize();
-					 String filepath = request.getServletContext().getRealPath("/upload");
-					 String fpath = filepath + "\\" + filename;
-					 System.out.println(filename + " , " + fpath);
-					 if(!filename.equals("")) {
-						 //서버에 파일 업로드 (write)
-						 FileOutputStream fs = new FileOutputStream(fpath);
-						 fs.write(mutifile.getBytes());
-						 fs.close();
-						 try {
-							 tseq = Integer.parseInt(selectTeam);
-							 teamservice.fileInsert(tseq, filename, fsize, email);
-						 } catch (Exception e) {
-							 teamservice.myFileInsert(filename, fsize, email);
-						 }
-					 }
-					 filenames.add(filename);
-					 filesizes.add(fsize);
-				 }
-			 }
-			 String dbFileName = "";
-			 String dbFileSize = "";
-			 for(int i=0;i<filenames.size();i++) {
-				 dbFileName += filenames.get(i) + "/";
-				 dbFileSize += filesizes.get(i) + "/";
-			 }
 			 //실 DB Insert
 			if (selectTeam.equals((String) session.getAttribute("email")) || selectTeam == null) {
 				System.out.println("이프문 타니??");
@@ -177,9 +147,33 @@ public class TeamController {
 				myissue.setPicontent(issuecontent);
 				myissue.setIspibook(0);
 				myissue.setMymention(mentions);
-				myissue.setPfilename(dbFileName);
-				myissue.setPfilesize(dbFileSize);
+				//myissue.setPfilename(dbFileName);
+				//myissue.setPfilesize(dbFileSize);
 				int result = privateservice.writeMyissue(myissue);
+				 if(files != null && files.length > 0) {
+					 //업로드한 파일이 하나라도 있다면
+					 for(MultipartFile mutifile : files) {
+						 String filename = mutifile.getOriginalFilename();
+						 long fsize = mutifile.getSize();
+						 String filepath = request.getServletContext().getRealPath("/upload");
+						 String fpath = filepath + "\\" + filename;
+						 System.out.println(filename + " , " + fpath);
+						 if(!filename.equals("")) {
+							 //서버에 파일 업로드 (write)
+							 FileOutputStream fs = new FileOutputStream(fpath);
+							 fs.write(mutifile.getBytes());
+							 fs.close();
+							 try {
+								 tseq = Integer.parseInt(selectTeam);
+								 teamservice.fileInsert(tseq, filename, fsize, email);
+							 } catch (Exception e) {
+								 teamservice.myFileInsert(filename, fsize, email);
+							 }
+						 }
+						 filenames.add(filename);
+						 filesizes.add(fsize);
+					 }
+				 }
 				if(result >0) {
 					path = "redirect:/userindex.do";
 					System.out.println("success insert Myissue");
@@ -189,59 +183,38 @@ public class TeamController {
 				}
 				return path;
 			} else {
-				
 				Tissue tissue = new Tissue();
 				tissue.setEmail((String)session.getAttribute("email"));
 				tissue.setTititle(issuetitle);
 				tissue.setTicontent(issuecontent);
 				tissue.setTseq(Integer.parseInt(selectTeam));
-				String realFolder = "c:/upload2/";
-		        File dir = new File(realFolder);
-		        if (!dir.isDirectory()) {
-		            dir.mkdirs();
-		        }
-		 
-		        // 넘어온 파일을 리스트로 저장
-		       
 				int result = teamservice.writeTissue(tissue);
+				 if(files != null && files.length > 0) {
+					 //업로드한 파일이 하나라도 있다면
+					 for(MultipartFile mutifile : files) {
+						 String filename = mutifile.getOriginalFilename();
+						 long fsize = mutifile.getSize();
+						 String filepath = request.getServletContext().getRealPath("/upload");
+						 String fpath = filepath + "\\" + filename;
+						 System.out.println(filename + " , " + fpath);
+						 if(!filename.equals("")) {
+							 //서버에 파일 업로드 (write)
+							 FileOutputStream fs = new FileOutputStream(fpath);
+							 fs.write(mutifile.getBytes());
+							 fs.close();
+							 try {
+								 tseq = Integer.parseInt(selectTeam);
+								 teamservice.fileInsert(tseq, filename, fsize, email);
+							 } catch (Exception e) {
+								 teamservice.myFileInsert(filename, fsize, email);
+							 }
+						 }
+						 filenames.add(filename);
+						 filesizes.add(fsize);
+					 }
+				 }
 				if(result >0) {
-					/*	// 여기는 insert 성고
-					List<Tissue> list = new ArrayList<Tissue>();
-					  System.out.println(tissue);
-					  List<CommonsMultipartFile> files = tissue.getFiles();
-					  for(CommonsMultipartFile file : files) {
-					   
-					   if(!file.getOriginalFilename().isEmpty() && !file.isEmpty()) {
-					    File uploadFile = new File("c:/upload/", file.getOriginalFilename());
-					    
-					    // 실제 업로드
-					    try {
-							file.transferTo(uploadFile);
-						} catch (IllegalStateException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					    
-					    Tissue ti = new Tissue();
-
-					    ti.setTfilename(file.getOriginalFilename());
-					    ti.setTfilesize(file.getSize());
-					       
-					    list.add(ti);    
-					   }
-					   else {
-					   }
-					  }*/
-
-
-							 	
-					
-					
-				        path = "user/ProjectDetail";
-					
+				    path = "user/ProjectDetail";
 					System.out.println("success insert tissue");
 				}else {
 					System.out.println("에러다잉");
