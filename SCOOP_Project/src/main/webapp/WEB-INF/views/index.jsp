@@ -121,7 +121,11 @@ $(function(){
       var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
       var getCheck= RegExp(/^[a-zA-Z0-9]{8,16}$/);
       var getName= RegExp(/^[가-힣]+$/);
-
+		if($('#name').val().length>5){
+			alert("name은 5자 까지 입력가능합니다.")
+			return false;
+		}
+		
       //이메일 유효성 검사
       if(!getMail.test($("#mail").val())){
         alert("이메일 형식에 맞게 입력해주세요.")
@@ -493,11 +497,11 @@ function idOver(a){
         </div>
         <div class="form-group mb-4">
          <label>Name</label>
-         <input type="text" class="form-control" id="name" name ="name" placeholder="Name" required>
+         <input type="text" class="form-control" id="name" name ="name" placeholder="5자까지 입력가능합니다" required>
         </div>
         <div class="form-group mb-4">
          <label>Password</label>
-         <input type="password" class="form-control" id="tbPwd" name="pwd" placeholder="Password" required>
+         <input type="password" class="form-control" id="tbPwd" name="pwd" placeholder="8~16자리를 입력해주세요" required>
         </div>
         <div class="form-group" style="margin-left:27%;margin-right: 30%;">
         		<input type="submit" id="signUpBtn" value="스쿱 시작하기" class="btn btn-primary" style="width: 300px;height:38px;text-align: center;padding-top: 5px;" disabled="disabled">
