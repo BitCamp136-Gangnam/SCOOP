@@ -130,7 +130,17 @@ $(function(){
 			$("#emailcheck").val("");
 			$("#emailcheck").focus();
 			return false;
-	      }
+	      }else{
+	    	  Swal.fire({
+   				  icon: 'success',
+   				  title: '인증 이메일 발송완료!',
+   				  showConfirmButton: false,
+   				  timer: 2000
+   				})
+
+			}
+
+	      
 	}
 	//회원가입 유효성 검사
     function checkz() {
