@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import kr.or.scoop.dao.ProjectDao;
 import kr.or.scoop.dao.TissueDao;
+import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.dto.Reply;
 import kr.or.scoop.dto.TeamPjt;
 import kr.or.scoop.dto.Tissue;
@@ -17,14 +18,6 @@ public class TeamService {
 	
 	@Autowired
 	private SqlSession sqlsession;
-	
-	public int writeTissue(Tissue tissue) {
-		int result = 0 ;
-		System.out.println("writetissue");
-		TissueDao dao = sqlsession.getMapper(TissueDao.class);
-		result = dao.writeTissue(tissue);
-		return result;
-	}
 	
 	public List<Tissue> loadKanban(int tseq) {
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
