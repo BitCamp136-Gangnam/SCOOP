@@ -288,7 +288,8 @@ function idOver(a) {
 
 </script>
 <style>
-	.accordion {
+
+.accordion {
   background-color: #fff;
   color: #444;
   cursor: pointer;

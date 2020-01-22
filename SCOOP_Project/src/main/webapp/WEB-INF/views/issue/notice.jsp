@@ -227,11 +227,11 @@
 
 </body>
 <script type="text/javascript">
-
+$(document).ready(function(){
 function roll(a) {
                   //alert(a);
                   var no = '<c:out value="${no}"/>';
-                  
+                  console.log(no);
                   console.log(a);
                   console.log(bnseq);
                   console.log(bntitle);
@@ -291,5 +291,6 @@ function roll(a) {
                   });
                   
                 }
+});
 </script>
 </html>
