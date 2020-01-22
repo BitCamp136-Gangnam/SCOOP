@@ -157,7 +157,7 @@ public class BoardController {
 		
 		return viewpage;
 	}
-	
+	// 팀이슈 북마크
 	@RequestMapping(value="/tibookmark.do", method = RequestMethod.POST)
 	public String tiBookMark (HttpSession session, int tseq, int tiseq, String status, Model model) {
 		String email = (String)session.getAttribute("email");
@@ -165,6 +165,7 @@ public class BoardController {
 		int result = 0;
 		TissueDao dao = sqlSession.getMapper(TissueDao.class);
 		
+		// 북마크 추가/제거
 		if(status.equals("bookoff")) {
 			result = dao.addBookMark(tiseq, email);
 		}else if(status.equals("bookon")) {
