@@ -10,7 +10,14 @@ public class PjNotice {
 	private String email;
 	private int tseq;
 	private String name;
+	private String tititle;
 	
+	public String getTititle() {
+		return tititle;
+	}
+	public void setTititle(String tititle) {
+		this.tititle = tititle;
+	}
 	public int getPnseq() {
 		return pnseq;
 	}
@@ -57,7 +64,7 @@ public class PjNotice {
 	@Override
 	public String toString() {
 		return "PjNotice [pnseq=" + pnseq + ", pntitle=" + pntitle + ", pncontent=" + pncontent + ", pntime=" + pntime
-				+ ", email=" + email + ", tseq=" + tseq + "]";
+				+ ", email=" + email + ", tseq=" + tseq + ", name=" + name + ", tititle=" + tititle + "]";
 	}
 
 }
