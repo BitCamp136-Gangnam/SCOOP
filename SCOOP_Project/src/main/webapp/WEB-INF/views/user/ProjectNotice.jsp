@@ -255,13 +255,13 @@ $(function(){
       <c:forEach items="${pjn}" var="p">
          <div class="row" style="margin-left: 2%; margin-right: 2%">
          <div class="col-sm-3 newissue" >
-         <a href="pjNoticeDetail.do?pnseq=${p.pnseq}">${p.name}</a>
+         <a href="pjNoticeDetail.do?pnseq=${p.pnseq}&tseq=${p.tseq}">${p.name}</a>
          </div>
          <div class="col-sm-7 newissue">
-         <a href="pjNoticeDetail.do?pnseq=${p.pnseq}">${p.pntitle}</a> 
+         <a href="pjNoticeDetail.do?pnseq=${p.pnseq}&tseq=${p.tseq}">${p.pntitle}</a> 
          </div>
          <div class="col-sm-2 newissue">
-         <a href="pjNoticeDetail.do?pnseq=${p.pnseq}">${fn:substring(p.pntime,0,16)}</a> 
+         <a href="pjNoticeDetail.do?pnseq=${p.pnseq}&tseq=${p.tseq}">${fn:substring(p.pntime,0,16)}</a> 
          </div>
       </div>
       </c:forEach>

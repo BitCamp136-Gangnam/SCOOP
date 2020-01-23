@@ -123,7 +123,7 @@
 		<hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
 			<div class="row" style="margin-left: 2%; margin-right: 2%">
 				<div class="col-sm-3 newissue" >
-					제목
+				제목
 				</div>
 				<div class="col-sm-6 newissue">
 				내용
