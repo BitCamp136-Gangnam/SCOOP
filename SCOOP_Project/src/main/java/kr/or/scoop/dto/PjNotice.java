@@ -1,23 +1,16 @@
 package kr.or.scoop.dto;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class PjNotice {
 	private int pnseq;
 	private String pntitle;
 	private String pncontent;
-	private Date pntime;
+	private Timestamp pntime;
 	private String email;
 	private int tseq;
-	private String tititle;
+	private String name;
 	
-	
-	public String getTititle() {
-		return tititle;
-	}
-	public void setTititle(String tititle) {
-		this.tititle = tititle;
-	}
 	public int getPnseq() {
 		return pnseq;
 	}
@@ -36,11 +29,18 @@ public class PjNotice {
 	public void setPncontent(String pncontent) {
 		this.pncontent = pncontent;
 	}
-	public Date getPntime() {
+	
+	public Timestamp getPntime() {
 		return pntime;
 	}
-	public void setPntime(Date pntime) {
+	public void setPntime(Timestamp pntime) {
 		this.pntime = pntime;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getEmail() {
 		return email;
@@ -57,7 +57,7 @@ public class PjNotice {
 	@Override
 	public String toString() {
 		return "PjNotice [pnseq=" + pnseq + ", pntitle=" + pntitle + ", pncontent=" + pncontent + ", pntime=" + pntime
-				+ ", email=" + email + ", tseq=" + tseq + ", tititle=" + tititle + "]";
+				+ ", email=" + email + ", tseq=" + tseq + "]";
 	}
 
 }
