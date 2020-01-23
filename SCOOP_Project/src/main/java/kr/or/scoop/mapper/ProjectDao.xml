@@ -83,4 +83,7 @@ select p.pnseq,p.pntitle,p.pncontent,m.name,p.tseq,p.pntime,p.email from pjnotic
 <select id="pjNoticeDetail" resultType="kr.or.scoop.dto.PjNotice" parameterType="String">
 	select pnseq,pntitle,pncontent from pjnotice where pnseq = #{pnseq}
 </select>
+<update id="updatePjNotice" parameterType="kr.or.scoop.dto.PjNotice">
+	update pjnotice set pntitle = #{pntitle} , pncontent = #{pncontent} where pnseq = #{pnseq}
+</update>
 </mapper>

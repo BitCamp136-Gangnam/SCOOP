@@ -45,4 +45,7 @@ public interface ProjectDao {
 	
 	//프로젝트 공지사항 상세보기
 	public PjNotice pjNoticeDetail(int pnseq);
+	
+	//프로젝트 공지사항 수정
+	public int updatePjNotice(PjNotice pjnotice);
 }

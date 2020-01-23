@@ -489,7 +489,6 @@ public class MemberController {
 			if(filename.equals("")) {
 				member.setProfile((String)session.getAttribute("img"));
 			}else {
-				System.out.println("일겸일겸"+filename);
 				member.setProfile(filename);
 			}
 			String path = request.getServletContext().getRealPath("/user/upload");

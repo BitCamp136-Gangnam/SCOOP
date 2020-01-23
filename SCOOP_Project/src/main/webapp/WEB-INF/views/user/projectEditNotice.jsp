@@ -57,22 +57,22 @@
         <div class="myissueDetail">
        <textarea class="form-control createmodal" rows="3" id="pcontent_Edit"name="pncontent" style="width: 100%">${edit.pncontent}</textarea>
         </div>    
-            <!-- #/ container -->
-            </div> 
-            </div>
-        </div>
-        <!--**********************************
-            Content body end
-        ***********************************-->
         	<button type="submit" class="btn btn-secondary"
                   style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;">작성 완료</button>
                <button type="button" class="btn btn-secondary"
                   style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;"
                   data-dismiss="modal">취소</button>
         	
-	</form>
-  <jsp:include page="/WEB-INF/views/commons/footer.jsp"></jsp:include>
+            </div>
+        </div>
     </div>
+	</form>
+            </div> 
+            <!-- #/ container -->
+        <!--**********************************
+            Content body end
+        ***********************************-->
+  <jsp:include page="/WEB-INF/views/commons/footer.jsp"></jsp:include>
     <!--**********************************
         Main wrapper end
     ***********************************-->
