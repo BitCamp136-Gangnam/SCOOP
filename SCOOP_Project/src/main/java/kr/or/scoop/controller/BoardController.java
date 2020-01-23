@@ -297,6 +297,7 @@ public class BoardController {
 		ProjectDao dao = sqlSession.getMapper(ProjectDao.class);
 		MemberDao md = sqlSession.getMapper(MemberDao.class);
 		List<PjNotice> pj = dao.getPjNotice(tseq);
+		System.out.println("플젝" + pj);
 		TeamPjt pjt = dao.detailPJT(tseq);
 		int rank = dao.searchRank(tseq, email);
 		List<ProjectMemberlist> projectMemberlist =md.projectMemberlist(tseq);
@@ -307,5 +308,22 @@ public class BoardController {
 		
 		
 		return "user/ProjectNotice";
+	}
+	
+	@RequestMapping(value = "PnoticeWrite.do" , method = RequestMethod.POST)
+	public String pjNoticeWrite(PjNotice pjnotice) {
+		int result = 0;
+		String viewpage;
+		
+		result = tservice.pjNoticeWrite(pjnotice);
+		
+		if(result > 0) {
+			viewpage = "redirect:/projectNotice.do?tseq="+pjnotice.getTseq();
+		}else {
+			viewpage = "user/userindex";
+		}
+		
+		
+		return viewpage;
 	}
 }
