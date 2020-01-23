@@ -291,5 +291,6 @@ public class BoardController {
 	@RequestMapping(value="projectNotice.do", method = RequestMethod.GET)
 	public String pjNotice() {
 		
+		return null;
 	}
 }
