@@ -326,4 +326,22 @@ public class BoardController {
 		
 		return viewpage;
 	}
+	
+	@RequestMapping(value="pjNoticeDetail.do",method=RequestMethod.GET)
+	public String pjNoticeDetail(int pnseq,Model model,HttpSession session) {
+		ProjectDao dao = sqlSession.getMapper(ProjectDao.class);
+		PjNotice Detail = dao.pjNoticeDetail(pnseq);
+		model.addAttribute("detail", Detail);
+		return "user/projectDetailNotice";
+	}
+	
+	@RequestMapping(value="pjNoticeEdit.do",method=RequestMethod.GET)
+	public String pjNoticeEdit(int pnseq,Model model) {
+		ProjectDao dao = sqlSession.getMapper(ProjectDao.class);
+		PjNotice edit = dao.pjNoticeDetail(pnseq);
+		
+		model.addAttribute("edit",edit);
+		
+		return "user/projectEditNotice";
+	}
 }

@@ -797,7 +797,7 @@ span {
 <c:set var="kind" value="${session.kind}}"></c:set>
 <c:set var="email" value="${session.email}}"></c:set>
 
-<div class="nk-sidebar" style="z-index: 0">
+<div class="nk-sidebar" style="z-index: 0;padding-bottom: 0px;">
    <div id="scnav" class="nk-nav-scroll">
       <ul class="metismenu" id="menu">
          <li class="nav-label" style="padding-bottom: 10px;">

@@ -31,10 +31,7 @@
 }
 </style>
 <body>
-
     <jsp:include page="/WEB-INF/views/commons/preloader.jsp"></jsp:include>
-
-    
     <!--**********************************
         Main wrapper start
     ***********************************-->
@@ -69,15 +66,6 @@
              </li>
              <li class="nav-item">
                <a class="nav-link" data-toggle="tab" href="#">@멘션</a>
-             </li>
-              <li class="nav-item dropdown">
-               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">정렬</a>
-               <div class="dropdown-menu">
-                 <a class="dropdown-item" data-toggle="tab" href="newTissue.do">새로운 팀이슈</a>
-                 <a class="dropdown-item" data-toggle="tab" href="newReply.do">새로운 댓글</a>
-                 <a class="dropdown-item" data-toggle="tab" href="newNotice.do">새로운 공지사항</a>
-                 <a class="dropdown-item" data-toggle="tab" href="newVote.do">새로운 투표</a>
-               </div>
              </li>
           </ul>
       </div>
