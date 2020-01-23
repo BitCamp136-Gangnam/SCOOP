@@ -63,7 +63,7 @@ $(function(){
 					            '<div class="col-sm-10">'+
 					            '<div id="commentMain" style="margin: 3% 5% 3% 5%;" >'+
 					            '<div style="margin-bottom: 1%;width: 260px;">'+
-					            '<span>'+object.name+'</span><span style="padding-left:3%"><i class="far fa-clock" style="color:#E71D36 "></i>'+object.rdate.year+"-"+object.rdate.day+"-"+object.rdate.date+" "+object.rdate.hours+":"+object.rdate.minutes+'</span>'+
+					            '<span>'+object.name+'</span><span style="padding-left:3%"><i class="far fa-clock" style="color:#E71D36 "></i>'+object.rdate.substring(0,16)+'</span>'+
 					            '<br><div>'+object.rcontent+'</div></div></div></div></div>'
 						           
 							);
