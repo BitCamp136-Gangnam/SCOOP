@@ -44,25 +44,56 @@ $(function(){
       });
 
    $('#c_InformationBtn').click(function(){
-      $('#c_InformationBtn').attr("style","border:none; color: #E71D36;background-color: #fff;padding-left: 16px;padding-top: 16px;padding-right: 16px;");
-      $('#c_ManagementBtn').attr("style","border:none; color: #000;background-color: #fff;");
+      $('#c_InformationBtn').attr("style","border:none; color: #E71D36;background-color: #fff;padding-left: 16px;padding-top: 16px;padding-right: 16px; cursor:pointer;");
+      $('#c_ManagementBtn').attr("style","border:none; color: #000;background-color: #fff;padding-right: 16px; cursor:pointer;");
       $('#c_Information').show();
       $('#c_Management').hide();
    });
    $('#c_ManagementBtn').click(function(){      
-      $('#c_ManagementBtn').attr("style","border:none; color: #E71D36;background-color: #fff;");
-      $('#c_InformationBtn').attr("style","border:none; color: #000;background-color: #fff;padding-left: 16px;padding-top: 16px;padding-right: 16px;");
+      $('#c_ManagementBtn').attr("style","border:none; color: #E71D36;background-color: #fff;padding-right: 16px; cursor:pointer;");
+      $('#c_InformationBtn').attr("style","border:none; color: #000;background-color: #fff;padding-left: 16px;padding-top: 16px;padding-right: 16px; cursor:pointer;");
       $('#c_Management').show();
       $('#c_Information').hide();
    });
+   $('#c_DropProject').click(function(){
+	   Swal.fire({
+		   title: '정말로 프로젝트를 삭제하시겠습니까??',
+		   text: "삭제하시면 프로젝트의 모든 정보가 사라집니다!",
+		   icon: 'warning',
+		   showCancelButton: true,
+		   confirmButtonColor: '#d33',
+		   cancelButtonColor: '#c8c8c8',
+		   confirmButtonText: '확인',
+		   cancelButtonText: '취소'
+		 }).then((result) => {
+		   if (result.value) {
+			   location.href = 'dropProjet.do?tseq='+$('#getTseq').val();
+		   }
+		 })
+   })
    $('.adm').click(function(){
-	   if($(this).closest(".drop-down").prev().children().length==1){
+	   var memDiv = $(this).parents(".search_NameEmail");
+	   Swal.fire({
+		   title: '정말로 팀장을 위임하시겠습니까?',
+		   text: "확인을 누르시면 되돌릴수 없습니다!",
+		   icon: 'warning',
+		   showCancelButton: true,
+		   confirmButtonColor: '#d33',
+		   cancelButtonColor: '#c8c8c8',
+		   confirmButtonText: '확인',
+		   cancelButtonText: '취소'
+		 }).then((result) => {
+		   if (result.value) {
+			   location.href = 'changeManager.do?tseq='+$('#getTseq').val()+'&email='+$(this).attr('id');
+		   }
+		 })
+	 /*   if($(this).closest(".drop-down").prev().children().length==1){
 		   $(this).closest(".drop-down").prev().prepend('<i class="fas fa-user-cog" id="icon_First" style="font-size: 20px;color:#195ac2;"></i>');
 		   $(this).text('관리자 권한 해제');
 	   }else{
 		   $(this).closest(".drop-down").prev().children().first().remove();
 		   $(this).text('관리자 권한 설정');
-	   }
+	   } */
    })
    $('#admSubmit').click(function(){
 	   console.log("gd");
@@ -77,7 +108,6 @@ $(function(){
 	   }
 	   
    })
-   
    $('.banMember').click(function(){
 	   var memDiv = $(this).parents(".search_NameEmail");
 	   Swal.fire({
@@ -304,8 +334,9 @@ $(function(){
             <button type="button" class="close" data-dismiss="modal">&times;</button>
          </div>
             <div style="padding-left: 25px;">
-            <button id="c_InformationBtn" style=" border:none; border:hidden; ; color: #E71D36;background-color: #fff;padding-left: 16px;padding-top: 16px;padding-right: 16px;"><i class="far fa-edit" style="padding-right: 5px;"></i>협업공간 정보</button>
-            <button id="c_ManagementBtn" style="border:none; color: #000;background-color: #fff;" ><i class="fas fa-user-friends" style="padding-right: 5px;"></i>멤버 관리</button>
+            <button id="c_InformationBtn" style=" border:none; border:hidden; ; color: #E71D36;background-color: #fff;padding-left: 16px;padding-top: 16px;padding-right: 16px; cursor: pointer;"><i class="far fa-edit" style="padding-right: 5px;"></i>협업공간 정보</button>
+            <button id="c_ManagementBtn" style="border:none; color: #000;background-color: #fff;padding-right: 16px; cursor: pointer;" ><i class="fas fa-user-friends" style="padding-right: 5px;"></i>멤버 관리</button>
+            <button id="c_DropProject" style="border:none; color: #000;background-color: #fff; cursor: pointer;" ><i class="far fa-trash-alt" style="padding-right: 5px;"></i>협업공간 삭제하기</button>
             </div>
 
          <!-- Modal body -->
@@ -335,13 +366,8 @@ $(function(){
                         <div class="dropdown-content-body">
                         <ul style="margin-bottom: 0px; padding-bottom: 0px;padding-top: 0px;">
                         <c:choose>
-                        	<c:when test="${pm.pjuserrank==100}">
-	                           <li id="adminCancle${status.index}" value="off" class="adm">관리자 권한 해제</li>
-	                           <li class="banMember" value="${pm.email}">멤버 탈퇴</li>
-                        	</c:when>
-                        	<%-- <c:when test="${pm.pjuserrank==200}">매니저</c:when> --%>
                         	<c:when test="${pm.pjuserrank==300}">
-	                           <li id="adminPlus${status.index}" value="on" class="adm">관리자로 설정</li>
+	                           <li id="${pm.email}" value="on" class="adm">팀장 위임</li>
                         	   <li class="banMember" value="${pm.email}">멤버 탈퇴</li>
                         	</c:when>
                         </c:choose>

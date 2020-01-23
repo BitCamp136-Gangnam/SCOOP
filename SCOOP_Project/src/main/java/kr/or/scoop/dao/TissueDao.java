@@ -13,8 +13,13 @@ public interface TissueDao {
 	public int teamSetting(int pjuserrank, int tseq, String email);
 	//칸반 수정
 	public int kanbanEdit(int tseq, int tiseq, int isprocess);
-		
+	//멤버탈퇴	
 	public int banMember(int tseq, String email);
+	//팀장위임
+	public int changeMember(int tseq, String email);
+	public int changeMemberTp(int tseq, String email);
+	public int changeMemberTp2(int tseq, String email);
+	public int dropProject(int tseq);
 	
 	//팀 이슈 디테일
 	public Tissue teamissueDetail(int tiseq);

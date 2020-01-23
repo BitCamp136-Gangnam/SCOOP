@@ -246,7 +246,7 @@ public class TeamController {
 		int result = 0;
 		String viewpage;
 		
-		result = teamservice.teamSetting(pjuserrank, tseq, email);
+		//result = teamservice.teamSetting(pjuserrank, tseq, email);
 		result = teamservice.teamUpdate(teampjt);
 		
 		if(result > 0) {
@@ -293,6 +293,46 @@ public class TeamController {
 			System.out.println("멤버 탈퇴실패");
 			model.addAttribute("ajax", "멤버탈퇴 실패했습니다");
 			viewpage = "ajax/ajax";
+		}
+		return viewpage;
+		
+	}
+	@RequestMapping(value = "changeManager.do", method = {RequestMethod.POST,RequestMethod.GET})
+	public String changeManager(int tseq, String email, Model model, HttpSession session) {
+		int result = 0;
+		String viewpage;
+		System.out.println("tseq" + tseq);
+		System.out.println("email" + email);
+		String myEmail = (String)session.getAttribute("email");
+		result = teamservice.changeManager(tseq, email);
+		result = teamservice.changeManagerTp(tseq, email);
+		result = teamservice.changeManagerTp2(tseq, myEmail);
+		if(result > 0) {
+			System.out.println("관리자변경성공");
+			//model.addAttribute("ajax", "관리자변경 성공했습니다");
+			viewpage = "redirect:/projectDetail.do?tseq="+tseq;
+		}else {
+			System.out.println("멤버 탈퇴실패");
+			//model.addAttribute("ajax", "관리자변경 실패했습니다");
+			viewpage = "redirect:/projectDetail.do?tseq="+tseq;
+		}
+		return viewpage;
+		
+	}
+	@RequestMapping(value = "dropProjet.do", method = {RequestMethod.POST,RequestMethod.GET})
+	public String dropProjet(int tseq, Model model) {
+		int result = 0;
+		String viewpage;
+		System.out.println("tseq" + tseq);
+		result = teamservice.dropProject(tseq);
+		if(result > 0) {
+			System.out.println("프로젝트 삭제 성공");
+			//model.addAttribute("ajax", "관리자변경 성공했습니다");
+			viewpage = "redirect:/userindex.do";
+		}else {
+			System.out.println("프로젝트 삭제 실패");
+			//model.addAttribute("ajax", "관리자변경 실패했습니다");
+			viewpage = "redirect:/userindex.do";
 		}
 		return viewpage;
 		

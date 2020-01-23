@@ -52,6 +52,37 @@ public class TeamService {
 		result = dao.banMember(tseq, email);
 		return result;
 	}
+	public int changeManager(int tseq, String email) {
+		int result = 0;
+		System.out.println(tseq);
+		System.out.println(email);
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		result = dao.changeMember(tseq, email);
+		return result;
+	}
+	public int changeManagerTp(int tseq, String email) {
+		int result = 0;
+		System.out.println(tseq);
+		System.out.println(email);
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		result = dao.changeMemberTp(tseq, email);
+		return result;
+	}
+	public int changeManagerTp2(int tseq, String email) {
+		int result = 0;
+		System.out.println(tseq);
+		System.out.println(email);
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		result = dao.changeMemberTp2(tseq, email);
+		return result;
+	}
+	public int dropProject(int tseq) {
+		int result = 0;
+		System.out.println(tseq);
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		result = dao.dropProject(tseq);
+		return result;
+	}
 	public int teamUpdate(TeamPjt teampjt) {
 		int result = 0;
 		ProjectDao dao = sqlsession.getMapper(ProjectDao.class);
