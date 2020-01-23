@@ -215,6 +215,8 @@ $(function(){
             <h3>${tpj.pname}
             	<c:if test="${rank == 100}">
             		<i class="fas fa-cog" id="myModal_Edit_Icon" style="margin-left: 5px;cursor: pointer; font-size: 15px" data-toggle="modal" data-target="#myModal_Edit" ></i>
+            	<input type="button" class="btn btn-secondary" id="nowrite" value="공지사항 작성" data-toggle="modal" data-target="#pnoticewrite"
+                  style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;">
             	</c:if>
             </h3>
             ${tpj.pcontent}
@@ -232,7 +234,7 @@ $(function(){
                <a class="nav-link" href="cooperation-kanban.do?tseq=${tpj.tseq}">칸반</a>
              </li>
              <li class="nav-item">
-               <a class="nav-link" href="projectNotice.do">공지사항</a>
+               <a class="nav-link" href="projectNotice.do?tseq${tpj.tseq}">공지사항</a>
              </li>
           </ul>
       </div>
@@ -241,51 +243,26 @@ $(function(){
          <div class="col-sm-3 newissue" >
          작성자
          </div>
-         <div class="col-sm-6 newissue">
+         <div class="col-sm-7 newissue">
          제목 
          </div>
          <div class="col-sm-2 newissue">
          작성시간 
          </div>
-         <div class="col-sm-1 newissue">
-         북마크
-         </div>
       </div>
-      <c:forEach items="${tp}" var="ti">
-         <div class="row" style="margin-left: 2%; margin-right: 2%">
          <input type="hidden" name="tiseq" value="${ti.tiseq}" />
          <input type="hidden" name="tseq" value="${tpj.tseq}" />
+      <c:forEach items="${pjn}" var="p">
+         <div class="row" style="margin-left: 2%; margin-right: 2%">
          <div class="col-sm-3 newissue" >
-         <a href="#">작성자</a>
+         <a href="pjNoticeDetail.do?pnseq=${p.pnseq}">${p.name}</a>
          </div>
-         <div class="col-sm-6 newissue">
-         <a href="#">제목</a> 
+         <div class="col-sm-7 newissue">
+         <a href="pjNoticeDetail.do?pnseq=${p.pnseq}">${p.pntitle}</a> 
          </div>
          <div class="col-sm-2 newissue">
-         <a href="#">날짜</a> 
+         <a href="pjNoticeDetail.do?pnseq=${p.pnseq}">${fn:substring(p.pntime,0,16)}</a> 
          </div>
-         
-         <c:set var="mark" value="true" />
-			<c:set var="loop" value="false" />
-			<c:forEach items="${bookMark}" var="book">
-				<c:if test="${not loop}" />
-				<c:if test="${ti.tiseq == book.tiseq}">
-					<c:set var="mark" value="false" />
-					<c:set var="loop" value="true" />
-				</c:if>
-         	</c:forEach>
-         <c:choose>
-			<c:when test="${mark}">
-				<div class="col-sm-1 newissue">
-					<i class="bookmark far fa-bookmark" id="bookmark" name="bookoff"></i>
-				</div>
-			</c:when>
-			<c:otherwise>
-				<div class="col-sm-1 newissue">
-					<i class="bookmark fas fa-bookmark" id="bookmark" name="bookon"></i>
-				</div>
-			</c:otherwise>
-		</c:choose>
       </div>
       </c:forEach>
       
@@ -378,7 +355,43 @@ $(function(){
       </div>
    </div>
 </div>
-        
+      <div class="modal fade" id="pnoticewrite">
+   <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+
+         <!-- Modal Header -->
+         <div class="modal-header">
+            <h3 class="modal-title">공지사항 작성</h3>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+         </div>
+   
+         <form action="PnoticeWrite.do" method="POST">
+            <!-- Modal body -->
+            <div class="modal-body">
+               <!-- <p style="font-size: 12px">협업공간은 함께 일하는 멤버들끼리만 자료를 공유하고 협업할 수 있는 공간입니다.<br>
+             협업공간을 만들고 함께 일할 멤버들을 초대해보세요.</p> -->
+               <label for="bntitle">공지사항</label> <input
+                  class="form-control createmodal" type="text" id="pntitle"
+                  name="pntitle" style="width: 100%" placeholder="제목을 입력해 주세요.">
+               <br> <label for="noticecontent">공지 설명</label>
+               <textarea class="form-control createmodal" rows="5"
+                  id="pncontent" name="pncontent" style="width: 100%"
+                  placeholder="내용을 적어주세요."></textarea>   
+                  <input type="hidden" name="email" value="${sessionScope.email}">      
+                  <input type="hidden" name="tseq" value="${tpj.tseq}">      
+            <!-- Modal footer -->
+            <div class="modal-footer">
+               <button type="submit" class="btn btn-secondary"
+                  style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;">작성 완료</button>
+               <button type="button" class="btn btn-secondary"
+                  style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;"
+                  data-dismiss="modal">취소</button>
+               </div>
+            </div>
+         </form>
+      </div>
+   </div>
+   </div>
   <jsp:include page="/WEB-INF/views/commons/footer.jsp"></jsp:include>
     </div>
     <!--**********************************

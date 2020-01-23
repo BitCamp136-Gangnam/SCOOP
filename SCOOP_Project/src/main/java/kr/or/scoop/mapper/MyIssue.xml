@@ -36,13 +36,13 @@ select r.replyseq, r.rcontent, r.email, r.rdate, t.tiseq, t.tititle from reply r
 	where piseq=#{param1} and email=#{param2}
 </delete>
 <select id="getBookMark" resultType="kr.or.scoop.dto.BookMark">
-	select *
-from bookmark b full outer join myissue p on b.piseq=p.piseq
-                full outer join tissue t on b.tiseq=t.tiseq
-                full outer join member m on m.email=p.email
-                full outer join member n on n.email=t.email
-where b.email = #{email}
-order by bseq asc
+	select b.bseq, t.tseq, p.piseq, p.pititle, t.tiseq, t.tititle, b.email, n.name as tiname, m.name as piname
+	from bookmark b full outer join myissue p on b.piseq=p.piseq
+               	 	full outer join tissue t on b.tiseq=t.tiseq
+                	full outer join member m on m.email=p.email
+                	full outer join member n on n.email=t.email
+	where b.email = #{email}
+	order by bseq desc
 </select>
 <select id="teamWriteTiisueList" resultType="kr.or.scoop.dto.Tissue">
 select t.tseq,t.tititle,t.tidate,t.tiseq, t.isprocess,p.pname from tissue t join teampjt p on t.tseq = p.tseq where t.tidate > #{param1, jdbcType=TIMESTAMP} order by t.tidate desc
@@ -53,5 +53,9 @@ select r.replyseq, r.rcontent, r.email, r.rdate, t.tiseq, t.tititle from reply r
 <select id="teamWriteNoticeList" resultType="kr.or.scoop.dto.PjNotice">
 select p.pnseq, p.pntitle, p.pncontent, p.pntime, p.email, p.tseq, t.tititle from pjnotice p join teampjt t on p.tseq = t.tseq where p.email !=#{param1, jdbcType=VARCHAR} and p.pntime > #{param2, jdbcType=TIMESTAMP} order by p.pntime desc
 </select>
-
+<select id="getPjtName" resultType="kr.or.scoop.dto.ProjectName">
+	select t.tseq, t.tiseq, p.pname 
+	from tissue t join teampjt p on t.tseq=p.tseq 
+	where t.tseq = #{param1} and t.tiseq = #{param2}
+</select>
 </mapper>

@@ -27,6 +27,10 @@
 	padding-bottom: 0.7%;
 }
 </style>
+<script type="text/javascript">
+console.log(${myIssue});
+console.log(${teamIssue});
+</script>
 <body>
 
     <jsp:include page="/WEB-INF/views/commons/preloader.jsp"></jsp:include>

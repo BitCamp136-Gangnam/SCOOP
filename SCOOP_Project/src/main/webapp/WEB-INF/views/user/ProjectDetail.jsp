@@ -186,7 +186,7 @@ $(function(){
 						Swal.fire({
 				    		  title: "북마크 취소",
 				    		  text: "북마크 취소",
-				    		  icon: "worning",
+				    		  icon: "warning",
 				    		  button: "확인"
 				    		})
 					}
@@ -260,6 +260,9 @@ $(function(){
              </li>
              <li class="nav-item">
                <a class="nav-link" href="cooperation-kanban.do?tseq=${tpj.tseq}">칸반</a>
+             </li>
+             <li class="nav-item">
+               <a class="nav-link" href="projectNotice.do?tseq=${tpj.tseq}">공지사항</a>
              </li>
           </ul>
       </div>

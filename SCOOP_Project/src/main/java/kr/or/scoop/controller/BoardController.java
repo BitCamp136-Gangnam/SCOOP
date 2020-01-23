@@ -11,12 +11,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.or.scoop.dao.MemberDao;
 import kr.or.scoop.dao.MyIssueDao;
 import kr.or.scoop.dao.NoticeDao;
+import kr.or.scoop.dao.ProjectDao;
 import kr.or.scoop.dao.TissueDao;
 import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.dto.Notice;
+import kr.or.scoop.dto.PjNotice;
+import kr.or.scoop.dto.ProjectMemberlist;
 import kr.or.scoop.dto.Reply;
+import kr.or.scoop.dto.TeamPjt;
 import kr.or.scoop.dto.Tissue;
 import kr.or.scoop.service.BoardService;
 import kr.or.scoop.service.TeamService;
@@ -288,7 +293,37 @@ public class BoardController {
 	
 	@RequestMapping(value="projectNotice.do", method = RequestMethod.GET)
 	public String pjNotice(int tseq,Model model,HttpSession session) {
+		String email = (String)session.getAttribute("email");
+		ProjectDao dao = sqlSession.getMapper(ProjectDao.class);
+		MemberDao md = sqlSession.getMapper(MemberDao.class);
+		List<PjNotice> pj = dao.getPjNotice(tseq);
+		System.out.println("플젝" + pj);
+		TeamPjt pjt = dao.detailPJT(tseq);
+		int rank = dao.searchRank(tseq, email);
+		List<ProjectMemberlist> projectMemberlist =md.projectMemberlist(tseq);
+		model.addAttribute("tpj", pjt);
+		model.addAttribute("pjn", pj);	
+		model.addAttribute("rank", rank);
+		model.addAttribute("projectmember", projectMemberlist);
+		
 		
 		return "user/ProjectNotice";
+	}
+	
+	@RequestMapping(value = "PnoticeWrite.do" , method = RequestMethod.POST)
+	public String pjNoticeWrite(PjNotice pjnotice) {
+		int result = 0;
+		String viewpage;
+		
+		result = tservice.pjNoticeWrite(pjnotice);
+		
+		if(result > 0) {
+			viewpage = "redirect:/projectNotice.do?tseq="+pjnotice.getTseq();
+		}else {
+			viewpage = "user/userindex";
+		}
+		
+		
+		return viewpage;
 	}
 }

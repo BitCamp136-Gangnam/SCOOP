@@ -6,6 +6,7 @@ import java.util.List;
 import kr.or.scoop.dto.BookMark;
 import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.dto.PjNotice;
+import kr.or.scoop.dto.ProjectName;
 import kr.or.scoop.dto.Reply;
 import kr.or.scoop.dto.Tissue;
 
@@ -48,4 +49,6 @@ public interface MyIssueDao {
 	// 팀이 작성한 프로잭트 공지사항 리스트
 	public List<PjNotice> teamWriteNoticeList(String email, Timestamp idtime);
 	
+	// 팀 이름 찾기
+	public ProjectName getPjtName(int tseq, int tiseq);
 }
