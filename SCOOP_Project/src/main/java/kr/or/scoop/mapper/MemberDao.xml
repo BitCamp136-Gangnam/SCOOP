@@ -101,7 +101,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update role set rname = 'ROLE_CHARGE' where email = #{email}
 	</update>
 	<select id="getCount" parameterType="kr.or.scoop.dto.Role" resultType="int">
-	select count(*) from teampjt where email = #{email}
+    select count(*) from teampjt t join tpmember p on t.tseq=p.tseq and p.email = #{email}
 	</select>
 	<select id="getProfile" parameterType="kr.or.scoop.dto.Member" resultType="String">
 		select profile from member where email = #{email}

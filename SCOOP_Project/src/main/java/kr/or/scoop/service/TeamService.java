@@ -59,24 +59,15 @@ public class TeamService {
 		return result;
 	}
 	
-	/*
-	 * // 안씀 public int bookMark(int tiseq, int istbook, String email) { TissueDao
-	 * dao = sqlsession.getMapper(TissueDao.class);
-	 * 
-	 * int result = dao.addBookMark(tiseq, email);
-	 * System.out.println("service result : " + result); return result; }
-	 */
+	//팀 프로젝트 댓글 입력
 	public int teamComment(int tiseq,String rcontent,String email) {
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
-		System.out.println("가나다라"+tiseq+rcontent+email);
 		int result = dao.teamComment(tiseq,rcontent,email);
-		System.out.println("마바사아"+tiseq+rcontent+email);
-
 		return result;
 	}
+	//팀 댓글 비동기 뿌려주기 
 	public List<Reply> teamCommentOk(int tiseq){
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
-		
 		List<Reply> result = dao.teamCommentOk(tiseq);
 		return result;
 	}
@@ -84,7 +75,6 @@ public class TeamService {
 	public int fileInsert(int tseq, String fdname, long fdcapa, String email) {
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		int result = dao.fileInsert(tseq, fdname, fdcapa, email);
-		
 		return result;
 	}
 	public int myFileInsert(String pfdname, long pdcapa, String email) {

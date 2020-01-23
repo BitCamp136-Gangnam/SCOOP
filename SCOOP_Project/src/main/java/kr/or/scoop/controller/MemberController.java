@@ -138,42 +138,15 @@ public class MemberController {
 		result = service.insertMember(member);
 
 		if (result > 0) {
-			try {
-				PrintWriter out = response.getWriter();
-				out.println("<script>Swal.fire({\r\n" + 
-						"		  title: \"회원가입 인증 성공\",\r\n" + 
-						"		  text: \"회원가입 인증에 성공하셨습니다\",\r\n" + 
-						"		  icon: \"success\",\r\n" + 
-						"		  button: \"확인\"\r\n" + 
-						"		})</script>");
-				out.flush();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
+
 			viewpage = "redirect:/index.do";
 			session.removeAttribute("checkpwd");
 			session.removeAttribute("checkemail");
 			session.removeAttribute("checkname");
 		} else {
-			PrintWriter out;
-			try {
-				out = response.getWriter();
-				out.println("<script>Swal.fire({\r\n" + 
-						"		  title: \"회원가입 인증 성공\",\r\n" + 
-						"		  text: \"회원가입 인증에 성공하셨습니다\",\r\n" + 
-						"		  icon: \"success\",\r\n" + 
-						"		  button: \"확인\"\r\n" + 
-						"		})</script>");
-				out.flush();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			
 			System.out.println("가입실패");
-			viewpage = "index";
+			viewpage = "redirect:/index.do";
 		}
 
 		return viewpage; // 주의 (website/index.htm
