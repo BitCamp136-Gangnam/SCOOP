@@ -4,6 +4,7 @@ import java.util.List;
 
 import kr.or.scoop.dto.BookMark;
 import kr.or.scoop.dto.MyIssue;
+import kr.or.scoop.dto.PjNotice;
 import kr.or.scoop.dto.Reply;
 
 public interface MyIssueDao {
@@ -32,4 +33,14 @@ public interface MyIssueDao {
 	
 	//내가 작성한 이슈 디테일
 	public MyIssue myissueDetail(int piseq);
+
+	// 팀이 작성한 팀 이슈 리스트
+	public List<MyIssue> teamWriteTiisueList(String email, int tseq);
+
+	// 팀이 작성한 댓글 리스트
+	public List<Reply> teamWriteReplyList(String email, int tseq);
+	
+	// 팀이 작성한 프로잭트 공지사항 리스트
+	public List<PjNotice> teamWriteNoticeList(String email, int tseq);
+	
 }

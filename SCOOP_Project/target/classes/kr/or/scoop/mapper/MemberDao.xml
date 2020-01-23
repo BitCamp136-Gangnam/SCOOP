@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <!-- 일반회원가입 -->
     <insert id="insertMember" parameterType="kr.or.scoop.dto.Member">
        insert into member(email, pwd, name,idtime,loginnum)
-       values (#{email},#{pwd},#{name},SYSDATE,1)
+       values (#{email},#{pwd},#{name},SYSTIMESTAMP,1)
     </insert>
 	
 	<select id="loginCheck" resultType="int">
@@ -31,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<insert id="googleInsertCheck">
        insert into member(email,pwd,name,idtime,loginnum)
-       values (#{param1},'google',#{param2},SYSDATE,3)
+       values (#{param1},'google',#{param2},SYSTIMESTAMP,3)
     </insert>
     
     <!-- public String googleLogin(String email, String name, HttpSession session); -->
@@ -43,7 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<insert id="naverInsertCheck">
        insert into member(email,pwd,name,idtime,loginnum)
-       values (#{param1},'naver',#{param2},SYSDATE,2)
+       values (#{param1},'naver',#{param2},SYSTIMESTAMP,2)
     </insert>
     
     <select id="idCheck" resultType="int">
@@ -101,7 +101,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update role set rname = 'ROLE_CHARGE' where email = #{email}
 	</update>
 	<select id="getCount" parameterType="kr.or.scoop.dto.Role" resultType="int">
-	select count(*) from teampjt where email = #{email}
+    select count(*) from teampjt t join tpmember p on t.tseq=p.tseq and p.email = #{email}
 	</select>
 	<select id="getProfile" parameterType="kr.or.scoop.dto.Member" resultType="String">
 		select profile from member where email = #{email}

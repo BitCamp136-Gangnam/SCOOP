@@ -132,6 +132,9 @@ public class BoardController {
 		MyIssueDao dao = sqlSession.getMapper(MyIssueDao.class);
 		int result = 0;
 		
+		System.out.println(email);
+		System.out.println("pibookmark");
+		
 		// 북마크 추가/제거
 		if(status.equals("bookoff")) {
 			result = dao.addPBookMark(piseq, email);
@@ -286,5 +289,11 @@ public class BoardController {
 		}
 				
 		return viewpage;
+	}
+	
+	@RequestMapping(value="projectNotice.do", method = RequestMethod.GET)
+	public String pjNotice() {
+		
+		return null;
 	}
 }
