@@ -46,6 +46,14 @@ select r.replyseq, r.rcontent, r.email, r.rdate, t.tiseq, t.tititle from reply r
 	where b.email = #{email}
 	order by bseq asc
 </select>
-
+<select id="teamWriteTiisueList" resultType="kr.or.scoop.dto.Tissue">
+select t.tseq,t.tititle,t.tidate,t.tiseq, t.isprocess,p.pname from tissue t join teampjt p on t.tseq = #{param2,jdbcType=INTEGER} where t.email = #{param1, jdbcType=VARCHAR}
+</select>
+<select id="teamWriteReplyList" resultType="kr.or.scoop.dto.Reply">
+select r.replyseq, r.rcontent, r.email, r.rdate, t.tiseq, t.tititle from reply r join tissue t on r.tiseq = #{param2, jdbcType=INTEGER} where r.email = #{email, jdbcType=VARCHAR}
+</select>
+<select id="teamWriteNoticeList" resultType="kr.or.scoop.dto.Notice">
+select r.replyseq, r.rcontent, r.email, r.rdate, t.tiseq, t.tititle from reply r join tissue t on r.tiseq = #{param2, jdbcType=INTEGER} where r.email = #{email, jdbcType=VARCHAR}
+</select>
 
 </mapper>
