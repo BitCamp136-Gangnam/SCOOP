@@ -61,6 +61,7 @@ public class PjNotice {
 	public void setTseq(int tseq) {
 		this.tseq = tseq;
 	}
+	
 	@Override
 	public String toString() {
 		return "PjNotice [pnseq=" + pnseq + ", pntitle=" + pntitle + ", pncontent=" + pncontent + ", pntime=" + pntime
