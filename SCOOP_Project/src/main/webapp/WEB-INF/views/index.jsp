@@ -129,10 +129,10 @@ $(function(){
 	// 비밀번호 변경 이메일 유효성
 	function chgpwdchk() {
 		let getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
-		let forgotemail = $('#emailcheck').val();
+		let emailcheck = $('#emailcheck').val();
 		console.log('email : ' + forgotemail);
 		
-		if(!getMail.test(forgotemail)) {
+		if(!getMail.test(emailcheck)) {
 			Swal.fire({
  				  title: '이메일 형식이 맞지 않습니다.',
  				  showConfirmButton: false,
@@ -143,19 +143,25 @@ $(function(){
 			$("#emailcheck").focus();
 			return false;
 		}else{
+			console.log('else email : ' + forgotemail);
 			$.ajax({
 				url: "forgotpwd.do",
 				type: "POST",
-				data: forgotemail,
+				data: {"emailcheck":emailcheck},
 				success: function(){
+					console.log('success');
 					Swal.fire({
 		   				icon: 'success',
 		   				title: '인증 이메일 발송완료!',
 		   				showConfirmButton: false,
 		   				timer: 1000
 		   			})
+		   			window.setTimeout(function() {
+				  		location.href='notice.do';	
+				  	}, 1500);
 				},
 				error: function(){
+					console.log('error');
 					Swal.fire({
 		   				icon: 'error',
 		   				title: '인증 이메일 발송실패!',
