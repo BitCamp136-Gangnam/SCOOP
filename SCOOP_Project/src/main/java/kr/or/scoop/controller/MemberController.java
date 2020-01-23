@@ -215,7 +215,7 @@ public class MemberController {
 		session.setAttribute("img",img); 
 		session.setAttribute("role", role.getRname());
 		session.setAttribute("count", count);
-		session.setAttribute("file", filedrive);
+		session.setAttribute("filed", filedrive);
 		List<Tpmember> pjtlist = null;
 		try {
 			pjtlist = noticeDao.getPJT(email);
@@ -279,12 +279,12 @@ public class MemberController {
 	}
 
 	// 본인 인증 메일 발송
-	@RequestMapping(value="/forgotpwd.do", method = RequestMethod.POST)
-	public String forgotPwd(Mail mail, HttpServletRequest request, HttpServletResponse response, HttpSession session, String emailcheck) {
+	@RequestMapping(value="/forgotpwd.do")
+	public String forgotPwd(Mail mail, HttpServletRequest request, HttpServletResponse response, HttpSession session, String email) {
 		response.setContentType("text/html; charset=UTF-8");
 		//String email = request.getParameter("emailcheck");
-		session.setAttribute("email", emailcheck);
-		System.out.println("이메일 받아 오니? : " + emailcheck);
+		session.setAttribute("email", email);
+		System.out.println("이메일 받아 오니? : " + email);
 		System.out.println("세션 이메일 : " + session.getAttribute("email"));
 		String viewpage = "";
 
@@ -298,7 +298,7 @@ public class MemberController {
 			String mailBody = VelocityEngineUtils.mergeTemplateIntoString(
 					velocityEngineFactoryBean.createVelocityEngine(), "forgotPwd.vm", "UTF-8", model);
 			messageHelper.setFrom("leeyong1321@gmail.com");
-			messageHelper.setTo(emailcheck);
+			messageHelper.setTo(email);
 			messageHelper.setSubject("회원님의 SCOOP 계정의 본인 인증 이메일입니다");
 			messageHelper.setText(mailBody, true);
 			mailSender.send(message);

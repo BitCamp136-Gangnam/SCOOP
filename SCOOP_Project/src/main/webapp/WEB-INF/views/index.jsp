@@ -129,49 +129,49 @@ $(function(){
 	// 비밀번호 변경 이메일 유효성
 	function chgpwdchk() {
 		let getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
-		let emailcheck = $('#emailcheck').val();
-		console.log('email : ' + forgotemail);
+		let email = $('#emailcheck').val();
 		
-		if(!getMail.test(emailcheck)) {
+		if(!getMail.test($('#emailcheck').val())) {
 			Swal.fire({
  				  title: '이메일 형식이 맞지 않습니다.',
  				  showConfirmButton: false,
  				  icon: 'warning',
  				  timer: 1000
- 				})
+ 			})
 			$("#emailcheck").val("");
 			$("#emailcheck").focus();
 			return false;
-		}else{
-			console.log('else email : ' + forgotemail);
-			$.ajax({
-				url: "forgotpwd.do",
-				type: "POST",
-				data: {"emailcheck":emailcheck},
-				success: function(){
-					console.log('success');
-					Swal.fire({
-		   				icon: 'success',
-		   				title: '인증 이메일 발송완료!',
-		   				showConfirmButton: false,
-		   				timer: 1000
-		   			})
-		   			window.setTimeout(function() {
-				  		location.href='notice.do';	
-				  	}, 1500);
-				},
-				error: function(){
-					console.log('error');
-					Swal.fire({
-		   				icon: 'error',
-		   				title: '인증 이메일 발송실패!',
-		   				showConfirmButton: false,
-		   				timer: 1000
-		   			})
-				}
-			})
-			
 		}
+
+		$.ajax({
+			url: "forgotpwd.do",
+			type : "GET",
+			data : {"email":email},
+			async: false,
+			success: function(){
+				Swal.fire({
+	 				  title: '이메일 전송 완료!.',
+	 				  showConfirmButton: false,
+	 				  icon: 'success',
+	 				  timer: 2000
+	 			})
+	 			window.setTimeout(function() {
+			  		location.href='index.do';	
+			  	}, 20000);
+			},
+			error: function(){
+				Swal.fire({
+	 				  title: '이메일 전송 실패.',
+	 				  showConfirmButton: false,
+	 				  icon: 'warning',
+	 				  timer: 1000
+	 			})
+	 			window.setTimeout(function() {
+			  		location.href='index.do';	
+			  	}, 5000);
+			}
+		})
+		
 	}
 	//회원가입 유효성 검사
     function checkz() {
