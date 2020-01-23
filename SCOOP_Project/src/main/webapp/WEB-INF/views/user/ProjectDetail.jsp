@@ -186,7 +186,7 @@ $(function(){
 						Swal.fire({
 				    		  title: "북마크 취소",
 				    		  text: "북마크 취소",
-				    		  icon: "worning",
+				    		  icon: "warning",
 				    		  button: "확인"
 				    		})
 					}
