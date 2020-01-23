@@ -46,6 +46,7 @@ h5{
 }
 </style>
 <script>
+
 function allowDrop(ev) {
   ev.preventDefault();
 }
@@ -195,21 +196,26 @@ function drop(ev) {
         <div class="content-body">
             <div class="container-fluid">
         <div class="card">
-		<div class="row" style="margin: 2% 2% 0 2%">
+		<div class="row" style="margin: 2% 2% 15px 2%">
 			<div class="col-sm-12" style="padding-left: 0">
-				<h3 style="padding-left: 15px;">쫀쬬니</h3>
+				<h3 style="padding-left: 1%;">${tpj.pname}
+					<c:if test="${rank == 100}">
+            			<i class="fas fa-cog" id="myModal_Edit_Icon" style="margin-left: 5px;cursor: pointer; font-size: 15px" data-toggle="modal" data-target="#myModal_Edit" ></i>
+            		</c:if>
+				</h3>
+				<p style="padding-left: 1%;margin-bottom: 0px;">[${tpj.pcontent}]</p>
 			</div>
 		</div>
 		<div class="row" style="margin-left: 2%;">
 			<ul class="nav nav-pills">
 			    <li class="nav-item">
-			      <a class="nav-link" href="./cooperation-issue.jsp">협업공간 이슈</a>
+			      <a class="nav-link"  href="projectDetail.do?tseq=${tpj.tseq}">팀 이슈</a>
 			    </li>
 			    <li class="nav-item">
-			      <a class="nav-link" href="./cooperation-kanban.jsp">칸반</a>
+			      <a class="nav-link"  href="./private-cal.jsp">팀 캘린더</a>
 			    </li>
 			    <li class="nav-item">
-			      <a class="nav-link" href="./cooperation-cal.jsp">캘린더</a>
+			      <a class="nav-link" href="cooperation-kanban.do?tseq=${tpj.tseq}">칸반</a>
 			    </li>
 		    </ul>
 		</div>
