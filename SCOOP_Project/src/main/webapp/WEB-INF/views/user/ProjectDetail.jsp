@@ -233,7 +233,7 @@ $(function(){
              </li>
           </ul>
       </div>
-      <hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
+      <hr style="margin-top: 0;margin-left: 2%; margin-right: 2%;margin-bottom:0;">
       <div class="row" style="margin-left: 2%; margin-right: 2%">
          <div class="col-sm-3 newissue" >
          작성자

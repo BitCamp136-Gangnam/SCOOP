@@ -3258,7 +3258,7 @@ input[type="button"].btn-block {
       color: #fff; }
 
 .card {
-  min-height:650px;
+  min-height:657px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -7424,7 +7424,7 @@ sub {
   border-radius: 100%; }
 
 .content-body .container-fluid {
-  padding: 15px 30px 0; }
+  padding: 15px 30px 15px }
 
 @media (max-width: 767px) {
   .content-body .container-fluid {
@@ -11321,7 +11321,7 @@ table.dataTable thead .sorting::after {
     border-color: #1295bf; }
 
 .card {
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
   border: 0px;
   border-radius: 0.625rem;
  /*  box-shadow: 6px 11px 41px -28px #a99de7; */ }

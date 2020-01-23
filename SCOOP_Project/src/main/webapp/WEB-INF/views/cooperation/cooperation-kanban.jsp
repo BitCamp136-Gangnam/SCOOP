@@ -45,6 +45,15 @@ h5{
   margin-bottom: 10%;
 }
 </style>
+<script type="text/javascript">
+
+$(function(){
+	//칸반 개수 세기
+	if()
+	
+});
+
+</script>
 <script>
 
 function allowDrop(ev) {
@@ -219,7 +228,7 @@ function drop(ev) {
 			    </li>
 		    </ul>
 		</div>
-		<hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
+		<hr style="margin-top: 0;margin-left: 2%; margin-right: 2%;margin-bottom: 0px;">
 		<div class="row" style="margin-left: 2%; margin-right: 2%;">
 			<div id="todolist" class="col-sm-3 kanban">
 			<div class="realkan" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #888;height: 500px;overflow: auto;">
