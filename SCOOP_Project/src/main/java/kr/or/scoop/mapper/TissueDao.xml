@@ -69,11 +69,11 @@ insert into tissue (tiseq,tseq,email,tititle,ticontent,isprocess, istbook, issee
 	where tiseq=#{param1} and email=#{param3}
 </update> -->
 <!-- 북마크 -->
-<insert id="addBookMark">
+<insert id="addTBookMark">
 	insert into bookmark(bseq, tiseq, email) 
 	values(bseq_bookmark_seq.nextval, #{param1}, #{param2})
 </insert>
-<delete id="delBookMark">
+<delete id="delTBookMark">
 	delete from bookmark 
 	where tiseq=#{param1} and email=#{param2}
 </delete>

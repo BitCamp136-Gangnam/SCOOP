@@ -125,6 +125,7 @@ $(function(){
   });
 })
 
+// form action 지우고 ajax 얼럿 success에 넣고 슥삭 
 	// 비밀번호 변경 이메일 유효성
 	function chgpwdchk() {
 		let getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
