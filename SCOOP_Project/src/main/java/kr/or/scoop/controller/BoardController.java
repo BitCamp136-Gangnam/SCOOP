@@ -287,4 +287,10 @@ public class BoardController {
 				
 		return viewpage;
 	}
+	
+	@RequestMapping(value="projectNotice.do", method = RequestMethod.GET)
+	public String pjNotice() {
+		
+		return null;
+	}
 }

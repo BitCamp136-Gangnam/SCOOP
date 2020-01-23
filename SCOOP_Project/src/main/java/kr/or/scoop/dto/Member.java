@@ -1,5 +1,6 @@
 package kr.or.scoop.dto;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -14,9 +15,15 @@ public class Member {
 	private String dname;
 	private String drank;
 	private String address;
-	private String idtime;
+	private Timestamp idtime;
 	private int loginnum;
-	private String profile; 
+	private String profile;
+	
+	public void setIdtime(Timestamp idtime) {
+		this.idtime = idtime;
+	}
+
+	 
 
 	public String getEmail() {
 		return email;
@@ -60,14 +67,6 @@ public class Member {
 	}
 	public void setAddress(String address) {
 		this.address = address;
-	}
-
-	
-	public String getIdtime() {
-		return idtime;
-	}
-	public void setIdtime(String idtime) {
-		this.idtime = idtime;
 	}
 	
 	public CommonsMultipartFile getFilesrc() {
