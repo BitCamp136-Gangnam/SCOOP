@@ -77,6 +77,7 @@ function drop(ev) {
 		    		  icon: "success",
 		    		  button: "확인"
 		    		})
+		    	$('#todolistCnt')
 		    },
 		    error: function(err) {
 		    	Swal.fire({
