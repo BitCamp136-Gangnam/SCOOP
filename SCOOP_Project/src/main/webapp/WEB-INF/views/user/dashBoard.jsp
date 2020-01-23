@@ -31,10 +31,7 @@
 }
 </style>
 <body>
-
     <jsp:include page="/WEB-INF/views/commons/preloader.jsp"></jsp:include>
-
-    
     <!--**********************************
         Main wrapper start
     ***********************************-->
