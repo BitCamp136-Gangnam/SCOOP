@@ -73,7 +73,7 @@
                  <a class="dropdown-item" data-toggle="tab" href="newTissue.do">새로운 팀이슈</a>
                  <a class="dropdown-item" data-toggle="tab" href="newReply.do">새로운 댓글</a>
                  <a class="dropdown-item" data-toggle="tab" href="newNotice.do">새로운 공지사항</a>
-                 <a class="dropdown-item" data-toggle="tab" href="newVote.do">새로운 투표</a>
+                 <a class="dropdown-item" data-toggle="tab" href="#">새로운 투표</a>
                </div>
              </li>
           </ul>
