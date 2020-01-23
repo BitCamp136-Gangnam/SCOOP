@@ -129,7 +129,7 @@ $(function(){
 	// 비밀번호 변경 이메일 유효성
 	function chgpwdchk() {
 		let getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
-		let emailcheck = $('#emailcheck').val();
+		let email = $('#emailcheck').val();
 		
 		if(!getMail.test($('#emailcheck').val())) {
 			Swal.fire({
@@ -143,6 +143,34 @@ $(function(){
 			return false;
 		}
 
+		$.ajax({
+			url: "forgotpwd.do",
+			type : "GET",
+			data : {"email":email},
+			async: false,
+			success: function(){
+				Swal.fire({
+	 				  title: '이메일 전송 완료!.',
+	 				  showConfirmButton: false,
+	 				  icon: 'success',
+	 				  timer: 2000
+	 			})
+	 			window.setTimeout(function() {
+			  		location.href='index.do';	
+			  	}, 20000);
+			},
+			error: function(){
+				Swal.fire({
+	 				  title: '이메일 전송 실패.',
+	 				  showConfirmButton: false,
+	 				  icon: 'warning',
+	 				  timer: 1000
+	 			})
+	 			window.setTimeout(function() {
+			  		location.href='index.do';	
+			  	}, 5000);
+			}
+		})
 		
 	}
 	//회원가입 유효성 검사
@@ -552,7 +580,7 @@ function idOver(a) {
      </div>
      <div class="modal-body p-4 p-lg-5">
       <img class="img-responsive center-block" alt="Scoop로고" src="resources/images/logo/ScoopBig.png" style="width:100%;height:auto;padding-right:15%;padding-left:15%;"/>
-      <form action="forgotpwd.do" class="login-form text-left" id="pwdchg" name="pwdchg" onsubmit="return chgpwdchk();">
+      <form class="login-form text-left" id="pwdchg" name="pwdchg" onsubmit="return chgpwdchk();">
         <div class="form-group mb-4">
          <label>Email address</label>
          <input type="email" class="form-control" id="emailcheck" name="emailcheck" placeholder="E-mail@company.com" required>
