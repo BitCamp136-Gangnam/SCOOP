@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 <head>
     <meta charset="utf-8">
@@ -258,7 +259,7 @@ $(function(){
          <a href="teamissueDetail.do?tiseq=${ti.tiseq}">${ti.tititle}</a> 
          </div>
          <div class="col-sm-2 newissue">
-         <a href="teamissueDetail.do?tiseq=${ti.tiseq}">${ti.tidate}</a> 
+         <a href="teamissueDetail.do?tiseq=${ti.tiseq}">${fn:substring(ti.tidate,0,16)}</a> 
          </div>
          
          <c:set var="mark" value="true" />

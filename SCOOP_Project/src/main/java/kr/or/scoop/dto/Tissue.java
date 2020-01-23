@@ -2,6 +2,7 @@ package kr.or.scoop.dto;
 
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -25,7 +26,7 @@ public class Tissue {
 	private long tfilesize;
 	private int istbook;
 	private int issee;
-	private Date tidate;
+	private Timestamp tidate;
 	private String tgfilename;
 	private String tmemail;
 	private String turl;
@@ -112,13 +113,13 @@ public class Tissue {
 	public void setIssee(int issee) {
 		this.issee = issee;
 	}
-	public Date getTidate() {
+	
+	public Timestamp getTidate() {
 		return tidate;
 	}
-	public void setTidate(Date tidate) {
+	public void setTidate(Timestamp tidate) {
 		this.tidate = tidate;
 	}
-	
 	public String getName() {
 		return name;
 	}
