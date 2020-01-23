@@ -2,7 +2,7 @@ package kr.or.scoop.dao;
 
 import java.util.List;
 
-import kr.or.scoop.dto.ProjectMemberlist;
+import kr.or.scoop.dto.PjNotice;
 import kr.or.scoop.dto.TeamPjt;
 import kr.or.scoop.dto.Tissue;
 import kr.or.scoop.dto.Tpmember;
@@ -35,5 +35,8 @@ public interface ProjectDao {
 	public int delBookMark(int tiseq, String email);
 	
 	//북마크 조회
-	public int seachBookMark();
+	public int seachBookMark(int tseq);
+	
+	//프로젝트 공지사항 리스트
+	public List<PjNotice> getPjNotice(int tseq);
 }
