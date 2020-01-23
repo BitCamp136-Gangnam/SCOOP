@@ -140,17 +140,26 @@ $(function(){
 						console.log('bookoff if');
 						book.removeAttr('name').attr('name', 'bookon');
 						book.removeClass(mark[1]+" "+mark[2]).addClass("fas fa-bookmark");
+
+						Swal.fire({
+				    		  title: "북마크 성공",
+				    		  text: "북마크 성공",
+				    		  icon: "success",
+				    		  button: "확인"
+				    		})
 					}else if(status == "bookon"){
 						console.log('bookon if');
 						book.removeAttr("name").attr("name", "bookoff");
 						book.removeClass(mark[1]+" "+mark[2]).addClass("far fa-bookmark");
+
+						Swal.fire({
+				    		  title: "북마크 취소",
+				    		  text: "북마크 취소",
+				    		  icon: "worning",
+				    		  button: "확인"
+				    		})
 					}
-					Swal.fire({
-			    		  title: "북마크 성공",
-			    		  text: "북마크 성공",
-			    		  icon: "success",
-			    		  button: "확인"
-			    		})
+					
 
 				},
 				error : function(err){

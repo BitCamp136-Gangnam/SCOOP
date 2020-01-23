@@ -27,7 +27,9 @@
 	    			  '네이버 로그인 성공',
 	    			  'success'
 	    )			
-	    location.href="userindex.do";
+	    window.setTimeout(function() {
+	    	location.href='userindex.do';	
+	    }, 1500);
 	    },
 	    error:function(data) {
 	    	Swal.fire(
@@ -35,7 +37,9 @@
 	    			  '이미 가입된 아이디가 있습니다',
 	    			  'warning'
 	    			)
-	    			location.href="index.do";
+	    			window.setTimeout(function() {
+	    				location.href='index.do';	
+	    			}, 1500);
 	    }
 	});
 }

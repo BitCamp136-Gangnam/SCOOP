@@ -56,8 +56,8 @@
 			<div class="row col-sm-12">
 				<div class="col-sm-3 newissue"><b>협업 공간</b></div>
 				<div class="col-sm-5 newissue"><b>글 제목</b></div>
-				<div class="col-sm-4 newissue"><b>글쓴이</b></div>
-				<div class="col-sm-1"></div>
+				<div class="col-sm-3 newissue"><b>글쓴이</b></div>
+				<div class="col-sm-1 newissue">취소</div>
 			</div>
 			
 		</div>
@@ -75,7 +75,7 @@
 					<div class="col-sm-3 newissue">
 						${blist.tiname}
 					</div>
-					<div class="col-sm-1 newissue">
+					<div class="col-sm-1 newissue" style="padding-left: 25px;">
 						<i class="fas fa-times bookmark" id="timark" name="${blist.tiseq}"></i>
 					</div>
 				</c:when>
@@ -89,7 +89,7 @@
 					<div class="col-sm-3 newissue" >
 						${blist.piname}
 					</div>
-					<div class="col-sm-1 newissue">
+					<div class="col-sm-1 newissue" style="padding-left: 25px;">
 						<i class="fas fa-times bookmark" id="pimark" name="${blist.piseq}"></i>
 					</div>
 				</c:when>
@@ -177,15 +177,17 @@
 			    		  icon: "success",
 			    		  button: "확인"
 			    	})
+			    	location.reload();
 				},
 				error : function(err){
 					console.log('실패');
 					Swal.fire({
-			    		  title: "북마크 취소",
-			    		  text: "북마크 취소",
+			    		  title: "북마크 삭제 에러",
+			    		  text: "북마크 삭제 실패",
 			    		  icon: "info",
 			    		  button: "확인"
 			    	})
+			    	location.reload();
 				}
 			});
 		})
