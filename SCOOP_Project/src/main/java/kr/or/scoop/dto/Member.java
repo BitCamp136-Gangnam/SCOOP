@@ -25,6 +25,12 @@ public class Member {
 
 	 
 
+	public Timestamp getIdtime() {
+		return idtime;
+	}
+
+
+
 	public String getEmail() {
 		return email;
 	}
