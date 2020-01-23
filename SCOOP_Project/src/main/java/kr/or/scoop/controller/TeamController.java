@@ -98,7 +98,7 @@ public class TeamController {
 	
 	//팀 디테일 
 	@RequestMapping(value = "projectDetail.do" , method = RequestMethod.GET)
-	public String JoinProject(HttpSession session, int tseq, Model model) {
+	public String projectDetail(HttpSession session, int tseq, Model model) {
 		String email = (String)session.getAttribute("email");
 		System.out.println(tseq);
 		
@@ -133,8 +133,6 @@ public class TeamController {
 		public String writeIssue(String issuetitle, String fileclick, String issuecontent, String selectTeam, Model model,
 				HttpSession session,HttpServletRequest request, String mentions, @RequestParam(value="files") MultipartFile[] files) throws IOException {
 			String path = "";
-			List<String> filenames = new ArrayList<String>();
-			List<Long> filesizes = new ArrayList<Long>();
 			String email = (String)session.getAttribute("email");
 			int tseq = 0;
 			System.out.println("파일??"+files);
@@ -164,14 +162,11 @@ public class TeamController {
 							 fs.write(mutifile.getBytes());
 							 fs.close();
 							 try {
-								 tseq = Integer.parseInt(selectTeam);
-								 teamservice.fileInsert(tseq, filename, fsize, email);
+								 teamservice.myFileInsert(filename, fsize, email);
 							 } catch (Exception e) {
 								 teamservice.myFileInsert(filename, fsize, email);
 							 }
 						 }
-						 filenames.add(filename);
-						 filesizes.add(fsize);
 					 }
 				 }
 				if(result >0) {
@@ -183,12 +178,12 @@ public class TeamController {
 				}
 				return path;
 			} else {
-				Tissue tissue = new Tissue();
+				MyIssue tissue = new MyIssue();
+				tissue.setTseq(Integer.parseInt(selectTeam));
 				tissue.setEmail((String)session.getAttribute("email"));
 				tissue.setTititle(issuetitle);
 				tissue.setTicontent(issuecontent);
-				tissue.setTseq(Integer.parseInt(selectTeam));
-				int result = teamservice.writeTissue(tissue);
+				int result = privateservice.writeTissue(tissue);
 				 if(files != null && files.length > 0) {
 					 //업로드한 파일이 하나라도 있다면
 					 for(MultipartFile mutifile : files) {
@@ -206,19 +201,18 @@ public class TeamController {
 								 tseq = Integer.parseInt(selectTeam);
 								 teamservice.fileInsert(tseq, filename, fsize, email);
 							 } catch (Exception e) {
-								 teamservice.myFileInsert(filename, fsize, email);
+								 tseq = Integer.parseInt(selectTeam);
+								 teamservice.fileInsert(tseq, filename, fsize, email);
 							 }
 						 }
-						 filenames.add(filename);
-						 filesizes.add(fsize);
 					 }
 				 }
 				if(result >0) {
-				    path = "user/ProjectDetail";
+				    path = "redirect:/projectDetail.do?tseq="+tseq;
 					System.out.println("success insert tissue");
 				}else {
 					System.out.println("에러다잉");
-					path = "user/ProjectDetail";
+					path = "redirect:/projectDetail.do?tseq="+tseq;
 					System.out.println("fail insert tissue");
 				}
 			}

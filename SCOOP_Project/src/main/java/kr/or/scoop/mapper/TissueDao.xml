@@ -4,10 +4,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.scoop.dao.TissueDao">
 
-<insert id="writeTissue" parameterType="kr.or.scoop.dto.Tissue" >
-insert into tissue (tiseq,tseq,email,tititle,ticontent,isprocess, istbook, issee, tidate)
-  values (TISEQ_TISSUE_SEQ.NEXTVAL, #{tseq}, #{email}, #{tititle}, #{ticontent}, 0, 0, 0, sysdate)
-</insert>
 <resultMap type="kr.or.scoop.dto.Member" id="Member">
 	<result column="tseq" property="tseq"/>
 	<result column="email" property="email"/>

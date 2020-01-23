@@ -94,16 +94,16 @@
          
          <c:choose>
          	<c:when test="${al.pnseq!=0 }">
-         	${al.pnatitle }
+         	<p>${al.pnatitle }</p>
          	</c:when>
          	<c:when test="${al.replyseq!=0 }">
-         	${al.ratitle }
+         	<p>${al.ratitle }</p>
          	</c:when>
          	<c:when test="${al.tiseq!=0 }">
-         	${al.tiatitle }
+         	<p>${al.tiatitle }</p>
          	</c:when>
          	<c:when test="${al.vseq!=0 }">
-         	${al.vatitle }
+         	<p>${al.vatitle }</p>
          	</c:when>
          </c:choose>
          </div>
@@ -127,7 +127,7 @@
       </div>
       </c:forEach>
       </c:if>
-      		<button id="load" >더 보기</button>
+      		<!-- <button id="load" >더 보기</button> -->
             <!-- #/ container -->
             </div>
             </div>
@@ -176,9 +176,10 @@
 		$(function(){
 			$("p").slice(0,10).show();
 			$("#load").click(function(e){
+				console.log(e);
 				e.prevenDefault();
-				$("p").slice(0,10).show();
-					if($("#ialarm").length == 0){
+				$("p hidden").slice(0,10).show();
+					if($("<p>").length == 0){
 					alert("더 이상 글이 없습니다.");
 						}
 				

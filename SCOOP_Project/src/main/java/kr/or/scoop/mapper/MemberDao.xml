@@ -112,4 +112,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getFileProject" resultType="kr.or.scoop.dto.FileDrive">
 		select * from filedrive f join teampjt t on f.tseq=t.tseq where f.email=#{param1} and f.tseq=#{param2}
 	</select>
+	<select id="getMyFile" resultType="kr.or.scoop.dto.PrivateFileDrive">
+		select * from pfiledrive where email=#{email,jdbcType=VARCHAR}
+	</select>
 </mapper>

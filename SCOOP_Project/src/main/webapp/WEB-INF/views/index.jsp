@@ -203,16 +203,7 @@ $(function(){
         $("#tbPwd").focus();
         return false;
       }
-      
-   		//회원가입 시 메일 보낼 때 얼럿창
-   		
-   			Swal.fire({
-   				  icon: 'success',
-   				  title: '회원가입 이메일 발송완료!',
-   				  showConfirmButton: false,
-   				  timer: 2000
-   				})
-    		
+      	
  
     return true;
   }
@@ -534,7 +525,7 @@ function idOver(a) {
          <label>Email address</label>
          <input type="text" class="form-control signup" id="mail" name="email" placeholder="E-mail@company.com" required>
          <br>
-         <button type="button" id="idcheck" class="btn btn-primary" style="width: 150px;height:38px;padding-top: 10px;" onclick="idOver(this.id)">아이디 중복체크</button>
+         <button type="button" id="idcheck" class="btn btn-primary" style="width: 150px;height:38px;" onclick="idOver(this.id)">아이디 중복체크</button>
         </div>
         <div class="form-group mb-4">
          <label>Name</label>
