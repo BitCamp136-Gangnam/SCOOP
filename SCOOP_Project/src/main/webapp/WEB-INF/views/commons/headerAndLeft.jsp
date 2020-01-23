@@ -967,7 +967,14 @@ span {
             src="<c:url value="/upload/${f.fdname}" />">
         </a>
          <p style="font-size: 15px; text-align: center">
-            ${f.fdname}<br> ${f.pname}
+            <c:choose>
+           <c:when test="${fn:length(f.fdname) > 12 || fn:length(f.pname) > 12}">
+            <c:out value="${fn:substring(f.fdname,0,14)}"/> ...<br>  <c:out value="${fn:substring(f.pname,0,11)}"/> ...
+            </c:when>
+            <c:otherwise>
+            	<c:out value="${f.fdname}"/><br> <c:out value="${f.pname}"/>
+            </c:otherwise>
+            </c:choose>
          </p>
       </div>
    </c:forEach>
