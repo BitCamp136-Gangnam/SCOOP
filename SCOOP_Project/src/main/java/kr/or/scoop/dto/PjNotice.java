@@ -4,15 +4,20 @@ import java.sql.Timestamp;
 
 public class PjNotice {
 	private int pnseq;
-	private int tseq;
 	private String pntitle;
 	private String pncontent;
 	private Timestamp pntime;
 	private String email;
+	private int tseq;
 	private String name;
-	private String pname;
-	private String pcontent;
+	private String tititle;
 	
+	public String getTititle() {
+		return tititle;
+	}
+	public void setTititle(String tititle) {
+		this.tititle = tititle;
+	}
 	public int getPnseq() {
 		return pnseq;
 	}
@@ -56,25 +61,10 @@ public class PjNotice {
 	public void setTseq(int tseq) {
 		this.tseq = tseq;
 	}
-	public String getPname() {
-		return pname;
-	}
-	public void setPname(String pname) {
-		this.pname = pname;
-	}
-	public String getPcontent() {
-		return pcontent;
-	}
-	public void setPcontent(String pcontent) {
-		this.pcontent = pcontent;
-	}
-	
 	@Override
 	public String toString() {
 		return "PjNotice [pnseq=" + pnseq + ", pntitle=" + pntitle + ", pncontent=" + pncontent + ", pntime=" + pntime
-				+ ", email=" + email + ", tseq=" + tseq + ", name=" + name + ", pname=" + pname + ", pcontent="
-				+ pcontent + "]";
+				+ ", email=" + email + ", tseq=" + tseq + ", name=" + name + ", tititle=" + tititle + "]";
 	}
-	
 
 }
