@@ -58,7 +58,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <delete id="banMember">
 	delete from tpmember where tseq=#{param1} and email=#{param2}
 </delete>
-
+<update id="changeMember">
+	update teampjt set email = #{param2} where tseq=#{param1}
+</update>
+<update id="changeMemberTp">
+	update tpmember set pjuserrank = 100 where email= #{param2} and tseq=#{param1}
+</update>
+<update id="changeMemberTp2">
+	update tpmember set pjuserrank = 300 where email= #{param2} and tseq=#{param1}
+</update>
+<delete id="dropProject">
+	delete from teampjt where tseq=#{param1}
+</delete>
 <!-- <update id="tiBookMark" parameterType="kr.or.scoop.dto.Tissue">
 	update Tissue
 	set istbook = #{param2}
