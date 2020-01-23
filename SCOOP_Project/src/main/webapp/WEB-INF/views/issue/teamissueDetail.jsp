@@ -48,7 +48,7 @@ $(function(){
 						$('#commentMain').empty();
 						$.each(event,function(index,object){
 							var src = "";
-		                     if(object.profile==null){
+		                     if(object.profile==''){
 		                        src = '/SCOOP/resources/images/avatar/avatar.png';
 		                     }else{
 		                        src = '/SCOOP/user/upload/'+object.profile;

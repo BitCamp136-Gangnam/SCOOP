@@ -855,11 +855,22 @@ span {
             onkeyup="filter()" type="search" id="searchpjt" class="form-control"
             style="border-radius: 0.25rem; height: 20px" placeholder="협업공간 검색"></li>
          <c:forEach items="${pjtlist}" var="p">
+            <c:choose>
+           <c:when test="${fn:length(p.pname) > 13}">
             <li class="search_project"><a
                href="projectDetail.do?tseq=${p.tseq}" class="projecthref" aria-expanded="false"><span
                   class="iconify" data-icon="bx:bxs-flag-alt" data-inline="false"
                   style="width: 20px; height: auto;"> </span><span
-                  class="nav-text resultsearch"> &nbsp;${p.pname}</span></a></li>
+                  class="nav-text resultsearch"> &nbsp; <c:out value="${fn:substring(p.pname,0,13)}"/> ...</span></a></li>
+               </c:when>
+               <c:otherwise>
+               <li class="search_project"><a
+               href="projectDetail.do?tseq=${p.tseq}" class="projecthref" aria-expanded="false"><span
+                  class="iconify" data-icon="bx:bxs-flag-alt" data-inline="false"
+                  style="width: 20px; height: auto;"> </span><span
+                  class="nav-text resultsearch"> &nbsp; <c:out value="${p.pname}"/></span></a></li>
+           </c:otherwise> 
+          </c:choose>    
          </c:forEach>
          <li class="nav-label" style="padding-bottom: 30px"></li>
       </ul>
@@ -929,7 +940,7 @@ span {
    <div class="row" style="margin: 2%;">
       <div class="col-sm-12">
          <h3>파일함(Ctrl + .)</h3>
-         <h6>어디서든 Drag & Drop으로 파일을 업로드할 수 있습니다.</h6>
+         <h6>파일을 클릭하시면 다운로드 됩니다.</h6>
       </div>
    </div>
    <div class="row" style="margin: 2%;">
@@ -937,7 +948,7 @@ span {
          <li class="nav-item"><a class="nav-link" id="myFile" style="cursor: pointer;">내 파일</a></li>
          <li class="nav-item" style="margin-right: 10px">
           <select id="selectFile" name="tseq" class="form-control" style="border: none; color: #76838f; font-size: 18px; padding-top: 0;">
-                 <option value="0">전체 파일</option>
+                 <option value="0">프로젝트 전체 파일</option>
               <c:forEach items="${pjtlist}" var="p">
                  <option value="${p.tseq}">${p.pname}</option>
               </c:forEach>
@@ -949,14 +960,21 @@ span {
       </ul>
    </div>
    <div class="row" id="fileLocation" style="margin: 2%; overflow: auto; height: 600px">
-   <c:forEach items="${file}" var="f">
+   <c:forEach items="${filed}" var="f">
       <div class="fileDown" id="${f.fdname}" style="width: 150px; height:150px; margin: 1%;">
       	<a href="fileDownload.do?fileName=${f.fdname}">
          <img id="${f.tseq}" width="100px" height="100px" style="margin: 1%; display: block; margin-left: auto; margin-right: auto"
             src="<c:url value="/upload/${f.fdname}" />">
         </a>
          <p style="font-size: 15px; text-align: center">
-            ${f.fdname}<br> ${f.pname}
+            <c:choose>
+           <c:when test="${fn:length(f.fdname) > 12 || fn:length(f.pname) > 12}">
+            <c:out value="${fn:substring(f.fdname,0,14)}"/> ...<br>  <c:out value="${fn:substring(f.pname,0,11)}"/> ...
+            </c:when>
+            <c:otherwise>
+            	<c:out value="${f.fdname}"/><br> <c:out value="${f.pname}"/>
+            </c:otherwise>
+            </c:choose>
          </p>
       </div>
    </c:forEach>

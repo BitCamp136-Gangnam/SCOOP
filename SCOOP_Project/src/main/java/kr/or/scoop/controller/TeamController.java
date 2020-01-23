@@ -170,10 +170,10 @@ public class TeamController {
 					 }
 				 }
 				if(result >0) {
-					path = "redirect:/userindex.do";
+					path = "ajax/makeMyIssueSwal";
 					System.out.println("success insert Myissue");
 				}else {
-					path = "redirect:/userindex.do";
+					path = "ajax/makeMyIssueFailSwal";
 					System.out.println("fail insert Myissue");
 				}
 				return path;
@@ -208,11 +208,14 @@ public class TeamController {
 					 }
 				 }
 				if(result >0) {
-				    path = "redirect:/projectDetail.do?tseq="+tseq;
+					tseq = Integer.parseInt(selectTeam);
+					model.addAttribute("tseq", tseq);
+					path = "ajax/makeTeamIssueSwal";
 					System.out.println("success insert tissue");
 				}else {
-					System.out.println("에러다잉");
-					path = "redirect:/projectDetail.do?tseq="+tseq;
+					tseq = Integer.parseInt(selectTeam);
+					model.addAttribute("tseq", tseq);
+					path = "ajax/makeTeamIssueFailSwal";
 					System.out.println("fail insert tissue");
 				}
 			}

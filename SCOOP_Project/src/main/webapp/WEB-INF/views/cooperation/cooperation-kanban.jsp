@@ -77,6 +77,7 @@ function drop(ev) {
 		    		  icon: "success",
 		    		  button: "확인"
 		    		})
+		    	$('#todolistCnt')
 		    },
 		    error: function(err) {
 		    	Swal.fire({
@@ -218,7 +219,7 @@ function drop(ev) {
 			<div class="realkan" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #888;height: 500px;overflow: auto;">
 			<div style="margin-bottom: 7%;">
 			<div class="iconify" data-icon="uil:file-exclamation-alt" data-inline="false" style="width: 25px;height: auto;"></div>
-			<div style="font-size:15px;float:right;padding-right: 170px;padding-top:1%;">발의됨</div>
+			<span style="font-size:15px;padding-top:1%;">발의됨(<span id="todolistCnt"> </span>)</span><hr>
 			</div>
 			
 			  <c:forEach items="${tissuelist}" var="tl">
@@ -234,7 +235,7 @@ function drop(ev) {
 				<div class="realkan" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #2671bd;height: 500px;overflow: auto">
 				<div style="margin-bottom: 7%;">
 				<div class="iconify" data-icon="uil:file-edit-alt" data-inline="false"style="width: 25px;height: auto;color:#2671bd"></div>
-				<div style="font-size:15px;float:right;padding-right: 170px;padding-top:1%;">진행중</div>
+				<span style="font-size:15px;padding-top:1%;">진행중 (<span id="doingCnt"> </span>)</span><hr>
 				</div>
 				
 				<c:forEach items="${tissuelist}" var="tl">
@@ -249,7 +250,7 @@ function drop(ev) {
 				<div class="realkan" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #cca352;height: 500px;overflow: auto">
 				<div style="margin-bottom: 7%;">
 				<div class="iconify" data-icon="uil:file-block-alt" data-inline="false" style="width: 25px;height: auto;color:#cca352"></div>
-				<div style="font-size:15px;float:right;padding-right: 155px;padding-top:1%;">일시중지</div>
+				<span style="font-size:15px;padding-top:1%;">일시중지 (<span id="validateCnt"> </span>)</span><hr>
 				</div>
 				
 				<c:forEach items="${tissuelist}" var="tl">
@@ -264,7 +265,7 @@ function drop(ev) {
 				<div class="realkan" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #26805c;height: 500px;overflow: auto">
 				<div style="margin-bottom: 7%;">
 				<div class="iconify" data-icon="uil:file-check-alt" data-inline="false" style="width: 25px;height: auto;color:#26805c"></div>
-				<div style="font-size:15px;float:right;padding-right: 185px;padding-top:1%;">완료</div>
+				<span style="font-size:15px;padding-top:1%;">완료 (<span id="completeCnt"> </span>)</span><hr>
 				</div>
 				
 				<c:forEach items="${tissuelist}" var="tl">
