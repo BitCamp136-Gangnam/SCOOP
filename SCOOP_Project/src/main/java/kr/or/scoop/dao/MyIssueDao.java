@@ -32,4 +32,10 @@ public interface MyIssueDao {
 	
 	//내가 작성한 이슈 디테일
 	public MyIssue myissueDetail(int piseq);
+
+	// 팀이 작성한 팀 이슈 리스트
+	public List<MyIssue> teamWriteTiisueList(String email, int tseq);
+
+	// 팀이 작성한 댓글 리스트
+	public List<Reply> teamWriteReplyList(String email, int tseq);
 }
