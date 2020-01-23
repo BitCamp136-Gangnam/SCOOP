@@ -80,4 +80,7 @@ select p.pnseq,p.pntitle,p.pncontent,m.name,p.tseq,p.pntime,p.email from pjnotic
 <insert id="pjNoticeWrite" parameterType="kr.or.scoop.dto.PjNotice">
 	insert into pjnotice(pnseq,pntitle,pncontent,tseq,pntime,email) values (pnseq_pjnotice_seq.nextval,#{pntitle},#{pncontent},#{tseq},systimestamp,#{email})
 </insert>
+<select id="pjNoticeDetail" resultType="kr.or.scoop.dto.PjNotice" parameterType="String">
+	select pnseq,pntitle,pncontent from pjnotice where pnseq = #{pnseq}
+</select>
 </mapper>
