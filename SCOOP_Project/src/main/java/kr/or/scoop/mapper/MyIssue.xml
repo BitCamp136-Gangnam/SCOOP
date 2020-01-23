@@ -27,11 +27,11 @@ select r.replyseq, r.rcontent, r.email, r.rdate, t.tiseq, t.tititle from reply r
 	SELECT piseq, pititle, picontent, pidate, ispibook FROM myissue WHERE piseq = #{piseq, jdbcType=INTEGER}
 </select>
 <!-- 북마크 -->
-<insert id="addBookMark">
+<insert id="addPBookMark">
 	insert into bookmark(bseq, piseq, email) 
 	values(bseq_bookmark_seq.nextval, #{param1}, #{param2})
 </insert>
-<delete id="delBookMark">
+<delete id="delPBookMark">
 	delete from bookmark 
 	where piseq=#{param1} and email=#{param2}
 </delete>

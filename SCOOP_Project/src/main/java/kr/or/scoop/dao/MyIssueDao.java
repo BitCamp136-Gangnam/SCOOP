@@ -25,8 +25,8 @@ public interface MyIssueDao {
 	public List<Reply> MyWriteReplyList(String email);
 	
 	//북마크
-	public int addBookMark(int piseq, String email);
-	public int delBookMark(int piseq, String email);
+	public int addPBookMark(int piseq, String email);
+	public int delPBookMark(int piseq, String email);
 	//북마크 리스트
 	public List<BookMark> getBookMark(String email);
 	

@@ -855,11 +855,22 @@ span {
             onkeyup="filter()" type="search" id="searchpjt" class="form-control"
             style="border-radius: 0.25rem; height: 20px" placeholder="협업공간 검색"></li>
          <c:forEach items="${pjtlist}" var="p">
+            <c:choose>
+           <c:when test="${fn:length(p.pname) > 13}">
             <li class="search_project"><a
                href="projectDetail.do?tseq=${p.tseq}" class="projecthref" aria-expanded="false"><span
                   class="iconify" data-icon="bx:bxs-flag-alt" data-inline="false"
                   style="width: 20px; height: auto;"> </span><span
-                  class="nav-text resultsearch"> &nbsp;${p.pname}</span></a></li>
+                  class="nav-text resultsearch"> &nbsp; <c:out value="${fn:substring(p.pname,0,13)}"/> ...</span></a></li>
+               </c:when>
+               <c:otherwise>
+               <li class="search_project"><a
+               href="projectDetail.do?tseq=${p.tseq}" class="projecthref" aria-expanded="false"><span
+                  class="iconify" data-icon="bx:bxs-flag-alt" data-inline="false"
+                  style="width: 20px; height: auto;"> </span><span
+                  class="nav-text resultsearch"> &nbsp; <c:out value="${p.pname}"/></span></a></li>
+           </c:otherwise> 
+          </c:choose>    
          </c:forEach>
          <li class="nav-label" style="padding-bottom: 30px"></li>
       </ul>
