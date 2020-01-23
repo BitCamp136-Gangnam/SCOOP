@@ -33,7 +33,7 @@
 
 			let dat;
 			let mark;
-			
+			console.log(piseq);
 			$.ajax({
 				url : "pibookmark.do",
 				type : "POST",

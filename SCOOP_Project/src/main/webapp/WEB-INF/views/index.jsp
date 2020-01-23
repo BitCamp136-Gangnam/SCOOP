@@ -136,42 +136,71 @@ $(function(){
  				  title: '이메일 형식이 맞지 않습니다.',
  				  showConfirmButton: false,
  				  icon: 'warning',
- 				  timer: 1000
+ 				  timer: 5000
  			})
 			$("#emailcheck").val("");
 			$("#emailcheck").focus();
 			return false;
+		}else {
+			$.ajax({
+				url: "idOverlab.do",
+				type: "POST",
+				data: {"email": email},
+				async: false,
+				success : function(data) {
+					if (data == 0) {
+						$("#emailcheck").val("");
+						$("#emailcheck").focus();
+						Swal.fire({
+			 				title: '가입된 이메일이 없습니다',
+			 				showConfirmButton: false,
+			 				icon: 'warning',
+			 				timer: 5000
+			 			})
+						return false;
+					}else {
+						$.ajax({
+							url: "forgotpwd.do",
+							type : "GET",
+							data : {"email":email},
+							async: false,
+							success: function(){
+								Swal.fire({
+					 				  title: '이메일 전송 완료!.',
+					 				  showConfirmButton: false,
+					 				  icon: 'success',
+					 				  timer: 5000
+					 			})
+					 			window.setTimeout(function() {
+							  		location.href='index.do';	
+							  	}, 20000);
+							},
+							error: function(){
+								Swal.fire({
+					 				  title: '이메일 전송 실패.',
+					 				  showConfirmButton: false,
+					 				  icon: 'warning',
+					 				  timer: 5000
+					 			})
+					 			window.setTimeout(function() {
+							  		location.href='index.do';	
+							  	}, 5000);
+							}
+						})
+					}
+				},
+				error : function(err) {
+					console.log(err);
+					Swal.fire({
+		 				title: '에러 발생',
+		 				showConfirmButton: false,
+		 				icon: 'error',
+		 				timer: 2000
+		 			})
+					return false;
+				}
+			})
 		}
-
-		$.ajax({
-			url: "forgotpwd.do",
-			type : "GET",
-			data : {"email":email},
-			async: false,
-			success: function(){
-				Swal.fire({
-	 				  title: '이메일 전송 완료!.',
-	 				  showConfirmButton: false,
-	 				  icon: 'success',
-	 				  timer: 2000
-	 			})
-	 			window.setTimeout(function() {
-			  		location.href='index.do';	
-			  	}, 20000);
-			},
-			error: function(){
-				Swal.fire({
-	 				  title: '이메일 전송 실패.',
-	 				  showConfirmButton: false,
-	 				  icon: 'warning',
-	 				  timer: 1000
-	 			})
-	 			window.setTimeout(function() {
-			  		location.href='index.do';	
-			  	}, 5000);
-			}
-		})
-		
 	}
 	//회원가입 유효성 검사
     function checkz() {

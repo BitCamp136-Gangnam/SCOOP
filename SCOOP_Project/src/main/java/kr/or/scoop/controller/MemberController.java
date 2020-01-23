@@ -280,6 +280,7 @@ public class MemberController {
 
 	// 본인 인증 메일 발송
 	@RequestMapping(value="/forgotpwd.do")
+	@ResponseBody
 	public String forgotPwd(Mail mail, HttpServletRequest request, HttpServletResponse response, HttpSession session, String email) {
 		response.setContentType("text/html; charset=UTF-8");
 		//String email = request.getParameter("emailcheck");
@@ -287,7 +288,7 @@ public class MemberController {
 		System.out.println("이메일 받아 오니? : " + email);
 		System.out.println("세션 이메일 : " + session.getAttribute("email"));
 		String viewpage = "";
-
+		
 		try {
 			MimeMessage message = mailSender.createMimeMessage();
 			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
@@ -311,7 +312,6 @@ public class MemberController {
 					"})</script>");
 			out.flush(); 
 			viewpage = "index";
-			
 			
 		} catch (Exception e1) {
 			e1.printStackTrace();
