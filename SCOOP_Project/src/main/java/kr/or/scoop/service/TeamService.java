@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import kr.or.scoop.dao.ProjectDao;
 import kr.or.scoop.dao.TissueDao;
-import kr.or.scoop.dto.MyIssue;
+import kr.or.scoop.dto.PjNotice;
 import kr.or.scoop.dto.Reply;
 import kr.or.scoop.dto.TeamPjt;
 import kr.or.scoop.dto.Tissue;
@@ -103,14 +103,25 @@ public class TeamService {
 		return result;
 	}
 	
+	//팀 파일 업로드
 	public int fileInsert(int tseq, String fdname, long fdcapa, String email) {
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		int result = dao.fileInsert(tseq, fdname, fdcapa, email);
 		return result;
 	}
+	
+	//개인 파일 업로드
 	public int myFileInsert(String pfdname, long pdcapa, String email) {
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		int result = dao.myFileInsert(pfdname, pdcapa, email);
+		
+		return result;
+	}
+	
+	//프로젝트 공지사항 작성
+	public int pjNoticeWrite(PjNotice pjnotice) {
+		ProjectDao dao = sqlsession.getMapper(ProjectDao.class);
+		int result = dao.pjNoticeWrite(pjnotice);
 		
 		return result;
 	}
