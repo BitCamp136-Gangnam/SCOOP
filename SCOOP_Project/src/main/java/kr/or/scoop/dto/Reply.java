@@ -1,6 +1,5 @@
 package kr.or.scoop.dto;
 
-import java.sql.Timestamp;
 
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +9,7 @@ public class Reply {
 	private int replyseq;
 	private String rcontent;
 	private String email;
-	private Timestamp rdate;
+	private String rdate;
 	private int tiseq;
 	private String name;
 	private String tititle;
@@ -33,10 +32,10 @@ public class Reply {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Timestamp getRdate() {
+	public String getRdate() {
 		return rdate;
 	}
-	public void setRdate(Timestamp rdate) {
+	public void setRdate(String rdate) {
 		this.rdate = rdate;
 	}
 	public int getTiseq() {
@@ -57,7 +56,6 @@ public class Reply {
 	public void setTititle(String tititle) {
 		this.tititle = tititle;
 	}
-	
 	public String getProfile() {
 		return profile;
 	}
@@ -69,7 +67,5 @@ public class Reply {
 		return "Reply [replyseq=" + replyseq + ", rcontent=" + rcontent + ", email=" + email + ", rdate=" + rdate
 				+ ", tiseq=" + tiseq + ", name=" + name + ", tititle=" + tititle + ", profile=" + profile + "]";
 	}
-	
-	
 	
 }
