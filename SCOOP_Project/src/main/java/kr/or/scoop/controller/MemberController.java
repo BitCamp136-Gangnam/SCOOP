@@ -306,7 +306,7 @@ public class MemberController {
 	}
 
 	// 본인 인증 메일 발송
-	@RequestMapping(value="/forgotpwd.do")
+	@RequestMapping(value="/forgotpwd.do", method = RequestMethod.POST)
 	public String forgotPwd(Mail mail, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		response.setContentType("text/html; charset=UTF-8");
 		String email = request.getParameter("emailcheck");

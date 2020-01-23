@@ -59,14 +59,13 @@ public class TeamService {
 		return result;
 	}
 	
-	// 안씀
-	public int bookMark(int tiseq, int istbook, String email) {
-		TissueDao dao = sqlsession.getMapper(TissueDao.class);
-		
-		int result = dao.addBookMark(tiseq, email);
-		System.out.println("service result : " + result);
-		return result;
-	}
+	/*
+	 * // 안씀 public int bookMark(int tiseq, int istbook, String email) { TissueDao
+	 * dao = sqlsession.getMapper(TissueDao.class);
+	 * 
+	 * int result = dao.addBookMark(tiseq, email);
+	 * System.out.println("service result : " + result); return result; }
+	 */
 	public int teamComment(int tiseq,String rcontent,String email) {
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		System.out.println("가나다라"+tiseq+rcontent+email);
