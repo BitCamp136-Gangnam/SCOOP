@@ -134,9 +134,9 @@ public class BoardController {
 		
 		// 북마크 추가/제거
 		if(status.equals("bookoff")) {
-			result = dao.addBookMark(piseq, email);
+			result = dao.addPBookMark(piseq, email);
 		}else if(status.equals("bookon")) {
-			result = dao.delBookMark(piseq, email);
+			result = dao.delPBookMark(piseq, email);
 		}
 		
 		System.out.println("piseq : " + piseq);
@@ -167,9 +167,9 @@ public class BoardController {
 		
 		// 북마크 추가/제거
 		if(status.equals("bookoff")) {
-			result = dao.addBookMark(tiseq, email);
+			result = dao.addTBookMark(tiseq, email);
 		}else if(status.equals("bookon")) {
-			result = dao.delBookMark(tiseq, email);
+			result = dao.delTBookMark(tiseq, email);
 		}
 		
 		System.out.println("bookmark : " + status);
@@ -199,9 +199,9 @@ public class BoardController {
 		TissueDao tidao = sqlSession.getMapper(TissueDao.class);
 		
 		if(tiseq > 0) {
-			result = tidao.delBookMark(tiseq, email);
+			result = tidao.delTBookMark(tiseq, email);
 		}else if(piseq > 0) {
-			result = pidao.delBookMark(piseq, email);
+			result = pidao.delPBookMark(piseq, email);
 		}
 		viewpage = "redirect:bookmark.do";
 		

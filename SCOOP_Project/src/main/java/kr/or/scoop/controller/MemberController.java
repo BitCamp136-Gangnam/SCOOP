@@ -138,42 +138,15 @@ public class MemberController {
 		result = service.insertMember(member);
 
 		if (result > 0) {
-			try {
-				PrintWriter out = response.getWriter();
-				out.println("<script>Swal.fire({\r\n" + 
-						"		  title: \"회원가입 인증 성공\",\r\n" + 
-						"		  text: \"회원가입 인증에 성공하셨습니다\",\r\n" + 
-						"		  icon: \"success\",\r\n" + 
-						"		  button: \"확인\"\r\n" + 
-						"		})</script>");
-				out.flush();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
+
 			viewpage = "redirect:/index.do";
 			session.removeAttribute("checkpwd");
 			session.removeAttribute("checkemail");
 			session.removeAttribute("checkname");
 		} else {
-			PrintWriter out;
-			try {
-				out = response.getWriter();
-				out.println("<script>Swal.fire({\r\n" + 
-						"		  title: \"회원가입 인증 성공\",\r\n" + 
-						"		  text: \"회원가입 인증에 성공하셨습니다\",\r\n" + 
-						"		  icon: \"success\",\r\n" + 
-						"		  button: \"확인\"\r\n" + 
-						"		})</script>");
-				out.flush();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			
 			System.out.println("가입실패");
-			viewpage = "index";
+			viewpage = "redirect:/index.do";
 		}
 
 		return viewpage; // 주의 (website/index.htm
@@ -306,12 +279,12 @@ public class MemberController {
 	}
 
 	// 본인 인증 메일 발송
-	@RequestMapping(value="/forgotpwd.do")
-	public String forgotPwd(Mail mail, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+	@RequestMapping(value="/forgotpwd.do", method = RequestMethod.POST)
+	public String forgotPwd(Mail mail, HttpServletRequest request, HttpServletResponse response, HttpSession session, String emailcheck) {
 		response.setContentType("text/html; charset=UTF-8");
-		String email = request.getParameter("emailcheck");
-		session.setAttribute("email", email);
-		System.out.println("이메일 받아 오니? : " + email);
+		//String email = request.getParameter("emailcheck");
+		session.setAttribute("email", emailcheck);
+		System.out.println("이메일 받아 오니? : " + emailcheck);
 		System.out.println("세션 이메일 : " + session.getAttribute("email"));
 		String viewpage = "";
 
@@ -325,7 +298,7 @@ public class MemberController {
 			String mailBody = VelocityEngineUtils.mergeTemplateIntoString(
 					velocityEngineFactoryBean.createVelocityEngine(), "forgotPwd.vm", "UTF-8", model);
 			messageHelper.setFrom("leeyong1321@gmail.com");
-			messageHelper.setTo(email);
+			messageHelper.setTo(emailcheck);
 			messageHelper.setSubject("회원님의 SCOOP 계정의 본인 인증 이메일입니다");
 			messageHelper.setText(mailBody, true);
 			mailSender.send(message);

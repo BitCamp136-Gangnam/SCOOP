@@ -27,16 +27,6 @@ if(session.getAttribute("checkemail")!=null){
 	
 	</script>
 	<%
-	/* response.sendRedirect("registerOk.do"); 
-	Swal.fire(
-	  '게시물 삭제에 성공했습니다',
-	  '게시물 삭제 성공',
-	  'success'
-	)
-	window.setTimeout(function() {
-	location.href='notice.do';	
-	}, 1500);
-	*/
 }else{
 	System.out.println("세션에없다");
 	%>
@@ -52,11 +42,8 @@ if(session.getAttribute("checkemail")!=null){
 			location.href='index.do';	
 			}, 1500);
 	});	
-	
-	
 	</script>
 	<%
-	/* response.sendRedirect("index.do"); */
 }
 %>
 </head>
