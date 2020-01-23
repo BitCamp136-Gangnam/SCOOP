@@ -228,7 +228,10 @@ public class TeamController {
 	@RequestMapping(value = "cooperation-kanban.do", method = RequestMethod.GET)
 	public String kanbanView(int tseq, Model model) {
 		String path = "";
+		ProjectDao dao = sqlsession.getMapper(ProjectDao.class);
 		List<Tissue> tissuelist = teamservice.loadKanban(tseq);
+		TeamPjt pjt = dao.detailPJT(tseq);
+		model.addAttribute("tpj",pjt); //프로젝트 이름 , 설명
 		if(tissuelist.isEmpty()) {
 			path = "cooperation/cooperation-kanban";
 		} else {

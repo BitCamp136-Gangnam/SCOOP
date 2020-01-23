@@ -13,6 +13,7 @@
     <link href="<c:url value='/resources/css/style.css' />" rel="stylesheet">
 
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
 .myinfo{
  border: 0;
@@ -45,7 +46,15 @@ h5{
   margin-bottom: 10%;
 }
 </style>
+
 <script>
+$(function(){
+	//칸반 진행사항 별 갯수 세기
+	$('#todolistCnt').text($('#first').children().length-1);
+	$('#doingCnt').text($('#second').children().length-1);
+  	$('#validateCnt').text($('#third').children().length-1);
+  	$('#completeCnt').text($('#fourth').children().length-1);
+});
 function allowDrop(ev) {
   ev.preventDefault();
 }
@@ -77,7 +86,7 @@ function drop(ev) {
 		    		  icon: "success",
 		    		  button: "확인"
 		    		})
-		    	$('#todolistCnt')
+		    	
 		    },
 		    error: function(err) {
 		    	Swal.fire({
@@ -106,6 +115,7 @@ function drop(ev) {
 			    		  icon: "success",
 			    		  button: "확인"
 			    		})
+			    		
 			    },
 			    error: function(err) {
 			    	Swal.fire({
@@ -174,7 +184,13 @@ function drop(ev) {
 			});
 		  }
 	}
- 
+
+	//칸반 진행사항 별 갯수 변경
+  	$('#todolistCnt').text($('#first').children().length-1);
+  	$('#doingCnt').text($('#second').children().length-1);
+  	$('#validateCnt').text($('#third').children().length-1);
+  	$('#completeCnt').text($('#fourth').children().length-1);
+  
 }
 </script>
 <body>
@@ -195,31 +211,36 @@ function drop(ev) {
         <div class="content-body">
             <div class="container-fluid">
         <div class="card">
-		<div class="row" style="margin: 2% 2% 0 2%">
+		<div class="row" style="margin: 2% 2% 15px 2%">
 			<div class="col-sm-12" style="padding-left: 0">
-				<h3 style="padding-left: 15px;">쫀쬬니</h3>
+				<h3 style="padding-left: 1%;">${tpj.pname}
+					<c:if test="${rank == 100}">
+            			<i class="fas fa-cog" id="myModal_Edit_Icon" style="margin-left: 5px;cursor: pointer; font-size: 15px" data-toggle="modal" data-target="#myModal_Edit" ></i>
+            		</c:if>
+				</h3>
+				<p style="padding-left: 1%;margin-bottom: 0px;">[${tpj.pcontent}]</p>
 			</div>
 		</div>
 		<div class="row" style="margin-left: 2%;">
 			<ul class="nav nav-pills">
 			    <li class="nav-item">
-			      <a class="nav-link" href="./cooperation-issue.jsp">협업공간 이슈</a>
+			      <a class="nav-link"  href="projectDetail.do?tseq=${tpj.tseq}">팀이슈</a>
 			    </li>
 			    <li class="nav-item">
-			      <a class="nav-link" href="./cooperation-kanban.jsp">칸반</a>
+			      <a class="nav-link"  href="./private-cal.jsp">팀 캘린더</a>
 			    </li>
 			    <li class="nav-item">
-			      <a class="nav-link" href="./cooperation-cal.jsp">캘린더</a>
+			      <a class="nav-link" href="cooperation-kanban.do?tseq=${tpj.tseq}">칸반</a>
 			    </li>
 		    </ul>
 		</div>
-		<hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
+		<hr style="margin-top: 0;margin-left: 2%; margin-right: 2%;margin-bottom: 0px;">
 		<div class="row" style="margin-left: 2%; margin-right: 2%;">
 			<div id="todolist" class="col-sm-3 kanban">
-			<div class="realkan" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #888;height: 500px;overflow: auto;">
+			<div class="realkan" id="first" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #888;height: 500px;overflow: auto;">
 			<div style="margin-bottom: 7%;">
 			<div class="iconify" data-icon="uil:file-exclamation-alt" data-inline="false" style="width: 25px;height: auto;"></div>
-			<span style="font-size:15px;padding-top:1%;">발의됨(<span id="todolistCnt"> </span>)</span><hr>
+			<span style="font-size:15px;padding-top:1%;">발의됨(<span id="todolistCnt">0</span>)</span><hr>
 			</div>
 			
 			  <c:forEach items="${tissuelist}" var="tl">
@@ -232,10 +253,10 @@ function drop(ev) {
 			</div>
 			</div>
 			<div id="doing" class="col-sm-3 kanban">
-				<div class="realkan" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #2671bd;height: 500px;overflow: auto">
+				<div class="realkan"id="second" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #2671bd;height: 500px;overflow: auto">
 				<div style="margin-bottom: 7%;">
 				<div class="iconify" data-icon="uil:file-edit-alt" data-inline="false"style="width: 25px;height: auto;color:#2671bd"></div>
-				<span style="font-size:15px;padding-top:1%;">진행중 (<span id="doingCnt"> </span>)</span><hr>
+				<span style="font-size:15px;padding-top:1%;">진행중 (<span id="doingCnt">0</span>)</span><hr>
 				</div>
 				
 				<c:forEach items="${tissuelist}" var="tl">
@@ -247,10 +268,10 @@ function drop(ev) {
 				</div>
 			</div>
 			<div id="validate" class="col-sm-3 kanban" ondrop="drop(event)">
-				<div class="realkan" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #cca352;height: 500px;overflow: auto">
+				<div class="realkan" id="third" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #cca352;height: 500px;overflow: auto">
 				<div style="margin-bottom: 7%;">
 				<div class="iconify" data-icon="uil:file-block-alt" data-inline="false" style="width: 25px;height: auto;color:#cca352"></div>
-				<span style="font-size:15px;padding-top:1%;">일시중지 (<span id="validateCnt"> </span>)</span><hr>
+				<span style="font-size:15px;padding-top:1%;">일시중지 (<span id="validateCnt">0</span>)</span><hr>
 				</div>
 				
 				<c:forEach items="${tissuelist}" var="tl">
@@ -262,10 +283,10 @@ function drop(ev) {
 				</div>
 			</div>
 			<div id="complete" class="col-sm-3 kanban" ondrop="drop(event)">
-				<div class="realkan" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #26805c;height: 500px;overflow: auto">
+				<div class="realkan" id="fourth" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #26805c;height: 500px;overflow: auto">
 				<div style="margin-bottom: 7%;">
 				<div class="iconify" data-icon="uil:file-check-alt" data-inline="false" style="width: 25px;height: auto;color:#26805c"></div>
-				<span style="font-size:15px;padding-top:1%;">완료 (<span id="completeCnt"> </span>)</span><hr>
+				<span style="font-size:15px;padding-top:1%;">완료 (<span id="completeCnt">0</span>)</span><hr>
 				</div>
 				
 				<c:forEach items="${tissuelist}" var="tl">

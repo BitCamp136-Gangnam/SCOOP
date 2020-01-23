@@ -210,14 +210,14 @@ $(function(){
         <div class="content-body">
         <div class="container-fluid">
         <div class="card">
-      <div class="row" style="margin: 2%">
+      <div class="row" style="margin: 2% 2% 15px 2%">
          <div class="col-sm-12" style="padding-left: 0">
-            <h3>${tpj.pname}
+            <h3 style="padding-left: 1%;">${tpj.pname}
             	<c:if test="${rank == 100}">
             		<i class="fas fa-cog" id="myModal_Edit_Icon" style="margin-left: 5px;cursor: pointer; font-size: 15px" data-toggle="modal" data-target="#myModal_Edit" ></i>
             	</c:if>
             </h3>
-            ${tpj.pcontent}
+            <p style="padding-left: 1%;margin-bottom: 0px;">[${tpj.pcontent}]</p>
          </div>
       </div>
       <div class="row" style="margin-left: 2%;">
@@ -233,7 +233,7 @@ $(function(){
              </li>
           </ul>
       </div>
-      <hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
+      <hr style="margin-top: 0;margin-left: 2%; margin-right: 2%;margin-bottom:0;">
       <div class="row" style="margin-left: 2%; margin-right: 2%">
          <div class="col-sm-3 newissue" >
          작성자
