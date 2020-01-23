@@ -215,7 +215,7 @@ public class MemberController {
 		session.setAttribute("img",img); 
 		session.setAttribute("role", role.getRname());
 		session.setAttribute("count", count);
-		session.setAttribute("file", filedrive);
+		session.setAttribute("filed", filedrive);
 		List<Tpmember> pjtlist = null;
 		try {
 			pjtlist = noticeDao.getPJT(email);
