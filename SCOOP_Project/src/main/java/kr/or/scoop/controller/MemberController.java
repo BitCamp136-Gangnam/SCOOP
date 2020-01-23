@@ -35,12 +35,16 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import kr.or.scoop.dao.AlarmDao;
 import kr.or.scoop.dao.MemberDao;
+import kr.or.scoop.dao.MyIssueDao;
 import kr.or.scoop.dao.NoticeDao;
 import kr.or.scoop.dao.ProjectDao;
 import kr.or.scoop.dto.Alarm;
 import kr.or.scoop.dto.FileDrive;
 import kr.or.scoop.dto.Member;
+import kr.or.scoop.dto.PjNotice;
+import kr.or.scoop.dto.Reply;
 import kr.or.scoop.dto.Role;
+import kr.or.scoop.dto.Tissue;
 import kr.or.scoop.dto.Tpmember;
 import kr.or.scoop.service.MemberService;
 import kr.or.scoop.utils.Mail;
@@ -200,11 +204,16 @@ public class MemberController {
 		email = (String)session.getAttribute("email");
 		ProjectDao noticeDao = sqlsession.getMapper(ProjectDao.class);
 		MemberDao memberdao = sqlsession.getMapper(MemberDao.class);
+		MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
 		Member member = memberdao.getMember((String)session.getAttribute("email"));
 		Role role = memberdao.getRole(email);
 		int count = memberdao.getCount(email);	
 		String img = memberdao.getProfile(email);
 		List<FileDrive> filedrive = null;
+		List<Tissue> mytissuelist = null;
+		List<Reply> myreplylist = null;
+		List<PjNotice> mypjtlist = null;
+		
 		try {
 			
 			 filedrive = memberdao.getFileDrive(email);
@@ -219,6 +228,12 @@ public class MemberController {
 		List<Tpmember> pjtlist = null;
 		try {
 			pjtlist = noticeDao.getPJT(email);
+			mytissuelist = myissuedao.teamWriteTiisueList(member.getIdtime());
+			myreplylist = myissuedao.teamWriteReplyList(member.getIdtime());
+			mypjtlist = myissuedao.teamWriteNoticeList(member.getEmail(), member.getIdtime());
+			model.addAttribute("mytissuelist",mytissuelist);
+			model.addAttribute("myreplylist",myreplylist);
+			model.addAttribute("mypjtlist",mypjtlist);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

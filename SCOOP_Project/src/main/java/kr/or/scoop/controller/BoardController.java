@@ -1,11 +1,9 @@
 package kr.or.scoop.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.mapping.SqlMapperException;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,13 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.or.scoop.dao.MyIssueDao;
 import kr.or.scoop.dao.NoticeDao;
-import kr.or.scoop.dao.ProjectDao;
 import kr.or.scoop.dao.TissueDao;
-import kr.or.scoop.dto.BookMark;
 import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.dto.Notice;
 import kr.or.scoop.dto.Reply;
-import kr.or.scoop.dto.TeamPjt;
 import kr.or.scoop.dto.Tissue;
 import kr.or.scoop.service.BoardService;
 import kr.or.scoop.service.TeamService;
@@ -292,8 +287,8 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value="projectNotice.do", method = RequestMethod.GET)
-	public String pjNotice() {
+	public String pjNotice(int tseq,Model model,HttpSession session) {
 		
-		return null;
+		return "user/ProjectNotice";
 	}
 }
