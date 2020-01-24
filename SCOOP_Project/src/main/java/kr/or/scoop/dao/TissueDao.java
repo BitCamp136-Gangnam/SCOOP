@@ -3,6 +3,7 @@ package kr.or.scoop.dao;
 import java.util.List;
 
 import kr.or.scoop.dto.Mention;
+import kr.or.scoop.dto.Process;
 import kr.or.scoop.dto.Reply;
 import kr.or.scoop.dto.Tissue;
 
@@ -42,6 +43,7 @@ public interface TissueDao {
 	public int myFileInsert(String pfdname, long pdcapa, String email);
 	
 	public int mentionInsert(String email);
+	
 	//칸반 게시글 상태 정보
 	public Process chartData(int tseq);
 }
