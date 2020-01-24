@@ -29,6 +29,15 @@ input::placeholder {
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script> -->
 <script type="text/javascript">
    $(function() {
+	   for(let i=0; i<$('#memlist').children().length-1; i++){
+			for(let j=i+1; j<$('#memlist').children().length;j++){
+				console.log($('#memlist').children().eq(i))
+				console.log($('#memlist').children().eq(j))
+				if($('#memlist').children().eq(i).attr('id').split("/")[1] == $('#memlist').children().eq(j).attr('id').split("/")[1]){
+					$('#memlist').children().eq(j).hide();
+				}
+			}
+		}
 	   $('#myFile').click(function(){
 		   console.log("마이파일");
 		   var tseq = $(this).val();
@@ -1045,25 +1054,20 @@ span {
    </div>
 
    <div class="list-group" id="mentionlist" style="display: none">
-      <a href="#" class="list-group-item list-group-item-action menli" id="men1"style="padding: 5px">멘션(완료)</a> 
-      <a href="#" class="list-group-item list-group-item-action menli" id="men2"style="padding: 5px">소스코드(코드미러 하다말았음)</a> 
-      <a href="#" class="list-group-item list-group-item-action menli" id="men3"style="padding: 5px">구글 드라이브(완료))</a> 
-      <a href="#" class="list-group-item list-group-item-action menli" id="men4"style="padding: 5px">파일(완료)</a> 
-      <a href="#" class="list-group-item list-group-item-action menli" id="men5"style="padding: 5px">표(이건 어떻게함;;)</a> 
-      <a href="#" class="list-group-item list-group-item-action menli" id="men6"style="padding: 5px">관련 이슈</a> 
+      <a href="#" class="list-group-item list-group-item-action menli" id="men1"style="padding: 5px;">멘션</a> 
+      <!-- <a href="#" class="list-group-item list-group-item-action menli" id="men2"style="padding: 5px">소스코드</a> --> 
+      <a href="#" class="list-group-item list-group-item-action menli" id="men3"style="padding: 5px">구글 드라이브</a> 
+      <a href="#" class="list-group-item list-group-item-action menli" id="men4"style="padding: 5px">파일</a> 
       <a href="#" class="list-group-item list-group-item-action menli" id="men7"style="padding: 5px">의사결정</a> 
-      <a href="#" class="list-group-item list-group-item-action menli" id="men8"style="padding: 5px">할 일(완료)</a> 
-      <a href="#" class="list-group-item list-group-item-action menli" id="men9"style="padding: 5px">일정(완료)</a>
+      <a href="#" class="list-group-item list-group-item-action menli" id="men8"style="padding: 5px">할 일</a> 
+      <a href="#" class="list-group-item list-group-item-action menli" id="men9"style="padding: 5px">일정</a>
    </div>
    <!--  -->
    <!-- 멘션할 사람 목록 -->
    <div class="list-group" id="memlist" style="display: none">
-      <a href="#" class="list-group-item list-group-item-action todo"
-         style="padding: 5px">홍길동</a> <a href="#"
-         class="list-group-item list-group-item-action todo"
-         style="padding: 5px">김유신</a> <a href="#"
-         class="list-group-item list-group-item-action todo"
-         style="padding: 5px">임경균</a>
+   <c:forEach items="${tpmemlist}" var="t">
+   	<a href="#" class="list-group-item list-group-item-action todo projectmem${t.tseq}" style="padding: 5px; border-radius: 0" id="${t.tseq}/${t.email}">${t.name}</a>
+   </c:forEach>
    </div>
    <div class="list-group" id="todo" style="display: none;">
       <label for="todomem">담당자</label> <input
@@ -1318,6 +1322,27 @@ $('.menli').keydown(function(event) {
 					});
 				}
 			});
+	$('#selectpro').change(function(){
+		if($(selectpro).val()=="${sessionScope.email}"){
+			$('.todo').show();
+			for(let i=0; i<$('#memlist').children().length-1; i++){
+				for(let j=i+1; j<$('#memlist').children().length;j++){
+					console.log($('#memlist').children().eq(i))
+					console.log($('#memlist').children().eq(j))
+					if($('#memlist').children().eq(i).attr('id').split("/")[1] == $('#memlist').children().eq(j).attr('id').split("/")[1]){
+						$('#memlist').children().eq(j).hide();
+					}
+				}
+			}
+		}else{
+			$('.todo').hide();
+			for(let i=0; i<$('#memlist').children().length; i++){
+				if($('#memlist').children().eq(i).attr('id').split("/")[0] == $(selectpro).val()){
+					$('.projectmem'+$(selectpro).val()).show();
+				}
+			}
+		}
+	})
 	$('#men1').click(
 			function() {
 				var top = ($('#issuecontent').offset().top);
@@ -1334,7 +1359,7 @@ $('.menli').keydown(function(event) {
 					$('#memlist').attr('class', 'list-group');
 				});
 			});
-	$('#men2').click(function() {
+	/* $('#men2').click(function() {
 		$('#mentionlist').hide();
 		$('#issuecontent').empty();
 		$('#issuecontent').hide();
@@ -1346,7 +1371,7 @@ $('.menli').keydown(function(event) {
 			theme : "eclipse",
 			val : textarea.value
 		});
-	});
+	}); */
 	$('#men3').click(function() {
 		$('#mentionlist').hide();
 		var text = "";
@@ -1416,7 +1441,8 @@ $('#todoresult').show();
 							var text = "";
 							text = $('#issuecontent').val().replace("@", "");
 							$('#issuecontent').val(text);
-							$('#todoresult').append('<div style="padding:5px"><input type="text" id="mention" name="mention" value="@'+ $(this).text() + '" style="border:none" readonly></div>');
+							$('#todoresult').append('<div style="padding:5px; width:100%"><input type="text" id="'+$(this).attr('id')+'" value="@'+ $(this).text() + '" style="border:none" readonly></div>');
+							$('#todoresult').append('<input type="hidden" name="mentions" value="'+ $(this).attr('id').split('/')[1] + '">');
 							console.log($(this).text());
 							$('#todoresult').show();
 							$('#memlist').hide();

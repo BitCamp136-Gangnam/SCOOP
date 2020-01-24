@@ -213,9 +213,9 @@ public class MemberController {
 		List<Tissue> mytissuelist = null;
 		List<Reply> myreplylist = null;
 		List<PjNotice> mypjtlist = null;
-		
+		List<Tpmember> pjtlist = null;
+		List<Tpmember> tpmemlist =  null;
 		try {
-			
 			 filedrive = memberdao.getFileDrive(email);
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -225,9 +225,12 @@ public class MemberController {
 		session.setAttribute("role", role.getRname());
 		session.setAttribute("count", count);
 		session.setAttribute("filed", filedrive);
-		List<Tpmember> pjtlist = null;
 		try {
 			pjtlist = noticeDao.getPJT(email);
+			tpmemlist = memberdao.getTpmembers(member.getEmail());
+			System.out.println(tpmemlist.get(0));
+			System.out.println(tpmemlist.get(1));
+			System.out.println(tpmemlist.get(2));
 			mytissuelist = myissuedao.teamWriteTiisueList(member.getIdtime());
 			myreplylist = myissuedao.teamWriteReplyList(member.getIdtime());
 			mypjtlist = myissuedao.teamWriteNoticeList(member.getEmail(), member.getIdtime());
@@ -239,6 +242,7 @@ public class MemberController {
 		}
 		if(pjtlist!=null) {
 			session.setAttribute("pjtlist", pjtlist);
+			session.setAttribute("tpmemlist", tpmemlist);
 			AlarmDao dao = sqlsession.getMapper(AlarmDao.class);
 			List<Alarm> alarm = dao.getAlarm((String)session.getAttribute("email"));
 			

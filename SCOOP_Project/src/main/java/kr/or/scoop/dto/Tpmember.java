@@ -8,7 +8,7 @@ public class Tpmember {
 	private String email;
 	private int pjuserrank;
 	private String pname;
-	
+	private String name;
 	public int getTseq() {
 		return tseq;
 	}
@@ -33,10 +33,16 @@ public class Tpmember {
 	public void setPname(String pname) {
 		this.pname = pname;
 	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	@Override
 	public String toString() {
-		return "Tpmember [tseq=" + tseq + ", email=" + email + ", pjuserrank=" + pjuserrank + ", pname=" + pname + "]";
+		return "Tpmember [tseq=" + tseq + ", email=" + email + ", pjuserrank=" + pjuserrank + ", pname=" + pname
+				+ ", name=" + name + "]";
 	}
-	
 	
 }

@@ -99,5 +99,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	insert into pfiledrive(pdseq, pdcapa, pfdname, pfddate, email, piseq)
   	values(pdseq_pfiledrive_seq.nextval, #{param2}, #{param1}, sysdate, #{param3, jdbcType=VARCHAR}, (select Max(piseq) from myissue))
 </insert>
+<insert id="mentionInsert">
+	insert into teammention values((select Max(tiseq) from tissue),tmseq_teammention_seq.nextval, #{email, jdbcType=VARCHAR})
+</insert>
+<select id="getMentions" resultType="kr.or.scoop.dto.Mention">
+	select * from teammention t join member m on t.tmemail=m.email where t.tiseq=#{tiseq}
+</select>
 
 </mapper>

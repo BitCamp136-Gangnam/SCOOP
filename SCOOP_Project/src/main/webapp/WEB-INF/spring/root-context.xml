@@ -10,7 +10,7 @@
 		<property name="driverClassName"
 			value="oracle.jdbc.driver.OracleDriver" />
 		<property name="url"
-			value="jdbc:oracle:thin:@192.168.6.13:1521:XE" />
+			value="jdbc:oracle:thin:@172.16.100.242:1521:XE" />
 		<property name="username" value="SCOOP" />
 		<property name="password" value="1004" />
 	</bean>
