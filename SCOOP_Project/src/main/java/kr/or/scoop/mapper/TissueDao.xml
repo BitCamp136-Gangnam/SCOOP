@@ -99,5 +99,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	insert into pfiledrive(pdseq, pdcapa, pfdname, pfddate, email, piseq)
   	values(pdseq_pfiledrive_seq.nextval, #{param2}, #{param1}, sysdate, #{param3, jdbcType=VARCHAR}, (select Max(piseq) from myissue))
 </insert>
-
+<select id="chartData" resultType="int">
+	select count(isprocess) 
+	from tissue 
+	where tseq = #{param1} and isprocess = #{param2}
+</select>
 </mapper>
