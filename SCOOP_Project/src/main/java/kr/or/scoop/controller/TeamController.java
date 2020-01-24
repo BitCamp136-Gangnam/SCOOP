@@ -1,11 +1,8 @@
 package kr.or.scoop.controller;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,8 +15,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import kr.or.scoop.dao.MemberDao;
 import kr.or.scoop.dao.MyIssueDao;
@@ -27,6 +24,7 @@ import kr.or.scoop.dao.ProjectDao;
 import kr.or.scoop.dao.TissueDao;
 import kr.or.scoop.dto.BookMark;
 import kr.or.scoop.dto.MyIssue;
+import kr.or.scoop.dto.Process;
 import kr.or.scoop.dto.ProjectMemberlist;
 import kr.or.scoop.dto.TeamPjt;
 import kr.or.scoop.dto.Tissue;
@@ -353,21 +351,23 @@ public class TeamController {
 		
 	}
 	
-	@RequestMapping(value="selectChart.do")
-	public String chart(int tseq) {
+	@ResponseBody
+	@RequestMapping(value="selectChart.do", method = RequestMethod.POST)
+	public Process chart(int tseq) {
 		System.out.println("selectChart 들어오고");
 		System.out.println("tseq : " + tseq);
-		List processList = null;
+		
+		Process processList = null;
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		
-		System.out.println("for문 시작");
-		for(int isprocess = 0; isprocess < 4; isprocess++) {
-			processList = dao.chartData(tseq, isprocess);
-			System.out.println(processList.get(isprocess));
-		}
-		System.out.println("for 다 돌고" + processList);
+		System.out.println("select");
 		
+		processList = (dao.chartData(tseq));
 		
-		return null;
+		System.out.println("결과는?" + processList.toString());
+
+		System.out.println("이제 리턴할 차례");
+		
+		return processList;
 	}
 }

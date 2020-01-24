@@ -3,6 +3,7 @@ package kr.or.scoop.dao;
 import java.util.List;
 
 import kr.or.scoop.dto.Mention;
+import kr.or.scoop.dto.Process;
 import kr.or.scoop.dto.Reply;
 import kr.or.scoop.dto.Tissue;
 
@@ -45,5 +46,6 @@ public interface TissueDao {
 	public int googleDriveInsert(String tgfilename, String tgurl);
 	public List chartData(int tseq, int isprocess);
 	
-	
+	//칸반 게시글 상태 정보
+	public Process chartData(int tseq);
 }
