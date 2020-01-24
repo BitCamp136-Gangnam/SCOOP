@@ -146,7 +146,7 @@ $(function(){
 				url: "idOverlab.do",
 				type: "POST",
 				data: {"email": email},
-				
+				async: false,
 				success : function(data) {
 					if (data == 0) {
 						$("#emailcheck").val("");
@@ -163,6 +163,7 @@ $(function(){
 							url: "forgotpwd.do",
 							type : "GET",
 							data : {"email":email},
+							async : false,
 							success: function(){
 								Swal.fire({
 					 				  title: '이메일 전송 완료!.',
