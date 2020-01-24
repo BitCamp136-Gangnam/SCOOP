@@ -105,9 +105,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="getMentions" resultType="kr.or.scoop.dto.Mention">
 	select * from teammention t join member m on t.tmemail=m.email where t.tiseq=#{tiseq}
 </select>
-<select id="chartData" resultType="int">
-	select count(isprocess) 
+<select id="chartData" resultType="kr.or.scoop.dto.Process">
+	select distinct (select count(*) from tissue where tseq = #{tseq} and isprocess=0) as initiative, 
+                	(select count(*) from tissue where tseq = #{tseq} and isprocess=1) as progress, 
+                	(select count(*) from tissue where tseq = #{tseq} and isprocess=2) as pause, 
+                	(select count(*) from tissue where tseq = #{tseq} and isprocess=3) as complete 
 	from tissue 
-	where tseq = #{param1} and isprocess = #{param2}
 </select>
 </mapper>

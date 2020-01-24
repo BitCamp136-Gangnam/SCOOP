@@ -61,7 +61,7 @@ public class PrivateController {
 		String email = (String)session.getAttribute("email");
 		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
 		
-		List<BookMark>bookMarkList = dao.getBookMark(email);
+		List<BookMark> bookMarkList = dao.getBookMark(email);
 		
 		for(int i = 0; i < bookMarkList.size(); i++) {
 			tseq = bookMarkList.get(i).getTseq();
