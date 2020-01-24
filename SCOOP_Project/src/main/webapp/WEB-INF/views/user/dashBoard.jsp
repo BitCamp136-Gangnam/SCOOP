@@ -150,7 +150,7 @@
 				type: "POST",
 				data: {"tseq" : tseq},
 				success: function(data) {
-					alret('성공');
+					console.log(data);
 				}
 			})
 		})

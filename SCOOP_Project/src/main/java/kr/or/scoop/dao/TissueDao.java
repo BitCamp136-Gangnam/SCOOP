@@ -2,6 +2,7 @@ package kr.or.scoop.dao;
 
 import java.util.List;
 
+import kr.or.scoop.dto.Process;
 import kr.or.scoop.dto.Reply;
 import kr.or.scoop.dto.Tissue;
 
@@ -37,7 +38,7 @@ public interface TissueDao {
 	public int fileInsert(int tseq, String fdname, long fdcapa, String email);
 	public int myFileInsert(String pfdname, long pdcapa, String email);
 	
-	public List chartData(int tseq, int isprocess);
+	public Process chartData(int tseq);
 	
 	
 }
