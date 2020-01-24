@@ -354,6 +354,6 @@ public class BoardController {
 	
 	@RequestMapping(value="dashboard.do")
 	public String dashBoard() {
-		return "issue/dashboard";
+		return "user/dashBoard";
 	}
 }
