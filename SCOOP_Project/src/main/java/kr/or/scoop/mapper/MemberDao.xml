@@ -115,4 +115,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getMyFile" resultType="kr.or.scoop.dto.PrivateFileDrive">
 		select * from pfiledrive where email=#{email,jdbcType=VARCHAR}
 	</select>
+	<select id="getTpmembers" resultType="kr.or.scoop.dto.Tpmember">
+		select* from tpmember t join teampjt p on p.email=#{email,jdbcType=VARCHAR} join member m on t.email=m.email where t.tseq=p.tseq
+	</select>
 </mapper>

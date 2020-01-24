@@ -126,4 +126,10 @@ public class TeamService {
 		return result;
 	}
 	
+	//팀 멘션 생성
+		public int mentionInsert(String email) {
+			TissueDao dao = sqlsession.getMapper(TissueDao.class);
+			int result = dao.mentionInsert(email);
+			return result;
+		}
 }

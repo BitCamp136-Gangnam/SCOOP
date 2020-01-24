@@ -130,11 +130,10 @@ public class TeamController {
 	// 이슈 작성
 		@RequestMapping(value = "writeIssue.do", method = {RequestMethod.POST,RequestMethod.GET})
 		public String writeIssue(String issuetitle, String fileclick, String issuecontent, String selectTeam, Model model,
-				HttpSession session,HttpServletRequest request, String mentions, @RequestParam(value="files") MultipartFile[] files) throws IOException {
+				HttpSession session,HttpServletRequest request, String[] mentions, @RequestParam(value="files") MultipartFile[] files) throws IOException {
 			String path = "";
 			String email = (String)session.getAttribute("email");
 			int tseq = 0;
-			System.out.println("파일??"+files);
 			 //실 DB Insert
 			if (selectTeam.equals((String) session.getAttribute("email")) || selectTeam == null) {
 				System.out.println("이프문 타니??");
@@ -143,9 +142,6 @@ public class TeamController {
 				myissue.setPititle(issuetitle);
 				myissue.setPicontent(issuecontent);
 				myissue.setIspibook(0);
-				myissue.setMymention(mentions);
-				//myissue.setPfilename(dbFileName);
-				//myissue.setPfilesize(dbFileSize);
 				int result = privateservice.writeMyissue(myissue);
 				 if(files != null && files.length > 0) {
 					 //업로드한 파일이 하나라도 있다면
@@ -204,6 +200,11 @@ public class TeamController {
 								 teamservice.fileInsert(tseq, filename, fsize, email);
 							 }
 						 }
+					 }
+				 }
+				 if(mentions != null && mentions.length > 0) {
+					 for(int i=0;i<mentions.length;i++) {
+						 teamservice.mentionInsert(mentions[i]);
 					 }
 				 }
 				if(result >0) {
