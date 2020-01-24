@@ -30,6 +30,12 @@
 </style>
 <script type="text/javascript">
 $(function(){
+	$('#nowrite').mouseover(function(){
+	      $(this).attr("style","cursor: pointer;color:#E71D36;");
+	});
+	$('#nowrite').mouseout(function(){
+	      $(this).attr("style","cursor: pointer;");
+	});
    $('#myModal_Edit_Icon').mouseover(function(){
       $(this).attr("style","margin-left: 5px;cursor: pointer;font-size: 15px;color:#E71D36;");
    });
@@ -215,8 +221,8 @@ $(function(){
             <h3>${tpj.pname}
             	<c:if test="${rank == 100}">
             		<i class="fas fa-cog" id="myModal_Edit_Icon" style="margin-left: 5px;cursor: pointer; font-size: 15px" data-toggle="modal" data-target="#myModal_Edit" ></i>
-            	<input type="button" class="btn btn-secondary" id="nowrite" value="공지사항 작성" data-toggle="modal" data-target="#pnoticewrite"
-                  style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;">
+            	<span id="nowrite" class="iconify" data-icon="jam:write" style="cursor: pointer;" data-inline="false" data-toggle="modal" data-target="#pnoticewrite"></span>
+            	
             	</c:if>
             </h3>
             ${tpj.pcontent}
