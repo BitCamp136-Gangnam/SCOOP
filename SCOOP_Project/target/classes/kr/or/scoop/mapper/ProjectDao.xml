@@ -51,7 +51,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	SELECT TSEQ,PNAME,PCONTENT FROM TEAMPJT WHERE TSEQ = #{TSEQ}
 </select>
 <select id="getPJT" parameterType="kr.or.scoop.dto.Tpmember" resultMap="Tpmember">
-		select m.email, m.TSEQ, t.pname from tpmember m join teampjt t on m.tseq = t.tseq where m.email = #{email}
+		select m.email, m.TSEQ, t.pname, m.tpaddtime from tpmember m join teampjt t on m.tseq = t.tseq where m.email = #{email}
 </select>
 <select id="getTissue" parameterType="kr.or.scoop.dto.Tissue" resultMap="Tissue">
 	SELECT T.TSEQ , M.NAME, S.TISEQ, S.tititle, S.TICONTENT, S.TIDATE, S.ISTBOOK 
@@ -83,4 +83,7 @@ select p.pnseq,p.pntitle,p.pncontent,m.name,p.tseq,p.pntime,p.email from pjnotic
 <select id="pjNoticeDetail" resultType="kr.or.scoop.dto.PjNotice" parameterType="String">
 	select pnseq,pntitle,pncontent from pjnotice where pnseq = #{pnseq}
 </select>
+<update id="updatePjNotice" parameterType="kr.or.scoop.dto.PjNotice">
+	update pjnotice set pntitle = #{pntitle} , pncontent = #{pncontent} where pnseq = #{pnseq}
+</update>
 </mapper>

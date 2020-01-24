@@ -164,7 +164,7 @@ $(function(){
 							type : "GET",
 							data : {"email":email},
 							async : false,
-							success: function(){
+							success: function(data){
 								Swal.fire({
 					 				  title: '이메일 전송 완료!.',
 					 				  showConfirmButton: false,
@@ -172,7 +172,7 @@ $(function(){
 					 				  timer: 5000
 					 			})
 							},
-							error: function(){
+							error: function(data){
 								Swal.fire({
 					 				  title: '이메일 전송 실패.',
 					 				  showConfirmButton: false,

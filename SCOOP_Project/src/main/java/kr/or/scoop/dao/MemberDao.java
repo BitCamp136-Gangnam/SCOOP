@@ -9,6 +9,7 @@ import kr.or.scoop.dto.Member;
 import kr.or.scoop.dto.PrivateFileDrive;
 import kr.or.scoop.dto.ProjectMemberlist;
 import kr.or.scoop.dto.Role;
+import kr.or.scoop.dto.Tpmember;
 
 
 public interface MemberDao {
@@ -66,4 +67,7 @@ public interface MemberDao {
 	
 	//내 파일함 불러오기
 	public List<PrivateFileDrive> getMyFile(String email);
+	
+	//Tpmember 불러오기
+	public List<Tpmember> getTpmembers(String email);
 }

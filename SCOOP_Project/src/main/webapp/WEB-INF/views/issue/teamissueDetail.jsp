@@ -128,7 +128,12 @@ $(function(){
 				<h3 id="myissueSubject" style="padding-top: 2%;padding-left: 1%;">${tissue.tititle}</h3>
 		</div>
 		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>2019.08.07 ~ 2020.2.12(캘린더 설정 날짜 넣으면 됨)</div>
-		<div class="myissueDetail" id="myissueMention"><sup><i class="fas fa-quote-left" style="color:#ca0000;"></i></sup> 멘션 멤버 이름 넣는 곳 <sup><i class="fas fa-quote-right"style="color:#ca0000;"></i></sup></div>
+		<div class="myissueDetail" id="myissueMention">
+		<c:forEach items="${mentions}" var="m">
+		<sup><i class="fas fa-quote-left" style="color:#ca0000; font-size: 7px"></i></sup> @${m.name} <sup><i class="fas fa-quote-right"style="color:#ca0000;font-size: 7px"></i></sup>
+		<br>
+		</c:forEach>
+		</div>
 		<div class="myissueDetail" id="myissueGoogledrive"><i class="fab fa-google-drive"></i>
 			<a href="">여기에 구글드라이브 파일 올리면됨</a>
 		</div>

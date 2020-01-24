@@ -17,6 +17,7 @@ import kr.or.scoop.dao.MyIssueDao;
 import kr.or.scoop.dao.NoticeDao;
 import kr.or.scoop.dao.ProjectDao;
 import kr.or.scoop.dao.TissueDao;
+import kr.or.scoop.dto.Mention;
 import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.dto.Notice;
 import kr.or.scoop.dto.PjNotice;
@@ -79,8 +80,10 @@ public class BoardController {
 		TissueDao dao = sqlSession.getMapper(TissueDao.class);
 		Tissue tissue = dao.teamissueDetail(tiseq);
 		List<Reply> reply = dao.teamCommentOk(tiseq);
+		List<Mention> mentions = dao.getMentions(tiseq);
 		model.addAttribute("tissue", tissue);
 		model.addAttribute("reply",reply);
+		model.addAttribute("mentions",mentions);
 		return "issue/teamissueDetail";
 	}
 

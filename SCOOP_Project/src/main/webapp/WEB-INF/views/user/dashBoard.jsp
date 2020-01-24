@@ -82,7 +82,7 @@
                            <option value="${p.tseq}">${p.pname}</option>
                   </c:forEach>
                </select>
-               <div style="width:100%;height:640px;background: #F3F3F9;margin: 5% 0 5% 0;float: right;padding-top:2%;padding-bottom: 2%;border-radius: 0.5rem;">
+               <div style="width:100%;height:500px;background: #F3F3F9;margin: 5% 0 5% 0;float: right;padding-top:2%;padding-bottom: 2%;border-radius: 0.5rem;">
                  	<canvas id="myChart"></canvas>
                </div>
                </div>
@@ -140,42 +140,51 @@
       src="<c:url value="/resources/plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"/>"></script>
 
    <script src="<c:url value="/resources/js/dashboard/dashboard-1.js"/>"></script>
-	<script>
-		var ctx = document.getElementById('myChart').getContext('2d');
-		var myChart = new Chart(ctx,
-				{
-					type : 'doughnut',
-					data : {
-						labels : [ 'Red', 'Blue', 'Yellow', 'Green', 'Purple',
-								'Orange' ],
-						datasets : [ {
-							label : '# of Votes',
-							data : [ 12, 19, 3, 5, 2, 3 ],
-							backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
-									'rgba(54, 162, 235, 0.2)',
-									'rgba(255, 206, 86, 0.2)',
-									'rgba(75, 192, 192, 0.2)',
-									'rgba(153, 102, 255, 0.2)',
-									'rgba(255, 159, 64, 0.2)' ],
-							borderColor : [ 'rgba(255, 99, 132, 1)',
-									'rgba(54, 162, 235, 1)',
-									'rgba(255, 206, 86, 1)',
-									'rgba(75, 192, 192, 1)',
-									'rgba(153, 102, 255, 1)',
-									'rgba(255, 159, 64, 1)' ],
-							borderWidth : 1
-						} ]
-					},
-					options : {
-						scales : {
-							yAxes : [ {
-								ticks : {
-									beginAtZero : true
+   <script type="text/javascript">
+		$('#selectDash').change(function(){
+			let tseq = $(this).val();
+			console.log(tseq);
+
+			$.ajax({
+				url: "selectChart.do",
+				type: "POST",
+				data: {"tseq" : tseq},
+				success: function(data) {
+					console.log(data);
+					var ctx = document.getElementById('myChart').getContext('2d');
+					var myChart = new Chart(ctx,
+							{
+								type : 'doughnut',
+								data : {
+									labels : [ '발의됨', '진행중', '일시중지', '완료' ],
+									datasets : [ {
+										label : '# of Votes',
+										data : [ data.initiative, data.progress, data.pause, data.complete ],
+										backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+												'rgba(54, 162, 235, 0.2)',
+												'rgba(255, 206, 86, 0.2)',
+												'rgba(75, 192, 192, 0.2)' ],
+										borderColor : [ 'rgba(255, 99, 132, 1)',
+												'rgba(54, 162, 235, 1)',
+												'rgba(255, 206, 86, 1)',
+												'rgba(75, 192, 192, 1)' ],
+										borderWidth : 1
+									} ]
+								},
+								options : {
+									/* responsive : false, */
+									scales : {
+										yAxes : [ {
+											ticks : {
+												beginAtZero : true
+											}
+										} ]
+									}
 								}
-							} ]
-						}
-					}
-				});
-	</script>
+							});
+				}
+			})
+		})
+   </script>
 </body>
 </html>

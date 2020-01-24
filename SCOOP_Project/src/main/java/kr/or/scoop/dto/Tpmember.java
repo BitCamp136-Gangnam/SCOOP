@@ -10,14 +10,8 @@ public class Tpmember {
 	private String email;
 	private int pjuserrank;
 	private String pname;
+	private String name;
 	private Timestamp tpaddtime;
-	
-	public Timestamp getTpaddtime() {
-		return tpaddtime;
-	}
-	public void setTpaddtime(Timestamp tpaddtime) {
-		this.tpaddtime = tpaddtime;
-	}
 	public int getTseq() {
 		return tseq;
 	}
@@ -42,11 +36,22 @@ public class Tpmember {
 	public void setPname(String pname) {
 		this.pname = pname;
 	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Timestamp getTpaddtime() {
+		return tpaddtime;
+	}
+	public void setTpaddtime(Timestamp tpaddtime) {
+		this.tpaddtime = tpaddtime;
+	}
 	@Override
 	public String toString() {
 		return "Tpmember [tseq=" + tseq + ", email=" + email + ", pjuserrank=" + pjuserrank + ", pname=" + pname
-				+ ", tpaddtime=" + tpaddtime + "]";
+				+ ", name=" + name + ", tpaddtime=" + tpaddtime + "]";
 	}
-	
 	
 }
