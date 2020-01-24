@@ -132,4 +132,11 @@ public class TeamService {
 			int result = dao.mentionInsert(email);
 			return result;
 		}
+		
+		//프로젝트 공지사항 수정
+		public int pjNoticeEdit(PjNotice pjnotice) {
+			ProjectDao dao = sqlsession.getMapper(ProjectDao.class);
+			int result = dao.updatePjNotice(pjnotice);
+			return result;
+		}
 }
