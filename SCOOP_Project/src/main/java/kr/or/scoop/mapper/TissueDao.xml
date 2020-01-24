@@ -110,4 +110,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	from tissue 
 	where tseq = #{param1} and isprocess = #{param2}
 </select>
+<insert id="googleDriveInsert">
+	insert into teamgoogledrive values(#{param1}, #{param2},(select Max(tiseq) from tissue))
+</insert>
 </mapper>

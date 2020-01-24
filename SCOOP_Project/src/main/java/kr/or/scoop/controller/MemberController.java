@@ -229,9 +229,6 @@ public class MemberController {
 		try {
 			pjtlist = noticeDao.getPJT(email);
 			tpmemlist = memberdao.getTpmembers(member.getEmail());
-			System.out.println(tpmemlist.get(0));
-			System.out.println(tpmemlist.get(1));
-			System.out.println(tpmemlist.get(2));
 			mytissuelist = myissuedao.teamWriteTiisueList(member.getIdtime());
 			myreplylist = myissuedao.teamWriteReplyList(member.getIdtime());
 			mypjtlist = myissuedao.teamWriteNoticeList(member.getEmail(), member.getIdtime());

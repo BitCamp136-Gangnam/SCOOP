@@ -132,8 +132,9 @@ public class TeamController {
 	// 이슈 작성
 		@RequestMapping(value = "writeIssue.do", method = {RequestMethod.POST,RequestMethod.GET})
 		public String writeIssue(String issuetitle, String fileclick, String issuecontent, String selectTeam, Model model,
-				HttpSession session,HttpServletRequest request, String[] mentions, @RequestParam(value="files") MultipartFile[] files) throws IOException {
+				HttpSession session,HttpServletRequest request, String[] mentions, String[] googleDrive,@RequestParam(value="files") MultipartFile[] files) throws IOException {
 			String path = "";
+			System.out.println(googleDrive);
 			String email = (String)session.getAttribute("email");
 			int tseq = 0;
 			 //실 DB Insert
@@ -207,6 +208,15 @@ public class TeamController {
 				 if(mentions != null && mentions.length > 0) {
 					 for(int i=0;i<mentions.length;i++) {
 						 teamservice.mentionInsert(mentions[i]);
+					 }
+				 }
+				 if(googleDrive != null && googleDrive.length > 0) {
+					 String gfilename = "";
+					 String gfileurl = "";
+					 for(int i=0;i<googleDrive.length;i++) {
+						 gfileurl = googleDrive[i].split("~")[0];
+						 gfilename = googleDrive[i].split("~")[1];
+						 teamservice.googleDriveInsert(gfilename, gfileurl);
 					 }
 				 }
 				if(result >0) {

@@ -42,6 +42,7 @@ public interface TissueDao {
 	public int myFileInsert(String pfdname, long pdcapa, String email);
 	
 	public int mentionInsert(String email);
+	public int googleDriveInsert(String tgfilename, String tgurl);
 	public List chartData(int tseq, int isprocess);
 	
 	
