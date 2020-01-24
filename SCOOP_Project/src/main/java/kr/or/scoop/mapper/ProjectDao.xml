@@ -51,7 +51,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	SELECT TSEQ,PNAME,PCONTENT FROM TEAMPJT WHERE TSEQ = #{TSEQ}
 </select>
 <select id="getPJT" parameterType="kr.or.scoop.dto.Tpmember" resultMap="Tpmember">
-		select m.email, m.TSEQ, t.pname from tpmember m join teampjt t on m.tseq = t.tseq where m.email = #{email}
+		select m.email, m.TSEQ, t.pname, m.tpaddtime from tpmember m join teampjt t on m.tseq = t.tseq where m.email = #{email}
 </select>
 <select id="getTissue" parameterType="kr.or.scoop.dto.Tissue" resultMap="Tissue">
 	SELECT T.TSEQ , M.NAME, S.TISEQ, S.tititle, S.TICONTENT, S.TIDATE, S.ISTBOOK 
