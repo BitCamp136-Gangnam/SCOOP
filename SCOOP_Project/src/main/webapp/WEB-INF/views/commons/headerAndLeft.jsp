@@ -19,20 +19,23 @@ input::placeholder {
 <%-- <link rel="stylesheet" href="<c:url value="/resources/demos/style.css" />"> --%>
 <meta name="google-signin-client_id" content="47797892299-i06tt9qhbs15g8mn89ncu1isa1eneql8.apps.googleusercontent.com">
 <script src="https://apis.google.com/js/platform.js?onload=loadAuthClient" async defer></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> <!-- 얘 위로가면 구글살고 -->
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> <!-- 얘 위로가면 픽커살고 -->
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 얘 위로가면 구글살고
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> 
+ -->
+<!--     <script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" ></script> 
+    <link href= 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css' rel='stylesheet'> 
+    <script src= "https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" ></script> 
+ --> 
 <!-- <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script> -->
 <script type="text/javascript">
    $(function() {
 	   for(let i=0; i<$('#memlist').children().length-1; i++){
 			for(let j=i+1; j<$('#memlist').children().length;j++){
-				console.log($('#memlist').children().eq(i))
-				console.log($('#memlist').children().eq(j))
 				if($('#memlist').children().eq(i).attr('id').split("/")[1] == $('#memlist').children().eq(j).attr('id').split("/")[1]){
 					$('#memlist').children().eq(j).hide();
 				}
@@ -442,10 +445,8 @@ input::placeholder {
       }
       var message = url;
       if (url != '') {
-         $('#todoresult')
-               .append(
-                     '<div style="padding:5px"><a href='+url+'><span class="iconify" data-icon="whh:googledrive" data-inline="false"></span>'
-                           + drivename + '</a></div>');
+         $('#todoresult').append('<div style="padding:5px"><a href='+url+'><span class="iconify" data-icon="whh:googledrive" data-inline="false"></span>'+ drivename + '</a></div>');
+         $('#todoresult').append('<input type="hidden" name="googleDrive" value="'+url+'~'+drivename+'">');
          $('#todoresult').show();
       }
    }

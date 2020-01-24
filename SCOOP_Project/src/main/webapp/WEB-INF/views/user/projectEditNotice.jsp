@@ -77,8 +77,6 @@
 							취소
 						</button>
 						</div>
-						
-
 					</div>
 				</div>
 			</div>

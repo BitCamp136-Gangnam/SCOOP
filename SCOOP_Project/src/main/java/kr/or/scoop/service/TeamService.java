@@ -127,16 +127,15 @@ public class TeamService {
 	}
 	
 	//팀 멘션 생성
-		public int mentionInsert(String email) {
-			TissueDao dao = sqlsession.getMapper(TissueDao.class);
-			int result = dao.mentionInsert(email);
-			return result;
-		}
-		
-		//프로젝트 공지사항 수정
-		public int pjNoticeEdit(PjNotice pjnotice) {
-			ProjectDao dao = sqlsession.getMapper(ProjectDao.class);
-			int result = dao.updatePjNotice(pjnotice);
-			return result;
-		}
+	public int mentionInsert(String email) {
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		int result = dao.mentionInsert(email);
+		return result;
+	}
+	//팀 멘션 생성
+	public int googleDriveInsert(String gfilename, String gurl) {
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		int result = dao.googleDriveInsert(gfilename, gurl);
+		return result;
+	}
 }
