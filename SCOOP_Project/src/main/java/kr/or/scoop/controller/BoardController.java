@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -325,5 +326,29 @@ public class BoardController {
 		
 		
 		return viewpage;
+	}
+	
+	@RequestMapping(value="pjNoticeDetail.do",method=RequestMethod.GET)
+	public String pjNoticeDetail(int pnseq,Model model,HttpSession session) {
+		ProjectDao dao = sqlSession.getMapper(ProjectDao.class);
+		PjNotice Detail = dao.pjNoticeDetail(pnseq);
+		model.addAttribute("detail", Detail);
+		return "user/projectDetailNotice";
+	}
+	
+	@RequestMapping(value="pjNoticeEdit.do",method=RequestMethod.GET)
+	public String pjNoticeEdit(int pnseq,Model model) {
+		ProjectDao dao = sqlSession.getMapper(ProjectDao.class);
+		PjNotice edit = dao.pjNoticeDetail(pnseq);
+		
+		model.addAttribute("edit",edit);
+		
+		return "user/projectEditNotice";
+	}
+	
+	@RequestMapping(value="pjNoticeEditOk.do", method = RequestMethod.POST)
+	public String pjNoticeEditOk(PjNotice pjnotice) {
+		
+		return null;
 	}
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,19 +19,20 @@
      <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 
 </head>
-
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
 <style>
 .newissue{
 	border-bottom: 1px solid #c8c8c8;
 	padding-top: 0.7%;
 	padding-bottom: 0.7%;
 }
+.myissueDetail{
+	font-size: 15px;
+	margin-left: 3%;
+	margin-bottom:1%;
+}
 </style>
-<script type="text/javascript">
-console.log(${myIssue});
-console.log(${teamIssue});
-</script>
 <body>
 
     <jsp:include page="/WEB-INF/views/commons/preloader.jsp"></jsp:include>
@@ -40,81 +42,37 @@ console.log(${teamIssue});
         Main wrapper start
     ***********************************-->
     <div id="main-wrapper">
-
+	<form action="pjNoticeEditOk.do?pnseq=${edit.pnseq}">
         <jsp:include page="/WEB-INF/views/commons/headerAndLeft.jsp"></jsp:include>
 
         <!--**********************************
             Content body start
         ***********************************-->
-        <div class="content-body">
-            <div class="container-fluid">
-        <div class="card">
-		<div class="row" style="margin: 2%">
-				<h3>검색 결과</h3>
+        <div class="content-body"style="height: 680px;">
+        <div class="container-fluid row" style="padding-right: 15px; margin-right: 0px;margin-left: 0px; padding-left: 15px;">
+        <div class="card" style="padding-left: 15px;padding-right: 15px; padding-top:1%;width:100%;height: auto;overflow: auto;">
+		<div class="row"style="margin:2% 2% 0 2%" >
+				<input class="form-control createmodal" type="text" id="pntitle" name="pntitle" style="width: 100%" value="${edit.pntitle}"> 
 		</div>
-		<hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
-		<div class="row" style="margin-left: 2%; margin-right: 2%">
-			<c:forEach items="${myIssue}" var="my">
-			<div class="col-sm-12 newissue" >
-				<div class="iconify" data-icon="uil:file-lock-alt" data-inline="false" style="width:27px;height: auto;color:black"></div>
-							
-			<div style="float: right;min-width:97%;">
-			<a href="myissueDetail.do?piseq=${my.piseq}">${my.pititle}</a>			
-			<br>
-			<a class="pnameHover" href="private.do" style="color:#2c9aa8;">프라이빗 공간</a>&nbsp;&nbsp;&nbsp;${my.pidate}<br>
-			</div>
-			
-			</div>
-			</c:forEach>
-			
-			<c:forEach items="${teamIssue}" var="ti">
-			<div class="col-sm-12 newissue" >
-			<c:choose>
-				<c:when test="${ti.isprocess==0}">
-				<div id="create" class="iconify" data-icon="uil:file-exclamation-alt" data-inline="false" style="width:27px;height: auto;"></div>
-				</c:when>
-				<c:when test="${ti.isprocess==1}">
-				<div id="ing" class="iconify" data-icon="uil:file-edit-alt" data-inline="false" style="width:27px;height: auto;color: #2671bd;"></div>
-				</c:when>
-				<c:when test="${ti.isprocess==2}">
-				<div id="stop" class="iconify" data-icon="uil:file-block-alt" data-inline="false" style="width:27px;height: auto;color:#cca352"></div>
-				</c:when>
-				<c:when test="${ti.isprocess==3}">
-				<div id="finish" class="iconify" data-icon="uil:file-check-alt" data-inline="false" style="width:27px;height: auto;color:#26805c"></div>
-				</c:when>	
-			</c:choose>
-			
-			<div style="float: right;min-width:97%;">
-			<a href="teamissueDetail.do?tiseq=${ti.tiseq}">${ti.tititle}</a>			
-			<br>
-			<a class="pnameHover" href="projectDetail.do?tseq=${ti.tseq}" style="color:#2c9aa8;">${ti.pname}</a>&nbsp;&nbsp;&nbsp;${ti.tidate}<br>
-			</div>
-			
-			</div>
-			</c:forEach>
-			
-<%-- 			<c:forEach items="${pi}" var="pi">
-			<div class="col-sm-12 newissue" >
-			<div class="iconify" data-icon="uil:file-lock-alt" data-inline="false" style="width:27px;height: auto;"></div>
-			<div style="float: right;min-width:97%;">
-			<a href="myissueDetail.do?piseq=${pi.piseq}">${pi.pititle}</a>
-			<br>
-			<a class="pnameHover" href="private.do" style="color:#2c9aa8;">프라이빗 공간</a>&nbsp;&nbsp;&nbsp;${pi.pidate} 
-			</div>
-			</div>
-			</c:forEach> --%>
-		</div>
-            <!-- #/ container -->
-            </div>
+        <div class="myissueDetail">
+       <textarea class="form-control createmodal" rows="3" id="pcontent_Edit"name="pncontent" style="width: 100%">${edit.pncontent}</textarea>
+        </div>    
+        	<button type="submit" class="btn btn-secondary"
+                  style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;">작성 완료</button>
+               <button type="button" class="btn btn-secondary"
+                  style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;"
+                  data-dismiss="modal">취소</button>
+        	
             </div>
         </div>
+    </div>
+	</form>
+            </div> 
+            <!-- #/ container -->
         <!--**********************************
             Content body end
         ***********************************-->
-        
-        
   <jsp:include page="/WEB-INF/views/commons/footer.jsp"></jsp:include>
-    </div>
     <!--**********************************
         Main wrapper end
     ***********************************-->

@@ -246,7 +246,8 @@ function drop(ev) {
 			  <c:forEach items="${tissuelist}" var="tl">
 			  	  <c:set value="${tl.tseq}" var="tseq"></c:set>
 			  	  <c:if test="${tl.isprocess==0 }">
-			  	  <div draggable="true" ondragstart="drag(event)" id="${tl.tiseq }" name="${tl.isprocess }" class="drags" style="margin-bottom: 5%;">${tl.tititle}
+			  	  <div draggable="true" ondragstart="drag(event)" id="${tl.tiseq }" name="${tl.isprocess }" class="drags" style="margin-bottom: 5%;" >${tl.tititle}
+			  	  <a href="teamissueDetail.do?tiseq=${tl.tiseq}" ></a> 
 			      </div>
 			  	  </c:if>
 			  </c:forEach>
@@ -262,6 +263,7 @@ function drop(ev) {
 				<c:forEach items="${tissuelist}" var="tl">
 			  	  <c:if test="${tl.isprocess==1 }">
 			  	  <div draggable="true" ondragstart="drag(event)" id="${tl.tiseq }" name="${tl.isprocess }" class="drags" style="margin-bottom: 5%;">${tl.tititle}
+			  	  <a href="teamissueDetail.do?tiseq=${tl.tiseq}"></a>
 			      </div>
 			  	  </c:if>
 				  </c:forEach>
@@ -277,6 +279,7 @@ function drop(ev) {
 				<c:forEach items="${tissuelist}" var="tl">
 			  	  <c:if test="${tl.isprocess==2 }">
 			  	  <div draggable="true" ondragstart="drag(event)" id="${tl.tiseq }" name="${tl.isprocess }" class="drags" style="margin-bottom: 5%;">${tl.tititle}
+			  	  <a href="teamissueDetail.do?tiseq=${tl.tiseq}"></a>
 			      </div>
 			  	  </c:if>
 			  </c:forEach>
@@ -292,6 +295,7 @@ function drop(ev) {
 				<c:forEach items="${tissuelist}" var="tl">
 			  	  <c:if test="${tl.isprocess==3 }">
 			  	  <div draggable="true" ondragstart="drag(event)" id="${tl.tiseq }" name="${tl.isprocess }" class="drags" style="margin-bottom: 5%;">${tl.tititle}
+			  	  <a href="teamissueDetail.do?tiseq=${tl.tiseq}"></a>
 			      </div>
 			  	  </c:if>
 			  </c:forEach>

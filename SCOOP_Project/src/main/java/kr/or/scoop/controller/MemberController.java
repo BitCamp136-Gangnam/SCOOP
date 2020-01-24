@@ -489,7 +489,6 @@ public class MemberController {
 			if(filename.equals("")) {
 				member.setProfile((String)session.getAttribute("img"));
 			}else {
-				System.out.println("일겸일겸"+filename);
 				member.setProfile(filename);
 			}
 			String path = request.getServletContext().getRealPath("/user/upload");
@@ -580,5 +579,29 @@ public class MemberController {
 		return result;
 	}
 	
+	// 새로운 팀이슈
+		@RequestMapping(value = "newTissue.do", method = RequestMethod.GET)
+		public String newTissue() {
+			String viewpage = "user/UserNewTissue";
+			return viewpage;
+		}
+		
+		@RequestMapping(value = "newReply.do", method = RequestMethod.GET)
+		public String newReply() {
+			String viewpage = "user/UserNewReply";
+			return viewpage;
+		}
+		
+		@RequestMapping(value = "newVote.do", method = RequestMethod.GET)
+		public String newVote() {
+			String viewpage = "user/UserNewVote";
+			return viewpage;
+		}
+		
+		@RequestMapping(value = "newNotice.do", method = RequestMethod.GET)
+		public String newNotice() {
+			String viewpage = "user/UserNewNotice";
+			return viewpage;
+		}
 	
 }
