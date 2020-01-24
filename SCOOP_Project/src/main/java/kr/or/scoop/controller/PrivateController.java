@@ -63,17 +63,12 @@ public class PrivateController {
 		
 		List<BookMark>bookMarkList = dao.getBookMark(email);
 		
-		
-
 		for(int i = 0; i < bookMarkList.size(); i++) {
-			System.out.println(i + " ------ " + bookMarkList.get(i));
 			tseq = bookMarkList.get(i).getTseq();
 			tiseq = bookMarkList.get(i).getTiseq();
 			System.out.println("tseq : " + tseq + " / tiseq : " + tiseq);
 			if(tseq > 0) {
 				ProjectName projectName = dao.getPjtName(tseq, tiseq);
-				System.out.println("pjn : " + projectName);
-				
 				pname = projectName.getPname();
 				bookMarkList.get(i).setPname(pname);
 			}
