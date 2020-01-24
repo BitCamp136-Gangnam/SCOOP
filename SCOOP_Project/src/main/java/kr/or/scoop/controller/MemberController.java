@@ -592,18 +592,14 @@ public class MemberController {
 			try {
 				Member member = memberdao.getMember(email);
 				List<Tpmember> pjtlist = projectdao.getPJT(email);
-				List<PjNotice> myNewPjNoticeList = myissuedao.teamWriteNoticeList(email, member.getIdtime());
 				List<Tissue> myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime());
-				List<Reply> myNewReplyList = myissuedao.teamWriteReplyList(member.getIdtime());
 				model.addAttribute("mypjtlist", pjtlist);
-				model.addAttribute("myNewPjNoticeList", myNewPjNoticeList);
 				model.addAttribute("myNewTissueList", myNewTissueList);
-				model.addAttribute("myNewReplyList", myNewReplyList);
 				viewpage = "user/UserNewTissue";
 			} catch (Exception e) {
 				// TODO: handle exception
 				System.out.println(e.getMessage());
-				viewpage = "redirect:/index.do";
+				viewpage = "redirect:/userindex.do";
 			}
 			
 			return viewpage;
@@ -630,7 +626,7 @@ public class MemberController {
 			} catch (Exception e) {
 				// TODO: handle exception
 				System.out.println(e.getMessage());
-				viewpage = "redirect:/index.do";
+				viewpage = "redirect:/userindex.do";
 			}
 			
 			return viewpage;
@@ -656,7 +652,7 @@ public class MemberController {
 				viewpage = "user/UserNewVote";
 			} catch(Exception e) {
 				System.out.println(e.getMessage());
-				viewpage = "redirect:/index.do";
+				viewpage = "redirect:/userindex.do";
 			}
 			
 			return viewpage;
@@ -682,7 +678,7 @@ public class MemberController {
 				viewpage = "user/UserNewNotice";
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
-				viewpage = "redirect:/index.do";
+				viewpage = "redirect:/userindex.do";
 			}
 			
 			return viewpage;

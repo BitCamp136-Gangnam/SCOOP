@@ -70,6 +70,7 @@
              
           </ul>
           <select id="selectMenu" name="menu" class="nav-item" onchange="changeItem()">
+          		 <option value="#">이슈 업데이트</option>
                  <option value="0">새로운 팀이슈</option>
             	 <option value="1">새로운 댓글</option>	
             	 <option value="2">새로운 의사결정</option>

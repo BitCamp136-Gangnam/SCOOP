@@ -71,6 +71,7 @@
               
           </ul>
           <select id="selectMenu" name="menu" class="nav-item" onchange="changeItem()">
+                 <option value="#">이슈 업데이트</option>
                  <option value="0">새로운 팀이슈</option>
             	 <option value="1">새로운 댓글</option>	
             	 <option value="2">새로운 의사결정</option>
@@ -82,13 +83,14 @@
       <c:forEach items="${mypjtlist}" var="mpl">
       <c:if test="${myNewPjNoticeList !=null }">
       <c:forEach items="${myNewPjNoticeList }" var="mynewpjnotice">
-      <c:if test="${mpl.tseq==mynewpjnotice.tseq && mpl.tseq !=null}">
+      <c:if test="${mpl.tseq==mynewpjnotice.tseq && mpl.tseq !=null && mpl.tpaddtime > mynewpjnotice.pntime}">
       <div class="row" style="margin-left: 2%; margin-right: 2%" id="ialarm">
 		
          <div class="col-sm-2 newissue" id="al">
+         
          <c:choose>
          	<c:when test="${mpl.tseq==mynewpjnotice.tseq && mpl.tseq !=null && mpl.tpaddtime > mynewpjnotice.pntime}">
-         	<p>${mpl.pname }</p>
+         	<p><a href="projectDetail.do?tseq=${mynewpjnotice.tseq }">${mpl.pname }</a></p>
          	</c:when>
          	
          </c:choose>
@@ -97,7 +99,7 @@
          
          <c:choose>
          	<c:when test="${mpl.tseq==mynewpjnotice.tseq && mpl.tseq !=null && mpl.tpaddtime > mynewpjnotice.pntime}">
-         	<p>${mynewpjnotice.pntitle }</p>
+         	<p><a href="pjNoticeDetail.do?pnseq=${mynewpjnotice.pnseq }&tseq=${mynewpjnotice.tseq}">${mynewpjnotice.pntitle }</a></p>
          	</c:when>
          	
          </c:choose>
@@ -177,9 +179,12 @@
 				});
 
 			});
+		var itemidSelect = document.getElementById('selectMenu');
+		var itemId = itemidSelect.options[itemidSelect.selectedIndex].value;
+		itemId=3;
 		function changeItem(){
-			  var itemidSelect = document.getElementById('selectMenu');
-			  var itemId = itemidSelect.options[itemidSelect.selectedIndex].value;
+			  itemidSelect = document.getElementById('selectMenu');
+			  itemId = itemidSelect.options[itemidSelect.selectedIndex].value;
 			  console.log("itemid :"+itemId);
 			  if(itemId==0){
 				  location.href="newTissue.do";

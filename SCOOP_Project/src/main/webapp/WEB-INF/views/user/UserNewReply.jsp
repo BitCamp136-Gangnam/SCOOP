@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+     <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -70,6 +71,7 @@
               
           </ul>
           <select id="selectMenu" name="menu" class="nav-item" onchange="changeItem()">
+                 <option value="#">이슈 업데이트</option>
                  <option value="0">새로운 팀이슈</option>
             	 <option value="1">새로운 댓글</option>	
             	 <option value="2">새로운 의사결정</option>
@@ -77,61 +79,49 @@
           </select>
       </div>
       <hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
-      <c:if test="${alarm !=null }">
-      <c:forEach items="${alarm }" var="al">
+      <c:if test="${mypjtlist!=null }">
+      <c:forEach items="${mypjtlist}" var="mpl">
+      <c:if test="${myNewTissueList !=null }">
+      <c:forEach items="${myNewTissueList }" var="mynewtissue">
+      <c:if test="${myNewReplyList !=null }">
+      <c:forEach items="${myNewReplyList }" var="mynewreply">
+      <c:if test="${mpl.tseq==mynewtissue.tseq && mpl.tseq !=null && mynewreply.tiseq==mynewtissue.tiseq &&mynewreply.rdate > mpl.tpaddtime}">
       <div class="row" style="margin-left: 2%; margin-right: 2%" id="ialarm">
-      
+		 
          <div class="col-sm-2 newissue" id="al">
+         
          <c:choose>
-         	<c:when test="${al.pnseq!=0 }">
-         	<p>새로운 팀프로젝트 공지사항이 생성됐습니다.</p>
+         	<c:when test="${mpl.tseq==mynewtissue.tseq && mpl.tseq !=null && mynewreply.tiseq==mynewtissue.tiseq &&mynewreply.rdate > mpl.tpaddtime}">
+         	<p><a href="projectDetail.do?tseq=${mynewtissue.tseq }">${mpl.pname }</a></p>
          	</c:when>
-         	<c:when test="${al.replyseq!=0 }">
-         	<p>새로운 댓글이 달렸습니다.</p>
-         	</c:when>
-         	<c:when test="${al.tiseq!=0 }">
-         	<p>새로운 팀 이슈가 생성되었습니다.</p>
-         	</c:when>
-         	<c:when test="${al.vseq!=0 }">
-         	<p>새로운 의사결정이 생성되었습니다.</p>
-         	</c:when>
+         	
          </c:choose>
          </div>
          <div class="col-sm-8 newissue" id="ti">
          
          <c:choose>
-         	<c:when test="${al.pnseq!=0 }">
-         	<p>${al.pnatitle }</p>
+         	<c:when test="${mpl.tseq==mynewtissue.tseq && mpl.tseq !=null && mynewreply.tiseq==mynewtissue.tiseq &&mynewreply.rdate > mpl.tpaddtime}">
+         	<p><a href="teamissueDetail.do?tiseq=${mynewtissue.tiseq}">[${mynewtissue.tititle}]에 [${mynewreply.email }]님이 댓글을 남겼습니다.</a></p>
          	</c:when>
-         	<c:when test="${al.replyseq!=0 }">
-         	<p>${al.ratitle }</p>
-         	</c:when>
-         	<c:when test="${al.tiseq!=0 }">
-         	<p>${al.tiatitle }</p>
-         	</c:when>
-         	<c:when test="${al.vseq!=0 }">
-         	<p>${al.vatitle }</p>
-         	</c:when>
+         	
          </c:choose>
          </div>
          <div class="col-sm-2 newissue" id="day">
-         여기에 시간넣으면됨
+         
          <c:choose>
-         	<c:when test="${al.pnseq!=0 }">
-         	
+         	<c:when test="${mpl.tseq==mynewtissue.tseq && mpl.tseq !=null && mynewreplylist.tiseq==mynewtissue.tiseq &&mynewreplylist.rdate > mpl.tpaddtime}">
+         	<p>${fn:substring(mynewreplylist.rdate,0,16)}</p>
          	</c:when>
-         	<c:when test="${al.replyseq!=0 }">
          	
-         	</c:when>
-         	<c:when test="${al.tiseq!=0 }">
-         	
-         	</c:when>
-         	<c:when test="${al.vseq!=0 }">
-         	
-         	</c:when>
          </c:choose>
          </div>
+         
       </div>
+      </c:if>
+      </c:forEach>
+      </c:if>
+      </c:forEach>
+      </c:if>
       </c:forEach>
       </c:if>
       		<!-- <button id="load" >더 보기</button> -->
@@ -193,9 +183,12 @@
 				});
 
 			});
+		var itemidSelect = document.getElementById('selectMenu');
+		var itemId = itemidSelect.options[itemidSelect.selectedIndex].value;
+		itemId=1;
 		function changeItem(){
-			  var itemidSelect = document.getElementById('selectMenu');
-			  var itemId = itemidSelect.options[itemidSelect.selectedIndex].value;
+			  itemidSelect = document.getElementById('selectMenu');
+			  itemId = itemidSelect.options[itemidSelect.selectedIndex].value;
 			  console.log("itemid :"+itemId);
 			  if(itemId==0){
 				  location.href="newTissue.do";
