@@ -53,7 +53,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="getMember" resultType="kr.or.scoop.dto.Member">
-		select email,name,pwd,dname,drank,address,profile from member 
+		select email,name,pwd,dname,drank,address,profile,idtime from member 
 		where email = #{email}
 	</select>
 	

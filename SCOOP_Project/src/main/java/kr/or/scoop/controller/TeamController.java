@@ -24,6 +24,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import kr.or.scoop.dao.MemberDao;
 import kr.or.scoop.dao.MyIssueDao;
 import kr.or.scoop.dao.ProjectDao;
+import kr.or.scoop.dao.TissueDao;
 import kr.or.scoop.dto.BookMark;
 import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.dto.ProjectMemberlist;
@@ -342,5 +343,21 @@ public class TeamController {
 		
 	}
 	
-	
+	@RequestMapping(value="selectChart.do")
+	public String chart(int tseq) {
+		System.out.println("selectChart 들어오고");
+		System.out.println("tseq : " + tseq);
+		List processList = null;
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		
+		System.out.println("for문 시작");
+		for(int isprocess = 0; isprocess < 4; isprocess++) {
+			processList = dao.chartData(tseq, isprocess);
+			System.out.println(processList.get(isprocess));
+		}
+		System.out.println("for 다 돌고" + processList);
+		
+		
+		return null;
+	}
 }

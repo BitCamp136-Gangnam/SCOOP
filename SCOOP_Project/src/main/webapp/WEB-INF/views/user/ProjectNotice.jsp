@@ -30,6 +30,12 @@
 </style>
 <script type="text/javascript">
 $(function(){
+	$('#nowrite').mouseover(function(){
+	      $(this).attr("style","cursor: pointer;color:#E71D36;font-size:20px;padding-bottom:3px;");
+	});
+	$('#nowrite').mouseout(function(){
+	      $(this).attr("style","cursor: pointer;font-size:20px;padding-bottom:3px;");
+	});
    $('#myModal_Edit_Icon').mouseover(function(){
       $(this).attr("style","margin-left: 5px;cursor: pointer;font-size: 15px;color:#E71D36;");
    });
@@ -214,9 +220,14 @@ $(function(){
          <div class="col-sm-12" style="padding-left: 0">
             <h3>${tpj.pname}
             	<c:if test="${rank == 100}">
-            		<i class="fas fa-cog" id="myModal_Edit_Icon" style="margin-left: 5px;cursor: pointer; font-size: 15px" data-toggle="modal" data-target="#myModal_Edit" ></i>
-            	<input type="button" class="btn btn-secondary" id="nowrite" value="공지사항 작성" data-toggle="modal" data-target="#pnoticewrite"
-                  style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;">
+            	<span data-toggle="tooltip" data-placement="top" title="협업공간 관리" >
+            	<i class="fas fa-cog" id="myModal_Edit_Icon" style="margin-left: 5px;cursor: pointer; font-size: 15px" data-toggle="modal" data-target="#myModal_Edit" ></i>
+            	</span>
+            	<span data-toggle="tooltip" data-placement="top" title="공지사항 관리" >
+            	<span id="nowrite" class="iconify" data-icon="jam:write" style="font-size:20px;cursor: pointer;padding-bottom: 3px;" data-inline="false" data-toggle="modal" data-target="#pnoticewrite">
+            	</span>
+            	</span>
+            	
             	</c:if>
             </h3>
             ${tpj.pcontent}

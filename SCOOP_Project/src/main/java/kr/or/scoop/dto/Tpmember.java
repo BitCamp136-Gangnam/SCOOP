@@ -1,5 +1,7 @@
 package kr.or.scoop.dto;
 
+import java.sql.Timestamp;
+
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -9,6 +11,7 @@ public class Tpmember {
 	private int pjuserrank;
 	private String pname;
 	private String name;
+	private Timestamp tpaddtime;
 	public int getTseq() {
 		return tseq;
 	}
@@ -39,10 +42,16 @@ public class Tpmember {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public Timestamp getTpaddtime() {
+		return tpaddtime;
+	}
+	public void setTpaddtime(Timestamp tpaddtime) {
+		this.tpaddtime = tpaddtime;
+	}
 	@Override
 	public String toString() {
 		return "Tpmember [tseq=" + tseq + ", email=" + email + ", pjuserrank=" + pjuserrank + ", pname=" + pname
-				+ ", name=" + name + "]";
+				+ ", name=" + name + ", tpaddtime=" + tpaddtime + "]";
 	}
 	
 }

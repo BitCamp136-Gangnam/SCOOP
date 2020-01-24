@@ -75,7 +75,7 @@ $(function(){
 	<div id="changpwd" class="row">
 		<div class="col-sm-12">
 
-			<img class="img-responsive center-block" alt="Scoop로고"src="resources/images/logo/ScoopBig.png" style="width: 500px;height: auto;margin-left:35%;/* margin-top:10%; */" />
+			<img class="img-responsive center-block" alt="Scoop로고"src="resources/images/logo/ScoopBig.png" style="width: 500px;height: auto;margin-left:35%; margin-top:10%; " />
 			<form action="changePwdOk.do" method="post" class="pwdform">
 				<p style="margin-left: 45%;font-size:35px;margin-top: 0px;">비밀번호 변경</p>
 				<div id="firstPw" style="margin-left:41%;margin-bottom:1%;">

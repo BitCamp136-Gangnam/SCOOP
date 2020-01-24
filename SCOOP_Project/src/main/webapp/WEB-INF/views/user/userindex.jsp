@@ -20,9 +20,6 @@
 
 </head>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script type="text/javascript">
-  
-</script>
 <style>
 .newissue{
    border-bottom: 1px solid #c8c8c8;
@@ -68,18 +65,16 @@
                <a class="nav-link active" data-toggle="tab" href="#">이슈 업데이트</a>
              </li>
              <li class="nav-item">
-               <a class="nav-link" data-toggle="tab" href="#">@멘션</a>
+               <a class="nav-link" data-toggle="tab">@멘션</a>
              </li>
-              <li class="nav-item dropdown">
-               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">정렬</a>
-               <div class="dropdown-menu">
-                 <a class="dropdown-item" data-toggle="tab" href="newTissue.do">새로운 팀이슈</a>
-                 <a class="dropdown-item" data-toggle="tab" href="newReply.do">새로운 댓글</a>
-                 <a class="dropdown-item" data-toggle="tab" href="newNotice.do">새로운 공지사항</a>
-                 <a class="dropdown-item" data-toggle="tab" href="newVote.do">새로운 투표</a>
-               </div>
-             </li>
+             
           </ul>
+          <select id="selectMenu" name="menu" class="nav-item" onchange="changeItem()">
+                 <option value="0">새로운 팀이슈</option>
+            	 <option value="1">새로운 댓글</option>	
+            	 <option value="2">새로운 의사결정</option>
+            	 <option value="3">새로운 공지사항</option>
+          </select>
       </div>
       <hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
       <c:if test="${alarm !=null }">
@@ -198,6 +193,20 @@
 				});
 
 			});
+		  function changeItem(){
+			  var itemidSelect = document.getElementById('selectMenu');
+			  var itemId = itemidSelect.options[itemidSelect.selectedIndex].value;
+			  console.log("itemid :"+itemId);
+			  if(itemId==0){
+				  location.href="newTissue.do";
+			  } else if (itemId==1){
+				  location.href="newReply.do";
+			  } else if (itemId==2){
+				  location.href="newVote.do";
+			  } else if (itemId==3){
+				  location.href="newNotice.do";
+			  }
+		  }
 	</script>
 </body>
 </html>

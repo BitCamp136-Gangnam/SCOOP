@@ -105,5 +105,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="getMentions" resultType="kr.or.scoop.dto.Mention">
 	select * from teammention t join member m on t.tmemail=m.email where t.tiseq=#{tiseq}
 </select>
-
+<select id="chartData" resultType="int">
+	select count(isprocess) 
+	from tissue 
+	where tseq = #{param1} and isprocess = #{param2}
+</select>
 </mapper>

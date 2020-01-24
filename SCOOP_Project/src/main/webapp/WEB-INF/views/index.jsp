@@ -125,7 +125,7 @@ $(function(){
   });
 })
 
-// form action 지우고 ajax 얼럿 success에 넣고 슥삭 "forgotpwd.do" 
+
 	// 비밀번호 변경 이메일 유효성
 	function chgpwdchk() {
 		let getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
@@ -136,7 +136,7 @@ $(function(){
  				  title: '이메일 형식이 맞지 않습니다.',
  				  showConfirmButton: false,
  				  icon: 'warning',
- 				  timer: 5000
+ 				  timer: 1000
  			})
 			$("#emailcheck").val("");
 			$("#emailcheck").focus();
@@ -163,28 +163,22 @@ $(function(){
 							url: "forgotpwd.do",
 							type : "GET",
 							data : {"email":email},
-							async: false,
-							success: function(){
+							async : false,
+							success: function(data){
 								Swal.fire({
 					 				  title: '이메일 전송 완료!.',
 					 				  showConfirmButton: false,
 					 				  icon: 'success',
 					 				  timer: 5000
 					 			})
-					 			window.setTimeout(function() {
-							  		location.href='index.do';	
-							  	}, 20000);
 							},
-							error: function(){
+							error: function(data){
 								Swal.fire({
 					 				  title: '이메일 전송 실패.',
 					 				  showConfirmButton: false,
 					 				  icon: 'warning',
 					 				  timer: 5000
 					 			})
-					 			window.setTimeout(function() {
-							  		location.href='index.do';	
-							  	}, 5000);
 							}
 						})
 					}

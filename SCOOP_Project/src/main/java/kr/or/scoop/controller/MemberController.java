@@ -41,6 +41,7 @@ import kr.or.scoop.dao.ProjectDao;
 import kr.or.scoop.dto.Alarm;
 import kr.or.scoop.dto.FileDrive;
 import kr.or.scoop.dto.Member;
+import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.dto.PjNotice;
 import kr.or.scoop.dto.Reply;
 import kr.or.scoop.dto.Role;
@@ -585,26 +586,108 @@ public class MemberController {
 	
 	// 새로운 팀이슈
 		@RequestMapping(value = "newTissue.do", method = RequestMethod.GET)
-		public String newTissue() {
-			String viewpage = "user/UserNewTissue";
+		public String newTissue(HttpSession session, Model model) {
+			String viewpage = "";
+			String email = (String)session.getAttribute("email");
+			MemberDao memberdao = sqlsession.getMapper(MemberDao.class);
+			MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
+			ProjectDao projectdao = sqlsession.getMapper(ProjectDao.class);
+			try {
+				Member member = memberdao.getMember(email);
+				List<Tpmember> pjtlist = projectdao.getPJT(email);
+				List<PjNotice> myNewPjNoticeList = myissuedao.teamWriteNoticeList(email, member.getIdtime());
+				List<Tissue> myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime());
+				List<Reply> myNewReplyList = myissuedao.teamWriteReplyList(member.getIdtime());
+				model.addAttribute("mypjtlist", pjtlist);
+				model.addAttribute("myNewPjNoticeList", myNewPjNoticeList);
+				model.addAttribute("myNewTissueList", myNewTissueList);
+				model.addAttribute("myNewReplyList", myNewReplyList);
+				viewpage = "user/UserNewTissue";
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println(e.getMessage());
+				viewpage = "redirect:/index.do";
+			}
+			
 			return viewpage;
 		}
 		
 		@RequestMapping(value = "newReply.do", method = RequestMethod.GET)
-		public String newReply() {
-			String viewpage = "user/UserNewReply";
+		public String newReply(HttpSession session, Model model) {
+			String viewpage = "";
+			String email = (String)session.getAttribute("email");
+			MemberDao memberdao = sqlsession.getMapper(MemberDao.class);
+			MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
+			ProjectDao projectdao = sqlsession.getMapper(ProjectDao.class);
+			try {
+				Member member = memberdao.getMember(email);
+				List<Tpmember> pjtlist = projectdao.getPJT(email);
+				List<PjNotice> myNewPjNoticeList = myissuedao.teamWriteNoticeList(email, member.getIdtime());
+				List<Tissue> myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime());
+				List<Reply> myNewReplyList = myissuedao.teamWriteReplyList(member.getIdtime());
+				model.addAttribute("mypjtlist", pjtlist);
+				model.addAttribute("myNewPjNoticeList", myNewPjNoticeList);
+				model.addAttribute("myNewTissueList", myNewTissueList);
+				model.addAttribute("myNewReplyList", myNewReplyList);
+				viewpage = "user/UserNewReply";
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println(e.getMessage());
+				viewpage = "redirect:/index.do";
+			}
+			
 			return viewpage;
 		}
 		
 		@RequestMapping(value = "newVote.do", method = RequestMethod.GET)
-		public String newVote() {
-			String viewpage = "user/UserNewVote";
+		public String newVote(HttpSession session, Model model) {
+			String viewpage = "";
+			String email = (String)session.getAttribute("email");
+			MemberDao memberdao = sqlsession.getMapper(MemberDao.class);
+			MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
+			ProjectDao projectdao = sqlsession.getMapper(ProjectDao.class);
+			try {
+				Member member = memberdao.getMember(email);
+				List<Tpmember> pjtlist = projectdao.getPJT(email);
+				List<PjNotice> myNewPjNoticeList = myissuedao.teamWriteNoticeList(email, member.getIdtime());
+				List<Tissue> myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime());
+				List<Reply> myNewReplyList = myissuedao.teamWriteReplyList(member.getIdtime());
+				model.addAttribute("mypjtlist", pjtlist);
+				model.addAttribute("myNewPjNoticeList", myNewPjNoticeList);
+				model.addAttribute("myNewTissueList", myNewTissueList);
+				model.addAttribute("myNewReplyList", myNewReplyList);
+				viewpage = "user/UserNewVote";
+			} catch(Exception e) {
+				System.out.println(e.getMessage());
+				viewpage = "redirect:/index.do";
+			}
+			
 			return viewpage;
 		}
 		
 		@RequestMapping(value = "newNotice.do", method = RequestMethod.GET)
-		public String newNotice() {
-			String viewpage = "user/UserNewNotice";
+		public String newNotice(HttpSession session, Model model) {
+			String viewpage = "";
+			String email = (String)session.getAttribute("email");
+			MemberDao memberdao = sqlsession.getMapper(MemberDao.class);
+			MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
+			ProjectDao projectdao = sqlsession.getMapper(ProjectDao.class);
+			try {
+				Member member = memberdao.getMember(email);
+				List<Tpmember> pjtlist = projectdao.getPJT(email);
+				List<PjNotice> myNewPjNoticeList = myissuedao.teamWriteNoticeList(email, member.getIdtime());
+				
+				model.addAttribute("mypjtlist", pjtlist);
+				model.addAttribute("myNewPjNoticeList", myNewPjNoticeList);
+				System.out.println(member);
+				System.out.println(pjtlist);
+				System.out.println(myNewPjNoticeList);
+				viewpage = "user/UserNewNotice";
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				viewpage = "redirect:/index.do";
+			}
+			
 			return viewpage;
 		}
 	
