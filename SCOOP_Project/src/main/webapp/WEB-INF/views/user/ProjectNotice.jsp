@@ -405,6 +405,21 @@ $(function(){
    </div>
   <jsp:include page="/WEB-INF/views/commons/footer.jsp"></jsp:include>
     </div>
+    <script type="text/javascript">
+    $(function(){
+		$("p").slice(0,10).show();
+		$("#load").click(function(e){
+			console.log(e);
+			e.prevenDefault();
+			$("p hidden").slice(0,10).show();
+				if($("<p>").length == 0){
+				alert("더 이상 글이 없습니다.");
+					}
+			
+			});
+
+		});
+    </script>
     <!--**********************************
         Main wrapper end
     ***********************************-->

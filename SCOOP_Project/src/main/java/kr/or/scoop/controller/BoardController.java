@@ -280,6 +280,7 @@ public class BoardController {
 		return viewpage;
 	}
 	
+	//공지사항 삭제 처리 
 	@RequestMapping(value="noticeDelete.do",method = RequestMethod.POST)
 	public String deleteNotice(int bnseq) {
 		int result = 0;
@@ -295,6 +296,7 @@ public class BoardController {
 		return viewpage;
 	}
 	
+	//프로젝트 공지사항 페이지 이동
 	@RequestMapping(value="projectNotice.do", method = RequestMethod.GET)
 	public String pjNotice(int tseq,Model model,HttpSession session) {
 		String email = (String)session.getAttribute("email");
@@ -313,7 +315,7 @@ public class BoardController {
 		
 		return "user/ProjectNotice";
 	}
-	
+	//프로젝트 공지사항 작성처리
 	@RequestMapping(value = "PnoticeWrite.do" , method = RequestMethod.POST)
 	public String pjNoticeWrite(PjNotice pjnotice) {
 		int result = 0;
@@ -330,7 +332,7 @@ public class BoardController {
 		
 		return viewpage;
 	}
-	
+	//프로젝트 공지사항 상세보기
 	@RequestMapping(value="pjNoticeDetail.do",method=RequestMethod.GET)
 	public String pjNoticeDetail(int pnseq,Model model,HttpSession session) {
 		ProjectDao dao = sqlSession.getMapper(ProjectDao.class);
@@ -338,7 +340,7 @@ public class BoardController {
 		model.addAttribute("detail", Detail);
 		return "user/projectDetailNotice";
 	}
-	
+	//프로젝트 공지사항 수정 
 	@RequestMapping(value="pjNoticeEdit.do",method=RequestMethod.GET)
 	public String pjNoticeEdit(int pnseq,Model model) {
 		ProjectDao dao = sqlSession.getMapper(ProjectDao.class);
@@ -349,14 +351,40 @@ public class BoardController {
 		return "user/projectEditNotice";
 	}
 	
+	//프로젝트 공지사항 수정 처리 
 	@RequestMapping(value="pjNoticeEditOk.do", method = RequestMethod.POST)
 	public String pjNoticeEditOk(PjNotice pjnotice) {
+		System.out.println("작동해??");
+		String viewpage;
+		int result = 0;
 		
-		return null;
+		result = tservice.pjNoticeEdit(pjnotice);
+		if(result > 0) {
+			viewpage = "redirect:/pjNoticeDetail.do?pnseq="+pjnotice.getPnseq();
+		}else {
+			viewpage = "user/projectNotice";
+		}
+		return viewpage;
 	}
 	
 	@RequestMapping(value="dashboard.do")
 	public String dashBoard() {
 		return "user/dashBoard";
+	}
+	
+	//프로젝트 공지사항 삭제
+	@RequestMapping(value="pjNoticeDelete.do" , method = {RequestMethod.POST, RequestMethod.GET})
+	public String pjNoticeDelete(int pnseq) {
+		ProjectDao dao = sqlSession.getMapper(ProjectDao.class);
+		int result = dao.deletePjNotice(pnseq);
+		String viewpage;
+		
+		if(result > 0) {
+			viewpage="redirect:/projectNotice.do";
+		}else {
+			viewpage="user/ProjectNotice";
+		}
+		
+		return viewpage;
 	}
 }

@@ -48,12 +48,12 @@
         Main wrapper start
     ***********************************-->
 	<div id="main-wrapper">
-		<form action="pjNoticeEditOk.do?pnseq=${edit.pnseq}">
 			<jsp:include page="/WEB-INF/views/commons/headerAndLeft.jsp"></jsp:include>
 
 			<!--**********************************
             Content body start
         ***********************************-->
+		<form action="pjNoticeEditOk.do" method="POST">
 			<div class="content-body" style="height: 680px;">
 				<div class="container-fluid row"
 					style="padding-right: 15px; margin-right: 0px; margin-left: 0px; padding-left: 15px;">
@@ -69,9 +69,10 @@
 								style="width: 75%; margin-left: 15%; border-radius: 0.5rem;" placeholder="공지사항을 내용을 입력해주세요">${edit.pncontent}</textarea>
 						</div>
 						<div class="row" style="padding-left: 38%;">
-						<button type="submit" class="btn btn-secondary"  style="width:150px;background-color: #E71D36; border-color: #CCCCCC; color: #fff;margin-right:2%; cursor: pointer;">
-						작성 완료
-						</button>
+						<input type="hidden" name="pnseq" value="${edit.pnseq}">
+						<input type="submit" class="btn btn-secondary"  style="width:150px;background-color: #E71D36; border-color: #CCCCCC; color: #fff;margin-right:2%; cursor: pointer;" value="작성 완료">
+						
+						
 						<button type="button" class="btn btn-secondary" style="float:right;width:150px;background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;"data-dismiss="modal">
 							취소
 						</button>
