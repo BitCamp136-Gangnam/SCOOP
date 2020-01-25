@@ -101,7 +101,7 @@ var calendar = $('#calendar').fullCalendar({
       content: $('<div />', {
           class: 'popoverInfoCalendar'
         }).append('<p><strong>등록자:</strong> ' + event.username + '</p>')
-        .append('<p><strong>구분:</strong> ' + event.type + '</p>')
+        .append('<p><strong>협업공간 이름:</strong> ' + event.type + '</p>')
         .append('<p><strong>시간:</strong> ' + getDisplayEventDate(event) + '</p>')
         .append('<div class="popoverDescCalendar"><strong>설명:</strong> ' + event.description + '</div>'),
       delay: {
@@ -319,7 +319,7 @@ var calendar = $('#calendar').fullCalendar({
   },
   eventLimitClick: 'week', //popover
   navLinks: true,
-  defaultDate: moment('2019-05'), //실제 사용시 삭제
+  defaultDate: moment('2020-01'), //실제 사용시 삭제
   timeFormat: 'HH:mm',
   defaultTimedEventDuration: '01:00:00',
   editable: true,
