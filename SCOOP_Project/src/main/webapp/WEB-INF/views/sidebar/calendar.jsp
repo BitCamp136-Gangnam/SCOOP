@@ -223,11 +223,6 @@
     
     <jsp:include page="/WEB-INF/views/commons/footer.jsp"></jsp:include>
 </div>
-<script>
-$(function(){
-console.log(${'#edit-type'}.value());
-});
-</script>
 </body>
 <script src="<c:url value="/resources/plugins/common/common.min.js" />"></script>
 

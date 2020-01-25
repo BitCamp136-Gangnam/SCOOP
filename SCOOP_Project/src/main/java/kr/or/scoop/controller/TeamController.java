@@ -3,6 +3,7 @@ package kr.or.scoop.controller;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -369,5 +370,14 @@ public class TeamController {
 		System.out.println("이제 리턴할 차례");
 		
 		return processList;
+	}
+	
+	@RequestMapping(value = "addTeamCalendar.do", method = RequestMethod.POST)
+	public String dropProjet(String title, Timestamp start, Timestamp end, String description, String type, String username, String backgroundColor, String textColor, boolean allDay) {
+		int result = 0;
+		String viewpage = "redirect:/userindex.do";
+		System.out.println(title+"/"+start+"/"+end+"/"+description+"/"+type+"/"+username+"/"+allDay);
+		return viewpage;
+		
 	}
 }
