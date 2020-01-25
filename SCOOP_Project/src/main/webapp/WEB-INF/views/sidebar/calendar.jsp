@@ -171,8 +171,9 @@
 																<select class="filter" id="type_filter"
 																	multiple="multiple">
 																	<c:forEach items="${pjtlist}" var="p">
-                         														  <option value="${p.tseq}">${p.pname}</option>
-                  															</c:forEach>
+																	<input class="inputModal" type="text" name="edit-tseq" id="edit-tseq" value="${p.tseq}" readonly hidden="hidden">
+                         											<option value="${p.tseq}">${p.pname}</option>
+                  													</c:forEach>
 																</select>
 															</div>
 														</div>

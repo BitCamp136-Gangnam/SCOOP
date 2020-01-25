@@ -9,6 +9,7 @@ var editType = $('#edit-type');
 var editColor = $('#edit-color');
 var editDesc = $('#edit-desc');
 var editName = $('#edit-name');
+var editTseq = $('#edit-tseq');
 
 var addBtnContainer = $('.modalBtnContainer-addEvent');
 var modifyBtnContainer = $('.modalBtnContainer-modifyEvent');
@@ -44,6 +45,7 @@ var newEvent = function (start, end, eventType) {
             username: editName.val(),
             backgroundColor: editColor.val(),
             textColor: '#ffffff',
+            tseq:editTseq.val(),
             allDay: false
         };
 

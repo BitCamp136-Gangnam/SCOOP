@@ -373,12 +373,47 @@ public class TeamController {
 	}
 	
 	@RequestMapping(value = "addTeamCalendar.do", method = RequestMethod.POST)
-	public String addTeamCalendar(String title, String start, String end, String description, String type, String username, String backgroundColor, String textColor, boolean allDay) {
+	public String addTeamCalendar(HttpSession session,String title, String start, String end, String description, String type, String username, String backgroundColor, String textColor, boolean allDay, int tseq) {
 		int result = 0;
-		String viewpage = "redirect:/userindex.do";
-		//java.sql.Timestamp.valueOf(start);
+		System.out.println(title+"/"+start+"/"+end+"/"+description+"/"+type+"/"+username+"/"+allDay+"/"+tseq);
+		String viewpage = "";
+		Tissue tissue = new Tissue();
+		System.out.println(start.length());
+		MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
+		if(start.length()==16) {
+			System.out.println(start+":00");
+			tissue.setTititle(title);
+			tissue.setEmail((String)session.getAttribute("email"));
+			tissue.setTicontent(description);
+			tissue.setTistart(java.sql.Timestamp.valueOf(start+":00"));
+			tissue.setTiend(java.sql.Timestamp.valueOf(end+":00"));
+			tissue.setTseq(tseq);
+			tissue.setBackgroundColor(backgroundColor);
+			tissue.setTextColor(textColor);
+			tissue.setAllDay((true ? 1 : 0));
+			result = myissuedao.writeCalendarTissue(tissue);
+		} else {
+			System.out.println(start+" 00:00:00");
+			tissue.setTititle(title);
+			tissue.setEmail((String)session.getAttribute("email"));
+			tissue.setTicontent(description);
+			tissue.setTistart(java.sql.Timestamp.valueOf(start+" 00:00:00"));
+			tissue.setTiend(java.sql.Timestamp.valueOf(end+" 00:00:00"));
+			tissue.setTseq(tseq);
+			tissue.setBackgroundColor(backgroundColor);
+			tissue.setTextColor(textColor);
+			tissue.setAllDay((true ? 1 : 0));
+			result = myissuedao.writeCalendarTissue(tissue);
+		}
 		
-		System.out.println(title+"/"+start+"/"+end+"/"+description+"/"+type+"/"+username+"/"+allDay);
+		if(result>0) {
+			System.out.println("성공");
+			viewpage = "redirect:/calendar.do";
+		} else {
+			System.out.println("실패");
+			viewpage = "redirect:/calendar.do";
+		}
+		
 		return viewpage;
 		
 	}

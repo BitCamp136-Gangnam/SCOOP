@@ -51,4 +51,7 @@ public interface MyIssueDao {
 	
 	// 팀 이름 찾기
 	public ProjectName getPjtName(int tseq, int tiseq);
+	
+	//팀이슈 캘린더 작성
+	public int writeCalendarTissue(Tissue tissue);
 }
