@@ -373,9 +373,11 @@ public class TeamController {
 	}
 	
 	@RequestMapping(value = "addTeamCalendar.do", method = RequestMethod.POST)
-	public String dropProjet(String title, Timestamp start, Timestamp end, String description, String type, String username, String backgroundColor, String textColor, boolean allDay) {
+	public String addTeamCalendar(String title, String start, String end, String description, String type, String username, String backgroundColor, String textColor, boolean allDay) {
 		int result = 0;
 		String viewpage = "redirect:/userindex.do";
+		//java.sql.Timestamp.valueOf(start);
+		
 		System.out.println(title+"/"+start+"/"+end+"/"+description+"/"+type+"/"+username+"/"+allDay);
 		return viewpage;
 		

@@ -79,12 +79,11 @@ var newEvent = function (start, end, eventType) {
         	url: "addTeamCalendar.do",
             type: "post",
             data: eventData,
-            dataType: "json",
             success: function (data) {
                 alert("데이터 넘기기 성공");
             },
-            error: function(xhr) {
-		    	alert(xhr.status);
+            error: function() {
+		    	alert("에러");
 		    }
         });
     });
