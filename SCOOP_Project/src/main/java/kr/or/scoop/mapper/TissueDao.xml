@@ -105,6 +105,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="getMentions" resultType="kr.or.scoop.dto.Mention">
 	select * from teammention t join member m on t.tmemail=m.email where t.tiseq=#{tiseq}
 </select>
+<select id="getGoogleDrive" resultType="kr.or.scoop.dto.GoogleDrive">
+	select * from teamgoogledrive where tiseq=#{tiseq}
+</select>
 <select id="chartData" resultType="kr.or.scoop.dto.Process">
 	select distinct (select count(*) from tissue where tseq = #{tseq} and isprocess=0) as initiative, 
                 	(select count(*) from tissue where tseq = #{tseq} and isprocess=1) as progress, 

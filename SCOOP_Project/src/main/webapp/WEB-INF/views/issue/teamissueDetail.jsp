@@ -134,8 +134,11 @@ $(function(){
 		<br>
 		</c:forEach>
 		</div>
-		<div class="myissueDetail" id="myissueGoogledrive"><i class="fab fa-google-drive"></i>
-			<a href="">여기에 구글드라이브 파일 올리면됨</a>
+		<div class="myissueDetail" id="myissueGoogledrive">
+			<c:forEach items="${gdrive}" var="gd">
+			<i class="fab fa-google-drive"></i>
+			<a href="${gd.tgurl}" onclick="window.open(this.href,'팝업창','width=800, height=800');return false;">${gd.tgfilename}</a>
+			</c:forEach>
 		</div>
 		<div class="myissueDetail" id="myissueTodo"><i class="far fa-check-circle"style="padding-right: 5px;"></i>From 멤버이름<i class="fas fa-long-arrow-alt-right" style="margin-left:5px;margin-right: 5px;"></i>To 멤버 이름 </div>
         <div class="myissueDetail">

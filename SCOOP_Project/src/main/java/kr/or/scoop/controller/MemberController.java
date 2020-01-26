@@ -208,8 +208,8 @@ public class MemberController {
 		MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
 		Member member = memberdao.getMember((String)session.getAttribute("email"));
 		Role role = memberdao.getRole(email);
-		int count = memberdao.getCount(email);	
 		String img = memberdao.getProfile(email);
+		int count = 0;	
 		List<FileDrive> filedrive = null;
 		List<Tissue> mytissuelist = null;
 		List<Reply> myreplylist = null;
@@ -218,6 +218,7 @@ public class MemberController {
 		List<Tpmember> tpmemlist =  null;
 		try {
 			 filedrive = memberdao.getFileDrive(email);
+			 count = memberdao.getCount(email);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
