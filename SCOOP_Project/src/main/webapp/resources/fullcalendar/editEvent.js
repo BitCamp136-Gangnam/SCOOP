@@ -26,6 +26,7 @@ var editEvent = function (event, element, view) {
     editTitle.val(event.title);
     editStart.val(event.start.format('YYYY-MM-DD HH:mm'));
     editType.val(event.type);
+    editTseq.val(event.tseq);
     editDesc.val(event.description);
     editColor.val(event.backgroundColor).css('color', event.backgroundColor);
 
@@ -71,21 +72,34 @@ var editEvent = function (event, element, view) {
         event.start = startDate;
         event.end = displayDate;
         event.type = editType.val();
+        event.tseq = editTseq.val();
         event.backgroundColor = editColor.val();
         event.description = editDesc.val();
+        
+        var editData = {
+                title: event.title,
+                start: event.start,
+                end: event.end,
+                description: event.description,
+                type: event.type,
+                tseq: event.tseq,
+                backgroundColor: event.backgroundColor,
+                allDay: event.allDay
+            };
 
         $("#calendar").fullCalendar('updateEvent', event);
 
         //일정 업데이트
         $.ajax({
-            type: "get",
-            url: "",
-            data: {
-                //...
+        	url: "editTeamCalendar.do",
+            type: "post",
+            data: editData,
+            success: function (data) {
+                alert("데이터 넘기기 성공");
             },
-            success: function (response) {
-                alert('수정되었습니다.')
-            }
+            error: function() {
+		    	alert("에러");
+		    }
         });
 
     });
