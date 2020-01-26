@@ -138,6 +138,13 @@ public class TeamService {
 		int result = dao.googleDriveInsert(gfilename, gurl);
 		return result;
 	}
+	//팀 멘션 생성
+	public int doWorkInsert(String fromWork, String toWork, String doWork) {
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		System.out.println(fromWork+ toWork+ doWork);
+		int result = dao.doWorkInsert(fromWork, toWork, doWork);
+		return result;
+	}
 
 	//프로젝트 공지사항 수정
 	public int pjNoticeEdit(PjNotice pjnotice) {

@@ -1077,7 +1077,7 @@ span {
    <div class="list-group" id="todo" style="display: none;">
       <label for="todomem">담당자</label> <input
          class="form-control createmodal" type="text" id="todomem"
-         style="width: 100%"> <br> <label for="todolist">할
+         style="width: 100%" name=""> <br> <label for="todolist">할
          일</label>
       <textarea class="form-control createmodal" rows="3" id="todolist"
          style="width: 100%; margin-bottom: 2%" placeholder="할 일을 작성해주세요."></textarea>
@@ -1464,6 +1464,7 @@ $('#todoresult').show();
 													+ 'px; z-index:4;background-color:white');
 							$('#todo').show();
 							$('#todomem').val($(this).text());
+							$('#todomem').attr('name', $(this).attr('id'));
 						}
 
 						$('.modal-content').not('#todo').click(function() {
@@ -1484,6 +1485,8 @@ $('#todoresult').show();
 												+ ' <span class="iconify" data-icon="bytesize:arrow-right" data-inline="false"></span> '
 												+ $('#todolist').val()
 												+ '</div>');
+						$('#todoresult').append('<input type="hidden" name="toWork" value="'+$('#todomem').attr('name').split("/")[1]+'">');
+						$('#todoresult').append('<input type="hidden" name="doWork" value="'+$('#todolist').val()+'">');
 						$('#todoresult').show();
 						$('#todolist').val('');
 					})
