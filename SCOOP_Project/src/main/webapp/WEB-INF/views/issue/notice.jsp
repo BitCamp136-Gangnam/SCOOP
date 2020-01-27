@@ -142,10 +142,10 @@
 			<div class="col-sm-3 newissue">
 			<c:choose>
            		<c:when test="${fn:length(n.bntitle) > 19}">	
-            <p><c:out value="${fn:substring(n.bntitle,0,18)}"/>...</p>
+            <c:out value="${fn:substring(n.bntitle,0,18)}"/>...
            </c:when>
            <c:otherwise>
-           		<p><c:out value="${n.bntitle}"/></p>
+           		<c:out value="${n.bntitle}"/>
            </c:otherwise> 
           </c:choose>
 			</div>
@@ -153,20 +153,20 @@
 			<div class="col-sm-7 newissue">
 			<c:choose>
           <c:when test="${fn:length(n.bncontent) > 56}">
-             <p><c:out value="${fn:substring(n.bncontent,0,55)}"/>...</p>
+             <c:out value="${fn:substring(n.bncontent,0,55)}"/>...
            </c:when>
            <c:otherwise>
-           		 <p><c:out value="${n.bncontent}"/></p>
+           		 <c:out value="${n.bncontent}"/>
            </c:otherwise> 
           </c:choose>
 			</div>
 			<div class="col-sm-2 newissue">
-			<p>${fn:substring(n.bntime,0,16)}</p>
+			${fn:substring(n.bntime,0,16)}
 			</div>
       </div>
 			</a>
 			</c:forEach>
-			<a href="#" class="btn" id="load">더 보기</a>
+			<button id="load">더 보기</button>
 			</div>
 		
             <!-- #/ container -->
@@ -295,20 +295,17 @@
 </body>
 <script type="text/javascript">
  $(document).ready(function(){
-	 var page = 1;
-			 $("p").slice(0	 ,10).show();
+			 $("#listbody").slice(0,10).show();
 			$("#load").click(function(e){
-				console.log($("p").val());
+				console.log($("#listbody").val());
 				console.log(e);
-				 $("#listbody").append("<div class='col-sm-3 newissue'>${n.bntitle}" + page + "</div><div class='col-sm-7 newissue'>${n.bncontent}</div><div class='ol-sm-2 newissue'>${n.bntime}</div>");
-				e.prevenDefault();
-				$("p:hidden").slice(0,10).show();
-					if($("p").length == 0){
+				$("#listbody:hidden").slice(0,10).show();
+					if($("#listbody").length == 0){
 					alert("더 이상 글이 없습니다.");
 						}
 				
 				}); 
-			/* 	 
+			/* 	 var page = 1;
 
 		$(window).scroll(function() {
 		    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
