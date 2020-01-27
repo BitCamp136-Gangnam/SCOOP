@@ -22,6 +22,8 @@
 </head>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script language="javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 
 <style>
 .newissue{
@@ -130,46 +132,48 @@
 		<c:set value="${notice}" var="no" />
 		<c:forEach items="${notice}" var="n">
 		<a href="#" id="${n.bnseq}" name="bnseq" data-target="#noticeDetail" data-toggle="modal" class="bnseq" onclick="roll(this.id)">
-		<div class="row" style="margin-left: 2%; margin-right: 2%">
 			<script>
 			array.push("${n}");
 			bnseq.push("${n.bnseq}");
 			bntitle.push("${n.bntitle}");
 			bncontent.push("${n.bncontent}");
 			</script>
-			<div class="col-sm-3 newissue" >
+		<div class="row" style="margin-left: 2%; margin-right: 2%" id="listbody">
+			<div class="col-sm-3 newissue">
 			<c:choose>
            		<c:when test="${fn:length(n.bntitle) > 19}">	
-            <c:out value="${fn:substring(n.bntitle,0,18)}"/>...
+            <p><c:out value="${fn:substring(n.bntitle,0,18)}"/>...</p>
            </c:when>
            <c:otherwise>
-           		 <c:out value="${n.bntitle}"/>
+           		<p><c:out value="${n.bntitle}"/></p>
            </c:otherwise> 
           </c:choose>
 			</div>
 			
-			<div class="col-sm-7 newissue" >
+			<div class="col-sm-7 newissue">
 			<c:choose>
-           <c:when test="${fn:length(n.bncontent) > 56}">
-            <c:out value="${fn:substring(n.bncontent,0,55)}"/>...
+          <c:when test="${fn:length(n.bncontent) > 56}">
+             <p><c:out value="${fn:substring(n.bncontent,0,55)}"/>...</p>
            </c:when>
            <c:otherwise>
-           		 <c:out value="${n.bncontent}"/>
+           		 <p><c:out value="${n.bncontent}"/></p>
            </c:otherwise> 
           </c:choose>
 			</div>
-      
 			<div class="col-sm-2 newissue">
-			${fn:substring(n.bntime,0,16)}
+			<p>${fn:substring(n.bntime,0,16)}</p>
 			</div>
-		</div>
+      </div>
 			</a>
 			</c:forEach>
+			<a href="#" class="btn" id="load">더 보기</a>
 			</div>
-		ㅌ
+		
             <!-- #/ container -->
             
             </div>
+		</div>
+		
         	
         </div>
         
@@ -215,7 +219,7 @@
 				</div>
 		</div>
 	</div>
-	</div>
+	
   <div class="modal fade" id="noticeEdit">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
@@ -290,8 +294,33 @@
 
 </body>
 <script type="text/javascript">
-$(document).ready(function(){
+ $(document).ready(function(){
+	 var page = 1;
+			 $("p").slice(0	 ,10).show();
+			$("#load").click(function(e){
+				console.log($("p").val());
+				console.log(e);
+				 $("#listbody").append("<div class='col-sm-3 newissue'>${n.bntitle}" + page + "</div><div class='col-sm-7 newissue'>${n.bncontent}</div><div class='ol-sm-2 newissue'>${n.bntime}</div>");
+				e.prevenDefault();
+				$("p:hidden").slice(0,10).show();
+					if($("p").length == 0){
+					alert("더 이상 글이 없습니다.");
+						}
+				
+				}); 
+			/* 	 
 
-});
+		$(window).scroll(function() {
+		    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+		      console.log(++page);
+		      $("#listbody").append("<div class='col-sm-3 newissue'>${n.bntitle}" + page + "</div><div class='col-sm-7 newissue'>${n.bncontent}</div><div class='ol-sm-2 newissue'>${n.bntime}</div>");
+		      
+		    }
+		}); */
+
+		
+
+			}); 
+			
 </script>
 </html>

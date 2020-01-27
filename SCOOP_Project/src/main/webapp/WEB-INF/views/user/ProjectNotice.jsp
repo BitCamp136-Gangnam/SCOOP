@@ -263,20 +263,21 @@ $(function(){
       </div>
          <input type="hidden" name="tiseq" value="${ti.tiseq}" />
          <input type="hidden" name="tseq" value="${tpj.tseq}" />
-      <c:forEach items="${pjn}" var="p">
          <div class="row" style="margin-left: 2%; margin-right: 2%">
-         <div class="col-sm-3 newissue" >
+      <c:forEach items="${pjn}" var="p">
+         <div class="col-sm-3 newissue" id="not">
          <a href="pjNoticeDetail.do?pnseq=${p.pnseq}&tseq=${p.tseq}">${p.name}</a>
          </div>
-         <div class="col-sm-7 newissue">
+         <div class="col-sm-7 newissue" id="not">
          <a href="pjNoticeDetail.do?pnseq=${p.pnseq}&tseq=${p.tseq}">${p.pntitle}</a> 
          </div>
-         <div class="col-sm-2 newissue">
+         <div class="col-sm-2 newissue" id="not">
          <a href="pjNoticeDetail.do?pnseq=${p.pnseq}&tseq=${p.tseq}">${fn:substring(p.pntime,0,16)}</a> 
          </div>
-      </div>
       </c:forEach>
-      
+            
+      </div>
+      		
             <!-- #/ container -->
             </div>
             </div>
@@ -407,12 +408,12 @@ $(function(){
     </div>
     <script type="text/javascript">
     $(function(){
-		$("p").slice(0,10).show();
+		$("#not").slice(0,10).show();
 		$("#load").click(function(e){
 			console.log(e);
 			e.prevenDefault();
-			$("p hidden").slice(0,10).show();
-				if($("<p>").length == 0){
+			$("#not").slice(0,10).show();
+				if($("#not").length == 0){
 				alert("더 이상 글이 없습니다.");
 					}
 			
