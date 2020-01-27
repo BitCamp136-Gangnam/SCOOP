@@ -3,6 +3,7 @@ package kr.or.scoop.controller;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -130,7 +131,7 @@ public class TeamController {
 	// 이슈 작성
 		@RequestMapping(value = "writeIssue.do", method = {RequestMethod.POST,RequestMethod.GET})
 		public String writeIssue(String issuetitle, String fileclick, String issuecontent, String selectTeam, Model model,
-				HttpSession session,HttpServletRequest request, String[] mentions, String[] googleDrive,@RequestParam(value="files") MultipartFile[] files) throws IOException {
+				HttpSession session,HttpServletRequest request, String[] mentions, String[] toWork, String[] doWork, String[] googleDrive,@RequestParam(value="files") MultipartFile[] files) throws IOException {
 			String path = "";
 			System.out.println(googleDrive);
 			String email = (String)session.getAttribute("email");
@@ -215,6 +216,12 @@ public class TeamController {
 						 gfileurl = googleDrive[i].split("~")[0];
 						 gfilename = googleDrive[i].split("~")[1];
 						 teamservice.googleDriveInsert(gfilename, gfileurl);
+					 }
+				 }
+				 if(toWork != null && toWork.length > 0) {
+					 String fromWork = email;
+					 for(int i=0;i<toWork.length;i++) {
+						 teamservice.doWorkInsert(fromWork, toWork[i], doWork[i]);
 					 }
 				 }
 				if(result >0) {
@@ -369,5 +376,51 @@ public class TeamController {
 		System.out.println("이제 리턴할 차례");
 		
 		return processList;
+	}
+	
+	@RequestMapping(value = "addTeamCalendar.do", method = RequestMethod.POST)
+	public String addTeamCalendar(HttpSession session,String title, String start, String end, String description, String type, String username, String backgroundColor, String textColor, boolean allDay, int tseq) {
+		int result = 0;
+		System.out.println(title+"/"+start+"/"+end+"/"+description+"/"+type+"/"+username+"/"+allDay+"/"+tseq);
+		String viewpage = "";
+		Tissue tissue = new Tissue();
+		System.out.println(start.length());
+		MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
+		if(start.length()==16) {
+			System.out.println(start+":00");
+			tissue.setTititle(title);
+			tissue.setEmail((String)session.getAttribute("email"));
+			tissue.setTicontent(description);
+			tissue.setTistart(java.sql.Timestamp.valueOf(start+":00"));
+			tissue.setTiend(java.sql.Timestamp.valueOf(end+":00"));
+			tissue.setTseq(tseq);
+			tissue.setBackgroundColor(backgroundColor);
+			tissue.setTextColor(textColor);
+			tissue.setAllDay((true ? 1 : 0));
+			result = myissuedao.writeCalendarTissue(tissue);
+		} else {
+			System.out.println(start+" 00:00:00");
+			tissue.setTititle(title);
+			tissue.setEmail((String)session.getAttribute("email"));
+			tissue.setTicontent(description);
+			tissue.setTistart(java.sql.Timestamp.valueOf(start+" 00:00:00"));
+			tissue.setTiend(java.sql.Timestamp.valueOf(end+" 00:00:00"));
+			tissue.setTseq(tseq);
+			tissue.setBackgroundColor(backgroundColor);
+			tissue.setTextColor(textColor);
+			tissue.setAllDay((true ? 1 : 0));
+			result = myissuedao.writeCalendarTissue(tissue);
+		}
+		
+		if(result>0) {
+			System.out.println("성공");
+			viewpage = "redirect:/calendar.do";
+		} else {
+			System.out.println("실패");
+			viewpage = "redirect:/calendar.do";
+		}
+		
+		return viewpage;
+		
 	}
 }

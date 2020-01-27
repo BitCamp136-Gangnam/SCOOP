@@ -17,6 +17,8 @@ import kr.or.scoop.dao.MyIssueDao;
 import kr.or.scoop.dao.NoticeDao;
 import kr.or.scoop.dao.ProjectDao;
 import kr.or.scoop.dao.TissueDao;
+import kr.or.scoop.dto.DoWork;
+import kr.or.scoop.dto.GoogleDrive;
 import kr.or.scoop.dto.Mention;
 import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.dto.Notice;
@@ -81,9 +83,13 @@ public class BoardController {
 		Tissue tissue = dao.teamissueDetail(tiseq);
 		List<Reply> reply = dao.teamCommentOk(tiseq);
 		List<Mention> mentions = dao.getMentions(tiseq);
+		List<GoogleDrive> googledrive = dao.getGoogleDrive(tiseq);
+		List<DoWork> dowork = dao.getDoWork(tiseq);
 		model.addAttribute("tissue", tissue);
 		model.addAttribute("reply",reply);
 		model.addAttribute("mentions",mentions);
+		model.addAttribute("gdrive", googledrive);
+		model.addAttribute("dowork", dowork);
 		return "issue/teamissueDetail";
 	}
 

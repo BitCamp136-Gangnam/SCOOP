@@ -19,10 +19,14 @@ public class Tissue {
 	private String ticontent;	
 	private List<CommonsMultipartFile> files;
 	private String tfilename;
-	private Date tistart;
-	private Date tiend;
+	private Timestamp tistart;
+	private Timestamp tiend;
 	private String isprocess;
+	private String backgroundColor;
+	private String textColor;
+	private int allDay;
 
+	
 	private long tfilesize;
 	private int istbook;
 	private int issee;
@@ -32,6 +36,12 @@ public class Tissue {
 	private String turl;
 	private String name;
 	
+	public int getAllDay() {
+		return allDay;
+	}
+	public void setAllDay(int allDay) {
+		this.allDay = allDay;
+	}
 	public String getTgfilename() {
 		return tgfilename;
 	}
@@ -75,18 +85,7 @@ public class Tissue {
 	public void setTicontent(String ticontent) {
 		this.ticontent = ticontent;
 	}
-	public Date getTistart() {
-		return tistart;
-	}
-	public void setTistart(Date tistart) {
-		this.tistart = tistart;
-	}
-	public Date getTiend() {
-		return tiend;
-	}
-	public void setTiend(Date tiend) {
-		this.tiend = tiend;
-	}
+	
 	public String getIsprocess() {
 		return isprocess;
 	}
@@ -151,11 +150,36 @@ public class Tissue {
 		this.tfilename = tfilename;
 	}
 	
+	public Timestamp getTistart() {
+		return tistart;
+	}
+	public void setTistart(Timestamp tistart) {
+		this.tistart = tistart;
+	}
+	public Timestamp getTiend() {
+		return tiend;
+	}
+	public void setTiend(Timestamp tiend) {
+		this.tiend = tiend;
+	}
+	public String getBackgroundColor() {
+		return backgroundColor;
+	}
+	public void setBackgroundColor(String backgroundColor) {
+		this.backgroundColor = backgroundColor;
+	}
+	public String getTextColor() {
+		return textColor;
+	}
+	public void setTextColor(String textColor) {
+		this.textColor = textColor;
+	}
 	@Override
 	public String toString() {
 		return "Tissue [tiseq=" + tiseq + ", tseq=" + tseq + ", tmseq=" + tmseq + ", email=" + email + ", tititle="
 				+ tititle + ", ticontent=" + ticontent + ", files=" + files + ", tfilename=" + tfilename + ", tistart="
-				+ tistart + ", tiend=" + tiend + ", isprocess=" + isprocess + ", tfilesize=" + tfilesize + ", istbook="
+				+ tistart + ", tiend=" + tiend + ", isprocess=" + isprocess + ", backgroundColor=" + backgroundColor
+				+ ", textColor=" + textColor + ", allDay=" + allDay + ", tfilesize=" + tfilesize + ", istbook="
 				+ istbook + ", issee=" + issee + ", tidate=" + tidate + ", tgfilename=" + tgfilename + ", tmemail="
 				+ tmemail + ", turl=" + turl + ", name=" + name + "]";
 	}
