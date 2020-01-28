@@ -367,9 +367,9 @@ public class TeamController {
 		Process processList = null;
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		
-		System.out.println("select");
+		System.out.println("select query");
 		
-		processList = (dao.chartData(tseq));
+		processList = dao.chartData(tseq);
 		
 		System.out.println("결과는?" + processList.toString());
 

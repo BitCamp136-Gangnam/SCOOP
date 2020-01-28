@@ -8,7 +8,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -27,6 +26,7 @@ import kr.or.scoop.dto.ProjectMemberlist;
 import kr.or.scoop.dto.Reply;
 import kr.or.scoop.dto.TeamPjt;
 import kr.or.scoop.dto.Tissue;
+import kr.or.scoop.dto.Tpmember;
 import kr.or.scoop.service.BoardService;
 import kr.or.scoop.service.TeamService;
 import net.sf.json.JSONArray;
@@ -371,11 +371,6 @@ public class BoardController {
 			viewpage = "user/projectNotice";
 		}
 		return viewpage;
-	}
-	
-	@RequestMapping(value="dashboard.do")
-	public String dashBoard() {
-		return "user/dashBoard";
 	}
 	
 	//프로젝트 공지사항 삭제

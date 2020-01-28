@@ -177,7 +177,6 @@
 			    		  icon: "success",
 			    		  button: "확인"
 			    	})
-			    	location.reload();
 				},
 				error : function(err){
 					console.log('실패');
