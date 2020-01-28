@@ -46,6 +46,49 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="sweetalert2.all.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+<!-- Channel Plugin Scripts -->
+<script>
+  (function() {
+    var w = window;
+    if (w.ChannelIO) {
+      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+    }
+    var d = window.document;
+    var ch = function() {
+      ch.c(arguments);
+    };
+    ch.q = [];
+    ch.c = function(args) {
+      ch.q.push(args);
+    };
+    w.ChannelIO = ch;
+    function l() {
+      if (w.ChannelIOInitialized) {
+        return;
+      }
+      w.ChannelIOInitialized = true;
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+      s.charset = 'UTF-8';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+    if (document.readyState === 'complete') {
+      l();
+    } else if (window.attachEvent) {
+      window.attachEvent('onload', l);
+    } else {
+      window.addEventListener('DOMContentLoaded', l, false);
+      window.addEventListener('load', l, false);
+    }
+  })();
+  ChannelIO('boot', {
+    "pluginKey": "969e6926-9aff-4763-ac19-ec65b811442f"
+  });
+</script>
+<!-- End Channel Plugin -->
 <script type="text/javascript">
 $(document).ready(function($) {
 	$("#pricing_area").click(function(event){
@@ -83,48 +126,6 @@ function signOut() {
     });
     auth2.disconnect();
   }
-
-$(function(){
-    var w = window;
-    if (w.ChannelIO) {
-      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
-    }
-    var d = window.document;
-    var ch = function() {
-      ch.c(arguments);
-    };
-    ch.q = [];
-    ch.c = function(args) {
-      ch.q.push(args);
-    };
-    signOut();
-    w.ChannelIO = ch;
-    function l() {
-      if (w.ChannelIOInitialized) {
-        return;
-      }
-      w.ChannelIOInitialized = true;
-      var s = document.createElement('script');
-      s.type = 'text/javascript';
-      s.async = true;
-      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
-      s.charset = 'UTF-8';
-      var x = document.getElementsByTagName('script')[0];
-      x.parentNode.insertBefore(s, x);
-    }
-    if (document.readyState === 'complete') {
-      l();
-    } else if (window.attachEvent) {
-      window.attachEvent('onload', l);
-    } else {
-      window.addEventListener('DOMContentLoaded', l, false);
-      window.addEventListener('load', l, false);
-    }
-  ChannelIO('boot', {
-    "pluginKey": "f6d33d63-4c8d-471b-84ca-10dcb27372eb"
-  });
-})
-
 
 	// 비밀번호 변경 이메일 유효성
 	function chgpwdchk() {

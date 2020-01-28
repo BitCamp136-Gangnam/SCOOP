@@ -105,7 +105,34 @@
 	
 </script>
 <body>
-	
+	<script type="text/javascript">
+$(document).ready(function(){
+	var temp = 0;
+	var moreEventArray = document.querySelectorAll(".card > a > .row ");
+	 $(moreEventArray).attr("hidden","hidden");
+	 $(moreEventArray).slice(0,10).removeAttr("hidden");
+	 $(moreEventArray).slice(0,10);
+	 temp = 10;
+	$("#load").click(function(e){
+		console.log(moreEventArray);
+		/* console.log($('.card'));
+		console.log($('.card > a'));
+		console.log($('.card > a > .row'));
+		console.log($(".card > a > .row").val()); */
+		console.log("if");
+		$(moreEventArray).slice(temp,temp+10).removeAttr("hidden");
+		 temp +=10;
+		if(moreEventArray.length<temp+10){
+			$(moreEventArray).slice(temp,10).removeAttr("hidden");
+
+
+			}
+		
+			
+	}); 
+
+});
+</script>	
 
     <jsp:include page="/WEB-INF/views/commons/preloader.jsp"></jsp:include>
 
@@ -143,10 +170,10 @@
 			<div class="col-sm-3 newissue">
 			<c:choose>
            		<c:when test="${fn:length(n.bntitle) > 19}">	
-            <p><c:out value="${fn:substring(n.bntitle,0,18)}"/>...</p>
+            <c:out value="${fn:substring(n.bntitle,0,18)}"/>...
            </c:when>
            <c:otherwise>
-           		<p><c:out value="${n.bntitle}"/></p>
+           		<c:out value="${n.bntitle}"/>
            </c:otherwise> 
           </c:choose>
 			</div>
@@ -154,15 +181,15 @@
 			<div class="col-sm-7 newissue">
 			<c:choose>
           <c:when test="${fn:length(n.bncontent) > 56}">
-             <p><c:out value="${fn:substring(n.bncontent,0,55)}"/>...<p>
+             <c:out value="${fn:substring(n.bncontent,0,55)}"/>...
            </c:when>
            <c:otherwise>
-           		 <p><c:out value="${n.bncontent}"/></p>
+           		<c:out value="${n.bncontent}"/>
            </c:otherwise> 
           </c:choose>
 			</div>
 			<div class="col-sm-2 newissue">
-			<p>${fn:substring(n.bntime,0,16)}</p>
+			${fn:substring(n.bntime,0,16)}
 			</div>
       </div>
 			</a>
@@ -213,7 +240,7 @@
 						</c:choose>
 						<button type="button" class="btn btn-secondary"
 						style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;"
-						data-dismiss="modal">취소</button>
+						data-dismiss="modal">닫기</button>
 					</div>
 					
 					</div>
@@ -292,21 +319,7 @@
     <script src="<c:url value="/resources/plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"/>"></script>
 
     <script src="<c:url value="/resources/js/dashboard/dashboard-1.js"/>"></script>
-
+	
 </body>
-<script type="text/javascript">
-$(document).ready(function(){
-	 $("div.card.a.div").slice(0,10).show();
-	$("#load").click(function(e){
-		console.log($("div.card.a.div.div.newissue").val());
-		$("div.card.a").slice(0,10).show();
-			if($("div.card.a").length == 0){
-			alert("더 이상 글이 없습니다.");
-				}
-		
-		}); 
 
-	}); 
-			
-</script>
 </html>
