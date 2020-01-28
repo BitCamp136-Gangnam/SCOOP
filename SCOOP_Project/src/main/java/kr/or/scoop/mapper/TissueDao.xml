@@ -102,6 +102,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <insert id="mentionInsert">
 	insert into teammention values((select Max(tiseq) from tissue),tmseq_teammention_seq.nextval, #{email, jdbcType=VARCHAR})
 </insert>
+<insert id="myMentionInsert">
+	insert into pmention values(pmseq_pmention_seq.nextval, #{email, jdbcType=VARCHAR}, (select Max(piseq) from myissue))
+</insert>
+<select id="getFiles" resultType="kr.or.scoop.dto.FileDrive">
+	select * from FileDrive where tiseq=#{tiseq}
+</select>
 <select id="getMentions" resultType="kr.or.scoop.dto.Mention">
 	select * from teammention t join member m on t.tmemail=m.email where t.tiseq=#{tiseq}
 </select>
@@ -109,7 +115,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	select * from teamgoogledrive where tiseq=#{tiseq}
 </select>
 <select id="getDoWork" resultType="kr.or.scoop.dto.DoWork">
-	select (select m.name from dowork d join member m on d.email=m.email where d.tiseq=#{tiseq}) fromname, (select m.name from dowork d join member m on d.toemail=m.email where d.tiseq=#{tiseq}) toname, dowork from dowork where tiseq=#{tiseq}
+	select (select m.name from teamdowork d join member m on d.email=m.email where d.tiseq=#{tiseq}) fromname, (select m.name from teamdowork d join member m on d.toemail=m.email where d.tiseq=#{tiseq}) toname, dowork from teamdowork where tiseq=#{tiseq}
 </select>
 <select id="chartData" resultType="kr.or.scoop.dto.Process">
 	select distinct (select count(*) from tissue where tseq = #{tseq} and isprocess=0) as initiative, 
@@ -119,9 +125,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	from tissue 
 </select>
 <insert id="googleDriveInsert">
-	insert into teamgoogledrive values(#{param1}, #{param2},(select Max(tiseq) from tissue))
+	insert into teamgoogledrive values(tgseq_teamgoogledrive_seq.nextval,#{param1}, #{param2},(select Max(tiseq) from tissue))
+</insert>
+<insert id="myGoogleDriveInsert">
+	insert into pgoogledrive values(pgseq_pgoogledrive_seq.nextval,#{param1}, #{param2},(select Max(piseq) from myissue))
 </insert>
 <insert id="doWorkInsert">
-	insert into dowork values(#{param1}, #{param2}, #{param3},(select Max(tiseq) from tissue))
+	insert into teamdowork values(tdseq_teamdowork_seq.nextval, (select Max(tiseq) from tissue), #{param1}, #{param2}, #{param3})
+</insert>
+<insert id="myDoWorkInsert">
+	insert into pdowork values(pwseq_pdowork_seq.nextval, (select Max(piseq) from myissue), #{param1}, #{param2}, #{param3})
 </insert>
 </mapper>

@@ -193,11 +193,11 @@ var calendar = $('#calendar').fullCalendar({
 
     //리사이즈한 일정 업데이트
     $.ajax({
-      type: "get",
-      url: "",
+      type: "post",
+      url: "editTeamCalendar.do",
       data: {
         //id: event._id,
-        //....
+        
       },
       success: function (response) {
         alert('수정: ' + newDates.startDate + ' ~ ' + newDates.endDate);
@@ -249,8 +249,8 @@ var calendar = $('#calendar').fullCalendar({
         .addClass("contextOpened")
         .css({
           display: "block",
-          left: e.pageX,
-          top: e.pageY
+          left: e.pageX-280,
+          top: e.pageY-180
         });
       return false;
     });

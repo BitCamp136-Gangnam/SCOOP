@@ -2,6 +2,7 @@ package kr.or.scoop.controller;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
@@ -130,10 +131,11 @@ public class TeamController {
 	
 	// 이슈 작성
 		@RequestMapping(value = "writeIssue.do", method = {RequestMethod.POST,RequestMethod.GET})
-		public String writeIssue(String issuetitle, String fileclick, String issuecontent, String selectTeam, Model model,
+		public String writeIssue(String issuetitle, String fileclick, String issuecontent, String selectTeam, Model model, String fromDate, String toDate,
 				HttpSession session,HttpServletRequest request, String[] mentions, String[] toWork, String[] doWork, String[] googleDrive,@RequestParam(value="files") MultipartFile[] files) throws IOException {
 			String path = "";
-			System.out.println(googleDrive);
+			System.out.println(fromDate);
+			System.out.println(toDate);
 			String email = (String)session.getAttribute("email");
 			int tseq = 0;
 			 //실 DB Insert
@@ -144,6 +146,10 @@ public class TeamController {
 				myissue.setPititle(issuetitle);
 				myissue.setPicontent(issuecontent);
 				myissue.setIspibook(0);
+				if(fromDate != null) {
+					 myissue.setPistart(java.sql.Timestamp.valueOf(fromDate+" 00:00:00"));
+					 myissue.setPiend(java.sql.Timestamp.valueOf(toDate+" 00:00:00"));
+				}
 				int result = privateservice.writeMyissue(myissue);
 				 if(files != null && files.length > 0) {
 					 //업로드한 파일이 하나라도 있다면
@@ -166,6 +172,26 @@ public class TeamController {
 						 }
 					 }
 				 }
+				 if(mentions != null && mentions.length > 0) {
+					 for(int i=0;i<mentions.length;i++) {
+						 teamservice.myMentionInsert(mentions[i]);
+					 }
+				 }
+				 if(googleDrive != null && googleDrive.length > 0) {
+					 String gfilename = "";
+					 String gfileurl = "";
+					 for(int i=0;i<googleDrive.length;i++) {
+						 gfileurl = googleDrive[i].split("~")[0];
+						 gfilename = googleDrive[i].split("~")[1];
+						 teamservice.myGoogleDriveInsert(gfilename, gfileurl);
+					 }
+				 }
+				 if(toWork != null && toWork.length > 0) {
+					 String fromWork = email;
+					 for(int i=0;i<toWork.length;i++) {
+						 teamservice.myDoWorkInsert(fromWork, toWork[i], doWork[i]);
+					 }
+				 }
 				if(result >0) {
 					path = "ajax/makeMyIssueSwal";
 					System.out.println("success insert Myissue");
@@ -180,6 +206,10 @@ public class TeamController {
 				tissue.setEmail((String)session.getAttribute("email"));
 				tissue.setTititle(issuetitle);
 				tissue.setTicontent(issuecontent);
+				if(fromDate != null) {
+					 tissue.setTistart(java.sql.Timestamp.valueOf(fromDate+" 00:00:00"));
+					 tissue.setTiend(java.sql.Timestamp.valueOf(toDate+" 00:00:00"));
+				}
 				int result = privateservice.writeTissue(tissue);
 				 if(files != null && files.length > 0) {
 					 //업로드한 파일이 하나라도 있다면
@@ -386,31 +416,83 @@ public class TeamController {
 		Tissue tissue = new Tissue();
 		System.out.println(start.length());
 		MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
+		tissue.setTititle(title);
+		tissue.setEmail((String)session.getAttribute("email"));
+		tissue.setTicontent(description);
+		tissue.setTseq(tseq);
+		tissue.setBackgroundColor(backgroundColor);
+		tissue.setTextColor(textColor);
+		tissue.setAllDay((true ? 1 : 0));
 		if(start.length()==16) {
 			System.out.println(start+":00");
-			tissue.setTititle(title);
-			tissue.setEmail((String)session.getAttribute("email"));
-			tissue.setTicontent(description);
 			tissue.setTistart(java.sql.Timestamp.valueOf(start+":00"));
 			tissue.setTiend(java.sql.Timestamp.valueOf(end+":00"));
-			tissue.setTseq(tseq);
-			tissue.setBackgroundColor(backgroundColor);
-			tissue.setTextColor(textColor);
-			tissue.setAllDay((true ? 1 : 0));
 			result = myissuedao.writeCalendarTissue(tissue);
 		} else {
 			System.out.println(start+" 00:00:00");
-			tissue.setTititle(title);
-			tissue.setEmail((String)session.getAttribute("email"));
-			tissue.setTicontent(description);
 			tissue.setTistart(java.sql.Timestamp.valueOf(start+" 00:00:00"));
 			tissue.setTiend(java.sql.Timestamp.valueOf(end+" 00:00:00"));
-			tissue.setTseq(tseq);
-			tissue.setBackgroundColor(backgroundColor);
-			tissue.setTextColor(textColor);
-			tissue.setAllDay((true ? 1 : 0));
 			result = myissuedao.writeCalendarTissue(tissue);
 		}
+		
+		if(result>0) {
+			System.out.println("성공");
+			viewpage = "redirect:/calendar.do";
+		} else {
+			System.out.println("실패");
+			viewpage = "redirect:/calendar.do";
+		}
+		
+		return viewpage;
+		
+	}
+	
+	@RequestMapping(value = "editTeamCalendar.do", method = RequestMethod.POST)
+	public String editTeamCalendar(String title, String start, String end, String description, String type, String backgroundColor, boolean allDay, int tseq, int tiseq) {
+		int result = 0;
+		System.out.println(title+"/"+start+"/"+end+"/"+description+"/"+type+"/"+allDay+"/"+tseq);
+		String viewpage = "";
+		Tissue tissue = new Tissue();
+		System.out.println(start.length());
+		MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
+		tissue.setTititle(title);
+		tissue.setTicontent(description);
+		tissue.setTseq(tseq);
+		tissue.setTiseq(tiseq);
+		tissue.setBackgroundColor(backgroundColor);
+		tissue.setAllDay((true ? 1 : 0));
+		if(start.length()==16) {
+			System.out.println(start+":00");
+			tissue.setTistart(java.sql.Timestamp.valueOf(start+":00"));
+			tissue.setTiend(java.sql.Timestamp.valueOf(end+":00"));
+			result = myissuedao.editTeamCalendar(tissue);
+		} else {
+			System.out.println(start+" 00:00:00");
+			tissue.setTistart(java.sql.Timestamp.valueOf(start+" 00:00:00"));
+			tissue.setTiend(java.sql.Timestamp.valueOf(end+" 00:00:00"));
+			result = myissuedao.editTeamCalendar(tissue);
+		}
+		
+		if(result>0) {
+			System.out.println("성공");
+			viewpage = "redirect:/calendar.do";
+		} else {
+			System.out.println("실패");
+			viewpage = "redirect:/calendar.do";
+		}
+		
+		return viewpage;
+		
+	}
+	
+	@RequestMapping(value = "deleteTeamCalendar.do", method = RequestMethod.POST)
+	public String deleteTeamCalendar(int tiseq) {
+		int result = 0;
+		String viewpage = "";
+		Tissue tissue = new Tissue();
+		MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
+		tissue.setTiseq(tiseq);
+		result = myissuedao.deleteTeamCalendar(tissue);
 		
 		if(result>0) {
 			System.out.println("성공");

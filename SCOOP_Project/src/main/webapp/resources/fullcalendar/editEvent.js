@@ -27,6 +27,7 @@ var editEvent = function (event, element, view) {
     editStart.val(event.start.format('YYYY-MM-DD HH:mm'));
     editType.val(event.type);
     editTseq.val(event.tseq);
+    /*editTiseq.val(event.tiseq);*/
     editDesc.val(event.description);
     editColor.val(event.backgroundColor).css('color', event.backgroundColor);
 
@@ -73,6 +74,7 @@ var editEvent = function (event, element, view) {
         event.end = displayDate;
         event.type = editType.val();
         event.tseq = editTseq.val();
+        /*event.tiseq = editTiseq.val();*/
         event.backgroundColor = editColor.val();
         event.description = editDesc.val();
         
@@ -83,6 +85,7 @@ var editEvent = function (event, element, view) {
                 description: event.description,
                 type: event.type,
                 tseq: event.tseq,
+                /*tiseq: event.tiseq,*/
                 backgroundColor: event.backgroundColor,
                 allDay: event.allDay
             };
@@ -112,14 +115,15 @@ var editEvent = function (event, element, view) {
 
         //삭제시
         $.ajax({
-            type: "get",
-            url: "",
-            data: {
-                //...
-            },
+            type: "post",
+            url: "deleteTeamCalendar.do",
+            data: editData,
             success: function (response) {
                 alert('삭제되었습니다.');
-            }
+            },
+            error: function() {
+		    	alert("에러");
+		    }
         });
     });
 };

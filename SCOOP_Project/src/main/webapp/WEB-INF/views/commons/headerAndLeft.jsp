@@ -11,7 +11,7 @@ input::placeholder {
    color: #fff;
 }
 </style>
-<script language="javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <%-- <link rel="stylesheet" href="<c:url value="/resources/lib/codemirror.css" />">
 <script src="<c:url value="/resources/lib/codemirror.js" />"></script> --%>
 <%-- <link rel="stylesheet"
@@ -20,17 +20,13 @@ input::placeholder {
 <%-- <link rel="stylesheet" href="<c:url value="/resources/demos/style.css" />"> --%>
 <meta name="google-signin-client_id" content="47797892299-i06tt9qhbs15g8mn89ncu1isa1eneql8.apps.googleusercontent.com">
 <script src="https://apis.google.com/js/platform.js?onload=loadAuthClient" async defer></script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> <!-- 얘 위로가면 픽커살고 -->
 <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 얘 위로가면 구글살고
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
  -->
-<!--     <script src= "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" ></script> 
     <link href= 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css' rel='stylesheet'> 
     <script src= "https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" ></script> 
- --> 
 <!-- <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script> -->
 <script type="text/javascript">
@@ -446,7 +442,7 @@ input::placeholder {
       }
       var message = url;
       if (url != '') {
-         $('#todoresult').append('<div style="padding:5px"><a href='+url+'><span class="iconify" data-icon="whh:googledrive" data-inline="false"></span>'+ drivename + '</a></div>');
+         $('#todoresult').append('<div style="padding:5px"><a href='+url+'><span class="iconify" data-icon="whh:googledrive" data-inline="false"></span>'+ drivename + '</a><span id="annoDelete" style="cursor:pointer;" onclick="annotationDelete('+annotation+')"><span class="iconify" data-icon="octicon:x" data-inline="false"></span></span></div>');
          $('#todoresult').append('<input type="hidden" name="googleDrive" value="'+url+'~'+drivename+'">');
          $('#todoresult').show();
       }
@@ -1105,13 +1101,19 @@ span {
                placeholder="종료날짜">
          </div>
       </div>
-      <br> <label>할 일</label>
+      <br> <!-- <label>할 일</label>
       <textarea class="form-control createmodal" rows="3" id="datecontent"
-         style="width: 100%; margin-bottom: 2%" placeholder="일정을 작성해주세요."></textarea>
+         style="width: 100%; margin-bottom: 2%" placeholder="일정을 작성해주세요."></textarea> -->
+         <div class="row">
+         <div class="col-sm-6" style="padding-right: 2px">
       <button type="button" id="datemake" class="btn btn-secondary"
-         style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;">만들기</button>
+         style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer; width: 100%">만들기</button>
+         </div>
+         <div class="col-sm-6" style="padding-left: 2px">
       <button type="button" id="datecancle" class="btn btn-secondary"
-         style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;">취소</button>
+         style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer; width: 100%">취소</button>
+         </div>
+         </div>
    </div>
 </div>
 <!-- 파트너 초대 모달 -->
@@ -1220,6 +1222,7 @@ span {
    </div>
    </div>
 <script type="text/javascript">
+var annotation = 0;
 $('.modal').on('hidden.bs.modal', function(e) {
    console.log('modal close');
    $('#memlist').hide();
@@ -1421,7 +1424,7 @@ $('.menli').keydown(function(event) {
 		.append(
 				'<div style="padding:5px"><span class="iconify" data-icon="si-glyph:file-box" data-inline="false"></span> '
 						+ files[i].name
-						+ '</div>');
+						+ '<span id="annoDelete'+(++annotation)+'" style="cursor:pointer;" onclick="annotationDelete('+annotation+')"><span class="iconify" data-icon="octicon:x" data-inline="false"></span></span></div>');
 		}
 $('#todoresult').show();
 		
@@ -1449,7 +1452,7 @@ $('#todoresult').show();
 							var text = "";
 							text = $('#issuecontent').val().replace("@", "");
 							$('#issuecontent').val(text);
-							$('#todoresult').append('<div style="padding:5px; width:100%"><input type="text" id="'+$(this).attr('id')+'" value="@'+ $(this).text() + '" style="border:none" readonly></div>');
+							$('#todoresult').append('<div style="padding:5px; width:100%"><input type="text" id="'+$(this).attr('id')+'" value="@'+ $(this).text() + '" style="border:none" readonly><span id="annoDelete'+(++annotation)+'" style="cursor:pointer;" onclick="annotationDelete('+annotation+')"><span class="iconify" data-icon="octicon:x" data-inline="false"></span></span></div>');
 							$('#todoresult').append('<input type="hidden" name="mentions" value="'+ $(this).attr('id').split('/')[1] + '">');
 							console.log($(this).text());
 							$('#todoresult').show();
@@ -1487,7 +1490,7 @@ $('#todoresult').show();
 												+ $('#todomem').val()
 												+ ' <span class="iconify" data-icon="bytesize:arrow-right" data-inline="false"></span> '
 												+ $('#todolist').val()
-												+ '</div>');
+												+ '<span id="annoDelete'+(++annotation)+'" style="cursor:pointer;" onclick="annotationDelete('+annotation+')"><span class="iconify" data-icon="octicon:x" data-inline="false"></span></span></div>');
 						$('#todoresult').append('<input type="hidden" name="toWork" value="'+$('#todomem').attr('name').split("/")[1]+'">');
 						$('#todoresult').append('<input type="hidden" name="doWork" value="'+$('#todolist').val()+'">');
 						$('#todoresult').show();
@@ -1528,15 +1531,17 @@ $('#todoresult').show();
 						var text = "";
 						text = $('#issuecontent').val().replace("@", "");
 						$('#issuecontent').val(text);
-						$('#todoresult')
-								.append(
+						$('#todoresult').append(
 										'<div style="padding:5px"><span class="iconify" data-icon="bx:bx-calendar" data-inline="false"></span>'
 												+ $('#from').val()
 												+ '~'
 												+ $('#to').val()
-												+ ' <span class="iconify" data-icon="bytesize:arrow-right" data-inline="false"></span> '
-												+ $('#datecontent').val()
-												+ '</div>');
+												//+ ' <span class="iconify" data-icon="bytesize:arrow-right" data-inline="false"></span> '
+												//+ $('#datecontent').val()
+												+ '<span id="annoDelete'+(++annotation)+'" style="cursor:pointer;" onclick="annotationDelete('+annotation+')"><span class="iconify" data-icon="octicon:x" data-inline="false"></span></span></div>');
+						$('#todoresult').append('<input type="hidden" name="fromDate" value="'+$('#from').val()+'">');
+						$('#todoresult').append('<input type="hidden" name="toDate" value="'+$('#to').val()+'">');
+						//$('#todoresult').append('<input type="hidden" name="dateMemo" value="'+$('#datecontent').val()+'">');
 						$('#todoresult').show();
 						$('#todolist').val('');
 					})
@@ -1547,30 +1552,9 @@ $('#todoresult').show();
 		$('#issuecontent').val(text);
 		$('#todolist').val('');
 	});
-	var dateFormat = "mm/dd/yy", from = $("#from").datepicker({
-		defaultDate : "+1w",
-		changeMonth : true,
-		numberOfMonths : 1
-	}).on("change", function() {
-		to.datepicker("option", "minDate", getDate(this));
-	}), to = $("#to").datepicker({
-		defaultDate : "+1w",
-		changeMonth : true,
-		numberOfMonths : 1
-	}).on("change", function() {
-		from.datepicker("option", "maxDate", getDate(this));
-	});
-	function getDate(element) {
-		var date;
-		try {
-			date = $.datepicker.parseDate(dateFormat, element.value);
-		} catch (error) {
-			date = null;
-		}
-		return date;
-	}
-
-	 if(!gapi.auth2){
+	$("#to").datepicker({ dateFormat: 'yy-mm-dd' });
+	$("#from").datepicker({ dateFormat: 'yy-mm-dd' });
+/* 	 if(!gapi.auth2){
 		    gapi.load('auth2', function() {
 		        gapi.auth2.init();
 		    });
@@ -1586,19 +1570,19 @@ $('#todoresult').show();
 		        console.log(auth2);				
 				auth2.disconnect();
 				console.log("오이오이");
-				location.href="logout.do";
+				location.href="logout.do"; */
 		        /* window.gapi.auth2.signOut().then(function() {
 					console.log("google logout");			
 				});
 				auth2.disconnect(); */
-		      });
+		      //});
 		/* console.log(gapi.auth2);
 		var auth2 = gapi.auth2.getAuthInstance();
 		auth2.signOut().then(function() {
 			console.log("google logout");			
 		});
 		auth2.disconnect(); */
-	}
+/* 	}
 	function googleSignOut() { 
 		var auth2 = gapi.auth2.getAuthInstance();
 		auth2.signOut().then(function () {
@@ -1613,7 +1597,7 @@ $('#todoresult').show();
 		gapi.load('auth2', function() {
 			gapi.auth2.init();
 		});
-	}
+	} */
 
 	$('#inviteModal_id')
 			.mouseover(
@@ -1629,5 +1613,8 @@ $('#todoresult').show();
 								.attr('style',
 										'cursor: pointer;color:#535359;font-size: 18px;padding-bottom: 12px;');
 					});
-	
+	function annotationDelete(annotation){
+		console.log($('#annoDelete'+annotation).attr('id'));
+		$('#annoDelete'+annotation).parent().remove();
+	}
 </script>
