@@ -41,6 +41,7 @@ import kr.or.scoop.dto.Tpmember;
 import kr.or.scoop.service.BoardService;
 import kr.or.scoop.service.PrivateService;
 import kr.or.scoop.service.TeamService;
+import net.sf.json.JSON;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -561,7 +562,7 @@ public class TeamController {
 			Iterator<Integer> tissueitor = sortlist.keySet().iterator();
 			System.out.println(tissueitor);
 			SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd'T'HH:mm" , Locale.KOREA );
-			SimpleDateFormat sdft = new SimpleDateFormat( "yyyy-MM-dd" , Locale.KOREA );
+			SimpleDateFormat sdft = new SimpleDateFormat( "yyyy-MM-dd");
 			while(tissueitor.hasNext()) {
 				int key =tissueitor.next();
 				JSONObject data = new JSONObject();
