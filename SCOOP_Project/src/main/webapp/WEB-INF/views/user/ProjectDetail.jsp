@@ -282,7 +282,7 @@ $(function(){
          </div>
       </div>
       <c:forEach items="${tp}" var="ti">
-         <div class="row" style="margin-left: 2%; margin-right: 2%">
+         <div class="row" style="margin-left: 2%; margin-right: 2%" id="row">
          <input type="hidden" name="tiseq" value="${ti.tiseq}" />
          <input type="hidden" name="tseq" value="${tpj.tseq}" />
          <div class="col-sm-3 newissue" >
@@ -318,7 +318,7 @@ $(function(){
 		</c:choose>
       </div>
       </c:forEach>
-      
+      <button id="load">더보기</button>
             <!-- #/ container -->
             </div>
             </div>
@@ -439,6 +439,33 @@ $(function(){
     <script src="<c:url value="/resources/plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"/>"></script>
 
     <script src="<c:url value="/resources/js/dashboard/dashboard-1.js"/>"></script>
+			<script type="text/javascript">
+$(document).ready(function(){
+	var temp = 0;
+	var moreEventArray = document.querySelectorAll(".card > #row ");
+	 $(moreEventArray).attr("hidden","hidden");	
+	 $(moreEventArray).slice(0,10).removeAttr("hidden");
+	 $(moreEventArray).slice(0,10);
+	 temp = 10;
+	$("#load").click(function(e){
+		console.log(moreEventArray);
+		/* console.log($('.card'));
+		console.log($('.card > a'));
+		console.log($('.card > a > .row'));
+		console.log($(".card > a > .row").val()); */
+		console.log("if");
+		$(moreEventArray).slice(temp,temp+10).removeAttr("hidden");
+		 temp +=10;
+		if(moreEventArray.length<temp+10){
+			$(moreEventArray).slice(temp,10).removeAttr("hidden");
 
+
+			}
+		
+			
+	}); 
+
+});
+</script>
 </body>
 </html>
