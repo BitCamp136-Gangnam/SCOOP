@@ -137,7 +137,7 @@ function signOut() {
  				  title: '이메일 형식이 맞지 않습니다.',
  				  showConfirmButton: false,
  				  icon: 'warning',
- 				  timer: 1000
+ 				  timer: 2000
  			})
 			$("#emailcheck").val("");
 			$("#emailcheck").focus();
@@ -156,7 +156,7 @@ function signOut() {
 			 				title: '가입된 이메일이 없습니다',
 			 				showConfirmButton: false,
 			 				icon: 'warning',
-			 				timer: 5000
+			 				timer: 2000
 			 			})
 						return false;
 					}else {
@@ -170,15 +170,16 @@ function signOut() {
 					 				  title: '이메일 전송 완료!.',
 					 				  showConfirmButton: false,
 					 				  icon: 'success',
-					 				  timer: 5000
+					 				  timer: 2000
 					 			})
+					 			location.reload();
 							},
 							error: function(data){
 								Swal.fire({
 					 				  title: '이메일 전송 실패.',
 					 				  showConfirmButton: false,
 					 				  icon: 'warning',
-					 				  timer: 5000
+					 				  timer: 2000
 					 			})
 							}
 						})
@@ -604,7 +605,7 @@ function idOver(a) {
      </div>
      <div class="modal-body p-4 p-lg-5">
       <img class="img-responsive center-block" alt="Scoop로고" src="resources/images/logo/ScoopBig.png" style="width:100%;height:auto;padding-right:15%;padding-left:15%;"/>
-      <form class="login-form text-left" id="pwdchg" name="pwdchg" onsubmit="return chgpwdchk();">
+     <!--  <form class="login-form text-left" id="pwdchg" name="pwdchg" onsubmit="return chgpwdchk();"> -->
         <div class="form-group mb-4">
          <label>Email address</label>
          <input type="email" class="form-control" id="emailcheck" name="emailcheck" placeholder="E-mail@company.com" required>
@@ -612,11 +613,11 @@ function idOver(a) {
        
         <div class="form-group">
         	<a href="" data-dismiss="modal" aria-label="Close" style="float: left;padding-right: 33%;">〈 로그인으로 돌아가기</a>
-        	<input type="submit" value="비밀번호 재설정 메일 발송" class="btn btn-primary" style="width: 300px;height:38px;text-align: center;padding-top: 5px;">
+        	<input type="button" value="비밀번호 재설정 메일 발송" class="btn btn-primary" style="width: 300px;height:38px;text-align: center;padding-top: 5px;" onclick="chgpwdchk();">
         </div>
         <div>
         </div>
-      	</form>								   
+      	<!-- </form>	 -->							   
      </div>
    </div>
   </div>
