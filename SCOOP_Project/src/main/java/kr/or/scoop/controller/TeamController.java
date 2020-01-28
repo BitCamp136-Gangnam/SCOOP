@@ -13,6 +13,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -474,7 +475,6 @@ public class TeamController {
 			tissue.setAllDay(0);
 			tissue.setTistart(java.sql.Timestamp.valueOf(start+":00"));
 			tissue.setTiend(java.sql.Timestamp.valueOf(end+":00"));
-			tissue.setAllDay(0);
 			result = myissuedao.editTeamCalendar(tissue);
 		} else {
 			tissue.setAllDay(1);
@@ -519,7 +519,9 @@ public class TeamController {
 	
 	@ResponseBody
 	@RequestMapping(value="getTeamCalendar.do", method = RequestMethod.GET)
-	public JSONArray getTeamCalendar(HttpSession session) {
+	public JSONArray getTeamCalendar(HttpSession session, HttpServletResponse response) {
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json");
 		String email = (String)session.getAttribute("email");
 		ProjectDao projectdao = sqlsession.getMapper(ProjectDao.class);
 		TissueDao tissuedao = sqlsession.getMapper(TissueDao.class);
@@ -571,14 +573,14 @@ public class TeamController {
 				boolean allDay;
 				if(z==0) {
 					allDay = false;
-					data.put("start", sdf.format(sortlist.get(key).getTistart()));
-					data.put("end", sdf.format(sortlist.get(key).getTiend()));
+					data.put("start", (String)sdf.format(sortlist.get(key).getTistart()).toString());
+					data.put("end", (String)sdf.format(sortlist.get(key).getTiend()).toString());
 				} else {
 					allDay = true;
-					data.put("start", sdft.format(sortlist.get(key).getTistart()));
-					data.put("end", sdft.format(sortlist.get(key).getTiend()));
+					data.put("start", (String)sdft.format(sortlist.get(key).getTistart()).toString());
+					data.put("end", (String)sdft.format(sortlist.get(key).getTiend()).toString());
 				}
-				data.put("type", sortlist.get(key).getTiseq());
+				data.put("type", String.valueOf(sortlist.get(key).getTiseq()));
 				data.put("username", sortlist.get(key).getEmail());
 				data.put("backgroundColor", sortlist.get(key).getBackgroundColor());
 				data.put("textColor", sortlist.get(key).getTextColor());
