@@ -9,7 +9,7 @@ var editType = $('#edit-type');
 var editColor = $('#edit-color');
 var editDesc = $('#edit-desc');
 var editName = $('#edit-name');
-var editTseq = $('#edit-tseq');
+var editTseq = $('#edit-type');
 
 var addBtnContainer = $('.modalBtnContainer-addEvent');
 var modifyBtnContainer = $('.modalBtnContainer-modifyEvent');
@@ -46,7 +46,7 @@ var newEvent = function (start, end, eventType) {
             backgroundColor: editColor.val(),
             textColor: '#ffffff',
             tseq:editTseq.val(),
-            allDay: false
+            allDay: editAllDay.val()
         };
 
         if (eventData.start > eventData.end) {

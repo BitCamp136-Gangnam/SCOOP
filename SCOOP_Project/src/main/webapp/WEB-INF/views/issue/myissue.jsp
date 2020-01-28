@@ -70,9 +70,9 @@ $(function(){
 		    </ul>
 		</div>
 		<hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
-		<div class="row" style="margin-left: 2%; margin-right: 2%">
+		<div class="row" style="margin-left: 2%; margin-right: 2%" id="here">
 			<c:forEach items="${ti}" var="ti">
-			<div class="col-sm-12 newissue" >
+			<div class="col-sm-12 newissue" id="row">
 			<c:choose>
 				<c:when test="${ti.isprocess==0}">
 				<div id="create" class="iconify" data-icon="uil:file-exclamation-alt" data-inline="false" style="width:27px;height: auto;"></div>
@@ -98,7 +98,7 @@ $(function(){
 			</c:forEach>
 			
 			<c:forEach items="${pi}" var="pi">
-			<div class="col-sm-12 newissue" >
+			<div class="col-sm-12 newissue" id="row">
 			<div class="iconify" data-icon="uil:file-lock-alt" data-inline="false" style="width:27px;height: auto;"></div>
 			<div style="float: right;min-width:97%;">
 			<a href="myissueDetail.do?piseq=${pi.piseq}">${pi.pititle}</a>
@@ -108,6 +108,7 @@ $(function(){
 			</div>
 			</c:forEach>
 		</div>
+		<button id="load">더보기</button>
             <!-- #/ container -->
             </div>
             </div>
@@ -153,6 +154,33 @@ $(function(){
 
 
      <script src="<c:url value="/resources/js/dashboard/dashboard-1.js"/>"></script>
+		<script type="text/javascript">
+$(document).ready(function(){
+	var temp = 0;
+	var moreEventArray = document.querySelectorAll(".card > #here > #row ");
+	 $(moreEventArray).attr("hidden","hidden");	
+	 $(moreEventArray).slice(0,10).removeAttr("hidden");
+	 $(moreEventArray).slice(0,10);
+	 temp = 10;
+	$("#load").click(function(e){
+		console.log(moreEventArray);
+		/* console.log($('.card'));
+		console.log($('.card > a'));
+		console.log($('.card > a > .row'));
+		console.log($(".card > a > .row").val()); */
+		console.log("if");
+		$(moreEventArray).slice(temp,temp+10).removeAttr("hidden");
+		 temp +=10;
+		if(moreEventArray.length<temp+10){
+			$(moreEventArray).slice(temp,10).removeAttr("hidden");
 
+
+			}
+		
+			
+	}); 
+
+});
+</script>
 </body>
 </html>

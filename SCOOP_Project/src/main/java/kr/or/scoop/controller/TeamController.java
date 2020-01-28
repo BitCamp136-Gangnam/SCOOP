@@ -2,12 +2,18 @@ package kr.or.scoop.controller;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -25,14 +31,18 @@ import kr.or.scoop.dao.MyIssueDao;
 import kr.or.scoop.dao.ProjectDao;
 import kr.or.scoop.dao.TissueDao;
 import kr.or.scoop.dto.BookMark;
+import kr.or.scoop.dto.Member;
 import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.dto.Process;
 import kr.or.scoop.dto.ProjectMemberlist;
 import kr.or.scoop.dto.TeamPjt;
 import kr.or.scoop.dto.Tissue;
+import kr.or.scoop.dto.Tpmember;
 import kr.or.scoop.service.BoardService;
 import kr.or.scoop.service.PrivateService;
 import kr.or.scoop.service.TeamService;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @Controller
 public class TeamController {
@@ -397,9 +407,9 @@ public class TeamController {
 		Process processList = null;
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		
-		System.out.println("select");
+		System.out.println("select query");
 		
-		processList = (dao.chartData(tseq));
+		processList = dao.chartData(tseq);
 		
 		System.out.println("결과는?" + processList.toString());
 
@@ -460,13 +470,14 @@ public class TeamController {
 		tissue.setTseq(tseq);
 		tissue.setTiseq(tiseq);
 		tissue.setBackgroundColor(backgroundColor);
-		tissue.setAllDay((true ? 1 : 0));
 		if(start.length()==16) {
 			System.out.println(start+":00");
+			tissue.setAllDay(0);
 			tissue.setTistart(java.sql.Timestamp.valueOf(start+":00"));
 			tissue.setTiend(java.sql.Timestamp.valueOf(end+":00"));
 			result = myissuedao.editTeamCalendar(tissue);
 		} else {
+			tissue.setAllDay(1);
 			System.out.println(start+" 00:00:00");
 			tissue.setTistart(java.sql.Timestamp.valueOf(start+" 00:00:00"));
 			tissue.setTiend(java.sql.Timestamp.valueOf(end+" 00:00:00"));
@@ -504,5 +515,113 @@ public class TeamController {
 		
 		return viewpage;
 		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="getTeamCalendar.do", method = RequestMethod.GET)
+	public JSONArray getTeamCalendar(HttpSession session, HttpServletResponse response) {
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json");
+		String email = (String)session.getAttribute("email");
+		ProjectDao projectdao = sqlsession.getMapper(ProjectDao.class);
+		TissueDao tissuedao = sqlsession.getMapper(TissueDao.class);
+		List<Tpmember> pjtlist = projectdao.getPJT(email);
+		List<Tissue> temptissuelist;
+		Map<Integer, Tissue> sortlist = new HashMap<Integer, Tissue>();
+		JSONArray jArray = new JSONArray();
+		System.out.println("pjtlist"+pjtlist);
+		System.out.println(pjtlist.size());
+		int tempnum = 0;
+		for(Tpmember tpmember : pjtlist) {
+			 System.out.println("몇번도니?");
+			 System.out.println(tpmember.getTseq());
+			 temptissuelist = tissuedao.loadKanban(tpmember.getTseq());
+			 System.out.println(temptissuelist.size());
+			 System.out.println(temptissuelist);
+			 for(Tissue tissue : temptissuelist) {
+				 if(tissue.getTistart()!=null) {
+					 System.out.println("caltissue 와따시");
+					 sortlist.put(tempnum++, tissue);
+				 }
+				 
+			 }
+			 
+//			 temptissuelist = tissuedao.loadKanban(pjtlist.get(i).getTseq());
+			 
+//			 for(int j = 0 ; j > temptissuelist.size() ; j++) {
+//				 System.out.println("2중포문오니?");
+//				 System.out.println("temptissue"+temptissuelist.get(j));
+//				 caltissuelist.add(temptissuelist.get(j));
+//			 }
+			 
+			 
+		}
+		try {
+			System.out.println(sortlist);
+			Iterator<Integer> tissueitor = sortlist.keySet().iterator();
+			System.out.println(tissueitor);
+			SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd'T'HH:mm" , Locale.KOREA );
+			SimpleDateFormat sdft = new SimpleDateFormat( "yyyy-MM-dd" , Locale.KOREA );
+			while(tissueitor.hasNext()) {
+				int key =tissueitor.next();
+				JSONObject data = new JSONObject();
+				int z = sortlist.get(key).getAllDay();
+				
+				data.put("_id", key++);
+				data.put("title", sortlist.get(key).getTititle());
+				data.put("description", sortlist.get(key).getTicontent());
+				boolean allDay;
+				if(z==0) {
+					allDay = false;
+					data.put("start", (String)sdf.format(sortlist.get(key).getTistart()).toString());
+					data.put("end", (String)sdf.format(sortlist.get(key).getTiend()).toString());
+				} else {
+					allDay = true;
+					data.put("start", (String)sdft.format(sortlist.get(key).getTistart()).toString());
+					data.put("end", (String)sdft.format(sortlist.get(key).getTiend()).toString());
+				}
+				data.put("type", String.valueOf(sortlist.get(key).getTiseq()));
+				data.put("username", sortlist.get(key).getEmail());
+				data.put("backgroundColor", sortlist.get(key).getBackgroundColor());
+				data.put("textColor", sortlist.get(key).getTextColor());
+				
+				data.put("allDay", allDay);
+				jArray.add(data);
+				System.out.println("while문 도니?");
+				System.out.println(data);
+				
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		System.out.println("jArray 입니다"+jArray);
+		/*
+		System.out.println(caltissuelist);
+		for(int i = 0 ; i > caltissuelist.size() ; i ++) {
+			JSONObject data = new JSONObject();
+			data.put("_id", i++);
+			data.put("title", caltissuelist.get(i).getTititle());
+			data.put("start", caltissuelist.get(i).getTistart());
+			data.put("end", caltissuelist.get(i).getTiend());
+			data.put("type", caltissuelist.get(i).getTiseq());
+			data.put("username", caltissuelist.get(i).getEmail());
+			data.put("backgroundColor", caltissuelist.get(i).getBackgroundColor());
+			data.put("textColor", caltissuelist.get(i).getTextColor());
+			int z = caltissuelist.get(i).getAllDay();
+			boolean allDay;
+			if(z==0) {
+				allDay = false;
+			} else {
+				allDay = true;
+			}
+			data.put("allDay", allDay);
+			jArray.add(i, data);
+			
+		}
+		*/
+		
+		
+		return jArray;
 	}
 }

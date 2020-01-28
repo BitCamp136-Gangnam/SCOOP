@@ -193,20 +193,27 @@ function requestPay(){
 												<ul class="list-unstyled pricing-list">
 													<li>3개</li>
 													<li>무제한</li>
-													<li>무제한</li>
 													<li>20MB</li>
+													<li>-</li>
 													<li>-</li>
 													<li>-</li>
 													<li><span class="iconify" data-icon="bx:bx-check"
 														data-inline="false" style="color: #E71D36;"></span></li>
-													<li>-</li>
 													<li>무제한</li>
 													<li>무제한</li>
 													<li>-</li>
+													<li>구글 드라이브</li>
 													<li>-</li>
 												</ul>
-												<a href="#" data-toggle="modal" data-target="#login"
-													class="btn btn-secondary"> Get started </a>
+												<c:choose>
+													<c:when test="${role == 'ROLE_CHARGE' || role == 'ROLE_ADMIN'}">
+													<a href="#" data-toggle="modal" data-target="#login"class="btn btn-secondary">-</a>
+													</c:when>
+													<c:otherwise>
+													<a href="#" data-toggle="modal" data-target="#login"class="btn btn-secondary"> 사용중  </a>
+													</c:otherwise>
+												</c:choose>
+												
 											</div>
 										</div>
 										 <c:choose>
@@ -215,7 +222,7 @@ function requestPay(){
 											<div class="card-body">
 												<h4 class="card-title text-primary pt-3">Premium</h4>
 												<h2 class="card-title text-primary pt-4">$4</h2>
-												<div class="text-muted mt-4">per month</div>
+												<div class="text-muted mt-4">30일</div>
 												<ul class="list-unstyled pricing-list">
 													<li>무제한</li>
 													<li>무제한</li>
@@ -232,11 +239,11 @@ function requestPay(){
 													<li>무제한</li>
 													<li><span class="iconify" data-icon="bx:bx-check"
 														data-inline="false" style="color: #E71D36;"></span></li>
-													<li>무제한</li>
+													<li>구글 드라이브</li>
 													<li>-</li>
 												</ul>
 												<button class="btn btn-primary" onclick="charge();" 
-													type="button">Get Started</button>
+													type="button">사용 중</button>
 												<!-- <a href="#" data-toggle="modal"
 													class="btn btn-primary" id="check_module"> Get
 													Started </a> -->
@@ -266,11 +273,11 @@ function requestPay(){
 													<li>무제한</li>
 													<li><span class="iconify" data-icon="bx:bx-check"
 														data-inline="false" style="color: #E71D36;"></span></li>
-													<li>무제한</li>
+													<li>구글 드라이브</li>
 													<li>-</li>
 												</ul>
 												<button class="btn btn-primary" onclick="requestPay()"
-													type="button">Get Started</button>
+													type="button">유료회원 전환</button>
 												<!-- <a href="#" data-toggle="modal"
 													class="btn btn-primary" id="check_module"> Get
 													Started </a> -->

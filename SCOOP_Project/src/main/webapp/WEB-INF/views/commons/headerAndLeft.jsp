@@ -819,10 +819,10 @@ span {
       <ul class="metismenu" id="menu">
          <li class="nav-label" style="padding-bottom: 10px;">
          <b style="padding-bottom: 2%;font-size:15px;"><spring:message code="boardtitle" /></b></li>
-         <li><a href="dashboard.do" aria-expanded="false"><span class="iconify" data-icon="ps:megaphone" data-inline="false"></span>
+         <%-- <li><a href="dashboard.do" aria-expanded="false"><span class="iconify" data-icon="ps:megaphone" data-inline="false"></span>
          <span class="nav-text">
                   &nbsp;<spring:message code="dashboard" /></span> <!-- <i class="icon-speedometer menu-icon"> -->
-         </a></li>
+         </a></li> --%>
          <li><a href="notice.do" aria-expanded="false"><span class="iconify" data-icon="ps:megaphone" data-inline="false"></span>
          <span class="nav-text">
                   &nbsp;<spring:message code="notice" /></span> <!-- <i class="icon-speedometer menu-icon"> -->
