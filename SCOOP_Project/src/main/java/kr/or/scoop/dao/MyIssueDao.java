@@ -66,4 +66,9 @@ public interface MyIssueDao {
 
 	//나의이슈 할일 출력
 	public List<DoWork> getMyDoWork(int piseq);
+	//팀이슈 캘린더 수정
+	public int editTeamCalendar(Tissue tissue);
+	
+	//팀이슈 캘린더 삭제
+	public int deleteTeamCalendar(Tissue tissue);
 }

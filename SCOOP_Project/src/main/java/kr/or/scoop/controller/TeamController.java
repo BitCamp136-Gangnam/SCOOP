@@ -416,31 +416,83 @@ public class TeamController {
 		Tissue tissue = new Tissue();
 		System.out.println(start.length());
 		MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
+		tissue.setTititle(title);
+		tissue.setEmail((String)session.getAttribute("email"));
+		tissue.setTicontent(description);
+		tissue.setTseq(tseq);
+		tissue.setBackgroundColor(backgroundColor);
+		tissue.setTextColor(textColor);
+		tissue.setAllDay((true ? 1 : 0));
 		if(start.length()==16) {
 			System.out.println(start+":00");
-			tissue.setTititle(title);
-			tissue.setEmail((String)session.getAttribute("email"));
-			tissue.setTicontent(description);
 			tissue.setTistart(java.sql.Timestamp.valueOf(start+":00"));
 			tissue.setTiend(java.sql.Timestamp.valueOf(end+":00"));
-			tissue.setTseq(tseq);
-			tissue.setBackgroundColor(backgroundColor);
-			tissue.setTextColor(textColor);
-			tissue.setAllDay((true ? 1 : 0));
 			result = myissuedao.writeCalendarTissue(tissue);
 		} else {
 			System.out.println(start+" 00:00:00");
-			tissue.setTititle(title);
-			tissue.setEmail((String)session.getAttribute("email"));
-			tissue.setTicontent(description);
 			tissue.setTistart(java.sql.Timestamp.valueOf(start+" 00:00:00"));
 			tissue.setTiend(java.sql.Timestamp.valueOf(end+" 00:00:00"));
-			tissue.setTseq(tseq);
-			tissue.setBackgroundColor(backgroundColor);
-			tissue.setTextColor(textColor);
-			tissue.setAllDay((true ? 1 : 0));
 			result = myissuedao.writeCalendarTissue(tissue);
 		}
+		
+		if(result>0) {
+			System.out.println("성공");
+			viewpage = "redirect:/calendar.do";
+		} else {
+			System.out.println("실패");
+			viewpage = "redirect:/calendar.do";
+		}
+		
+		return viewpage;
+		
+	}
+	
+	@RequestMapping(value = "editTeamCalendar.do", method = RequestMethod.POST)
+	public String editTeamCalendar(String title, String start, String end, String description, String type, String backgroundColor, boolean allDay, int tseq, int tiseq) {
+		int result = 0;
+		System.out.println(title+"/"+start+"/"+end+"/"+description+"/"+type+"/"+allDay+"/"+tseq);
+		String viewpage = "";
+		Tissue tissue = new Tissue();
+		System.out.println(start.length());
+		MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
+		tissue.setTititle(title);
+		tissue.setTicontent(description);
+		tissue.setTseq(tseq);
+		tissue.setTiseq(tiseq);
+		tissue.setBackgroundColor(backgroundColor);
+		tissue.setAllDay((true ? 1 : 0));
+		if(start.length()==16) {
+			System.out.println(start+":00");
+			tissue.setTistart(java.sql.Timestamp.valueOf(start+":00"));
+			tissue.setTiend(java.sql.Timestamp.valueOf(end+":00"));
+			result = myissuedao.editTeamCalendar(tissue);
+		} else {
+			System.out.println(start+" 00:00:00");
+			tissue.setTistart(java.sql.Timestamp.valueOf(start+" 00:00:00"));
+			tissue.setTiend(java.sql.Timestamp.valueOf(end+" 00:00:00"));
+			result = myissuedao.editTeamCalendar(tissue);
+		}
+		
+		if(result>0) {
+			System.out.println("성공");
+			viewpage = "redirect:/calendar.do";
+		} else {
+			System.out.println("실패");
+			viewpage = "redirect:/calendar.do";
+		}
+		
+		return viewpage;
+		
+	}
+	
+	@RequestMapping(value = "deleteTeamCalendar.do", method = RequestMethod.POST)
+	public String deleteTeamCalendar(int tiseq) {
+		int result = 0;
+		String viewpage = "";
+		Tissue tissue = new Tissue();
+		MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
+		tissue.setTiseq(tiseq);
+		result = myissuedao.deleteTeamCalendar(tissue);
 		
 		if(result>0) {
 			System.out.println("성공");
