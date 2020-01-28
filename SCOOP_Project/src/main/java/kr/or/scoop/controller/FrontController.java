@@ -25,13 +25,12 @@ public class FrontController {
 	
 	@RequestMapping("/index.do")
 	public String change(@RequestParam(required = false, name="lang") String language, HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("FrontController 왔냐?");
 		if(language == null) {
 			language = "ko";
 		}
 		
 		Locale locale  = new Locale(language);
-		System.out.println("locale : " + locale + "\n language : " + language);
+		System.out.println(" locale : " + locale + "\n language : " + language);
 		localeResolver.setLocale(request, response, locale);
 		
 		return "index";

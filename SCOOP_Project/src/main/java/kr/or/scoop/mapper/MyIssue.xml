@@ -8,8 +8,8 @@ insert into tissue (tiseq,tseq,email,tititle,ticontent,isprocess, istbook, issee
   values (TISEQ_TISSUE_SEQ.NEXTVAL, #{tseq}, #{email}, #{tititle}, #{ticontent}, 0, 0, 0, sysdate)
 </insert>
 <insert id="writeMyissue" parameterType="kr.or.scoop.dto.MyIssue" >
-insert into myissue (piseq,pititle,picontent,pistart, piend, ispibook, email, pidate, mygfilename, mymention, myurl)
-  values (PISEQ_MYISSUE_SEQ.NEXTVAL, #{pititle}, #{picontent}, #{pistart,jdbcType=DATE}, #{piend,jdbcType=DATE}, 0, #{email,jdbcType=VARCHAR}, sysdate, #{mygfilename,jdbcType=VARCHAR}, #{mymention,jdbcType=VARCHAR}, #{myurl,jdbcType=VARCHAR})
+insert into myissue (piseq,pititle,picontent,pistart, piend, ispibook, email, pidate)
+  values (PISEQ_MYISSUE_SEQ.NEXTVAL, #{pititle}, #{picontent}, #{pistart,jdbcType=DATE}, #{piend,jdbcType=DATE}, 0, #{email,jdbcType=VARCHAR}, sysdate)
 </insert>
 <select id="getMyissue" resultType="kr.or.scoop.dto.MyIssue">
 	SELECT piseq, pititle, picontent, pidate, ispibook FROM myissue WHERE email = #{email, jdbcType=VARCHAR} order by pidate desc

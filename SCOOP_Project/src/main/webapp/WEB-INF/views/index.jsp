@@ -398,52 +398,52 @@ function idOver(a) {
       <div id="table">
       <div class="rowdrop">
          <span class="celldrop col1drop"><a href="" class="dropdown-item">
-         	협업공간<br>
-         	<span style="color: gray;font-size:13px">동료와 함께 자유롭게 <br>협업하는 공간</span>
+         	<spring:message code="detail.collabo" /><br>
+         	<span style="color: gray;font-size:13px"><spring:message code="detail.collabo1" /><br><spring:message code="detail.collabo2" /></span>
          	<br>
          	</a></span>
       
          <span class="celldrop col2drop"><a href="" class="dropdown-item">
-         	이슈<br>
-         	<span style="color: gray;font-size:13px">협업을 시작하는 실시간 <br> 동시 편집 문서</span>
+         	<spring:message code="detail.issue" /><br>
+         	<span style="color: gray;font-size:13px"><spring:message code="detail.issue1" /> <br><spring:message code="detail.issue2" /></span>
          
          </a></span>
       </div>
       <div class="rowdrop">
          <span class="celldrop col1drop"><a href="index.html" class="dropdown-item">
-         	실시간 대화<br>
-         	<span style="color: gray;font-size:13px">모든 이슈,할 일,파일에서 <br>나누는 실시간 커뮤니케이션</span>
+         	<spring:message code="detail.chat" /><br>
+         	<span style="color: gray;font-size:13px"><spring:message code="detail.chat1" /> <br><spring:message code="detail.chat2" /></span>
          	</a></span>
          <span class="celldrop col2drop"><a href="" class="dropdown-item">
-         	이슈 업데이트<br>
-         	<span style="color: gray;font-size:13px">나에게 필요한 소식을 이슈별로<br>알려주는 알림 리스트</span>
+         	<spring:message code="detail.update" /><br>
+         	<span style="color: gray;font-size:13px"><spring:message code="detail.update1" /><br><spring:message code="detail.update2" /></span>
          	</a></span>
       </div>
        <div class="rowdrop">
          <span class="celldrop col1drop"><a href="index.html" class="dropdown-item">
-         	캘린더<br>
-         	<span style="color: gray;font-size:13px">나와 동료의 일정/할 일<br>파악 및 스케쥴 관리</span>
+         	<spring:message code="detail.cal" /><br>
+         	<span style="color: gray;font-size:13px"><spring:message code="detail.cal1" /><br><spring:message code="detail.cal2" /></span>
          	</a></span>
          <span class="celldrop col2drop"><a href="" class="dropdown-item">
-         	칸반<br>
-         	<span style="color: gray;font-size:13px">업무의 진행사항을 파악<br> 및 설정으로 프로젝트를 관리</span>
+         	<spring:message code="detail.kanban" /><br>
+         	<span style="color: gray;font-size:13px"><spring:message code="detail.kanban1" /><br><spring:message code="detail.kanban2" /></span>
          	</a></span>
       </div>
       <div class="rowdrop">
          <span class="celldrop col1drop"><a href="" class="dropdown-item">
-         	컨텐츠 모음<br>
-         	<span style="color: gray;font-size:13px">파일,할 일,의사결정,링크를 <br>쉽고 빠르게 찾을 수 있는 공간</span>
+         	<spring:message code="detail.content" /><br>
+         	<span style="color: gray;font-size:13px"><spring:message code="detail.content1" /> <br><spring:message code="detail.content2" /></span>
          </a></span>
          <span class="celldrop col2drop"><a href="" class="dropdown-item">
-         	관리자 기능<br>
-         	<span style="color: gray;font-size:13px">동료 관리 ,<br> 협업공간 관리</span>
+         	<spring:message code="detail.admin" /><br>
+         	<span style="color: gray;font-size:13px"><spring:message code="detail.admin1" /><br><spring:message code="detail.admin2" /></span>
          </a></span>
       </div>
       
          <hr>
          <a href="" class="dropdown-item" style="text-align: center;">
-         	스쿱의 보안<br>
-         	<span style="color: gray;font-size:13px">최우선적인 데이터 보호, 개인정보보호 유지</span>
+         	<spring:message code="detail.security" /><br>
+         	<span style="color: gray;font-size:13px"><spring:message code="detail.security1" /></span>
          </a>
          <br>
         
@@ -470,7 +470,7 @@ function idOver(a) {
      <div class="modal-body p-4 p-lg-5">
       <img class="img-responsive center-block" alt="Scoop로고" src="resources/images/logo/ScoopBig.png" style="width:100%;height:auto;padding-right:15%;padding-left:15%;"/>
       <form onsubmit="return checkz2()" action="login.do" class="login-form text-left" method="post">
-        <h4>로그인</h4>
+        <h4><spring:message code="login.menu" /></h4>
         <div class="form-group mb-4">
          <label>Email address</label>
          <input type="email" name="email" id="mail2" placeholder="name@company.com" class="form-control">
@@ -485,8 +485,8 @@ function idOver(a) {
         	<div id="naver_id_login" style="float:right;margin-right: 5px;margin-left: 0px;width: 210px;border-left-width: 20px;padding-left: 15px;"></div>
         </div>
         <div>
-	        	   <a href="#" data-toggle="modal" data-target="#signUp" style="padding-right:45%;">아직 회원이 아니신가요?</a>
-	        	   <a href="#" data-toggle="modal" data-target="#passwordFind">비밀번호를 잃어버리셨나요?</a>
+	        	   <a href="#" data-toggle="modal" data-target="#signUp" style="padding-right:45%;"><spring:message code="login.yet" /></a>
+	        	   <a href="#" data-toggle="modal" data-target="#passwordFind"><spring:message code="login.forgot" /></a>
         </div>
       	</form>
 		<!-- 네이버아이디로로그인 버튼 노출 영역 -->
@@ -567,12 +567,12 @@ function idOver(a) {
      <div class="modal-body p-4 p-lg-5">
       <img class="img-responsive center-block" alt="Scoop로고" src="resources/images/logo/ScoopBig.png" style="width:100%;height:auto;padding-right:15%;padding-left:15%;"/>
       <form onsubmit="return checkz()" action="frontpage.do" class="login-form text-left" method="post">
-        <h4>회원가입</h4>
+        <h4><spring:message code="register.title" /></h4>
         <div class="form-group mb-4">
          <label>Email address</label>
          <input type="text" class="form-control signup" id="mail" name="email" placeholder="E-mail@company.com" required>
          <br>
-         <button type="button" id="idcheck" class="btn btn-primary" style="width: 150px;height:38px;" onclick="idOver(this.id)">아이디 중복체크</button>
+         <button type="button" id="idcheck" class="btn btn-primary" style="width: 150px;height:38px;" onclick="idOver(this.id)"><spring:message code="register.idchk" /></button>
         </div>
         <div class="form-group mb-4">
          <label>Name</label>
@@ -583,7 +583,7 @@ function idOver(a) {
          <input type="password" class="form-control" id="tbPwd" name="pwd" placeholder="8~16자리를 입력해주세요" required>
         </div>
         <div class="form-group" style="margin-left:27%;margin-right: 30%;">
-        		<input type="submit" id="signUpBtn" value="스쿱 시작하기" class="btn btn-primary" style="width: 300px;height:38px;text-align: center;padding-top: 5px;" disabled="disabled">
+        		<input type="submit" id="signUpBtn" value="<spring:message code='register.start' />" class="btn btn-primary" style="width: 300px;height:38px;text-align: center;padding-top: 5px;" disabled="disabled">
         </div>
         <div>
         </div>
@@ -706,20 +706,20 @@ function idOver(a) {
 								</div>
 								<ul class="list-unstyled pricing-list">
 									<li>3개</li>
-									<li>무제한</li>
-									<li>무제한</li>
+									<li><spring:message code="payment.unlimited" /></li>
+									<li><spring:message code="payment.unlimited" /></li>
 									<li>20MB</li>
 									<li>-</li>
 									<li>-</li>
 									<li><span class="iconify" data-icon="bx:bx-check"
 										data-inline="false" style="color: #E71D36;"></span></li>
 									<li>-</li>
-									<li>무제한</li>
-									<li>무제한</li>
+									<li><spring:message code="payment.unlimited" /></li>
+									<li><spring:message code="payment.unlimited" /></li>
 									<li>-</li>
 									<li>-</li>
 								</ul>
-								<a href="#" data-toggle="modal" data-target="#login" class="btn btn-secondary"> Get started </a>
+								<a href="#" data-toggle="modal" data-target="#login" class="btn btn-secondary"> <spring:message code="payment.start" /> </a>
 							</div>
 						</div>
 						<div class="card text-center"style="border-color:#fff">
@@ -728,8 +728,8 @@ function idOver(a) {
 								<h2 class="card-title text-primary pt-4">$4</h2>
 								<div class="text-muted mt-4">per month</div>
 								<ul class="list-unstyled pricing-list">
-									<li>무제한</li>
-									<li>무제한</li>
+									<li><spring:message code="payment.unlimited" /></li>
+									<li><spring:message code="payment.unlimited" /></li>
 									<li>50MB</li>
 									<li><span class="iconify" data-icon="bx:bx-check"
 										data-inline="false" style="color: #E71D36;"></span></li>
@@ -739,14 +739,14 @@ function idOver(a) {
 										data-inline="false" style="color: #E71D36;"></span></li>
 									<li><span class="iconify" data-icon="bx:bx-check"
 										data-inline="false" style="color: #E71D36;"></span></li>
-									<li>무제한</li>
-									<li>무제한</li>
+									<li><spring:message code="payment.unlimited" /></li>
+									<li><spring:message code="payment.unlimited" /></li>
 									<li><span class="iconify" data-icon="bx:bx-check"
 										data-inline="false" style="color: #E71D36;"></span></li>
-									<li>무제한</li>
+									<li><spring:message code="payment.unlimited" /></li>
 									<li>-</li>
 								</ul>
-								<a href="requestPay" data-toggle="modal" data-target="#login" class="btn btn-primary"> Get Started </a>
+								<a href="requestPay" data-toggle="modal" data-target="#login" class="btn btn-primary"> <spring:message code="payment.start" /> </a>
 
 							</div>
 						</div>
