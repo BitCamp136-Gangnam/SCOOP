@@ -205,8 +205,15 @@ function requestPay(){
 													<li>구글 드라이브</li>
 													<li>-</li>
 												</ul>
-												<a href="#" data-toggle="modal" data-target="#login"
-													class="btn btn-secondary"> Get started </a>
+												<c:choose>
+													<c:when test="${role == 'ROLE_CHARGE' || role == 'ROLE_ADMIN'}">
+													<a href="#" data-toggle="modal" data-target="#login"class="btn btn-secondary">-</a>
+													</c:when>
+													<c:otherwise>
+													<a href="#" data-toggle="modal" data-target="#login"class="btn btn-secondary"> 사용중  </a>
+													</c:otherwise>
+												</c:choose>
+												
 											</div>
 										</div>
 										 <c:choose>
@@ -236,7 +243,7 @@ function requestPay(){
 													<li>-</li>
 												</ul>
 												<button class="btn btn-primary" onclick="charge();" 
-													type="button">Get Started</button>
+													type="button">사용 중</button>
 												<!-- <a href="#" data-toggle="modal"
 													class="btn btn-primary" id="check_module"> Get
 													Started </a> -->
@@ -270,7 +277,7 @@ function requestPay(){
 													<li>-</li>
 												</ul>
 												<button class="btn btn-primary" onclick="requestPay()"
-													type="button">Get Started</button>
+													type="button">유료회원 전환</button>
 												<!-- <a href="#" data-toggle="modal"
 													class="btn btn-primary" id="check_module"> Get
 													Started </a> -->

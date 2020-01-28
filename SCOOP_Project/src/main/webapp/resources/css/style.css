@@ -11074,7 +11074,7 @@ table.dataTable thead .sorting::after {
 .btn-primary:active, .btn-primary:focus, .btn-primary:hover {
   background: #4540f7;
   color: #fff;
-  border-color: #4540f7; }
+   }
 
 .btn-secondary:active, .btn-secondary:focus, .btn-secondary:hover {
   background: #6f78b2;
