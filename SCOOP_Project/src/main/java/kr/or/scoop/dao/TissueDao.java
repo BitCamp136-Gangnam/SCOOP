@@ -3,6 +3,7 @@ package kr.or.scoop.dao;
 import java.util.List;
 
 import kr.or.scoop.dto.DoWork;
+import kr.or.scoop.dto.FileDrive;
 import kr.or.scoop.dto.GoogleDrive;
 import kr.or.scoop.dto.Mention;
 import kr.or.scoop.dto.MyIssue;
@@ -43,6 +44,10 @@ public interface TissueDao {
 
 	//팀이슈 할일 출력
 	public List<DoWork> getDoWork(int tiseq);
+	
+	//팀이슈 파일 출력
+	public List<FileDrive> getFiles(int tiseq);
+	
 
 	//북마크 추가/제거
 	public int addTBookMark(int tiseq, String email);

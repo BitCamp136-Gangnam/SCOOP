@@ -18,6 +18,7 @@ import kr.or.scoop.dao.NoticeDao;
 import kr.or.scoop.dao.ProjectDao;
 import kr.or.scoop.dao.TissueDao;
 import kr.or.scoop.dto.DoWork;
+import kr.or.scoop.dto.FileDrive;
 import kr.or.scoop.dto.GoogleDrive;
 import kr.or.scoop.dto.Mention;
 import kr.or.scoop.dto.MyIssue;
@@ -75,10 +76,12 @@ public class BoardController {
 		List<Mention> mentions = dao.getMyMentions(piseq);
 		List<GoogleDrive> googledrive = dao.getMyGoogleDrive(piseq);
 		List<DoWork> dowork = dao.getMyDoWork(piseq);
+		List<FileDrive> files = dao.getMyFiles(piseq);
 		model.addAttribute("myissue", myissue);
 		model.addAttribute("mymention", mentions);
 		model.addAttribute("mygdrive", googledrive);
 		model.addAttribute("mydowork", dowork);
+		model.addAttribute("files", files);
 		return "issue/myissueDetail";
 	}
 	
@@ -91,11 +94,13 @@ public class BoardController {
 		List<Mention> mentions = dao.getMentions(tiseq);
 		List<GoogleDrive> googledrive = dao.getGoogleDrive(tiseq);
 		List<DoWork> dowork = dao.getDoWork(tiseq);
+		List<FileDrive> files = dao.getFiles(tiseq);
 		model.addAttribute("tissue", tissue);
 		model.addAttribute("reply",reply);
 		model.addAttribute("mentions",mentions);
 		model.addAttribute("gdrive", googledrive);
 		model.addAttribute("dowork", dowork);
+		model.addAttribute("files", files);
 		return "issue/teamissueDetail";
 	}
 
@@ -398,5 +403,20 @@ public class BoardController {
 		}
 		
 		return viewpage;
+	}
+	@RequestMapping(value="teamIssueEdit.do" , method = {RequestMethod.POST, RequestMethod.GET})
+	public String teamIssueEdit(int tiseq, Model model) {
+		TissueDao dao = sqlSession.getMapper(TissueDao.class);
+		Tissue tissue = dao.teamissueDetail(tiseq);
+		List<Reply> reply = dao.teamCommentOk(tiseq);
+		List<Mention> mentions = dao.getMentions(tiseq);
+		List<GoogleDrive> googledrive = dao.getGoogleDrive(tiseq);
+		List<DoWork> dowork = dao.getDoWork(tiseq);
+		model.addAttribute("tissue", tissue);
+		model.addAttribute("reply",reply);
+		model.addAttribute("mentions",mentions);
+		model.addAttribute("gdrive", googledrive);
+		model.addAttribute("dowork", dowork);
+		return "issue/teamIssueEdit";
 	}
 }

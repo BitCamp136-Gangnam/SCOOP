@@ -105,6 +105,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <insert id="myMentionInsert">
 	insert into pmention values(pmseq_pmention_seq.nextval, #{email, jdbcType=VARCHAR}, (select Max(piseq) from myissue))
 </insert>
+<select id="getFiles" resultType="kr.or.scoop.dto.FileDrive">
+	select * from FileDrive where tiseq=#{tiseq}
+</select>
 <select id="getMentions" resultType="kr.or.scoop.dto.Mention">
 	select * from teammention t join member m on t.tmemail=m.email where t.tiseq=#{tiseq}
 </select>

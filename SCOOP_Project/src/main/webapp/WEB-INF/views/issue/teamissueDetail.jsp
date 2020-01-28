@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="<c:url value="/resources/plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css" />">
     <!-- Custom Stylesheet -->
      <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
-
 </head>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript">
@@ -89,6 +88,9 @@ $(function(){
 				
 		});
 	});
+	$('#editIssue').click(function(){
+		location.href = 'teamIssueEdit.do?tiseq='+${tissue.tiseq};
+	})
 });
 
 
@@ -104,6 +106,13 @@ $(function(){
 	font-size: 15px;
 	margin-left: 3%;
 	/* margin-bottom:1%; */
+}
+.editdelete{
+background-color: #E71D36;
+border-color: #CCCCCC;
+color: #fff;
+cursor: pointer;
+border-radius: 5px;
 }
 </style>
 <body>
@@ -125,12 +134,17 @@ $(function(){
         <div class="container-fluid row" style="padding-right: 0px; margin-right: 0px;margin-left: 0px; padding-left: 15px;">
         <div class="card" style="padding-left: 2%;padding-right: 0px; padding-top:1%;min-width:900px;height: auto;overflow: auto;">
 		<div class="row"style="margin:2% 2% 0 2%" >
-		<div class="col-sm-10">
+		<div class="col-sm-8">
 				<h3 id="myissueSubject" style="padding-top: 2%;padding-left: 1%;">${tissue.tititle}</h3>
 		</div>
-		<div class="col-sm-2">
-				수정 삭제
+		<c:if test="${tissue.email==sessionScope.email}">
+		<div class="col-sm-2" style="padding-right: 0">
+			<input type="button" class="form-control editdelete" value="수정" id="editIssue">
 		</div>
+		<div class="col-sm-2" style="padding-left: 0">
+			<input type="button" class="form-control editdelete" value="삭제" id="deleteIssue">
+		</div>
+		</c:if>
 		</div>
 		<c:choose>
         <c:when test="${tissue.tistart!=null}">
@@ -143,6 +157,12 @@ $(function(){
 		<c:forEach items="${mentions}" var="m">
 		<div class="myissueDetail" id="myissueMention">
 		<sup><i class="fas fa-quote-left" style="color:#ca0000; font-size: 7px"></i></sup> @${m.name} <sup><i class="fas fa-quote-right"style="color:#ca0000;font-size: 7px"></i></sup>
+		<br>
+		</div>
+		</c:forEach>
+		<c:forEach items="${files}" var="f">
+		<div class="myissueDetail" id="myissueMention">
+		<a href="fileDownload.do?fileName=${f.fdname}"><span class="iconify" data-icon="si-glyph:file-box" data-inline="false"></span>${f.fdname}</a>
 		<br>
 		</div>
 		</c:forEach>

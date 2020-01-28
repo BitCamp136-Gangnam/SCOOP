@@ -5,6 +5,7 @@ import java.util.List;
 
 import kr.or.scoop.dto.BookMark;
 import kr.or.scoop.dto.DoWork;
+import kr.or.scoop.dto.FileDrive;
 import kr.or.scoop.dto.GoogleDrive;
 import kr.or.scoop.dto.Mention;
 import kr.or.scoop.dto.MyIssue;
@@ -66,6 +67,8 @@ public interface MyIssueDao {
 
 	//나의이슈 할일 출력
 	public List<DoWork> getMyDoWork(int piseq);
+	//나의이슈 할일 출력
+	public List<FileDrive> getMyFiles(int piseq);
 	//팀이슈 캘린더 수정
 	public int editTeamCalendar(Tissue tissue);
 	

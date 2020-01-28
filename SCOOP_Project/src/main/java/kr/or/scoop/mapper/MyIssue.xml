@@ -71,6 +71,9 @@ insert into tissue (tiseq,tseq,email,tititle,ticontent,isprocess, istbook, issee
 <select id="getMyDoWork" resultType="kr.or.scoop.dto.DoWork">
 	select (select m.name from pdowork d join member m on d.email=m.email where d.piseq=#{piseq}) fromname, (select m.name from pdowork d join member m on d.ptoemail=m.email where d.piseq=#{piseq}) toname, pdowork from pdowork where piseq=#{piseq}
 </select>
+<select id="getMyFiles" resultType="kr.or.scoop.dto.FileDrive">
+	select * from pfiledrive where piseq=#{piseq}
+</select>
 <update id="editTeamCalendar" parameterType="kr.or.scoop.dto.Tissue">
 UPDATE tissue 
 SET tititle = #{tititle},
