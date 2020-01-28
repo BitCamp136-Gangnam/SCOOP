@@ -125,7 +125,12 @@ $(function(){
         <div class="container-fluid row" style="padding-right: 0px; margin-right: 0px;margin-left: 0px; padding-left: 15px;">
         <div class="card" style="padding-left: 2%;padding-right: 0px; padding-top:1%;min-width:900px;height: auto;overflow: auto;">
 		<div class="row"style="margin:2% 2% 0 2%" >
+		<div class="col-sm-10">
 				<h3 id="myissueSubject" style="padding-top: 2%;padding-left: 1%;">${tissue.tititle}</h3>
+		</div>
+		<div class="col-sm-2">
+				수정 삭제
+		</div>
 		</div>
 		<c:choose>
         <c:when test="${tissue.tistart!=null}">
