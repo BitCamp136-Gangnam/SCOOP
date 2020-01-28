@@ -680,8 +680,8 @@ function idOver(a) {
 								<h2 class="card-title pt-4"  style="color:#0E2866">PRICE</h2>
 								<div class="text-muted mt-4"><spring:message code="payment.date" /></div>
 								<ul class="list-unstyled pricing-list">
-									<li><spring:message code="payment.team" /></li>
 									<li><spring:message code="payment.alam" /></li>
+									<li><spring:message code="payment.team" /></li>
 									<li><spring:message code="payment.upload" /></li>
 									<li><spring:message code="payment.retiree" /></li>
 									<li><spring:message code="payment.comMgm" /></li>
@@ -708,16 +708,15 @@ function idOver(a) {
 								<ul class="list-unstyled pricing-list">
 									<li>3개</li>
 									<li><spring:message code="payment.unlimited" /></li>
-									<li><spring:message code="payment.unlimited" /></li>
 									<li>20MB</li>
+									<li>-</li>
 									<li>-</li>
 									<li>-</li>
 									<li><span class="iconify" data-icon="bx:bx-check"
 										data-inline="false" style="color: #E71D36;"></span></li>
-									<li>-</li>
-									<li><spring:message code="payment.unlimited" /></li>
 									<li><spring:message code="payment.unlimited" /></li>
 									<li>-</li>
+									<li>구글 드라이브</li>
 									<li>-</li>
 								</ul>
 								<a href="#" data-toggle="modal" data-target="#login" class="btn btn-secondary"> <spring:message code="payment.start" /> </a>
@@ -744,7 +743,7 @@ function idOver(a) {
 									<li><spring:message code="payment.unlimited" /></li>
 									<li><span class="iconify" data-icon="bx:bx-check"
 										data-inline="false" style="color: #E71D36;"></span></li>
-									<li><spring:message code="payment.unlimited" /></li>
+									<li>구글 드라이브</li>
 									<li>-</li>
 								</ul>
 								<a href="requestPay" data-toggle="modal" data-target="#login" class="btn btn-primary"> <spring:message code="payment.start" /> </a>
