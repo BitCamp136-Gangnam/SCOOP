@@ -30,19 +30,17 @@
 					<div class="col-lg-12">
 						<div class="card">
 							<div class="card-body">
-								<div class="card-title">
-									<h3>일정 관리</h3>
-								</div>
+						
 								<div class="row">
-									<div class="col-md-10">
-										<div class="card-box m-b-50">
+									<div class="col-md-12">
+										<div class="card-box">
 											<div class="container">
 
 												<!-- 일자 클릭시 메뉴오픈 -->
-												<div id="contextMenu" class="dropdown clearfix">
+												<div id="contextMenu" class="dropdown clearfix" style="position: relative;">
 													<ul class="dropdown-menu dropNewEvent" role="menu"
 														aria-labelledby="dropdownMenu"
-														style="display: block; position: static; margin-bottom: 5px;">
+														style="display: block; margin-bottom: 5px;">
 														<c:forEach items="${pjtlist}" var="p">
 														<li><a tabindex="-1" href="#" name="${p.tseq}">${p.pname}</a></li>
                          														 
@@ -56,19 +54,18 @@
 													<div id="loading"></div>
 													<div id="calendar"></div>
 												</div>
-
-
 												<!-- 일정 추가 MODAL -->
 												<div class="modal fade" tabindex="-1" role="dialog"
 													id="eventModal">
-													<div class="modal-dialog" role="document">
+													<div class="modal-dialog" role="document" style=" margin-top: 150px; margin-bottom: 150px;">
 														<div class="modal-content">
 															<div class="modal-header">
-																<button type="button" class="close" data-dismiss="modal"
-																	aria-label="Close">
-																	<span aria-hidden="true">&times;</span>
+															<h4 style="padding-left: 2%;" class="modal-title"></h4>
+																<button type="button" class="close"  data-dismiss="modal"
+																	aria-label="Close">&times;
+																	
 																</button>
-																<h4 class="modal-title"></h4>
+																
 															</div>
 															<div class="modal-body">
 
@@ -234,7 +231,7 @@
 	<script src="<c:url value="/resources/vendor/js/fullcalendar.min.js"/>"></script>
 	<script src="<c:url value="/resources/vendor/js/ko.js"/>"></script>
 	<script src="<c:url value="/resources/vendor/js/select2.min.js"/>"></script>
-	<script src="<c:url value="/resources/vendor/js/bootstrap-datetimepicker.min.js"/>"></script>
+	
 	<script src="<c:url value='/resources/fullcalendar/main.js'/>"></script>
 	<script src="<c:url value='/resources/fullcalendar/addEvent.js'/>"></script>
 	<script src="<c:url value='/resources/fullcalendar/editEvent.js'/>"></script>

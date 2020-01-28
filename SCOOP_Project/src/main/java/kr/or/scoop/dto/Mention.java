@@ -5,6 +5,9 @@ public class Mention {
 	private int tmseq;
 	private String email;
 	private String name;
+	private int pmseq;
+	private String pemail;
+	private int piseq;
 	public int getTiseq() {
 		return tiseq;
 	}
@@ -29,9 +32,28 @@ public class Mention {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public int getPmseq() {
+		return pmseq;
+	}
+	public void setPmseq(int pmseq) {
+		this.pmseq = pmseq;
+	}
+	public String getPemail() {
+		return pemail;
+	}
+	public void setPemail(String pemail) {
+		this.pemail = pemail;
+	}
+	public int getPiseq() {
+		return piseq;
+	}
+	public void setPiseq(int piseq) {
+		this.piseq = piseq;
+	}
 	@Override
 	public String toString() {
-		return "Mention [tiseq=" + tiseq + ", tmseq=" + tmseq + ", email=" + email + ", name=" + name + "]";
+		return "Mention [tiseq=" + tiseq + ", tmseq=" + tmseq + ", email=" + email + ", name=" + name + ", pmseq="
+				+ pmseq + ", pemail=" + pemail + ", piseq=" + piseq + "]";
 	}
 	
 }

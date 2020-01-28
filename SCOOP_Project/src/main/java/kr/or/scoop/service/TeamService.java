@@ -132,17 +132,36 @@ public class TeamService {
 		int result = dao.mentionInsert(email);
 		return result;
 	}
-	//팀 멘션 생성
+	//나의 멘션 생성
+	public int myMentionInsert(String email) {
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		int result = dao.myMentionInsert(email);
+		return result;
+	}
+	//팀 구글드라이브 생성
 	public int googleDriveInsert(String gfilename, String gurl) {
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		int result = dao.googleDriveInsert(gfilename, gurl);
 		return result;
 	}
-	//팀 멘션 생성
+	//개인 구글드라이브 생성
+	public int myGoogleDriveInsert(String pgfilename,String pgurl) {
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		int result = dao.myGoogleDriveInsert(pgfilename, pgurl);
+		return result;
+	}
+	//팀 할일 생성
 	public int doWorkInsert(String fromWork, String toWork, String doWork) {
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		System.out.println(fromWork+ toWork+ doWork);
 		int result = dao.doWorkInsert(fromWork, toWork, doWork);
+		return result;
+	}
+	//개인 할일 생성
+	public int myDoWorkInsert(String fromWork, String toWork, String doWork) {
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		System.out.println(fromWork+ toWork+ doWork);
+		int result = dao.myDoWorkInsert(fromWork, toWork, doWork);
 		return result;
 	}
 

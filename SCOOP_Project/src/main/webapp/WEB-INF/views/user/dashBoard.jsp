@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,7 +26,7 @@
 </head>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript">
-   
+	
 </script>
 
 <style>
@@ -69,20 +70,98 @@
                      <li class="nav-item"><a class="nav-link" data-toggle="tab"
                         href="#">@멘션</a></li>
                   </ul>
+                  <select id="selectMenu" name="menu" class="nav-item" onchange="changeItem()">
+          		 <option value="#">이슈 업데이트</option>
+                 <option value="0">새로운 팀이슈</option>
+            	 <option value="1">새로운 댓글</option>	
+            	 <option value="2">새로운 의사결정</option>
+            	 <option value="3">새로운 공지사항</option>
+          </select>
                </div>
                <hr style="margin-top: 0; margin-left: 2%; margin-right: 2%">
                <div class="row">
-               <div class="col-sm-6" style="height:700px;background: #F3F3F9;margin: 2% 10px 2% 3%;padding-top:2%;padding-bottom: 2%;border-radius: 0.5rem;">
-               호롷ㅇ로롷오홀호옿ㅇ로로로홀홀호롷롷롷롷로홇롷로호ㅗㅎㄹ홀호롷
-               </div>
-               <div class="col-sm-5" >
+						<div class="col-sm-6"
+							style="height: 700px; background: #F3F3F9; margin: 2% 10px 2% 3%; padding-top: 2%; padding-bottom: 2%; border-radius: 0.5rem;">
+							<div class="row" style="margin-left: 2%; margin-right: 2%" id="ialarm">
+							<div class="col-sm-3 newissue" id="al"><p><b>새로운 이슈</b></p></div>
+							<div class="col-sm-6 newissue" id="ti"><p><b>제목</b></p></div>
+							<div class="col-sm-3 newissue" id="day"><p><b>시간</b></p></div>
+							</div>
+							<c:if test="${alarm !=null }">
+								<c:forEach items="${alarm }" var="al">
+									<div class="row" style="margin-left: 2%; margin-right: 2%" id="ialarm">
+
+										<div class="col-sm-3 newissue" id="al">
+											<c:choose>
+												<c:when test="${al.pnseq!=0 }">
+													<p>새로운 공지사항</p>
+												</c:when>
+												<c:when test="${al.replyseq!=0 }">
+													<p>새로운 댓글</p>
+												</c:when>
+												<c:when test="${al.tiseq!=0 }">
+													<p>새로운 팀 이슈</p>
+												</c:when>
+												<c:when test="${al.vseq!=0 }">
+													<p>새로운 의사결정</p>
+												</c:when>
+											</c:choose>
+										</div>
+										<div class="col-sm-6 newissue" id="ti">
+
+											<c:choose>
+												<c:when test="${al.pnseq!=0 }">
+													<p>${al.pnatitle }</p>
+												</c:when>
+												<c:when test="${al.replyseq!=0 }">
+													<p>${al.ratitle }</p>
+												</c:when>
+												<c:when test="${al.tiseq!=0 }">
+													<p>${al.tiatitle }</p>
+												</c:when>
+												<c:when test="${al.vseq!=0 }">
+													<p>${al.vatitle }</p>
+												</c:when>
+											</c:choose>
+										</div>
+										<div class="col-sm-3 newissue" id="day">
+											20/01/28
+											<c:choose>
+												<c:when test="${al.pnseq!=0 }">
+
+												</c:when>
+												<c:when test="${al.replyseq!=0 }">
+
+												</c:when>
+												<c:when test="${al.tiseq!=0 }">
+
+												</c:when>
+												<c:when test="${al.vseq!=0 }">
+
+												</c:when>
+											</c:choose>
+										</div>
+									</div>
+								</c:forEach>
+							</c:if>
+						</div>
+						<div class="col-sm-5" >
                 <select id="selectDash" name="selectDash" class="form-control" style="margin-top: 7%;">
-                  <option value="${sessionScope.email}">여기는 select공간</option>
-                  <c:forEach items="${pjtlist}" var="p">
+                  <%-- <option value="${sessionScope.email}">여기는 select공간</option> --%>
+                  <c:choose>
+                  	<c:when test="${fn:length(pjtlist) > 0}">
+                  		<c:forEach items="${pjtlist}" var="p">
                            <option value="${p.tseq}">${p.pname}</option>
-                  </c:forEach>
+                 		</c:forEach>
+                  	</c:when>
+                  	<c:otherwise>
+                  		<option value="-1">참여한 팀이 없습니다</option>
+                  	</c:otherwise>
+                  </c:choose>
+                  
                </select>
-               <div style="width:100%;height:500px;background: #F3F3F9;margin: 5% 0 5% 0;float: right;padding-top:2%;padding-bottom: 2%;border-radius: 0.5rem;">
+               <div style="width:100%;height:550px;background: #F3F3F9;margin: 5% 0 5% 0;float: right;padding-top:2%;padding-bottom: 2%;border-radius: 0.5rem;">
+                 	<!-- 차트 -->
                  	<canvas id="myChart"></canvas>
                </div>
                </div>
@@ -141,18 +220,20 @@
 
    <script src="<c:url value="/resources/js/dashboard/dashboard-1.js"/>"></script>
    <script type="text/javascript">
+	    /* 팀 선택시 차트 변경 */
 		$('#selectDash').change(function(){
 			let tseq = $(this).val();
 			console.log(tseq);
-
+			/* 비동기 차트 데이터 불러오기 */
 			$.ajax({
 				url: "selectChart.do",
 				type: "POST",
 				data: {"tseq" : tseq},
 				success: function(data) {
 					console.log(data);
-					var ctx = document.getElementById('myChart').getContext('2d');
-					var myChart = new Chart(ctx,
+					/* 차트 생성 */
+					let ctx = document.getElementById('myChart').getContext('2d');
+					let myChart = new Chart(ctx,
 							{
 								type : 'doughnut',
 								data : {
@@ -172,19 +253,83 @@
 									} ]
 								},
 								options : {
+									title : {
+										display : true,
+										text : '칸반 일정 진행도'
+									},
 									/* responsive : false, */
-									scales : {
-										yAxes : [ {
-											ticks : {
-												beginAtZero : true
-											}
-										} ]
-									}
+									
 								}
 							});
 				}
 			})
 		})
+		
+		function changeItem(){
+			  var itemidSelect = document.getElementById('selectMenu');
+			  var itemId = itemidSelect.options[itemidSelect.selectedIndex].value;
+			  console.log("itemid :"+itemId);
+			  if(itemId==0){
+				  location.href="newTissue.do";
+			  } else if (itemId==1){
+				  location.href="newReply.do";
+			  } else if (itemId==2){
+				  location.href="newVote.do";
+			  } else if (itemId==3){
+				  location.href="newNotice.do";
+			  }
+		  }
+   </script>
+   <script type="text/javascript">
+	$(function(){
+		/* default 차트 */
+		let tseq = $('#selectDash').children().val();
+		console.log(' val : '+ tseq);
+
+		/* 팀이 있을시 제일 첫 팀 차트 생성 */
+		if(tseq > 0){
+			$.ajax({
+				url: "selectChart.do",
+				type: "POST",
+				data: {"tseq" : tseq},
+				success: function(data) {
+					console.log(data);
+					let ctx = document.getElementById('myChart').getContext('2d');
+					let myChart = new Chart(ctx,
+							{
+								type : 'doughnut',
+								data : {
+									labels : [ '발의됨', '진행중', '일시중지', '완료' ],
+									datasets : [ {
+										label : 'Scoop',
+										data : [ data.initiative, data.progress, data.pause, data.complete ],
+										backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+												'rgba(54, 162, 235, 0.2)',
+												'rgba(255, 206, 86, 0.2)',
+												'rgba(75, 192, 192, 0.2)' ],
+										borderColor : [ 'rgba(255, 99, 132, 1)',
+												'rgba(54, 162, 235, 1)',
+												'rgba(255, 206, 86, 1)',
+												'rgba(75, 192, 192, 1)' ],
+										borderWidth : 1
+									} ]
+								},
+								options : {
+									legend : {
+										position : 'top',
+									},
+									title : {
+										display : true,
+										text : '칸반 일정 진행도'
+									},
+									/* responsive : false, */
+									
+								}
+							});
+				}
+			})
+		}
+	})
    </script>
 </body>
 </html>

@@ -267,7 +267,7 @@ public class MemberController {
 			}
 		}
 		/* System.out.println(pjtlist.get(0)); */
-		return "user/userindex";
+		return "user/dashBoard";
 	}
 
 	// 로그아웃

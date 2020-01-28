@@ -10,6 +10,10 @@ public class FileDrive {
 	private Timestamp fddate;
 	private String pname;
 	private int tseq;
+	private int pdseq;
+	private int pdcapa;
+	private String pfdname;
+	private int piseq;
 	public int getFdseq() {
 		return fdseq;
 	}
@@ -52,10 +56,35 @@ public class FileDrive {
 	public void setTseq(int tseq) {
 		this.tseq = tseq;
 	}
+	public int getPdseq() {
+		return pdseq;
+	}
+	public void setPdseq(int pdseq) {
+		this.pdseq = pdseq;
+	}
+	public int getPdcapa() {
+		return pdcapa;
+	}
+	public void setPdcapa(int pdcapa) {
+		this.pdcapa = pdcapa;
+	}
+	public String getPfdname() {
+		return pfdname;
+	}
+	public void setPfdname(String pfdname) {
+		this.pfdname = pfdname;
+	}
+	public int getPiseq() {
+		return piseq;
+	}
+	public void setPiseq(int piseq) {
+		this.piseq = piseq;
+	}
 	@Override
 	public String toString() {
 		return "FileDrive [fdseq=" + fdseq + ", fdcapa=" + fdcapa + ", fdname=" + fdname + ", email=" + email
-				+ ", fddate=" + fddate + ", pname=" + pname + ", tseq=" + tseq + "]";
+				+ ", fddate=" + fddate + ", pname=" + pname + ", tseq=" + tseq + ", pdseq=" + pdseq + ", pdcapa="
+				+ pdcapa + ", pfdname=" + pfdname + ", piseq=" + piseq + "]";
 	}
 
 }

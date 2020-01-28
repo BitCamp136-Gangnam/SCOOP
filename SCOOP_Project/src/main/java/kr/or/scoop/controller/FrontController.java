@@ -36,7 +36,7 @@ public class FrontController {
 		return "index";
 	}
 	
-	@RequestMapping("/calendar2.do")
+	@RequestMapping("/calendar.do")
 	public String object(@RequestParam(required = false, name="lang") String language, HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("calendar 왔냐?");
 		if(language == null) {

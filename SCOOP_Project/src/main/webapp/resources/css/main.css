@@ -1,6 +1,6 @@
 body {
-  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
-  padding: 30px;
+ /*  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+  padding: 30px; */
 }
 
 .dropNewEvent {
@@ -60,8 +60,8 @@ body {
 }
 
 #contextMenu .dropdown-menu {
-  border: none;
-}
+/*   border: none;
+ */}
 
 .opacityWeekend {
   background-color: #f4f4fb !important;
