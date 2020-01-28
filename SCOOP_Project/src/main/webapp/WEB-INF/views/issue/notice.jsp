@@ -33,6 +33,7 @@
 }
 </style>
 <script>
+
  var array = new Array();
  var bnseq = new Array();
  var bntitle = new Array();
@@ -138,30 +139,30 @@
 			bntitle.push("${n.bntitle}");
 			bncontent.push("${n.bncontent}");
 			</script>
-		<div class="row" style="margin-left: 2%; margin-right: 2%">
-			<div class="col-sm-3 newissue" id="listbody">
+		<div class="row" style="margin-left: 2%; margin-right: 2%" id="row">
+			<div class="col-sm-3 newissue">
 			<c:choose>
            		<c:when test="${fn:length(n.bntitle) > 19}">	
-            <c:out value="${fn:substring(n.bntitle,0,18)}"/>...
+            <p><c:out value="${fn:substring(n.bntitle,0,18)}"/>...</p>
            </c:when>
            <c:otherwise>
-           		<c:out value="${n.bntitle}"/>
+           		<p><c:out value="${n.bntitle}"/></p>
            </c:otherwise> 
           </c:choose>
 			</div>
 			
-			<div class="col-sm-7 newissue" id="listbody">
+			<div class="col-sm-7 newissue">
 			<c:choose>
           <c:when test="${fn:length(n.bncontent) > 56}">
-             <c:out value="${fn:substring(n.bncontent,0,55)}"/>...
+             <p><c:out value="${fn:substring(n.bncontent,0,55)}"/>...<p>
            </c:when>
            <c:otherwise>
-           		 <c:out value="${n.bncontent}"/>
+           		 <p><c:out value="${n.bncontent}"/></p>
            </c:otherwise> 
           </c:choose>
 			</div>
-			<div class="col-sm-2 newissue" id="listbody">
-			${fn:substring(n.bntime,0,16)}
+			<div class="col-sm-2 newissue">
+			<p>${fn:substring(n.bntime,0,16)}</p>
 			</div>
       </div>
 			</a>
@@ -294,19 +295,18 @@
 
 </body>
 <script type="text/javascript">
- $(document).ready(function(){
-			 $("#listbody").slice(0,9).show();
-			$("#load").click(function(e){
-				console.log($("#listbody").val());
-				console.log(e);
-				$("#listbody:hidden").slice(0,10).show();
-					if($("#listbody").length == 0){
-					alert("더 이상 글이 없습니다.");
-						}
-				
-				}); 
-	
-			}); 
+$(document).ready(function(){
+	 $("div.card.a.div").slice(0,10).show();
+	$("#load").click(function(e){
+		console.log($("div.card.a.div.div.newissue").val());
+		$("div.card.a").slice(0,10).show();
+			if($("div.card.a").length == 0){
+			alert("더 이상 글이 없습니다.");
+				}
+		
+		}); 
+
+	}); 
 			
 </script>
 </html>
