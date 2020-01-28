@@ -46,6 +46,49 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="sweetalert2.all.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+<!-- Channel Plugin Scripts -->
+<script>
+  (function() {
+    var w = window;
+    if (w.ChannelIO) {
+      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+    }
+    var d = window.document;
+    var ch = function() {
+      ch.c(arguments);
+    };
+    ch.q = [];
+    ch.c = function(args) {
+      ch.q.push(args);
+    };
+    w.ChannelIO = ch;
+    function l() {
+      if (w.ChannelIOInitialized) {
+        return;
+      }
+      w.ChannelIOInitialized = true;
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+      s.charset = 'UTF-8';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+    if (document.readyState === 'complete') {
+      l();
+    } else if (window.attachEvent) {
+      window.attachEvent('onload', l);
+    } else {
+      window.addEventListener('DOMContentLoaded', l, false);
+      window.addEventListener('load', l, false);
+    }
+  })();
+  ChannelIO('boot', {
+    "pluginKey": "969e6926-9aff-4763-ac19-ec65b811442f"
+  });
+</script>
+<!-- End Channel Plugin -->
 <script type="text/javascript">
 $(document).ready(function($) {
 	$("#pricing_area").click(function(event){
@@ -84,48 +127,6 @@ function signOut() {
     auth2.disconnect();
   }
 
-$(function(){
-    var w = window;
-    if (w.ChannelIO) {
-      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
-    }
-    var d = window.document;
-    var ch = function() {
-      ch.c(arguments);
-    };
-    ch.q = [];
-    ch.c = function(args) {
-      ch.q.push(args);
-    };
-    signOut();
-    w.ChannelIO = ch;
-    function l() {
-      if (w.ChannelIOInitialized) {
-        return;
-      }
-      w.ChannelIOInitialized = true;
-      var s = document.createElement('script');
-      s.type = 'text/javascript';
-      s.async = true;
-      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
-      s.charset = 'UTF-8';
-      var x = document.getElementsByTagName('script')[0];
-      x.parentNode.insertBefore(s, x);
-    }
-    if (document.readyState === 'complete') {
-      l();
-    } else if (window.attachEvent) {
-      window.attachEvent('onload', l);
-    } else {
-      window.addEventListener('DOMContentLoaded', l, false);
-      window.addEventListener('load', l, false);
-    }
-  ChannelIO('boot', {
-    "pluginKey": "f6d33d63-4c8d-471b-84ca-10dcb27372eb"
-  });
-})
-
-
 	// 비밀번호 변경 이메일 유효성
 	function chgpwdchk() {
 		let getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
@@ -136,7 +137,7 @@ $(function(){
  				  title: '이메일 형식이 맞지 않습니다.',
  				  showConfirmButton: false,
  				  icon: 'warning',
- 				  timer: 1000
+ 				  timer: 2000
  			})
 			$("#emailcheck").val("");
 			$("#emailcheck").focus();
@@ -155,7 +156,7 @@ $(function(){
 			 				title: '가입된 이메일이 없습니다',
 			 				showConfirmButton: false,
 			 				icon: 'warning',
-			 				timer: 5000
+			 				timer: 2000
 			 			})
 						return false;
 					}else {
@@ -169,15 +170,16 @@ $(function(){
 					 				  title: '이메일 전송 완료!.',
 					 				  showConfirmButton: false,
 					 				  icon: 'success',
-					 				  timer: 5000
+					 				  timer: 2000
 					 			})
+					 			location.reload();
 							},
 							error: function(data){
 								Swal.fire({
 					 				  title: '이메일 전송 실패.',
 					 				  showConfirmButton: false,
 					 				  icon: 'warning',
-					 				  timer: 5000
+					 				  timer: 2000
 					 			})
 							}
 						})
@@ -603,7 +605,7 @@ function idOver(a) {
      </div>
      <div class="modal-body p-4 p-lg-5">
       <img class="img-responsive center-block" alt="Scoop로고" src="resources/images/logo/ScoopBig.png" style="width:100%;height:auto;padding-right:15%;padding-left:15%;"/>
-      <form class="login-form text-left" id="pwdchg" name="pwdchg" onsubmit="return chgpwdchk();">
+     <!--  <form class="login-form text-left" id="pwdchg" name="pwdchg" onsubmit="return chgpwdchk();"> -->
         <div class="form-group mb-4">
          <label>Email address</label>
          <input type="email" class="form-control" id="emailcheck" name="emailcheck" placeholder="E-mail@company.com" required>
@@ -611,11 +613,11 @@ function idOver(a) {
        
         <div class="form-group">
         	<a href="" data-dismiss="modal" aria-label="Close" style="float: left;padding-right: 33%;">〈 로그인으로 돌아가기</a>
-        	<input type="submit" value="비밀번호 재설정 메일 발송" class="btn btn-primary" style="width: 300px;height:38px;text-align: center;padding-top: 5px;">
+        	<input type="button" value="비밀번호 재설정 메일 발송" class="btn btn-primary" style="width: 300px;height:38px;text-align: center;padding-top: 5px;" onclick="chgpwdchk();">
         </div>
         <div>
         </div>
-      	</form>								   
+      	<!-- </form>	 -->							   
      </div>
    </div>
   </div>

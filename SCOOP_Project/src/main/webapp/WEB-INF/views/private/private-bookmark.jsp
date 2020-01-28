@@ -21,7 +21,34 @@
 </head>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript">
+$(document).ready(function(){
+	var temp = 0;
+	var moreEventArray = document.querySelectorAll(".card > #row ");
+	 $(moreEventArray).attr("hidden","hidden");	
+	 $(moreEventArray).slice(0,10).removeAttr("hidden");
+	 $(moreEventArray).slice(0,10);
+	 temp = 10;
+	$("#load").click(function(e){
+		console.log(moreEventArray);
+		/* console.log($('.card'));
+		console.log($('.card > a'));
+		console.log($('.card > a > .row'));
+		console.log($(".card > a > .row").val()); */
+		console.log("if");
+		$(moreEventArray).slice(temp,temp+10).removeAttr("hidden");
+		 temp +=10;
+		if(moreEventArray.length<temp+10){
+			$(moreEventArray).slice(temp,10).removeAttr("hidden");
 
+
+			}
+		
+			
+	}); 
+
+});
+</script>
 <style>
 .newissue{
 	border-bottom: 1px solid #c8c8c8;
@@ -29,6 +56,7 @@
 	padding-bottom: 0.7%;
 }
 </style>
+
 <body>
 
     <jsp:include page="/WEB-INF/views/commons/preloader.jsp"></jsp:include>
@@ -62,8 +90,8 @@
 			
 		</div>
 		<c:forEach items="${bookMarkList}" var="blist">
-		<div class="row" style="margin-left: 2%; margin-right: 2%">
-			<div class="row col-sm-12" >
+		<div class="row bm" style="margin-left: 2%; margin-right: 2%" id="row">
+			<div class="row col-sm-12">
 			<c:choose>
 				<c:when test="${blist.tiseq != 0}">
 					<div class="col-sm-3 newissue"><!-- <i class="fas fa-angle-double-right" id="" name=""></i> -->
@@ -90,7 +118,7 @@
 						${blist.piname}
 					</div>
 					<div class="col-sm-1 newissue" style="padding-left: 25px;">
-						<i class="fas fa-times bookmark" id="pimark" name="${blist.piseq}"></i>
+						<i class="fas fa-times bookmark" id="pimark" name="${blist.piseq}" style="cursor: pointer;"></i>
 					</div>
 				</c:when>
 			</c:choose>
@@ -98,6 +126,7 @@
 			</div>
 		</div>
 		</c:forEach>
+		<button id="load">더보기</button>
             <!-- #/ container -->
             </div>
             </div>
@@ -145,7 +174,7 @@
 	/* 북마크 제거 */
 	$(function(){
 		$('.bookmark').click(function(){
-			console.log('click fnc');
+			let deleteline = $(this).parents('div.bm');
 		 	let seq = $(this).attr('name');
 			let id = $(this).attr('id');
 			let tiseq; let piseq;
@@ -177,6 +206,7 @@
 			    		  icon: "success",
 			    		  button: "확인"
 			    	})
+			    	deleteline.remove();
 				},
 				error : function(err){
 					console.log('실패');
@@ -186,7 +216,6 @@
 			    		  icon: "info",
 			    		  button: "확인"
 			    	})
-			    	location.reload();
 				}
 			});
 		})
