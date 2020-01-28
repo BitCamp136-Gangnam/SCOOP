@@ -193,11 +193,11 @@ var calendar = $('#calendar').fullCalendar({
 
     //리사이즈한 일정 업데이트
     $.ajax({
-      type: "get",
-      url: "",
+      type: "post",
+      url: "editTeamCalendar.do",
       data: {
         //id: event._id,
-        //....
+        
       },
       success: function (response) {
         alert('수정: ' + newDates.startDate + ' ~ ' + newDates.endDate);

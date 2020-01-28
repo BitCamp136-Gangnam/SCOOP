@@ -62,4 +62,17 @@ select p.pnseq, p.pntitle, p.pncontent, p.pntime, p.email, p.tseq, t.pname, t.em
 insert into tissue (tiseq,tseq,email,tititle,ticontent,isprocess, istbook, issee, tidate, allday, tistart, tiend, backgroundcolor, textcolor)
   values (TISEQ_TISSUE_SEQ.NEXTVAL, #{tseq}, #{email}, #{tititle}, #{ticontent}, 0, 0, 0, SYSTIMESTAMP, #{allDay}, #{tistart}, #{tiend}, #{backgroundColor}, #{textColor})
 </insert>
+<update id="editTeamCalendar" parameterType="kr.or.scoop.dto.Tissue">
+UPDATE tissue 
+SET tititle = #{tititle},
+ticontent = #{ticontent},
+tistart = #{tistart},
+tiend = #{tiend},
+backgroundcolor = #{backgroundcolor},
+allday = #{allday} 
+WHERE tseq=#{tseq} and tiseq=#{tiseq}
+</update>
+<delete id="deleteTeamCalendar" parameterType="kr.or.scoop.dto.Tissue">
+delete from tissue where tiseq = #{tiseq}
+</delete>
 </mapper>

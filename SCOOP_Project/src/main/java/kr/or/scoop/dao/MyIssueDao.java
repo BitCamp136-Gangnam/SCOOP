@@ -54,4 +54,10 @@ public interface MyIssueDao {
 	
 	//팀이슈 캘린더 작성
 	public int writeCalendarTissue(Tissue tissue);
+	
+	//팀이슈 캘린더 수정
+	public int editTeamCalendar(Tissue tissue);
+	
+	//팀이슈 캘린더 삭제
+	public int deleteTeamCalendar(Tissue tissue);
 }
