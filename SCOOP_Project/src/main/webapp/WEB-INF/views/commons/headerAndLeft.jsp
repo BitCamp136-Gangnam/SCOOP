@@ -812,7 +812,7 @@ span {
    <div id="scnav" class="nk-nav-scroll">
       <ul class="metismenu" id="menu">
          <li class="nav-label" style="padding-bottom: 10px;">
-         <b style="padding-bottom: 2%;font-size:15px;"><spring:message code="board" /></b></li>
+         <b style="padding-bottom: 2%;font-size:15px;"><spring:message code="dashboard" /></b></li>
          <li><a href="dashboard.do" aria-expanded="false"><span class="iconify" data-icon="ps:megaphone" data-inline="false"></span>
          <span class="nav-text">
                   &nbsp;<spring:message code="dashboard" /></span> <!-- <i class="icon-speedometer menu-icon"> -->
@@ -1141,7 +1141,7 @@ span {
                         placeholder="<spring:message code='invite.holder' />"
                         style="width: 100%; border-radius: 0.25rem;">
                      <p style="font-size: 13px; margin-top: 2%; margin-left: 1%;">
-                     	<spring:message code="subcon" />
+                     	<spring:message code="invite.subcon" />
                      </p>
                      <div id="invite_email_append"
                         style="min-width: 35%; border: 1px solid #c8c8c8; border-radius: 0.25rem; background-color: #fff; display: none; position: absolute; top: 145px; left: 18px;">
