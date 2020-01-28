@@ -30,19 +30,17 @@
 					<div class="col-lg-12">
 						<div class="card">
 							<div class="card-body">
-								<div class="card-title">
-									<h3>일정 관리</h3>
-								</div>
+						
 								<div class="row">
 									<div class="col-md-12">
-										<div class="card-box m-b-50">
+										<div class="card-box">
 											<div class="container">
 
 												<!-- 일자 클릭시 메뉴오픈 -->
-												<div id="contextMenu" class="dropdown clearfix">
+												<div id="contextMenu" class="dropdown clearfix" style="position: relative;">
 													<ul class="dropdown-menu dropNewEvent" role="menu"
 														aria-labelledby="dropdownMenu"
-														style="display: block; position: static; margin-bottom: 5px;">
+														style="display: block; margin-bottom: 5px;">
 														<c:forEach items="${pjtlist}" var="p">
 														<li><a tabindex="-1" href="#" name="${p.tseq}">${p.pname}</a></li>
                          														 
@@ -56,8 +54,6 @@
 													<div id="loading"></div>
 													<div id="calendar"></div>
 												</div>
-
-
 												<!-- 일정 추가 MODAL -->
 												<div class="modal fade" tabindex="-1" role="dialog"
 													id="eventModal">
