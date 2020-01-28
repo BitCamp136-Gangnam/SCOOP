@@ -405,11 +405,13 @@ public class BoardController {
 		List<Mention> mentions = dao.getMentions(tiseq);
 		List<GoogleDrive> googledrive = dao.getGoogleDrive(tiseq);
 		List<DoWork> dowork = dao.getDoWork(tiseq);
+		List<FileDrive> files = dao.getFiles(tiseq);
 		model.addAttribute("tissue", tissue);
 		model.addAttribute("reply",reply);
 		model.addAttribute("mentions",mentions);
 		model.addAttribute("gdrive", googledrive);
 		model.addAttribute("dowork", dowork);
+		model.addAttribute("files", files);
 		return "issue/teamIssueEdit";
 	}
 }

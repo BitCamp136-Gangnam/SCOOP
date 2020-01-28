@@ -445,6 +445,16 @@ input::placeholder {
          $('#todoresult').append('<div style="padding:5px"><a href='+url+'><span class="iconify" data-icon="whh:googledrive" data-inline="false"></span>'+ drivename + '</a><span id="annoDelete" style="cursor:pointer;" onclick="annotationDelete('+annotation+')"><span class="iconify" data-icon="octicon:x" data-inline="false"></span></span></div>');
          $('#todoresult').append('<input type="hidden" name="googleDrive" value="'+url+'~'+drivename+'">');
          $('#todoresult').show();
+         if('#edittodoresult'){
+        	 $('#edittodoresult').append('<div class="myissueDetail" id="myissueGoogledrive">'+
+        				'<i class="fab fa-google-drive"></i>'+
+        				'<a href="'+url+'" onclick="window.open(this.href,"팝업창","width=800, height=800");return false;">'+drivename+'</a>'+
+        				'<span class="divDelete" style="cursor:pointer;"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span>'+
+        				'<br>');
+        	 $('.divDelete').click(function(){
+        			$(this).parent().remove();
+        		});				
+         }
       }
    }
 

@@ -6,6 +6,7 @@
 <html lang="en">
 
 <head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -18,7 +19,6 @@
     <!-- Custom Stylesheet -->
      <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
 </head>
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <style>
 .newissue{
 	border-bottom: 1px solid #c8c8c8;
@@ -28,7 +28,7 @@
 .myissueDetail{
 	font-size: 15px;
 	margin-left: 3%;
-	/* margin-bottom:1%; */
+	margin-bottom:1%;
 }
 .editdelete{
 background-color: #E71D36;
@@ -56,28 +56,40 @@ border-radius: 5px;
         <div class="content-body"style="height: 680px;">
         <div class="container-fluid row" style="padding-right: 0px; margin-right: 0px;margin-left: 0px; padding-left: 15px;">
         <div class="card" style="padding-left: 2%;padding-right: 0px; padding-top:1%;min-width:900px;height: auto;overflow: auto;">
+        <form action="">
 		<div class="row"style="margin:2% 2% 0 2%" >
-		<div class="col-sm-8">
-				<h3 id="myissueSubject" style="padding-top: 2%;padding-left: 1%;">${tissue.tititle}</h3>
+		<div class="col-sm-7">
+			<input type="text" class="form-control" name="title" value="${tissue.tititle}" style="border: 0px; border-bottom: 1px solid #ced4da; font-size: 20px">
+		</div>
+		<div class="col-sm-1">
 		</div>
 		<div class="col-sm-2" style="padding-right: 0">
-			<input type="button" class="form-control editdelete" value="수정" id="editIssue">
+			<input type="button" class="form-control editdelete" value="완료" id="editIssue">
 		</div>
 		<div class="col-sm-2" style="padding-left: 0">
-			<input type="button" class="form-control editdelete" value="삭제" id="deleteIssue">
+			<input type="button" class="form-control editdelete" value="돌아가기" id="returnIssue">
 		</div>
 		</div>
 		<c:choose>
         <c:when test="${tissue.tistart!=null}">
-		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>${fn:substring(tissue.tistart,0,10)} ~ ${fn:substring(tissue.tiend,0,10)}</div>
+		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%; margin-top: 2%"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i><input type="text" id="editFrom" style="border: 0; border-bottom: 1px solid #ced4da; text-align: center" value="${fn:substring(tissue.tistart,0,10)}"> ~ <input type="text" id="editTo" style="border: 0; border-bottom: 1px solid #ced4da; text-align: center" value="${fn:substring(tissue.tiend,0,10)}"></div>
 		</c:when>
 		<c:otherwise>
 		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>등록된 일정이 없습니다.</div>
 		</c:otherwise>
 		</c:choose>
+		<div id="edittodoresult">
 		<c:forEach items="${mentions}" var="m">
 		<div class="myissueDetail" id="myissueMention">
 		<sup><i class="fas fa-quote-left" style="color:#ca0000; font-size: 7px"></i></sup> @${m.name} <sup><i class="fas fa-quote-right"style="color:#ca0000;font-size: 7px"></i></sup>
+		<span class="divDelete" style="cursor:pointer;"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span>
+		<br>
+		</div>
+		</c:forEach>
+				<c:forEach items="${files}" var="f">
+		<div class="myissueDetail" id="myissueMention">
+		<a href="fileDownload.do?fileName=${f.fdname}"><span class="iconify" data-icon="si-glyph:file-box" data-inline="false"></span>${f.fdname}</a>
+		<span class="divDelete" style="cursor:pointer;"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span>
 		<br>
 		</div>
 		</c:forEach>
@@ -85,6 +97,7 @@ border-radius: 5px;
 		<div class="myissueDetail" id="myissueGoogledrive">
 			<i class="fab fa-google-drive"></i>
 			<a href="${gd.tgurl}" onclick="window.open(this.href,'팝업창','width=800, height=800');return false;">${gd.tgfilename}</a>
+			<span class="divDelete" style="cursor:pointer;"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span>
 			<br>
 		</div>
 			</c:forEach>
@@ -93,48 +106,16 @@ border-radius: 5px;
 		<i class="far fa-check-circle"style="padding-right: 5px;"></i>${work.fromname}
 		<i class="fas fa-long-arrow-alt-right" style="margin-left:5px;margin-right: 5px;"></i>${work.toname}<br>
 		: ${work.dowork}
+		<span class="divDelete" style="cursor:pointer;"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span>
 		<br>
 		</div>
 		</c:forEach> 
-        <div class="myissueDetail">
-        ${tissue.ticontent}
+		</div>
+        <div class="myissueDetail" style="margin-top: 2%">
+        <textarea rows="1" style="width:50%;border: 0; border-bottom: 1px solid #ced4da;" id="editIssuecontent">${tissue.ticontent}</textarea>
         </div>    
-            <!-- #/ container -->
+            </form>
             </div> 
-            <div class="card" style="height: 600px;float:right;background-color: #fff;margin-left:10px;padding-left: 0px;padding-right: 0px;width:400px;">
-            <div id="commentMain" style="height:450px;padding-left: 3%;padding-top: 5%;padding-right: 3%;padding-bottom: 5%;overflow: auto;margin:5%;">
-            <c:forEach items="${reply}" var="r">
-            
-            <div class="row" style="margin:2% 3% 2% 3%;">
-            
-            <div class="col-sm-1" style="margin-top: 5px;margin-right:10px;padding-left:0;">
-            <c:choose>
-            <c:when test="${r.profile==null}">
-            <img class="img-circle" alt="프로필 사진" src="<c:url value="/resources/images/avatar/avatar.png"/>" style="width:40px;height: 40px;padding-top: 1%;margin-left: 10px;margin-right: 10px;">
-            </c:when>
-            <c:otherwise>
-            <img  class="img-circle" alt="프로필 사진 " src="<c:url value="/user/upload/${r.profile}"/>" style="width:40px;height:40px;padding-top: 1%;margin-left: 10px;margin-right: 10px;">
-            </c:otherwise>
-            </c:choose>
-            </div>
-            <div class="col-sm-10">
-            <div id="commentMain" style="margin: 3% 5% 3% 5%;" >
-            <div style="margin-bottom: 1%;width: 260px;">
-            <span>${r.name}</span><span style="padding-left:3%"><i class="far fa-clock" style="color:#E71D36 "></i>${fn:substring(r.rdate,0,16)}</span>
-            <br>
-            <div>${r.rcontent}</div>
-            </div>
-            </div>
-            </div>
-            
-            </div>
-            </c:forEach>
-            
-            </div>
-            <img src="resources/images/logo/ScoopTitle.png" style="width:150px;height: auto;opacity:0.3;position:absolute;top:25%;left: 32%;">
-            <textarea id="teamComment" rows="5" placeholder="말하지 않아도 아는것은 초코파이뿐입니다                        댓글 입력 후 저장을 클릭해주세요" style="resize: none;height:180px;width:auto;border: 1px solid #c8c8c8;border-radius: 0.5rem;margin-left: 15px;margin-bottom: 20px;margin-right: 15px;overflow:auto;padding: 4%"></textarea>
-            <input id="teamCommentBtn" type="submit" value="저장" style="width: 90px;border-radius:0.5rem ;padding-top:7px;padding-bottom:7px; background-color: #E71D36;color: #fff; cursor: pointer;position: absolute;top:585px;left: 290px;">
-            </div>
             </div>
         </div>
         <!--**********************************
@@ -147,7 +128,30 @@ border-radius: 5px;
     <!--**********************************
         Main wrapper end
     ***********************************-->
-
+<div class="list-group" id="editMentionlist" style="display: none">
+      <a href="#" class="list-group-item list-group-item-action menli" id="editMen1"style="padding: 5px;">멘션</a> 
+      <a href="#" class="list-group-item list-group-item-action menli" id="editMen3"style="padding: 5px">구글 드라이브</a> 
+      <a href="#" class="list-group-item list-group-item-action menli" id="editMen4"style="padding: 5px">파일</a> 
+      <a href="#" class="list-group-item list-group-item-action menli" id="editMen7"style="padding: 5px">의사결정</a> 
+      <a href="#" class="list-group-item list-group-item-action menli" id="editMen8"style="padding: 5px">할 일</a> 
+</div>
+<div class="list-group" id="editMemlist" style="display: none">
+<c:forEach items="${tpmemlist}" var="t">
+	<a href="#" class="list-group-item list-group-item-action todo projectmem${t.tseq}" style="padding: 5px; border-radius: 0" id="${t.tseq}/${t.email}">${t.name}</a>
+</c:forEach>
+</div>
+ <div class="list-group" id="edittodo" style="display: none;">
+      <label for="todomem">담당자</label> <input
+         class="form-control createmodal" type="text" id="edittodomem"
+         style="width: 100%" name=""> <br> <label for="todolist">할
+         일</label>
+      <textarea class="form-control createmodal" rows="3" id="edittodolist"
+         style="width: 100%; margin-bottom: 2%" placeholder="할 일을 작성해주세요."></textarea>
+      <button type="button" id="edittodomake" class="btn btn-secondary"
+         style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;">만들기</button>
+      <button type="button" id="edittodocancle" class="btn btn-secondary"
+         style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;">취소</button>
+   </div>
     <!--**********************************
         Scripts
     ***********************************-->
@@ -180,4 +184,237 @@ border-radius: 5px;
      <script src="<c:url value="/resources/js/dashboard/dashboard-1.js"/>"></script>
 
 </body>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script type="text/javascript">
+$(function(){
+		$("#editFrom").flatpickr();
+		$("#editTo").flatpickr();
+		   for(let i=0; i<$('#editMemlist').children().length-1; i++){
+				for(let j=i+1; j<$('#editMemlist').children().length;j++){
+					if($('#editMemlist').children().eq(i).attr('id').split("/")[1] == $('#editMemlist').children().eq(j).attr('id').split("/")[1]){
+						$('#editMemlist').children().eq(j).hide();
+					}
+				}
+			}
+			for(let i=0; i<$('#editMemlist').children().length; i++){
+				if($('#editMemlist').children().eq(i).attr('id').split("/")[0] == $(selectpro).val()){
+					$('.projectmem'+$(selectpro).val()).show();
+				}
+			}
+})
+$('#returnIssue').click(function(){
+	location.href ='teamissueDetail.do?tiseq='+${tissue.tiseq};
+})
+$('.divDelete').click(function(){
+	$(this).parent().remove();
+})
+
+var tar = 1;
+	$('#editIssuecontent').keydown(
+			function(event) {
+				if($('#editMentionlist').css('display')==('flex')){
+					console.log('여기서라면?');
+					console.log(event.keyCode);
+					var key = event.keyCode;
+		               switch (key) {
+		               case 38:
+		                  console.log("위");
+		                  tar--;
+		                  break;
+		               case 40:
+		                  tar++;
+		                  break;
+		               case 39:
+		                  break;
+		               case 37:
+		                  break;
+		               }
+		               if (tar < 1) {
+		                  tar = 1;
+		               }
+		               if (tar > 9) {
+		                  tar = 9;
+		               }
+		               $('#editMen' + tar).focus();
+		               if ($('#editMen' + tar).focus()) {
+		                  $('.editMenli').css('background-color', '#fff');
+		                  $('#editMen' + tar).css(
+		                        'background-color',
+		                        'rgba(225, 225, 225,0.5)');
+		               }
+		               if(event.keyCode == 13){
+		               	$(this).click();
+		               }
+				}
+				var top = ($('#editIssuecontent').offset().top);
+				var left = ($('#editIssuecontent').offset().left + 490);
+				if (event.shiftKey && event.keyCode == 50) {
+					console.log("top&left" + top + ", " + left);
+					$('#editMentionlist').attr(
+							'style',
+							'position:fixed; width:20%;top:' + top + 'px;left:'
+									+ left + 'px; z-index:4');
+					$('#editMentionlist').show();
+					$('div').not('#editMentionlist').click(function() {
+						$('#editMentionlist').hide();
+					});
+				}
+			});
+	$('#editMen1').click(
+			function() {
+				var top = ($('#editIssuecontent').offset().top);
+				var left = ($('#editIssuecontent').offset().left + 490);
+				$('#editMentionlist').hide();
+				$('#editMemlist').attr(
+						'style',
+						'position:fixed; width:20%;top:' + top + 'px;left:'
+								+ left + 'px; z-index:4');
+				$('#editMemlist').show();
+				$('#editMemlist').attr('class', 'list-group mem');
+			});
+	/* $('#men2').click(function() {
+		$('#mentionlist').hide();
+		$('#issuecontent').empty();
+		$('#issuecontent').hide();
+		var textarea = document.getElementById('codemirrorarea');
+		var editor = CodeMirror.fromTextArea(textarea, {
+			mode : "javascript",
+			lineNumbers : true,
+			lineWrapping : true,
+			theme : "eclipse",
+			val : textarea.value
+		});
+	}); */
+	$('#editMen3').click(function() {
+		$('#editMentionlist').hide();
+		var text = "";
+		text = $('#editIssuecontent').val().replace("@", "");
+		$('#editIssuecontent').val(text);
+		$('#auth').click();
+		$('#editIssuecontent').append($('.picker-dialog'));
+
+	});
+	$('#editMen4').click(function() {
+		$('#editMentionlist').hide();
+		$('#fileclick').click();
+	});
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				$('#imgpreview').attr('src', e.target.result);
+				if (e.target.result.substring(5, 10) == 'image') {
+					//$('#imgpreview').show();
+				} else {
+					$('#imgpreview').hide();
+				}
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+	$("#fileclick").change(function() {
+		readURL(this);
+		console.log($("#fileclick")[0].files);
+		var files = $("#fileclick")[0].files;
+		$('#filename').empty();
+		//$('#filename').append($("#fileclick").val().substring(12));
+		var text = "";
+		text = $('#editIssuecontent').val().replace("@", "");
+		//$('#issuecontent').val(text);
+		for(let i=0; i<$("#fileclick")[0].files.length;i++){
+		$('#edittodoresult').append('<div class="myissueDetail" id="myissueMention">'+
+				'<a href="fileDownload.do?fileName='+files[i].name+'"><span class="iconify" data-icon="si-glyph:file-box" data-inline="false"></span>'+files[i].name+'</a>'+
+				'<span class="divDelete" style="cursor:pointer;"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span>'+
+				'<br>'+
+				'</div>')
+				$('.divDelete').click(function(){
+	$(this).parent().remove();
+})
+		}
+$('#todoresult').show();
+		
+	});
+	$('#editMen8').click(
+			function() {
+				var text = "";
+				text = $('#editIssuecontent').val().replace("@", "");
+				$('#editIssuecontent').val(text);
+				var top = ($('#editIssuecontent').offset().top);
+				var left = ($('#editIssuecontent').offset().left + 490);
+				$('#editMentionlist').hide();
+				$('#editMemlist').attr(
+						'style',
+						'position:fixed; width:20%;top:' + top + 'px;left:'
+								+ left + 'px; z-index:4');
+				$('#editMmemlist').show();
+			});
+	$('.todo')
+			.click(
+					function() {
+						var top = ($('#editIssuecontent').offset().top);
+						var left = ($('#editIssuecontent').offset().left + 490);
+						if ($(this).parents('#editMemlist').attr('class') == 'list-group mem') {
+							console.log("if");
+							var text = "";
+							text = $('#editIssuecontent').val().replace("@", "");
+							$('#editIssuecontent').val(text);
+							$('#edittodoresult').append('<div class="myissueDetail" id="myissueMention">'+
+									'<sup><i class="fas fa-quote-left" style="color:#ca0000; font-size: 7px"></i></sup> @'+ $(this).text() + ' <sup><i class="fas fa-quote-right"style="color:#ca0000;font-size: 7px"></i></sup>'+
+									'<span class="divDelete" style="cursor:pointer;"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span>'+
+									'<br>');
+							$('#edittodoresult').append('<input type="hidden" name="mentions" value="'+ $(this).attr('id').split('/')[1] + '">');
+							console.log($(this).text());
+							$('#edittodoresult').show();
+							$('#editMemlist').hide();
+							$('#editMemlist').attr('class', 'list-group');
+							$('.divDelete').click(function(){
+								$(this).parent().remove();
+							})
+						} else {
+							console.log("else");
+							$('#editMemlist').hide();
+							$('#edittodo')
+									.attr(
+											'style',
+											'border-radius:0.25em;padding:1%;position:fixed; width:20%;top:'
+													+ (top - 208)
+													+ 'px;left:'
+													+ left
+													+ 'px; z-index:4;background-color:white');
+							$('#edittodo').show();
+							$('#edittodomem').val($(this).text());
+							$('#edittodomem').attr('name', $(this).attr('id'));
+						}
+					});
+	$('#edittodomake')
+			.click(
+					function() {
+						$('#edittodo').hide();
+						var text = "";
+						text = $('#editIssuecontent').val().replace("@", "");
+						$('#editIssuecontent').val(text);
+						$('#edittodoresult').append('<div class="myissueDetail" id="myissueTodo">'+
+								'<i class="far fa-check-circle"style="padding-right: 5px;"></i>${sessionScope.name}'+
+								'<i class="fas fa-long-arrow-alt-right" style="margin-left:5px;margin-right: 5px;"></i>'+ $('#edittodomem').val()+'<br>'+
+								': '+$('#edittodolist').val()+
+								'<span class="divDelete" style="cursor:pointer;"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span>'+
+								'<br>'+
+								'</div>')
+						$('#edittodoresult').append('<input type="hidden" name="toWork" value="'+$('#todomem').attr('name').split("/")[1]+'">');
+						$('#edittodoresult').append('<input type="hidden" name="doWork" value="'+$('#todolist').val()+'">');
+						$('#edittodoresult').show();
+						$('#edittodolist').val('');
+						$('.divDelete').click(function(){
+							$(this).parent().remove();
+						})
+					})
+	$('#edittodocancle').click(function() {
+		$('#edittodo').hide();
+		var text = "";
+		text = $('#editIssuecontent').val().replace("@", "");
+		$('#editIssuecontent').val(text);
+		$('#edittodolist').val('');
+	});
+</script>
 </html>
