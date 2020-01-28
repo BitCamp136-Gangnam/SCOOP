@@ -62,7 +62,7 @@
 			
 		</div>
 		<c:forEach items="${bookMarkList}" var="blist">
-		<div class="row" style="margin-left: 2%; margin-right: 2%">
+		<div class="row bm" style="margin-left: 2%; margin-right: 2%">
 			<div class="row col-sm-12" >
 			<c:choose>
 				<c:when test="${blist.tiseq != 0}">
@@ -145,7 +145,7 @@
 	/* 북마크 제거 */
 	$(function(){
 		$('.bookmark').click(function(){
-			console.log('click fnc');
+			let deleteline = $(this).parents('div.bm');
 		 	let seq = $(this).attr('name');
 			let id = $(this).attr('id');
 			let tiseq; let piseq;
@@ -177,6 +177,7 @@
 			    		  icon: "success",
 			    		  button: "확인"
 			    	})
+			    	deleteline.remove();
 				},
 				error : function(err){
 					console.log('실패');
