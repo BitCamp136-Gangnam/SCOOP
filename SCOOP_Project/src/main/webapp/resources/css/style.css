@@ -9293,13 +9293,14 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
   z-index: 0; }
 
 .fc-widget-header {
-  border: 1px solid rgba(120, 130, 140, 0.13) !important; }
+  /* border: 1px solid rgba(120, 130, 140, 0.13) !important; */ }
 
 .fc-widget-content {
   border: 1px solid rgba(120, 130, 140, 0.13) !important; }
 
 .fc th.fc-widget-header {
-  background: rgba(120, 130, 140, 0.13) !important;
+  background: #e71d36 !important;
+  color:#fff;
   font-size: 14px;
   line-height: 20px;
   padding: 10px 0;

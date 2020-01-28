@@ -34,7 +34,7 @@
 									<h3>일정 관리</h3>
 								</div>
 								<div class="row">
-									<div class="col-md-10">
+									<div class="col-md-12">
 										<div class="card-box m-b-50">
 											<div class="container">
 
@@ -61,14 +61,15 @@
 												<!-- 일정 추가 MODAL -->
 												<div class="modal fade" tabindex="-1" role="dialog"
 													id="eventModal">
-													<div class="modal-dialog" role="document">
+													<div class="modal-dialog" role="document" style=" margin-top: 150px; margin-bottom: 150px;">
 														<div class="modal-content">
 															<div class="modal-header">
-																<button type="button" class="close" data-dismiss="modal"
-																	aria-label="Close">
-																	<span aria-hidden="true">&times;</span>
+															<h4 style="padding-left: 2%;" class="modal-title"></h4>
+																<button type="button" class="close"  data-dismiss="modal"
+																	aria-label="Close">&times;
+																	
 																</button>
-																<h4 class="modal-title"></h4>
+																
 															</div>
 															<div class="modal-body">
 
@@ -234,7 +235,7 @@
 	<script src="<c:url value="/resources/vendor/js/fullcalendar.min.js"/>"></script>
 	<script src="<c:url value="/resources/vendor/js/ko.js"/>"></script>
 	<script src="<c:url value="/resources/vendor/js/select2.min.js"/>"></script>
-	<script src="<c:url value="/resources/vendor/js/bootstrap-datetimepicker.min.js"/>"></script>
+	
 	<script src="<c:url value='/resources/fullcalendar/main.js'/>"></script>
 	<script src="<c:url value='/resources/fullcalendar/addEvent.js'/>"></script>
 	<script src="<c:url value='/resources/fullcalendar/editEvent.js'/>"></script>
