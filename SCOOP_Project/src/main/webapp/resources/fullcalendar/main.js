@@ -249,8 +249,8 @@ var calendar = $('#calendar').fullCalendar({
         .addClass("contextOpened")
         .css({
           display: "block",
-          left: e.pageX,
-          top: e.pageY
+          left: e.pageX-280,
+          top: e.pageY-180
         });
       return false;
     });
