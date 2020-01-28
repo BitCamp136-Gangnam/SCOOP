@@ -2,6 +2,7 @@
    pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <c:set var="role" value="${sessionScope.role}" />
 <c:set var="count" value="${sessionScope.count}" />
 <c:set var="img" value="${sessionScope.img}" />
@@ -811,56 +812,56 @@ span {
    <div id="scnav" class="nk-nav-scroll">
       <ul class="metismenu" id="menu">
          <li class="nav-label" style="padding-bottom: 10px;">
-         <b style="padding-bottom: 2%;font-size:15px;">전체 정보</b></li>
+         <b style="padding-bottom: 2%;font-size:15px;"><spring:message code="board" /></b></li>
          <li><a href="dashboard.do" aria-expanded="false"><span class="iconify" data-icon="ps:megaphone" data-inline="false"></span>
          <span class="nav-text">
-                  &nbsp;대시보드</span> <!-- <i class="icon-speedometer menu-icon"> -->
+                  &nbsp;<spring:message code="dashboard" /></span> <!-- <i class="icon-speedometer menu-icon"> -->
          </a></li>
          <li><a href="notice.do" aria-expanded="false"><span class="iconify" data-icon="ps:megaphone" data-inline="false"></span>
          <span class="nav-text">
-                  &nbsp;공지사항</span> <!-- <i class="icon-speedometer menu-icon"> -->
+                  &nbsp;<spring:message code="notice" /></span> <!-- <i class="icon-speedometer menu-icon"> -->
          </a></li>
          <li><a href="userindex.do" aria-expanded="false"> <span
                class="iconify" data-icon="bx:bx-file-blank" data-inline="false"
                style="width: 20px; height: auto;"> </span><span class="nav-text">
-                  &nbsp;새로운 소식</span> <!-- <i class="icon-speedometer menu-icon"> -->
+                  &nbsp;<spring:message code="newissue" /></span> <!-- <i class="icon-speedometer menu-icon"> -->
          </a></li>
          <li><a href="myissue.do" aria-expanded="false"> <span
                class="iconify" data-icon="simple-line-icons:emotsmile"
                data-inline="false" style="width: 17px; height: auto;font: bold;"> </span><span
-               class="nav-text"> &nbsp;내가 작성한 이슈</span>
+               class="nav-text"> &nbsp;<spring:message code="myissue" /></span>
          </a></li>
          <li><a href="calendar.do" aria-expanded="false"> <span
                class="iconify" data-icon="bx:bx-calendar" data-inline="false"
                style="width: 20px; height: auto;"> </span><span class="nav-text">
-                  &nbsp;캘린더</span>
+                  &nbsp;<spring:message code="calendar" /></span>
          </a></li>
-         <li class="nav-label" style="padding-bottom: 0"><b>개인 공간</b></li>
+         <li class="nav-label" style="padding-bottom: 0"><b><spring:message code="private.title" /></b></li>
          <li><a href="private.do" aria-expanded="false"> <span
                class="iconify" data-icon="ic:baseline-person" data-inline="false"
                style="width: 20px; height: auto;"> </span><span class="nav-text">
-                  &nbsp;프라이빗 공간</span>
+                  &nbsp;<spring:message code="private.issue" /></span>
          </a></li>
          <li><a href="bookmark.do" aria-expanded="false"> <span
                class="iconify" data-icon="ic:round-bookmark" data-inline="false"
                style="width: 20px; height: auto;"> </span><span class="nav-text">
-                  &nbsp;북마크</span>
+                  &nbsp;<spring:message code="private.book" /></span>
          </a></li>
-         <li class="nav-label" style="padding-bottom: 0"><b style="font-size:15px;">협업 공간</b></li>
+         <li class="nav-label" style="padding-bottom: 0"><b style="font-size:15px;"><spring:message code="team.title" /></b></li>
          <li class="nav-label">
          <c:choose>
          <c:when test="${count == 3 and role == 'ROLE_USER'}">
          <button type="button" class="btn"
                style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;"
                data-toggle="modal" data-target="#myModal" disabled="disabled">
-               <i class="icon-note menu-icon"></i> 갯수 초과
+               <i class="icon-note menu-icon"></i> <spring:message code="team.limit" />
         </button>
         </c:when>
         <c:otherwise>
          <button type="button" class="btn"
                style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;"
                data-toggle="modal" data-target="#myModal">
-               <i class="icon-note menu-icon"></i> 새 협업공간 만들기
+               <i class="icon-note menu-icon"></i> <spring:message code="team.create" />
         </button>
         </c:otherwise>
         </c:choose>
@@ -1120,7 +1121,7 @@ span {
          style="border-radius: 0.5rem;">
          <!-- Modal Header -->
          <div class="modal-header" style="padding-bottom: 0px;height: 67px;">
-            <h5 style="padding-top: 2%; padding-left: 5px;">멤버 초대</h5>
+            <h5 style="padding-top: 2%; padding-left: 5px;"><spring:message code="invite.title" /></h5>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
          </div>
 
@@ -1132,21 +1133,21 @@ span {
                   style="border-right: 1px solid #c8c8c8; padding-left: 20px;">
                   <div class="modal-body">
                      <p style="font-size: 12px">
-		                        더 많은 사람들을 초대하여 원활한 소통으로 업무를 효율적으로 처리해보세요.<br> 회사 동료뿐만 아니라
-		                        외부 협업자도 파트너로 초대할 수 있습니다.
+		              <spring:message code="invite.content1" /><br> 
+		              <spring:message code="invite.content2" />
                      </p>
-                     <label for="title">파트너 초대</label> <input
+                     <label for="title"><spring:message code="invite.subject" /></label> <input
                         class="form-control createmodal" type="text" id="invite_Submit"
-                        placeholder="이메일 주소를 입력하고 Enter키를 눌러주세요"
+                        placeholder="<spring:message code='invite.holder' />"
                         style="width: 100%; border-radius: 0.25rem;">
                      <p style="font-size: 13px; margin-top: 2%; margin-left: 1%;">
-                     	이메일 주소를 입력하고 Enter키를 눌러 동료들을 초대해 보세요.
+                     	<spring:message code="subcon" />
                      </p>
                      <div id="invite_email_append"
                         style="min-width: 35%; border: 1px solid #c8c8c8; border-radius: 0.25rem; background-color: #fff; display: none; position: absolute; top: 145px; left: 18px;">
 
                      </div>
-                     <label for="content">협업 공간</label> <select id="select_invite"
+                     <label for="content"><spring:message code="invite.team" /></label> <select id="select_invite"
                         name="tseq" class="form-control" style="border-radius: 0.25rem;">
                         <c:forEach items="${pjtlist}" var="p">
                            <option value="${p.tseq}">${p.pname}</option>
@@ -1155,8 +1156,9 @@ span {
                   </div>
                </div>
                <div class="col-sm-6">
-                  <label for="content" style="margin-top: 3%; margin-bottom: 0px;">초대
-                     리스트</label>
+                  <label for="content" style="margin-top: 3%; margin-bottom: 0px;">
+                  	<spring:message code="invite.list" />
+                  </label>
                   <div id="invite_Input"
                      style="border: 1px solid rgba(124, 119, 119, 0.3); border-radius: 0.5rem; margin-right: 3%; height: 280px; overflow: auto; margin-bottom: 10px;">
                      <span id="invite_Input1"
@@ -1165,13 +1167,14 @@ span {
                         style="width: 75px; height: 75px; margin-left: 40%;' ">
                      </span>
                      <p id="invite_Input2" style="text-align: center;">
-                        초대 메일 보낼 이메일 주소를<br>여기에서 확인할 수 있습니다
+                       <spring:message code="invite.listcon1" /><br>
+                       <spring:message code="invite.listcon2" />
                      </p>
                   </div>
                   <input type="hidden" name="invitecnt" id="invitecnt">
                   <button type="submit" class="btn btn-secondary" id="invitebtn"
                      style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer; margin-left: 100px; padding-left: 75px; padding-right: 75px;"
-                     disabled="disabled">멤버 초대하기</button>
+                     disabled="disabled"><spring:message code="invite.invite" /></button>
                </div>
             </div>
 
