@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.mail.MessagingException;
@@ -30,8 +31,10 @@ import org.springframework.ui.velocity.VelocityEngineUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.servlet.LocaleResolver;
 
 import kr.or.scoop.dao.AlarmDao;
 import kr.or.scoop.dao.MemberDao;
@@ -69,6 +72,9 @@ public class MemberController {
 	@Autowired
 	private VelocityEngineFactoryBean velocityEngineFactoryBean;
 
+	@Autowired
+	private LocaleResolver localeResolver;
+	
 	// 일반 회원가입 인증
 	@RequestMapping(value = "frontpage.do", method = { RequestMethod.POST, RequestMethod.GET })
 	public String register(Member member, HttpSession session, Mail mail, HttpServletResponse response) throws ClassNotFoundException, SQLException {
@@ -199,7 +205,16 @@ public class MemberController {
 
 	// 로그인 성공
 	@RequestMapping(value = "/userindex.do", method = RequestMethod.GET)
-	public String userindex(HttpSession session,Model model) {
+	public String userindex(@RequestParam(required = false, name="lang") String language, HttpSession session, 
+				HttpServletRequest request, HttpServletResponse response, Model model) {
+		if(language == null) {
+			language = "ko";
+		}
+		
+		Locale locale  = new Locale(language);
+		System.out.println(" locale : " + locale + "\n language : " + language);
+		localeResolver.setLocale(request, response, locale);
+		
 		String email = "";
 		
 		email = (String)session.getAttribute("email");

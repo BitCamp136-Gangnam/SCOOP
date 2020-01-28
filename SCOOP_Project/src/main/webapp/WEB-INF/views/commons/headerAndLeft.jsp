@@ -672,15 +672,15 @@ span {
          <ul class="clearfix">
             <li class="icons dropdown d-none d-md-flex"><a
                href="javascript:void(0)" class="log-user" data-toggle="dropdown">
-                  <span>한국어</span> <i class="fa fa-angle-down f-s-14"
+                  <span><spring:message code="language" /></span> <i class="fa fa-angle-down f-s-14"
                   aria-hidden="true"></i>
             </a>
                <div
                   class="drop-down dropdown-language animated fadeIn  dropdown-menu">
                   <div class="dropdown-content-body">
                      <ul>
-                        <li><a href="javascript:void()">한국어</a></li>
-                        <li><a href="javascript:void()">English</a></li>
+                        <li><a href="userindex.do?lang=ko">한국어</a></li>
+                        <li><a href="userindex.do?lang=en">English</a></li>
                      </ul>
                   </div>
                </div></li>
@@ -812,7 +812,7 @@ span {
    <div id="scnav" class="nk-nav-scroll">
       <ul class="metismenu" id="menu">
          <li class="nav-label" style="padding-bottom: 10px;">
-         <b style="padding-bottom: 2%;font-size:15px;"><spring:message code="dashboard" /></b></li>
+         <b style="padding-bottom: 2%;font-size:15px;"><spring:message code="boardtitle" /></b></li>
          <li><a href="dashboard.do" aria-expanded="false"><span class="iconify" data-icon="ps:megaphone" data-inline="false"></span>
          <span class="nav-text">
                   &nbsp;<spring:message code="dashboard" /></span> <!-- <i class="icon-speedometer menu-icon"> -->
