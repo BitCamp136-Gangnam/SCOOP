@@ -104,7 +104,8 @@
 																			class="inputModal" type="text" name="edit-type"
 																			id="edit-type">
 																			<c:forEach items="${pjtlist}" var="p">
-                         														  <option value="${p.pname}">${p.pname}</option>
+																			
+                         														  <option value="${p.tseq}">${p.pname}</option>
                   															</c:forEach>
 																		</select>
 																	</div>

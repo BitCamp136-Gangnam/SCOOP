@@ -5,7 +5,12 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -25,14 +30,18 @@ import kr.or.scoop.dao.MyIssueDao;
 import kr.or.scoop.dao.ProjectDao;
 import kr.or.scoop.dao.TissueDao;
 import kr.or.scoop.dto.BookMark;
+import kr.or.scoop.dto.Member;
 import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.dto.Process;
 import kr.or.scoop.dto.ProjectMemberlist;
 import kr.or.scoop.dto.TeamPjt;
 import kr.or.scoop.dto.Tissue;
+import kr.or.scoop.dto.Tpmember;
 import kr.or.scoop.service.BoardService;
 import kr.or.scoop.service.PrivateService;
 import kr.or.scoop.service.TeamService;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @Controller
 public class TeamController {
@@ -504,5 +513,107 @@ public class TeamController {
 		
 		return viewpage;
 		
+	}
+	
+	@SuppressWarnings("null")
+	@ResponseBody
+	@RequestMapping(value="getTeamCalendar.do", method = RequestMethod.GET)
+	public JSONArray getTeamCalendar(HttpSession session) {
+		String email = (String)session.getAttribute("email");
+		ProjectDao projectdao = sqlsession.getMapper(ProjectDao.class);
+		TissueDao tissuedao = sqlsession.getMapper(TissueDao.class);
+		List<Tpmember> pjtlist = projectdao.getPJT(email);
+		List<Tissue> temptissuelist;
+		Map<Integer, Tissue> sortlist = new HashMap<Integer, Tissue>();
+		JSONArray jArray = new JSONArray();
+		System.out.println("pjtlist"+pjtlist);
+		System.out.println(pjtlist.size());
+		int tempnum = 0;
+		for(Tpmember tpmember : pjtlist) {
+			 System.out.println("몇번도니?");
+			 System.out.println(tpmember.getTseq());
+			 temptissuelist = tissuedao.loadKanban(tpmember.getTseq());
+			 System.out.println(temptissuelist.size());
+			 System.out.println(temptissuelist);
+			 for(Tissue tissue : temptissuelist) {
+				 if(tissue.getTistart()!=null) {
+					 System.out.println("caltissue 와따시");
+					 sortlist.put(tempnum++, tissue);
+				 }
+				 
+			 }
+			 
+//			 temptissuelist = tissuedao.loadKanban(pjtlist.get(i).getTseq());
+			 
+//			 for(int j = 0 ; j > temptissuelist.size() ; j++) {
+//				 System.out.println("2중포문오니?");
+//				 System.out.println("temptissue"+temptissuelist.get(j));
+//				 caltissuelist.add(temptissuelist.get(j));
+//			 }
+			 
+			 
+		}
+		try {
+			System.out.println(sortlist);
+			Iterator<Integer> tissueitor = sortlist.keySet().iterator();
+			System.out.println(tissueitor);
+			SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd HH:mm:ss" , Locale.KOREA );
+			while(tissueitor.hasNext()) {
+				int key =tissueitor.next();
+				JSONObject data = new JSONObject();
+				data.put("_id", key++);
+				data.put("title", sortlist.get(key).getTititle());
+				data.put("description", sortlist.get(key).getTicontent());
+				data.put("start", sdf.format(sortlist.get(key).getTistart()));
+				data.put("end", sdf.format(sortlist.get(key).getTiend()));
+				data.put("type", sortlist.get(key).getTiseq());
+				data.put("username", sortlist.get(key).getEmail());
+				data.put("backgroundColor", sortlist.get(key).getBackgroundColor());
+				data.put("textColor", sortlist.get(key).getTextColor());
+				int z = sortlist.get(key).getAllDay();
+				boolean allDay;
+				if(z==0) {
+					allDay = false;
+				} else {
+					allDay = true;
+				}
+				data.put("allDay", allDay);
+				jArray.add(data);
+				System.out.println("while문 도니?");
+				System.out.println(data);
+				
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		System.out.println("jArray 입니다"+jArray);
+		/*
+		System.out.println(caltissuelist);
+		for(int i = 0 ; i > caltissuelist.size() ; i ++) {
+			JSONObject data = new JSONObject();
+			data.put("_id", i++);
+			data.put("title", caltissuelist.get(i).getTititle());
+			data.put("start", caltissuelist.get(i).getTistart());
+			data.put("end", caltissuelist.get(i).getTiend());
+			data.put("type", caltissuelist.get(i).getTiseq());
+			data.put("username", caltissuelist.get(i).getEmail());
+			data.put("backgroundColor", caltissuelist.get(i).getBackgroundColor());
+			data.put("textColor", caltissuelist.get(i).getTextColor());
+			int z = caltissuelist.get(i).getAllDay();
+			boolean allDay;
+			if(z==0) {
+				allDay = false;
+			} else {
+				allDay = true;
+			}
+			data.put("allDay", allDay);
+			jArray.add(i, data);
+			
+		}
+		*/
+		
+		
+		return jArray;
 	}
 }
