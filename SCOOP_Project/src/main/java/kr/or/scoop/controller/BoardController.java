@@ -116,7 +116,6 @@ public class BoardController {
 	public String noticeWrite(Notice notice) {
 		int result = 0;
 		String viewpage;
-		System.out.println(notice);
 		result = service.insertNotice(notice);
 		
 		if(result > 0) {
@@ -132,7 +131,6 @@ public class BoardController {
 	@RequestMapping(value="noticeDetail.do" , method=RequestMethod.GET)	
 	public String noticeDetail(int bnseq,Model model) {
 		NoticeDao dao = sqlSession.getMapper(NoticeDao.class);
-		System.out.println(bnseq);
 		Notice notice = dao.detailNotice(bnseq);
 		model.addAttribute("n",notice);
 		
@@ -147,8 +145,6 @@ public class BoardController {
 		MyIssueDao dao = sqlSession.getMapper(MyIssueDao.class);
 		int result = 0;
 		
-		System.out.println(email);
-		System.out.println("pibookmark");
 		
 		// 북마크 추가/제거
 		if(status.equals("bookoff")) {
@@ -157,8 +153,6 @@ public class BoardController {
 			result = dao.delPBookMark(piseq, email);
 		}
 		
-		System.out.println("piseq : " + piseq);
-		System.out.println("email : " + email);
 		
 		// 북마크 성공시 북마크 상태 변경
 		if(status.equals("bookoff") && result > 0) {
@@ -190,8 +184,6 @@ public class BoardController {
 			result = dao.delTBookMark(tiseq, email);
 		}
 		
-		System.out.println("bookmark : " + status);
-		System.out.println("result : " + result);
 		
 		if(status.equals("bookoff") && result > 0) {
 			status = "bookon";
@@ -202,7 +194,6 @@ public class BoardController {
 		}
 		
 		model.addAttribute("status", status);
-		System.out.println(model);
 		
 		return viewpage;
 	}
@@ -244,11 +235,9 @@ public class BoardController {
 	@RequestMapping(value="searchIssue.do", method = {RequestMethod.POST,RequestMethod.GET})
 	public String searchIssue(String email,String word,Model model) {
 		int result = 0;
-		System.out.println(email + word);
 		String viewpage = "";
 		NoticeDao dao = sqlSession.getMapper(NoticeDao.class);
 		List<MyIssue> teamIssue = dao.searchTeamIssue(email, word);
-		System.out.println(teamIssue);
 		List<MyIssue> myIssue = dao.searchMyIssue(email, word);
 		model.addAttribute("teamIssue", teamIssue);
 		model.addAttribute("myIssue", myIssue);
@@ -267,7 +256,6 @@ public class BoardController {
 	@RequestMapping(value = "teamComment.do", method = {RequestMethod.POST,RequestMethod.GET})
 	public String teamCommentAjax(int tiseq,String rcontent,String email,Model model) {
 		int result = 0;	
-		System.out.println(tiseq + rcontent + email);
 		String viewpage = "";
 		result = tservice.teamComment(tiseq, rcontent, email);
 		
@@ -314,7 +302,6 @@ public class BoardController {
 		ProjectDao dao = sqlSession.getMapper(ProjectDao.class);
 		MemberDao md = sqlSession.getMapper(MemberDao.class);
 		List<PjNotice> pj = dao.getPjNotice(tseq);
-		System.out.println("플젝" + pj);
 		TeamPjt pjt = dao.detailPJT(tseq);
 		int rank = dao.searchRank(tseq, email);
 		List<ProjectMemberlist> projectMemberlist =md.projectMemberlist(tseq);
@@ -365,7 +352,6 @@ public class BoardController {
 	//프로젝트 공지사항 수정 처리 
 	@RequestMapping(value="pjNoticeEditOk.do", method = RequestMethod.POST)
 	public String pjNoticeEditOk(PjNotice pjnotice) {
-		System.out.println("작동해??");
 		String viewpage;
 		int result = 0;
 		
