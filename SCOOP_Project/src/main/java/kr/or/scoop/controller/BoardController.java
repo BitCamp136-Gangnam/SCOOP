@@ -8,7 +8,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -102,12 +101,6 @@ public class BoardController {
 		model.addAttribute("dowork", dowork);
 		model.addAttribute("files", files);
 		return "issue/teamissueDetail";
-	}
-
-	// 캘린더
-	@RequestMapping(value = "/calendar.do", method = RequestMethod.GET)
-	public String calendar() {
-		return "sidebar/app-calender";
 	}
 
 	@RequestMapping(value="notice.do" , method = RequestMethod.GET)
