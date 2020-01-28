@@ -4,12 +4,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.scoop.dao.MyIssueDao">
 <insert id="writeTissue" parameterType="kr.or.scoop.dto.MyIssue" >
-insert into tissue (tiseq,tseq,email,tititle,ticontent,isprocess, istbook, issee, tidate)
-  values (TISEQ_TISSUE_SEQ.NEXTVAL, #{tseq}, #{email}, #{tititle}, #{ticontent}, 0, 0, 0, sysdate)
+insert into tissue (tiseq,tseq,email,tititle,ticontent,isprocess, istbook, issee, tidate, tistart, tiend)
+  values (TISEQ_TISSUE_SEQ.NEXTVAL, #{tseq}, #{email}, #{tititle}, #{ticontent}, 0, 0, 0, sysdate, #{tistart,jdbcType=TIMESTAMP}, #{tiend,jdbcType=TIMESTAMP})
 </insert>
 <insert id="writeMyissue" parameterType="kr.or.scoop.dto.MyIssue" >
 insert into myissue (piseq,pititle,picontent,pistart, piend, ispibook, email, pidate)
-  values (PISEQ_MYISSUE_SEQ.NEXTVAL, #{pititle}, #{picontent}, #{pistart,jdbcType=DATE}, #{piend,jdbcType=DATE}, 0, #{email,jdbcType=VARCHAR}, sysdate)
+  values (PISEQ_MYISSUE_SEQ.NEXTVAL, #{pititle}, #{picontent}, #{pistart,jdbcType=TIMESTAMP}, #{piend,jdbcType=TIMESTAMP}, 0, #{email,jdbcType=VARCHAR}, sysdate)
 </insert>
 <select id="getMyissue" resultType="kr.or.scoop.dto.MyIssue">
 	SELECT piseq, pititle, picontent, pidate, ispibook FROM myissue WHERE email = #{email, jdbcType=VARCHAR} order by pidate desc
@@ -24,7 +24,7 @@ select t.tseq,t.tititle,t.tidate,t.tiseq, t.isprocess,p.pname from tissue t join
 select r.replyseq, r.rcontent, r.email, r.rdate, t.tiseq, t.tititle from reply r join tissue t on r.tiseq = t.tiseq where r.email = #{email, jdbcType=VARCHAR}
 </select>
 <select id="myissueDetail" resultType="kr.or.scoop.dto.MyIssue">
-	SELECT piseq, pititle, picontent, pidate, ispibook FROM myissue WHERE piseq = #{piseq, jdbcType=INTEGER}
+	SELECT piseq, pititle, picontent, pidate, ispibook, pistart, piend FROM myissue WHERE piseq = #{piseq, jdbcType=INTEGER}
 </select>
 <!-- 북마크 -->
 <insert id="addPBookMark">
@@ -62,4 +62,13 @@ select p.pnseq, p.pntitle, p.pncontent, p.pntime, p.email, p.tseq, t.pname, t.em
 insert into tissue (tiseq,tseq,email,tititle,ticontent,isprocess, istbook, issee, tidate, allday, tistart, tiend, backgroundcolor, textcolor)
   values (TISEQ_TISSUE_SEQ.NEXTVAL, #{tseq}, #{email}, #{tititle}, #{ticontent}, 0, 0, 0, SYSTIMESTAMP, #{allDay}, #{tistart}, #{tiend}, #{backgroundColor}, #{textColor})
 </insert>
+<select id="getMyMentions" resultType="kr.or.scoop.dto.Mention">
+	select * from pmention t join member m on t.pemail=m.email where t.piseq=#{piseq}
+</select>
+<select id="getMyGoogleDrive" resultType="kr.or.scoop.dto.GoogleDrive">
+	select * from pgoogledrive where piseq=#{piseq}
+</select>
+<select id="getMyDoWork" resultType="kr.or.scoop.dto.DoWork">
+	select (select m.name from pdowork d join member m on d.email=m.email where d.piseq=#{piseq}) fromname, (select m.name from pdowork d join member m on d.ptoemail=m.email where d.piseq=#{piseq}) toname, pdowork from pdowork where piseq=#{piseq}
+</select>
 </mapper>

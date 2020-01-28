@@ -52,8 +52,11 @@ public interface TissueDao {
 	public int myFileInsert(String pfdname, long pdcapa, String email);
 	
 	public int mentionInsert(String email);
+	public int myMentionInsert(String email);
 	public int googleDriveInsert(String tgfilename, String tgurl);
+	public int myGoogleDriveInsert(String pgfilename,String pgurl);
 	public int doWorkInsert(String email, String toEmail, String doWork);
+	public int myDoWorkInsert(String email, String ptoEmail, String pdoWork);
 	public List chartData(int tseq, int isprocess);
 	
 	//칸반 게시글 상태 정보

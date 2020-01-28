@@ -72,7 +72,13 @@ public class BoardController {
 		
 		MyIssueDao dao = sqlSession.getMapper(MyIssueDao.class);
 		MyIssue myissue = dao.myissueDetail(piseq);
+		List<Mention> mentions = dao.getMyMentions(piseq);
+		List<GoogleDrive> googledrive = dao.getMyGoogleDrive(piseq);
+		List<DoWork> dowork = dao.getMyDoWork(piseq);
 		model.addAttribute("myissue", myissue);
+		model.addAttribute("mymention", mentions);
+		model.addAttribute("mygdrive", googledrive);
+		model.addAttribute("mydowork", dowork);
 		return "issue/myissueDetail";
 	}
 	

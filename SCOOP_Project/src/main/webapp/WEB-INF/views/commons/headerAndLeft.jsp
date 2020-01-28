@@ -1101,13 +1101,19 @@ span {
                placeholder="종료날짜">
          </div>
       </div>
-      <br> <label>할 일</label>
+      <br> <!-- <label>할 일</label>
       <textarea class="form-control createmodal" rows="3" id="datecontent"
-         style="width: 100%; margin-bottom: 2%" placeholder="일정을 작성해주세요."></textarea>
+         style="width: 100%; margin-bottom: 2%" placeholder="일정을 작성해주세요."></textarea> -->
+         <div class="row">
+         <div class="col-sm-6" style="padding-right: 2px">
       <button type="button" id="datemake" class="btn btn-secondary"
-         style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;">만들기</button>
+         style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer; width: 100%">만들기</button>
+         </div>
+         <div class="col-sm-6" style="padding-left: 2px">
       <button type="button" id="datecancle" class="btn btn-secondary"
-         style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;">취소</button>
+         style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer; width: 100%">취소</button>
+         </div>
+         </div>
    </div>
 </div>
 <!-- 파트너 초대 모달 -->
@@ -1524,15 +1530,17 @@ $('#todoresult').show();
 						var text = "";
 						text = $('#issuecontent').val().replace("@", "");
 						$('#issuecontent').val(text);
-						$('#todoresult')
-								.append(
+						$('#todoresult').append(
 										'<div style="padding:5px"><span class="iconify" data-icon="bx:bx-calendar" data-inline="false"></span>'
 												+ $('#from').val()
 												+ '~'
 												+ $('#to').val()
-												+ ' <span class="iconify" data-icon="bytesize:arrow-right" data-inline="false"></span> '
-												+ $('#datecontent').val()
+												//+ ' <span class="iconify" data-icon="bytesize:arrow-right" data-inline="false"></span> '
+												//+ $('#datecontent').val()
 												+ '</div>');
+						$('#todoresult').append('<input type="hidden" name="fromDate" value="'+$('#from').val()+'">');
+						$('#todoresult').append('<input type="hidden" name="toDate" value="'+$('#to').val()+'">');
+						//$('#todoresult').append('<input type="hidden" name="dateMemo" value="'+$('#datecontent').val()+'">');
 						$('#todoresult').show();
 						$('#todolist').val('');
 					})
@@ -1543,29 +1551,8 @@ $('#todoresult').show();
 		$('#issuecontent').val(text);
 		$('#todolist').val('');
 	});
-	var dateFormat = "mm/dd/yy", from = $("#from").datepicker({
-		defaultDate : "+1w",
-		changeMonth : true,
-		numberOfMonths : 1
-	}).on("change", function() {
-		to.datepicker("option", "minDate", getDate(this));
-	}), to = $("#to").datepicker({
-		defaultDate : "+1w",
-		changeMonth : true,
-		numberOfMonths : 1
-	}).on("change", function() {
-		from.datepicker("option", "maxDate", getDate(this));
-	});
-	function getDate(element) {
-		var date;
-		try {
-			date = $.datepicker.parseDate(dateFormat, element.value);
-		} catch (error) {
-			date = null;
-		}
-		return date;
-	}
-
+	$("#to").datepicker({ dateFormat: 'yy-mm-dd' });
+	$("#from").datepicker({ dateFormat: 'yy-mm-dd' });
 /* 	 if(!gapi.auth2){
 		    gapi.load('auth2', function() {
 		        gapi.auth2.init();

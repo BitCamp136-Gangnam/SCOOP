@@ -19,10 +19,10 @@ public class MyIssue {
 	private String tititle;
 	private String picontent;
 	private String ticontent;
-	private Date pistart;
-	private Date piend;
-	private Date tistart;
-	private Date tiend;
+	private Timestamp pistart;
+	private Timestamp piend;
+	private Timestamp tistart;
+	private Timestamp tiend;
 	private int ispibook;
 	private int istbook;
 	private String email;
@@ -93,28 +93,28 @@ public class MyIssue {
 	public void setTicontent(String ticontent) {
 		this.ticontent = ticontent;
 	}
-	public Date getPistart() {
+	public Timestamp getPistart() {
 		return pistart;
 	}
-	public void setPistart(Date pistart) {
+	public void setPistart(Timestamp pistart) {
 		this.pistart = pistart;
 	}
-	public Date getPiend() {
+	public Timestamp getPiend() {
 		return piend;
 	}
-	public void setPiend(Date piend) {
+	public void setPiend(Timestamp piend) {
 		this.piend = piend;
 	}
-	public Date getTistart() {
+	public Timestamp getTistart() {
 		return tistart;
 	}
-	public void setTistart(Date tistart) {
+	public void setTistart(Timestamp tistart) {
 		this.tistart = tistart;
 	}
-	public Date getTiend() {
+	public Timestamp getTiend() {
 		return tiend;
 	}
-	public void setTiend(Date tiend) {
+	public void setTiend(Timestamp tiend) {
 		this.tiend = tiend;
 	}
 	public int getIspibook() {

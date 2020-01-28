@@ -127,7 +127,14 @@ $(function(){
 		<div class="row"style="margin:2% 2% 0 2%" >
 				<h3 id="myissueSubject" style="padding-top: 2%;padding-left: 1%;">${tissue.tititle}</h3>
 		</div>
-		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>2019.08.07 ~ 2020.2.12(캘린더 설정 날짜 넣으면 됨)</div>
+		<c:choose>
+        <c:when test="${tissue.tistart!=null}">
+		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>${fn:substring(tissue.tistart,0,10)} ~ ${fn:substring(tissue.tiend,0,10)}</div>
+		</c:when>
+		<c:otherwise>
+		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>등록된 일정이 없습니다.</div>
+		</c:otherwise>
+		</c:choose>
 		<c:forEach items="${mentions}" var="m">
 		<div class="myissueDetail" id="myissueMention">
 		<sup><i class="fas fa-quote-left" style="color:#ca0000; font-size: 7px"></i></sup> @${m.name} <sup><i class="fas fa-quote-right"style="color:#ca0000;font-size: 7px"></i></sup>

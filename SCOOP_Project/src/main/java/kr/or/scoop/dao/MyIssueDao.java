@@ -4,6 +4,9 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import kr.or.scoop.dto.BookMark;
+import kr.or.scoop.dto.DoWork;
+import kr.or.scoop.dto.GoogleDrive;
+import kr.or.scoop.dto.Mention;
 import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.dto.PjNotice;
 import kr.or.scoop.dto.ProjectName;
@@ -54,4 +57,13 @@ public interface MyIssueDao {
 	
 	//팀이슈 캘린더 작성
 	public int writeCalendarTissue(Tissue tissue);
+	
+	//나의이슈 멘션 리스트 출력
+	public List<Mention> getMyMentions(int piseq);
+	
+	//나의이슈 구글드라이브 출력
+	public List<GoogleDrive> getMyGoogleDrive(int piseq);
+
+	//나의이슈 할일 출력
+	public List<DoWork> getMyDoWork(int piseq);
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -74,12 +75,35 @@
 		<div class="row"style="margin:2% 2% 0 2%" >
 				<h3 id="myissueSubject" style="padding-top: 2%;padding-left: 1%;">${myissue.pititle}</h3>
 		</div>
-		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>2019.08.07 ~ 2020.2.12(캘린더 설정 날짜 넣으면 됨)</div>
-		<div class="myissueDetail" id="myissueMention"><sup><i class="fas fa-quote-left" style="color:#ca0000;"></i></sup> 멘션 멤버 이름 넣는 곳 <sup><i class="fas fa-quote-right"style="color:#ca0000;"></i></sup></div>
-		<div class="myissueDetail" id="myissueGoogledrive"><i class="fab fa-google-drive"></i>
-			<a href="">여기에 구글드라이브 파일 올리면됨</a>
+		<c:choose>
+        <c:when test="${myissue.pistart!=null}">
+		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>${fn:substring(myissue.pistart,0,10)} ~ ${fn:substring(myissue.piend,0,10)}</div>
+		</c:when>
+		<c:otherwise>
+		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>등록된 일정이 없습니다.</div>
+		</c:otherwise>
+		</c:choose>
+		<c:forEach items="${mymentions}" var="m">
+		<div class="myissueDetail" id="myissueMention">
+		<sup><i class="fas fa-quote-left" style="color:#ca0000; font-size: 7px"></i></sup> @${m.name} <sup><i class="fas fa-quote-right"style="color:#ca0000;font-size: 7px"></i></sup>
+		<br>
 		</div>
-		<div class="myissueDetail" id="myissueTodo"><i class="far fa-check-circle"style="padding-right: 5px;"></i>From 멤버이름<i class="fas fa-long-arrow-alt-right" style="margin-left:5px;margin-right: 5px;"></i>To 멤버 이름 </div>
+		</c:forEach>
+		<c:forEach items="${mygdrive}" var="gd">
+		<div class="myissueDetail" id="myissueGoogledrive">
+			<i class="fab fa-google-drive"></i>
+			<a href="${gd.pgurl}" onclick="window.open(this.href,'팝업창','width=800, height=800');return false;">${gd.pgfilename}</a>
+			<br>
+		</div>
+			</c:forEach>
+			<c:forEach items="${mydowork}" var="work">
+		<div class="myissueDetail" id="myissueTodo">
+		<i class="far fa-check-circle"style="padding-right: 5px;"></i>${work.fromname}
+		<i class="fas fa-long-arrow-alt-right" style="margin-left:5px;margin-right: 5px;"></i>${work.toname}<br>
+		: ${work.pdowork}
+		<br>
+		</div>
+		</c:forEach> 
         <div class="myissueDetail">
         ${myissue.picontent}
         </div>    
