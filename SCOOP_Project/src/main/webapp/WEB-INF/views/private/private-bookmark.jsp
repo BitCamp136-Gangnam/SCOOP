@@ -216,7 +216,6 @@ $(document).ready(function(){
 			    		  icon: "info",
 			    		  button: "확인"
 			    	})
-			    	location.reload();
 				}
 			});
 		})
