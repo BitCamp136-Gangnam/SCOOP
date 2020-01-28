@@ -18,12 +18,12 @@
     <link rel="stylesheet" href="<c:url value="/resources/plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css" />">
     <!-- Custom Stylesheet -->
     <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
+<script language="javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 
 </head>
 
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script language="javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+<!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> -->
 
 <style>
 .newissue{
@@ -138,8 +138,8 @@
 			bntitle.push("${n.bntitle}");
 			bncontent.push("${n.bncontent}");
 			</script>
-		<div class="row" style="margin-left: 2%; margin-right: 2%" id="listbody">
-			<div class="col-sm-3 newissue">
+		<div class="row" style="margin-left: 2%; margin-right: 2%">
+			<div class="col-sm-3 newissue" id="listbody">
 			<c:choose>
            		<c:when test="${fn:length(n.bntitle) > 19}">	
             <c:out value="${fn:substring(n.bntitle,0,18)}"/>...
@@ -150,7 +150,7 @@
           </c:choose>
 			</div>
 			
-			<div class="col-sm-7 newissue">
+			<div class="col-sm-7 newissue" id="listbody">
 			<c:choose>
           <c:when test="${fn:length(n.bncontent) > 56}">
              <c:out value="${fn:substring(n.bncontent,0,55)}"/>...
@@ -160,7 +160,7 @@
            </c:otherwise> 
           </c:choose>
 			</div>
-			<div class="col-sm-2 newissue">
+			<div class="col-sm-2 newissue" id="listbody">
 			${fn:substring(n.bntime,0,16)}
 			</div>
       </div>
@@ -295,7 +295,7 @@
 </body>
 <script type="text/javascript">
  $(document).ready(function(){
-			 $("#listbody").slice(0,10).show();
+			 $("#listbody").slice(0,9).show();
 			$("#load").click(function(e){
 				console.log($("#listbody").val());
 				console.log(e);
@@ -305,18 +305,7 @@
 						}
 				
 				}); 
-			/* 	 var page = 1;
-
-		$(window).scroll(function() {
-		    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-		      console.log(++page);
-		      $("#listbody").append("<div class='col-sm-3 newissue'>${n.bntitle}" + page + "</div><div class='col-sm-7 newissue'>${n.bncontent}</div><div class='ol-sm-2 newissue'>${n.bntime}</div>");
-		      
-		    }
-		}); */
-
-		
-
+	
 			}); 
 			
 </script>
