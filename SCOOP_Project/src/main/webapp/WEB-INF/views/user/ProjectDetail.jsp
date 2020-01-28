@@ -307,12 +307,12 @@ $(function(){
          <c:choose>
 			<c:when test="${mark}">
 				<div class="col-sm-1 newissue">
-					<i class="bookmark far fa-bookmark" id="bookmark" name="bookoff"></i>
+					<i class="bookmark far fa-bookmark" id="bookmark" name="bookoff" style="cursor: pointer;"></i>
 				</div>
 			</c:when>
 			<c:otherwise>
 				<div class="col-sm-1 newissue">
-					<i class="bookmark fas fa-bookmark" id="bookmark" name="bookon"></i>
+					<i class="bookmark fas fa-bookmark" id="bookmark" name="bookon" style="cursor: pointer;"></i>
 				</div>
 			</c:otherwise>
 		</c:choose>

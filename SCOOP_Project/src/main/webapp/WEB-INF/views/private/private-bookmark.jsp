@@ -118,7 +118,7 @@ $(document).ready(function(){
 						${blist.piname}
 					</div>
 					<div class="col-sm-1 newissue" style="padding-left: 25px;">
-						<i class="fas fa-times bookmark" id="pimark" name="${blist.piseq}"></i>
+						<i class="fas fa-times bookmark" id="pimark" name="${blist.piseq}" style="cursor: pointer;"></i>
 					</div>
 				</c:when>
 			</c:choose>
