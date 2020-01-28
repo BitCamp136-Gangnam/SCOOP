@@ -215,7 +215,7 @@ function requestPay(){
 											<div class="card-body">
 												<h4 class="card-title text-primary pt-3">Premium</h4>
 												<h2 class="card-title text-primary pt-4">$4</h2>
-												<div class="text-muted mt-4">per month</div>
+												<div class="text-muted mt-4">30일</div>
 												<ul class="list-unstyled pricing-list">
 													<li>무제한</li>
 													<li>무제한</li>
