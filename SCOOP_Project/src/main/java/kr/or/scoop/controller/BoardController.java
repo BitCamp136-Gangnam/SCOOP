@@ -8,7 +8,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -18,6 +17,7 @@ import kr.or.scoop.dao.NoticeDao;
 import kr.or.scoop.dao.ProjectDao;
 import kr.or.scoop.dao.TissueDao;
 import kr.or.scoop.dto.DoWork;
+import kr.or.scoop.dto.FileDrive;
 import kr.or.scoop.dto.GoogleDrive;
 import kr.or.scoop.dto.Mention;
 import kr.or.scoop.dto.MyIssue;
@@ -27,6 +27,7 @@ import kr.or.scoop.dto.ProjectMemberlist;
 import kr.or.scoop.dto.Reply;
 import kr.or.scoop.dto.TeamPjt;
 import kr.or.scoop.dto.Tissue;
+import kr.or.scoop.dto.Tpmember;
 import kr.or.scoop.service.BoardService;
 import kr.or.scoop.service.TeamService;
 import net.sf.json.JSONArray;
@@ -72,7 +73,15 @@ public class BoardController {
 		
 		MyIssueDao dao = sqlSession.getMapper(MyIssueDao.class);
 		MyIssue myissue = dao.myissueDetail(piseq);
+		List<Mention> mentions = dao.getMyMentions(piseq);
+		List<GoogleDrive> googledrive = dao.getMyGoogleDrive(piseq);
+		List<DoWork> dowork = dao.getMyDoWork(piseq);
+		List<FileDrive> files = dao.getMyFiles(piseq);
 		model.addAttribute("myissue", myissue);
+		model.addAttribute("mymention", mentions);
+		model.addAttribute("mygdrive", googledrive);
+		model.addAttribute("mydowork", dowork);
+		model.addAttribute("files", files);
 		return "issue/myissueDetail";
 	}
 	
@@ -85,18 +94,14 @@ public class BoardController {
 		List<Mention> mentions = dao.getMentions(tiseq);
 		List<GoogleDrive> googledrive = dao.getGoogleDrive(tiseq);
 		List<DoWork> dowork = dao.getDoWork(tiseq);
+		List<FileDrive> files = dao.getFiles(tiseq);
 		model.addAttribute("tissue", tissue);
 		model.addAttribute("reply",reply);
 		model.addAttribute("mentions",mentions);
 		model.addAttribute("gdrive", googledrive);
 		model.addAttribute("dowork", dowork);
+		model.addAttribute("files", files);
 		return "issue/teamissueDetail";
-	}
-
-	// 캘린더
-	@RequestMapping(value = "/calendar.do", method = RequestMethod.GET)
-	public String calendar() {
-		return "sidebar/app-calender";
 	}
 
 	@RequestMapping(value="notice.do" , method = RequestMethod.GET)
@@ -373,11 +378,6 @@ public class BoardController {
 		return viewpage;
 	}
 	
-	@RequestMapping(value="dashboard.do")
-	public String dashBoard() {
-		return "user/dashBoard";
-	}
-	
 	//프로젝트 공지사항 삭제
 	@RequestMapping(value="pjNoticeDelete.do" , method = {RequestMethod.POST, RequestMethod.GET})
 	public String pjNoticeDelete(int pnseq) {
@@ -392,5 +392,20 @@ public class BoardController {
 		}
 		
 		return viewpage;
+	}
+	@RequestMapping(value="teamIssueEdit.do" , method = {RequestMethod.POST, RequestMethod.GET})
+	public String teamIssueEdit(int tiseq, Model model) {
+		TissueDao dao = sqlSession.getMapper(TissueDao.class);
+		Tissue tissue = dao.teamissueDetail(tiseq);
+		List<Reply> reply = dao.teamCommentOk(tiseq);
+		List<Mention> mentions = dao.getMentions(tiseq);
+		List<GoogleDrive> googledrive = dao.getGoogleDrive(tiseq);
+		List<DoWork> dowork = dao.getDoWork(tiseq);
+		model.addAttribute("tissue", tissue);
+		model.addAttribute("reply",reply);
+		model.addAttribute("mentions",mentions);
+		model.addAttribute("gdrive", googledrive);
+		model.addAttribute("dowork", dowork);
+		return "issue/teamIssueEdit";
 	}
 }

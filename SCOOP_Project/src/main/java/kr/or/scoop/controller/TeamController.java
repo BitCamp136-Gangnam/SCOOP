@@ -2,6 +2,7 @@ package kr.or.scoop.controller;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -139,10 +140,11 @@ public class TeamController {
 	
 	// 이슈 작성
 		@RequestMapping(value = "writeIssue.do", method = {RequestMethod.POST,RequestMethod.GET})
-		public String writeIssue(String issuetitle, String fileclick, String issuecontent, String selectTeam, Model model,
+		public String writeIssue(String issuetitle, String fileclick, String issuecontent, String selectTeam, Model model, String fromDate, String toDate,
 				HttpSession session,HttpServletRequest request, String[] mentions, String[] toWork, String[] doWork, String[] googleDrive,@RequestParam(value="files") MultipartFile[] files) throws IOException {
 			String path = "";
-			System.out.println(googleDrive);
+			System.out.println(fromDate);
+			System.out.println(toDate);
 			String email = (String)session.getAttribute("email");
 			int tseq = 0;
 			 //실 DB Insert
@@ -153,6 +155,10 @@ public class TeamController {
 				myissue.setPititle(issuetitle);
 				myissue.setPicontent(issuecontent);
 				myissue.setIspibook(0);
+				if(fromDate != null) {
+					 myissue.setPistart(java.sql.Timestamp.valueOf(fromDate+" 00:00:00"));
+					 myissue.setPiend(java.sql.Timestamp.valueOf(toDate+" 00:00:00"));
+				}
 				int result = privateservice.writeMyissue(myissue);
 				 if(files != null && files.length > 0) {
 					 //업로드한 파일이 하나라도 있다면
@@ -175,6 +181,26 @@ public class TeamController {
 						 }
 					 }
 				 }
+				 if(mentions != null && mentions.length > 0) {
+					 for(int i=0;i<mentions.length;i++) {
+						 teamservice.myMentionInsert(mentions[i]);
+					 }
+				 }
+				 if(googleDrive != null && googleDrive.length > 0) {
+					 String gfilename = "";
+					 String gfileurl = "";
+					 for(int i=0;i<googleDrive.length;i++) {
+						 gfileurl = googleDrive[i].split("~")[0];
+						 gfilename = googleDrive[i].split("~")[1];
+						 teamservice.myGoogleDriveInsert(gfilename, gfileurl);
+					 }
+				 }
+				 if(toWork != null && toWork.length > 0) {
+					 String fromWork = email;
+					 for(int i=0;i<toWork.length;i++) {
+						 teamservice.myDoWorkInsert(fromWork, toWork[i], doWork[i]);
+					 }
+				 }
 				if(result >0) {
 					path = "ajax/makeMyIssueSwal";
 					System.out.println("success insert Myissue");
@@ -189,6 +215,10 @@ public class TeamController {
 				tissue.setEmail((String)session.getAttribute("email"));
 				tissue.setTititle(issuetitle);
 				tissue.setTicontent(issuecontent);
+				if(fromDate != null) {
+					 tissue.setTistart(java.sql.Timestamp.valueOf(fromDate+" 00:00:00"));
+					 tissue.setTiend(java.sql.Timestamp.valueOf(toDate+" 00:00:00"));
+				}
 				int result = privateservice.writeTissue(tissue);
 				 if(files != null && files.length > 0) {
 					 //업로드한 파일이 하나라도 있다면
@@ -376,9 +406,9 @@ public class TeamController {
 		Process processList = null;
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		
-		System.out.println("select");
+		System.out.println("select query");
 		
-		processList = (dao.chartData(tseq));
+		processList = dao.chartData(tseq);
 		
 		System.out.println("결과는?" + processList.toString());
 

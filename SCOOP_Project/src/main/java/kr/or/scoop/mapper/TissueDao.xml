@@ -102,6 +102,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <insert id="mentionInsert">
 	insert into teammention values((select Max(tiseq) from tissue),tmseq_teammention_seq.nextval, #{email, jdbcType=VARCHAR})
 </insert>
+<insert id="myMentionInsert">
+	insert into pmention values(pmseq_pmention_seq.nextval, #{email, jdbcType=VARCHAR}, (select Max(piseq) from myissue))
+</insert>
+<select id="getFiles" resultType="kr.or.scoop.dto.FileDrive">
+	select * from FileDrive where tiseq=#{tiseq}
+</select>
 <select id="getMentions" resultType="kr.or.scoop.dto.Mention">
 	select * from teammention t join member m on t.tmemail=m.email where t.tiseq=#{tiseq}
 </select>
@@ -121,7 +127,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <insert id="googleDriveInsert">
 	insert into teamgoogledrive values(tgseq_teamgoogledrive_seq.nextval,#{param1}, #{param2},(select Max(tiseq) from tissue))
 </insert>
+<insert id="myGoogleDriveInsert">
+	insert into pgoogledrive values(pgseq_pgoogledrive_seq.nextval,#{param1}, #{param2},(select Max(piseq) from myissue))
+</insert>
 <insert id="doWorkInsert">
 	insert into teamdowork values(tdseq_teamdowork_seq.nextval, (select Max(tiseq) from tissue), #{param1}, #{param2}, #{param3})
+</insert>
+<insert id="myDoWorkInsert">
+	insert into pdowork values(pwseq_pdowork_seq.nextval, (select Max(piseq) from myissue), #{param1}, #{param2}, #{param3})
 </insert>
 </mapper>
