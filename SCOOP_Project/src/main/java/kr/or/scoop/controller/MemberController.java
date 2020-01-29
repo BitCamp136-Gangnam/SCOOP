@@ -213,7 +213,13 @@ public class MemberController {
 		Locale locale  = new Locale(language);
 		System.out.println(" locale : " + locale + "\n language : " + language);
 		localeResolver.setLocale(request, response, locale);
-		
+		if(language.equals("ko")) {
+			System.out.println("????");
+			session.setAttribute("defaultlang", "한국어");
+		}else{
+			System.out.println("!!!!");
+			session.setAttribute("defaultlang", "English");
+		}
 		String email = "";
 		
 		email = (String)session.getAttribute("email");
