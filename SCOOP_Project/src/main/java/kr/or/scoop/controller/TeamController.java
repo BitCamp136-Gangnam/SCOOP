@@ -2,7 +2,6 @@ package kr.or.scoop.controller;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -498,7 +497,7 @@ public class TeamController {
 	
 	@ResponseBody
 	@RequestMapping(value="getTeamCalendar.do", method = RequestMethod.GET)
-	public JSONArray getTeamCalendar(HttpSession session, HttpServletResponse response) {
+	public JSONArray getTeamCalendar(HttpSession session, HttpServletResponse response, Model model) {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");
 		String email = (String)session.getAttribute("email");
@@ -534,6 +533,7 @@ public class TeamController {
 			 
 		}
 		try {
+			
 			System.out.println(sortlist);
 			Iterator<Integer> tissueitor = sortlist.keySet().iterator();
 			System.out.println(tissueitor);
@@ -577,7 +577,6 @@ public class TeamController {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		
 		System.out.println("jArray 입니다"+jArray);
 		/*
 		System.out.println(caltissuelist);
