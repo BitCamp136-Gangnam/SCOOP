@@ -1,7 +1,9 @@
 package kr.or.scoop.controller;
 
+import java.io.FileOutputStream;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -10,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.scoop.dao.MemberDao;
 import kr.or.scoop.dao.MyIssueDao;
@@ -27,8 +31,8 @@ import kr.or.scoop.dto.ProjectMemberlist;
 import kr.or.scoop.dto.Reply;
 import kr.or.scoop.dto.TeamPjt;
 import kr.or.scoop.dto.Tissue;
-import kr.or.scoop.dto.Tpmember;
 import kr.or.scoop.service.BoardService;
+import kr.or.scoop.service.PrivateService;
 import kr.or.scoop.service.TeamService;
 import net.sf.json.JSONArray;
 
@@ -43,6 +47,8 @@ public class BoardController {
 	
 	@Autowired
 	private TeamService tservice;
+	@Autowired
+	private PrivateService privateservice;
 	
 	// 내가 작성한 이슈
 	@RequestMapping(value = "/myissue.do", method = RequestMethod.GET)
@@ -395,5 +401,103 @@ public class BoardController {
 		model.addAttribute("dowork", dowork);
 		model.addAttribute("files", files);
 		return "issue/teamIssueEdit";
+	}
+	@RequestMapping(value="teamIssueEditOk.do" , method = {RequestMethod.POST, RequestMethod.GET})
+	public String teamIssueEditOk(int tseq, int tiseq,Model model, String[] editMention, String[] editGfilename, HttpSession session, HttpServletRequest request
+			, String[] editGurl, String[] editToname, String[] editDowork, String title, String editIssuecontent, String editFrom, String editTo, @RequestParam(value="editFile") MultipartFile[] editFile) throws Exception {
+		String path = "";
+		System.out.println(tiseq +"/"+ editMention + editFile + editGfilename + editGurl+editToname+editDowork+title+editIssuecontent);
+		MyIssue tissue = new MyIssue();
+		String email = (String)session.getAttribute("email");
+		tissue.setTseq(tseq);
+		tissue.setEmail(email);
+		tissue.setTititle(title);
+		tissue.setTicontent(editIssuecontent);
+		if(editFrom != null) {
+			 tissue.setTistart(java.sql.Timestamp.valueOf(editFrom+" 00:00:00"));
+			 tissue.setTiend(java.sql.Timestamp.valueOf(editTo+" 00:00:00"));
+		}
+		int result = privateservice.editTissue(tissue);
+		 if(editFile != null && editFile.length > 0) {
+			 //업로드한 파일이 하나라도 있다면
+			 for(MultipartFile mutifile : editFile) {
+				 String filename = mutifile.getOriginalFilename();
+				 if(filename.split("~")[2] != null) {
+					 int fdseq = Integer.parseInt(filename.split("~")[1]);
+					 tservice.fileDelete(fdseq);
+				 }else {
+					 if(filename.split("/")[1]!=null) {
+						 filename = filename.split("/")[0];
+					 }
+					 long fsize = mutifile.getSize();
+					 String filepath = request.getServletContext().getRealPath("/upload");
+					 String fpath = filepath + "\\" + filename;
+					 System.out.println(filename + " , " + fpath);
+					 if(!filename.equals("")) {
+						 //서버에 파일 업로드 (write)
+						 FileOutputStream fs = new FileOutputStream(fpath);
+						 fs.write(mutifile.getBytes());
+						 fs.close();
+						 try {
+							 tservice.fileInsert(tseq, filename, fsize, email);
+						 } catch (Exception e) {
+							 tservice.fileInsert(tseq, filename, fsize, email);
+						 }
+					 }
+				 }
+			 }
+		 }
+		 if(editMention != null && editMention.length > 0) {
+			 for(int i=0;i<editMention.length;i++) {
+				 if(editMention[i].split("~")[2] != null) {
+					 int tmseq = Integer.parseInt(editMention[i].split("~")[1]);
+					 tservice.mentionDelete(tmseq);
+				 }else {
+					 if(editMention[i].split("/")[1]!=null) {
+						 editMention[i] = editMention[i].split("/")[0];
+					 }
+					 tservice.mentionInsert(editMention[i]);
+				 }
+			 }
+		 }
+		 if(editGfilename != null && editGfilename.length > 0) {
+			 for(int i=0;i<editGfilename.length;i++) {
+				 if(editGfilename[i].split("~")[2] != null) {
+					 int tgseq = Integer.parseInt(editGfilename[i].split("~")[1]);
+					 tservice.googleDriveDelete(tgseq);
+				 }else {
+					 if(editGfilename[i].split("/")[1]!=null) {
+						 editGfilename[i] = editGfilename[i].split("/")[0];
+						 editGurl[i] = editGurl[i].split("/")[0];
+					 }
+					 tservice.googleDriveInsert(editGfilename[i], editGurl[i]);
+				 }
+			 }
+		 }
+		 if(editToname != null && editToname.length > 0) {
+			 String fromWork = email;
+			 for(int i=0;i<editToname.length;i++) {
+				 if(editToname[i].split("~")[2] != null) {
+					 int tdseq = Integer.parseInt(editToname[i].split("~")[1]);
+					 tservice.doWorkDelete(tdseq);
+				 }else {
+					 if(editToname[i].split("/")[1]!=null) {
+						 editToname[i] = editToname[i].split("/")[0];
+						 editDowork[i] = editDowork[i].split("/")[0];
+					 }
+					 tservice.doWorkInsert(fromWork, editToname[i], editDowork[i]);
+				 }
+			 }
+		 }
+		if(result >0) {
+			model.addAttribute("tseq", tseq);
+			path = "ajax/makeTeamIssueSwal";
+			System.out.println("success insert tissue");
+		}else {
+			model.addAttribute("tseq", tseq);
+			path = "ajax/makeTeamIssueFailSwal";
+			System.out.println("fail insert tissue");
+		}
+	return path;
 	}
 }

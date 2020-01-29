@@ -458,7 +458,9 @@ $(document).ready(function(){
 		 temp +=10;
 		if(moreEventArray.length<temp+10){
 			$(moreEventArray).slice(temp,10).removeAttr("hidden");
-
+			if(temp-moreEventArray.length>=0){
+				$('#load').remove();
+			}
 
 			}
 		
