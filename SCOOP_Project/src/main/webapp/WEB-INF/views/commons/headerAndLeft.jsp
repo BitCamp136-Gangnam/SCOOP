@@ -642,7 +642,7 @@ span {
          </div>
       </div>
       <div class="header-left">
-         <div class="input-group icons" style="width: 400px;">
+         <div class="input-group icons">
             <div class="input-group-prepend">
                <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3"
                   id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
@@ -655,10 +655,10 @@ span {
                <c:choose>
                   <c:when test="${role == 'ROLE_ADMIN'}">
                <input type="button"class="form-control"
-               style="background-color: #E71D36; border-color: #CCCCCC; margin-left: 2%; color: #fff; cursor: pointer;"
+               style="background-color: #E71D36; border-color: #CCCCCC; margin-left: 2%; color: #fff; cursor: pointer;width: 126px;"
                value="공지사항 작성" data-toggle="modal" data-target="#makenotice">
                <input type="button"class="form-control"
-               style="background-color: #E71D36; border-color: #CCCCCC; margin-left: 2%; color: #fff; cursor: pointer;"
+               style="background-color: #E71D36; border-color: #CCCCCC; margin-left: 2%; color: #fff; cursor: pointer;width: 126px;"
                value="이슈 작성" data-toggle="modal" data-target="#makeissue">
                </c:when>
                <c:otherwise>
