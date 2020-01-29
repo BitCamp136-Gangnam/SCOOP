@@ -21,10 +21,24 @@
 </head>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-		<script type="text/javascript">
+
+<script type="text/javascript">
+
 $(document).ready(function(){
+	//더보기 스타일 변경
+	$('#load').mouseover(function(){
+		$(this).css("color","#E71D36");
+	});
+	$('#load').mouseout(function(){
+		$(this).css("color","#464a53");
+	});
 	var temp = 0;
 	var moreEventArray = document.querySelectorAll(".card > #row ");
+	if(moreEventArray.length<=10){
+		 $('#load').remove();
+        $('#loadPlus').remove();
+        $('.tooltip').remove();
+	}
 	 $(moreEventArray).attr("hidden","hidden");	
 	 $(moreEventArray).slice(0,10).removeAttr("hidden");
 	 $(moreEventArray).slice(0,10);
@@ -40,8 +54,11 @@ $(document).ready(function(){
 		 temp +=10;
 		if(moreEventArray.length<temp+10){
 			$(moreEventArray).slice(temp,10).removeAttr("hidden");
-
-
+			if(temp-moreEventArray.length>=0){
+	            $('#load').remove();
+	            $('#loadPlus').remove();
+	            $('.tooltip').remove();
+	         }
 			}
 		
 			
@@ -126,7 +143,9 @@ $(document).ready(function(){
 			</div>
 		</div>
 		</c:forEach>
-		<button id="load">더보기</button>
+			<div id="loadPlus" data-toggle="tooltip" data-placement="bottom" title="더 보기" >
+			<div id="load" class="iconify" style="font-size: 40px; color:#464a53;cursor: pointer; margin-left: 627px; margin-top: 1%;" data-icon="mdi:chevron-double-down" data-inline="false">더 보기</div>
+			</div>
             <!-- #/ container -->
             </div>
             </div>
@@ -171,8 +190,10 @@ $(document).ready(function(){
 
     <script src="<c:url value="/resources/js/dashboard/dashboard-1.js"/>"></script>
 <script type="text/javascript">
-	/* 북마크 제거 */
+
+/* 북마크 제거 */
 	$(function(){
+		
 		$('.bookmark').click(function(){
 			let deleteline = $(this).parents('div.bm');
 		 	let seq = $(this).attr('name');
