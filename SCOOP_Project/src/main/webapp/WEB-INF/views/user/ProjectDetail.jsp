@@ -309,12 +309,12 @@ $(function(){
          	</c:forEach>
          <c:choose>
 			<c:when test="${mark}">
-				<div class="col-sm-1 newissue">
+				<div class="col-sm-1 newissue" style="padding-left: 30px;">
 					<i class="bookmark far fa-bookmark" id="bookmark" name="bookoff"></i>
 				</div>
 			</c:when>
 			<c:otherwise>
-				<div class="col-sm-1 newissue">
+				<div class="col-sm-1 newissue" style="padding-left: 30px;">
 					<i class="bookmark fas fa-bookmark" id="bookmark" name="bookon"></i>
 				</div>
 			</c:otherwise>
