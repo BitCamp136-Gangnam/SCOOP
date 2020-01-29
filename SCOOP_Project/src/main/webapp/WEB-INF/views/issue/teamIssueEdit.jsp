@@ -56,7 +56,9 @@ border-radius: 5px;
         <div class="content-body"style="height: 680px;">
         <div class="container-fluid row" style="padding-right: 0px; margin-right: 0px;margin-left: 0px; padding-left: 15px;">
         <div class="card" style="padding-left: 2%;padding-right: 0px; padding-top:1%;min-width:900px;height: auto;overflow: auto;">
-        <form action="">
+        <form action="teamIssueEditOk.do" enctype="multipart/form-data">
+        <input type="hidden" name="tseq" value="${tissue.tseq}">
+        <input type="hidden" name="tiseq" value="${tissue.tiseq}">
 		<div class="row"style="margin:2% 2% 0 2%" >
 		<div class="col-sm-7">
 			<input type="text" class="form-control" name="title" value="${tissue.tititle}" style="border: 0px; border-bottom: 1px solid #ced4da; font-size: 20px">
@@ -64,7 +66,7 @@ border-radius: 5px;
 		<div class="col-sm-1">
 		</div>
 		<div class="col-sm-2" style="padding-right: 0">
-			<input type="button" class="form-control editdelete" value="완료" id="editIssue">
+			<input type="submit" class="form-control editdelete" value="완료" id="editIssue">
 		</div>
 		<div class="col-sm-2" style="padding-left: 0">
 			<input type="button" class="form-control editdelete" value="돌아가기" id="returnIssue">
@@ -72,7 +74,7 @@ border-radius: 5px;
 		</div>
 		<c:choose>
         <c:when test="${tissue.tistart!=null}">
-		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%; margin-top: 2%"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i><input type="text" id="editFrom" style="border: 0; border-bottom: 1px solid #ced4da; text-align: center" value="${fn:substring(tissue.tistart,0,10)}"> ~ <input type="text" id="editTo" style="border: 0; border-bottom: 1px solid #ced4da; text-align: center" value="${fn:substring(tissue.tiend,0,10)}"></div>
+		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%; margin-top: 2%"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i><input type="text" id="editFrom" name="editFrom" style="border: 0; border-bottom: 1px solid #ced4da; text-align: center" value="${fn:substring(tissue.tistart,0,10)}"> ~ <input type="text" id="editTo" name="editTo" style="border: 0; border-bottom: 1px solid #ced4da; text-align: center" value="${fn:substring(tissue.tiend,0,10)}"></div>
 		</c:when>
 		<c:otherwise>
 		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>등록된 일정이 없습니다.</div>
@@ -85,6 +87,7 @@ border-radius: 5px;
 		<span class="divDelete" style="cursor:pointer;"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span>
 		<br>
 		</div>
+		<input type="hidden" name="editMention" value="${m.email}~${m.tmseq}">
 		</c:forEach>
 				<c:forEach items="${files}" var="f">
 		<div class="myissueDetail" id="myissueMention">
@@ -92,23 +95,28 @@ border-radius: 5px;
 		<span class="divDelete" style="cursor:pointer;"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span>
 		<br>
 		</div>
+		<input type="file" multiple="multiple" hidden="" name="editFile" value="${f.fdname}~${f.fdseq}">
 		</c:forEach>
 			<c:forEach items="${gdrive}" var="gd">
 		<div class="myissueDetail" id="myissueGoogledrive">
 			<i class="fab fa-google-drive"></i>
 			<a href="${gd.tgurl}" onclick="window.open(this.href,'팝업창','width=800, height=800');return false;">${gd.tgfilename}</a>
-			<span class="divDelete" style="cursor:pointer;"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span>
+			<span class="divDelete2" style="cursor:pointer;"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span>
 			<br>
 		</div>
+			<input type="hidden" name="editGfilename" value="${gd.tgfilename}~${gd.tgseq}">
+			<input type="hidden" name="editGurl" value="${gd.tgurl}~${gd.tgseq}">
 			</c:forEach>
 		<c:forEach items="${dowork}" var="work">
 		<div class="myissueDetail" id="myissueTodo">
 		<i class="far fa-check-circle"style="padding-right: 5px;"></i>${work.fromname}
 		<i class="fas fa-long-arrow-alt-right" style="margin-left:5px;margin-right: 5px;"></i>${work.toname}<br>
 		: ${work.dowork}
-		<span class="divDelete" style="cursor:pointer;"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span>
+		<span class="divDelete2" style="cursor:pointer;"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span>
 		<br>
 		</div>
+		<input type="hidden" name="editToname" value="${work.toemail}~${work.tdseq}">
+		<input type="hidden" name="editDowork" value="${work.dowork}~${work.tdseq}">
 		</c:forEach> 
 		</div>
         <div class="myissueDetail" style="margin-top: 2%">
@@ -207,6 +215,15 @@ $('#returnIssue').click(function(){
 	location.href ='teamissueDetail.do?tiseq='+${tissue.tiseq};
 })
 $('.divDelete').click(function(){
+	var dValue = $(this).parent().next().attr('value');
+	$(this).parent().next().attr('value', dValue+'~delete');
+	$(this).parent().remove();
+})
+$('.divDelete2').click(function(){
+	var dValue = $(this).parent().next().attr('value');
+	var dValue2 = $(this).parent().next().next().attr('value');
+	$(this).parent().next().attr('value', dValue+'~delete');
+	$(this).parent().next().next().attr('value', dValue2+'~delete');
 	$(this).parent().remove();
 })
 
@@ -326,6 +343,7 @@ var tar = 1;
 		$('#edittodoresult').append('<div class="myissueDetail" id="myissueMention">'+
 				'<a href="fileDownload.do?fileName='+files[i].name+'"><span class="iconify" data-icon="si-glyph:file-box" data-inline="false"></span>'+files[i].name+'</a>'+
 				'<span class="divDelete" style="cursor:pointer;"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span>'+
+				'<input type="file" multiple="multiple" hidden="" name="editFile" value="'+files[i].name+'">'+
 				'<br>'+
 				'</div>')
 				$('.divDelete').click(function(){
@@ -362,6 +380,7 @@ $('#todoresult').show();
 							$('#edittodoresult').append('<div class="myissueDetail" id="myissueMention">'+
 									'<sup><i class="fas fa-quote-left" style="color:#ca0000; font-size: 7px"></i></sup> @'+ $(this).text() + ' <sup><i class="fas fa-quote-right"style="color:#ca0000;font-size: 7px"></i></sup>'+
 									'<span class="divDelete" style="cursor:pointer;"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span>'+
+									'<input type="hidden" name="editMention" value="'+$(this).attr('id').split('/')[1]+'">'+
 									'<br>');
 							$('#edittodoresult').append('<input type="hidden" name="mentions" value="'+ $(this).attr('id').split('/')[1] + '">');
 							console.log($(this).text());
@@ -399,10 +418,10 @@ $('#todoresult').show();
 								'<i class="fas fa-long-arrow-alt-right" style="margin-left:5px;margin-right: 5px;"></i>'+ $('#edittodomem').val()+'<br>'+
 								': '+$('#edittodolist').val()+
 								'<span class="divDelete" style="cursor:pointer;"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span>'+
+								'<input type="hidden" name="editToname" value="'+$('#edittodomem').attr('name').split("/")[1]+'">'+
+								'<input type="hidden" name="editDowork" value="'+$('#edittodolist').val()+'">'+
 								'<br>'+
 								'</div>')
-						$('#edittodoresult').append('<input type="hidden" name="toWork" value="'+$('#todomem').attr('name').split("/")[1]+'">');
-						$('#edittodoresult').append('<input type="hidden" name="doWork" value="'+$('#todolist').val()+'">');
 						$('#edittodoresult').show();
 						$('#edittodolist').val('');
 						$('.divDelete').click(function(){

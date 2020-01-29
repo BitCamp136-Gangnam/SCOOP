@@ -20,6 +20,8 @@ public interface MyIssueDao {
 	//나의 이슈 작성
 	public int writeMyissue(MyIssue myissue);
 	
+	//팀이슈 수정
+	public int editTissue(MyIssue tissue);
 	
 	public List<MyIssue> getMyissue(String email);
 	

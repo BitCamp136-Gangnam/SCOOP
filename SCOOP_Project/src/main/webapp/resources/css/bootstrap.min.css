@@ -7153,7 +7153,7 @@ button.close {
 }
 
 .show {
-	display: block !important
+	/* display: block !important */
 }
 
 .invisible {
