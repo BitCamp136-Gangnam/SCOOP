@@ -145,8 +145,6 @@ public class TeamController {
 		public String writeIssue(String issuetitle, String fileclick, String issuecontent, String selectTeam, Model model, String fromDate, String toDate,
 				HttpSession session,HttpServletRequest request, String[] mentions, String[] toWork, String[] doWork, String[] googleDrive,@RequestParam(value="files") MultipartFile[] files) throws IOException {
 			String path = "";
-			System.out.println(fromDate);
-			System.out.println(toDate);
 			String email = (String)session.getAttribute("email");
 			int tseq = 0;
 			 //실 DB Insert

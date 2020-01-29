@@ -450,6 +450,8 @@ input::placeholder {
         				'<i class="fab fa-google-drive"></i>'+
         				'<a href="'+url+'" onclick="window.open(this.href,"팝업창","width=800, height=800");return false;">'+drivename+'</a>'+
         				'<span class="divDelete" style="cursor:pointer;"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span>'+
+        				'<input type="hidden" name="editGfilename" value="'+drivename+'">'+
+        				'<input type="hidden" name="editGurl" value="'+url+'">'+
         				'<br>');
         	 $('.divDelete').click(function(){
         			$(this).parent().remove();

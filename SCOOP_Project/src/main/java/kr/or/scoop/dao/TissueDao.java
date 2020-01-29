@@ -55,12 +55,15 @@ public interface TissueDao {
 	
 	public int fileInsert(int tseq, String fdname, long fdcapa, String email);
 	public int myFileInsert(String pfdname, long pdcapa, String email);
-	
+	public int fileDelete(int fdseq);
 	public int mentionInsert(String email);
+	public int mentionDelete(int tmseq);
 	public int myMentionInsert(String email);
 	public int googleDriveInsert(String tgfilename, String tgurl);
+	public int googleDriveDelete(int tgseq);
 	public int myGoogleDriveInsert(String pgfilename,String pgurl);
 	public int doWorkInsert(String email, String toEmail, String doWork);
+	public int doWorkDelete(int tdseq);
 	public int myDoWorkInsert(String email, String ptoEmail, String pdoWork);
 	public List chartData(int tseq, int isprocess);
 	
