@@ -20,7 +20,7 @@
 
 </head>
 
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
 .newissue{
    border-bottom: 1px solid #c8c8c8;
@@ -215,7 +215,7 @@ $(function(){
         ***********************************-->
         <div class="content-body">
         <div class="container-fluid">
-        <div class="card">
+        <div class="card" style="padding-bottom: 30px;">
       <div class="row" style="margin: 2%">
          <div class="col-sm-12" style="padding-left: 0">
             <h3>${tpj.pname}
@@ -276,8 +276,9 @@ $(function(){
          </div>
       </div>
       </c:forEach>
-            
-      		<button id="load">더보기</button>
+      		<div id="loadPlus" data-toggle="tooltip" data-placement="bottom" title="더 보기" >
+			<div id="load" class="iconify" style="font-size: 40px; color:#464a53;cursor: pointer; margin-left: 627px; margin-top: 1%;" data-icon="mdi:chevron-double-down" data-inline="false">더 보기</div>
+			</div>
             <!-- #/ container -->
             </div>
             </div>

@@ -20,7 +20,7 @@
 
 </head>
 
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
 .newissue{
    border-bottom: 1px solid #c8c8c8;
@@ -265,7 +265,7 @@ $(function(){
                <a class="nav-link" href="projectNotice.do?tseq=${tpj.tseq}">공지사항</a>
              </li>
              <li class="nav-item">
-               <a class="nav-link" href="projectladder.do?tseq=${tpj.tseq}">사다리 타기</a>
+               <a class="nav-link" href="projectLadder.do?tseq=${tpj.tseq}">사다리 타기</a>
              </li>
           </ul>
       </div>
@@ -309,12 +309,12 @@ $(function(){
          	</c:forEach>
          <c:choose>
 			<c:when test="${mark}">
-				<div class="col-sm-1 newissue">
+				<div class="col-sm-1 newissue" style="padding-left: 30px;">
 					<i class="bookmark far fa-bookmark" id="bookmark" name="bookoff"></i>
 				</div>
 			</c:when>
 			<c:otherwise>
-				<div class="col-sm-1 newissue">
+				<div class="col-sm-1 newissue" style="padding-left: 30px;">
 					<i class="bookmark fas fa-bookmark" id="bookmark" name="bookon"></i>
 				</div>
 			</c:otherwise>
