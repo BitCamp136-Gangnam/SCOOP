@@ -48,23 +48,6 @@
         <div class="content-body">
         <div class="container-fluid">
         <div class="card">
-      <div class="row" style="margin: 2%">
-         <div class="col-sm-12" style="padding-left: 0">
-            <h3>${tpj.pname}
-            	<c:if test="${rank == 100}">
-            	<span data-toggle="tooltip" data-placement="top" title="협업공간 관리" >
-            	<i class="fas fa-cog" id="myModal_Edit_Icon" style="margin-left: 5px;cursor: pointer; font-size: 15px" data-toggle="modal" data-target="#myModal_Edit" ></i>
-            	</span>
-            	<span data-toggle="tooltip" data-placement="top" title="공지사항 관리" >
-            	<span id="nowrite" class="iconify" data-icon="jam:write" style="font-size:20px;cursor: pointer;padding-bottom: 3px;" data-inline="false" data-toggle="modal" data-target="#pnoticewrite">
-            	</span>
-            	</span>
-            	
-            	</c:if>
-            </h3>
-            ${tpj.pcontent}
-         </div>
-      </div>
       <div class="row" style="margin-left: 2%;">
          <ul class="nav nav-pills">
              <li class="nav-item">

@@ -62,11 +62,9 @@ public class TeamController {
 	
 	@RequestMapping(value = "team.do" , method= {RequestMethod.POST,RequestMethod.GET})
 	public String CreateProject(TeamPjt team) {
-		System.out.println("팀컨 와?" + team);
 		int result = 0;
 		String viewpage;
 		
-		System.out.println("팀컨 와?" + team);
 		result = service.insertTeamPjt(team);
 		
 		if(result > 0) {
@@ -87,8 +85,6 @@ public class TeamController {
 		String email = (String)session.getAttribute("mailTo");
 		String temptseq = (String)session.getAttribute("tseq");
 		int tseq = Integer.parseInt(temptseq);
-		System.out.println("메일투"+email);
-		System.out.println("티에스이큐"+tseq);
 		result = service.insertTeamPjt2(email, tseq);
 		if (result > 0) {
 			System.out.println("협업공간 초대 성공");
@@ -151,7 +147,6 @@ public class TeamController {
 			int tseq = 0;
 			 //실 DB Insert
 			if (selectTeam.equals((String) session.getAttribute("email")) || selectTeam == null) {
-				System.out.println("이프문 타니??");
 				MyIssue myissue = new MyIssue();
 				myissue.setEmail((String) session.getAttribute("email"));
 				myissue.setPititle(issuetitle);
@@ -205,10 +200,8 @@ public class TeamController {
 				 }
 				if(result >0) {
 					path = "ajax/makeMyIssueSwal";
-					System.out.println("success insert Myissue");
 				}else {
 					path = "ajax/makeMyIssueFailSwal";
-					System.out.println("fail insert Myissue");
 				}
 				return path;
 			} else {
@@ -311,10 +304,8 @@ public class TeamController {
 		result = teamservice.teamUpdate(teampjt);
 		
 		if(result > 0) {
-			System.out.println("권한 설정성공");
 			viewpage = "redirect:/projectDetail.do?tseq="+tseq;
 		}else {
-			System.out.println("권한 설정 실패");
 			viewpage = "redirect:/userindex.do";
 		}
 		return viewpage;
@@ -329,10 +320,8 @@ public class TeamController {
 		result = teamservice.EditKanban(tseq, tiseq, isprocess);
 		if(result>0) {
 			path = "redirect:/cooperation-kanban.do?tseq="+tseq;
-			System.out.println("result kanban edit 성공");
 		} else {
 			path = "redirect:/cooperation-kanban.do?tseq="+tseq;
-			System.out.println("result kanban edit 실패");
 		}
 		return path;
 	}
@@ -347,11 +336,9 @@ public class TeamController {
 		result = teamservice.banMember(tseq, email);
 		
 		if(result > 0) {
-			System.out.println("멤버 탈퇴성공");
 			model.addAttribute("ajax", "멤버탈퇴 성공했습니다");
 			viewpage = "ajax/ajax";
 		}else {
-			System.out.println("멤버 탈퇴실패");
 			model.addAttribute("ajax", "멤버탈퇴 실패했습니다");
 			viewpage = "ajax/ajax";
 		}
@@ -387,12 +374,8 @@ public class TeamController {
 		System.out.println("tseq" + tseq);
 		result = teamservice.dropProject(tseq);
 		if(result > 0) {
-			System.out.println("프로젝트 삭제 성공");
-			//model.addAttribute("ajax", "관리자변경 성공했습니다");
 			viewpage = "redirect:/userindex.do";
 		}else {
-			System.out.println("프로젝트 삭제 실패");
-			//model.addAttribute("ajax", "관리자변경 실패했습니다");
 			viewpage = "redirect:/userindex.do";
 		}
 		return viewpage;
@@ -402,13 +385,10 @@ public class TeamController {
 	@ResponseBody
 	@RequestMapping(value="selectChart.do", method = RequestMethod.POST)
 	public Process chart(int tseq) {
-		System.out.println("selectChart 들어오고");
-		System.out.println("tseq : " + tseq);
 		
 		Process processList = null;
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		
-		System.out.println("select query");
 		
 		processList = dao.chartData(tseq);
 		
@@ -534,14 +514,12 @@ public class TeamController {
 		System.out.println(pjtlist.size());
 		int tempnum = 0;
 		for(Tpmember tpmember : pjtlist) {
-			 System.out.println("몇번도니?");
 			 System.out.println(tpmember.getTseq());
 			 temptissuelist = tissuedao.getTissueList(tpmember.getTseq());
 			 System.out.println(temptissuelist.size());
 			 System.out.println(temptissuelist);
 			 for(Tissue tissue : temptissuelist) {
 				 if(tissue.getTistart()!=null) {
-					 System.out.println("caltissue 와따시");
 					 sortlist.put(tempnum++, tissue);
 				 }
 				 
@@ -632,10 +610,14 @@ public class TeamController {
 		return jArray;
 	}
 	
-	@RequestMapping(value = "projectladder.do" , method = RequestMethod.GET)
+	@RequestMapping(value="projectladder.do" , method = RequestMethod.GET)
 	public String ladder(int tseq,Model model) {
 		ProjectDao dao = sqlsession.getMapper(ProjectDao.class);
+		System.out.println(tseq);
+		TeamPjt tpj = dao.detailPJT(tseq);
 		List<Tpmember> mem = dao.getTpMember(tseq);
+		System.out.println(mem);
+		model.addAttribute("tpj", tpj);
 		model.addAttribute("mem", mem);
 		return "user/projectLadder";
 	}
