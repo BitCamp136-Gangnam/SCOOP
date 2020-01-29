@@ -12,7 +12,7 @@ insert into myissue (piseq,pititle,picontent,pistart, piend, ispibook, email, pi
   values (PISEQ_MYISSUE_SEQ.NEXTVAL, #{pititle}, #{picontent}, #{pistart,jdbcType=TIMESTAMP}, #{piend,jdbcType=TIMESTAMP}, 0, #{email,jdbcType=VARCHAR}, sysdate)
 </insert>
 <select id="getMyissue" resultType="kr.or.scoop.dto.MyIssue">
-	SELECT piseq, pititle, picontent, pidate, ispibook FROM myissue WHERE email = #{email, jdbcType=VARCHAR} order by pidate desc
+	SELECT * FROM myissue WHERE email = #{email, jdbcType=VARCHAR} order by pidate desc
 </select>
 <select id="MyWriteIssueList" resultType="kr.or.scoop.dto.MyIssue">
 select piseq,pititle,pidate from myissue where email = #{email}
@@ -24,7 +24,7 @@ select t.tseq,t.tititle,t.tidate,t.tiseq, t.isprocess,p.pname from tissue t join
 select r.replyseq, r.rcontent, r.email, r.rdate, t.tiseq, t.tititle from reply r join tissue t on r.tiseq = t.tiseq where r.email = #{email, jdbcType=VARCHAR}
 </select>
 <select id="myissueDetail" resultType="kr.or.scoop.dto.MyIssue">
-	SELECT piseq, pititle, picontent, pidate, ispibook, pistart, piend FROM myissue WHERE piseq = #{piseq, jdbcType=INTEGER}
+	SELECT * FROM myissue WHERE piseq = #{piseq, jdbcType=INTEGER}
 </select>
 <!-- 북마크 -->
 <insert id="addPBookMark">
