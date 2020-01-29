@@ -51,4 +51,7 @@ public interface ProjectDao {
 	
 	//프로젝트 공지사항 삭제
 	public int deletePjNotice(int pnseq);
+	
+	//프로젝트 멤버 리스트
+	public List<Tpmember> getTpMember(int tseq);
 }

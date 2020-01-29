@@ -239,7 +239,7 @@ $(function(){
         ***********************************-->
         <div class="content-body">
         <div class="container-fluid">
-        <div class="card">
+        <div class="card" style="padding-bottom: 30px;">
       <div class="row" style="margin: 2% 2% 15px 2%">
          <div class="col-sm-12" style="padding-left: 0">
             <h3 style="padding-left: 1%;">${tpj.pname}
@@ -253,7 +253,7 @@ $(function(){
       <div class="row" style="margin-left: 2%;">
          <ul class="nav nav-pills">
              <li class="nav-item">
-               <a class="nav-link" href="projectDetail.do?tseq=${tpj.tseq}">팀이슈</a>
+               <a class="nav-link" href="projectDetail.do?tseq=${tpj.tseq}" style="color: #E71D36;">팀이슈</a>
              </li>
              <li class="nav-item">
                <a class="nav-link" href="./private-cal.jsp">팀 캘린더</a>
@@ -263,6 +263,9 @@ $(function(){
              </li>
              <li class="nav-item">
                <a class="nav-link" href="projectNotice.do?tseq=${tpj.tseq}">공지사항</a>
+             </li>
+             <li class="nav-item">
+               <a class="nav-link" href="projectladder.do?tseq=${tpj.tseq}">사다리 타기</a>
              </li>
           </ul>
       </div>
@@ -307,18 +310,20 @@ $(function(){
          <c:choose>
 			<c:when test="${mark}">
 				<div class="col-sm-1 newissue">
-					<i class="bookmark far fa-bookmark" id="bookmark" name="bookoff" style="cursor: pointer;"></i>
+					<i class="bookmark far fa-bookmark" id="bookmark" name="bookoff"></i>
 				</div>
 			</c:when>
 			<c:otherwise>
 				<div class="col-sm-1 newissue">
-					<i class="bookmark fas fa-bookmark" id="bookmark" name="bookon" style="cursor: pointer;"></i>
+					<i class="bookmark fas fa-bookmark" id="bookmark" name="bookon"></i>
 				</div>
 			</c:otherwise>
 		</c:choose>
       </div>
       </c:forEach>
-      <button id="load">더보기</button>
+      		<div id="loadPlus" data-toggle="tooltip" data-placement="bottom" title="더 보기" >
+			<div id="load" class="iconify" style="font-size: 40px; color:#464a53;cursor: pointer; margin-left: 627px; margin-top: 1%;" data-icon="mdi:chevron-double-down" data-inline="false">더 보기</div>
+			</div>
             <!-- #/ container -->
             </div>
             </div>
@@ -441,8 +446,20 @@ $(function(){
     <script src="<c:url value="/resources/js/dashboard/dashboard-1.js"/>"></script>
 			<script type="text/javascript">
 $(document).ready(function(){
+	//더보기 스타일 변경
+	$('#load').mouseover(function(){
+		$(this).css("color","#E71D36");
+	});
+	$('#load').mouseout(function(){
+		$(this).css("color","#464a53");
+	});
 	var temp = 0;
 	var moreEventArray = document.querySelectorAll(".card > #row ");
+	if(moreEventArray.length<=10){
+		 $('#load').remove();
+      $('#loadPlus').remove();
+      $('.tooltip').remove();
+	}
 	 $(moreEventArray).attr("hidden","hidden");	
 	 $(moreEventArray).slice(0,10).removeAttr("hidden");
 	 $(moreEventArray).slice(0,10);
@@ -458,13 +475,12 @@ $(document).ready(function(){
 		 temp +=10;
 		if(moreEventArray.length<temp+10){
 			$(moreEventArray).slice(temp,10).removeAttr("hidden");
-			if(temp-moreEventArray.length>=0){
-				$('#load').remove();
+				if(temp-moreEventArray.length>=0){
+		            $('#load').remove();
+		            $('#loadPlus').remove();
+		            $('.tooltip').remove();
+		         }
 			}
-
-			}
-		
-			
 	}); 
 
 });

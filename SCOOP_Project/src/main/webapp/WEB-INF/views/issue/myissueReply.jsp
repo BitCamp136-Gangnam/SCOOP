@@ -55,7 +55,7 @@ $(function(){
         ***********************************-->
         <div class="content-body">
             <div class="container-fluid">
-        <div class="card">
+        <div class="card" style="padding-bottom: 30px;">
 		<div class="row" style="margin: 2%">
 				<h3>내가 작성한 댓글</h3>
 		</div>
@@ -65,14 +65,14 @@ $(function(){
 			      <a class="nav-link" href="myissue.do">내가 작성한 이슈</a>
 			    </li>
 			    <li class="nav-item">
-			      <a class="nav-link" href="myissueReply.do">내가 작성한 댓글</a>
+			      <a class="nav-link" href="myissueReply.do" style="color:#E71D36;">내가 작성한 댓글</a>
 			    </li>
 		    </ul>
 		</div>
 		<hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
-		<div class="row" style="margin-left: 2%; margin-right: 2%">
+		<div class="row" style="margin-left: 2%; margin-right: 2%" id="row">
 			<c:forEach items="${re}" var="re">
-			<div class="col-sm-12 newissue" >
+			<div class="col-sm-12 newissue" id="here">
 				<div id="finish" class="iconify" data-icon="fa-solid:reply-all" data-inline="false" style="width:27px;height: auto;color:#26805c"></div>
 			<div style="float: right;min-width:97%;">
 			<a href="teamissueDetail.do?tiseq=${re.tiseq}">${re.rcontent}</a>			
@@ -83,6 +83,9 @@ $(function(){
 			</div>
 			</c:forEach>
 		</div>
+			<div id="loadPlus" data-toggle="tooltip" data-placement="bottom" title="더 보기" >
+			<div id="load" class="iconify" style="font-size: 40px; color:#464a53;cursor: pointer; margin-left: 627px; margin-top: 1%;" data-icon="mdi:chevron-double-down" data-inline="false">더 보기</div>
+			</div>
             <!-- #/ container -->
             </div>
             </div>
@@ -124,10 +127,49 @@ $(function(){
     <!-- ChartistJS -->
    <script src="<c:url value="/resources/plugins/chartist/js/chartist.min.js"/>"></script>
     <script src="<c:url value="/resources/plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"/>"></script>
+	<script src="<c:url value="/resources/js/dashboard/dashboard-1.js"/>"></script>
+	<script type="text/javascript">
+ $(document).ready(function(){
+	//더보기 스타일 변경
+		$('#load').mouseover(function(){
+			$(this).css("color","#E71D36");
+		});
+		$('#load').mouseout(function(){
+			$(this).css("color","#464a53");
+		});
+	var temp = 0;
+	var moreEventArray = document.querySelectorAll(".card > #row > #here ");
+	if(moreEventArray.length<=10){
+		 $('#load').remove();
+       $('#loadPlus').remove();
+       $('.tooltip').remove();
+	}
+	 $(moreEventArray).attr("hidden","hidden");
+	 $(moreEventArray).slice(0,10).removeAttr("hidden");
+	 $(moreEventArray).slice(0,10);
+	 temp = 10;
+	$("#load").click(function(e){
+		console.log(moreEventArray);
+		/* console.log($('.card'));
+		console.log($('.card > a'));
+		console.log($('.card > a > .row'));
+		console.log($(".card > a > .row").val()); */
+		console.log("if");
+		$(moreEventArray).slice(temp,temp+10).removeAttr("hidden");
+		 temp +=10;
+		if(moreEventArray.length<temp+10){
+			$(moreEventArray).slice(temp,10).removeAttr("hidden");
+				if(temp-moreEventArray.length>=0){
+		            $('#load').remove();
+		            $('#loadPlus').remove();
+		            $('.tooltip').remove();
+		         }
+			}
+		
+			
+	}); 
 
-
-
-     <script src="<c:url value="/resources/js/dashboard/dashboard-1.js"/>"></script>
-
+}); 
+</script>	
 </body>
 </html>

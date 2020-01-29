@@ -534,7 +534,7 @@ public class TeamController {
 		for(Tpmember tpmember : pjtlist) {
 			 System.out.println("몇번도니?");
 			 System.out.println(tpmember.getTseq());
-			 temptissuelist = tissuedao.loadKanban(tpmember.getTseq());
+			 temptissuelist = tissuedao.getTissueList(tpmember.getTseq());
 			 System.out.println(temptissuelist.size());
 			 System.out.println(temptissuelist);
 			 for(Tissue tissue : temptissuelist) {
@@ -579,12 +579,18 @@ public class TeamController {
 					data.put("start", (String)sdft.format(sortlist.get(key).getTistart()).toString());
 					data.put("end", (String)sdft.format(sortlist.get(key).getTiend()).toString());
 				}
-				data.put("type", String.valueOf(sortlist.get(key).getTiseq()));
-				data.put("username", sortlist.get(key).getEmail());
+				for(Tpmember tpmember : pjtlist) {
+					if(tpmember.getTseq() == sortlist.get(key).getTseq()) {
+						data.put("type", tpmember.getPname());
+					}
+				}
+				
+				data.put("username", sortlist.get(key).getName());
 				data.put("backgroundColor", sortlist.get(key).getBackgroundColor());
 				data.put("textColor", sortlist.get(key).getTextColor());
 				
 				data.put("allDay", allDay);
+				data.put("tiseq", sortlist.get(key).getTiseq());
 				jArray.add(data);
 				System.out.println("while문 도니?");
 				System.out.println(data);
@@ -623,4 +629,13 @@ public class TeamController {
 		
 		return jArray;
 	}
+	
+	@RequestMapping(value = "projectladder.do" , method = RequestMethod.GET)
+	public String ladder(int tseq,Model model) {
+		ProjectDao dao = sqlsession.getMapper(ProjectDao.class);
+		List<Tpmember> mem = dao.getTpMember(tseq);
+		model.addAttribute("mem", mem);
+		return "user/projectLadder";
+	}
+	
 }
