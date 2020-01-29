@@ -55,7 +55,7 @@ $(function(){
         ***********************************-->
         <div class="content-body">
             <div class="container-fluid">
-        <div class="card"style="padding-bottom: 30px;">
+        <div class="card" style="padding-bottom: 30px;">
 		<div class="row" style="margin: 2%">
 				<h3>내가 작성한 댓글</h3>
 		</div>
@@ -65,7 +65,7 @@ $(function(){
 			      <a class="nav-link" href="myissue.do">내가 작성한 이슈</a>
 			    </li>
 			    <li class="nav-item">
-			      <a class="nav-link" href="myissueReply.do" style="color:#E71D36 ">내가 작성한 댓글</a>
+			      <a class="nav-link" href="myissueReply.do" style="color:#E71D36;">내가 작성한 댓글</a>
 			    </li>
 		    </ul>
 		</div>
