@@ -56,7 +56,7 @@ border-radius: 5px;
         <div class="content-body"style="height: 680px;">
         <div class="container-fluid row" style="padding-right: 0px; margin-right: 0px;margin-left: 0px; padding-left: 15px;">
         <div class="card" style="padding-left: 2%;padding-right: 0px; padding-top:1%;min-width:900px;height: auto;overflow: auto;">
-        <form action="teamIssueEditOk.do" enctype="multipart/form-data">
+        <form action="teamIssueEditOk.do" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="tseq" value="${tissue.tseq}">
         <input type="hidden" name="tiseq" value="${tissue.tiseq}">
 		<div class="row"style="margin:2% 2% 0 2%" >
@@ -95,7 +95,7 @@ border-radius: 5px;
 		<span class="divDelete" style="cursor:pointer;"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span>
 		<br>
 		</div>
-		<input type="file" multiple="multiple" hidden="" name="editFile" value="${f.fdname}~${f.fdseq}">
+		<input type="text" hidden="" name="editOriFile" value="${f.fdname}~${f.fdseq}">
 		</c:forEach>
 			<c:forEach items="${gdrive}" var="gd">
 		<div class="myissueDetail" id="myissueGoogledrive">
@@ -120,7 +120,7 @@ border-radius: 5px;
 		</c:forEach> 
 		</div>
         <div class="myissueDetail" style="margin-top: 2%">
-        <textarea rows="1" style="width:50%;border: 0; border-bottom: 1px solid #ced4da;" id="editIssuecontent">${tissue.ticontent}</textarea>
+        <textarea rows="5" style="width:50%;border: 0; border-bottom: 1px solid #ced4da;" id="editIssuecontent" name="editIssuecontent">${tissue.ticontent}</textarea>
         </div>    
             </form>
             </div> 

@@ -210,7 +210,6 @@ public class MemberController {
 		if(language == null) {
 			language = "ko";
 		}
-		
 		Locale locale  = new Locale(language);
 		System.out.println(" locale : " + locale + "\n language : " + language);
 		localeResolver.setLocale(request, response, locale);
@@ -257,14 +256,15 @@ public class MemberController {
 		if(pjtlist!=null) {
 			session.setAttribute("pjtlist", pjtlist);
 			session.setAttribute("tpmemlist", tpmemlist);
-			AlarmDao dao = sqlsession.getMapper(AlarmDao.class);
-			List<Alarm> alarm = dao.getAlarm((String)session.getAttribute("email"));
-			
-			if(alarm == null) {
-				
-			} else {
-				model.addAttribute("alarm", alarm);
-			}
+			/*
+			 * AlarmDao dao = sqlsession.getMapper(AlarmDao.class); List<Alarm> alarm =
+			 * dao.getAlarm((String)session.getAttribute("email"));
+			 */
+			/*
+			 * if(alarm == null) { System.out.println("유저인덱스 알람 널"); } else {
+			 * System.out.println("유저인덱스 알람"); model.addAttribute("alarm", alarm);
+			 * System.out.println("유저인덱스 알람 끝"); }
+			 */
 		}
 		/* System.out.println(pjtlist.get(0)); */
 		return "user/dashBoard";

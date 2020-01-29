@@ -88,6 +88,6 @@ WHERE tseq=#{tseq} and tiseq=#{tiseq}
 delete from tissue where tiseq = #{tiseq}
 </delete>
 <update id="editTissue" parameterType="kr.or.scoop.dto.MyIssue">
-	update tissue set tititle=#{tititle}, ticontent=#{ticontent} where tiseq=#{tiseq}
+	update tissue set tititle=#{tititle}, ticontent=#{ticontent}, tistart=#{tistart,jdbcType=TIMESTAMP}, tiend=#{tiend,jdbcType=TIMESTAMP} where tiseq=#{tiseq}
 </update>
 </mapper>
