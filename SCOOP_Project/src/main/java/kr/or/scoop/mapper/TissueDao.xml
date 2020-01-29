@@ -136,4 +136,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <insert id="myDoWorkInsert">
 	insert into pdowork values(pwseq_pdowork_seq.nextval, (select Max(piseq) from myissue), #{param1}, #{param2}, #{param3})
 </insert>
+<select id="getTissueList" parameterType="int" resultMap="Tissue">
+select m.name, t.tititle, t.tiseq, t.tseq, t.email, t.tititle, t.ticontent, t.tistart, t.tiend, t.isprocess, t.istbook, t.issee, t.tidate, t.turl, t.backgroundcolor, t.textcolor, t.allday
+from tissue t join member m
+on m.email = t.email
+where tseq = #{tseq}
+</select>
 </mapper>

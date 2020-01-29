@@ -67,4 +67,7 @@ public interface TissueDao {
 	//칸반 게시글 상태 정보
 	public Process chartData(int tseq);
 	
+	//팀이슈 리스트 받아오기
+	public List<Tissue> getTissueList(int tseq);
+	
 }
