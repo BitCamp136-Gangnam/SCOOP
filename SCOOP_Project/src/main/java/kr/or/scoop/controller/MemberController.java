@@ -210,7 +210,7 @@ public class MemberController {
 		if(language == null) {
 			language = "ko";
 		}
-		
+		System.out.println("유저인덱스 시작");
 		Locale locale  = new Locale(language);
 		System.out.println(" locale : " + locale + "\n language : " + language);
 		localeResolver.setLocale(request, response, locale);
@@ -231,18 +231,22 @@ public class MemberController {
 		List<PjNotice> mypjtlist = null;
 		List<Tpmember> pjtlist = null;
 		List<Tpmember> tpmemlist =  null;
+		System.out.println("유저인덱스 중간");
 		try {
 			 filedrive = memberdao.getFileDrive(email);
+			 System.out.println("유저인덱스 캐치");
 			 count = memberdao.getCount(email);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+		System.out.println("유저인덱스 세션");
 		session.setAttribute("name", member.getName());
 		session.setAttribute("img",img); 
 		session.setAttribute("role", role.getRname());
 		session.setAttribute("count", count);
 		session.setAttribute("filed", filedrive);
 		try {
+			System.out.println("유저인덱스 다시트라이");
 			pjtlist = noticeDao.getPJT(email);
 			tpmemlist = memberdao.getTpmembers(member.getEmail());
 			mytissuelist = myissuedao.teamWriteTiisueList(member.getIdtime());
@@ -255,17 +259,21 @@ public class MemberController {
 			// TODO: handle exception
 		}
 		if(pjtlist!=null) {
+			System.out.println("유저인덱스 pjtlist");
 			session.setAttribute("pjtlist", pjtlist);
 			session.setAttribute("tpmemlist", tpmemlist);
-			AlarmDao dao = sqlsession.getMapper(AlarmDao.class);
-			List<Alarm> alarm = dao.getAlarm((String)session.getAttribute("email"));
-			
-			if(alarm == null) {
-				
-			} else {
-				model.addAttribute("alarm", alarm);
-			}
+			/*
+			 * AlarmDao dao = sqlsession.getMapper(AlarmDao.class); List<Alarm> alarm =
+			 * dao.getAlarm((String)session.getAttribute("email"));
+			 */
+			System.out.println("유저인덱스 pjtlist끝");
+			/*
+			 * if(alarm == null) { System.out.println("유저인덱스 알람 널"); } else {
+			 * System.out.println("유저인덱스 알람"); model.addAttribute("alarm", alarm);
+			 * System.out.println("유저인덱스 알람 끝"); }
+			 */
 		}
+		System.out.println("유저인덱스 끝");
 		/* System.out.println(pjtlist.get(0)); */
 		return "user/dashBoard";
 	}
