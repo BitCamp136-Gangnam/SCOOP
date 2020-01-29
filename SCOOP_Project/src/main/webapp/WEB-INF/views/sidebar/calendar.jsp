@@ -101,6 +101,10 @@
 																		<label class="col-xs-4" for="edit-end">끝</label> <input
 																			class="inputModal" type="text" name="edit-end"
 																			id="edit-end" />
+																		<label class="col-xs-4" for="edit-tiseq">tiseq</label> <input
+																			class="inputModal" type="text" name="edit-tiseq"
+																			id="edit-tiseq" />
+																		
 																	</div>
 																</div>
 																<div class="row">
@@ -176,6 +180,7 @@
 																	<c:forEach items="${pjtlist}" var="p">
 																	<input class="inputModal" type="text" name="edit-tseq" id="edit-tseq" value="${p.tseq}" readonly hidden="hidden">
                          											<option value="${p.tseq}">${p.pname}</option>
+         
                   													</c:forEach>
 																</select>
 															</div>

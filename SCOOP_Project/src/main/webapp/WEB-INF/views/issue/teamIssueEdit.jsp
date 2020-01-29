@@ -121,7 +121,8 @@ border-radius: 5px;
 		</div>
         <div class="myissueDetail" style="margin-top: 2%">
         <textarea rows="5" style="width:50%;border: 0; border-bottom: 1px solid #ced4da;" id="editIssuecontent" name="editIssuecontent">${tissue.ticontent}</textarea>
-        </div>    
+        </div>
+        <input type="file" multiple="multiple"  id="fileclick2" name="editFile" hidden="">    
             </form>
             </div> 
             </div>
@@ -314,7 +315,7 @@ var tar = 1;
 	});
 	$('#editMen4').click(function() {
 		$('#editMentionlist').hide();
-		$('#fileclick').click();
+		$('#fileclick2').click();
 	});
 	function readURL(input) {
 		if (input.files && input.files[0]) {
@@ -330,20 +331,20 @@ var tar = 1;
 			reader.readAsDataURL(input.files[0]);
 		}
 	}
-	$("#fileclick").change(function() {
+	$("#fileclick2").change(function() {
 		readURL(this);
-		console.log($("#fileclick")[0].files);
-		var files = $("#fileclick")[0].files;
+		console.log($("#fileclick2")[0].files);
+		var files = $("#fileclick2")[0].files;
 		$('#filename').empty();
-		//$('#filename').append($("#fileclick").val().substring(12));
+		//$('#filename').append($("#fileclick2").val().substring(12));
 		var text = "";
 		text = $('#editIssuecontent').val().replace("@", "");
 		//$('#issuecontent').val(text);
-		for(let i=0; i<$("#fileclick")[0].files.length;i++){
+		for(let i=0; i<$("#fileclick2")[0].files.length;i++){
 		$('#edittodoresult').append('<div class="myissueDetail" id="myissueMention">'+
 				'<a href="fileDownload.do?fileName='+files[i].name+'"><span class="iconify" data-icon="si-glyph:file-box" data-inline="false"></span>'+files[i].name+'</a>'+
 				'<span class="divDelete" style="cursor:pointer;"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span>'+
-				'<input type="file" multiple="multiple" hidden="" name="editFile" value="'+files[i].name+'">'+
+				//'<input type="file" multiple="multiple" hidden="" name="editFile" value="'+files[i].name+'">'+
 				'<br>'+
 				'</div>')
 				$('.divDelete').click(function(){
