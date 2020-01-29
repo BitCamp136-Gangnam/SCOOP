@@ -264,6 +264,9 @@ $(function(){
              <li class="nav-item">
                <a class="nav-link" href="projectNotice.do?tseq=${tpj.tseq}">공지사항</a>
              </li>
+             <li class="nav-item">
+               <a class="nav-link" href="projectladder.do?tseq=${tpj.tseq}">사다리 타기</a>
+             </li>
           </ul>
       </div>
       <hr style="margin-top: 0;margin-left: 2%; margin-right: 2%;margin-bottom:0;">
@@ -307,12 +310,12 @@ $(function(){
          <c:choose>
 			<c:when test="${mark}">
 				<div class="col-sm-1 newissue">
-					<i class="bookmark far fa-bookmark" id="bookmark" name="bookoff" style="cursor: pointer;"></i>
+					<i class="bookmark far fa-bookmark" id="bookmark" name="bookoff"></i>
 				</div>
 			</c:when>
 			<c:otherwise>
 				<div class="col-sm-1 newissue">
-					<i class="bookmark fas fa-bookmark" id="bookmark" name="bookon" style="cursor: pointer;"></i>
+					<i class="bookmark fas fa-bookmark" id="bookmark" name="bookon"></i>
 				</div>
 			</c:otherwise>
 		</c:choose>

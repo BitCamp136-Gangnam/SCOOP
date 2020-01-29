@@ -625,4 +625,13 @@ public class TeamController {
 		
 		return jArray;
 	}
+	
+	@RequestMapping(value = "projectladder.do" , method = RequestMethod.GET)
+	public String ladder(int tseq,Model model) {
+		ProjectDao dao = sqlsession.getMapper(ProjectDao.class);
+		List<Tpmember> mem = dao.getTpMember(tseq);
+		model.addAttribute("mem", mem);
+		return "user/projectLadder";
+	}
+	
 }
