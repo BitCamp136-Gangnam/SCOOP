@@ -21,25 +21,12 @@
 </head>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript">
-	$(function(){
-		$('#myissueCommentBtn').click(function(){
-			console.log("들어오니");
-			$.ajax({
-				type:"POST",
-				url:"teamComment.do",
-				data:{
-					rcontent: $("#teamComment").val(),
-					email: ${sessionScope.email}
-				},
-				success:function(data){
-					alert(data);
-				},
-				error:function(error){
-					alert(error);
-				}
-					
-			});
-		});
+$(function(){
+		console.log("${myissue.email}");
+		console.log("${sessionScope.email}");
+		$('#editIssue').click(function(){
+			location.href = 'myissueEdit.do?piseq='+${myissue.piseq};
+		})
 	});
 </script>
 <style>
@@ -52,6 +39,13 @@
 	font-size: 15px;
 	margin-left: 3%;
 	margin-bottom:1%;
+}
+.editdelete{
+background-color: #E71D36;
+border-color: #CCCCCC;
+color: #fff;
+cursor: pointer;
+border-radius: 5px;
 }
 </style>
 <body>
@@ -73,7 +67,17 @@
         <div class="container-fluid row" style="padding-right: 0px; margin-right: 0px;margin-left: 0px; padding-left: 15px;">
         <div class="card" style="padding-left: 2%;padding-right: 0px; padding-top:1%;min-width:900px;height: auto;overflow: auto;">
 		<div class="row"style="margin:2% 2% 0 2%" >
-				<h3 id="myissueSubject" style="padding-top: 2%;padding-left: 1%;">${myissue.pititle}</h3>
+		<div class="col-sm-8">
+		<h3 id="myissueSubject" style="padding-top: 2%;padding-left: 1%;">${myissue.pititle}</h3>
+		</div>
+		<c:if test="${myissue.email==sessionScope.email}">
+		<div class="col-sm-2" style="padding-right: 0">
+			<input type="button" class="form-control editdelete" value="수정" id="editIssue">
+		</div>
+		<div class="col-sm-2" style="padding-left: 0">
+			<input type="button" class="form-control editdelete" value="삭제" id="deleteIssue">
+		</div>
+		</c:if>
 		</div>
 		<c:choose>
         <c:when test="${myissue.pistart!=null}">

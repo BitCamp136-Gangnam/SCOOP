@@ -385,6 +385,25 @@ public class BoardController {
 		
 		return viewpage;
 	}
+	@RequestMapping(value="myissueEdit.do" , method = {RequestMethod.POST, RequestMethod.GET})
+	public String myissueEdit(int piseq, Model model) {
+		MyIssueDao dao = sqlSession.getMapper(MyIssueDao.class);
+		MyIssue myissue = dao.myissueDetail(piseq);
+		try {
+			List<Mention> mentions = dao.getMyMentions(piseq);
+			List<GoogleDrive> googledrive = dao.getMyGoogleDrive(piseq);
+			List<DoWork> dowork = dao.getMyDoWork(piseq);
+			List<FileDrive> files = dao.getMyFiles(piseq);
+			model.addAttribute("myissue", myissue);
+			model.addAttribute("mymention", mentions);
+			model.addAttribute("mygdrive", googledrive);
+			model.addAttribute("mydowork", dowork);
+			model.addAttribute("files", files);
+		} catch (Exception e) {
+			model.addAttribute("myissue", myissue);
+		}
+		return "issue/myissueEdit";
+	}
 	@RequestMapping(value="teamIssueEdit.do" , method = {RequestMethod.POST, RequestMethod.GET})
 	public String teamIssueEdit(int tiseq, Model model) {
 		TissueDao dao = sqlSession.getMapper(TissueDao.class);
