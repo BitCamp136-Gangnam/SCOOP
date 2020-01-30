@@ -17,7 +17,7 @@ input::placeholder {
 <%-- <link rel="stylesheet"
    href="<c:url value="/resources/dist/summernote.css" />">
 <script src="<c:url value="/resources/dist/summernote.min.js" />"></script> --%>
-<%-- <link rel="stylesheet" href="<c:url value="/resources/demos/style.css" />"> --%>
+<link rel="stylesheet" href="<c:url value='/resources/js/crawling/app.js' />">
 <meta name="google-signin-client_id" content="47797892299-i06tt9qhbs15g8mn89ncu1isa1eneql8.apps.googleusercontent.com">
 <script src="https://apis.google.com/js/platform.js?onload=loadAuthClient" async defer></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
@@ -1690,4 +1690,5 @@ $('#todoresult').show();
 		console.log($('#annoDelete'+annotation).attr('id'));
 		$('#annoDelete'+annotation).parent().remove();
 	}
+
 </script>

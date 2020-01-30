@@ -83,13 +83,13 @@
       <c:forEach items="${mypjtlist}" var="mpl">
       <c:if test="${myNewPjNoticeList !=null }">
       <c:forEach items="${myNewPjNoticeList }" var="mynewpjnotice">
-      <c:if test="${mpl.tseq==mynewpjnotice.tseq && mpl.tseq !=null && mpl.tpaddtime > mynewpjnotice.pntime}">
+      <c:if test="${mpl.tseq==mynewpjnotice.tseq && mpl.tseq !=null && mpl.tpaddtime < mynewpjnotice.pntime}">
       <div class="row" style="margin-left: 2%; margin-right: 2%" id="ialarm">
 		
          <div class="col-sm-2 newissue" id="al">
          
          <c:choose>
-         	<c:when test="${mpl.tseq==mynewpjnotice.tseq && mpl.tseq !=null && mpl.tpaddtime > mynewpjnotice.pntime}">
+         	<c:when test="${mpl.tseq==mynewpjnotice.tseq && mpl.tseq !=null && mpl.tpaddtime < mynewpjnotice.pntime}">
          	<p><a href="projectDetail.do?tseq=${mynewpjnotice.tseq }">${mpl.pname }</a></p>
          	</c:when>
          	
@@ -98,7 +98,7 @@
          <div class="col-sm-8 newissue" id="ti">
          
          <c:choose>
-         	<c:when test="${mpl.tseq==mynewpjnotice.tseq && mpl.tseq !=null && mpl.tpaddtime > mynewpjnotice.pntime}">
+         	<c:when test="${mpl.tseq==mynewpjnotice.tseq && mpl.tseq !=null && mpl.tpaddtime < mynewpjnotice.pntime}">
          	<p><a href="pjNoticeDetail.do?pnseq=${mynewpjnotice.pnseq }&tseq=${mynewpjnotice.tseq}">${mynewpjnotice.pntitle }</a></p>
          	</c:when>
          	
@@ -107,7 +107,7 @@
          <div class="col-sm-2 newissue" id="day">
          
          <c:choose>
-         	<c:when test="${mpl.tseq==mynewpjnotice.tseq && mpl.tseq !=null && mpl.tpaddtime > mynewpjnotice.pntime}">
+         	<c:when test="${mpl.tseq==mynewpjnotice.tseq && mpl.tseq !=null && mpl.tpaddtime < mynewpjnotice.pntime}">
          	<p>${fn:substring(mynewpjnotice.pntime,0,16)}</p>
          	</c:when>
          	

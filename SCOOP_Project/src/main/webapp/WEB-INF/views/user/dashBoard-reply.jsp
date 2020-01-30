@@ -71,8 +71,8 @@
                         href="#">@멘션</a></li>
                   </ul>
                   <select id="selectMenu" name="menu" class="nav-item" onchange="changeItem()">
-                 <option value="0" selected="selected">새로운 팀이슈</option>
-            	 <option value="1">새로운 댓글</option>	
+                 <option value="0">새로운 팀이슈</option>
+            	 <option value="1" selected="selected">새로운 댓글</option>	
             	 <option value="2">새로운 의사결정</option>
             	 <option value="3">새로운 공지사항</option>
           </select>
@@ -86,17 +86,19 @@
 							<div class="col-sm-6 newissue" id="ti"><p><b>제목</b></p></div>
 							<div class="col-sm-3 newissue" id="day"><p><b>시간</b></p></div>
 							</div>
-	 <c:if test="${mypjtlist!=null }">
+      <c:if test="${mypjtlist!=null }">
       <c:forEach items="${mypjtlist}" var="mpl">
       <c:if test="${myNewTissueList !=null }">
       <c:forEach items="${myNewTissueList }" var="mynewtissue">
-      <c:if test="${mpl.tseq==mynewtissue.tseq && mpl.tseq !=null && mynewtissue.tidate > mpl.tpaddtime && mynewtissue.issee==0}">
+      <c:if test="${myNewReplyList !=null }">
+      <c:forEach items="${myNewReplyList }" var="mynewreply">
+      <c:if test="${mpl.tseq==mynewtissue.tseq && mpl.tseq !=null && mynewreply.tiseq==mynewtissue.tiseq &&mynewreply.rdate > mpl.tpaddtime}">
       <div class="row countRow" style="margin-left: 2%; margin-right: 2%" id="ialarm">
-		
+		 
          <div class="col-sm-3 newissue" id="al">
          
          <c:choose>
-         	<c:when test="${mpl.tseq==mynewtissue.tseq && mpl.tseq !=null && mynewtissue.tidate > mpl.tpaddtime}">
+         	<c:when test="${mpl.tseq==mynewtissue.tseq && mpl.tseq !=null && mynewreply.tiseq==mynewtissue.tiseq &&mynewreply.rdate > mpl.tpaddtime}">
          	<p><a href="projectDetail.do?tseq=${mynewtissue.tseq }">${mpl.pname }</a></p>
          	</c:when>
          	
@@ -105,8 +107,8 @@
          <div class="col-sm-6 newissue" id="ti">
          
          <c:choose>
-         	<c:when test="${mpl.tseq==mynewtissue.tseq && mpl.tseq !=null && mynewtissue.tidate > mpl.tpaddtime}">
-         	<p><a href="teamissueDetail.do?tiseq=${mynewtissue.tiseq}">${mynewtissue.tititle}</a></p>
+         	<c:when test="${mpl.tseq==mynewtissue.tseq && mpl.tseq !=null && mynewreply.tiseq==mynewtissue.tiseq &&mynewreply.rdate > mpl.tpaddtime}">
+         	<p><a href="teamissueDetail.do?tiseq=${mynewtissue.tiseq}">[${mynewreply.email }]님이 댓글을 남겼습니다.</a></p>
          	</c:when>
          	
          </c:choose>
@@ -114,14 +116,16 @@
          <div class="col-sm-3 newissue" id="day">
          
          <c:choose>
-         	<c:when test="${mpl.tseq==mynewtissue.tseq && mpl.tseq !=null && mynewtissue.tidate > mpl.tpaddtime}">
-         	<p>${fn:substring(mynewtissue.tidate,0,16)}</p>
+         	<c:when test="${mpl.tseq==mynewtissue.tseq && mpl.tseq !=null && mynewreply.tiseq==mynewtissue.tiseq &&mynewreply.rdate > mpl.tpaddtime}">
+         	<p>${fn:substring(mynewreply.rdate,0,16)}</p>
          	</c:when>
          	
          </c:choose>
          </div>
          
       </div>
+      </c:if>
+      </c:forEach>
       </c:if>
       </c:forEach>
       </c:if>

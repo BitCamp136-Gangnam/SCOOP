@@ -117,7 +117,7 @@
 			      <a class="nav-link" href="private.do">프라이빗 이슈</a>
 			    </li>
 			    <li class="nav-item">
-			      <a class="nav-link" href="calendar.do">캘린더</a>
+			      <a class="nav-link" href="private-calendar.do">캘린더</a>
 			    </li>
 		    </ul>
 		</div>
