@@ -9,6 +9,7 @@ public class Mention {
 	private String pemail;
 	private int piseq;
 	private String pname;
+	private int tseq;
 	public int getTiseq() {
 		return tiseq;
 	}
@@ -57,10 +58,16 @@ public class Mention {
 	public void setPname(String pname) {
 		this.pname = pname;
 	}
+	public int getTseq() {
+		return tseq;
+	}
+	public void setTseq(int tseq) {
+		this.tseq = tseq;
+	}
 	@Override
 	public String toString() {
 		return "Mention [tiseq=" + tiseq + ", tmseq=" + tmseq + ", email=" + email + ", name=" + name + ", pmseq="
-				+ pmseq + ", pemail=" + pemail + ", piseq=" + piseq + ", pname=" + pname + "]";
+				+ pmseq + ", pemail=" + pemail + ", piseq=" + piseq + ", pname=" + pname + ", tseq=" + tseq + "]";
 	}
 	
 }

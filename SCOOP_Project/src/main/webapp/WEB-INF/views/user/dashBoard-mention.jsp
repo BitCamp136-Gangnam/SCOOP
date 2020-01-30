@@ -56,10 +56,10 @@
                   <h3>새로운 소식</h3>
                </div>
                <div class="row" style="margin-left: 2%;">
-                  <select id="selectMenu" name="menu" class="nav-item" onchange="changeItem()" style="color: #E71D36; border: 0">
+                  <select id="selectMenu" name="menu" class="nav-item" onchange="changeItem()" style="color: #76838f; border: 0">
                  <option value="0" style="color: #76838f">새로운 팀이슈</option>
             	 <option value="1" style="color: #76838f">새로운 댓글</option>	
-            	 <option value="3" selected="selected" style="color: #76838f">새로운 공지사항</option>
+            	 <option value="3" style="color: #76838f">새로운 공지사항</option>
           </select>
                   <ul class="nav nav-pills">
                      <!-- <li class="nav-item dropdown"><a
@@ -72,7 +72,7 @@
                         data-toggle="tab" href="#">협업 진행률</a></li>
                      <li class="nav-item"><a class="nav-link active"
                         data-toggle="tab" href="#">이슈 업데이트</a></li> -->
-                     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#">@멘션</a></li>
+                     <li class="nav-item"><a href="mention.do" class="nav-link" style="color: #E71D36">@멘션</a></li>
                   </ul>
                </div>
                <hr style="margin-top: 0; margin-left: 2%; margin-right: 2%">
@@ -84,19 +84,20 @@
 							<div class="col-sm-6 newissue" id="ti"><p><b>제목</b></p></div>
 							<div class="col-sm-3 newissue" id="day"><p><b>시간</b></p></div>
 							</div>
+		<c:forEach items="${mentions}" var="m">
       <div class="row countRow" style="margin-left: 2%; margin-right: 2%" id="ialarm">
-		
          <div class="col-sm-3 newissue" id="al">
-         ${mentions.pname}
+         <a href="projectDetail.do?tseq=${m.tseq}">${m.pname}</a>
          </div>
          <div class="col-sm-6 newissue" id="ti">
-         ${mentions.tititle}
+         <a href="teamissueDetail.do?tiseq=${m.tiseq}">${m.tititle}</a>
          </div>
          <div class="col-sm-3 newissue" id="day">
-         ${mentions.tidate}
+         ${m.tidate}
          </div>
          
       </div>
+      </c:forEach>
 						</div>
 						<div class="col-sm-5" >
                 <select id="selectDash" name="selectDash" class="form-control" style="margin-top: 7%;">
