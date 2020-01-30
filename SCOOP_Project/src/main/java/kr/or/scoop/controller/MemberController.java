@@ -322,10 +322,8 @@ public class MemberController {
 	@ResponseBody
 	public String forgotPwd(Mail mail, HttpServletRequest request, HttpServletResponse response, HttpSession session, String email) {
 		response.setContentType("text/html; charset=UTF-8");
-		//String email = request.getParameter("emailcheck");
 		session.setAttribute("email", email);
-		System.out.println("이메일 받아 오니? : " + email);
-		System.out.println("세션 이메일 : " + session.getAttribute("email"));
+		
 		String viewpage = "";
 		
 		try {
@@ -342,24 +340,13 @@ public class MemberController {
 			messageHelper.setSubject("회원님의 SCOOP 계정의 본인 인증 이메일입니다");
 			messageHelper.setText(mailBody, true);
 			mailSender.send(message);
-			/*
-			 * PrintWriter out = response.getWriter(); out.println("<script>Swal.fire({" +
-			 * "title: \"비밀번호 변경 인증 메일 전송\"," + "text: \"본인인증 이메일을 발송했습니다.\"," +
-			 * "icon: \"info\"," + "button: \"확인\"" + "})</script>"); out.flush();
-			 */
+			
 			viewpage = "index";
 			
 		} catch (Exception e1) {
 			e1.printStackTrace();
 			System.out.println("인증 메일 발송 에러");
-			/* PrintWriter out; */
 			try {
-				/*
-				 * out = response.getWriter(); out.println("<script>Swal.fire({\r\n" +
-				 * "title: \"인증 메일 전송 실패\",\r\n" +
-				 * "text: \"인증 이메일 발송 도중 에러가 발생했습니다 이메일을 확인해주세요\",\r\n" + "icon: \"error\",\r\n"
-				 * + "button: \"확인\"\r\n" + "})</script>"); out.flush();
-				 */
 			viewpage = "index";
 			} catch (Exception e2) {
 				e2.printStackTrace();
@@ -392,7 +379,6 @@ public class MemberController {
 		
 		MemberDao dao = sqlsession.getMapper(MemberDao.class);
 		int result = dao.changePassword(pwd, email);
-		System.out.println("비밀번호 인서트");
 		
 		String viewpage = "";
 		if(result > 0) {
@@ -543,9 +529,6 @@ public class MemberController {
 			member.setPwd(this.bCryptPasswordEncoder.encode(member.getPwd()));
 			dao.updateMember(member);
 		}
-		
-		
-		
 		return "redirect:/userindex.do";
 	}
 	

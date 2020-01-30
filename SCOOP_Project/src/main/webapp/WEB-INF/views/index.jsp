@@ -129,6 +129,7 @@ function signOut() {
 
 	// 비밀번호 변경 이메일 유효성
 	function chgpwdchk() {
+		
 		let getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
 		let email = $('#emailcheck').val();
 		
