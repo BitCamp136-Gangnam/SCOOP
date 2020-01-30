@@ -236,9 +236,9 @@ $(function(){
         <div class="content-body">
         <div class="container-fluid">
         <div class="card" style="padding-bottom: 30px;">
-      <div class="row" style="margin: 2%">
+      <div class="row" style="margin: 2% 2% 15px 2%">
          <div class="col-sm-12" style="padding-left: 0">
-            <h3>${tpj.pname}
+            <h3 style="padding-left: 1%;">${tpj.pname}
             	<c:if test="${rank == 100}">
             	<span data-toggle="tooltip" data-placement="top" title="협업공간 관리" >
             	<i class="fas fa-cog" id="myModal_Edit_Icon" style="margin-left: 5px;cursor: pointer; font-size: 15px" data-toggle="modal" data-target="#myModal_Edit" ></i>
@@ -250,7 +250,7 @@ $(function(){
             	
             	</c:if>
             </h3>
-            ${tpj.pcontent}
+            <p style="padding-left: 1%;margin-bottom: 0px;">[${tpj.pcontent}]</p>
          </div>
       </div>
       <div class="row" style="margin-left: 2%;">
@@ -265,7 +265,7 @@ $(function(){
                <a class="nav-link" href="cooperation-kanban.do?tseq=${tpj.tseq}">칸반</a>
              </li>
              <li class="nav-item">
-               <a class="nav-link" href="projectNotice.do?tseq=${tpj.tseq}">공지사항</a>
+               <a class="nav-link" href="projectNotice.do?tseq=${tpj.tseq}"style="color: #E71D36;" >공지사항</a>
              </li>
              <li class="nav-item">
                <a class="nav-link" href="projectLadder.do?tseq=${tpj.tseq}">사다리 타기</a>
