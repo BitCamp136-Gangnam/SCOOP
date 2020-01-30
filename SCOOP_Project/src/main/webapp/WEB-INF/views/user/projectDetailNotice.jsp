@@ -23,7 +23,7 @@
 <script type="text/javascript">
 	$(function(){
 		$('#pjNoticeDel').click(function(){
-			location.href="pjNoticeDelete.do?pnseq=${detail.pnseq}";
+			location.href="pjNoticeDelete.do?pnseq=${detail.pnseq}&tseq=${detail.tseq}";
 		});
 	});
 		

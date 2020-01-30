@@ -374,13 +374,13 @@ public class BoardController {
 	
 	//프로젝트 공지사항 삭제
 	@RequestMapping(value="pjNoticeDelete.do" , method = {RequestMethod.POST, RequestMethod.GET})
-	public String pjNoticeDelete(int pnseq) {
+	public String pjNoticeDelete(int pnseq,int tseq) {
 		ProjectDao dao = sqlSession.getMapper(ProjectDao.class);
 		int result = dao.deletePjNotice(pnseq);
 		String viewpage;
 		
 		if(result > 0) {
-			viewpage="redirect:/projectNotice.do";
+			viewpage="redirect:/projectNotice.do?tseq="+tseq;
 		}else {
 			viewpage="user/ProjectNotice";
 		}
