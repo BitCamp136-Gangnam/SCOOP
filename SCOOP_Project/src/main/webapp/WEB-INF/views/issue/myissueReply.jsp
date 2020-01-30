@@ -56,8 +56,8 @@ $(function(){
         <div class="content-body">
             <div class="container-fluid">
         <div class="card" style="padding-bottom: 30px;">
-		<div class="row" style="margin: 2%">
-				<h3>내가 작성한 댓글</h3>
+		<div class="row" style="margin: 2% 2% 15px 2%">
+				<h3  style="padding-left: 15px;">내가 작성한 댓글</h3>
 		</div>
 		<div class="row" style="margin-left: 2%;">
 			<ul class="nav nav-pills">
@@ -70,19 +70,34 @@ $(function(){
 		    </ul>
 		</div>
 		<hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
-		<div class="row" style="margin-left: 2%; margin-right: 2%" id="row">
+		<div class="row" style="margin-left: 2%; margin-right: 2%">
+         <div class="col-sm-7 newissue" style="padding-left: 81px;" >
+         	댓글 내용
+         </div>
+         <div class="col-sm-3 newissue" style="padding-left: 10px;">
+         	이슈 제목
+         </div>
+         <div class="col-sm-2 newissue">
+         	작성시간 
+         </div>
+      	</div>
+      	
+		
 			<c:forEach items="${re}" var="re">
-			<div class="col-sm-12 newissue" id="here">
-				<div id="finish" class="iconify" data-icon="fa-solid:reply-all" data-inline="false" style="width:27px;height: auto;color:#26805c"></div>
-			<div style="float: right;min-width:97%;">
-			<a href="teamissueDetail.do?tiseq=${re.tiseq}">${re.rcontent}</a>			
-			<br>
-			<a class="pnameHover" href="teamissueDetail.do?tiseq=${re.tiseq}" style="color:#2c9aa8;">${re.tititle}</a>&nbsp;&nbsp;&nbsp;${fn:substring(re.rdate,0,16)}<br>
+			<div class="row" style="margin-left: 2%; margin-right: 2%" id="row">
+			<div class="col-sm-7 newissue" >
+			<div id="finish" class="iconify" data-icon="fa-solid:reply-all" data-inline="false" style="width:27px;height: auto;color:#26805c"></div>
+			<a href="teamissueDetail.do?tiseq=${re.tiseq}" style="padding-left: 5%;">${re.rcontent}</a>			
 			</div>
-			
+			<div class="col-sm-3 newissue" >
+			<a class="pnameHover" href="teamissueDetail.do?tiseq=${re.tiseq}" style="color:#2c9aa8;">${re.tititle}</a>
+			</div>
+			<div class="col-sm-2 newissue" >
+			<a href="teamissueDetail.do?tiseq=${re.tiseq}">${fn:substring(re.rdate,0,16)}</a>
+			</div>
 			</div>
 			</c:forEach>
-		</div>
+		
 			<div id="loadPlus" data-toggle="tooltip" data-placement="bottom" title="더 보기" >
 			<div id="load" class="iconify" style="font-size: 40px; color:#464a53;cursor: pointer; margin-left: 627px; margin-top: 1%;" data-icon="mdi:chevron-double-down" data-inline="false">더 보기</div>
 			</div>
@@ -138,7 +153,7 @@ $(function(){
 			$(this).css("color","#464a53");
 		});
 	var temp = 0;
-	var moreEventArray = document.querySelectorAll(".card > #row > #here ");
+	var moreEventArray = document.querySelectorAll(".card > #row ");
 	if(moreEventArray.length<=10){
 		 $('#load').remove();
        $('#loadPlus').remove();

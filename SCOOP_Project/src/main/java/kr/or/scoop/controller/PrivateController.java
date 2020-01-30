@@ -28,7 +28,6 @@ import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.dto.ProjectName;
 import kr.or.scoop.dto.Tissue;
 import kr.or.scoop.dto.Tpmember;
-import kr.or.scoop.service.MemberService;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -36,9 +35,7 @@ import net.sf.json.JSONObject;
 
 @Controller
 public class PrivateController {
-	@Autowired
-	private MemberService service;
-
+	
 	
 	@Autowired
 	private SqlSession sqlsession;
@@ -48,19 +45,15 @@ public class PrivateController {
 		String email = "";
 		email = (String)session.getAttribute("email");
 		
-		System.out.println("private Controller email : " + email);
 		
 		MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
 		List<MyIssue> myissuelist = myissuedao.getMyissue(email);
 		List<BookMark> bookMark = myissuedao.getBookMark(email);
 		
-		System.out.println("bookMark" + bookMark);
 		
 		model.addAttribute("myissuelist", myissuelist);
 		model.addAttribute("bookMark", bookMark);
 		
-		System.out.println(myissuelist);
-		System.out.println("bookMark : " + bookMark);
 		
 		String viewpage = "private/private-place";
 		
@@ -81,13 +74,12 @@ public class PrivateController {
 		for(int i = 0; i < bookMarkList.size(); i++) {
 			tseq = bookMarkList.get(i).getTseq();
 			tiseq = bookMarkList.get(i).getTiseq();
-			System.out.println("tseq : " + tseq + " / tiseq : " + tiseq);
 			if(tseq > 0) {
 				ProjectName projectName = dao.getPjtName(tseq, tiseq);
 				pname = projectName.getPname();
 				bookMarkList.get(i).setPname(pname);
 			}
-			System.out.println(i + " ------ " + bookMarkList.get(i));
+
 		}
 		
 		model.addAttribute("bookMarkList", bookMarkList);
@@ -97,7 +89,6 @@ public class PrivateController {
 	
 	@RequestMapping("/private-calendar.do")
 	public String object(@RequestParam(required = false, name="lang") String language, HttpServletRequest request, HttpServletResponse response,Model model,HttpSession session) {
-		System.out.println("privatecalendar 왔냐?");
 		String email = (String)session.getAttribute("email");
 		return "private/private-calendar";
 	}
@@ -105,10 +96,8 @@ public class PrivateController {
 	@RequestMapping(value = "addPrivateCalendar.do", method = RequestMethod.POST)
 	public String addPrivateCalendar(HttpSession session,String title, String start, String end, String description, String type, String username, String backgroundColor, String textColor, String allDay, int tseq) {
 		int result = 0;
-		System.out.println(title+"/"+start+"/"+end+"/"+description+"/"+type+"/"+username+"/"+allDay+"/"+tseq);
 		String viewpage = "";
 		Tissue tissue = new Tissue();
-		System.out.println(start.length());
 		MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
 		tissue.setTititle(title);
 		tissue.setEmail((String)session.getAttribute("email"));
@@ -124,22 +113,18 @@ public class PrivateController {
 		}
 		tissue.setAllDay(alldayReturn);
 		if(start.length()==16) {
-			System.out.println(start+":00");
 			tissue.setTistart(java.sql.Timestamp.valueOf(start+":00"));
 			tissue.setTiend(java.sql.Timestamp.valueOf(end+":00"));
 			result = myissuedao.writeCalendarTissue(tissue);
 		} else {
-			System.out.println(start+" 00:00:00");
 			tissue.setTistart(java.sql.Timestamp.valueOf(start+" 00:00:00"));
 			tissue.setTiend(java.sql.Timestamp.valueOf(end+" 00:00:00"));
 			result = myissuedao.writeCalendarTissue(tissue);
 		}
 		
 		if(result>0) {
-			System.out.println("성공");
 			viewpage = "redirect:/calendar.do";
 		} else {
-			System.out.println("실패");
 			viewpage = "redirect:/calendar.do";
 		}
 		
@@ -150,35 +135,28 @@ public class PrivateController {
 	@RequestMapping(value = "editPrivateCalendar.do", method = RequestMethod.POST)
 	public String editPrivateCalendar(int _id, String title, String start, String end, String description, String type, String backgroundColor, boolean allDay) {
 		int result = 0;
-		System.out.println(title+"/"+start+"/"+end+"/"+description+"/"+type+"/"+allDay+"/");
 		String viewpage = "";
 		Tissue tissue = new Tissue();
-		System.out.println(start.length());
-		System.out.println("idididididididididididid :"+_id);
 		MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
 		tissue.setTititle(title);
 		tissue.setTicontent(description);
 		tissue.setTiseq(_id);
 		tissue.setBackgroundColor(backgroundColor);
 		if(start.length()==16) {
-			System.out.println(start+":00");
 			tissue.setAllDay(0);
 			tissue.setTistart(java.sql.Timestamp.valueOf(start+":00"));
 			tissue.setTiend(java.sql.Timestamp.valueOf(end+":00"));
 			result = myissuedao.editTeamCalendar(tissue);
 		} else {
 			tissue.setAllDay(1);
-			System.out.println(start+" 00:00:00");
 			tissue.setTistart(java.sql.Timestamp.valueOf(start+" 00:00:00"));
 			tissue.setTiend(java.sql.Timestamp.valueOf(end+" 00:00:00"));
 			result = myissuedao.editTeamCalendar(tissue);
 		}
 		
 		if(result>0) {
-			System.out.println("성공");
 			viewpage = "redirect:/calendar.do";
 		} else {
-			System.out.println("실패");
 			viewpage = "redirect:/calendar.do";
 		}
 		
@@ -206,7 +184,7 @@ public class PrivateController {
 				}
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
+
 		}
 		
 		return viewpage;

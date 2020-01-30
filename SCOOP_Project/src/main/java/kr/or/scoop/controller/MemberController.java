@@ -273,7 +273,7 @@ public class MemberController {
 				*/
 			model.addAttribute("mypjtlist", pjtlist);
 			model.addAttribute("myNewTissueList", myNewTissueList);
-			System.out.println(myNewTissueList);
+			System.out.println(tpmemlist);
 			/*
 			 AlarmDao dao = sqlsession.getMapper(AlarmDao.class); 
 			 List<Alarm> alarm = dao.getAlarm((String)session.getAttribute("email"));
@@ -464,6 +464,7 @@ public class MemberController {
 		List<PjNotice> mypjtlist = null;
 		List<Tpmember> pjtlist = null;
 		List<Tpmember> tpmemlist =  null;
+		List<Tissue> myNewTissueList = null;
 		List<Mention> mentions = null;
 		try {
 			 filedrive = memberdao.getFileDrive(email);
@@ -482,7 +483,6 @@ public class MemberController {
 			mytissuelist = myissuedao.teamWriteTiisueList(member.getIdtime());
 			myreplylist = myissuedao.teamWriteReplyList(member.getIdtime());
 			mypjtlist = myissuedao.teamWriteNoticeList(member.getEmail(), member.getIdtime());
-			mentions = memberdao.getMention(member.getEmail());
 			model.addAttribute("mytissuelist",mytissuelist);
 			model.addAttribute("myreplylist",myreplylist);
 			model.addAttribute("mypjtlist",mypjtlist);
@@ -492,12 +492,14 @@ public class MemberController {
 		if(pjtlist!=null) {
 			session.setAttribute("pjtlist", pjtlist);
 			session.setAttribute("tpmemlist", tpmemlist);
-			List<Tissue> myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime());
+			myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime());
+			mentions = memberdao.getMention(member.getEmail());
 			model.addAttribute("mypjtlist", pjtlist);
 			model.addAttribute("myNewTissueList", myNewTissueList);
-			System.out.println(myNewTissueList);
+			model.addAttribute("mentions",mentions);
+			System.out.println(mentions);
 		}
-		return "user/mention";
+		return "user/dashBoard-mention";
 	}
 	// 로그아웃
 	@RequestMapping(value = "/logout.do")

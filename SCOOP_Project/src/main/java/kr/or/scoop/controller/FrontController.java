@@ -30,7 +30,6 @@ public class FrontController {
 		}
 		
 		Locale locale  = new Locale(language);
-		System.out.println(" locale : " + locale + "\n language : " + language);
 		localeResolver.setLocale(request, response, locale);
 		
 		return "index";

@@ -171,7 +171,6 @@ public class BoardController {
 		
 		model.addAttribute("status", status);
 		
-		System.out.println(model);
 		
 		return viewpage;
 	}
@@ -362,7 +361,6 @@ public class BoardController {
 	public String pjNoticeEditOk(PjNotice pjnotice,int tseq) {
 		String viewpage;
 		int result = 0;
-		System.out.println("이거 : " + pjnotice);
 		result = tservice.pjNoticeEdit(pjnotice);
 		if(result > 0) {
 			viewpage = "redirect:/pjNoticeDetail.do?pnseq="+pjnotice.getPnseq()+"&tseq="+tseq;
@@ -431,7 +429,6 @@ public class BoardController {
 	public String myissueEditOk(int piseq,Model model, String[] editMention, String[] editGfilename, HttpSession session, HttpServletRequest request
 			, String[] editGurl, String[] editToname, String[] editOriFile,String[] editDowork, String title, String editIssuecontent, String editFrom, String editTo, @RequestParam(value="editFile") MultipartFile[] editFile) throws Exception {
 		String path = "";
-		System.out.println(piseq +"/"+ editMention + editFile + editGfilename + editGurl+editToname+editDowork+title+editIssuecontent);
 		MyIssue tissue = new MyIssue();
 		String email = (String)session.getAttribute("email");
 		//tissue.setTseq(tseq);
@@ -443,18 +440,14 @@ public class BoardController {
 			tissue.setPistart(java.sql.Timestamp.valueOf(editFrom+" 00:00:00"));
 			tissue.setPiend(java.sql.Timestamp.valueOf(editTo+" 00:00:00"));
 		}
-		System.out.println(tissue);
 		int result = privateservice.editMyissue(tissue);
 		if(editFile != null && editFile.length > 0) {
-			System.out.println("파일오니????");
 			//업로드한 파일이 하나라도 있다면
 			for(MultipartFile mutifile : editFile) {
 				String filename = mutifile.getOriginalFilename();
-				System.out.println(filename);
 				long fsize = mutifile.getSize();
 				String filepath = request.getServletContext().getRealPath("/upload");
 				String fpath = filepath + "\\" + filename;
-				System.out.println(filename + " , " + fpath);
 				if(!filename.equals("")) {
 					//서버에 파일 업로드 (write)
 					FileOutputStream fs = new FileOutputStream(fpath);
@@ -482,12 +475,9 @@ public class BoardController {
 					int pmseq = Integer.parseInt(editMention[i].split("~")[1]);
 					privateservice.pmentionDelete(pmseq);
 				}else {
-					System.out.println(editMention[i].contains("~"));
 					if(!editMention[i].contains("~")) {
 						//editMention[i] = editMention[i].split("~")[0];
-						System.out.println("멘션전에딧"+piseq+editMention[i]);
 						privateservice.pmentionEdit(editMention[i], piseq);
-						System.out.println("멘션끝"+piseq+editMention[i]);
 					}
 				}
 			}
@@ -524,11 +514,9 @@ public class BoardController {
 		if(result >0) {
 			model.addAttribute("piseq", piseq);
 			path = "ajax/editMyIssueSwal";
-			System.out.println("success edit myissue");
 		}else {
 			model.addAttribute("piseq", piseq);
 			path = "ajax/editMyIssueFailSwal";
-			System.out.println("fail edit myissue");
 		}
 		return path;
 	}
@@ -536,7 +524,6 @@ public class BoardController {
 	public String teamIssueEditOk(int tseq, int tiseq,Model model, String[] editMention, String[] editGfilename, HttpSession session, HttpServletRequest request
 			, String[] editGurl, String[] editToname, String[] editOriFile,String[] editDowork, String title, String editIssuecontent, String editFrom, String editTo, @RequestParam(value="editFile") MultipartFile[] editFile) throws Exception {
 		String path = "";
-		System.out.println(tiseq +"/"+ editMention + editFile + editGfilename + editGurl+editToname+editDowork+title+editIssuecontent);
 		MyIssue tissue = new MyIssue();
 		String email = (String)session.getAttribute("email");
 		tissue.setTseq(tseq);
@@ -548,18 +535,14 @@ public class BoardController {
 			 tissue.setTistart(java.sql.Timestamp.valueOf(editFrom+" 00:00:00"));
 			 tissue.setTiend(java.sql.Timestamp.valueOf(editTo+" 00:00:00"));
 		}
-		System.out.println(tissue);
 		int result = privateservice.editTissue(tissue);
 		 if(editFile != null && editFile.length > 0) {
-			 System.out.println("파일오니????");
 			 //업로드한 파일이 하나라도 있다면
 			 for(MultipartFile mutifile : editFile) {
 				 String filename = mutifile.getOriginalFilename();
-				 System.out.println(filename);
 					 long fsize = mutifile.getSize();
 					 String filepath = request.getServletContext().getRealPath("/upload");
 					 String fpath = filepath + "\\" + filename;
-					 System.out.println(filename + " , " + fpath);
 					 if(!filename.equals("")) {
 						 //서버에 파일 업로드 (write)
 						 FileOutputStream fs = new FileOutputStream(fpath);
@@ -587,12 +570,9 @@ public class BoardController {
 					 int tmseq = Integer.parseInt(editMention[i].split("~")[1]);
 					 tservice.mentionDelete(tmseq);
 				 }else {
-					 System.out.println(editMention[i].matches("~"));
 					 if(!editMention[i].contains("~")) {
 						 //editMention[i] = editMention[i].split("~")[0];
-						 System.out.println("멘션전에딧"+tiseq);
 						 tservice.mentionEdit(editMention[i], tiseq);
-						 System.out.println("멘션끝"+tiseq);
 					 }
 				 }
 			 }
@@ -630,11 +610,9 @@ public class BoardController {
 		if(result >0) {
 			model.addAttribute("tiseq", tiseq);
 			path = "ajax/editTeamIssueSwal";
-			System.out.println("success edit tissue");
 		}else {
 			model.addAttribute("tiseq", tiseq);
 			path = "ajax/editTeamIssueFailSwal";
-			System.out.println("fail edit tissue");
 		}
 	return path;
 	}
