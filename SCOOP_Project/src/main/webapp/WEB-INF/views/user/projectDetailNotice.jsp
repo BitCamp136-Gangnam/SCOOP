@@ -28,7 +28,21 @@
 		});
 		//팀 공지사항 디테일 삭제 
 		$('#pjNoticeDel').click(function(){
-			location.href="pjNoticeDelete.do?pnseq=${detail.pnseq}&tseq=${detail.tseq}";
+			Swal.fire({
+				   title:'공지사항을 삭제하시겠습니까?',
+				   text: "삭제하시면 공지사항의 모든 정보가 사라집니다!",
+				   icon: 'warning',
+				   showCancelButton: true,
+				   confirmButtonColor: '#d33',
+				   cancelButtonColor: '#c8c8c8',
+				   confirmButtonText: '확인',
+				   cancelButtonText: '취소'
+				 }).then((result) => {
+				   if (result.value) {
+					   location.href="pjNoticeDelete.do?pnseq=${detail.pnseq}&tseq=${detail.tseq}";
+				   }
+				 })
+			
 		});
 		//팀 공지사항으로 돌아가기
 		$('#pjNoticeBack').click(function(){
@@ -71,15 +85,15 @@
 		<div class="row"style="margin:2% 2% 0 2%" >
 				<h3 id="myissueSubject" style="padding-top: 2%;padding-left: 1%;">${detail.pntitle}
 				<c:if test="${rank == 100}">
-					<span id="pjNoticeEd">
+					<span id="pjNoticeEd" data-toggle="tooltip" data-placement="top" title="공지사항 수정">
 					<span class="fas fa-cog" id="pjnoticeedit" style="margin-left: 5px;cursor: pointer; font-size: 15px"></span>
 					</span>
-					<span id="pjNoticeDel">
-					<span class="iconify" data-icon="octicon:x" data-inline="false" style="cursor: pointer;font-size: 15px;"></span>
+					<span id="pjNoticeDel" data-toggle="tooltip" data-placement="top" title="공지사항 삭제" >
+					<span class="iconify" data-icon="octicon:x" data-inline="false" style="cursor: pointer;font-size: 17px;margin-bottom: 5px;"></span>
 					</span>
 				</c:if>		
-					<span id="pjNoticeBack">
-					<span class="iconify" data-icon="typcn:arrow-back" data-inline="false" style="cursor: pointer; font-size: 15px;"></span>
+					<span id="pjNoticeBack" data-toggle="tooltip" data-placement="top" title="뒤로 돌아가기">
+					<span class="iconify" data-icon="typcn:arrow-back" data-inline="false" style="cursor: pointer; font-size: 17px;margin-bottom: 5px;"></span>
 					</span>			
 				</h3>
 

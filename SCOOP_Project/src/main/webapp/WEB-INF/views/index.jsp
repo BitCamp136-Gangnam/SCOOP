@@ -388,7 +388,7 @@ function idOver(a) {
       	<div class="dropdown-menu">
       		<div id="table">
       			<div id="rowdrop">
-      				<span style="color: gray;font-size:15px"><a a href="index.do?lang=ko">한국어</a></span>
+      				<span style="color: gray;font-size:15px"><a href="index.do?lang=ko">한국어</a></span>
       			</div>
       			<hr width="80%">
       			<div id="rowdrop">

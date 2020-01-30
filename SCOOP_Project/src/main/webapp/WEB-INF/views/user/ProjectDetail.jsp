@@ -296,28 +296,44 @@ $(function(){
       </div>
       <hr style="margin-top: 0;margin-left: 2%; margin-right: 2%;margin-bottom:0;">
       <div class="row" style="margin-left: 2%; margin-right: 2%">
-         <div class="col-sm-3 newissue" >
-         작성자
-         </div>
-         <div class="col-sm-6 newissue">
-         제목 
+         
+         <div class="col-sm-7 newissue" style="padding-left: 87px;" >
+         	제목
          </div>
          <div class="col-sm-2 newissue">
-         작성시간 
+         	작성자 
+         </div>
+         <div class="col-sm-2 newissue">
+         	작성시간 
          </div>
          <div class="col-sm-1 newissue">
-         북마크
+         	북마크
          </div>
       </div>
+      
       <c:forEach items="${tp}" var="ti">
          <div class="row" style="margin-left: 2%; margin-right: 2%" id="row">
          <input type="hidden" name="tiseq" value="${ti.tiseq}" />
          <input type="hidden" name="tseq" value="${tpj.tseq}" />
-         <div class="col-sm-3 newissue" >
-         <a href="teamissueDetail.do?tiseq=${ti.tiseq}">${ti.name}</a>
+         <div class="col-sm-7 newissue">
+         <c:choose>
+				<c:when test="${ti.isprocess==0}">
+				<div id="create" class="iconify" data-icon="uil:file-exclamation-alt" data-inline="false" style="width:27px;height: auto;margin-left: 1%;"></div>
+				</c:when>
+				<c:when test="${ti.isprocess==1}">
+				<div id="ing" class="iconify" data-icon="uil:file-edit-alt" data-inline="false" style="width:27px;height: auto;color: #2671bd;margin-left: 1%;"></div>
+				</c:when>
+				<c:when test="${ti.isprocess==2}">
+				<div id="stop" class="iconify" data-icon="uil:file-block-alt" data-inline="false" style="width:27px;height: auto;color:#cca352;margin-left: 1%;"></div>
+				</c:when>
+				<c:when test="${ti.isprocess==3}">
+				<div id="finish" class="iconify" data-icon="uil:file-check-alt" data-inline="false" style="width:27px;height: auto;color:#26805c;margin-left: 1%;"></div>
+				</c:when>	
+			</c:choose>
+         <a href="teamissueDetail.do?tiseq=${ti.tiseq}" style="margin-left: 5%;">${ti.tititle}</a> 
          </div>
-         <div class="col-sm-6 newissue">
-         <a href="teamissueDetail.do?tiseq=${ti.tiseq}">${ti.tititle}</a> 
+         <div class="col-sm-2 newissue" >
+         <a href="teamissueDetail.do?tiseq=${ti.tiseq}">${ti.name}</a>
          </div>
          <div class="col-sm-2 newissue">
          <a href="teamissueDetail.do?tiseq=${ti.tiseq}">${fn:substring(ti.tidate,0,16)}</a> 

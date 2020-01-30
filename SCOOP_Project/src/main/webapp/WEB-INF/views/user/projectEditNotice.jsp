@@ -40,6 +40,18 @@
 }
 </style>
 <script type="text/javascript">
+//공지사항 수정완료 스윗얼럿 
+$(function(){
+	 $('#noticeEditOk').click(function(){
+		 Swal.fire({
+			  icon: 'success',
+			  title: '수정 완료',
+			  showConfirmButton: false,
+			  timer: 1500
+			})
+		});
+});
+
 //프로젝트 공지사항작성 validation
 function checkpjnotice() {
 //이슈 제목 공백 확인
@@ -58,6 +70,8 @@ function checkpjnotice() {
 
 return true;
 }
+
+
 </script>
 <body>
 
@@ -73,7 +87,7 @@ return true;
 			<!--**********************************
             Content body start
         ***********************************-->
-		<form action="pjNoticeEditOk.do" method="POST" onsubmit="return checkpjnotice()">
+		<form action="pjNoticeEditOk.do?tseq=${edit.tseq}" method="POST" onsubmit="return checkpjnotice()">
 			<div class="content-body" style="height: 680px;">
 				<div class="container-fluid row"
 					style="padding-right: 15px; margin-right: 0px; margin-left: 0px; padding-left: 15px;">
@@ -90,9 +104,7 @@ return true;
 						</div>
 						<div class="row" style="padding-left: 38%;">
 						<input type="hidden" name="pnseq" value="${edit.pnseq}">
-						<input type="submit" class="btn btn-secondary"  style="width:150px;background-color: #E71D36; border-color: #CCCCCC; color: #fff;margin-right:2%; cursor: pointer;" value="작성 완료">
-						
-						
+						<input id="noticeEditOk" type="submit" class="btn btn-secondary"  style="width:150px;background-color: #E71D36; border-color: #CCCCCC; color: #fff;margin-right:2%; cursor: pointer;" value="작성 완료">
 						<button type="button" class="btn btn-secondary" style="float:right;width:150px;background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;"data-dismiss="modal">
 							취소
 						</button>

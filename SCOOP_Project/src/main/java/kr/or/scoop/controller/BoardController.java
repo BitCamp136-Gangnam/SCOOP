@@ -359,13 +359,13 @@ public class BoardController {
 	
 	//프로젝트 공지사항 수정 처리 
 	@RequestMapping(value="pjNoticeEditOk.do", method = RequestMethod.POST)
-	public String pjNoticeEditOk(PjNotice pjnotice) {
+	public String pjNoticeEditOk(PjNotice pjnotice,int tseq) {
 		String viewpage;
 		int result = 0;
-		
+		System.out.println("이거 : " + pjnotice);
 		result = tservice.pjNoticeEdit(pjnotice);
 		if(result > 0) {
-			viewpage = "redirect:/pjNoticeDetail.do?pnseq="+pjnotice.getPnseq();
+			viewpage = "redirect:/pjNoticeDetail.do?pnseq="+pjnotice.getPnseq()+"&tseq="+tseq;
 		}else {
 			viewpage = "user/projectNotice";
 		}
