@@ -20,7 +20,14 @@
 
 </head>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-
+<script type="text/javascript">
+	$(function(){
+		$('#pjNoticeDel').click(function(){
+			location.href="pjNoticeDelete.do?pnseq=${detail.pnseq}";
+		});
+	});
+		
+</script>
 <style>
 .newissue{
 	border-bottom: 1px solid #c8c8c8;
@@ -52,7 +59,12 @@
         <div class="container-fluid row" style="padding-right: 15px; margin-right: 0px;margin-left: 0px; padding-left: 15px;">
         <div class="card" style="padding-left: 15px;padding-right: 15px; padding-top:1%;width:100%;height: auto;overflow: auto;">
 		<div class="row"style="margin:2% 2% 0 2%" >
-				<h3 id="myissueSubject" style="padding-top: 2%;padding-left: 1%;">${detail.pntitle}<a href="pjNoticeEdit.do?pnseq=${detail.pnseq}" class="fas fa-cog" id="pjnoticeedit" style="margin-left: 5px;cursor: pointer; font-size: 15px"></a><a href="pjNoticeDelete.do?pnseq=${detail.pnseq}" class="iconify" data-icon="octicon:x" data-inline="false" style="cursor: pointer;font-size: 15px;"></a> </h3>
+				<h3 id="myissueSubject" style="padding-top: 2%;padding-left: 1%;">${detail.pntitle}
+				<a href="pjNoticeEdit.do?pnseq=${detail.pnseq}" class="fas fa-cog" id="pjnoticeedit" style="margin-left: 5px;cursor: pointer; font-size: 15px"></a>
+				<span id="pjNoticeDel">
+				<span class="iconify" data-icon="octicon:x" data-inline="false" style="cursor: pointer;font-size: 15px;"></span>
+				</span>
+				</h3>
 		</div>
 				<a href="projectNotice.do?pnseq=${detail.tseq}" class="iconify" data-icon="typcn:arrow-back" data-inline="false" style="cursor: pointer; font-size: 15px;"></a>
 		<div class="myissueDetail" id="myissueMention"><sup><i class="fas fa-quote-left" style="color:#ca0000;"></i></sup> 멘션 멤버 이름 넣는 곳 <sup><i class="fas fa-quote-right"style="color:#ca0000;"></i></sup></div>
