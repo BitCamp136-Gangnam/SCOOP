@@ -116,7 +116,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from pfiledrive where email=#{email,jdbcType=VARCHAR}
 	</select>
 	<select id="getTpmembers" resultType="kr.or.scoop.dto.Tpmember">
-		select* from tpmember t join teampjt p on p.email=#{email,jdbcType=VARCHAR} join member m on t.email=m.email where t.tseq=p.tseq
+		select m.name,m.email, t.tseq
+from  member m join tpmember t on m.email=t.email
+where tseq in (
+            select tseq
+            from tpmember
+            where email = #{email}
+)
 	</select>
 	<select id="getMention" resultType="kr.or.scoop.dto.Mention">
 		select * from teammention m join tissue t on m.tiseq = t.tiseq join teampjt p on t.tseq=p.tseq where tmemail==#{tmemail}
