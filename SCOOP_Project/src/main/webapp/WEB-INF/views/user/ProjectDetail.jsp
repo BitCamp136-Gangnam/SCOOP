@@ -223,7 +223,6 @@ $(function(){
 			}
 		}
 	}
-
 	//프로젝트 공지사항작성 validation
     function checkpjnotice() {
     //이슈 제목 공백 확인
@@ -461,7 +460,7 @@ $(function(){
             <button type="button" class="close" data-dismiss="modal">&times;</button>
          </div>
    
-         <form action="PnoticeWrite.do" method="POST" onsubmit="return checknotice()">
+         <form action="PnoticeWrite.do" method="POST" onsubmit="return checkpjnotice()">
             <!-- Modal body -->
             <div class="modal-body">
                <!-- <p style="font-size: 12px">협업공간은 함께 일하는 멤버들끼리만 자료를 공유하고 협업할 수 있는 공간입니다.<br>
@@ -560,6 +559,7 @@ $(document).ready(function(){
 		         }
 			}
 	}); 
+	
 
 });
 </script>

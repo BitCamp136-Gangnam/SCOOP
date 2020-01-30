@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import kr.or.scoop.dto.FileDrive;
 import kr.or.scoop.dto.Member;
+import kr.or.scoop.dto.Mention;
 import kr.or.scoop.dto.PrivateFileDrive;
 import kr.or.scoop.dto.ProjectMemberlist;
 import kr.or.scoop.dto.Role;
@@ -70,4 +71,6 @@ public interface MemberDao {
 	
 	//Tpmember 불러오기
 	public List<Tpmember> getTpmembers(String email);
+	//mention 불러오기
+	public List<Mention> getMention(String tmemail);
 }

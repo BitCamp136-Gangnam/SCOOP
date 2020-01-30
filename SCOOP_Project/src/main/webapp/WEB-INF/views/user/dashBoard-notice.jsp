@@ -57,12 +57,12 @@
                </div>
                <div class="row" style="margin-left: 2%;">
                   <select id="selectMenu" name="menu" class="nav-item" onchange="changeItem()" style="color: #E71D36; border: 0">
-                 <option value="0" selected="selected" style="color: #76838f">새로운 팀이슈</option>
+                 <option value="0" style="color: #76838f">새로운 팀이슈</option>
             	 <option value="1" style="color: #76838f">새로운 댓글</option>	
-            	 <option value="3" style="color: #76838f">새로운 공지사항</option>
+            	 <option value="3" selected="selected" style="color: #76838f">새로운 공지사항</option>
           </select>
                   <ul class="nav nav-pills">
-                    <!--  <li class="nav-item dropdown"><a
+                     <!-- <li class="nav-item dropdown"><a
                         class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">정렬</a>
                         <div class="dropdown-menu">
                            <a class="dropdown-item" data-toggle="tab" href="#">안읽음</a> <a
@@ -84,18 +84,18 @@
 							<div class="col-sm-6 newissue" id="ti"><p><b>제목</b></p></div>
 							<div class="col-sm-3 newissue" id="day"><p><b>시간</b></p></div>
 							</div>
-	 <c:if test="${mypjtlist!=null }">
+        <c:if test="${mypjtlist!=null }">
       <c:forEach items="${mypjtlist}" var="mpl">
-      <c:if test="${myNewTissueList !=null }">
-      <c:forEach items="${myNewTissueList }" var="mynewtissue">
-      <c:if test="${mpl.tseq==mynewtissue.tseq && mpl.tseq !=null && mynewtissue.tidate > mpl.tpaddtime && mynewtissue.issee==0}">
+      <c:if test="${myNewPjNoticeList !=null }">
+      <c:forEach items="${myNewPjNoticeList}" var="mynewpjnotice">
+      <c:if test="${mpl.tseq==mynewpjnotice.tseq && mpl.tseq !=null && mpl.tpaddtime < mynewpjnotice.pntime}">
       <div class="row countRow" style="margin-left: 2%; margin-right: 2%" id="ialarm">
 		
          <div class="col-sm-3 newissue" id="al">
          
          <c:choose>
-         	<c:when test="${mpl.tseq==mynewtissue.tseq && mpl.tseq !=null && mynewtissue.tidate > mpl.tpaddtime}">
-         	<p><a href="projectDetail.do?tseq=${mynewtissue.tseq }">${mpl.pname }</a></p>
+         	<c:when test="${mpl.tseq==mynewpjnotice.tseq && mpl.tseq !=null && mpl.tpaddtime < mynewpjnotice.pntime}">
+         	<p><a href="projectDetail.do?tseq=${mynewpjnotice.tseq }">${mpl.pname }</a></p>
          	</c:when>
          	
          </c:choose>
@@ -103,8 +103,8 @@
          <div class="col-sm-6 newissue" id="ti">
          
          <c:choose>
-         	<c:when test="${mpl.tseq==mynewtissue.tseq && mpl.tseq !=null && mynewtissue.tidate > mpl.tpaddtime}">
-         	<p><a href="teamissueDetail.do?tiseq=${mynewtissue.tiseq}">${mynewtissue.tititle}</a></p>
+         	<c:when test="${mpl.tseq==mynewpjnotice.tseq && mpl.tseq !=null && mpl.tpaddtime < mynewpjnotice.pntime}">
+         	<p><a href="pjNoticeDetail.do?pnseq=${mynewpjnotice.pnseq }&tseq=${mynewpjnotice.tseq}">${mynewpjnotice.pntitle }</a></p>
          	</c:when>
          	
          </c:choose>
@@ -112,8 +112,8 @@
          <div class="col-sm-3 newissue" id="day">
          
          <c:choose>
-         	<c:when test="${mpl.tseq==mynewtissue.tseq && mpl.tseq !=null && mynewtissue.tidate > mpl.tpaddtime}">
-         	<p>${fn:substring(mynewtissue.tidate,0,16)}</p>
+         	<c:when test="${mpl.tseq==mynewpjnotice.tseq && mpl.tseq !=null && mpl.tpaddtime < mynewpjnotice.pntime}">
+         	<p>${fn:substring(mynewpjnotice.pntime,0,16)}</p>
          	</c:when>
          	
          </c:choose>

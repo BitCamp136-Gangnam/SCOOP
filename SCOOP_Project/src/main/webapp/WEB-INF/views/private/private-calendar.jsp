@@ -46,10 +46,9 @@
 													<ul class="dropdown-menu dropNewEvent" role="menu"
 														aria-labelledby="dropdownMenu"
 														style="display: block; margin-bottom: 5px;">
-														<c:forEach items="${pjtlist}" var="p">
-														<li><a tabindex="-1" href="#" name="${p.tseq}">${p.pname}</a></li>
+														
+														<li><a tabindex="-1" href="#" name="프라이빗 공간">프라이빗 공간</a></li>
                          														 
-                  										</c:forEach>
 														<li class="divider"></li>
 														<li><a tabindex="-1" href="#" data-role="close">Close</a></li>
 													</ul>
@@ -109,10 +108,10 @@
 																		<label class="col-xs-4" for="edit-type">협업공간 이름</label> <select
 																			class="inputModal" type="text" name="edit-type"
 																			id="edit-type">
-																			<c:forEach items="${pjtlist}" var="p">
 																			
-                         														  <option value="${p.tseq}">${p.pname}</option>
-                  															</c:forEach>
+																			
+                         														  <option value="프라이빗 공간">프라이빗 공간</option>
+                  															
 																		</select>
 																	</div>
 																</div>
@@ -174,11 +173,9 @@
 															<div class="input-group">
 																<select class="filter" id="edit-tseq"
 																	multiple="multiple" name="edit-tseq">
-																	<c:forEach items="${pjtlist}" var="p">
-																	<input class="inputModal" type="text" name="edit-tseq${p.tseq }" id="edit-tseq${p.tseq }" value="${p.tseq}" readonly hidden="hidden">
-                         											<option value="${p.tseq}">${p.pname}</option>
+                         											<option value="프라이빗 공간">${p.pname}</option>
          
-                  													</c:forEach>
+                  													
 																</select>
 															</div>
 														</div>
@@ -191,12 +188,6 @@
 																			id="edit-name" required="required" value="${sessionScope.name}"></label>
 																<label class="checkbox-inline"><input
 																	class='filter' type="checkbox" value="${sessionScope.name}" checked>${sessionScope.name}</label>
-																	<c:forEach items="${mem}" var="m">
-																		<label class="checkbox-inline"><input
-																	class='filter' type="checkbox" value="${m.name}" checked>${m.name}</label>
-                  													</c:forEach>
-																	
-								
 															</div>
 														</div>
 
@@ -236,9 +227,9 @@
 	<script src="<c:url value="/resources/vendor/js/ko.js"/>"></script>
 	<script src="<c:url value="/resources/vendor/js/select2.min.js"/>"></script>
 	
-	<script src="<c:url value='/resources/fullcalendar/main.js'/>"></script>
-	<script src="<c:url value='/resources/fullcalendar/addEvent.js'/>"></script>
-	<script src="<c:url value='/resources/fullcalendar/editEvent.js'/>"></script>
+	<script src="<c:url value='/resources/fullcalendar/privateMain.js'/>"></script>
+	<script src="<c:url value='/resources/fullcalendar/privateAddEvent.js'/>"></script>
+	<script src="<c:url value='/resources/fullcalendar/privateEditEvent.js'/>"></script>
 	<script src="<c:url value='/resources/fullcalendar/etcSetting.js'/>"></script>
 	
 	<script src="<c:url value="/resources/js/custom.min.js" />"></script>
