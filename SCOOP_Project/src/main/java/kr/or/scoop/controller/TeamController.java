@@ -392,8 +392,8 @@ public class TeamController {
 	public Process chart(int tseq) {
 		
 		Process processList = null;
-		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		
 		processList = dao.chartData(tseq);
 		
@@ -405,7 +405,7 @@ public class TeamController {
 	}
 	
 	@RequestMapping(value = "addTeamCalendar.do", method = RequestMethod.POST)
-	public String addTeamCalendar(HttpSession session,String title, String start, String end, String description, String type, String username, String backgroundColor, String textColor, boolean allDay, int tseq) {
+	public String addTeamCalendar(HttpSession session,String title, String start, String end, String description, String type, String username, String backgroundColor, String textColor, String allDay, int tseq) {
 		int result = 0;
 		System.out.println(title+"/"+start+"/"+end+"/"+description+"/"+type+"/"+username+"/"+allDay+"/"+tseq);
 		String viewpage = "";
@@ -418,7 +418,13 @@ public class TeamController {
 		tissue.setTseq(tseq);
 		tissue.setBackgroundColor(backgroundColor);
 		tissue.setTextColor(textColor);
-		tissue.setAllDay((true ? 1 : 0));
+		int alldayReturn = 0;
+		if(allDay.equals("true")) {
+			alldayReturn = 1;
+		} else {
+			alldayReturn = 0;
+		}
+		tissue.setAllDay(alldayReturn);
 		if(start.length()==16) {
 			System.out.println(start+":00");
 			tissue.setTistart(java.sql.Timestamp.valueOf(start+":00"));
@@ -444,17 +450,17 @@ public class TeamController {
 	}
 	
 	@RequestMapping(value = "editTeamCalendar.do", method = RequestMethod.POST)
-	public String editTeamCalendar(String title, String start, String end, String description, String type, String backgroundColor, boolean allDay, int tseq, int tiseq) {
+	public String editTeamCalendar(int _id, String title, String start, String end, String description, String type, String backgroundColor, boolean allDay) {
 		int result = 0;
-		System.out.println(title+"/"+start+"/"+end+"/"+description+"/"+type+"/"+allDay+"/"+tseq);
+		System.out.println(title+"/"+start+"/"+end+"/"+description+"/"+type+"/"+allDay+"/");
 		String viewpage = "";
 		Tissue tissue = new Tissue();
 		System.out.println(start.length());
+		System.out.println("idididididididididididid :"+_id);
 		MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
 		tissue.setTititle(title);
 		tissue.setTicontent(description);
-		tissue.setTseq(tseq);
-		tissue.setTiseq(tiseq);
+		tissue.setTiseq(_id);
 		tissue.setBackgroundColor(backgroundColor);
 		if(start.length()==16) {
 			System.out.println(start+":00");
@@ -483,20 +489,26 @@ public class TeamController {
 	}
 	
 	@RequestMapping(value = "deleteTeamCalendar.do", method = RequestMethod.POST)
-	public String deleteTeamCalendar(int tiseq) {
+	public String deleteTeamCalendar(int tiseq, String username, HttpSession session) {
 		int result = 0;
 		String viewpage = "";
 		Tissue tissue = new Tissue();
 		MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
 		tissue.setTiseq(tiseq);
-		result = myissuedao.deleteTeamCalendar(tissue);
-		
-		if(result>0) {
-			System.out.println("성공");
-			viewpage = "redirect:/calendar.do";
-		} else {
-			System.out.println("실패");
-			viewpage = "redirect:/calendar.do";
+		try {
+			String name = (String)session.getAttribute("name");
+			if(name.equals(username)) {
+				result = myissuedao.deleteTeamCalendar(tissue);
+				if(result>0) {
+					System.out.println("성공");
+					viewpage = "redirect:/calendar.do";
+				} else {
+					System.out.println("실패");
+					viewpage = "redirect:/calendar.do";
+				}
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 		
 		return viewpage;
@@ -552,7 +564,7 @@ public class TeamController {
 				JSONObject data = new JSONObject();
 				int z = sortlist.get(key).getAllDay();
 				
-				data.put("_id", key++);
+				data.put("_id", sortlist.get(key).getTiseq());
 				data.put("title", sortlist.get(key).getTititle());
 				data.put("description", sortlist.get(key).getTicontent());
 				boolean allDay;
