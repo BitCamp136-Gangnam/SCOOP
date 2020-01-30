@@ -52,7 +52,7 @@
 
          <div class="container-fluid">
             <div class="card">
-               <div class="row" style="margin-left: 2%;">
+               <div class="row" style="margin-left: 2%;margin-top: 3%">
                   <select id="selectMenu" name="menu" class="nav-item" onchange="changeItem()" style="color: #E71D36; border: 0">
                  <option value="0" style="color: #76838f">새로운 팀이슈</option>
             	 <option value="1" selected="selected" style="color: #76838f">새로운 댓글</option>	
