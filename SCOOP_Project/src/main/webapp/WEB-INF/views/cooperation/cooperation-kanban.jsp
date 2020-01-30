@@ -232,6 +232,12 @@ function drop(ev) {
 			    <li class="nav-item">
 			      <a class="nav-link" href="cooperation-kanban.do?tseq=${tpj.tseq}" style="color:#E71D36;" >칸반</a>
 			    </li>
+			    <li class="nav-item">
+               <a class="nav-link" href="projectNotice.do?tseq=${tpj.tseq}">공지사항</a>
+             </li>
+			    <li class="nav-item">
+               <a class="nav-link" href="projectLadder.do?tseq=${tpj.tseq}">사다리 타기</a>
+             </li>
 		    </ul>
 		</div>
 		<hr style="margin-top: 0;margin-left: 2%; margin-right: 2%;margin-bottom: 0px;">

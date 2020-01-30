@@ -59,12 +59,15 @@
         <div class="container-fluid row" style="padding-right: 15px; margin-right: 0px;margin-left: 0px; padding-left: 15px;">
         <div class="card" style="padding-left: 15px;padding-right: 15px; padding-top:1%;width:100%;height: auto;overflow: auto;">
 		<div class="row"style="margin:2% 2% 0 2%" >
+			<c:if test="${rank == 100}">
 				<h3 id="myissueSubject" style="padding-top: 2%;padding-left: 1%;">${detail.pntitle}
 				<a href="pjNoticeEdit.do?pnseq=${detail.pnseq}" class="fas fa-cog" id="pjnoticeedit" style="margin-left: 5px;cursor: pointer; font-size: 15px"></a>
 				<span id="pjNoticeDel">
 				<span class="iconify" data-icon="octicon:x" data-inline="false" style="cursor: pointer;font-size: 15px;"></span>
 				</span>
 				</h3>
+			</c:if>
+
 		</div>
 				<a href="projectNotice.do?pnseq=${detail.tseq}" class="iconify" data-icon="typcn:arrow-back" data-inline="false" style="cursor: pointer; font-size: 15px;"></a>
 		<div class="myissueDetail" id="myissueMention"><sup><i class="fas fa-quote-left" style="color:#ca0000;"></i></sup> 멘션 멤버 이름 넣는 곳 <sup><i class="fas fa-quote-right"style="color:#ca0000;"></i></sup></div>

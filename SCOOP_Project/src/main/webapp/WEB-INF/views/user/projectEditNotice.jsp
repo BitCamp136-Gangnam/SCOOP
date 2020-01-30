@@ -39,6 +39,26 @@
 	margin-bottom: 1%;
 }
 </style>
+<script type="text/javascript">
+//프로젝트 공지사항작성 validation
+function checkpjnotice() {
+//이슈 제목 공백 확인
+ if($("#pntitle").val() == ""){
+    Swal.fire("제목을 입력해주세요.");
+   $("#pntitle").focus();
+   return false;
+ }
+
+ //이슈 설명 공백 확인
+ if($("#pncontent").val() == ""){
+    Swal.fire("내용을 입력해주세요.");
+   $("#pncontent").focus();
+   return false;
+ }
+
+return true;
+}
+</script>
 <body>
 
 	<jsp:include page="/WEB-INF/views/commons/preloader.jsp"></jsp:include>
@@ -53,7 +73,7 @@
 			<!--**********************************
             Content body start
         ***********************************-->
-		<form action="pjNoticeEditOk.do" method="POST">
+		<form action="pjNoticeEditOk.do" method="POST" onsubmit="return checkpjnotice()">
 			<div class="content-body" style="height: 680px;">
 				<div class="container-fluid row"
 					style="padding-right: 15px; margin-right: 0px; margin-left: 0px; padding-left: 15px;">

@@ -92,4 +92,10 @@ select p.pnseq,p.pntitle,p.pncontent,m.name,p.tseq,p.pntime,p.email from pjnotic
 <select id="getTpMember" resultType="kr.or.scoop.dto.Tpmember">
 	select tseq ,email from tpmember where tseq = #{tseq}
 </select>
+<select id="searchNoticeRank" parameterType="kr.or.scoop.dto.Tpmember" resultType="int">
+	select m.pjuserrank, m.tseq, m.email, n.pnseq
+	from tpmember m join teampjt p 
+                	on m.tseq = p.tseq join pjnotice n on n.tseq = m.tseq
+	where m.email = #{param2} and n.pnseq = #{param1} and p.tseq= #{param3} 
+	</select>
 </mapper>
