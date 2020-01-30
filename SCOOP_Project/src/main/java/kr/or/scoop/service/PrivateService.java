@@ -39,4 +39,67 @@ public class PrivateService {
 		System.out.println("edittissue2");
 		return result;
 	}
+	public int editMyissue(MyIssue myissue) {
+		int result = 0 ;
+		System.out.println("editmyissue");
+		System.out.println(myissue);
+		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
+		result = dao.editMyissue(myissue);
+		System.out.println("editmyissue2");
+		return result;
+	}
+	//마이파일 수정
+	public int pfileEdit(String pfdname, long pdcapa, String email, int piseq) {
+		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
+		System.out.println("파일 에딧");
+		int result = dao.pfileEdit(pfdname, pdcapa, email, piseq);
+		return result;
+	}
+	//마이파일 삭제
+	public int pfileDelete(int pdseq) {
+		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
+		int result = dao.pfileDelete(pdseq);
+		return result;
+	}
+	//마이 멘션 삭제
+	public int pmentionDelete(int pmseq) {
+		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
+		int result = dao.pmentionDelete(pmseq);
+		return result;
+	}
+	//마이 멘션 수정
+	public int pmentionEdit(String email, int piseq) {
+		System.out.println("멘션 에딧");
+		System.out.println("멘션후에딧"+piseq);
+		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
+		int result = dao.pmentionEdit(email, piseq);
+		return result;
+	}
+	//마이 구글드라이브 삭제
+	public int pgoogleDriveDelete(int pgseq) {
+		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
+		int result = dao.pgoogleDriveDelete(pgseq);
+		return result;
+	}
+	//마이 구글드라이브 수정
+	public int pgoogleDriveEdit(String pgfilename, String pgurl, int piseq) {
+		System.out.println("구글 에딧");
+		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
+		int result = dao.pgoogleDriveEdit(pgfilename, pgurl, piseq);
+		return result;
+	}
+	//팀 할일 제거
+	public int pdoWorkDelete(int pwseq) {
+		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
+		int result = dao.pdoWorkDelete(pwseq);
+		return result;
+	}
+	//팀 할일 수정
+	public int pdoWorkEdit(String fromWork, String toWork, String pdoWork, int piseq) {
+		System.out.println("두워크 에딧");
+		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
+		System.out.println(fromWork+ toWork+ pdoWork);
+		int result = dao.pdoWorkEdit(fromWork, toWork, pdoWork, piseq);
+		return result;
+	}
 }

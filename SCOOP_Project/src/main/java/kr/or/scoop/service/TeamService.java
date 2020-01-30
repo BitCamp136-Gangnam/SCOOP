@@ -178,7 +178,7 @@ public class TeamService {
 		int result = dao.googleDriveEdit(gfilename, gurl, tiseq);
 		return result;
 	}
-	//팀 구글드라이브 생성
+	//팀 구글드라이브 삭제
 	public int googleDriveDelete(int tgseq) {
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		int result = dao.googleDriveDelete(tgseq);

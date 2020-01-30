@@ -22,7 +22,16 @@ public interface MyIssueDao {
 	
 	//팀이슈 수정
 	public int editTissue(MyIssue tissue);
-	
+	//마이이슈 수정
+	public int editMyissue(MyIssue myissue);
+	public int pfileEdit(String pfdname, long pdcapa, String email, int piseq);
+	public int pfileDelete(int pdseq);
+	public int pmentionDelete(int pmseq);
+	public int pmentionEdit(String email, int piseq);
+	public int pgoogleDriveDelete(int pgseq);
+	public int pgoogleDriveEdit(String pgfilename, String pgurl, int piseq);
+	public int pdoWorkDelete(int pwseq);
+	public int pdoWorkEdit(String fromWork, String toWork, String pdoWork, int piseq);
 	public List<MyIssue> getMyissue(String email);
 	
 	//내가 작성한 이슈 리스트
