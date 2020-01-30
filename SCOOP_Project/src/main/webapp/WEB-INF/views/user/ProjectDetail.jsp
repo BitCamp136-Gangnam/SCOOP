@@ -223,6 +223,25 @@ $(function(){
 			}
 		}
 	}
+
+	//프로젝트 공지사항작성 validation
+    function checkpjnotice() {
+    //이슈 제목 공백 확인
+     if($("#pntitle").val() == ""){
+        Swal.fire("제목을 입력해주세요.");
+       $("#pntitle").focus();
+       return false;
+     }
+
+     //이슈 설명 공백 확인
+     if($("#pncontent").val() == ""){
+        Swal.fire("내용을 입력해주세요.");
+       $("#pncontent").focus();
+       return false;
+     }
+
+   return true;
+   }
 </script>
 <body>
     <jsp:include page="/WEB-INF/views/commons/preloader.jsp"></jsp:include>
@@ -245,6 +264,10 @@ $(function(){
             <h3 style="padding-left: 1%;">${tpj.pname}
             	<c:if test="${rank == 100}">
             		<i class="fas fa-cog" id="myModal_Edit_Icon" style="margin-left: 5px;cursor: pointer; font-size: 15px" data-toggle="modal" data-target="#myModal_Edit" ></i>
+            		<span data-toggle="tooltip" data-placement="top" title="공지사항 관리" >
+            	<span id="nowrite" class="iconify" data-icon="jam:write" style="font-size:20px;cursor: pointer;padding-bottom: 3px;" data-inline="false" data-toggle="modal" data-target="#pnoticewrite">
+            	</span>
+            	</span>
             	</c:if>
             </h3>
             <p style="padding-left: 1%;margin-bottom: 0px;">[${tpj.pcontent}]</p>
@@ -391,7 +414,7 @@ $(function(){
                </div>
                </div>
             </div>
-
+				
             <!-- Modal footer -->
 
             <input type="hidden" id="getTseq" name="tseq" value="${tpj.tseq}">
@@ -406,10 +429,47 @@ $(function(){
                   data-dismiss="modal">
             </div>
          </form>
+         
       </div>
    </div>
 </div>
-        
+        <div class="modal fade" id="pnoticewrite">
+   <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+
+         <!-- Modal Header -->
+         <div class="modal-header">
+            <h3 class="modal-title">공지사항 작성</h3>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+         </div>
+   
+         <form action="PnoticeWrite.do" method="POST" onsubmit="return checknotice()">
+            <!-- Modal body -->
+            <div class="modal-body">
+               <!-- <p style="font-size: 12px">협업공간은 함께 일하는 멤버들끼리만 자료를 공유하고 협업할 수 있는 공간입니다.<br>
+             협업공간을 만들고 함께 일할 멤버들을 초대해보세요.</p> -->
+               <label for="bntitle">공지사항</label> <input
+                  class="form-control createmodal" type="text" id="pntitle"
+                  name="pntitle" style="width: 100%" placeholder="제목을 입력해 주세요.">
+               <br> <label for="noticecontent">공지 설명</label>
+               <textarea class="form-control createmodal" rows="5"
+                  id="pncontent" name="pncontent" style="width: 100%"
+                  placeholder="내용을 적어주세요."></textarea>   
+                  <input type="hidden" name="email" value="${sessionScope.email}">      
+                  <input type="hidden" name="tseq" value="${tpj.tseq}">      
+            <!-- Modal footer -->
+            <div class="modal-footer">
+               <button type="submit" class="btn btn-secondary"
+                  style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;">작성 완료</button>
+               <button type="button" class="btn btn-secondary"
+                  style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;"
+                  data-dismiss="modal">취소</button>
+               </div>
+            </div>
+         </form>
+      </div>
+   </div>
+   </div>
   <jsp:include page="/WEB-INF/views/commons/footer.jsp"></jsp:include>
     </div>
     <!--**********************************

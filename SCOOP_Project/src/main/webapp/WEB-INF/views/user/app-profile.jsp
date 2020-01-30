@@ -198,7 +198,7 @@ $(function(){
 		<div class="row" style="margin-left: 2%;">
 			<ul class="nav nav-pills">
 			    <li class="nav-item">
-			      <a class="nav-link" href="memberEdit.do?${sessionScope.email}">내 정보</a>
+			      <a class="nav-link" href="memberEdit.do?${sessionScope.email}" style="color: #E71D36;">내 정보</a>
 			    </li>
 			    <li class="nav-item">
 			      <a class="nav-link" href="app-alram.do">알림</a>
