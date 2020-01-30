@@ -457,17 +457,36 @@ input::placeholder {
 
    //이슈작성 validation
     function checkz() {
-    //이슈 제목 공백 확인
+    //공지사항 제목 공백 확인
      if($("#issuetitle").val() == ""){
         Swal.fire("제목을 입력해주세요.");
        $("#issuetitle").focus();
        return false;
      }
 
-     //이슈 설명 공백 확인
+     //공지사항 설명 공백 확인
      if($("#issuecontent").val() == ""){
         Swal.fire("내용을 입력해주세요.");
        $("#issuecontent").focus();
+       return false;
+     }
+
+   return true;
+   }
+
+  //공지사항작성 validation
+    function checknotice() {
+    //이슈 제목 공백 확인
+     if($("#bntitle").val() == ""){
+        Swal.fire("제목을 입력해주세요.");
+       $("#bntitle").focus();
+       return false;
+     }
+
+     //이슈 설명 공백 확인
+     if($("#bncontent").val() == ""){
+        Swal.fire("내용을 입력해주세요.");
+       $("#bncontent").focus();
        return false;
      }
 
@@ -1203,7 +1222,7 @@ span {
             <button type="button" class="close" data-dismiss="modal">&times;</button>
          </div>
    
-         <form action="noticeWrite.do" method="POST">
+         <form action="noticeWrite.do" method="POST" onsubmit="return checknotice()">
             <!-- Modal body -->
             <div class="modal-body">
                <!-- <p style="font-size: 12px">협업공간은 함께 일하는 멤버들끼리만 자료를 공유하고 협업할 수 있는 공간입니다.<br>
