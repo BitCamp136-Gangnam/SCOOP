@@ -72,7 +72,7 @@
                         data-toggle="tab" href="#">협업 진행률</a></li>
                      <li class="nav-item"><a class="nav-link active"
                         data-toggle="tab" href="#">이슈 업데이트</a></li> -->
-                     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#">@멘션</a></li>
+                     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="mention.do">@멘션</a></li>
                   </ul>
                </div>
                <hr style="margin-top: 0; margin-left: 2%; margin-right: 2%">
@@ -80,8 +80,8 @@
 						<div class="col-sm-6"
 							style="height: 700px; background: #F3F3F9; margin: 2% 10px 2% 3%; padding-top: 2%; padding-bottom: 2%; border-radius: 0.5rem;">
 							<div class="row" style="margin-left: 2%; margin-right: 2%" id="ialarm">
-							<div class="col-sm-3 newissue" id="al"><p><b>새로운 이슈</b></p></div>
-							<div class="col-sm-6 newissue" id="ti"><p><b>제목</b></p></div>
+							<div class="col-sm-3 newissue" id="al"><p><b>협업공간</b></p></div>
+							<div class="col-sm-6 newissue" id="ti"><p><b>내용</b></p></div>
 							<div class="col-sm-3 newissue" id="day"><p><b>시간</b></p></div>
 							</div>
       <c:if test="${mypjtlist!=null }">

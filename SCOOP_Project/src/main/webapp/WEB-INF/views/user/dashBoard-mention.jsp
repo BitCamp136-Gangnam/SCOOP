@@ -72,7 +72,7 @@
                         data-toggle="tab" href="#">협업 진행률</a></li>
                      <li class="nav-item"><a class="nav-link active"
                         data-toggle="tab" href="#">이슈 업데이트</a></li> -->
-                     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="mention.do">@멘션</a></li>
+                     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#">@멘션</a></li>
                   </ul>
                </div>
                <hr style="margin-top: 0; margin-left: 2%; margin-right: 2%">
@@ -84,47 +84,19 @@
 							<div class="col-sm-6 newissue" id="ti"><p><b>제목</b></p></div>
 							<div class="col-sm-3 newissue" id="day"><p><b>시간</b></p></div>
 							</div>
-        <c:if test="${mypjtlist!=null }">
-      <c:forEach items="${mypjtlist}" var="mpl">
-      <c:if test="${myNewPjNoticeList !=null }">
-      <c:forEach items="${myNewPjNoticeList}" var="mynewpjnotice">
-      <c:if test="${mpl.tseq==mynewpjnotice.tseq && mpl.tseq !=null && mpl.tpaddtime < mynewpjnotice.pntime}">
       <div class="row countRow" style="margin-left: 2%; margin-right: 2%" id="ialarm">
 		
          <div class="col-sm-3 newissue" id="al">
-         
-         <c:choose>
-         	<c:when test="${mpl.tseq==mynewpjnotice.tseq && mpl.tseq !=null && mpl.tpaddtime < mynewpjnotice.pntime}">
-         	<p><a href="projectDetail.do?tseq=${mynewpjnotice.tseq }">${mpl.pname }</a></p>
-         	</c:when>
-         	
-         </c:choose>
+         ${mentions.pname}
          </div>
          <div class="col-sm-6 newissue" id="ti">
-         
-         <c:choose>
-         	<c:when test="${mpl.tseq==mynewpjnotice.tseq && mpl.tseq !=null && mpl.tpaddtime < mynewpjnotice.pntime}">
-         	<p><a href="pjNoticeDetail.do?pnseq=${mynewpjnotice.pnseq }&tseq=${mynewpjnotice.tseq}">${mynewpjnotice.pntitle }</a></p>
-         	</c:when>
-         	
-         </c:choose>
+         ${mentions.tititle}
          </div>
          <div class="col-sm-3 newissue" id="day">
-         
-         <c:choose>
-         	<c:when test="${mpl.tseq==mynewpjnotice.tseq && mpl.tseq !=null && mpl.tpaddtime < mynewpjnotice.pntime}">
-         	<p>${fn:substring(mynewpjnotice.pntime,0,16)}</p>
-         	</c:when>
-         	
-         </c:choose>
+         ${mentions.tidate}
          </div>
          
       </div>
-      </c:if>
-      </c:forEach>
-      </c:if>
-      </c:forEach>
-      </c:if>
 						</div>
 						<div class="col-sm-5" >
                 <select id="selectDash" name="selectDash" class="form-control" style="margin-top: 7%;">

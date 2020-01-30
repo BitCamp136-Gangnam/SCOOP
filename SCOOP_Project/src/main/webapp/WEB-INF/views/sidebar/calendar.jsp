@@ -47,8 +47,9 @@
 														aria-labelledby="dropdownMenu"
 														style="display: block; margin-bottom: 5px;">
 														<c:forEach items="${pjtlist}" var="p">
-														<li><a tabindex="-1" href="#" name="${p.tseq}">${p.pname}</a></li>
-                         														 
+															<li class="pjtlist">
+																<a tabindex="-1" href="#" name="${p.tseq}">${p.pname}</a>
+															</li>
                   										</c:forEach>
 														<li class="divider"></li>
 														<li><a tabindex="-1" href="#" data-role="close">Close</a></li>
@@ -106,11 +107,9 @@
 																</div>
 																<div class="row">
 																	<div class="col-xs-12">
-																		<label class="col-xs-4" for="edit-type">협업공간 이름</label> <select
-																			class="inputModal" type="text" name="edit-type"
-																			id="edit-type">
+																		<label class="col-xs-4" for="edit-type">협업공간 이름</label> 
+																		<select class="inputModal" type="text" name="edit-type" id="pjtselect">
 																			<c:forEach items="${pjtlist}" var="p">
-																			
                          														  <option value="${p.tseq}">${p.pname}</option>
                   															</c:forEach>
 																		</select>
@@ -172,8 +171,7 @@
 														<div class="col-lg-6">
 															<label for="calendar_view">협업공간</label>
 															<div class="input-group">
-																<select class="filter" id="edit-tseq"
-																	multiple="multiple" name="edit-tseq">
+																<select class="filter" id="select-tseq" multiple="multiple" name="edit-tseq">
 																	<c:forEach items="${pjtlist}" var="p">
 																	<input class="inputModal" type="text" name="edit-tseq${p.tseq }" id="edit-tseq${p.tseq }" value="${p.tseq}" readonly hidden="hidden">
                          											<option value="${p.tseq}">${p.pname}</option>
@@ -247,4 +245,26 @@
 	<script src="<c:url value="/resources/js/styleSwitcher.js" />"></script>
 	
 	<script src="<c:url value="/resources/vendor/js/bootstrap-datetimepicker.min.js"/>"></script>
+	
+	<script type="text/javascript">
+		$('.pjtlist').click(function(){
+			console.log('클릭 이벤트')
+			let text = $(this).children().text();
+			let tseq = $(this).children().attr('name');
+			console.log(text)
+			console.log(tseq)
+			
+			let select = $('#pjtselect option:eq(1)')
+			
+			let selectleng = $('#pjtselect option').length
+			
+			console.log(select.val())
+			for(let i = 0; i < selectleng; i++) {
+				console.log($('#pjtselect option:eq('+i+')').val())
+				if($('#pjtselect option:eq('+i+')').val() == tseq){
+					$('#pjtselect option:eq('+i+')').attr('selected', 'selected')
+				}
+			}
+		})
+	</script>
 </html>

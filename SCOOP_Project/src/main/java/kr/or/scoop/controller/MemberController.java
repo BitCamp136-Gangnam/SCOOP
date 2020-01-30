@@ -44,6 +44,7 @@ import kr.or.scoop.dao.ProjectDao;
 import kr.or.scoop.dto.Alarm;
 import kr.or.scoop.dto.FileDrive;
 import kr.or.scoop.dto.Member;
+import kr.or.scoop.dto.Mention;
 import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.dto.PjNotice;
 import kr.or.scoop.dto.Reply;
@@ -431,7 +432,74 @@ public class MemberController {
 		}
 		return "user/dashBoard-notice";
 	}
-
+	@RequestMapping(value = "/mention.do", method = RequestMethod.GET)
+	public String mention(@RequestParam(required = false, name="lang") String language, HttpSession session, 
+				HttpServletRequest request, HttpServletResponse response, Model model) {
+		if(language == null) {
+			language = "ko";
+		}
+		Locale locale  = new Locale(language);
+		System.out.println(" locale : " + locale + "\n language : " + language);
+		localeResolver.setLocale(request, response, locale);
+		if(language.equals("ko")) {
+			System.out.println("????");
+			session.setAttribute("defaultlang", "한국어");
+		}else{
+			System.out.println("!!!!");
+			session.setAttribute("defaultlang", "English");
+		}
+		String email = "";
+		
+		email = (String)session.getAttribute("email");
+		ProjectDao noticeDao = sqlsession.getMapper(ProjectDao.class);
+		MemberDao memberdao = sqlsession.getMapper(MemberDao.class);
+		MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
+		Member member = memberdao.getMember((String)session.getAttribute("email"));
+		Role role = memberdao.getRole(email);
+		String img = memberdao.getProfile(email);
+		int count = 0;	
+		List<FileDrive> filedrive = null;
+		List<Tissue> mytissuelist = null;
+		List<Reply> myreplylist = null;
+		List<PjNotice> mypjtlist = null;
+		List<Tpmember> pjtlist = null;
+		List<Tpmember> tpmemlist =  null;
+		List<Mention> mentions = null;
+		try {
+			 filedrive = memberdao.getFileDrive(email);
+			 count = memberdao.getCount(email);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		session.setAttribute("name", member.getName());
+		session.setAttribute("img",img); 
+		session.setAttribute("role", role.getRname());
+		session.setAttribute("count", count);
+		session.setAttribute("filed", filedrive);
+		try {
+			pjtlist = noticeDao.getPJT(email);
+			tpmemlist = memberdao.getTpmembers(member.getEmail());
+			mytissuelist = myissuedao.teamWriteTiisueList(member.getIdtime());
+			myreplylist = myissuedao.teamWriteReplyList(member.getIdtime());
+			mypjtlist = myissuedao.teamWriteNoticeList(member.getEmail(), member.getIdtime());
+			mentions = memberdao.getMention(member.getEmail());
+			model.addAttribute("mytissuelist",mytissuelist);
+			model.addAttribute("myreplylist",myreplylist);
+			model.addAttribute("mypjtlist",mypjtlist);
+			model.addAttribute("mentions",mentions);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		if(pjtlist!=null) {
+			session.setAttribute("pjtlist", pjtlist);
+			session.setAttribute("tpmemlist", tpmemlist);
+			List<Tissue> myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime());
+			model.addAttribute("mypjtlist", pjtlist);
+			model.addAttribute("myNewTissueList", myNewTissueList);
+			System.out.println(myNewTissueList);
+		}
+		return "user/dashBoard-mention";
+	}
 	// 로그아웃
 	@RequestMapping(value = "/logout.do")
 	public String logout(HttpSession session, HttpServletResponse response) {

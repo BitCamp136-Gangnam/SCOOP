@@ -90,7 +90,13 @@ select p.pnseq,p.pntitle,p.pncontent,m.name,p.tseq,p.pntime,p.email from pjnotic
 	delete from pjnotice where pnseq = #{pnseq}
 </delete>
 <select id="getTpMember" resultType="kr.or.scoop.dto.Tpmember">
-	select tseq ,email from tpmember where tseq = #{tseq}
+	select m.name,m.email, t.tseq
+from  member m join tpmember t on m.email=t.email
+where tseq in (
+            select tseq
+            from tpmember
+            where email = #{param1}
+)
 </select>
 <select id="searchNoticeRank" parameterType="kr.or.scoop.dto.Tpmember" resultType="int">
 	select m.pjuserrank, m.tseq, m.email, n.pnseq
