@@ -27,19 +27,15 @@ public class FileController {
 	
 	@RequestMapping("/fileDownload.do")
 	public void fileDownload(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("File 왔냐?");
-		System.out.println(request.getParameter("fileName"));
 		String realPath = "C:/SmartWeb/FinalProjectEclipse/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SCOOP_Project/upload/";
 		String p = "upload";
 		String f = request.getParameter("fileName");
 		
 		String fname = new String(f.getBytes("euc-kr"), "8859_1");
-		System.out.println(fname);
 		response.setHeader("Content-Disposition", "attachment;filename=" + fname + ";");
 		// 파일명 전송
 		// 파일 내용전송
 		String fullpath = request.getServletContext().getRealPath(p + "/" + f);
-		System.out.println(fullpath);
 		FileInputStream fin = new FileInputStream(fullpath);
 		// 출력 도구 얻기 :response.getOutputStream()
 		ServletOutputStream sout = response.getOutputStream();
@@ -58,8 +54,6 @@ public class FileController {
 		MemberDao memberdao = sqlsession.getMapper(MemberDao.class);
 		String email = (String)session.getAttribute("email");
 		int tseq = Integer.parseInt(request.getParameter("tseq"));
-		System.out.println(email);
-		System.out.println(tseq);
 		if(tseq == 0) {
 			List<FileDrive> filedrive = memberdao.getFileDrive(email);
 			JSONArray jsonlist = JSONArray.fromObject(filedrive);

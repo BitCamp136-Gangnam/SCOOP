@@ -1,5 +1,7 @@
 package kr.or.scoop.dto;
 
+import java.sql.Timestamp;
+
 public class Mention {
 	private int tiseq;
 	private int tmseq;
@@ -8,6 +10,10 @@ public class Mention {
 	private int pmseq;
 	private String pemail;
 	private int piseq;
+	private String pname;
+	private int tseq;
+	private String tititle;
+	private Timestamp tidate;
 	public int getTiseq() {
 		return tiseq;
 	}
@@ -50,10 +56,35 @@ public class Mention {
 	public void setPiseq(int piseq) {
 		this.piseq = piseq;
 	}
+	public String getPname() {
+		return pname;
+	}
+	public void setPname(String pname) {
+		this.pname = pname;
+	}
+	public int getTseq() {
+		return tseq;
+	}
+	public void setTseq(int tseq) {
+		this.tseq = tseq;
+	}
+	public String getTititle() {
+		return tititle;
+	}
+	public void setTititle(String tititle) {
+		this.tititle = tititle;
+	}
+	public Timestamp getTidate() {
+		return tidate;
+	}
+	public void setTidate(Timestamp tidate) {
+		this.tidate = tidate;
+	}
 	@Override
 	public String toString() {
 		return "Mention [tiseq=" + tiseq + ", tmseq=" + tmseq + ", email=" + email + ", name=" + name + ", pmseq="
-				+ pmseq + ", pemail=" + pemail + ", piseq=" + piseq + "]";
+				+ pmseq + ", pemail=" + pemail + ", piseq=" + piseq + ", pname=" + pname + ", tseq=" + tseq
+				+ ", tititle=" + tititle + ", tidate=" + tidate + "]";
 	}
 	
 }

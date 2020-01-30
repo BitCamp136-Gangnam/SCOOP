@@ -44,6 +44,7 @@ import kr.or.scoop.dao.ProjectDao;
 import kr.or.scoop.dto.Alarm;
 import kr.or.scoop.dto.FileDrive;
 import kr.or.scoop.dto.Member;
+import kr.or.scoop.dto.Mention;
 import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.dto.PjNotice;
 import kr.or.scoop.dto.Reply;
@@ -272,7 +273,7 @@ public class MemberController {
 				*/
 			model.addAttribute("mypjtlist", pjtlist);
 			model.addAttribute("myNewTissueList", myNewTissueList);
-			System.out.println(myNewTissueList);
+			System.out.println(tpmemlist);
 			/*
 			 AlarmDao dao = sqlsession.getMapper(AlarmDao.class); 
 			 List<Alarm> alarm = dao.getAlarm((String)session.getAttribute("email"));
@@ -360,7 +361,146 @@ public class MemberController {
 		}
 		return "user/dashBoard-reply";
 	}
-
+	@RequestMapping(value = "/newNotice.do", method = RequestMethod.GET)
+	public String userindexNotice(@RequestParam(required = false, name="lang") String language, HttpSession session, 
+			HttpServletRequest request, HttpServletResponse response, Model model) {
+		if(language == null) {
+			language = "ko";
+		}
+		Locale locale  = new Locale(language);
+		System.out.println(" locale : " + locale + "\n language : " + language);
+		localeResolver.setLocale(request, response, locale);
+		if(language.equals("ko")) {
+			System.out.println("????");
+			session.setAttribute("defaultlang", "한국어");
+		}else{
+			System.out.println("!!!!");
+			session.setAttribute("defaultlang", "English");
+		}
+		String email = "";
+		
+		email = (String)session.getAttribute("email");
+		ProjectDao noticeDao = sqlsession.getMapper(ProjectDao.class);
+		MemberDao memberdao = sqlsession.getMapper(MemberDao.class);
+		MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
+		Member member = memberdao.getMember((String)session.getAttribute("email"));
+		Role role = memberdao.getRole(email);
+		String img = memberdao.getProfile(email);
+		int count = 0;	
+		List<FileDrive> filedrive = null;
+		List<Tissue> mytissuelist = null;
+		List<Reply> myreplylist = null;
+		List<PjNotice> mypjtlist = null;
+		List<Tpmember> pjtlist = null;
+		List<Tpmember> tpmemlist =  null;
+		try {
+			filedrive = memberdao.getFileDrive(email);
+			count = memberdao.getCount(email);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		session.setAttribute("name", member.getName());
+		session.setAttribute("img",img); 
+		session.setAttribute("role", role.getRname());
+		session.setAttribute("count", count);
+		session.setAttribute("filed", filedrive);
+		try {
+			pjtlist = noticeDao.getPJT(email);
+			tpmemlist = memberdao.getTpmembers(member.getEmail());
+			mytissuelist = myissuedao.teamWriteTiisueList(member.getIdtime());
+			myreplylist = myissuedao.teamWriteReplyList(member.getIdtime());
+			mypjtlist = myissuedao.teamWriteNoticeList(member.getEmail(), member.getIdtime());
+			model.addAttribute("mytissuelist",mytissuelist);
+			model.addAttribute("myreplylist",myreplylist);
+			model.addAttribute("mypjtlist",mypjtlist);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		if(pjtlist!=null) {
+			session.setAttribute("pjtlist", pjtlist);
+			session.setAttribute("tpmemlist", tpmemlist);
+			List<Tissue> myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime());
+			List<PjNotice> myNewPjNoticeList = myissuedao.teamWriteNoticeList(email, member.getIdtime());
+			List<Reply> myNewReplyList = myissuedao.teamWriteReplyList(member.getIdtime());
+			model.addAttribute("mypjtlist", pjtlist);
+			model.addAttribute("myNewTissueList", myNewTissueList);
+			model.addAttribute("mypjtlist", pjtlist);
+			model.addAttribute("myNewPjNoticeList", myNewPjNoticeList);
+			model.addAttribute("myNewTissueList", myNewTissueList);
+			model.addAttribute("myNewReplyList", myNewReplyList);
+			System.out.println(myNewPjNoticeList);
+		}
+		return "user/dashBoard-notice";
+	}
+	@RequestMapping(value = "/mention.do", method = RequestMethod.GET)
+	public String mention(@RequestParam(required = false, name="lang") String language, HttpSession session, 
+				HttpServletRequest request, HttpServletResponse response, Model model) {
+		if(language == null) {
+			language = "ko";
+		}
+		Locale locale  = new Locale(language);
+		System.out.println(" locale : " + locale + "\n language : " + language);
+		localeResolver.setLocale(request, response, locale);
+		if(language.equals("ko")) {
+			System.out.println("????");
+			session.setAttribute("defaultlang", "한국어");
+		}else{
+			System.out.println("!!!!");
+			session.setAttribute("defaultlang", "English");
+		}
+		String email = "";
+		
+		email = (String)session.getAttribute("email");
+		ProjectDao noticeDao = sqlsession.getMapper(ProjectDao.class);
+		MemberDao memberdao = sqlsession.getMapper(MemberDao.class);
+		MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
+		Member member = memberdao.getMember((String)session.getAttribute("email"));
+		Role role = memberdao.getRole(email);
+		String img = memberdao.getProfile(email);
+		int count = 0;	
+		List<FileDrive> filedrive = null;
+		List<Tissue> mytissuelist = null;
+		List<Reply> myreplylist = null;
+		List<PjNotice> mypjtlist = null;
+		List<Tpmember> pjtlist = null;
+		List<Tpmember> tpmemlist =  null;
+		List<Tissue> myNewTissueList = null;
+		List<Mention> mentions = null;
+		try {
+			 filedrive = memberdao.getFileDrive(email);
+			 count = memberdao.getCount(email);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		session.setAttribute("name", member.getName());
+		session.setAttribute("img",img); 
+		session.setAttribute("role", role.getRname());
+		session.setAttribute("count", count);
+		session.setAttribute("filed", filedrive);
+		try {
+			pjtlist = noticeDao.getPJT(email);
+			tpmemlist = memberdao.getTpmembers(member.getEmail());
+			mytissuelist = myissuedao.teamWriteTiisueList(member.getIdtime());
+			myreplylist = myissuedao.teamWriteReplyList(member.getIdtime());
+			mypjtlist = myissuedao.teamWriteNoticeList(member.getEmail(), member.getIdtime());
+			model.addAttribute("mytissuelist",mytissuelist);
+			model.addAttribute("myreplylist",myreplylist);
+			model.addAttribute("mypjtlist",mypjtlist);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		if(pjtlist!=null) {
+			session.setAttribute("pjtlist", pjtlist);
+			session.setAttribute("tpmemlist", tpmemlist);
+			myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime());
+			mentions = memberdao.getMention(member.getEmail());
+			model.addAttribute("mypjtlist", pjtlist);
+			model.addAttribute("myNewTissueList", myNewTissueList);
+			model.addAttribute("mentions",mentions);
+			System.out.println(mentions);
+		}
+		return "user/dashBoard-mention";
+	}
 	// 로그아웃
 	@RequestMapping(value = "/logout.do")
 	public String logout(HttpSession session, HttpServletResponse response) {
@@ -743,7 +883,7 @@ public class MemberController {
 			return viewpage;
 		}
 		
-		@RequestMapping(value = "newNotice.do", method = RequestMethod.GET)
+		/*@RequestMapping(value = "newNotice.do", method = RequestMethod.GET)
 		public String newNotice(HttpSession session, Model model) {
 			String viewpage = "";
 			String email = (String)session.getAttribute("email");
@@ -767,6 +907,6 @@ public class MemberController {
 			}
 			
 			return viewpage;
-		}
+		}*/
 	
 }

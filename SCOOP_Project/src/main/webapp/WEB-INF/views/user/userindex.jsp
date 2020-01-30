@@ -46,7 +46,7 @@
        
             <div class="container-fluid">
         <div class="card">
-      <div class="row" style="margin: 2%">
+      <div class="row" style="margin: 2% 2% 15px 2%">
             <h3>새로운 소식</h3>
       </div>
       <div class="row" style="margin-left: 2%;">
