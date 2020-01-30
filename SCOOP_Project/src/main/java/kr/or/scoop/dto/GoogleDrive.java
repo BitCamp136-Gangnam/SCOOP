@@ -8,6 +8,7 @@ public class GoogleDrive {
 	private String pgfilename;
 	private String pgurl;
 	private int piseq;
+	private int tgseq;
 	public String getTgfilename() {
 		return tgfilename;
 	}
@@ -50,10 +51,16 @@ public class GoogleDrive {
 	public void setPiseq(int piseq) {
 		this.piseq = piseq;
 	}
+	public int getTgseq() {
+		return tgseq;
+	}
+	public void setTgseq(int tgseq) {
+		this.tgseq = tgseq;
+	}
 	@Override
 	public String toString() {
 		return "GoogleDrive [tgfilename=" + tgfilename + ", tgurl=" + tgurl + ", tiseq=" + tiseq + ", pgseq=" + pgseq
-				+ ", pgfilename=" + pgfilename + ", pgurl=" + pgurl + ", piseq=" + piseq + "]";
+				+ ", pgfilename=" + pgfilename + ", pgurl=" + pgurl + ", piseq=" + piseq + ", tgseq=" + tgseq + "]";
 	}
 	
 }

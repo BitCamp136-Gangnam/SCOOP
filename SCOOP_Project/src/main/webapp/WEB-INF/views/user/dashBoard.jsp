@@ -87,7 +87,7 @@
 							<div class="col-sm-6 newissue" id="ti"><p><b>제목</b></p></div>
 							<div class="col-sm-3 newissue" id="day"><p><b>시간</b></p></div>
 							</div>
-							<c:if test="${alarm !=null }">
+				<%-- 			<c:if test="${alarm !=null }">
 								<c:forEach items="${alarm }" var="al">
 									<div class="row" style="margin-left: 2%; margin-right: 2%" id="ialarm">
 
@@ -143,7 +143,7 @@
 										</div>
 									</div>
 								</c:forEach>
-							</c:if>
+							</c:if> --%>
 						</div>
 						<div class="col-sm-5" >
                 <select id="selectDash" name="selectDash" class="form-control" style="margin-top: 7%;">

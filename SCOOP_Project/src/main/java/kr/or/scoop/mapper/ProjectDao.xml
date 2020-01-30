@@ -89,4 +89,7 @@ select p.pnseq,p.pntitle,p.pncontent,m.name,p.tseq,p.pntime,p.email from pjnotic
 <delete id="deletePjNotice">
 	delete from pjnotice where pnseq = #{pnseq}
 </delete>
+<select id="getTpMember" resultType="kr.or.scoop.dto.Tpmember">
+	select tseq ,email from tpmember where tseq = #{tseq}
+</select>
 </mapper>

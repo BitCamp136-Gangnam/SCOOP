@@ -20,7 +20,7 @@
 
 </head>
 
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
 .newissue{
    border-bottom: 1px solid #c8c8c8;
@@ -215,7 +215,7 @@ $(function(){
         ***********************************-->
         <div class="content-body">
         <div class="container-fluid">
-        <div class="card">
+        <div class="card" style="padding-bottom: 30px;">
       <div class="row" style="margin: 2%">
          <div class="col-sm-12" style="padding-left: 0">
             <h3>${tpj.pname}
@@ -263,21 +263,22 @@ $(function(){
       </div>
          <input type="hidden" name="tiseq" value="${ti.tiseq}" />
          <input type="hidden" name="tseq" value="${tpj.tseq}" />
-         <div class="row" style="margin-left: 2%; margin-right: 2%">
       <c:forEach items="${pjn}" var="p">
-         <div class="col-sm-3 newissue" id="not">
+         <div class="row" style="margin-left: 2%; margin-right: 2%" id="row">
+         <div class="col-sm-3 newissue" >
          <a href="pjNoticeDetail.do?pnseq=${p.pnseq}&tseq=${p.tseq}">${p.name}</a>
          </div>
-         <div class="col-sm-7 newissue" id="not">
+         <div class="col-sm-7 newissue" >
          <a href="pjNoticeDetail.do?pnseq=${p.pnseq}&tseq=${p.tseq}">${p.pntitle}</a> 
          </div>
-         <div class="col-sm-2 newissue" id="not">
+         <div class="col-sm-2 newissue">
          <a href="pjNoticeDetail.do?pnseq=${p.pnseq}&tseq=${p.tseq}">${fn:substring(p.pntime,0,16)}</a> 
          </div>
-      </c:forEach>
-            
       </div>
-      		
+      </c:forEach>
+      		<div id="loadPlus" data-toggle="tooltip" data-placement="bottom" title="더 보기" >
+			<div id="load" class="iconify" style="font-size: 40px; color:#464a53;cursor: pointer; margin-left: 627px; margin-top: 1%;" data-icon="mdi:chevron-double-down" data-inline="false">더 보기</div>
+			</div>
             <!-- #/ container -->
             </div>
             </div>
@@ -406,21 +407,6 @@ $(function(){
    </div>
   <jsp:include page="/WEB-INF/views/commons/footer.jsp"></jsp:include>
     </div>
-    <script type="text/javascript">
-    $(function(){
-		$("#not").slice(0,10).show();
-		$("#load").click(function(e){
-			console.log(e);
-			e.prevenDefault();
-			$("#not").slice(0,10).show();
-				if($("#not").length == 0){
-				alert("더 이상 글이 없습니다.");
-					}
-			
-			});
-
-		});
-    </script>
     <!--**********************************
         Main wrapper end
     ***********************************-->
@@ -453,6 +439,49 @@ $(function(){
     <script src="<c:url value="/resources/plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"/>"></script>
 
     <script src="<c:url value="/resources/js/dashboard/dashboard-1.js"/>"></script>
+	<script type="text/javascript">
+$(document).ready(function(){
+	//더보기 스타일 변경
+	$('#load').mouseover(function(){
+		$(this).css("color","#E71D36");
+	});
+	$('#load').mouseout(function(){
+		$(this).css("color","#464a53");
+	});
+	var temp = 0;
+	var moreEventArray = document.querySelectorAll(".card > #row ");
+	if(moreEventArray.length<=10){
+		 $('#load').remove();
+        $('#loadPlus').remove();
+        $('.tooltip').remove();
+	}
+	 $(moreEventArray).attr("hidden","hidden");	
+	 $(moreEventArray).slice(0,10).removeAttr("hidden");
+	 $(moreEventArray).slice(0,10);
+	 temp = 10;
+	$("#load").click(function(e){
+		console.log(moreEventArray);
+		/* console.log($('.card'));
+		console.log($('.card > a'));
+		console.log($('.card > a > .row'));
+		console.log($(".card > a > .row").val()); */
+		console.log("if");
+		$(moreEventArray).slice(temp,temp+10).removeAttr("hidden");
+		 temp +=10;
+		if(moreEventArray.length<temp+10){
+			$(moreEventArray).slice(temp,10).removeAttr("hidden");
+				if(temp-moreEventArray.length>=0){
+		            $('#load').remove();
+		            $('#loadPlus').remove();
+		            $('.tooltip').remove();
+		         }
 
+			}
+		
+			
+	}); 
+
+});
+</script>
 </body>
 </html>

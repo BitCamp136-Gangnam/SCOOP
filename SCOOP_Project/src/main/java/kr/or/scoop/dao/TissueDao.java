@@ -54,17 +54,27 @@ public interface TissueDao {
 	public int delTBookMark(int tiseq, String email);
 	
 	public int fileInsert(int tseq, String fdname, long fdcapa, String email);
+	public int fileEdit(int tseq, String fdname, long fdcapa, String email, int tiseq);
 	public int myFileInsert(String pfdname, long pdcapa, String email);
-	
+	public int fileDelete(int fdseq);
 	public int mentionInsert(String email);
+	public int mentionEdit(String email, int tiseq);
+	public int mentionDelete(int tmseq);
 	public int myMentionInsert(String email);
 	public int googleDriveInsert(String tgfilename, String tgurl);
+	public int googleDriveEdit(String tgfilename, String tgurl, int tiseq);
+	public int googleDriveDelete(int tgseq);
 	public int myGoogleDriveInsert(String pgfilename,String pgurl);
 	public int doWorkInsert(String email, String toEmail, String doWork);
+	public int doWorkEdit(String email, String toEmail, String doWork, int tiseq);
+	public int doWorkDelete(int tdseq);
 	public int myDoWorkInsert(String email, String ptoEmail, String pdoWork);
 	public List chartData(int tseq, int isprocess);
 	
 	//칸반 게시글 상태 정보
 	public Process chartData(int tseq);
+	
+	//팀이슈 리스트 받아오기
+	public List<Tissue> getTissueList(int tseq);
 	
 }

@@ -103,21 +103,8 @@ input::placeholder {
       var number = 0;
 
       var target = 1;
-      /* var regExp  = /([w-.]+)@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.)|(([w-]+.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(]?)$/;
-      
-      if('!$("#invite_Submit").val()'){
-          alert("이메일주소를 입력 해 주세요"); 
-            $("#invite_Submit").focus(); 
-            return false; 
-      } else { 
-         if(!regExp.test($("#invite_Submit").val())) { 
-               alert("이메일 주소가 유효하지 않습니다"); 
-               $("#invite_Submit").focus(); 
-               return false; 
-            } 
-      }  */
+     
       $('#invite_Submit').keyup(function(event) {
-         console.log("gggg");
          $('#invite_email_append').show();
          $('#invite_email_append').empty();
 
@@ -188,7 +175,7 @@ input::placeholder {
             	}
                var u_email = $('#email_append_' + target);
                var regEmail = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-               console.log(u_email.text());
+          
                if (u_email.text() == "@naver.com") {
                   alert("이메일을 입력하세요");
                   u_email.focus();
@@ -372,6 +359,14 @@ input::placeholder {
        maxHeight: null,             // set maximum height of editor
        focus: true                  // set focus to editable area after initializing summernote
 }); */
+
+	/*언어 변경 : 한글 ,영어*/
+	$('#kor').click(function(){
+		$('#selectLang').text("한국어");
+	});
+	$('#eng').click(function(){
+		$('#selectLang').text("English");
+	});
 </script>
 <script type="text/javascript">
    // The Browser API key obtained from the Google API Console.
@@ -450,6 +445,8 @@ input::placeholder {
         				'<i class="fab fa-google-drive"></i>'+
         				'<a href="'+url+'" onclick="window.open(this.href,"팝업창","width=800, height=800");return false;">'+drivename+'</a>'+
         				'<span class="divDelete" style="cursor:pointer;"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span>'+
+        				'<input type="hidden" name="editGfilename" value="'+drivename+'">'+
+        				'<input type="hidden" name="editGurl" value="'+url+'">'+
         				'<br>');
         	 $('.divDelete').click(function(){
         			$(this).parent().remove();
@@ -494,7 +491,8 @@ input::placeholder {
      }
 
    return true;
-   } 
+   }
+     
 </script>
 <style>
 .modal-content.modal-fullsize {
@@ -642,7 +640,7 @@ span {
          </div>
       </div>
       <div class="header-left">
-         <div class="input-group icons" style="width: 350px;">
+         <div class="input-group icons">
             <div class="input-group-prepend">
                <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3"
                   id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
@@ -655,15 +653,15 @@ span {
                <c:choose>
                   <c:when test="${role == 'ROLE_ADMIN'}">
                <input type="button"class="form-control"
-               style="background-color: #E71D36; border-color: #CCCCCC; margin-left: 2%; color: #fff; cursor: pointer;"
+               style="background-color: #E71D36; border-color: #CCCCCC; margin-left: 2%; color: #fff; cursor: pointer;width: 126px;"
                value="공지사항 작성" data-toggle="modal" data-target="#makenotice">
                <input type="button"class="form-control"
-               style="background-color: #E71D36; border-color: #CCCCCC; margin-left: 2%; color: #fff; cursor: pointer;"
+               style="background-color: #E71D36; border-color: #CCCCCC; margin-left: 2%; color: #fff; cursor: pointer;width: 126px;"
                value="이슈 작성" data-toggle="modal" data-target="#makeissue">
                </c:when>
                <c:otherwise>
                <input type="button"class="form-control"
-               style="background-color: #E71D36; border-color: #CCCCCC; margin-left: 2%; color: #fff; cursor: pointer;"
+               style="background-color: #E71D36; border-color: #CCCCCC; margin-left: 2%; color: #fff; cursor: pointer;width: 126px;"
                value="이슈 작성" data-toggle="modal" data-target="#makeissue">
                </c:otherwise>
                </c:choose>
@@ -678,15 +676,15 @@ span {
          <ul class="clearfix">
             <li class="icons dropdown d-none d-md-flex"><a
                href="javascript:void(0)" class="log-user" data-toggle="dropdown">
-                  <span><spring:message code="language" /></span> <i class="fa fa-angle-down f-s-14"
+                  <span id="selectLang">${sessionScope.defaultlang}</span> <i class="fa fa-angle-down f-s-14"
                   aria-hidden="true"></i>
             </a>
                <div
                   class="drop-down dropdown-language animated fadeIn  dropdown-menu">
                   <div class="dropdown-content-body">
                      <ul>
-                        <li><a href="userindex.do?lang=ko">한국어</a></li>
-                        <li><a href="userindex.do?lang=en">English</a></li>
+                        <li><a href="userindex.do?lang=ko" >한국어</a></li>
+                        <li><a href="userindex.do?lang=en" >English</a></li>
                      </ul>
                   </div>
                </div></li>

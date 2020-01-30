@@ -230,7 +230,7 @@ function drop(ev) {
 			      <a class="nav-link"  href="./private-cal.jsp">팀 캘린더</a>
 			    </li>
 			    <li class="nav-item">
-			      <a class="nav-link" href="cooperation-kanban.do?tseq=${tpj.tseq}">칸반</a>
+			      <a class="nav-link" href="cooperation-kanban.do?tseq=${tpj.tseq}" style="color:#E71D36;" >칸반</a>
 			    </li>
 		    </ul>
 		</div>

@@ -30,4 +30,13 @@ public class PrivateService {
 		result = dao.writeMyissue(myissue);
 		return result;
 	}
+	public int editTissue(MyIssue tissue) {
+		int result = 0 ;
+		System.out.println("edittissue");
+		System.out.println(tissue);
+		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
+		result = dao.editTissue(tissue);
+		System.out.println("edittissue2");
+		return result;
+	}
 }

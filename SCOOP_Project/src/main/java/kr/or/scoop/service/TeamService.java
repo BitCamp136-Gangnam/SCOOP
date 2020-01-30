@@ -109,6 +109,18 @@ public class TeamService {
 		int result = dao.fileInsert(tseq, fdname, fdcapa, email);
 		return result;
 	}
+	//팀 파일 업로드
+	public int fileEdit(int tseq, String fdname, long fdcapa, String email, int tiseq) {
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		System.out.println("파일 에딧");
+		int result = dao.fileEdit(tseq, fdname, fdcapa, email, tiseq);
+		return result;
+	}
+	public int fileDelete(int fdseq) {
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		int result = dao.fileDelete(fdseq);
+		return result;
+	}
 	
 	//개인 파일 업로드
 	public int myFileInsert(String pfdname, long pdcapa, String email) {
@@ -132,6 +144,21 @@ public class TeamService {
 		int result = dao.mentionInsert(email);
 		return result;
 	}
+	//팀 멘션 생성
+	public int mentionEdit(String email, int tiseq) {
+		System.out.println("멘션 에딧");
+		System.out.println("멘션후에딧"+tiseq);
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		int result = dao.mentionEdit(email, tiseq);
+		return result;
+	}
+	//팀 멘션 삭제
+	public int mentionDelete(int tmseq) {
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		int result = dao.mentionDelete(tmseq);
+		return result;
+	}
+	
 	//나의 멘션 생성
 	public int myMentionInsert(String email) {
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
@@ -142,6 +169,19 @@ public class TeamService {
 	public int googleDriveInsert(String gfilename, String gurl) {
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		int result = dao.googleDriveInsert(gfilename, gurl);
+		return result;
+	}
+	//팀 구글드라이브 생성
+	public int googleDriveEdit(String gfilename, String gurl, int tiseq) {
+		System.out.println("구글 에딧");
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		int result = dao.googleDriveEdit(gfilename, gurl, tiseq);
+		return result;
+	}
+	//팀 구글드라이브 생성
+	public int googleDriveDelete(int tgseq) {
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		int result = dao.googleDriveDelete(tgseq);
 		return result;
 	}
 	//개인 구글드라이브 생성
@@ -155,6 +195,19 @@ public class TeamService {
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		System.out.println(fromWork+ toWork+ doWork);
 		int result = dao.doWorkInsert(fromWork, toWork, doWork);
+		return result;
+	}
+	public int doWorkEdit(String fromWork, String toWork, String doWork, int tiseq) {
+		System.out.println("두워크 에딧");
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		System.out.println(fromWork+ toWork+ doWork);
+		int result = dao.doWorkEdit(fromWork, toWork, doWork, tiseq);
+		return result;
+	}
+	//팀 할일 제거
+	public int doWorkDelete(int tdseq) {
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		int result = dao.doWorkDelete(tdseq);
 		return result;
 	}
 	//개인 할일 생성

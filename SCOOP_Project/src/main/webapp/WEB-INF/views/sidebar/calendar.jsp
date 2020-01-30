@@ -15,6 +15,11 @@
 <link rel="stylesheet" type="text/css" href='<c:url value="/resources/css/bootstrap.min.css" />' />
 <link rel="stylesheet" type="text/css" href='<c:url value="/resources/css/bootstrap-datetimepicker.min.css" />' />
 </head>
+<script>
+(function(){
+	
+});
+</script>
 
 <body>
 
@@ -96,6 +101,10 @@
 																		<label class="col-xs-4" for="edit-end">끝</label> <input
 																			class="inputModal" type="text" name="edit-end"
 																			id="edit-end" />
+																		<label class="col-xs-4" for="edit-tiseq">tiseq</label> <input
+																			class="inputModal" type="text" name="edit-tiseq"
+																			id="edit-tiseq" />
+																		
 																	</div>
 																</div>
 																<div class="row">
@@ -171,6 +180,7 @@
 																	<c:forEach items="${pjtlist}" var="p">
 																	<input class="inputModal" type="text" name="edit-tseq" id="edit-tseq" value="${p.tseq}" readonly hidden="hidden">
                          											<option value="${p.tseq}">${p.pname}</option>
+         
                   													</c:forEach>
 																</select>
 															</div>
@@ -184,16 +194,12 @@
 																			id="edit-name" required="required" value="${sessionScope.name}"></label>
 																<label class="checkbox-inline"><input
 																	class='filter' type="checkbox" value="${sessionScope.name}" checked>${sessionScope.name}</label>
-																	<label class="checkbox-inline"><input
-																	class='filter' type="checkbox" value="정연" checked>정연</label>
-																<label class="checkbox-inline"><input
-																	class='filter' type="checkbox" value="다현" checked>다현</label>
-																<label class="checkbox-inline"><input
-																	class='filter' type="checkbox" value="사나" checked>사나</label>
-																<label class="checkbox-inline"><input
-																	class='filter' type="checkbox" value="나연" checked>나연</label>
-																<label class="checkbox-inline"><input
-																	class='filter' type="checkbox" value="지효" checked>지효</label>
+																	<c:forEach items="${pjtlist}" var="p">
+																		<label class="checkbox-inline"><input
+																	class='filter' type="checkbox" value="${p.email}" checked>${p.email}</label>
+                  													</c:forEach>
+																	
+								
 															</div>
 														</div>
 

@@ -95,12 +95,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	insert into filedrive(fdseq, tiseq, fdcapa, fdname, email, fddate, tseq)
   	values(fdseq_filedrive_seq.nextval, (select Max(tiseq) from tissue), #{param3}, #{param2}, #{param4, jdbcType=VARCHAR}, sysdate, #{param1, jdbcType=INTEGER})
 </insert>
+<insert id="fileEdit">
+	insert into filedrive(fdseq, tiseq, fdcapa, fdname, email, fddate, tseq)
+  	values(fdseq_filedrive_seq.nextval, #{param5}, #{param3}, #{param2}, #{param4, jdbcType=VARCHAR}, sysdate, #{param1, jdbcType=INTEGER})
+</insert>
 <insert id="myFileInsert">
 	insert into pfiledrive(pdseq, pdcapa, pfdname, pfddate, email, piseq)
   	values(pdseq_pfiledrive_seq.nextval, #{param2}, #{param1}, sysdate, #{param3, jdbcType=VARCHAR}, (select Max(piseq) from myissue))
 </insert>
 <insert id="mentionInsert">
 	insert into teammention values((select Max(tiseq) from tissue),tmseq_teammention_seq.nextval, #{email, jdbcType=VARCHAR})
+</insert>
+<insert id="mentionEdit">
+	insert into teammention values(#{param2},tmseq_teammention_seq.nextval, #{param1})
 </insert>
 <insert id="myMentionInsert">
 	insert into pmention values(pmseq_pmention_seq.nextval, #{email, jdbcType=VARCHAR}, (select Max(piseq) from myissue))
@@ -115,7 +122,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	select * from teamgoogledrive where tiseq=#{tiseq}
 </select>
 <select id="getDoWork" resultType="kr.or.scoop.dto.DoWork">
-	select (select m.name from teamdowork d join member m on d.email=m.email where d.tiseq=#{tiseq}) fromname, (select m.name from teamdowork d join member m on d.toemail=m.email where d.tiseq=#{tiseq}) toname, dowork from teamdowork where tiseq=#{tiseq}
+	select (select m.name from teamdowork d join member m on d.email=m.email where d.tiseq=#{tiseq}) fromname, (select m.name from teamdowork d join member m on d.toemail=m.email where d.tiseq=#{tiseq}) toname, dowork, toemail, tdseq from teamdowork where tiseq=#{tiseq}
 </select>
 <select id="chartData" resultType="kr.or.scoop.dto.Process">
 	select distinct (select count(*) from tissue where tseq = #{tseq} and isprocess=0) as initiative, 
@@ -127,13 +134,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <insert id="googleDriveInsert">
 	insert into teamgoogledrive values(tgseq_teamgoogledrive_seq.nextval,#{param1}, #{param2},(select Max(tiseq) from tissue))
 </insert>
+<insert id="googleDriveEdit">
+	insert into teamgoogledrive values(tgseq_teamgoogledrive_seq.nextval,#{param1}, #{param2},#{param3})
+</insert>
 <insert id="myGoogleDriveInsert">
 	insert into pgoogledrive values(pgseq_pgoogledrive_seq.nextval,#{param1}, #{param2},(select Max(piseq) from myissue))
 </insert>
 <insert id="doWorkInsert">
 	insert into teamdowork values(tdseq_teamdowork_seq.nextval, (select Max(tiseq) from tissue), #{param1}, #{param2}, #{param3})
 </insert>
+<insert id="doWorkEdit">
+	insert into teamdowork values(tdseq_teamdowork_seq.nextval, #{param4}, #{param1}, #{param2}, #{param3})
+</insert>
 <insert id="myDoWorkInsert">
 	insert into pdowork values(pwseq_pdowork_seq.nextval, (select Max(piseq) from myissue), #{param1}, #{param2}, #{param3})
 </insert>
+<delete id="fileDelete">
+	delete filedrive where fdseq= #{fdseq}
+</delete>
+<delete id="mentionDelete">
+	delete teammention where tmseq= #{tmseq}
+</delete>
+<delete id="googleDriveDelete">
+	delete teamgoogledrive where tgseq= #{tgseq}
+</delete>
+<delete id="doWorkDelete">
+	delete teamdowork where tdseq= #{tdseq}
+</delete>
+<select id="getTissueList" parameterType="int" resultMap="Tissue">
+select m.name, t.tititle, t.tiseq, t.tseq, t.email, t.tititle, t.ticontent, t.tistart, t.tiend, t.isprocess, t.istbook, t.issee, t.tidate, t.turl, t.backgroundcolor, t.textcolor, t.allday
+from tissue t join member m
+on m.email = t.email
+where tseq = #{tseq}
+</select>
 </mapper>
