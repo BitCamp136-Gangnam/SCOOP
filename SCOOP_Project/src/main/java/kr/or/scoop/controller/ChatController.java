@@ -9,7 +9,6 @@ public class ChatController {
 	@RequestMapping("/Chat.do")
 	public String showView(String room, Model model) {
 		model.addAttribute("room", room);
-		System.out.println("오냐");
 		
 		return "chatting/Chat";
 	}
