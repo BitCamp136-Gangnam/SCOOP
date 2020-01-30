@@ -32,7 +32,7 @@
 		});
 		//팀 공지사항으로 돌아가기
 		$('#pjNoticeBack').click(function(){
-			location.href="projectNotice.do?pnseq=${detail.tseq}";
+			location.href="projectNotice.do?tseq=${detail.tseq}";
 		});
 		
 	});
