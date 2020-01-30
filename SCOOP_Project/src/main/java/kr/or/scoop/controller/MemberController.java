@@ -250,9 +250,7 @@ public class MemberController {
 		session.setAttribute("filed", filedrive);
 		try {
 			pjtlist = noticeDao.getPJT(email);
-			System.out.println(member.getEmail());
 			tpmemlist = memberdao.getTpmembers(member.getEmail());
-			System.out.println(tpmemlist);
 			mytissuelist = myissuedao.teamWriteTiisueList(member.getIdtime());
 			myreplylist = myissuedao.teamWriteReplyList(member.getIdtime());
 			mypjtlist = myissuedao.teamWriteNoticeList(member.getEmail(), member.getIdtime());
@@ -466,6 +464,7 @@ public class MemberController {
 		List<PjNotice> mypjtlist = null;
 		List<Tpmember> pjtlist = null;
 		List<Tpmember> tpmemlist =  null;
+		List<Tissue> myNewTissueList = null;
 		List<Mention> mentions = null;
 		try {
 			 filedrive = memberdao.getFileDrive(email);
@@ -484,21 +483,21 @@ public class MemberController {
 			mytissuelist = myissuedao.teamWriteTiisueList(member.getIdtime());
 			myreplylist = myissuedao.teamWriteReplyList(member.getIdtime());
 			mypjtlist = myissuedao.teamWriteNoticeList(member.getEmail(), member.getIdtime());
-			mentions = memberdao.getMention(member.getEmail());
 			model.addAttribute("mytissuelist",mytissuelist);
 			model.addAttribute("myreplylist",myreplylist);
 			model.addAttribute("mypjtlist",mypjtlist);
-			model.addAttribute("mentions",mentions);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		if(pjtlist!=null) {
 			session.setAttribute("pjtlist", pjtlist);
 			session.setAttribute("tpmemlist", tpmemlist);
-			List<Tissue> myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime());
+			myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime());
+			mentions = memberdao.getMention(member.getEmail());
 			model.addAttribute("mypjtlist", pjtlist);
 			model.addAttribute("myNewTissueList", myNewTissueList);
-			System.out.println(myNewTissueList);
+			model.addAttribute("mentions",mentions);
+			System.out.println(mentions);
 		}
 		return "user/dashBoard-mention";
 	}

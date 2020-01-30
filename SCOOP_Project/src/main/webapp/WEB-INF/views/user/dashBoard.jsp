@@ -52,10 +52,7 @@
 
          <div class="container-fluid">
             <div class="card">
-               <div class="row" style="margin: 2% 2% 15px 2%">
-                  <h3>새로운 소식</h3>
-               </div>
-               <div class="row" style="margin-left: 2%;">
+               <div class="row" style="margin-left: 2%;margin-top: 3%">
                   <select id="selectMenu" name="menu" class="nav-item" onchange="changeItem()" style="color: #E71D36; border: 0">
                  <option value="0" selected="selected" style="color: #76838f">새로운 팀이슈</option>
             	 <option value="1" style="color: #76838f">새로운 댓글</option>	
@@ -78,7 +75,7 @@
                <hr style="margin-top: 0; margin-left: 2%; margin-right: 2%">
                <div class="row">
 						<div class="col-sm-6"
-							style="height: 700px; background: #F3F3F9; margin: 2% 10px 2% 3%; padding-top: 2%; padding-bottom: 2%; border-radius: 0.5rem;">
+							style="margin: 2% 10px 2% 3%; border-radius: 0.5rem;">
 							<div class="row" style="margin-left: 2%; margin-right: 2%" id="ialarm">
 							<div class="col-sm-3 newissue" id="al"><p><b>협업공간</b></p></div>
 							<div class="col-sm-6 newissue" id="ti"><p><b>제목</b></p></div>
@@ -141,7 +138,7 @@
                   </c:choose>
                   
                </select>
-               <div style="width:100%;height:550px;background: #F3F3F9;margin: 5% 0 5% 0;float: right;padding-top:2%;padding-bottom: 2%;border-radius: 0.5rem;">
+               <div style="width:100%;height:550px;margin: 5% 0 5% 0;float: right;padding-top:2%;padding-bottom: 2%;border-radius: 0.5rem;">
                  	<!-- 차트 -->
                  	<canvas id="myChart"></canvas>
                </div>
