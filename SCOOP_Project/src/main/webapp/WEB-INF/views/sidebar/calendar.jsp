@@ -194,9 +194,9 @@
 																			id="edit-name" required="required" value="${sessionScope.name}"></label>
 																<label class="checkbox-inline"><input
 																	class='filter' type="checkbox" value="${sessionScope.name}" checked>${sessionScope.name}</label>
-																	<c:forEach items="${pjtlist}" var="p">
+																	<c:forEach items="${mem}" var="m">
 																		<label class="checkbox-inline"><input
-																	class='filter' type="checkbox" value="${p.email}" checked>${p.email}</label>
+																	class='filter' type="checkbox" value="${m.name}" checked>${m.name}</label>
                   													</c:forEach>
 																	
 								

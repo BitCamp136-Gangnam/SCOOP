@@ -53,7 +53,7 @@ public interface ProjectDao {
 	public int deletePjNotice(int pnseq);
 	
 	//프로젝트 멤버 리스트
-	public List<Tpmember> getTpMember(int tseq);
+	public List<Tpmember> getTpMember(String email);
 	
 	//프로젝트 공지사항 권한
 	public int searchNoticeRank(int pnseq, String email,int tseq);

@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.LocaleResolver;
 
 import kr.or.scoop.dao.MemberDao;
 import kr.or.scoop.dao.MyIssueDao;
@@ -56,8 +57,12 @@ public class TeamController {
 	
 	@Autowired
 	private TeamService teamservice;
+	
 	@Autowired
 	private PrivateService privateservice;
+	
+	@Autowired
+	private LocaleResolver localeResolver;
 	
 	@RequestMapping(value = "team.do" , method= {RequestMethod.POST,RequestMethod.GET})
 	public String CreateProject(TeamPjt team) {
@@ -614,6 +619,22 @@ public class TeamController {
 	public String ladder(int tseq,Model model) {
 		
 		return "user/projectLadder";
+	}
+	
+	@RequestMapping("/calendar.do")
+	public String object(@RequestParam(required = false, name="lang") String language, HttpServletRequest request, HttpServletResponse response,Model model,HttpSession session) {
+		System.out.println("calendar 왔냐?");
+		if(language == null) {
+			language = "ko";
+		}
+		String email = (String)session.getAttribute("email");
+		ProjectDao dao = sqlsession.getMapper(ProjectDao.class);
+		List<Tpmember> mem = dao.getTpMember(email);
+		Locale locale  = new Locale(language);
+		System.out.println("locale : " + locale + "\n language : " + language);
+		localeResolver.setLocale(request, response, locale);
+		model.addAttribute("mem",mem);
+		return "sidebar/calendar";
 	}
 	
 }
