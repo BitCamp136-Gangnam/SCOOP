@@ -103,6 +103,7 @@ var calendar = $('#calendar').fullCalendar({
         }).append('<p><strong>등록자:</strong> ' + event.username + '</p>')
         .append('<p><strong>협업공간 이름:</strong> ' + event.type + '</p>')
         .append('<p><strong>시간:</strong> ' + getDisplayEventDate(event) + '</p>')
+        .append('<p><strong>tiseq:</strong> ' + event._id + '</p>')
         .append('<div class="popoverDescCalendar"><strong>설명:</strong> ' + event.description + '</div>'),
       delay: {
         show: "800",
@@ -175,6 +176,8 @@ var calendar = $('#calendar').fullCalendar({
           }
           return array;
         })
+        console.log(fixedDate);
+        console.log(callback);
         callback(fixedDate);
       }
     });
@@ -193,18 +196,32 @@ var calendar = $('#calendar').fullCalendar({
     /** 리사이즈시 수정된 날짜반영
      * 하루를 빼야 정상적으로 반영됨. */
     var newDates = calDateWhenResize(event);
-
+    var editData = {
+    		_id: event._id,
+            title: event.title,
+            start: newDates.startDate,
+            end: newDates.endDate,
+            description: event.description,
+            type: event.type,
+            username: event.username,
+            backgroundColor: event.backgroundColor,
+            textColor: '#ffffff',
+            tseq:event.tseq,
+            allDay: event.allDay
+        };
+    console.log(editData);
     //리사이즈한 일정 업데이트
     $.ajax({
       type: "post",
       url: "editTeamCalendar.do",
-      data: {
-        //id: event._id,
-        
-      },
+      data: editData,
       success: function (response) {
         alert('수정: ' + newDates.startDate + ' ~ ' + newDates.endDate);
-      }
+        console.log(response);
+      },
+      error: function() {
+	    	alert("에러");
+	    }
     });
 
   },
@@ -225,21 +242,35 @@ var calendar = $('#calendar').fullCalendar({
         return false;
       }
     }
-
+    console.log(event._id);
     // 드랍시 수정된 날짜반영
     var newDates = calDateWhenDragnDrop(event);
-
+    var dropEditData = {
+    		_id: event._id,
+            title: event.title,
+            start: newDates.startDate,
+            end: newDates.endDate,
+            description: event.description,
+            type: event.type,
+            username: event.username,
+            backgroundColor: event.backgroundColor,
+            textColor: '#ffffff',
+            tseq:event.tseq,
+            allDay: event.allDay
+        };
     //드롭한 일정 업데이트
     $.ajax({
-      type: "get",
-      url: "",
-      data: {
-        //...
-      },
-      success: function (response) {
-        alert('수정: ' + newDates.startDate + ' ~ ' + newDates.endDate);
-      }
-    });
+        type: "post",
+        url: "editTeamCalendar.do",
+        data: dropEditData,
+        success: function (response) {
+          alert('수정: ' + newDates.startDate + ' ~ ' + newDates.endDate);
+          console.log(response);
+        },
+        error: function() {
+  	    	alert("에러");
+  	    }
+      });
 
   },
 

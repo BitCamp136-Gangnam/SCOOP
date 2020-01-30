@@ -267,6 +267,28 @@ input::placeholder {
          }
 
       });
+
+      //내정보 열기 (드롭다운)
+      $('#myprofileEdit').click(function(){
+    	  location.href="memberEdit.do?${sessionScope.email}";
+          });
+      //잠금 모드 (드롭다운)
+      $('#lockScoop').click(function(){
+			location.href="page-lock.jsp";
+          });
+      //일반 회원 로그아웃 (드롭다운)
+      $('#logout').click(function(){
+			location.href="logout.do";
+          });  
+      //구글 회원 로그아웃 (드롭다운)    
+      $('#logoutGoogle').click(function(){
+    	  	signOut();
+          });
+      //네이버 회원 로그아웃 (드롭다운)
+      $('#logoutNaver').click(function(){
+			location.href="logout.do";
+          });
+      //파일함 열기
       $('#fileopen').click(function() {
          $('#filediv').show();
          $('#fileclose').show();
@@ -457,17 +479,36 @@ input::placeholder {
 
    //이슈작성 validation
     function checkz() {
-    //이슈 제목 공백 확인
+    //공지사항 제목 공백 확인
      if($("#issuetitle").val() == ""){
         Swal.fire("제목을 입력해주세요.");
        $("#issuetitle").focus();
        return false;
      }
 
-     //이슈 설명 공백 확인
+     //공지사항 설명 공백 확인
      if($("#issuecontent").val() == ""){
         Swal.fire("내용을 입력해주세요.");
        $("#issuecontent").focus();
+       return false;
+     }
+
+   return true;
+   }
+
+  //공지사항작성 validation
+    function checknotice() {
+    //이슈 제목 공백 확인
+     if($("#bntitle").val() == ""){
+        Swal.fire("제목을 입력해주세요.");
+       $("#bntitle").focus();
+       return false;
+     }
+
+     //이슈 설명 공백 확인
+     if($("#bncontent").val() == ""){
+        Swal.fire("내용을 입력해주세요.");
+       $("#bncontent").focus();
        return false;
      }
 
@@ -769,25 +810,49 @@ span {
                   class="drop-down dropdown-profile animated fadeIn dropdown-menu">
                   <div class="dropdown-content-body">
                      <ul>
-                        <li><a href="memberEdit.do?${sessionScope.email}"><i
-                              class="icon-user"></i> <span>내 정보</span></a></li>
-                        <li><span id="fileopen" style="cursor: pointer;"><span class="iconify"
-                              data-icon="ion:folder-open-outline" data-inline="false"
-                              style="font-size: 15px"></span> <span> &nbsp;&nbsp;파일함</span></span>
+                        <li>
+                        	<span id="myprofileEdit" style="cursor: pointer;">
+                        	<span class="icon-user"></span> 
+                        	<span>&nbsp;&nbsp;내 정보</span>
+                        	</span>
+                        </li>
+                        <li>
+                        	<span id="fileopen" style="cursor: pointer;">
+                        	<span class="iconify" data-icon="ion:folder-open-outline" data-inline="false"style="font-size: 15px"></span> 
+                        	<span>&nbsp;&nbsp;파일함</span></span>
                         </li>
                         <hr class="my-2">
-                        <li><a href="page-lock.jsp"><i class="icon-lock"></i><span>잠금모드</span></a>
+                        <li>
+                        	<span id="lockScoop" style="cursor: pointer;">
+                        	<!-- <a href="page-lock.jsp"> -->
+                        	<span class="icon-lock"></span>
+                        	<span>&nbsp;&nbsp;잠금모드</span>
+                        	</span>
                         </li>
                         <c:choose>
                            <c:when test="${kind=='normal'}">
-                              <li><a href="logout.do"><i class="icon-key"></i> <span>로그아웃</span></a></li>
+                          		<li>
+                          			<span id="logout" style="cursor: pointer;">
+                              			<span class="icon-key"></span> 
+                              			<span>&nbsp;&nbsp;로그아웃</span>
+                              		</span>
+                              	</li>
                            </c:when>
                            <c:when test="${kind=='google'}">
-                              <li><a href="#" onclick="signOut();"><i
-                                    class="icon-key" ></i> <span>로그아웃</span></a></li>
+                              <li>
+                              	<span id="logoutGoogle" style="cursor: pointer;">
+                             		<span class="icon-key" ></span> 
+                              		<span>&nbsp;&nbsp;로그아웃</span>
+                              	</span>
+                              </li>
                            </c:when>
                            <c:when test="${kind=='naver'}">
-                              <li><a href="logout.do"><i class="icon-key"></i> <span>로그아웃</span></a></li>
+                              <li>
+                              	<span id="logoutNaver" style="cursor: pointer;">
+	                              	<span class="icon-key"></span> 
+	                              	<span>&nbsp;&nbsp;로그아웃</span>
+                              	</span>
+                              </li>
                            </c:when>
                            <c:otherwise></c:otherwise>
                         </c:choose>
@@ -1203,7 +1268,7 @@ span {
             <button type="button" class="close" data-dismiss="modal">&times;</button>
          </div>
    
-         <form action="noticeWrite.do" method="POST">
+         <form action="noticeWrite.do" method="POST" onsubmit="return checknotice()">
             <!-- Modal body -->
             <div class="modal-body">
                <!-- <p style="font-size: 12px">협업공간은 함께 일하는 멤버들끼리만 자료를 공유하고 협업할 수 있는 공간입니다.<br>

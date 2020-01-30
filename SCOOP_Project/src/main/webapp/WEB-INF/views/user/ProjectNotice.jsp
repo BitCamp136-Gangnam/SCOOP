@@ -199,8 +199,28 @@ $(function(){
 			}
 		}
 	}
+
+	//프로젝트 공지사항작성 validation
+    function checkpjnotice() {
+    //이슈 제목 공백 확인
+     if($("#pntitle").val() == ""){
+        Swal.fire("제목을 입력해주세요.");
+       $("#pntitle").focus();
+       return false;
+     }
+
+     //이슈 설명 공백 확인
+     if($("#pncontent").val() == ""){
+        Swal.fire("내용을 입력해주세요.");
+       $("#pncontent").focus();
+       return false;
+     }
+
+   return true;
+   }
 </script>
 <body>
+<c:set var="email" value="${sessionScope.email}" />
     <jsp:include page="/WEB-INF/views/commons/preloader.jsp"></jsp:include>
 
     <!--**********************************
@@ -216,9 +236,9 @@ $(function(){
         <div class="content-body">
         <div class="container-fluid">
         <div class="card" style="padding-bottom: 30px;">
-      <div class="row" style="margin: 2%">
+      <div class="row" style="margin: 2% 2% 15px 2%">
          <div class="col-sm-12" style="padding-left: 0">
-            <h3>${tpj.pname}
+            <h3 style="padding-left: 1%;">${tpj.pname}
             	<c:if test="${rank == 100}">
             	<span data-toggle="tooltip" data-placement="top" title="협업공간 관리" >
             	<i class="fas fa-cog" id="myModal_Edit_Icon" style="margin-left: 5px;cursor: pointer; font-size: 15px" data-toggle="modal" data-target="#myModal_Edit" ></i>
@@ -230,7 +250,7 @@ $(function(){
             	
             	</c:if>
             </h3>
-            ${tpj.pcontent}
+            <p style="padding-left: 1%;margin-bottom: 0px;">[${tpj.pcontent}]</p>
          </div>
       </div>
       <div class="row" style="margin-left: 2%;">
@@ -245,7 +265,10 @@ $(function(){
                <a class="nav-link" href="cooperation-kanban.do?tseq=${tpj.tseq}">칸반</a>
              </li>
              <li class="nav-item">
-               <a class="nav-link" href="projectNotice.do?tseq${tpj.tseq}">공지사항</a>
+               <a class="nav-link" href="projectNotice.do?tseq=${tpj.tseq}"style="color: #E71D36;" >공지사항</a>
+             </li>
+             <li class="nav-item">
+               <a class="nav-link" href="projectLadder.do?tseq=${tpj.tseq}">사다리 타기</a>
              </li>
           </ul>
       </div>
@@ -378,7 +401,7 @@ $(function(){
             <button type="button" class="close" data-dismiss="modal">&times;</button>
          </div>
    
-         <form action="PnoticeWrite.do" method="POST">
+         <form action="PnoticeWrite.do" method="POST" onsubmit="return checkpjnotice()">
             <!-- Modal body -->
             <div class="modal-body">
                <!-- <p style="font-size: 12px">협업공간은 함께 일하는 멤버들끼리만 자료를 공유하고 협업할 수 있는 공간입니다.<br>

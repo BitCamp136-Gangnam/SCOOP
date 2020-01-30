@@ -27,6 +27,22 @@ $(function(){
 		$('#editIssue').click(function(){
 			location.href = 'myissueEdit.do?piseq='+${myissue.piseq};
 		})
+		$('#deleteIssue').click(function(){
+			   Swal.fire({
+				   title: '정말로 이슈를 삭제하시겠습니까??',
+				   text: "삭제하시면 이슈의 모든 정보가 사라집니다!",
+				   icon: 'warning',
+				   showCancelButton: true,
+				   confirmButtonColor: '#d33',
+				   cancelButtonColor: '#c8c8c8',
+				   confirmButtonText: '확인',
+				   cancelButtonText: '취소'
+				 }).then((result) => {
+				   if (result.value) {
+					   location.href = 'deleteMyIssue.do?piseq='+${myissue.piseq};
+				   }
+				 })
+		})
 	});
 </script>
 <style>
@@ -119,7 +135,7 @@ border-radius: 5px;
         </div>    
             <!-- #/ container -->
             </div> 
-            <div class="card" style="float:right;background-color: #fff;margin-left:10px;padding-left: 0px;padding-right: 0px;width:400px;">
+            <!-- <div class="card" style="float:right;background-color: #fff;margin-left:10px;padding-left: 0px;padding-right: 0px;width:400px;">
             <div class="card" style="min-height:430px;padding-left: 3%;padding-top: 5%;padding-right: 3%;padding-bottom: 5%;overflow: auto;">
             
             <div class="row" style="margin-left: 3%;margin-right: 3%;">
@@ -143,7 +159,7 @@ border-radius: 5px;
             </div>
             <textarea id="myissueComment" rows="5" placeholder="말하지 않아도 아는것은 초코파이뿐입니다                        댓글 입력 후 저장을 클릭해주세요" style="resize: none;height:180px;width:auto;border: 1px solid #c8c8c8;border-radius: 0.5rem;margin-left: 15px;margin-bottom: 20px;margin-right: 15px;overflow:auto;padding: 4%"></textarea>
             <input id="myissueCommentBtn" type="button" value="저장" style="width: 90px;border-radius:0.5rem ;padding-top:7px;padding-bottom:7px; background-color: #E71D36;color: #fff; cursor: pointer;position: absolute;top:590px;left: 290px;">
-            </div>
+            </div> -->
             </div>
         </div>
         <!--**********************************

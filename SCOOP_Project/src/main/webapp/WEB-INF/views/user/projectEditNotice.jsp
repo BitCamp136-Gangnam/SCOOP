@@ -39,6 +39,40 @@
 	margin-bottom: 1%;
 }
 </style>
+<script type="text/javascript">
+//공지사항 수정완료 스윗얼럿 
+$(function(){
+	 $('#noticeEditOk').click(function(){
+		 Swal.fire({
+			  icon: 'success',
+			  title: '수정 완료',
+			  showConfirmButton: false,
+			  timer: 1500
+			})
+		});
+});
+
+//프로젝트 공지사항작성 validation
+function checkpjnotice() {
+//이슈 제목 공백 확인
+ if($("#pntitle").val() == ""){
+    Swal.fire("제목을 입력해주세요.");
+   $("#pntitle").focus();
+   return false;
+ }
+
+ //이슈 설명 공백 확인
+ if($("#pncontent").val() == ""){
+    Swal.fire("내용을 입력해주세요.");
+   $("#pncontent").focus();
+   return false;
+ }
+
+return true;
+}
+
+
+</script>
 <body>
 
 	<jsp:include page="/WEB-INF/views/commons/preloader.jsp"></jsp:include>
@@ -53,26 +87,24 @@
 			<!--**********************************
             Content body start
         ***********************************-->
-		<form action="pjNoticeEditOk.do" method="POST">
+		<form action="pjNoticeEditOk.do?tseq=${edit.tseq}" method="POST" onsubmit="return checkpjnotice()">
 			<div class="content-body" style="height: 680px;">
 				<div class="container-fluid row"
 					style="padding-right: 15px; margin-right: 0px; margin-left: 0px; padding-left: 15px;">
 					<div class="card"
 						style="padding-left: 15px; padding-right: 15px; padding-top: 1%; width: 100%; height: auto; overflow: auto;">
-						<div class="row" style="margin: 11% 2% 3% 2%;">
-						<h2 style="text-align: center;margin-left: 43%;margin-bottom: 2%">공지사항 수정</h2>
-							<input class="form-control createmodal" type="text" id="pntitle"name="pntitle" placeholder="공지사항 제목을 입력해주세요" style="width: 75%; margin-left: 15%; border-radius: 0.5rem;"value="${edit.pntitle}">
+						<div class="row" style="margin: 7% 2% 3% 2%;">
+						<h3 style="text-align: center;margin-left: 43%;margin-bottom: 2%">공지사항 수정</h3>
+							<input class="form-control createmodal" type="text" id="pntitle"name="pntitle" placeholder="공지사항 제목을 입력해주세요" style="width: 75%; margin-left: 13%; border-radius: 0.5rem;"value="${edit.pntitle}">
 						</div>
 						<div class="myissueDetail" style="margin: 0 2% 3% 2%;">
 							<textarea class="form-control createmodal" rows="10"
 								id="pcontent_Edit" name="pncontent"
-								style="width: 75%; margin-left: 15%; border-radius: 0.5rem;" placeholder="공지사항을 내용을 입력해주세요">${edit.pncontent}</textarea>
+								style="width: 75%; margin-left: 13%; border-radius: 0.5rem;" placeholder="공지사항을 내용을 입력해주세요">${edit.pncontent}</textarea>
 						</div>
 						<div class="row" style="padding-left: 38%;">
 						<input type="hidden" name="pnseq" value="${edit.pnseq}">
-						<input type="submit" class="btn btn-secondary"  style="width:150px;background-color: #E71D36; border-color: #CCCCCC; color: #fff;margin-right:2%; cursor: pointer;" value="작성 완료">
-						
-						
+						<input id="noticeEditOk" type="submit" class="btn btn-secondary"  style="width:150px;background-color: #E71D36; border-color: #CCCCCC; color: #fff;margin-right:2%; cursor: pointer;" value="작성 완료">
 						<button type="button" class="btn btn-secondary" style="float:right;width:150px;background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;"data-dismiss="modal">
 							취소
 						</button>

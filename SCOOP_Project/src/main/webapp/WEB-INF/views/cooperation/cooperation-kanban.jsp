@@ -215,7 +215,13 @@ function drop(ev) {
 			<div class="col-sm-12" style="padding-left: 0">
 				<h3 style="padding-left: 1%;">${tpj.pname}
 					<c:if test="${rank == 100}">
+            			<span data-toggle="tooltip" data-placement="top" title="협업공간 관리" >
             			<i class="fas fa-cog" id="myModal_Edit_Icon" style="margin-left: 5px;cursor: pointer; font-size: 15px" data-toggle="modal" data-target="#myModal_Edit" ></i>
+            			</span>
+            			<span data-toggle="tooltip" data-placement="top" title="공지사항 관리" >
+            			<span id="nowrite" class="iconify" data-icon="jam:write" style="font-size:20px;cursor: pointer;padding-bottom: 3px;" data-inline="false" data-toggle="modal" data-target="#pnoticewrite">
+            			</span>
+            			</span>
             		</c:if>
 				</h3>
 				<p style="padding-left: 1%;margin-bottom: 0px;">[${tpj.pcontent}]</p>
@@ -232,6 +238,12 @@ function drop(ev) {
 			    <li class="nav-item">
 			      <a class="nav-link" href="cooperation-kanban.do?tseq=${tpj.tseq}" style="color:#E71D36;" >칸반</a>
 			    </li>
+			    <li class="nav-item">
+               <a class="nav-link" href="projectNotice.do?tseq=${tpj.tseq}">공지사항</a>
+             </li>
+			    <li class="nav-item">
+               <a class="nav-link" href="projectLadder.do?tseq=${tpj.tseq}">사다리 타기</a>
+             </li>
 		    </ul>
 		</div>
 		<hr style="margin-top: 0;margin-left: 2%; margin-right: 2%;margin-bottom: 0px;">

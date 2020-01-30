@@ -54,7 +54,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select m.email, m.TSEQ, t.pname, m.tpaddtime from tpmember m join teampjt t on m.tseq = t.tseq where m.email = #{email}
 </select>
 <select id="getTissue" parameterType="kr.or.scoop.dto.Tissue" resultMap="Tissue">
-	SELECT T.TSEQ , M.NAME, S.TISEQ, S.tititle, S.TICONTENT, S.TIDATE, S.ISTBOOK 
+	SELECT T.TSEQ , M.NAME, S.TISEQ, S.tititle, S.TICONTENT, S.TIDATE, S.ISTBOOK ,s.isprocess
 	FROM TEAMPJT T JOIN TISSUE S ON T.TSEQ = S.TSEQ 
 				   JOIN MEMBER M ON M.EMAIL = S.EMAIL 
 	WHERE T.TSEQ = #{TSEQ} ORDER BY S.TIDATE DESC
@@ -90,6 +90,18 @@ select p.pnseq,p.pntitle,p.pncontent,m.name,p.tseq,p.pntime,p.email from pjnotic
 	delete from pjnotice where pnseq = #{pnseq}
 </delete>
 <select id="getTpMember" resultType="kr.or.scoop.dto.Tpmember">
-	select tseq ,email from tpmember where tseq = #{tseq}
+	select m.name,m.email, t.tseq
+from  member m join tpmember t on m.email=t.email
+where tseq in (
+            select tseq
+            from tpmember
+            where email = #{param1}
+)
 </select>
+<select id="searchNoticeRank" parameterType="kr.or.scoop.dto.Tpmember" resultType="int">
+	select m.pjuserrank, m.tseq, m.email, n.pnseq
+	from tpmember m join teampjt p 
+                	on m.tseq = p.tseq join pjnotice n on n.tseq = m.tseq
+	where m.email = #{param2} and n.pnseq = #{param1} and p.tseq= #{param3} 
+	</select>
 </mapper>

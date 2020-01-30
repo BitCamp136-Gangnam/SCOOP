@@ -338,9 +338,12 @@ public class BoardController {
 	}
 	//프로젝트 공지사항 상세보기
 	@RequestMapping(value="pjNoticeDetail.do",method=RequestMethod.GET)
-	public String pjNoticeDetail(int pnseq,Model model,HttpSession session) {
+	public String pjNoticeDetail(int pnseq,Model model,HttpSession session,int tseq) {
+		String email = (String)session.getAttribute("email");
 		ProjectDao dao = sqlSession.getMapper(ProjectDao.class);
+		int rank = dao.searchNoticeRank(pnseq, email, tseq);
 		PjNotice Detail = dao.pjNoticeDetail(pnseq);
+		model.addAttribute("rank", rank);
 		model.addAttribute("detail", Detail);
 		return "user/projectDetailNotice";
 	}
@@ -351,19 +354,18 @@ public class BoardController {
 		PjNotice edit = dao.pjNoticeDetail(pnseq);
 		
 		model.addAttribute("edit",edit);
-		
 		return "user/projectEditNotice";
 	}
 	
 	//프로젝트 공지사항 수정 처리 
 	@RequestMapping(value="pjNoticeEditOk.do", method = RequestMethod.POST)
-	public String pjNoticeEditOk(PjNotice pjnotice) {
+	public String pjNoticeEditOk(PjNotice pjnotice,int tseq) {
 		String viewpage;
 		int result = 0;
-		
+		System.out.println("이거 : " + pjnotice);
 		result = tservice.pjNoticeEdit(pjnotice);
 		if(result > 0) {
-			viewpage = "redirect:/pjNoticeDetail.do?pnseq="+pjnotice.getPnseq();
+			viewpage = "redirect:/pjNoticeDetail.do?pnseq="+pjnotice.getPnseq()+"&tseq="+tseq;
 		}else {
 			viewpage = "user/projectNotice";
 		}
@@ -372,13 +374,13 @@ public class BoardController {
 	
 	//프로젝트 공지사항 삭제
 	@RequestMapping(value="pjNoticeDelete.do" , method = {RequestMethod.POST, RequestMethod.GET})
-	public String pjNoticeDelete(int pnseq) {
+	public String pjNoticeDelete(int pnseq,int tseq) {
 		ProjectDao dao = sqlSession.getMapper(ProjectDao.class);
 		int result = dao.deletePjNotice(pnseq);
 		String viewpage;
 		
 		if(result > 0) {
-			viewpage="redirect:/projectNotice.do";
+			viewpage="redirect:/projectNotice.do?tseq="+tseq;
 		}else {
 			viewpage="user/ProjectNotice";
 		}
@@ -395,9 +397,9 @@ public class BoardController {
 			List<DoWork> dowork = dao.getMyDoWork(piseq);
 			List<FileDrive> files = dao.getMyFiles(piseq);
 			model.addAttribute("myissue", myissue);
-			model.addAttribute("mymention", mentions);
-			model.addAttribute("mygdrive", googledrive);
-			model.addAttribute("mydowork", dowork);
+			model.addAttribute("mentions", mentions);
+			model.addAttribute("gdrive", googledrive);
+			model.addAttribute("dowork", dowork);
 			model.addAttribute("files", files);
 		} catch (Exception e) {
 			model.addAttribute("myissue", myissue);
@@ -424,6 +426,111 @@ public class BoardController {
 			model.addAttribute("tissue", tissue);
 		}
 		return "issue/teamIssueEdit";
+	}
+	@RequestMapping(value="myissueEditOk.do" , method = {RequestMethod.POST, RequestMethod.GET})
+	public String myissueEditOk(int piseq,Model model, String[] editMention, String[] editGfilename, HttpSession session, HttpServletRequest request
+			, String[] editGurl, String[] editToname, String[] editOriFile,String[] editDowork, String title, String editIssuecontent, String editFrom, String editTo, @RequestParam(value="editFile") MultipartFile[] editFile) throws Exception {
+		String path = "";
+		System.out.println(piseq +"/"+ editMention + editFile + editGfilename + editGurl+editToname+editDowork+title+editIssuecontent);
+		MyIssue tissue = new MyIssue();
+		String email = (String)session.getAttribute("email");
+		//tissue.setTseq(tseq);
+		tissue.setPiseq(piseq);
+		tissue.setEmail(email);
+		tissue.setPititle(title);
+		tissue.setPicontent(editIssuecontent);
+		if(editFrom != null) {
+			tissue.setPistart(java.sql.Timestamp.valueOf(editFrom+" 00:00:00"));
+			tissue.setPiend(java.sql.Timestamp.valueOf(editTo+" 00:00:00"));
+		}
+		System.out.println(tissue);
+		int result = privateservice.editMyissue(tissue);
+		if(editFile != null && editFile.length > 0) {
+			System.out.println("파일오니????");
+			//업로드한 파일이 하나라도 있다면
+			for(MultipartFile mutifile : editFile) {
+				String filename = mutifile.getOriginalFilename();
+				System.out.println(filename);
+				long fsize = mutifile.getSize();
+				String filepath = request.getServletContext().getRealPath("/upload");
+				String fpath = filepath + "\\" + filename;
+				System.out.println(filename + " , " + fpath);
+				if(!filename.equals("")) {
+					//서버에 파일 업로드 (write)
+					FileOutputStream fs = new FileOutputStream(fpath);
+					fs.write(mutifile.getBytes());
+					fs.close();
+					try {
+						privateservice.pfileEdit(filename, fsize, email, piseq);
+					} catch (Exception e) {
+						privateservice.pfileEdit(filename, fsize, email, piseq);
+					}
+				}
+			}
+		}
+		if(editOriFile != null && editOriFile.length > 0) {
+			for(int i=0;i<editOriFile.length;i++) {
+				if(editOriFile[i].contains("~delete")) {
+					int pdseq = Integer.parseInt(editOriFile[i].split("~")[1]);
+					privateservice.pfileDelete(pdseq);
+				}
+			}
+		}
+		if(editMention != null && editMention.length > 0) {
+			for(int i=0;i<editMention.length;i++) {
+				if(editMention[i].contains("~delete")) {
+					int pmseq = Integer.parseInt(editMention[i].split("~")[1]);
+					privateservice.pmentionDelete(pmseq);
+				}else {
+					System.out.println(editMention[i].contains("~"));
+					if(!editMention[i].contains("~")) {
+						//editMention[i] = editMention[i].split("~")[0];
+						System.out.println("멘션전에딧"+piseq+editMention[i]);
+						privateservice.pmentionEdit(editMention[i], piseq);
+						System.out.println("멘션끝"+piseq+editMention[i]);
+					}
+				}
+			}
+		}
+		if(editGfilename != null && editGfilename.length > 0) {
+			for(int i=0;i<editGfilename.length;i++) {
+				if(editGfilename[i].contains("~delete")) {
+					int pgseq = Integer.parseInt(editGfilename[i].split("~")[1]);
+					privateservice.pgoogleDriveDelete(pgseq);
+				}else {
+					if(!editGfilename[i].contains("~")) {
+						//editGfilename[i] = editGfilename[i].split("/")[0];
+						//editGurl[i] = editGurl[i].split("/")[0];
+						privateservice.pgoogleDriveEdit(editGfilename[i], editGurl[i], piseq);
+					}
+				}
+			}
+		}
+		if(editToname != null && editToname.length > 0) {
+			String fromWork = email;
+			for(int i=0;i<editToname.length;i++) {
+				if(editToname[i].contains("~delete")) {
+					int pwseq = Integer.parseInt(editToname[i].split("~")[1]);
+					privateservice.pdoWorkDelete(pwseq);
+				}else {
+					if(!editToname[i].contains("~")) {
+						//editToname[i] = editToname[i].split("/")[0];
+						//editDowork[i] = editDowork[i].split("/")[0];
+						privateservice.pdoWorkEdit(fromWork, editToname[i], editDowork[i], piseq);
+					}
+				}
+			}
+		}
+		if(result >0) {
+			model.addAttribute("piseq", piseq);
+			path = "ajax/editMyIssueSwal";
+			System.out.println("success edit myissue");
+		}else {
+			model.addAttribute("piseq", piseq);
+			path = "ajax/editMyIssueFailSwal";
+			System.out.println("fail edit myissue");
+		}
+		return path;
 	}
 	@RequestMapping(value="teamIssueEditOk.do" , method = {RequestMethod.POST, RequestMethod.GET})
 	public String teamIssueEditOk(int tseq, int tiseq,Model model, String[] editMention, String[] editGfilename, HttpSession session, HttpServletRequest request
@@ -468,7 +575,7 @@ public class BoardController {
 		 }
 		 if(editOriFile != null && editOriFile.length > 0) {
 			 for(int i=0;i<editOriFile.length;i++) {
-				 if(editOriFile[i].matches("~delete")) {
+				 if(editOriFile[i].contains("~delete")) {
 					 int fdseq = Integer.parseInt(editOriFile[i].split("~")[1]);
 					 tservice.fileDelete(fdseq);
 				 }
@@ -476,45 +583,47 @@ public class BoardController {
 		 }
 		 if(editMention != null && editMention.length > 0) {
 			 for(int i=0;i<editMention.length;i++) {
-				 if(editMention[i].matches("~delete")) {
+				 if(editMention[i].contains("~delete")) {
 					 int tmseq = Integer.parseInt(editMention[i].split("~")[1]);
 					 tservice.mentionDelete(tmseq);
 				 }else {
-					 if(editMention[i].matches("~")) {
-						 editMention[i] = editMention[i].split("~")[0];
+					 System.out.println(editMention[i].matches("~"));
+					 if(!editMention[i].contains("~")) {
+						 //editMention[i] = editMention[i].split("~")[0];
+						 System.out.println("멘션전에딧"+tiseq);
+						 tservice.mentionEdit(editMention[i], tiseq);
+						 System.out.println("멘션끝"+tiseq);
 					 }
-					 System.out.println("멘션전에딧"+tiseq);
-					 tservice.mentionEdit(editMention[i], tiseq);
-					 System.out.println("멘션끝"+tiseq);
 				 }
 			 }
 		 }
 		 if(editGfilename != null && editGfilename.length > 0) {
 			 for(int i=0;i<editGfilename.length;i++) {
-				 if(editGfilename[i].matches("~delete")) {
+				 if(editGfilename[i].contains("~delete")) {
 					 int tgseq = Integer.parseInt(editGfilename[i].split("~")[1]);
 					 tservice.googleDriveDelete(tgseq);
 				 }else {
-					 if(editGfilename[i].matches("~")) {
-						 editGfilename[i] = editGfilename[i].split("/")[0];
-						 editGurl[i] = editGurl[i].split("/")[0];
+					 if(!editGfilename[i].contains("~")) {
+						 //editGfilename[i] = editGfilename[i].split("/")[0];
+						 //editGurl[i] = editGurl[i].split("/")[0];
+					 }else {
+						 tservice.googleDriveEdit(editGfilename[i], editGurl[i], tiseq);
 					 }
-					 tservice.googleDriveEdit(editGfilename[i], editGurl[i], tiseq);
 				 }
 			 }
 		 }
 		 if(editToname != null && editToname.length > 0) {
 			 String fromWork = email;
 			 for(int i=0;i<editToname.length;i++) {
-				 if(editToname[i].matches("~delete")) {
+				 if(editToname[i].contains("~delete")) {
 					 int tdseq = Integer.parseInt(editToname[i].split("~")[1]);
 					 tservice.doWorkDelete(tdseq);
 				 }else {
-					 if(editToname[i].matches("~")) {
-						 editToname[i] = editToname[i].split("/")[0];
-						 editDowork[i] = editDowork[i].split("/")[0];
+					 if(!editToname[i].contains("~")) {
+						 //editToname[i] = editToname[i].split("/")[0];
+						 //editDowork[i] = editDowork[i].split("/")[0];
+						 tservice.doWorkEdit(fromWork, editToname[i], editDowork[i], tiseq);
 					 }
-					 tservice.doWorkEdit(fromWork, editToname[i], editDowork[i], tiseq);
 				 }
 			 }
 		 }
@@ -528,5 +637,24 @@ public class BoardController {
 			System.out.println("fail edit tissue");
 		}
 	return path;
+	}
+	@RequestMapping(value="deleteMyIssue.do" , method = {RequestMethod.POST, RequestMethod.GET})
+	public String deleteMyIssue(int piseq, Model model) {
+		privateservice.myIssueFileDelete(piseq);
+		privateservice.myIssueMentionDelete(piseq);
+		privateservice.myIssueGoogleDriveDelete(piseq);
+		privateservice.myIssueDoWorkDelete(piseq);
+		privateservice.myIssueDelete(piseq);
+		return "ajax/myIssueDelete";
+	}
+	@RequestMapping(value="deleteTeamIssue.do" , method = {RequestMethod.POST, RequestMethod.GET})
+	public String deleteTeamIssue(int tiseq,int tseq, Model model) {
+		tservice.teamIssueFileDelete(tiseq);
+		tservice.teamIssueMentionDelete(tiseq);
+		tservice.teamIssueGoogleDriveDelete(tiseq);
+		tservice.teamIssueDoWorkDelete(tiseq);
+		tservice.teamIssueDelete(tiseq);
+		model.addAttribute("tseq", tseq);
+		return "ajax/teamIssueDelete";
 	}
 }

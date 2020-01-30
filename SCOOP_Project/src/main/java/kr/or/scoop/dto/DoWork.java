@@ -7,6 +7,8 @@ public class DoWork {
  private String pdowork;
  private String toemail;
  private int tdseq;
+ private String ptoemail;
+ private int pwseq;
 public String getFromname() {
 	return fromname;
 }
@@ -43,10 +45,22 @@ public int getTdseq() {
 public void setTdseq(int tdseq) {
 	this.tdseq = tdseq;
 }
+public String getPtoemail() {
+	return ptoemail;
+}
+public void setPtoemail(String ptoemail) {
+	this.ptoemail = ptoemail;
+}
+public int getPwseq() {
+	return pwseq;
+}
+public void setPwseq(int pwseq) {
+	this.pwseq = pwseq;
+}
 @Override
 public String toString() {
 	return "DoWork [fromname=" + fromname + ", toname=" + toname + ", dowork=" + dowork + ", pdowork=" + pdowork
-			+ ", toemail=" + toemail + ", tdseq=" + tdseq + "]";
+			+ ", toemail=" + toemail + ", tdseq=" + tdseq + ", ptoemail=" + ptoemail + ", pwseq=" + pwseq + "]";
 }
  
 }

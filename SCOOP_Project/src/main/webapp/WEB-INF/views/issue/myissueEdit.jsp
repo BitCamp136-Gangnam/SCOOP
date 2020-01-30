@@ -56,12 +56,12 @@ border-radius: 5px;
         <div class="content-body"style="height: 680px;">
         <div class="container-fluid row" style="padding-right: 0px; margin-right: 0px;margin-left: 0px; padding-left: 15px;">
         <div class="card" style="padding-left: 2%;padding-right: 0px; padding-top:1%;min-width:900px;height: auto;overflow: auto;">
-        <form action="teamIssueEditOk.do" method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="tseq" value="${tissue.tseq}">
-        <input type="hidden" name="tiseq" value="${tissue.tiseq}">
+        <form action="myissueEditOk.do" method="POST" enctype="multipart/form-data">
+        <%-- <input type="hidden" name="tseq" value="${tissue.tseq}"> --%>
+        <input type="hidden" name="piseq" value="${myissue.piseq}">
 		<div class="row"style="margin:2% 2% 0 2%" >
 		<div class="col-sm-7">
-			<input type="text" class="form-control" name="title" value="${tissue.tititle}" style="border: 0px; border-bottom: 1px solid #ced4da; font-size: 20px">
+			<input type="text" class="form-control" name="title" value="${myissue.pititle}" style="border: 0px; border-bottom: 1px solid #ced4da; font-size: 20px">
 		</div>
 		<div class="col-sm-1">
 		</div>
@@ -73,8 +73,8 @@ border-radius: 5px;
 		</div>
 		</div>
 		<c:choose>
-        <c:when test="${tissue.tistart!=null}">
-		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%; margin-top: 2%"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i><input type="text" id="editFrom" name="editFrom" style="border: 0; border-bottom: 1px solid #ced4da; text-align: center" value="${fn:substring(tissue.tistart,0,10)}"> ~ <input type="text" id="editTo" name="editTo" style="border: 0; border-bottom: 1px solid #ced4da; text-align: center" value="${fn:substring(tissue.tiend,0,10)}"></div>
+        <c:when test="${myissue.pistart!=null}">
+		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%; margin-top: 2%"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i><input type="text" id="editFrom" name="editFrom" style="border: 0; border-bottom: 1px solid #ced4da; text-align: center" value="${fn:substring(myissue.pistart,0,10)}"> ~ <input type="text" id="editTo" name="editTo" style="border: 0; border-bottom: 1px solid #ced4da; text-align: center" value="${fn:substring(myissue.piend,0,10)}"></div>
 		</c:when>
 		<c:otherwise>
 		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>등록된 일정이 없습니다.</div>
@@ -87,40 +87,40 @@ border-radius: 5px;
 		<span class="divDelete" style="cursor:pointer;"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span>
 		<br>
 		</div>
-		<input type="hidden" name="editMention" value="${m.email}~${m.tmseq}">
+		<input type="hidden" name="editMention" value="${m.email}~${m.pmseq}">
 		</c:forEach>
 				<c:forEach items="${files}" var="f">
 		<div class="myissueDetail" id="myissueMention">
-		<a href="fileDownload.do?fileName=${f.fdname}"><span class="iconify" data-icon="si-glyph:file-box" data-inline="false"></span>${f.fdname}</a>
+		<a href="fileDownload.do?fileName=${f.pfdname}"><span class="iconify" data-icon="si-glyph:file-box" data-inline="false"></span>${f.pfdname}</a>
 		<span class="divDelete" style="cursor:pointer;"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span>
 		<br>
 		</div>
-		<input type="text" hidden="" name="editOriFile" value="${f.fdname}~${f.fdseq}">
+		<input type="text" hidden="" name="editOriFile" value="${f.pfdname}~${f.pdseq}">
 		</c:forEach>
 			<c:forEach items="${gdrive}" var="gd">
 		<div class="myissueDetail" id="myissueGoogledrive">
 			<i class="fab fa-google-drive"></i>
-			<a href="${gd.tgurl}" onclick="window.open(this.href,'팝업창','width=800, height=800');return false;">${gd.tgfilename}</a>
+			<a href="${gd.pgurl}" onclick="window.open(this.href,'팝업창','width=800, height=800');return false;">${gd.pgfilename}</a>
 			<span class="divDelete2" style="cursor:pointer;"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span>
 			<br>
 		</div>
-			<input type="hidden" name="editGfilename" value="${gd.tgfilename}~${gd.tgseq}">
-			<input type="hidden" name="editGurl" value="${gd.tgurl}~${gd.tgseq}">
+			<input type="hidden" name="editGfilename" value="${gd.pgfilename}~${gd.pgseq}">
+			<input type="hidden" name="editGurl" value="${gd.pgurl}~${gd.pgseq}">
 			</c:forEach>
 		<c:forEach items="${dowork}" var="work">
 		<div class="myissueDetail" id="myissueTodo">
 		<i class="far fa-check-circle"style="padding-right: 5px;"></i>${work.fromname}
 		<i class="fas fa-long-arrow-alt-right" style="margin-left:5px;margin-right: 5px;"></i>${work.toname}<br>
-		: ${work.dowork}
+		: ${work.pdowork}
 		<span class="divDelete2" style="cursor:pointer;"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span>
 		<br>
 		</div>
-		<input type="hidden" name="editToname" value="${work.toemail}~${work.tdseq}">
-		<input type="hidden" name="editDowork" value="${work.dowork}~${work.tdseq}">
+		<input type="hidden" name="editToname" value="${work.ptoemail}~${work.pwseq}">
+		<input type="hidden" name="editDowork" value="${work.pdowork}~${work.pwseq}">
 		</c:forEach> 
 		</div>
         <div class="myissueDetail" style="margin-top: 2%">
-        <textarea rows="5" style="width:50%;border: 0; border-bottom: 1px solid #ced4da;" id="editIssuecontent" name="editIssuecontent">${tissue.ticontent}</textarea>
+        <textarea rows="5" style="width:50%;border: 0; border-bottom: 1px solid #ced4da;" id="editIssuecontent" name="editIssuecontent">${myissue.picontent}</textarea>
         </div>
         <input type="file" multiple="multiple"  id="fileclick2" name="editFile" hidden="">    
             </form>
@@ -213,7 +213,7 @@ $(function(){
 			}
 })
 $('#returnIssue').click(function(){
-	location.href ='teamissueDetail.do?tiseq='+${tissue.tiseq};
+	location.href ='myissueDetail.do?piseq='+${myissue.piseq};
 })
 $('.divDelete').click(function(){
 	var dValue = $(this).parent().next().attr('value');
