@@ -77,4 +77,9 @@ public interface TissueDao {
 	//팀이슈 리스트 받아오기
 	public List<Tissue> getTissueList(int tseq);
 	
+	public int teamIssueFileDelete(int tiseq);
+	public int teamIssueMentionDelete(int tiseq);
+	public int teamIssueGoogleDriveDelete(int tiseq);
+	public int teamIssueDoWorkDelete(int tiseq);
+	public int teamIssueDelete(int tiseq);
 }

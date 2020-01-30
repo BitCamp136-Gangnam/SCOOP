@@ -69,7 +69,7 @@ insert into tissue (tiseq,tseq,email,tititle,ticontent,isprocess, istbook, issee
 	select * from pgoogledrive where piseq=#{piseq}
 </select>
 <select id="getMyDoWork" resultType="kr.or.scoop.dto.DoWork">
-	select (select m.name from pdowork d join member m on d.email=m.email where d.piseq=#{piseq}) fromname, (select m.name from pdowork d join member m on d.ptoemail=m.email where d.piseq=#{piseq}) toname, pdowork from pdowork where piseq=#{piseq}
+	select (select m.name from pdowork d join member m on d.email=m.email where d.piseq=#{piseq}) fromname, (select m.name from pdowork d join member m on d.ptoemail=m.email where d.piseq=#{piseq}) toname, pdowork, ptoemail, pwseq from pdowork where piseq=#{piseq}
 </select>
 <select id="getMyFiles" resultType="kr.or.scoop.dto.FileDrive">
 	select * from pfiledrive where piseq=#{piseq}
@@ -90,4 +90,47 @@ delete from tissue where tiseq = #{tiseq}
 <update id="editTissue" parameterType="kr.or.scoop.dto.MyIssue">
 	update tissue set tititle=#{tititle}, ticontent=#{ticontent}, tistart=#{tistart,jdbcType=TIMESTAMP}, tiend=#{tiend,jdbcType=TIMESTAMP} where tiseq=#{tiseq}
 </update>
+<update id="editMyissue" parameterType="kr.or.scoop.dto.MyIssue">
+	update myissue set pititle=#{pititle}, picontent=#{picontent}, pistart=#{pistart,jdbcType=TIMESTAMP}, piend=#{piend,jdbcType=TIMESTAMP} where piseq=#{piseq}
+</update>
+<delete id="pfileDelete">
+	delete pfiledrive where pdseq=#{pdseq}
+</delete>
+<insert id="pfileEdit">
+	insert into pfiledrive(pdseq, piseq, pdcapa, pfdname, email, pfddate)
+  	values(pdseq_pfiledrive_seq.nextval, #{param4}, #{param2}, #{param1}, #{param3, jdbcType=VARCHAR}, sysdate)
+</insert>
+<delete id="pmentionDelete">
+	delete pmention where pmseq=#{pmseq}
+</delete>
+<insert id="pmentionEdit">
+	insert into pmention values(pmseq_pmention_seq.nextval, #{param1}, #{param2})
+</insert>
+<delete id="pgoogleDriveDelete">
+	delete pgoogledrive where pgseq=#{pgseq}
+</delete>
+<insert id="pgoogleDriveEdit">
+	insert into pgoogledrive values(pgseq_pgoogledrive_seq.nextval,#{param1}, #{param2},#{param3})
+</insert>
+<delete id="pdoWorkDelete">
+	delete pdowork where pwseq= #{pwseq}
+</delete>
+<insert id="pdoWorkEdit">
+	insert into pdowork values(pwseq_pdowork_seq.nextval, #{param4}, #{param1}, #{param2}, #{param3})
+</insert>
+<delete id="myIssueFileDelete">
+	delete pfiledrive where piseq= #{piseq}
+</delete>
+<delete id="myIssueMentionDelete">
+	delete pmention where piseq= #{piseq}
+</delete>
+<delete id="myIssueGoogleDriveDelete">
+	delete pgoogledrive where piseq= #{piseq}
+</delete>
+<delete id="myIssueDoWorkDelete">
+	delete pdowork where piseq= #{piseq}
+</delete>
+<delete id="myIssueDelete">
+	delete myissue where piseq= #{piseq}
+</delete>
 </mapper>

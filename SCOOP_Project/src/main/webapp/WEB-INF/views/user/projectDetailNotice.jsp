@@ -22,9 +22,33 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript">
 	$(function(){
-		$('#pjNoticeDel').click(function(){
-			location.href="pjNoticeDelete.do?pnseq=${detail.pnseq}&tseq=${detail.tseq}";
+		//팀 공자사항 디테일 수정
+		$('#pjNoticeEd').click(function(){
+			location.href="pjNoticeEdit.do?pnseq=${detail.pnseq}";
 		});
+		//팀 공지사항 디테일 삭제 
+		$('#pjNoticeDel').click(function(){
+			Swal.fire({
+				   title:'공지사항을 삭제하시겠습니까?',
+				   text: "삭제하시면 공지사항의 모든 정보가 사라집니다!",
+				   icon: 'warning',
+				   showCancelButton: true,
+				   confirmButtonColor: '#d33',
+				   cancelButtonColor: '#c8c8c8',
+				   confirmButtonText: '확인',
+				   cancelButtonText: '취소'
+				 }).then((result) => {
+				   if (result.value) {
+					   location.href="pjNoticeDelete.do?pnseq=${detail.pnseq}&tseq=${detail.tseq}";
+				   }
+				 })
+			
+		});
+		//팀 공지사항으로 돌아가기
+		$('#pjNoticeBack').click(function(){
+			location.href="projectNotice.do?tseq=${detail.tseq}";
+		});
+		
 	});
 		
 </script>
@@ -59,17 +83,21 @@
         <div class="container-fluid row" style="padding-right: 15px; margin-right: 0px;margin-left: 0px; padding-left: 15px;">
         <div class="card" style="padding-left: 15px;padding-right: 15px; padding-top:1%;width:100%;height: auto;overflow: auto;">
 		<div class="row"style="margin:2% 2% 0 2%" >
-			<c:if test="${rank == 100}">
 				<h3 id="myissueSubject" style="padding-top: 2%;padding-left: 1%;">${detail.pntitle}
-				<a href="pjNoticeEdit.do?pnseq=${detail.pnseq}" class="fas fa-cog" id="pjnoticeedit" style="margin-left: 5px;cursor: pointer; font-size: 15px"></a>
-				<span id="pjNoticeDel">
-				<span class="iconify" data-icon="octicon:x" data-inline="false" style="cursor: pointer;font-size: 15px;"></span>
-				</span>
+				<c:if test="${rank == 100}">
+					<span id="pjNoticeEd" data-toggle="tooltip" data-placement="top" title="공지사항 수정">
+					<span class="fas fa-cog" id="pjnoticeedit" style="margin-left: 5px;cursor: pointer; font-size: 15px"></span>
+					</span>
+					<span id="pjNoticeDel" data-toggle="tooltip" data-placement="top" title="공지사항 삭제" >
+					<span class="iconify" data-icon="octicon:x" data-inline="false" style="cursor: pointer;font-size: 17px;margin-bottom: 5px;"></span>
+					</span>
+				</c:if>		
+					<span id="pjNoticeBack" data-toggle="tooltip" data-placement="top" title="뒤로 돌아가기">
+					<span class="iconify" data-icon="typcn:arrow-back" data-inline="false" style="cursor: pointer; font-size: 17px;margin-bottom: 5px;"></span>
+					</span>			
 				</h3>
-			</c:if>
 
 		</div>
-				<a href="projectNotice.do?pnseq=${detail.tseq}" class="iconify" data-icon="typcn:arrow-back" data-inline="false" style="cursor: pointer; font-size: 15px;"></a>
 		<div class="myissueDetail" id="myissueMention"><sup><i class="fas fa-quote-left" style="color:#ca0000;"></i></sup> 멘션 멤버 이름 넣는 곳 <sup><i class="fas fa-quote-right"style="color:#ca0000;"></i></sup></div>
 		<div class="myissueDetail" id="myissueGoogledrive"><i class="fab fa-google-drive"></i>
 			<a href="">여기에 구글드라이브 파일 올리면됨</a>
