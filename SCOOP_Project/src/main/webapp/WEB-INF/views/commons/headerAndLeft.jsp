@@ -267,6 +267,28 @@ input::placeholder {
          }
 
       });
+
+      //내정보 열기 (드롭다운)
+      $('#myprofileEdit').click(function(){
+    	  location.href="memberEdit.do?${sessionScope.email}";
+          });
+      //잠금 모드 (드롭다운)
+      $('#lockScoop').click(function(){
+			location.href="page-lock.jsp";
+          });
+      //일반 회원 로그아웃 (드롭다운)
+      $('#logout').click(function(){
+			location.href="logout.do";
+          });  
+      //구글 회원 로그아웃 (드롭다운)    
+      $('#logoutGoogle').click(function(){
+    	  	signOut();
+          });
+      //네이버 회원 로그아웃 (드롭다운)
+      $('#logoutNaver').click(function(){
+			location.href="logout.do";
+          });
+      //파일함 열기
       $('#fileopen').click(function() {
          $('#filediv').show();
          $('#fileclose').show();
@@ -769,25 +791,49 @@ span {
                   class="drop-down dropdown-profile animated fadeIn dropdown-menu">
                   <div class="dropdown-content-body">
                      <ul>
-                        <li><a href="memberEdit.do?${sessionScope.email}"><i
-                              class="icon-user"></i> <span>내 정보</span></a></li>
-                        <li><span id="fileopen" style="cursor: pointer;"><span class="iconify"
-                              data-icon="ion:folder-open-outline" data-inline="false"
-                              style="font-size: 15px"></span> <span> &nbsp;&nbsp;파일함</span></span>
+                        <li>
+                        	<span id="myprofileEdit" style="cursor: pointer;">
+                        	<span class="icon-user"></span> 
+                        	<span>&nbsp;&nbsp;내 정보</span>
+                        	</span>
+                        </li>
+                        <li>
+                        	<span id="fileopen" style="cursor: pointer;">
+                        	<span class="iconify" data-icon="ion:folder-open-outline" data-inline="false"style="font-size: 15px"></span> 
+                        	<span>&nbsp;&nbsp;파일함</span></span>
                         </li>
                         <hr class="my-2">
-                        <li><a href="page-lock.jsp"><i class="icon-lock"></i><span>잠금모드</span></a>
+                        <li>
+                        	<span id="lockScoop" style="cursor: pointer;">
+                        	<!-- <a href="page-lock.jsp"> -->
+                        	<span class="icon-lock"></span>
+                        	<span>&nbsp;&nbsp;잠금모드</span>
+                        	</span>
                         </li>
                         <c:choose>
                            <c:when test="${kind=='normal'}">
-                              <li><a href="logout.do"><i class="icon-key"></i> <span>로그아웃</span></a></li>
+                          		<li>
+                          			<span id="logout" style="cursor: pointer;">
+                              			<span class="icon-key"></span> 
+                              			<span>&nbsp;&nbsp;로그아웃</span>
+                              		</span>
+                              	</li>
                            </c:when>
                            <c:when test="${kind=='google'}">
-                              <li><a href="#" onclick="signOut();"><i
-                                    class="icon-key" ></i> <span>로그아웃</span></a></li>
+                              <li>
+                              	<span id="logoutGoogle" style="cursor: pointer;">
+                             		<span class="icon-key" ></span> 
+                              		<span>&nbsp;&nbsp;로그아웃</span>
+                              	</span>
+                              </li>
                            </c:when>
                            <c:when test="${kind=='naver'}">
-                              <li><a href="logout.do"><i class="icon-key"></i> <span>로그아웃</span></a></li>
+                              <li>
+                              	<span id="logoutNaver" style="cursor: pointer;">
+	                              	<span class="icon-key"></span> 
+	                              	<span>&nbsp;&nbsp;로그아웃</span>
+                              	</span>
+                              </li>
                            </c:when>
                            <c:otherwise></c:otherwise>
                         </c:choose>
