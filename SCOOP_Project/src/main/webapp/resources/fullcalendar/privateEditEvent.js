@@ -96,7 +96,7 @@ var editEvent = function (event, element, view) {
 
         //일정 업데이트
         $.ajax({
-        	url: "editTeamCalendar.do",
+        	url: "editPrivateCalendar.do",
             type: "post",
             data: editData,
             success: function (data) {
@@ -114,13 +114,13 @@ var editEvent = function (event, element, view) {
         $('#deleteEvent').unbind();
         $("#calendar").fullCalendar('removeEvents', [event._id]);
         eventModal.modal('hide');
-        var tiseq = {tiseq:event._id,
+        var tiseq = {piseq:event._id,
         		username:event.username
         };
         //삭제시
         $.ajax({
             type: "post",
-            url: "deleteTeamCalendar.do",
+            url: "deletePrivateCalendar.do",
             data: tiseq,
             success: function (response) {
                 alert('삭제되었습니다.');

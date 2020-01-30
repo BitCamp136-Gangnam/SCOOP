@@ -133,4 +133,16 @@ delete from tissue where tiseq = #{tiseq}
 <delete id="myIssueDelete">
 	delete myissue where piseq= #{piseq}
 </delete>
+<insert id="writeMyCalendar" parameterType="kr.or.scoop.dto.MyIssue" >
+insert into myissue (piseq,pititle,picontent,pistart, piend, ispibook, email, pidate, backgroundcolor, textcolor, allday)
+  values (PISEQ_MYISSUE_SEQ.NEXTVAL, #{pititle}, #{picontent}, #{pistart,jdbcType=TIMESTAMP}, #{piend,jdbcType=TIMESTAMP}, 0, #{email,jdbcType=VARCHAR}, sysdate, #{backgroundColor}, #{textColor}, #{allDay})
+</insert>
+<update id="editMyCalendar" parameterType="kr.or.scoop.dto.MyIssue">
+	update myissue 
+	set pititle=#{pititle},
+	 picontent=#{picontent},
+	  pistart=#{pistart,jdbcType=TIMESTAMP},
+	   piend=#{piend,jdbcType=TIMESTAMP}
+	    where piseq=#{piseq}
+</update>
 </mapper>

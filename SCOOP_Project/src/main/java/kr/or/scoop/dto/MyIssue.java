@@ -39,6 +39,29 @@ public class MyIssue {
 	private String tfilesize;
 	private int isprocess;
 	private int issee;
+	private String backgroundColor;
+	private String textColor;
+	private int allDay;
+	
+	
+	public String getBackgroundColor() {
+		return backgroundColor;
+	}
+	public void setBackgroundColor(String backgroundColor) {
+		this.backgroundColor = backgroundColor;
+	}
+	public String getTextColor() {
+		return textColor;
+	}
+	public void setTextColor(String textColor) {
+		this.textColor = textColor;
+	}
+	public int getAllDay() {
+		return allDay;
+	}
+	public void setAllDay(int allDay) {
+		this.allDay = allDay;
+	}
 	public int getTseq() {
 		return tseq;
 	}
@@ -222,7 +245,8 @@ public class MyIssue {
 				+ ", pidate=" + pidate + ", tidate=" + tidate + ", mygfilename=" + mygfilename + ", tgfilename="
 				+ tgfilename + ", mymention=" + mymention + ", myurl=" + myurl + ", turl=" + turl + ", pname=" + pname
 				+ ", files=" + Arrays.toString(files) + ", tfilename=" + tfilename + ", tfilesize=" + tfilesize
-				+ ", isprocess=" + isprocess + ", issee=" + issee + "]";
+				+ ", isprocess=" + isprocess + ", issee=" + issee + ", backgroundColor=" + backgroundColor
+				+ ", textColor=" + textColor + ", allDay=" + allDay + "]";
 	}
 	
 }

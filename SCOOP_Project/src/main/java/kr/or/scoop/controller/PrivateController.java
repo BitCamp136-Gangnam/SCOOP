@@ -103,44 +103,43 @@ public class PrivateController {
 	}
 	
 	@RequestMapping(value = "addPrivateCalendar.do", method = RequestMethod.POST)
-	public String addPrivateCalendar(HttpSession session,String title, String start, String end, String description, String type, String username, String backgroundColor, String textColor, String allDay, int tseq) {
+	public String addPrivateCalendar(HttpSession session,String title, String start, String end, String description, String type, String username, String backgroundColor, String textColor, String allDay, String tseq) {
 		int result = 0;
 		System.out.println(title+"/"+start+"/"+end+"/"+description+"/"+type+"/"+username+"/"+allDay+"/"+tseq);
 		String viewpage = "";
-		Tissue tissue = new Tissue();
+		MyIssue myissue = new MyIssue();
 		System.out.println(start.length());
 		MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
-		tissue.setTititle(title);
-		tissue.setEmail((String)session.getAttribute("email"));
-		tissue.setTicontent(description);
-		tissue.setTseq(tseq);
-		tissue.setBackgroundColor(backgroundColor);
-		tissue.setTextColor(textColor);
+		myissue.setPititle(title);
+		myissue.setEmail((String)session.getAttribute("email"));
+		myissue.setPicontent(description);
+		myissue.setBackgroundColor(backgroundColor);
+		myissue.setTextColor(textColor);
 		int alldayReturn = 0;
 		if(allDay.equals("true")) {
 			alldayReturn = 1;
 		} else {
 			alldayReturn = 0;
 		}
-		tissue.setAllDay(alldayReturn);
+		myissue.setAllDay(alldayReturn);
 		if(start.length()==16) {
 			System.out.println(start+":00");
-			tissue.setTistart(java.sql.Timestamp.valueOf(start+":00"));
-			tissue.setTiend(java.sql.Timestamp.valueOf(end+":00"));
-			result = myissuedao.writeCalendarTissue(tissue);
+			myissue.setPistart(java.sql.Timestamp.valueOf(start+":00"));
+			myissue.setPiend(java.sql.Timestamp.valueOf(end+":00"));
+			result = myissuedao.writeMyCalendar(myissue);
 		} else {
 			System.out.println(start+" 00:00:00");
-			tissue.setTistart(java.sql.Timestamp.valueOf(start+" 00:00:00"));
-			tissue.setTiend(java.sql.Timestamp.valueOf(end+" 00:00:00"));
-			result = myissuedao.writeCalendarTissue(tissue);
+			myissue.setTistart(java.sql.Timestamp.valueOf(start+" 00:00:00"));
+			myissue.setTiend(java.sql.Timestamp.valueOf(end+" 00:00:00"));
+			result = myissuedao.writeMyCalendar(myissue);
 		}
 		
 		if(result>0) {
 			System.out.println("성공");
-			viewpage = "redirect:/calendar.do";
+			viewpage = "redirect:/private-calendar.do";
 		} else {
 			System.out.println("실패");
-			viewpage = "redirect:/calendar.do";
+			viewpage = "redirect:/private-calendar.do";
 		}
 		
 		return viewpage;
@@ -152,34 +151,34 @@ public class PrivateController {
 		int result = 0;
 		System.out.println(title+"/"+start+"/"+end+"/"+description+"/"+type+"/"+allDay+"/");
 		String viewpage = "";
-		Tissue tissue = new Tissue();
+		MyIssue myissue = new MyIssue();
 		System.out.println(start.length());
 		System.out.println("idididididididididididid :"+_id);
 		MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
-		tissue.setTititle(title);
-		tissue.setTicontent(description);
-		tissue.setTiseq(_id);
-		tissue.setBackgroundColor(backgroundColor);
+		myissue.setPititle(title);
+		myissue.setPicontent(description);
+		myissue.setPiseq(_id);
+		myissue.setBackgroundColor(backgroundColor);
 		if(start.length()==16) {
 			System.out.println(start+":00");
-			tissue.setAllDay(0);
-			tissue.setTistart(java.sql.Timestamp.valueOf(start+":00"));
-			tissue.setTiend(java.sql.Timestamp.valueOf(end+":00"));
-			result = myissuedao.editTeamCalendar(tissue);
+			myissue.setAllDay(0);
+			myissue.setPistart(java.sql.Timestamp.valueOf(start+":00"));
+			myissue.setPiend(java.sql.Timestamp.valueOf(end+":00"));
+			result = myissuedao.editMyCalendar(myissue);
 		} else {
-			tissue.setAllDay(1);
+			myissue.setAllDay(1);
 			System.out.println(start+" 00:00:00");
-			tissue.setTistart(java.sql.Timestamp.valueOf(start+" 00:00:00"));
-			tissue.setTiend(java.sql.Timestamp.valueOf(end+" 00:00:00"));
-			result = myissuedao.editTeamCalendar(tissue);
+			myissue.setTistart(java.sql.Timestamp.valueOf(start+" 00:00:00"));
+			myissue.setTiend(java.sql.Timestamp.valueOf(end+" 00:00:00"));
+			result = myissuedao.editMyCalendar(myissue);
 		}
 		
 		if(result>0) {
 			System.out.println("성공");
-			viewpage = "redirect:/calendar.do";
+			viewpage = "redirect:/private-calendar.do";
 		} else {
 			System.out.println("실패");
-			viewpage = "redirect:/calendar.do";
+			viewpage = "redirect:/private-calendar.do";
 		}
 		
 		return viewpage;
@@ -187,22 +186,22 @@ public class PrivateController {
 	}
 	
 	@RequestMapping(value = "deletePrivateCalendar.do", method = RequestMethod.POST)
-	public String deletePrivateCalendar(int tiseq, String username, HttpSession session) {
+	public String deletePrivateCalendar(int piseq, String username, HttpSession session) {
 		int result = 0;
 		String viewpage = "";
-		Tissue tissue = new Tissue();
+		MyIssue myissue = new MyIssue();
 		MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
-		tissue.setTiseq(tiseq);
+		myissue.setPiseq(piseq);
 		try {
 			String name = (String)session.getAttribute("name");
 			if(name.equals(username)) {
-				result = myissuedao.deleteTeamCalendar(tissue);
+				result = myissuedao.myIssueDelete(piseq);
 				if(result>0) {
 					System.out.println("성공");
-					viewpage = "redirect:/calendar.do";
+					viewpage = "redirect:/private-calendar.do";
 				} else {
 					System.out.println("실패");
-					viewpage = "redirect:/calendar.do";
+					viewpage = "redirect:/private-calendar.do";
 				}
 			}
 		} catch (Exception e) {
@@ -219,108 +218,42 @@ public class PrivateController {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");
 		String email = (String)session.getAttribute("email");
-		ProjectDao projectdao = sqlsession.getMapper(ProjectDao.class);
-		TissueDao tissuedao = sqlsession.getMapper(TissueDao.class);
-		List<Tpmember> pjtlist = projectdao.getPJT(email);
-		List<Tissue> temptissuelist;
-		Map<Integer, Tissue> sortlist = new HashMap<Integer, Tissue>();
+		MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
+		List<MyIssue> myissuelist = myissuedao.getMyissue(email);
 		JSONArray jArray = new JSONArray();
-		System.out.println("pjtlist"+pjtlist);
-		System.out.println(pjtlist.size());
-		int tempnum = 0;
-		for(Tpmember tpmember : pjtlist) {
-			 System.out.println(tpmember.getTseq());
-			 temptissuelist = tissuedao.getTissueList(tpmember.getTseq());
-			 System.out.println(temptissuelist.size());
-			 System.out.println(temptissuelist);
-			 for(Tissue tissue : temptissuelist) {
-				 if(tissue.getTistart()!=null) {
-					 sortlist.put(tempnum++, tissue);
-				 }
-				 
-			 }
-			 
-//			 temptissuelist = tissuedao.loadKanban(pjtlist.get(i).getTseq());
-			 
-//			 for(int j = 0 ; j > temptissuelist.size() ; j++) {
-//				 System.out.println("2중포문오니?");
-//				 System.out.println("temptissue"+temptissuelist.get(j));
-//				 caltissuelist.add(temptissuelist.get(j));
-//			 }
-			 
-			 
-		}
-		try {
-			
-			System.out.println(sortlist);
-			Iterator<Integer> tissueitor = sortlist.keySet().iterator();
-			System.out.println(tissueitor);
-			SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd'T'HH:mm" , Locale.KOREA );
-			SimpleDateFormat sdft = new SimpleDateFormat( "yyyy-MM-dd");
-			while(tissueitor.hasNext()) {
-				int key =tissueitor.next();
-				JSONObject data = new JSONObject();
-				int z = sortlist.get(key).getAllDay();
+		SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd'T'HH:mm" , Locale.KOREA );
+		SimpleDateFormat sdft = new SimpleDateFormat( "yyyy-MM-dd");
+		int z = 0;
+		if(!myissuelist.isEmpty()){
+			JSONObject data = new JSONObject();
+			for(MyIssue myissue: myissuelist) {
+				if(myissue.getPistart()!=null) {
+				data.put("_id", myissue.getPiseq());
+				data.put("title", myissue.getPititle());
+				data.put("description", myissue.getPicontent());
 				
-				data.put("_id", sortlist.get(key).getTiseq());
-				data.put("title", sortlist.get(key).getTititle());
-				data.put("description", sortlist.get(key).getTicontent());
 				boolean allDay;
+				z = myissue.getAllDay();
 				if(z==0) {
 					allDay = false;
-					data.put("start", (String)sdf.format(sortlist.get(key).getTistart()).toString());
-					data.put("end", (String)sdf.format(sortlist.get(key).getTiend()).toString());
+					data.put("start", (String)sdf.format(myissue.getPistart()).toString());
+					data.put("end", (String)sdf.format(myissue.getPiend()).toString());
 				} else {
 					allDay = true;
-					data.put("start", (String)sdft.format(sortlist.get(key).getTistart()).toString());
-					data.put("end", (String)sdft.format(sortlist.get(key).getTiend()).toString());
-				}
-				for(Tpmember tpmember : pjtlist) {
-					if(tpmember.getTseq() == sortlist.get(key).getTseq()) {
-						data.put("type", tpmember.getPname());
-					}
+					data.put("start", (String)sdf.format(myissue.getPistart()).toString());
+					data.put("end", (String)sdf.format(myissue.getPiend()).toString());
 				}
 				
-				data.put("username", sortlist.get(key).getName());
-				data.put("backgroundColor", sortlist.get(key).getBackgroundColor());
-				data.put("textColor", sortlist.get(key).getTextColor());
-				
+				data.put("type", "프라이빗 공간");
+				data.put("username", (String)session.getAttribute("name"));
+				data.put("backgroundColor", myissue.getBackgroundColor());
+				data.put("textColor", myissue.getTextColor());
 				data.put("allDay", allDay);
-				data.put("tiseq", sortlist.get(key).getTiseq());
 				jArray.add(data);
-				System.out.println("while문 도니?");
-				System.out.println(data);
-				
 			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		System.out.println("jArray 입니다"+jArray);
-		/*
-		System.out.println(caltissuelist);
-		for(int i = 0 ; i > caltissuelist.size() ; i ++) {
-			JSONObject data = new JSONObject();
-			data.put("_id", i++);
-			data.put("title", caltissuelist.get(i).getTititle());
-			data.put("start", caltissuelist.get(i).getTistart());
-			data.put("end", caltissuelist.get(i).getTiend());
-			data.put("type", caltissuelist.get(i).getTiseq());
-			data.put("username", caltissuelist.get(i).getEmail());
-			data.put("backgroundColor", caltissuelist.get(i).getBackgroundColor());
-			data.put("textColor", caltissuelist.get(i).getTextColor());
-			int z = caltissuelist.get(i).getAllDay();
-			boolean allDay;
-			if(z==0) {
-				allDay = false;
-			} else {
-				allDay = true;
 			}
-			data.put("allDay", allDay);
-			jArray.add(i, data);
-			
 		}
-		*/
-		
+		System.out.println(jArray);		
 		
 		return jArray;
 	}

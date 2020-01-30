@@ -78,11 +78,10 @@ var newEvent = function (start, end, eventType) {
 
         //새로운 일정 저장
         $.ajax({
-        	url: "addTeamCalendar.do",
+        	url: "addPrivateCalendar.do",
             type: "post",
             data: eventData,
             success: function (data) {
-            	location.href="calendar.do";
                 alert("데이터 넘기기 성공");
                 
             },

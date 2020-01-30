@@ -93,4 +93,9 @@ public interface MyIssueDao {
 	public int myIssueGoogleDriveDelete(int piseq);
 	public int myIssueDoWorkDelete(int piseq);
 	public int myIssueDelete(int piseq);
+	
+	
+	public int writeMyCalendar(MyIssue myissue);
+	
+	public int editMyCalendar(MyIssue myissue);
 }

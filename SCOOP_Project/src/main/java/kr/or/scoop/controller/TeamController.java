@@ -598,30 +598,6 @@ public class TeamController {
 			// TODO: handle exception
 		}
 		System.out.println("jArray 입니다"+jArray);
-		/*
-		System.out.println(caltissuelist);
-		for(int i = 0 ; i > caltissuelist.size() ; i ++) {
-			JSONObject data = new JSONObject();
-			data.put("_id", i++);
-			data.put("title", caltissuelist.get(i).getTititle());
-			data.put("start", caltissuelist.get(i).getTistart());
-			data.put("end", caltissuelist.get(i).getTiend());
-			data.put("type", caltissuelist.get(i).getTiseq());
-			data.put("username", caltissuelist.get(i).getEmail());
-			data.put("backgroundColor", caltissuelist.get(i).getBackgroundColor());
-			data.put("textColor", caltissuelist.get(i).getTextColor());
-			int z = caltissuelist.get(i).getAllDay();
-			boolean allDay;
-			if(z==0) {
-				allDay = false;
-			} else {
-				allDay = true;
-			}
-			data.put("allDay", allDay);
-			jArray.add(i, data);
-			
-		}
-		*/
 		
 		
 		return jArray;
