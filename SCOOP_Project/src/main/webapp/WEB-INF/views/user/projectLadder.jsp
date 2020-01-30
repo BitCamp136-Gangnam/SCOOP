@@ -12,7 +12,7 @@
      <link href="<c:url value="/resources/css/meterial.css" />" rel="stylesheet">
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
-<body>
+<body style="height: 300px;">
     <div class="landing" id="landing">
        <div class="start-form">
             <div class="landing-form">
@@ -29,7 +29,7 @@
             </div>
        </div>
     </div>
-    <div id="ladder" class="ladder">
+    <div id="ladder" class="ladder" style="margin-top: 270px;">
         <div class="dim"></div>
          <canvas class="ladder_canvas" id="ladder_canvas"></canvas>
     </div>
