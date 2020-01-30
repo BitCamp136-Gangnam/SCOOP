@@ -4,9 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -28,7 +26,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.velocity.VelocityEngineFactoryBean;
 import org.springframework.ui.velocity.VelocityEngineUtils;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,16 +33,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.LocaleResolver;
 
-import kr.or.scoop.dao.AlarmDao;
 import kr.or.scoop.dao.MemberDao;
 import kr.or.scoop.dao.MyIssueDao;
-import kr.or.scoop.dao.NoticeDao;
 import kr.or.scoop.dao.ProjectDao;
-import kr.or.scoop.dto.Alarm;
 import kr.or.scoop.dto.FileDrive;
 import kr.or.scoop.dto.Member;
 import kr.or.scoop.dto.Mention;
-import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.dto.PjNotice;
 import kr.or.scoop.dto.Reply;
 import kr.or.scoop.dto.Role;
@@ -85,7 +78,6 @@ public class MemberController {
 		session.setAttribute("checkemail", member.getEmail());
 		session.setAttribute("checkpwd", this.bCryptPasswordEncoder.encode(member.getPwd()));
 		session.setAttribute("checkname", member.getName());
-		System.out.println("인서트 들어오니" + member);
 		member.setPwd(this.bCryptPasswordEncoder.encode(member.getPwd()));
 		int number = (int) ((Math.random() * 99999) + 100000);
 		String temp = String.valueOf(number);
@@ -112,9 +104,7 @@ public class MemberController {
 					"							        	    		})</script>");
 			out.flush(); 
 			viewpage = "ajax/signUp";
-			System.out.println("메일발송완료");
 		} catch (Exception e) {
-			System.out.println("모시모시" + e.getMessage());
 			viewpage = "index";
 			PrintWriter out;
 			try {
@@ -126,9 +116,8 @@ public class MemberController {
 						"							        	    		  button: \"확인\"\r\n" + 
 						"							        	    		})</script>");
 				out.flush();
-				System.out.println("메일발송에러");
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
+
 				e1.printStackTrace();
 			}
 			
@@ -146,7 +135,6 @@ public class MemberController {
 		member.setPwd((String)session.getAttribute("checkpwd"));
 		member.setEmail((String)session.getAttribute("checkemail"));
 		member.setName((String)session.getAttribute("checkname"));
-		System.out.println(session.getAttribute("checkpwd"));
 		result = service.insertMember(member);
 
 		if (result > 0) {
@@ -157,7 +145,6 @@ public class MemberController {
 			session.removeAttribute("checkname");
 		} else {
 			
-			System.out.println("가입실패");
 			viewpage = "redirect:/index.do";
 		}
 
@@ -192,7 +179,6 @@ public class MemberController {
 		String viewpage = "";
 		result = service.googleIdCheck(email, name);
 		if (result > 0) {
-			System.out.println("성공");
 			viewpage = "redirect:/userindex.do";
 			session.setAttribute("email", email);
 			session.setAttribute("kind", "google");
@@ -212,13 +198,10 @@ public class MemberController {
 			language = "ko";
 		}
 		Locale locale  = new Locale(language);
-		System.out.println(" locale : " + locale + "\n language : " + language);
 		localeResolver.setLocale(request, response, locale);
 		if(language.equals("ko")) {
-			System.out.println("????");
 			session.setAttribute("defaultlang", "한국어");
 		}else{
-			System.out.println("!!!!");
 			session.setAttribute("defaultlang", "English");
 		}
 		String email = "";
@@ -241,7 +224,7 @@ public class MemberController {
 			 filedrive = memberdao.getFileDrive(email);
 			 count = memberdao.getCount(email);
 		} catch (Exception e) {
-			// TODO: handle exception
+
 		}
 		session.setAttribute("name", member.getName());
 		session.setAttribute("img",img); 
@@ -258,7 +241,7 @@ public class MemberController {
 			model.addAttribute("myreplylist",myreplylist);
 			model.addAttribute("mypjtlist",mypjtlist);
 		} catch (Exception e) {
-			// TODO: handle exception
+
 		}
 		if(pjtlist!=null) {
 			session.setAttribute("pjtlist", pjtlist);
@@ -273,7 +256,6 @@ public class MemberController {
 				*/
 			model.addAttribute("mypjtlist", pjtlist);
 			model.addAttribute("myNewTissueList", myNewTissueList);
-			System.out.println(myNewTissueList);
 			/*
 			 AlarmDao dao = sqlsession.getMapper(AlarmDao.class); 
 			 List<Alarm> alarm = dao.getAlarm((String)session.getAttribute("email"));
@@ -297,13 +279,10 @@ public class MemberController {
 			language = "ko";
 		}
 		Locale locale  = new Locale(language);
-		System.out.println(" locale : " + locale + "\n language : " + language);
 		localeResolver.setLocale(request, response, locale);
 		if(language.equals("ko")) {
-			System.out.println("????");
 			session.setAttribute("defaultlang", "한국어");
 		}else{
-			System.out.println("!!!!");
 			session.setAttribute("defaultlang", "English");
 		}
 		String email = "";
@@ -326,7 +305,7 @@ public class MemberController {
 			filedrive = memberdao.getFileDrive(email);
 			count = memberdao.getCount(email);
 		} catch (Exception e) {
-			// TODO: handle exception
+
 		}
 		session.setAttribute("name", member.getName());
 		session.setAttribute("img",img); 
@@ -343,7 +322,7 @@ public class MemberController {
 			model.addAttribute("myreplylist",myreplylist);
 			model.addAttribute("mypjtlist",mypjtlist);
 		} catch (Exception e) {
-			// TODO: handle exception
+
 		}
 		if(pjtlist!=null) {
 			session.setAttribute("pjtlist", pjtlist);
@@ -357,7 +336,6 @@ public class MemberController {
 			model.addAttribute("myNewPjNoticeList", myNewPjNoticeList);
 			model.addAttribute("myNewTissueList", myNewTissueList);
 			model.addAttribute("myNewReplyList", myNewReplyList);
-			System.out.println(myNewReplyList);
 		}
 		return "user/dashBoard-reply";
 	}
@@ -368,13 +346,10 @@ public class MemberController {
 			language = "ko";
 		}
 		Locale locale  = new Locale(language);
-		System.out.println(" locale : " + locale + "\n language : " + language);
 		localeResolver.setLocale(request, response, locale);
 		if(language.equals("ko")) {
-			System.out.println("????");
 			session.setAttribute("defaultlang", "한국어");
 		}else{
-			System.out.println("!!!!");
 			session.setAttribute("defaultlang", "English");
 		}
 		String email = "";
@@ -397,7 +372,7 @@ public class MemberController {
 			filedrive = memberdao.getFileDrive(email);
 			count = memberdao.getCount(email);
 		} catch (Exception e) {
-			// TODO: handle exception
+
 		}
 		session.setAttribute("name", member.getName());
 		session.setAttribute("img",img); 
@@ -414,7 +389,7 @@ public class MemberController {
 			model.addAttribute("myreplylist",myreplylist);
 			model.addAttribute("mypjtlist",mypjtlist);
 		} catch (Exception e) {
-			// TODO: handle exception
+
 		}
 		if(pjtlist!=null) {
 			session.setAttribute("pjtlist", pjtlist);
@@ -428,7 +403,6 @@ public class MemberController {
 			model.addAttribute("myNewPjNoticeList", myNewPjNoticeList);
 			model.addAttribute("myNewTissueList", myNewTissueList);
 			model.addAttribute("myNewReplyList", myNewReplyList);
-			System.out.println(myNewPjNoticeList);
 		}
 		return "user/dashBoard-notice";
 	}
@@ -439,13 +413,10 @@ public class MemberController {
 			language = "ko";
 		}
 		Locale locale  = new Locale(language);
-		System.out.println(" locale : " + locale + "\n language : " + language);
 		localeResolver.setLocale(request, response, locale);
 		if(language.equals("ko")) {
-			System.out.println("????");
 			session.setAttribute("defaultlang", "한국어");
 		}else{
-			System.out.println("!!!!");
 			session.setAttribute("defaultlang", "English");
 		}
 		String email = "";
@@ -469,7 +440,7 @@ public class MemberController {
 			 filedrive = memberdao.getFileDrive(email);
 			 count = memberdao.getCount(email);
 		} catch (Exception e) {
-			// TODO: handle exception
+
 		}
 		session.setAttribute("name", member.getName());
 		session.setAttribute("img",img); 
@@ -488,7 +459,7 @@ public class MemberController {
 			model.addAttribute("mypjtlist",mypjtlist);
 			model.addAttribute("mentions",mentions);
 		} catch (Exception e) {
-			// TODO: handle exception
+
 		}
 		if(pjtlist!=null) {
 			session.setAttribute("pjtlist", pjtlist);
@@ -496,7 +467,6 @@ public class MemberController {
 			List<Tissue> myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime());
 			model.addAttribute("mypjtlist", pjtlist);
 			model.addAttribute("myNewTissueList", myNewTissueList);
-			System.out.println(myNewTissueList);
 		}
 		return "user/dashBoard-mention";
 	}
@@ -504,7 +474,6 @@ public class MemberController {
 	@RequestMapping(value = "/logout.do")
 	public String logout(HttpSession session, HttpServletResponse response) {
 		String viewpage = "";
-		System.out.println("로그아웃 함수");
 		viewpage = "redirect:/index.do";
 		session.invalidate();
 		return viewpage;
@@ -528,13 +497,10 @@ public class MemberController {
 		String viewpage = "";
 		result = service.naverIdCheck(email, name);
 		if (result > 0) {
-			System.out.println("성공");
 			viewpage = "redirect:/userindex.do";
 			session.setAttribute("email", email);
 			session.setAttribute("kind", "naver");
-			System.out.println(session.getAttribute("kind"));
 		} else {
-			System.out.println("실패");
 			viewpage = "redirect:/index.do";
 		}
 
@@ -569,7 +535,6 @@ public class MemberController {
 			
 		} catch (Exception e1) {
 			e1.printStackTrace();
-			System.out.println("인증 메일 발송 에러");
 			try {
 			viewpage = "index";
 			} catch (Exception e2) {
@@ -582,7 +547,6 @@ public class MemberController {
 	// 이메일 인증 확인
 	@RequestMapping(value="/emailCertified.do")
 	public String emailCertified() {
-		System.out.println("return certified");
 		return "certified/emailCertified";
 	}
 	
@@ -606,10 +570,8 @@ public class MemberController {
 		
 		String viewpage = "";
 		if(result > 0) {
-			System.out.println("인서트 성공");
 			viewpage = "index";
 		}else {
-			System.out.println("인서트 실패");
 			viewpage = "index";
 		}
 		
@@ -634,7 +596,6 @@ public class MemberController {
 			request.setCharacterEncoding("UTF-8");
 			String tseq = request.getParameter("tseq");
 			int cnt = Integer.parseInt(request.getParameter("invitecnt"));
-			System.out.println("cnt:"+cnt);
 			String[] invitemem = new String[cnt];
 			for(int i=0;i<cnt;i++) {
 				invitemem[i] = request.getParameter("email"+i);
@@ -646,7 +607,6 @@ public class MemberController {
 			for(int i=0;i<cnt;i++) {
 				if(request.getParameter("email"+i)!=null) {
 					invitemem[i] = request.getParameter("email"+i);
-					System.out.println(invitemem[i]);
 					messageHelper.setFrom("leeyong1321@gmail.com");
 					messageHelper.setTo(invitemem[i]);
 					messageHelper.setSubject("협업공간 SCOOP 팀 멤버 초대 인증 이메일입니다");
@@ -667,12 +627,10 @@ public class MemberController {
 			request.setCharacterEncoding("UTF-8");
 			String tseq = request.getParameter("tseq");
 			int cnt = Integer.parseInt(request.getParameter("invitecnt"));
-			System.out.println("cnt:"+cnt);
 			String[] invitemem = new String[cnt];
 			for(int i=0;i<cnt;i++) {
 				if(request.getParameter("email"+i)!=null) {
 					invitemem[i] = request.getParameter("email"+i);
-					System.out.println(invitemem[i]);
 					messageHelper.setFrom("leeyong1321@gmail.com");
 					messageHelper.setTo(invitemem[i]);
 					messageHelper.setSubject("협업공간 SCOOP 팀 멤버 초대 인증 이메일입니다");
@@ -698,7 +656,6 @@ public class MemberController {
 		
 		String pwd = this.bCryptPasswordEncoder.encode(member.getPwd());
 		
-		System.out.println(pwd);
 		model.addAttribute("member",member);
 		model.addAttribute("pass",pwd);
 		session.setAttribute("img", member.getProfile());
@@ -710,7 +667,6 @@ public class MemberController {
 	//회원수정 체크
 	@RequestMapping(value="editCheck.do" , method = RequestMethod.POST)
 	public String UpdateProfile(Member member,HttpServletRequest request,HttpSession session) {
-		    System.out.println(member);
 		    
 				
 			CommonsMultipartFile multifile = member.getFilesrc();
@@ -729,7 +685,6 @@ public class MemberController {
 					try {
 						fs = new FileOutputStream(fpath);
 					} catch (FileNotFoundException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 						
 					}finally {
@@ -738,7 +693,6 @@ public class MemberController {
 							System.out.println(multifile.getBytes()[0]);
 							fs.close();
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					}
@@ -790,7 +744,6 @@ public class MemberController {
 	// 이메일 인증 확인
 	@RequestMapping(value = "/naverCertified.do")
 	public String naverCertified() {
-		System.out.println("return certified");
 		return "ajax/naverCertified";
 	}
 	
@@ -798,7 +751,6 @@ public class MemberController {
 	@RequestMapping(value = "/idOverlab.do")
 	@ResponseBody
 	public int emailCheck(String email) {
-		System.out.println(email);
 		int result = 0;
 		MemberDao dao = sqlsession.getMapper(MemberDao.class);
 		result = dao.idCheck(email);
@@ -821,8 +773,6 @@ public class MemberController {
 				model.addAttribute("myNewTissueList", myNewTissueList);
 				viewpage = "user/UserNewTissue";
 			} catch (Exception e) {
-				// TODO: handle exception
-				System.out.println(e.getMessage());
 				viewpage = "redirect:/userindex.do";
 			}
 			
@@ -848,7 +798,6 @@ public class MemberController {
 				model.addAttribute("myNewReplyList", myNewReplyList);
 				viewpage = "user/UserNewReply";
 			} catch (Exception e) {
-				// TODO: handle exception
 				System.out.println(e.getMessage());
 				viewpage = "redirect:/userindex.do";
 			}
@@ -875,7 +824,6 @@ public class MemberController {
 				model.addAttribute("myNewReplyList", myNewReplyList);
 				viewpage = "user/UserNewVote";
 			} catch(Exception e) {
-				System.out.println(e.getMessage());
 				viewpage = "redirect:/userindex.do";
 			}
 			
