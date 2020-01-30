@@ -402,19 +402,13 @@ public class TeamController {
 	@ResponseBody
 	@RequestMapping(value="selectChart.do", method = RequestMethod.POST)
 	public Process chart(int tseq) {
-		System.out.println("selectChart 들어오고");
+		System.out.println("차트 변경");
 		System.out.println("tseq : " + tseq);
 		
 		Process processList = null;
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		
-		System.out.println("select query");
-		
 		processList = dao.chartData(tseq);
-		
-		System.out.println("결과는?" + processList.toString());
-
-		System.out.println("이제 리턴할 차례");
 		
 		return processList;
 	}
