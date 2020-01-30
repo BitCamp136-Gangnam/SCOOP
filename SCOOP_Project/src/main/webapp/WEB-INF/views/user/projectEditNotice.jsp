@@ -73,7 +73,7 @@ return true;
 			<!--**********************************
             Content body start
         ***********************************-->
-		<form action="pjNoticeEditOk.do" method="POST" onsubmit="return checkpjnotice()">
+		<form action="pjNoticeEditOk.do?tseq=${edit.tseq}" method="POST" onsubmit="return checkpjnotice()">
 			<div class="content-body" style="height: 680px;">
 				<div class="container-fluid row"
 					style="padding-right: 15px; margin-right: 0px; margin-left: 0px; padding-left: 15px;">
