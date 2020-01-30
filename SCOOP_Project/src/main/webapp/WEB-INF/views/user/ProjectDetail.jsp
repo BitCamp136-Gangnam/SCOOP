@@ -310,6 +310,7 @@ $(function(){
          	북마크
          </div>
       </div>
+      
       <c:forEach items="${tp}" var="ti">
          <div class="row" style="margin-left: 2%; margin-right: 2%" id="row">
          <input type="hidden" name="tiseq" value="${ti.tiseq}" />
