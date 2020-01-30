@@ -119,7 +119,7 @@ function requestPay(){
 				<div class="card" style="min-height: 1080px">
 					<div class="row" style="margin: 2%">
 						<div class="col-sm-12" style="padding-left: 0">
-							<h3>결재 및 가격정보</h3>
+							<h3>결제 및 가격정보</h3>
 						</div>
 					</div>
 					<div class="row" style="margin-left: 2%;">
@@ -131,7 +131,7 @@ function requestPay(){
 							<li class="nav-item"><a class="nav-link"
 								href="app-external.do">외부 서비스 연결</a></li>
 							<li class="nav-item"><a class="nav-link"
-								href="paymentPage.do">가격 및 결제</a></li>
+								href="paymentPage.do" style="color: #E71D36;">가격 및 결제</a></li>
 						</ul>
 					</div>
 					<hr style="margin-top: 0">
