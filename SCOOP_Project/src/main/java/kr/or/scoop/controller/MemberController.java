@@ -250,7 +250,9 @@ public class MemberController {
 		session.setAttribute("filed", filedrive);
 		try {
 			pjtlist = noticeDao.getPJT(email);
+			System.out.println(member.getEmail());
 			tpmemlist = memberdao.getTpmembers(member.getEmail());
+			System.out.println(tpmemlist);
 			mytissuelist = myissuedao.teamWriteTiisueList(member.getIdtime());
 			myreplylist = myissuedao.teamWriteReplyList(member.getIdtime());
 			mypjtlist = myissuedao.teamWriteNoticeList(member.getEmail(), member.getIdtime());
@@ -273,7 +275,7 @@ public class MemberController {
 				*/
 			model.addAttribute("mypjtlist", pjtlist);
 			model.addAttribute("myNewTissueList", myNewTissueList);
-			System.out.println(myNewTissueList);
+			System.out.println(tpmemlist);
 			/*
 			 AlarmDao dao = sqlsession.getMapper(AlarmDao.class); 
 			 List<Alarm> alarm = dao.getAlarm((String)session.getAttribute("email"));
