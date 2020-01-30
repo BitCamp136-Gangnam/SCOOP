@@ -436,7 +436,7 @@ public class TeamController {
 	}
 	
 	@RequestMapping(value = "editTeamCalendar.do", method = RequestMethod.POST)
-	public String editTeamCalendar(String title, String start, String end, String description, String type, String backgroundColor, boolean allDay, int tseq, int tiseq) {
+	public String editTeamCalendar(int _id, String title, String start, String end, String description, String type, String backgroundColor, boolean allDay, int tseq) {
 		int result = 0;
 		System.out.println(title+"/"+start+"/"+end+"/"+description+"/"+type+"/"+allDay+"/"+tseq);
 		String viewpage = "";
@@ -446,7 +446,7 @@ public class TeamController {
 		tissue.setTititle(title);
 		tissue.setTicontent(description);
 		tissue.setTseq(tseq);
-		tissue.setTiseq(tiseq);
+		tissue.setTiseq(_id);
 		tissue.setBackgroundColor(backgroundColor);
 		if(start.length()==16) {
 			System.out.println(start+":00");
@@ -475,22 +475,23 @@ public class TeamController {
 	}
 	
 	@RequestMapping(value = "deleteTeamCalendar.do", method = RequestMethod.POST)
-	public String deleteTeamCalendar(int tiseq) {
+	public String deleteTeamCalendar(int tiseq, String username, HttpSession session) {
 		int result = 0;
 		String viewpage = "";
 		Tissue tissue = new Tissue();
 		MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
 		tissue.setTiseq(tiseq);
-		result = myissuedao.deleteTeamCalendar(tissue);
-		
-		if(result>0) {
-			System.out.println("성공");
-			viewpage = "redirect:/calendar.do";
-		} else {
-			System.out.println("실패");
-			viewpage = "redirect:/calendar.do";
+		String name = (String)session.getAttribute("name");
+		if(name.equals(username)) {
+			result = myissuedao.deleteTeamCalendar(tissue);
+			if(result>0) {
+				System.out.println("성공");
+				viewpage = "redirect:/calendar.do";
+			} else {
+				System.out.println("실패");
+				viewpage = "redirect:/calendar.do";
+			}
 		}
-		
 		return viewpage;
 		
 	}
@@ -544,7 +545,7 @@ public class TeamController {
 				JSONObject data = new JSONObject();
 				int z = sortlist.get(key).getAllDay();
 				
-				data.put("_id", key++);
+				data.put("_id", sortlist.get(key).getTiseq());
 				data.put("title", sortlist.get(key).getTititle());
 				data.put("description", sortlist.get(key).getTicontent());
 				boolean allDay;

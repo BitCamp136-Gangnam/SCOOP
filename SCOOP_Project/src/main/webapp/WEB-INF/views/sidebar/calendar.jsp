@@ -101,9 +101,6 @@
 																		<label class="col-xs-4" for="edit-end">끝</label> <input
 																			class="inputModal" type="text" name="edit-end"
 																			id="edit-end" />
-																		<label class="col-xs-4" for="edit-tiseq">tiseq</label> <input
-																			class="inputModal" type="text" name="edit-tiseq"
-																			id="edit-tiseq" />
 																		
 																	</div>
 																</div>
@@ -175,10 +172,10 @@
 														<div class="col-lg-6">
 															<label for="calendar_view">협업공간</label>
 															<div class="input-group">
-																<select class="filter" id="type_filter"
-																	multiple="multiple">
+																<select class="filter" id="edit-tseq"
+																	multiple="multiple" name="edit-tseq">
 																	<c:forEach items="${pjtlist}" var="p">
-																	<input class="inputModal" type="text" name="edit-tseq" id="edit-tseq" value="${p.tseq}" readonly hidden="hidden">
+																	<input class="inputModal" type="text" name="edit-tseq${p.tseq }" id="edit-tseq${p.tseq }" value="${p.tseq}" readonly hidden="hidden">
                          											<option value="${p.tseq}">${p.pname}</option>
          
                   													</c:forEach>

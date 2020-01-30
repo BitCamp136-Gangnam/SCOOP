@@ -80,8 +80,8 @@ SET tititle = #{tititle},
 ticontent = #{ticontent},
 tistart = #{tistart},
 tiend = #{tiend},
-backgroundcolor = #{backgroundcolor},
-allday = #{allday} 
+backgroundcolor = #{backgroundColor},
+allday = #{allDay} 
 WHERE tseq=#{tseq} and tiseq=#{tiseq}
 </update>
 <delete id="deleteTeamCalendar" parameterType="kr.or.scoop.dto.Tissue">

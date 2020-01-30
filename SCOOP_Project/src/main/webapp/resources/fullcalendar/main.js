@@ -103,6 +103,7 @@ var calendar = $('#calendar').fullCalendar({
         }).append('<p><strong>등록자:</strong> ' + event.username + '</p>')
         .append('<p><strong>협업공간 이름:</strong> ' + event.type + '</p>')
         .append('<p><strong>시간:</strong> ' + getDisplayEventDate(event) + '</p>')
+        .append('<p><strong>tiseq:</strong> ' + event._id + '</p>')
         .append('<div class="popoverDescCalendar"><strong>설명:</strong> ' + event.description + '</div>'),
       delay: {
         show: "800",
@@ -175,6 +176,8 @@ var calendar = $('#calendar').fullCalendar({
           }
           return array;
         })
+        console.log(fixedDate);
+        console.log(callback);
         callback(fixedDate);
       }
     });
@@ -199,12 +202,17 @@ var calendar = $('#calendar').fullCalendar({
       type: "post",
       url: "editTeamCalendar.do",
       data: {
-        //id: event._id,
+        id: event._id,
         
       },
       success: function (response) {
+    	console.log(data);
         alert('수정: ' + newDates.startDate + ' ~ ' + newDates.endDate);
-      }
+      },
+      error: function() {
+	    	alert("에러");
+	    	console.log(data);
+	    }
     });
 
   },
@@ -225,7 +233,7 @@ var calendar = $('#calendar').fullCalendar({
         return false;
       }
     }
-
+    console.log(event._id);
     // 드랍시 수정된 날짜반영
     var newDates = calDateWhenDragnDrop(event);
 
