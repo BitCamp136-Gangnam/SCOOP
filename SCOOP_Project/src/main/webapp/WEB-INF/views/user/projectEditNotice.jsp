@@ -79,14 +79,14 @@ return true;
 					style="padding-right: 15px; margin-right: 0px; margin-left: 0px; padding-left: 15px;">
 					<div class="card"
 						style="padding-left: 15px; padding-right: 15px; padding-top: 1%; width: 100%; height: auto; overflow: auto;">
-						<div class="row" style="margin: 11% 2% 3% 2%;">
-						<h2 style="text-align: center;margin-left: 43%;margin-bottom: 2%">공지사항 수정</h2>
-							<input class="form-control createmodal" type="text" id="pntitle"name="pntitle" placeholder="공지사항 제목을 입력해주세요" style="width: 75%; margin-left: 15%; border-radius: 0.5rem;"value="${edit.pntitle}">
+						<div class="row" style="margin: 7% 2% 3% 2%;">
+						<h3 style="text-align: center;margin-left: 43%;margin-bottom: 2%">공지사항 수정</h3>
+							<input class="form-control createmodal" type="text" id="pntitle"name="pntitle" placeholder="공지사항 제목을 입력해주세요" style="width: 75%; margin-left: 13%; border-radius: 0.5rem;"value="${edit.pntitle}">
 						</div>
 						<div class="myissueDetail" style="margin: 0 2% 3% 2%;">
 							<textarea class="form-control createmodal" rows="10"
 								id="pcontent_Edit" name="pncontent"
-								style="width: 75%; margin-left: 15%; border-radius: 0.5rem;" placeholder="공지사항을 내용을 입력해주세요">${edit.pncontent}</textarea>
+								style="width: 75%; margin-left: 13%; border-radius: 0.5rem;" placeholder="공지사항을 내용을 입력해주세요">${edit.pncontent}</textarea>
 						</div>
 						<div class="row" style="padding-left: 38%;">
 						<input type="hidden" name="pnseq" value="${edit.pnseq}">
