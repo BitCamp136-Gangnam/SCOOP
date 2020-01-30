@@ -12,6 +12,16 @@ public class Tpmember {
 	private String pname;
 	private String name;
 	private Timestamp tpaddtime;
+	private int pnseq;
+	
+	
+	
+	public int getPnseq() {
+		return pnseq;
+	}
+	public void setPnseq(int pnseq) {
+		this.pnseq = pnseq;
+	}
 	public int getTseq() {
 		return tseq;
 	}
@@ -48,10 +58,12 @@ public class Tpmember {
 	public void setTpaddtime(Timestamp tpaddtime) {
 		this.tpaddtime = tpaddtime;
 	}
+	
 	@Override
 	public String toString() {
 		return "Tpmember [tseq=" + tseq + ", email=" + email + ", pjuserrank=" + pjuserrank + ", pname=" + pname
-				+ ", name=" + name + ", tpaddtime=" + tpaddtime + "]";
+				+ ", name=" + name + ", tpaddtime=" + tpaddtime + ", pnseq=" + pnseq + "]";
 	}
+	
 	
 }

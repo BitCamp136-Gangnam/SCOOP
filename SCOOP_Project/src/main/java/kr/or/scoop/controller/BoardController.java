@@ -338,9 +338,12 @@ public class BoardController {
 	}
 	//프로젝트 공지사항 상세보기
 	@RequestMapping(value="pjNoticeDetail.do",method=RequestMethod.GET)
-	public String pjNoticeDetail(int pnseq,Model model,HttpSession session) {
+	public String pjNoticeDetail(int pnseq,Model model,HttpSession session,int tseq) {
+		String email = (String)session.getAttribute("email");
 		ProjectDao dao = sqlSession.getMapper(ProjectDao.class);
+		int rank = dao.searchNoticeRank(pnseq, email, tseq);
 		PjNotice Detail = dao.pjNoticeDetail(pnseq);
+		model.addAttribute("rank", rank);
 		model.addAttribute("detail", Detail);
 		return "user/projectDetailNotice";
 	}
@@ -351,7 +354,6 @@ public class BoardController {
 		PjNotice edit = dao.pjNoticeDetail(pnseq);
 		
 		model.addAttribute("edit",edit);
-		
 		return "user/projectEditNotice";
 	}
 	
@@ -372,13 +374,13 @@ public class BoardController {
 	
 	//프로젝트 공지사항 삭제
 	@RequestMapping(value="pjNoticeDelete.do" , method = {RequestMethod.POST, RequestMethod.GET})
-	public String pjNoticeDelete(int pnseq) {
+	public String pjNoticeDelete(int pnseq,int tseq) {
 		ProjectDao dao = sqlSession.getMapper(ProjectDao.class);
 		int result = dao.deletePjNotice(pnseq);
 		String viewpage;
 		
 		if(result > 0) {
-			viewpage="redirect:/projectNotice.do";
+			viewpage="redirect:/projectNotice.do?tseq="+tseq;
 		}else {
 			viewpage="user/ProjectNotice";
 		}

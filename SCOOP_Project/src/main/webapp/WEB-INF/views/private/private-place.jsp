@@ -130,7 +130,7 @@
 				내용
 				</div>
 				<div class="col-sm-2 newissue">
-				날짜
+				작성시간
 				</div>
 				<div class="col-sm-1 newissue" style="text-align: center">
 				북마크

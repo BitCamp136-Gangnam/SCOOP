@@ -20,7 +20,24 @@
 
 </head>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-
+<script type="text/javascript">
+	$(function(){
+		//팀 공자사항 디테일 수정
+		$('#pjNoticeEd').click(function(){
+			location.href="pjNoticeEdit.do?pnseq=${detail.pnseq}";
+		});
+		//팀 공지사항 디테일 삭제 
+		$('#pjNoticeDel').click(function(){
+			location.href="pjNoticeDelete.do?pnseq=${detail.pnseq}&tseq=${detail.tseq}";
+		});
+		//팀 공지사항으로 돌아가기
+		$('#pjNoticeBack').click(function(){
+			location.href="projectNotice.do?tseq=${detail.tseq}";
+		});
+		
+	});
+		
+</script>
 <style>
 .newissue{
 	border-bottom: 1px solid #c8c8c8;
@@ -52,9 +69,21 @@
         <div class="container-fluid row" style="padding-right: 15px; margin-right: 0px;margin-left: 0px; padding-left: 15px;">
         <div class="card" style="padding-left: 15px;padding-right: 15px; padding-top:1%;width:100%;height: auto;overflow: auto;">
 		<div class="row"style="margin:2% 2% 0 2%" >
-				<h3 id="myissueSubject" style="padding-top: 2%;padding-left: 1%;">${detail.pntitle}<a href="pjNoticeEdit.do?pnseq=${detail.pnseq}" class="fas fa-cog" id="pjnoticeedit" style="margin-left: 5px;cursor: pointer; font-size: 15px"></a><a href="pjNoticeDelete.do?pnseq=${detail.pnseq}" class="iconify" data-icon="octicon:x" data-inline="false" style="cursor: pointer;font-size: 15px;"></a> </h3>
+				<h3 id="myissueSubject" style="padding-top: 2%;padding-left: 1%;">${detail.pntitle}
+				<c:if test="${rank == 100}">
+					<span id="pjNoticeEd">
+					<span class="fas fa-cog" id="pjnoticeedit" style="margin-left: 5px;cursor: pointer; font-size: 15px"></span>
+					</span>
+					<span id="pjNoticeDel">
+					<span class="iconify" data-icon="octicon:x" data-inline="false" style="cursor: pointer;font-size: 15px;"></span>
+					</span>
+				</c:if>		
+					<span id="pjNoticeBack">
+					<span class="iconify" data-icon="typcn:arrow-back" data-inline="false" style="cursor: pointer; font-size: 15px;"></span>
+					</span>			
+				</h3>
+
 		</div>
-				<a href="projectNotice.do?pnseq=${detail.tseq}" class="iconify" data-icon="typcn:arrow-back" data-inline="false" style="cursor: pointer; font-size: 15px;"></a>
 		<div class="myissueDetail" id="myissueMention"><sup><i class="fas fa-quote-left" style="color:#ca0000;"></i></sup> 멘션 멤버 이름 넣는 곳 <sup><i class="fas fa-quote-right"style="color:#ca0000;"></i></sup></div>
 		<div class="myissueDetail" id="myissueGoogledrive"><i class="fab fa-google-drive"></i>
 			<a href="">여기에 구글드라이브 파일 올리면됨</a>

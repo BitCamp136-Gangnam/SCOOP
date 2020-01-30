@@ -54,4 +54,7 @@ public interface ProjectDao {
 	
 	//프로젝트 멤버 리스트
 	public List<Tpmember> getTpMember(int tseq);
+	
+	//프로젝트 공지사항 권한
+	public int searchNoticeRank(int pnseq, String email,int tseq);
 }
