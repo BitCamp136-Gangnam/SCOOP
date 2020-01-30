@@ -167,4 +167,19 @@ from tissue t join member m
 on m.email = t.email
 where tseq = #{tseq}
 </select>
+<delete id="teamIssueFileDelete">
+	delete filedrive where tiseq= #{tiseq}
+</delete>
+<delete id="teamIssueMentionDelete">
+	delete teammention where tiseq= #{tiseq}
+</delete>
+<delete id="teamIssueGoogleDriveDelete">
+	delete teamgoogledrive where tiseq= #{tiseq}
+</delete>
+<delete id="teamIssueDoWorkDelete">
+	delete teamdowork where tiseq= #{tiseq}
+</delete>
+<delete id="teamIssueDelete">
+	delete tissue where tiseq= #{tiseq}
+</delete>
 </mapper>

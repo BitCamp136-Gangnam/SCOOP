@@ -224,4 +224,30 @@ public class TeamService {
 		int result = dao.updatePjNotice(pjnotice);
 		return result;
 	}
+	
+	public int teamIssueFileDelete(int tiseq) {
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		int result = dao.teamIssueFileDelete(tiseq);
+		return result;
+	}
+	public int teamIssueMentionDelete(int tiseq) {
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		int result = dao.teamIssueMentionDelete(tiseq);
+		return result;
+	}
+	public int teamIssueGoogleDriveDelete(int tiseq) {
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		int result = dao.teamIssueGoogleDriveDelete(tiseq);
+		return result;
+	}
+	public int teamIssueDoWorkDelete(int tiseq) {
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		int result = dao.teamIssueDoWorkDelete(tiseq);
+		return result;
+	}
+	public int teamIssueDelete(int tiseq) {
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		int result = dao.teamIssueDelete(tiseq);
+		return result;
+	}
 }

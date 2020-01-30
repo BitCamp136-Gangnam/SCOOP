@@ -27,6 +27,22 @@ $(function(){
 		$('#editIssue').click(function(){
 			location.href = 'myissueEdit.do?piseq='+${myissue.piseq};
 		})
+		$('#deleteIssue').click(function(){
+			   Swal.fire({
+				   title: '정말로 이슈를 삭제하시겠습니까??',
+				   text: "삭제하시면 이슈의 모든 정보가 사라집니다!",
+				   icon: 'warning',
+				   showCancelButton: true,
+				   confirmButtonColor: '#d33',
+				   cancelButtonColor: '#c8c8c8',
+				   confirmButtonText: '확인',
+				   cancelButtonText: '취소'
+				 }).then((result) => {
+				   if (result.value) {
+					   location.href = 'deleteMyIssue.do?piseq='+${myissue.piseq};
+				   }
+				 })
+		})
 	});
 </script>
 <style>

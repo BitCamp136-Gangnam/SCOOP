@@ -102,4 +102,29 @@ public class PrivateService {
 		int result = dao.pdoWorkEdit(fromWork, toWork, pdoWork, piseq);
 		return result;
 	}
+	public int myIssueFileDelete(int piseq) {
+		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
+		int result = dao.myIssueFileDelete(piseq);
+		return result;
+	}
+	public int myIssueMentionDelete(int piseq) {
+		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
+		int result = dao.myIssueMentionDelete(piseq);
+		return result;
+	}
+	public int myIssueGoogleDriveDelete(int piseq) {
+		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
+		int result = dao.myIssueGoogleDriveDelete(piseq);
+		return result;
+	}
+	public int myIssueDoWorkDelete(int piseq) {
+		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
+		int result = dao.myIssueDoWorkDelete(piseq);
+		return result;
+	}
+	public int myIssueDelete(int piseq) {
+		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
+		int result = dao.myIssueDelete(piseq);
+		return result;
+	}
 }

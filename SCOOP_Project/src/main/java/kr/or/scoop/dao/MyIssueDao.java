@@ -85,4 +85,10 @@ public interface MyIssueDao {
 	
 	//팀이슈 캘린더 삭제
 	public int deleteTeamCalendar(Tissue tissue);
+	
+	public int myIssueFileDelete(int piseq);
+	public int myIssueMentionDelete(int piseq);
+	public int myIssueGoogleDriveDelete(int piseq);
+	public int myIssueDoWorkDelete(int piseq);
+	public int myIssueDelete(int piseq);
 }

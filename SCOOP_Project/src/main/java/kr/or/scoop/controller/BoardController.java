@@ -638,4 +638,23 @@ public class BoardController {
 		}
 	return path;
 	}
+	@RequestMapping(value="deleteMyIssue.do" , method = {RequestMethod.POST, RequestMethod.GET})
+	public String deleteMyIssue(int piseq, Model model) {
+		privateservice.myIssueFileDelete(piseq);
+		privateservice.myIssueMentionDelete(piseq);
+		privateservice.myIssueGoogleDriveDelete(piseq);
+		privateservice.myIssueDoWorkDelete(piseq);
+		privateservice.myIssueDelete(piseq);
+		return "ajax/myIssueDelete";
+	}
+	@RequestMapping(value="deleteTeamIssue.do" , method = {RequestMethod.POST, RequestMethod.GET})
+	public String deleteTeamIssue(int tiseq,int tseq, Model model) {
+		tservice.teamIssueFileDelete(tiseq);
+		tservice.teamIssueMentionDelete(tiseq);
+		tservice.teamIssueGoogleDriveDelete(tiseq);
+		tservice.teamIssueDoWorkDelete(tiseq);
+		tservice.teamIssueDelete(tiseq);
+		model.addAttribute("tseq", tseq);
+		return "ajax/teamIssueDelete";
+	}
 }

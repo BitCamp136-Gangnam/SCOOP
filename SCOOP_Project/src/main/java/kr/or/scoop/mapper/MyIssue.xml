@@ -118,4 +118,19 @@ delete from tissue where tiseq = #{tiseq}
 <insert id="pdoWorkEdit">
 	insert into pdowork values(pwseq_pdowork_seq.nextval, #{param4}, #{param1}, #{param2}, #{param3})
 </insert>
+<delete id="myIssueFileDelete">
+	delete pfiledrive where piseq= #{piseq}
+</delete>
+<delete id="myIssueMentionDelete">
+	delete pmention where piseq= #{piseq}
+</delete>
+<delete id="myIssueGoogleDriveDelete">
+	delete pgoogledrive where piseq= #{piseq}
+</delete>
+<delete id="myIssueDoWorkDelete">
+	delete pdowork where piseq= #{piseq}
+</delete>
+<delete id="myIssueDelete">
+	delete myissue where piseq= #{piseq}
+</delete>
 </mapper>
