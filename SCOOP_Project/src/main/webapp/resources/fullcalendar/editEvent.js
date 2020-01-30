@@ -26,6 +26,7 @@ var editEvent = function (event, element, view) {
     editTitle.val(event.title);
     editStart.val(event.start.format('YYYY-MM-DD HH:mm'));
     editType.val(event.type);
+    editType.attr("readonly", true);
     editTseq.val(event.tseq);
     /*editTiseq.val(event.tiseq);*/
     editDesc.val(event.description);
