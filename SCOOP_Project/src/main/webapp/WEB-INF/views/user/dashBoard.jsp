@@ -72,7 +72,7 @@
                         data-toggle="tab" href="#">협업 진행률</a></li>
                      <li class="nav-item"><a class="nav-link active"
                         data-toggle="tab" href="#">이슈 업데이트</a></li> -->
-                     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#">@멘션</a></li>
+                     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="mention.do">@멘션</a></li>
                   </ul>
                </div>
                <hr style="margin-top: 0; margin-left: 2%; margin-right: 2%">

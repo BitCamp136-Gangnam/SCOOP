@@ -486,6 +486,7 @@ public class MemberController {
 			model.addAttribute("mytissuelist",mytissuelist);
 			model.addAttribute("myreplylist",myreplylist);
 			model.addAttribute("mypjtlist",mypjtlist);
+			model.addAttribute("mentions",mentions);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -497,7 +498,7 @@ public class MemberController {
 			model.addAttribute("myNewTissueList", myNewTissueList);
 			System.out.println(myNewTissueList);
 		}
-		return "user/mention";
+		return "user/dashBoard-mention";
 	}
 	// 로그아웃
 	@RequestMapping(value = "/logout.do")

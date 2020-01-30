@@ -119,6 +119,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select* from tpmember t join teampjt p on p.email=#{email,jdbcType=VARCHAR} join member m on t.email=m.email where t.tseq=p.tseq
 	</select>
 	<select id="getMention" resultType="kr.or.scoop.dto.Mention">
-		select * from teammention where tmemail=#{tmemail}
+		select * from teammention m join tissue t on m.tiseq = t.tiseq join teampjt p on t.tseq=p.tseq where tmemail==#{tmemail}
 	</select>
 </mapper>
