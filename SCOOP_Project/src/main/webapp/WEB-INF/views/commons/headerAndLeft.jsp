@@ -1204,11 +1204,11 @@ span {
    <div class="list-group" id="mentionlist" style="display: none">
       <a href="#" class="list-group-item list-group-item-action menli" id="men1"style="padding: 5px;">멘션</a> 
       <!-- <a href="#" class="list-group-item list-group-item-action menli" id="men2"style="padding: 5px">소스코드</a> --> 
-      <a href="#" class="list-group-item list-group-item-action menli" id="men3"style="padding: 5px">구글 드라이브</a> 
-      <a href="#" class="list-group-item list-group-item-action menli" id="men4"style="padding: 5px">파일</a> 
-      <a href="#" class="list-group-item list-group-item-action menli" id="men7"style="padding: 5px">의사결정</a> 
-      <a href="#" class="list-group-item list-group-item-action menli" id="men8"style="padding: 5px">할 일</a> 
-      <a href="#" class="list-group-item list-group-item-action menli" id="men9"style="padding: 5px">일정</a>
+      <a href="#" class="list-group-item list-group-item-action menli" id="men2"style="padding: 5px">구글 드라이브</a> 
+      <a href="#" class="list-group-item list-group-item-action menli" id="men3"style="padding: 5px">파일</a> 
+      <!-- <a href="#" class="list-group-item list-group-item-action menli" id="men7"style="padding: 5px">의사결정</a> --> 
+      <a href="#" class="list-group-item list-group-item-action menli" id="men4"style="padding: 5px">할 일</a> 
+      <a href="#" class="list-group-item list-group-item-action menli" id="men5"style="padding: 5px">일정</a>
    </div>
    <!--  -->
    <!-- 멘션할 사람 목록 -->
@@ -1395,8 +1395,8 @@ $('.modal').on('hidden.bs.modal', function(e) {
    $('#invite_Input1').show();
    $('#invite_Input2').show();
 });
-var tar = 1;
-var tar2 = 2;
+var tar = 0;
+var tar2 = 1;
 $('.menli').keydown(function(event) {
    var key = event.keyCode;
     switch (key) {
@@ -1412,11 +1412,12 @@ $('.menli').keydown(function(event) {
     case 37:
        break;
     }
-    if (tar2 < 1) {
-       tar2 = 1;
+    console.log(tar2);
+    if (tar2 < 0) {
+       tar2 = 0;
     }
-    if (tar2 > 9) {
-       tar2 = 9;
+    if (tar2 > 5) {
+       tar2 = 5;
     }
     $('#men' + tar2).focus();
     if ($('#men' + tar2).focus()) {
@@ -1448,11 +1449,11 @@ $('.menli').keydown(function(event) {
 		               case 37:
 		                  break;
 		               }
-		               if (tar < 1) {
-		                  tar = 1;
+		               if (tar < 0) {
+		                  tar = 0;
 		               }
-		               if (tar > 9) {
-		                  tar = 9;
+		               if (tar > 5) {
+		                  tar = 5;
 		               }
 		               $('#men' + tar).focus();
 		               if ($('#men' + tar).focus()) {
@@ -1530,7 +1531,7 @@ $('.menli').keydown(function(event) {
 			val : textarea.value
 		});
 	}); */
-	$('#men3').click(function() {
+	$('#men2').click(function() {
 		$('#mentionlist').hide();
 		var text = "";
 		text = $('#issuecontent').val().replace("@", "");
@@ -1539,7 +1540,7 @@ $('.menli').keydown(function(event) {
 		$('#issuecontent').append($('.picker-dialog'));
 
 	});
-	$('#men4').click(function() {
+	$('#men3').click(function() {
 		$('#mentionlist').hide();
 		$('#fileclick').click();
 	});
@@ -1576,7 +1577,7 @@ $('.menli').keydown(function(event) {
 $('#todoresult').show();
 		
 	});
-	$('#men8').click(
+	$('#men4').click(
 			function() {
 				var text = "";
 				text = $('#issuecontent').val().replace("@", "");
@@ -1650,7 +1651,7 @@ $('#todoresult').show();
 		$('#issuecontent').val(text);
 		$('#todolist').val('');
 	});
-	$('#men9').click(
+	$('#men5').click(
 			function() {
 				var top = ($('#issuecontent').offset().top);
 				var left = ($('#issuecontent').offset().left + 490);
