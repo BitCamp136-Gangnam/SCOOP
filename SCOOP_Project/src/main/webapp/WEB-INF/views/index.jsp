@@ -553,6 +553,14 @@ function idOver(a) {
 							            'onfailure': onFailure
 							          });
 							        }
+
+							        $('#name').on('keyup', function() {
+							      		if(($(this).val().length) > 10) {
+							      			 Swal.fire("글자수를 초과 하셨습니다.");
+							      			$("#name").focus();
+							      			 $(this).val($(this).val().substring(0, 10));
+							      		}
+							      	});
 							      </script>
 							      <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
      </div>
@@ -579,7 +587,7 @@ function idOver(a) {
         </div>
         <div class="form-group mb-4">
          <label>Name</label>
-         <input type="text" class="form-control" id="name" name ="name" placeholder="7자까지 입력가능합니다" required>
+         <input type="text" class="form-control" id="name" name ="name" placeholder="10자까지 입력가능합니다" required>
         </div>
         <div class="form-group mb-4">
          <label>Password</label>

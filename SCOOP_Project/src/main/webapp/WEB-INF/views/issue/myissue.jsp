@@ -108,10 +108,20 @@ $(function(){
 				</span>
 				</c:when>	
 			</c:choose>
-			<a href="teamissueDetail.do?tiseq=${ti.tiseq}"style="margin-left: 5%;">${ti.tititle}</a>			
+			<c:if test="${fn:length(ti.tititle) > 45}">
+			<a href="teamissueDetail.do?tiseq=${ti.tiseq}"style="margin-left: 5%;"><c:out value="${fn:substring(ti.tititle,0,45)}"/>...</a>
+			</c:if>			
+			<c:if test="${fn:length(ti.tititle) <= 45}">
+			<a href="teamissueDetail.do?tiseq=${ti.tiseq}"style="margin-left: 5%;"><c:out value="${fn:substring(ti.tititle,0,45)}"/></a>
+			</c:if>			
 			</div>
 			<div class="col-sm-3 newissue" >
-			<a class="pnameHover" href="projectDetail.do?tseq=${ti.tseq}" style="color:#2c9aa8;">${ti.pname}</a>
+			<c:if test="${fn:length(ti.pname) > 20}">
+			<a class="pnameHover" href="projectDetail.do?tseq=${ti.tseq}" style="color:#2c9aa8;"><c:out value="${fn:substring(ti.pname,0,20)}"/>...</a>
+			</c:if>
+			<c:if test="${fn:length(ti.pname) <= 20}">
+			<a class="pnameHover" href="projectDetail.do?tseq=${ti.tseq}" style="color:#2c9aa8;"><c:out value="${fn:substring(ti.pname,0,20)}"/></a>
+			</c:if>
 			</div>
 			<div class="col-sm-2 newissue" >
 			<a href="projectDetail.do?tseq=${ti.tseq}">${fn:substring(ti.tidate,0,16)}</a>
