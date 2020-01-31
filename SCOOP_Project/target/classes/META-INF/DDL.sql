@@ -306,7 +306,10 @@ CREATE TABLE MYISSUE (
 	piend TIMESTAMP DEFAULT SYSTIMESTAMP, /* 종료날짜 */
 	ispibook NUMBER NOT NULL, /* 북마크여부 */
 	email VARCHAR2(100) NOT NULL, /* 이메일 */
-	pidate DATE NOT NULL /* 마이이슈작성날짜 */
+	pidate DATE NOT NULL, /* 마이이슈작성날짜 */
+	backgroundcolor VARCHAR2(100) null,
+	textcolor VARCHAR2(100) null,
+	allday NUMBER default 1 null
 );
 
 COMMENT ON TABLE MYISSUE IS '개인이슈';

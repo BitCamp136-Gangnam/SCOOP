@@ -197,9 +197,12 @@ border-radius: 5px;
 		<br>
 		</div>
 		</c:forEach> 
-        <div class="myissueDetail" id="myissueContent">
+		<div class="row" style="width: 100%">
+        <div class="myissueDetail col-sm-7" id="myissueContent">
         ${tissue.ticontent}
-        </div>    
+        </div>
+        <div class="crawling col-sm-3">크롤링 데이터</div>
+        </div>
             <!-- #/ container -->
             </div> 
             <div class="card" style="height: 600px;float:right;background-color: #fff;margin-left:10px;padding-left: 0px;padding-right: 0px;width:400px;">
@@ -279,21 +282,20 @@ border-radius: 5px;
      <script src="<c:url value="/resources/js/dashboard/dashboard-1.js"/>"></script>
 	<script type="text/javascript">
 		$(function(){
-			let content = $('#myissueContent').text();
-			console.log(content.trim());
-
-			let splitData = content.trim().split("\n");
+			let content = $('#myissueContent');
+			let text = content.text();
+			
+			let splitData = text.trim().split("\n");
 			console.log(splitData);
 
 			for(let i = 0; i < splitData.length; i++) {
 				if(splitData[i].indexOf('http') != -1) {
-					
-					content = content.replace(splitData[i], splitData[i].wrap('<a></a>'));
+					url = '<a href="' + splitData[i] + '">' + splitData[i] + '</a>'
+					text = text.replace(splitData[i], url);
 					
 				}
 			}
-			console.log(content);
-			$('#myissueContent').text(content);
+			console.log(text);
 		})
 	</script>
 </body>
