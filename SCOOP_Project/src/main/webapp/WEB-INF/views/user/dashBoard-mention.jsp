@@ -47,6 +47,8 @@
 		$(moreEventArray).slice(0, 10);
 		temp = 10;
 		$("#load").click(function(e) {
+			
+			
 			console.log(moreEventArray);
 			/* console.log($('.card'));
 			console.log($('.card > a'));
@@ -64,10 +66,12 @@
 				}
 
 			}
-
+			//시간이 안돼요 누가 좀 도와주세여 ㅠㅠㅠㅠ
+			$('#one').scrollTop($('#one')[0].scrollHeight);
 		});
 
 	});
+	
 </script>
 
 
@@ -117,8 +121,8 @@
 						</ul>
 					</div>
 					<hr style="margin-top: 0; margin-left: 2%; margin-right: 2%">
-					<div class="row">
-						<div class="col-sm-6"style="margin: 2% 2% 2% 7%; border-radius: 0.5rem;" id="one">
+					<div class="row" style="height: 560px;">
+						<div  id="one" class="col-sm-6"style="margin: 2% 2% 2% 7%; border-radius: 0.5rem;overflow: auto;height:500px;">
 							<div class="row" style="margin-left: 2%; margin-right: 2%">
 								<div class="col-sm-3 newissue" id="al">
 									<p>
