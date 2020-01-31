@@ -660,17 +660,13 @@ public class TeamController {
 	}
 	
 	@RequestMapping("/calendar.do")
-	public String object(@RequestParam(required = false, name="lang") String language, HttpServletRequest request, HttpServletResponse response,Model model,HttpSession session) {
+	public String object(HttpServletRequest request, HttpServletResponse response,Model model,HttpSession session) {
 		System.out.println("calendar 왔냐?");
-		if(language == null) {
-			language = "ko";
-		}
+		
 		String email = (String)session.getAttribute("email");
 		ProjectDao dao = sqlsession.getMapper(ProjectDao.class);
 		List<Tpmember> mem = dao.getTpMember(email);
-		Locale locale  = new Locale(language);
-		System.out.println("locale : " + locale + "\n language : " + language);
-		localeResolver.setLocale(request, response, locale);
+		
 		model.addAttribute("mem",mem);
 		return "sidebar/calendar";
 	}

@@ -107,13 +107,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select profile from member where email = #{email}
 	</select>
 	<select id="getFileDrive" resultType="kr.or.scoop.dto.FileDrive">
-		select * from filedrive f join teampjt t on f.tseq=t.tseq where f.email=#{email,jdbcType=VARCHAR}
+		select * from filedrive f join teampjt t on f.tseq=t.tseq where f.email=#{email,jdbcType=VARCHAR} order by f.fddate desc
+	</select>
+	<select id="searchFileDrive" resultType="kr.or.scoop.dto.FileDrive">
+		select * from filedrive f join teampjt t on f.tseq=t.tseq where f.email=#{param1} and f.fdname like '%'||#{param2}||'%' order by f.fddate desc
 	</select>
 	<select id="getFileProject" resultType="kr.or.scoop.dto.FileDrive">
-		select * from filedrive f join teampjt t on f.tseq=t.tseq where f.email=#{param1} and f.tseq=#{param2}
+		select * from filedrive f join teampjt t on f.tseq=t.tseq where f.email=#{param1} and f.tseq=#{param2} order by f.fddate desc
 	</select>
 	<select id="getMyFile" resultType="kr.or.scoop.dto.PrivateFileDrive">
-		select * from pfiledrive where email=#{email,jdbcType=VARCHAR}
+		select * from pfiledrive where email=#{email,jdbcType=VARCHAR} order by pfddate desc
+	</select>
+	<select id="searchMyFileDrive" resultType="kr.or.scoop.dto.PrivateFileDrive">
+		select * from pfiledrive where email=#{param1} and pfdname like '%'||#{param2}||'%' order by pfddate desc
 	</select>
 	<select id="getTpmembers" resultType="kr.or.scoop.dto.Tpmember">
 		select m.name,m.email, t.tseq
