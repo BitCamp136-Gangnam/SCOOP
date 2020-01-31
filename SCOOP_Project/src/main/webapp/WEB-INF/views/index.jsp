@@ -385,17 +385,20 @@ function idOver(a) {
       </ul>
       <ul class="navbar-nav">
       <li class="nav-item dropdown"><a id="pages" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><spring:message code="language" /></a>
-      	<div class="dropdown-menu">
+      	<div class="dropdown-menu" style="width: 70%">
       		<div id="table">
       			<div id="rowdrop">
-      				<span style="color: gray;font-size:15px"><a href="index.do?lang=ko">한국어</a></span>
+      				<span class="celldrop col1drop"><a href="index.do?lang=ko">한국어</a></span>
+      				<!-- <hr width="80%"> -->
+      				
       			</div>
-      			<hr width="80%">
+      			
       			<div id="rowdrop">
-      				<span style="color: gray;font-size:15px"><a href="index.do?lang=en">English</a></span>
+      				<span class="celldrop col1drop"><a href="index.do?lang=en">English</a></span>
       			</div>
       		</div>
       	</div>
+      </li>
       <li class="nav-item dropdown"><a id="pages" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><spring:message code="detail" /></a>
       <div class="dropdown-menu">
       <div id="table">

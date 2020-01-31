@@ -208,8 +208,10 @@ public class MemberController {
 	@RequestMapping(value = "/userindex.do", method = RequestMethod.GET)
 	public String userindex(@RequestParam(required = false, name="lang") String language, HttpSession session, 
 				HttpServletRequest request, HttpServletResponse response, Model model) {
-		language = (String)session.getAttribute("language");
-		if(language == null) {
+		
+		if(language == null && session.getAttribute("language") != null) {
+			language = (String)session.getAttribute("language");
+		}else if(language == null) {
 			language = "ko";
 		}
 		
@@ -223,6 +225,7 @@ public class MemberController {
 			System.out.println("!!!!");
 			session.setAttribute("defaultlang", "English");
 		}
+		session.setAttribute("language", language);
 		String email = "";
 		
 		email = (String)session.getAttribute("email");
