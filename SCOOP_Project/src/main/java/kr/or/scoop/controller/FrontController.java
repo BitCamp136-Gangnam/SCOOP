@@ -26,7 +26,10 @@ public class FrontController {
 	
 	@RequestMapping("/index.do")
 	public String change(@RequestParam(required = false, name="lang") String language, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-		if(language == null) {
+		
+		if(language == null && session.getAttribute("language") != null) {
+			language = (String)session.getAttribute("language");
+		}else if(language == null) {
 			language = "ko";
 		}
 		
