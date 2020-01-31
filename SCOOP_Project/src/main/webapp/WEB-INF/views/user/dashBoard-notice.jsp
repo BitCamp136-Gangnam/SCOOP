@@ -52,7 +52,7 @@
 
          <div class="container-fluid">
             <div class="card">
-               <div class="row" style="margin-left: 2%;margin-top: 3%">
+               <div class="row" style="margin-left: 4%;margin-top: 3%">
                   <select id="selectMenu" name="menu" class="nav-item" onchange="changeItem()" style="color: #E71D36; border: 0">
                  <option value="0" style="color: #76838f">새로운 팀이슈</option>
             	 <option value="1" style="color: #76838f">새로운 댓글</option>	
@@ -72,10 +72,10 @@
                      <li class="nav-item"><a href="mention.do" class="nav-link">@멘션</a></li>
                   </ul>
                </div>
-               <hr style="margin-top: 0; margin-left: 2%; margin-right: 2%">
-               <div class="row">
-						<div class="col-sm-6"
-							style="margin: 2% 2% 2% 7%; border-radius: 0.5rem;">
+               <hr style="margin-top: 0; margin-left: 4%; margin-right: 2%">
+               <div class="row" style="height: 560px;">
+						<div class="col-sm-7"
+							style="margin: 0 0 0 3% ; border-radius: 0.5rem;">
 							<div class="row" style="margin-left: 2%; margin-right: 2%" id="ialarm">
 							<div class="col-sm-3 newissue" id="al"><p><b>협업공간</b></p></div>
 							<div class="col-sm-6 newissue" id="ti"><p><b>제목</b></p></div>

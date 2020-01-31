@@ -37,14 +37,14 @@
 		});
 		var temp = 0;
 		var moreEventArray = document.querySelectorAll("#one > #ialarm ");
-		if (moreEventArray.length <= 12) {
+		if (moreEventArray.length <= 10) {
 			$('#load').remove();
 			$('#loadPlus').remove();
 			$('.tooltip').remove();
 		}
 		$(moreEventArray).attr("hidden", "hidden");
-		$(moreEventArray).slice(0, 12).removeAttr("hidden");
-		$(moreEventArray).slice(0, 12);
+		$(moreEventArray).slice(0, 10).removeAttr("hidden");
+		$(moreEventArray).slice(0, 10);
 		temp = 10;
 		$("#load").click(function(e) {
 			
@@ -55,10 +55,10 @@
 			console.log($('.card > a > .row'));
 			console.log($(".card > a > .row").val()); */
 			console.log("if");
-			$(moreEventArray).slice(temp, temp + 12).removeAttr("hidden");
+			$(moreEventArray).slice(temp, temp + 10).removeAttr("hidden");
 			temp += 10;
-			if (moreEventArray.length < temp + 12) {
-				$(moreEventArray).slice(temp, 12).removeAttr("hidden");
+			if (moreEventArray.length < temp + 10) {
+				$(moreEventArray).slice(temp, 10).removeAttr("hidden");
 				if (temp - moreEventArray.length >= 0) {
 					$('#load').remove();
 					$('#loadPlus').remove();
@@ -66,7 +66,7 @@
 				}
 
 			}
-			//시간이 안돼요 누가 좀 도와주세여 ㅠㅠㅠㅠ
+			
 			$('#one').scrollTop($('#one')[0].scrollHeight);
 		});
 
@@ -98,7 +98,7 @@
 
 			<div class="container-fluid">
 				<div class="card">
-					<div class="row" style="margin-left: 2%; margin-top: 3%">
+					<div class="row" style="margin-left: 4%; margin-top: 3%">
 						<select id="selectMenu" name="menu" class="nav-item"
 							onchange="changeItem()" style="color: #76838f; border: 0">
 							<option value="99" style="color: #76838f">새로운 이슈 선택</option>
@@ -120,9 +120,9 @@
 							<li class="nav-item"><a href="mention.do" class="nav-link" style="color: #E71D36">@멘션</a></li>
 						</ul>
 					</div>
-					<hr style="margin-top: 0; margin-left: 2%; margin-right: 2%">
+					<hr style="margin-top: 0; margin-left: 4%; margin-right: 2%">
 					<div class="row" style="height: 560px;">
-						<div  id="one" class="col-sm-6"style="margin: 2% 2% 2% 7%; border-radius: 0.5rem;overflow: auto;height:500px;">
+						<div  id="one" class="col-sm-7"style="margin: 0 0 0 3%; border-radius: 0.5rem;overflow: auto;height:530px;">
 							<div class="row" style="margin-left: 2%; margin-right: 2%">
 								<div class="col-sm-3 newissue" id="al">
 									<p>
@@ -166,13 +166,13 @@
 								</div>
 							</c:forEach>
 							<div id="loadPlus" data-toggle="tooltip" data-placement="bottom"title="더 보기">
-								<div id="load" class="iconify"style="font-size: 40px; color: #464a53; cursor: pointer; margin-left:295px; margin-top: 1%;"data-icon="mdi:chevron-double-down" data-inline="false">더보기</div>
+								<div id="load" class="iconify"style="font-size: 40px; color: #464a53; cursor: pointer; margin-left:350px; margin-top: 1%;"data-icon="mdi:chevron-double-down" data-inline="false">더보기</div>
 							</div>
 						</div>
 						
 						<div class="col-sm-4">
 							<select id="selectDash" name="selectDash" class="form-control"
-								style="margin-top: 7%;">
+								style="margin-top: 10%;">
 								<%-- <option value="${sessionScope.email}">여기는 select공간</option> --%>
 								<c:choose>
 									<c:when test="${fn:length(pjtlist) > 0}">

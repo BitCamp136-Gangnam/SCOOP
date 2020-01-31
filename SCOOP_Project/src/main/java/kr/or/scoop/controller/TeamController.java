@@ -154,9 +154,34 @@ public class TeamController {
 		@RequestMapping(value = "writeIssue.do", method = {RequestMethod.POST,RequestMethod.GET})
 		public String writeIssue(String issuetitle, String fileclick, String issuecontent, String selectTeam, Model model, String fromDate, String toDate,
 				HttpSession session,HttpServletRequest request, String[] mentions, String[] toWork, String[] doWork, String[] googleDrive,@RequestParam(value="files") MultipartFile[] files) throws IOException {
+			
+			System.out.println("content : \n"+issuecontent);
+			String[] contentline = issuecontent.split("\n");
+			String content = "";
+			
+			for(int i = 0; i < contentline.length; i++) {
+				System.out.println("엔터 분리 : "+contentline[i]);
+				
+				if(contentline[i].indexOf("http") != -1) {
+					String[] url = contentline[i].split(" ");
+					
+					for(int j = 0; j < url.length; j++) {
+						System.out.println("url 분리 : "+url[j]);
+						if(url[j].indexOf("http") != -1) {
+							content += "<a href="+ url[j] + ">" + url[j] + "</a> ";
+						}else {
+							content += url[j] + " ";
+						}
+					}
+					content += "\n";
+				}else {
+					content += contentline[i]+"\n";
+				}
+				
+			}
+			System.out.println("최종 컨텐츠 : " + content);
 			String path = "";
 			String email = (String)session.getAttribute("email");
-			System.out.println("가나다" + issuecontent);
 			int tseq = 0;
 			 //실 DB Insert
 			if (selectTeam.equals((String) session.getAttribute("email")) || selectTeam == null) {
@@ -677,5 +702,23 @@ public class TeamController {
 		model.addAttribute("mem",mem);
 		return "sidebar/calendar";
 	}
+	
+	@RequestMapping("/projectCalendar.do")
+	public String teamCalendar(HttpServletRequest request, HttpServletResponse response,Model model,HttpSession session, int tseq) {
+		System.out.println("calendar 왔냐?");
+		ProjectDao dao = sqlsession.getMapper(ProjectDao.class);
+		MemberDao memberdao = sqlsession.getMapper(MemberDao.class);
+		String email = (String)session.getAttribute("email");
+		TeamPjt pjt = dao.detailPJT(tseq);
+		int rank = dao.searchRank(tseq, email);
+		model.addAttribute("rank", rank);
+		model.addAttribute("tpj",pjt); //프로젝트 이름 , 설명
+		List<ProjectMemberlist> mem = memberdao.projectMemberlist(tseq);
+		
+		model.addAttribute("mem",mem);
+		
+		return "user/ProjectCalendar";
+	}
+	
 	
 }

@@ -81,7 +81,7 @@ var newEvent = function (start, end, eventType) {
         console.log(eventData.tseq);
         console.log(typeof eventData.tseq=="string");
         //새로운 일정 저장
-        if(typeof eventData.tseq != "string"){
+        if(typeof eventData.tseq != "string" || eventData.tseq !=null){
         	console.log("team");
         	console.log(eventData);
         $.ajax({
