@@ -25,9 +25,51 @@
 
 </head>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script type="text/javascript">
-	
+	<script type="text/javascript">
+$(document).ready(function(){
+	//더보기 스타일 변경
+	$('#load').mouseover(function(){
+		$(this).css("color","#E71D36");
+	});
+	$('#load').mouseout(function(){
+		$(this).css("color","#464a53");
+	});
+	var temp = 0;
+	var moreEventArray = document.querySelectorAll("#one > #ialarm ");
+	if(moreEventArray.length<=10){
+		 $('#load').remove();
+        $('#loadPlus').remove();
+        $('.tooltip').remove();
+	}
+	 $(moreEventArray).attr("hidden","hidden");	
+	 $(moreEventArray).slice(0,10).removeAttr("hidden");
+	 $(moreEventArray).slice(0,10);
+	 temp = 10;
+	$("#load").click(function(e){
+		console.log(moreEventArray);
+		/* console.log($('.card'));
+		console.log($('.card > a'));
+		console.log($('.card > a > .row'));
+		console.log($(".card > a > .row").val()); */
+		console.log("if");
+		$(moreEventArray).slice(temp,temp+10).removeAttr("hidden");
+		 temp +=10;
+		if(moreEventArray.length<temp+10){
+			$(moreEventArray).slice(temp,10).removeAttr("hidden");
+				if(temp-moreEventArray.length>=0){
+		            $('#load').remove();
+		            $('#loadPlus').remove();
+		            $('.tooltip').remove();
+		         }
+
+			}
+		
+			
+	}); 
+
+});
 </script>
+
 
 <style>
 .newissue {
@@ -75,8 +117,8 @@
                <hr style="margin-top: 0; margin-left: 2%; margin-right: 2%">
                <div class="row">
 						<div class="col-sm-6"
-							style="margin: 2% 2% 2% 7%; border-radius: 0.5rem;">
-							<div class="row" style="margin-left: 2%; margin-right: 2%" id="ialarm">
+							style="margin: 2% 2% 2% 7%; border-radius: 0.5rem;" id="one">
+							<div class="row" style="margin-left: 2%; margin-right: 2%">
 							<div class="col-sm-3 newissue" id="al"><p><b>협업공간</b></p></div>
 							<div class="col-sm-6 newissue" id="ti"><p><b>제목</b></p></div>
 							<div class="col-sm-3 newissue" id="day"><p><b>시간</b></p></div>
@@ -95,6 +137,7 @@
          
       </div>
       </c:forEach>
+      	<button id="load">더보기</button>
 						</div>
 						<div class="col-sm-4" >
                 <select id="selectDash" name="selectDash" class="form-control" style="margin-top: 7%;">
