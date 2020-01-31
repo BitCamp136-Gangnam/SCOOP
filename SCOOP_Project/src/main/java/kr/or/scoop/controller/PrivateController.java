@@ -53,6 +53,9 @@ public class PrivateController {
 		
 		MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
 		List<MyIssue> myissuelist = myissuedao.getMyissue(email);
+		for(int i=0; i<myissuelist.size();i++) {
+			myissuelist.get(i).setPicontent(myissuelist.get(i).getPicontent().replace("<br>", " "));
+		}
 		List<BookMark> bookMark = myissuedao.getBookMark(email);
 		
 		System.out.println("bookMark" + bookMark);

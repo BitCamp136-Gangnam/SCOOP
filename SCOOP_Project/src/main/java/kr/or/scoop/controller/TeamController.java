@@ -121,6 +121,9 @@ public class TeamController {
 		
 		TeamPjt pjt = dao.detailPJT(tseq);
 		List<Tissue> tp = dao.getTissue(tseq);
+		for(int i=0; i<tp.size();i++) {
+			tp.get(i).setTicontent(tp.get(i).getTicontent().replace("<br>", " "));
+		}
 		List<ProjectMemberlist> projectMemberlist =md.projectMemberlist(tseq);
 		List<BookMark> bookMark = mydao.getBookMark(email);
 		
@@ -159,6 +162,7 @@ public class TeamController {
 				MyIssue myissue = new MyIssue();
 				myissue.setEmail((String) session.getAttribute("email"));
 				myissue.setPititle(issuetitle);
+				issuecontent = issuecontent.replace("\r\n", "<br>");
 				myissue.setPicontent(issuecontent);
 				myissue.setIspibook(0);
 				if(fromDate != null) {
@@ -218,6 +222,7 @@ public class TeamController {
 				tissue.setTseq(Integer.parseInt(selectTeam));
 				tissue.setEmail((String)session.getAttribute("email"));
 				tissue.setTititle(issuetitle);
+				issuecontent = issuecontent.replace("\r\n", "<br>");
 				tissue.setTicontent(issuecontent);
 				if(fromDate != null) {
 					 tissue.setTistart(java.sql.Timestamp.valueOf(fromDate+" 00:00:00"));
