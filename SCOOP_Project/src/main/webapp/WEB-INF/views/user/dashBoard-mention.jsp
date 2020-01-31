@@ -172,7 +172,7 @@
 								</c:choose>
 
 							</select>
-							<div
+							<div id="myChartDiv"
 								style="width: 100%; height: 550px; margin: 5% 0 5% 0; float: right; padding-top: 2%; padding-bottom: 2%; border-radius: 0.5rem;">
 								<!-- 차트 -->
 								<canvas id="myChart"></canvas>
@@ -233,128 +233,131 @@
 		src="<c:url value="/resources/plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"/>"></script>
 
 	<script src="<c:url value="/resources/js/dashboard/dashboard-1.js"/>"></script>
-	<script type="text/javascript">
-		/* 팀 선택시 차트 변경 */
-		$('#selectDash').change(
-				function() {
-					let tseq = $(this).val();
-					console.log(tseq);
-					/* 비동기 차트 데이터 불러오기 */
-					$.ajax({
-						url : "selectChart.do",
-						type : "POST",
-						data : {
-							"tseq" : tseq
-						},
-						success : function(data) {
-							console.log(data);
-							/* 차트 생성 */
-							let ctx = document.getElementById('myChart')
-									.getContext('2d');
-							let myChart = new Chart(ctx, {
+   <script type="text/javascript">
+	    /* 팀 선택시 차트 변경 */
+		$('#selectDash').change(function(){
+			let tseq = $(this).val();
+			console.log(tseq);
+			/* 비동기 차트 데이터 불러오기 */
+			$.ajax({
+				url: "selectChart.do",
+				type: "POST",
+				data: {"tseq" : tseq},
+				success: function(data) {
+					console.log(data);
+					/* 차트 생성 */
+					$('#myChart').remove();
+					$('#myChartDiv').append('<canvas id="myChart"></canvas>');
+					let ctx = document.getElementById('myChart').getContext('2d');
+					var chartName = '칸반 일정 진행도';
+					if(data.initiative==0 && data.progress==0 && data.pause==0 && data.complete==0){
+						console.log("없다");
+						chartName = '아직 프로젝트에 등록된 이슈가 없습니다';
+					}
+					let myChart = new Chart(ctx,
+							{
 								type : 'doughnut',
 								data : {
 									labels : [ '발의됨', '진행중', '일시중지', '완료' ],
 									datasets : [ {
 										label : '# of Votes',
-										data : [ data.initiative,
-												data.progress, data.pause,
-												data.complete ],
-										backgroundColor : [
-												'rgba(255, 99, 132, 0.2)',
-												'rgba(54, 162, 235, 0.2)',
-												'rgba(255, 206, 86, 0.2)',
-												'rgba(75, 192, 192, 0.2)' ],
-										borderColor : [
-												'rgba(255, 99, 132, 1)',
-												'rgba(54, 162, 235, 1)',
-												'rgba(255, 206, 86, 1)',
-												'rgba(75, 192, 192, 1)' ],
+										data : [ data.initiative, data.progress, data.pause, data.complete ],
+										backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+		                                    'rgba(54, 162, 235, 0.2)',
+		                                    'rgba(255, 206, 86, 0.2)',
+		                                    'rgba(75, 192, 192, 0.2)' ],
+		                              borderColor : [ 'rgba(255, 99, 132, 1)',
+		                                    'rgba(54, 162, 235, 1)',
+		                                    'rgba(255, 206, 86, 1)',
+		                                    'rgba(75, 192, 192, 1)' ],
 										borderWidth : 1
 									} ]
 								},
 								options : {
 									title : {
 										display : true,
-										text : '칸반 일정 진행도'
+										text : chartName
 									},
-								/* responsive : false, */
-
+									/* responsive : false, */
+									
 								}
 							});
-						}
-					})
-				})
-
-		function changeItem() {
-			var itemidSelect = document.getElementById('selectMenu');
-			var itemId = itemidSelect.options[itemidSelect.selectedIndex].value;
-			console.log("itemid :" + itemId);
-			if (itemId == 0) {
-				location.href = "userindex.do";
-			} else if (itemId == 1) {
-				location.href = "newReply.do";
-			} else if (itemId == 2) {
-				location.href = "newVote.do";
-			} else if (itemId == 3) {
-				location.href = "newNotice.do";
-			}
-		}
-	</script>
-	<script type="text/javascript">
-		$(function() {
-			/* default 차트 */
-			let tseq = $('#selectDash').children().val();
-			console.log(' val : ' + tseq);
-
-			/* 팀이 있을시 제일 첫 팀 차트 생성 */
-			if (tseq > 0) {
-				$.ajax({
-					url : "selectChart.do",
-					type : "POST",
-					data : {
-						"tseq" : tseq
-					},
-					success : function(data) {
-						console.log(data);
-						let ctx = document.getElementById('myChart')
-								.getContext('2d');
-						let myChart = new Chart(ctx, {
-							type : 'doughnut',
-							data : {
-								labels : [ '발의됨', '진행중', '일시중지', '완료' ],
-								datasets : [ {
-									label : 'Scoop',
-									data : [ data.initiative, data.progress,
-											data.pause, data.complete ],
-									backgroundColor : [
-											'rgba(255, 99, 132, 0.2)',
-											'rgba(54, 162, 235, 0.2)',
-											'rgba(255, 206, 86, 0.2)',
-											'rgba(75, 192, 192, 0.2)' ],
-									borderColor : [ 'rgba(255, 99, 132, 1)',
-											'rgba(54, 162, 235, 1)',
-											'rgba(255, 206, 86, 1)',
-											'rgba(75, 192, 192, 1)' ],
-									borderWidth : 1
-								} ]
-							},
-							options : {
-								legend : {
-									position : 'top',
-								},
-								title : {
-									display : true,
-									text : '칸반 일정 진행도'
-								},
-							/* responsive : false, */
-
-							}
-						});
-					}
-				})
-			}
+				}
+			})
 		})
-	</script>
+		
+		function changeItem(){
+			  var itemidSelect = document.getElementById('selectMenu');
+			  var itemId = itemidSelect.options[itemidSelect.selectedIndex].value;
+			  console.log("itemid :"+itemId);
+			  if(itemId==0){
+				  location.href="userindex.do";
+			  } else if (itemId==1){
+				  location.href="newReply.do";
+			  } else if (itemId==2){
+				  location.href="newVote.do";
+			  } else if (itemId==3){
+				  location.href="newNotice.do";
+			  }
+		  }
+   </script>
+   <script type="text/javascript">
+	$(function(){
+		/* default 차트 */
+		let tseq = $('#selectDash').children().val();
+		console.log(' val : '+ tseq);
+
+		/* 팀이 있을시 제일 첫 팀 차트 생성 */
+		if(tseq > 0){
+			$.ajax({
+				url: "selectChart.do",
+				type: "POST",
+				data: {"tseq" : tseq},
+				success: function(data) {
+					console.log(data);
+					$('#myChart').remove();
+					$('#myChartDiv').append('<canvas id="myChart"></canvas>');
+					let ctx = document.getElementById('myChart').getContext('2d');
+					var chartName = '칸반 일정 진행도';
+					if(data.initiative==0 && data.progress==0 && data.pause==0 && data.complete==0){
+						console.log("없다");
+						chartName = '아직 프로젝트에 등록된 이슈가 없습니다';
+					}
+					let myChart = new Chart(ctx,
+							{
+								type : 'doughnut',
+								data : {
+									labels : [ '발의됨', '진행중', '일시중지', '완료' ],
+									datasets : [ {
+										label : 'Scoop',
+										data : [ data.initiative, data.progress, data.pause, data.complete ],
+										backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+		                                    'rgba(54, 162, 235, 0.2)',
+		                                    'rgba(255, 206, 86, 0.2)',
+		                                    'rgba(75, 192, 192, 0.2)' ],
+		                              borderColor : [ 'rgba(255, 99, 132, 1)',
+		                                    'rgba(54, 162, 235, 1)',
+		                                    'rgba(255, 206, 86, 1)',
+		                                    'rgba(75, 192, 192, 1)' ],
+										borderWidth : 1
+									} ]
+								},
+								options : {
+									legend : {
+										position : 'top',
+									},
+									title : {
+										display : true,
+										text : chartName
+									},
+									/* responsive : false, */
+									
+								}
+							});
+				}
+			})
+		}
+	})
+   </script>
 </body>
 </html>

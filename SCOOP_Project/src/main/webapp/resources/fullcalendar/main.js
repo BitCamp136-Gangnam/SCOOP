@@ -166,6 +166,7 @@ var calendar = $('#calendar').fullCalendar({
         // 실제 사용시, 날짜를 전달해 일정기간 데이터만 받아오기를 권장
       },
       dataType : "json",
+      async: false,
       success: function (response) {
         var fixedDate = response.map(function (array) {
         	console.log(response);
@@ -213,18 +214,34 @@ var calendar = $('#calendar').fullCalendar({
         };
     console.log(editData);
     //리사이즈한 일정 업데이트
-    $.ajax({
-      type: "post",
-      url: "editTeamCalendar.do",
-      data: editData,
-      success: function (response) {
-        alert('수정: ' + newDates.startDate + ' ~ ' + newDates.endDate);
-        console.log(response);
-      },
-      error: function() {
-	    	alert("에러");
-	    }
-    });
+    if(typeof editData.tseq == "number"){
+        //일정 업데이트
+        $.ajax({
+        	url: "editTeamCalendar.do",
+            type: "post",
+            data: editData,
+            async: false,
+            success: function (data) {
+                alert("데이터 넘기기 성공");
+            },
+            error: function() {
+		    	alert("에러");
+		    }
+        });
+        } else{
+        	$.ajax({
+            	url: "editPrivateCalendar.do",
+                type: "post",
+                data: editData,
+                async: false,
+                success: function (data) {
+                    alert("데이터 넘기기 성공");
+                },
+                error: function() {
+    		    	alert("에러");
+    		    }
+            });
+        }
 
   },
 
@@ -261,18 +278,34 @@ var calendar = $('#calendar').fullCalendar({
             allDay: event.allDay
         };
     //드롭한 일정 업데이트
-    $.ajax({
-        type: "post",
-        url: "editTeamCalendar.do",
-        data: dropEditData,
-        success: function (response) {
-          alert('수정: ' + newDates.startDate + ' ~ ' + newDates.endDate);
-          console.log(response);
-        },
-        error: function() {
-  	    	alert("에러");
-  	    }
-      });
+    if(typeof dropEditData.tseq == "number"){
+        //일정 업데이트
+        $.ajax({
+        	url: "editTeamCalendar.do",
+            type: "post",
+            data: dropEditData,
+            async: false,
+            success: function (data) {
+                alert("데이터 넘기기 성공");
+            },
+            error: function() {
+		    	alert("에러");
+		    }
+        });
+        } else{
+        	$.ajax({
+            	url: "editPrivateCalendar.do",
+                type: "post",
+                data: dropEditData,
+                async: false,
+                success: function (data) {
+                    alert("데이터 넘기기 성공");
+                },
+                error: function() {
+    		    	alert("에러");
+    		    }
+            });
+        }
 
   },
 
