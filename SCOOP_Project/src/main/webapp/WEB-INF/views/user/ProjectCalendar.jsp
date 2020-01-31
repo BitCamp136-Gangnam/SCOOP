@@ -40,6 +40,43 @@
 									<div class="col-md-12">
 										<div class="card-box">
 											<div class="container">
+												<div class="row" style="margin: 2% 2% 15px 2%">
+													<div class="col-sm-12" style="padding-left: 0">
+														<h3 style="padding-left: 1%;">${tpj.pname}
+															<c:if test="${rank == 100}">
+																<span data-toggle="tooltip" data-placement="top"
+																	title="협업공간 관리"> <i class="fas fa-cog"
+																	id="myModal_Edit_Icon"
+																	style="margin-left: 5px; cursor: pointer; font-size: 15px"
+																	data-toggle="modal" data-target="#myModal_Edit"></i>
+																</span>
+																<span data-toggle="tooltip" data-placement="top"
+																	title="공지사항 관리"> <span id="nowrite"
+																	class="iconify" data-icon="jam:write"
+																	style="font-size: 20px; cursor: pointer; padding-bottom: 3px;"
+																	data-inline="false" data-toggle="modal"
+																	data-target="#pnoticewrite"> </span>
+																</span>
+															</c:if>
+														</h3>
+														<p style="padding-left: 1%; margin-bottom: 0px;">[${tpj.pcontent}]</p>
+													</div>
+												</div>
+												<div class="row" style="margin-left: 2%;">
+													<ul class="nav nav-pills">
+														<li class="nav-item"><a class="nav-link"
+															href="projectDetail.do?tseq=${tpj.tseq}">팀이슈</a></li>
+														<li class="nav-item"><a class="nav-link"
+															href="projectCalendar.do?tseq=${tpj.tseq }">팀 캘린더</a></li>
+														<li class="nav-item"><a class="nav-link"
+															href="cooperation-kanban.do?tseq=${tpj.tseq}"
+															style="color: #E71D36;">칸반</a></li>
+														<li class="nav-item"><a class="nav-link"
+															href="projectNotice.do?tseq=${tpj.tseq}">공지사항</a></li>
+														<li class="nav-item"><a class="nav-link"
+															href="projectLadder.do?tseq=${tpj.tseq}">사다리 타기</a></li>
+													</ul>
+												</div>
 
 												<!-- 일자 클릭시 메뉴오픈 -->
 												<div id="contextMenu" class="dropdown clearfix" style="position: relative;">
@@ -47,16 +84,13 @@
 														aria-labelledby="dropdownMenu"
 														style="display: block; margin-bottom: 5px;">
 														
-														<c:forEach items="${pjtlist}" var="p">
+														
 															<li class="pjtlist">
-																<a tabindex="-1" href="#" name="${p.tseq}">${p.pname}</a>
+																<a tabindex="-1" href="#" name="${ tpj.pname}">${tpj.pname}</a>
 																
 															</li>
-                  										</c:forEach>
-                  										<li class="pjtlist">
-																<a tabindex="-1" href="#" name="프라이빗 공간">프라이빗 공간</a>
-																
-															</li>
+                  										
+                  										
 														<li class="divider"></li>
 														<li><a tabindex="-1" href="#" data-role="close">Close</a></li>
 													</ul>
@@ -115,10 +149,10 @@
 																	<div class="col-xs-12">
 																		<label class="col-xs-4" for="edit-type">협업공간 이름</label> 
 																		<select class="inputModal" type="text" name="edit-type" id="pjtselect">
-																		    <option value="프라이빗 공간">프라이빗 공간</option>
-																			<c:forEach items="${pjtlist}" var="p">
-                         														  <option value="${p.tseq}">${p.pname}</option>
-                  															</c:forEach>
+																		    
+																			
+                         														  <option value="${ tpj.tseq}">${ tpj.pname}</option>
+                  															
 																		</select>
 																	</div>
 																</div>
@@ -180,12 +214,9 @@
 															<label for="calendar_view">협업공간</label>
 															<div class="input-group">
 																<select class="filter" id="edit-tseq" multiple="multiple" name="edit-tseq">
-																	<option value="프라이빗 공간">프라이빗 공간</option>
-																	<c:forEach items="${pjtlist}" var="p">
-																	<input class="inputModal" type="text" name="edit-tseq${p.tseq }" id="edit-tseq${p.tseq }" value="${p.tseq}" readonly hidden="hidden">
-                         											<option value="${p.tseq}">${p.pname}</option>
-         
-                  													</c:forEach>
+																
+                         											<option value="${tpj.tseq}">${tpj.pname}</option>
+                  													
 																</select>
 															</div>
 														</div>
@@ -278,3 +309,43 @@
 	
 	</script>
 </html>
+<%-- 
+<!--**********************************
+            Content body start
+        ***********************************-->
+		<div class="row" style="margin: 2% 2% 15px 2%">
+			<div class="col-sm-12" style="padding-left: 0">
+				<h3 style="padding-left: 1%;">${tpj.pname}
+					<c:if test="${rank == 100}">
+            			<span data-toggle="tooltip" data-placement="top" title="협업공간 관리" >
+            			<i class="fas fa-cog" id="myModal_Edit_Icon" style="margin-left: 5px;cursor: pointer; font-size: 15px" data-toggle="modal" data-target="#myModal_Edit" ></i>
+            			</span>
+            			<span data-toggle="tooltip" data-placement="top" title="공지사항 관리" >
+            			<span id="nowrite" class="iconify" data-icon="jam:write" style="font-size:20px;cursor: pointer;padding-bottom: 3px;" data-inline="false" data-toggle="modal" data-target="#pnoticewrite">
+            			</span>
+            			</span>
+            		</c:if>
+				</h3>
+				<p style="padding-left: 1%;margin-bottom: 0px;">[${tpj.pcontent}]</p>
+			</div>
+		</div>
+		<div class="row" style="margin-left: 2%;">
+			<ul class="nav nav-pills">
+			    <li class="nav-item">
+			      <a class="nav-link"  href="projectDetail.do?tseq=${tpj.tseq}">팀이슈</a>
+			    </li>
+			    <li class="nav-item">
+			      <a class="nav-link"  href="projectCalendar.do?tseq=${tpj.tseq }">팀 캘린더</a>
+			    </li>
+			    <li class="nav-item">
+			      <a class="nav-link" href="cooperation-kanban.do?tseq=${tpj.tseq}" style="color:#E71D36;" >칸반</a>
+			    </li>
+			    <li class="nav-item">
+               <a class="nav-link" href="projectNotice.do?tseq=${tpj.tseq}">공지사항</a>
+             </li>
+			    <li class="nav-item">
+               <a class="nav-link" href="projectLadder.do?tseq=${tpj.tseq}">사다리 타기</a>
+             </li>
+		    </ul>
+		</div>
+		 --%>

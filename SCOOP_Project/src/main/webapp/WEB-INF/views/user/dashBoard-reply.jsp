@@ -52,7 +52,7 @@
 
          <div class="container-fluid">
             <div class="card">
-               <div class="row" style="margin-left: 2%;margin-top: 3%">
+               <div class="row" style="margin-left: 4%;margin-top: 3%">
                   <select id="selectMenu" name="menu" class="nav-item" onchange="changeItem()" style="color: #E71D36; border: 0">
                  <option value="0" style="color: #76838f">새로운 팀이슈</option>
             	 <option value="1" selected="selected" style="color: #76838f">새로운 댓글</option>	
@@ -72,10 +72,10 @@
                      <li class="nav-item"><a href="mention.do" class="nav-link">@멘션</a></li>
                   </ul>
                </div>
-               <hr style="margin-top: 0; margin-left: 2%; margin-right: 2%">
-               <div class="row">
-						<div class="col-sm-6"
-							style="margin: 2% 2% 2% 7%; border-radius: 0.5rem;">
+               <hr style="margin-top: 0; margin-left: 4%; margin-right: 2%">
+               <div class="row" style="height: 560px;">
+						<div class="col-sm-7"
+							style="margin: 0 0 0 3%; border-radius: 0.5rem;">
 							<div class="row" style="margin-left: 2%; margin-right: 2%" id="ialarm">
 							<div class="col-sm-3 newissue" id="al"><p><b>협업공간</b></p></div>
 							<div class="col-sm-6 newissue" id="ti"><p><b>내용</b></p></div>
@@ -94,7 +94,14 @@
          
          <c:choose>
          	<c:when test="${mpl.tseq==mynewtissue.tseq && mpl.tseq !=null && mynewreply.tiseq==mynewtissue.tiseq &&mynewreply.rdate > mpl.tpaddtime}">
-         	<p><a href="projectDetail.do?tseq=${mynewtissue.tseq }">${mpl.pname }</a></p>
+         	<p>
+         	<c:if test="${fn:length(mpl.pname) > 8}">
+         	<a href="projectDetail.do?tseq=${mynewtissue.tseq }"><c:out value="${fn:substring(mpl.pname,0,8)}"/>...</a>
+         	</c:if>
+         	<c:if test="${fn:length(mpl.pname) <= 8}">
+         	<a href="projectDetail.do?tseq=${mynewtissue.tseq }"><c:out value="${fn:substring(mpl.pname,0,8)}"/></a>
+         	</c:if>
+         	</p>
          	</c:when>
          	
          </c:choose>
@@ -103,7 +110,7 @@
          
          <c:choose>
          	<c:when test="${mpl.tseq==mynewtissue.tseq && mpl.tseq !=null && mynewreply.tiseq==mynewtissue.tiseq &&mynewreply.rdate > mpl.tpaddtime}">
-         	<p><a href="teamissueDetail.do?tiseq=${mynewtissue.tiseq}">[${mynewreply.email }]님이 댓글을 남겼습니다.</a></p>
+         	<p><a href="teamissueDetail.do?tiseq=${mynewtissue.tiseq}">[${mynewreply.name}]님이 댓글을 남겼습니다.</a></p>
          	</c:when>
          	
          </c:choose>
@@ -330,7 +337,7 @@
 </body>
 <script type="text/javascript">
 	for(let i=0; i< $('.countRow').length; i++){
-		if(i>=13){
+		if(i>=12){
 			$('.countRow')[i].setAttribute("id", "cR"+i);
 		}
 	}

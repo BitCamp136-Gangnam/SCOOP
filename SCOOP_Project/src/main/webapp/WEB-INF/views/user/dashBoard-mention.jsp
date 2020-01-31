@@ -47,6 +47,8 @@
 		$(moreEventArray).slice(0, 10);
 		temp = 10;
 		$("#load").click(function(e) {
+			
+			
 			console.log(moreEventArray);
 			/* console.log($('.card'));
 			console.log($('.card > a'));
@@ -64,10 +66,12 @@
 				}
 
 			}
-
+			
+			$('#one').scrollTop($('#one')[0].scrollHeight);
 		});
 
 	});
+	
 </script>
 
 
@@ -94,7 +98,7 @@
 
 			<div class="container-fluid">
 				<div class="card">
-					<div class="row" style="margin-left: 2%; margin-top: 3%">
+					<div class="row" style="margin-left: 4%; margin-top: 3%">
 						<select id="selectMenu" name="menu" class="nav-item"
 							onchange="changeItem()" style="color: #76838f; border: 0">
 							<option value="99" style="color: #76838f">새로운 이슈 선택</option>
@@ -116,9 +120,9 @@
 							<li class="nav-item"><a href="mention.do" class="nav-link" style="color: #E71D36">@멘션</a></li>
 						</ul>
 					</div>
-					<hr style="margin-top: 0; margin-left: 2%; margin-right: 2%">
-					<div class="row">
-						<div class="col-sm-6"style="margin: 2% 2% 2% 7%; border-radius: 0.5rem;" id="one">
+					<hr style="margin-top: 0; margin-left: 4%; margin-right: 2%">
+					<div class="row" style="height: 560px;">
+						<div  id="one" class="col-sm-7"style="margin: 0 0 0 3%; border-radius: 0.5rem;overflow: auto;height:530px;">
 							<div class="row" style="margin-left: 2%; margin-right: 2%">
 								<div class="col-sm-3 newissue" id="al">
 									<p>
@@ -162,13 +166,13 @@
 								</div>
 							</c:forEach>
 							<div id="loadPlus" data-toggle="tooltip" data-placement="bottom"title="더 보기">
-								<div id="load" class="iconify"style="font-size: 40px; color: #464a53; cursor: pointer; margin-left:295px; margin-top: 1%;"data-icon="mdi:chevron-double-down" data-inline="false">더보기</div>
+								<div id="load" class="iconify"style="font-size: 40px; color: #464a53; cursor: pointer; margin-left:350px; margin-top: 1%;"data-icon="mdi:chevron-double-down" data-inline="false">더보기</div>
 							</div>
 						</div>
 						
 						<div class="col-sm-4">
 							<select id="selectDash" name="selectDash" class="form-control"
-								style="margin-top: 7%;">
+								style="margin-top: 10%;">
 								<%-- <option value="${sessionScope.email}">여기는 select공간</option> --%>
 								<c:choose>
 									<c:when test="${fn:length(pjtlist) > 0}">

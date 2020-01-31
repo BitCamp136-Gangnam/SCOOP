@@ -100,10 +100,18 @@ var editEvent = function (event, element, view) {
             type: "post",
             data: editData,
             success: function (data) {
-                alert("데이터 넘기기 성공");
+            	Swal.fire(
+            			  '개인캘린더 변경 성공!',
+            			  '개인일정이 변경되었습니다',
+            			  'success'
+            			)
             },
             error: function() {
-		    	alert("에러");
+            	Swal.fire(
+          			  '캘린더 변경 실패!',
+          			  '변경 도중 에러가 발생했습니다',
+          			  'error'
+          			)
 		    }
         });
 
@@ -123,10 +131,18 @@ var editEvent = function (event, element, view) {
             url: "deletePrivateCalendar.do",
             data: tiseq,
             success: function (response) {
-                alert('삭제되었습니다.');
+            	Swal.fire(
+          			  '개인캘린더 삭제 성공!',
+          			  '개인일정이 삭제되었습니다',
+          			  'success'
+          			)
             },
             error: function() {
-		    	alert("에러");
+            	Swal.fire(
+            			  '개인캘린더 삭제 실패!',
+            			  '개인일정 삭제 도중 에러가 발생했습니다',
+            			  'error'
+            			)
 		    }
         });
     });

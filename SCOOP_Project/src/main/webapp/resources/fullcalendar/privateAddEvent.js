@@ -82,11 +82,15 @@ var newEvent = function (start, end, eventType) {
             type: "post",
             data: eventData,
             success: function (data) {
-                alert("데이터 넘기기 성공");
+            	location.href="addCalendarAjax.do";  
                 
             },
             error: function() {
-		    	alert("에러");
+            	Swal.fire(
+            			  '개인캘린더 생성 도중 실패!',
+            			  '개인일정 생성 도중 에러가 발생했습니다',
+            			  'error'
+            			)
 		    }
         });
     });

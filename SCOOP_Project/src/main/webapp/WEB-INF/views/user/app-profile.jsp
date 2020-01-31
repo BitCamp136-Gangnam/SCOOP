@@ -112,8 +112,8 @@ $(function(){
 	function pwdcheck() {
 			var getCheck = RegExp(/^[a-zA-Z0-9]{8,16}$/);
 			var getName= RegExp(/^[가-힣]+$/);
-			if($('#name').val().length>10){
-				alert("name은 10자 까지 입력가능합니다.")
+			if($('#name').val().length>7){
+				alert("name은 7자 까지 입력가능합니다.")
 				return false;
 			}
 			

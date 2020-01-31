@@ -490,7 +490,7 @@ public class TeamController {
 	@RequestMapping(value = "editTeamCalendar.do", method = RequestMethod.POST)
 	public String editTeamCalendar(int _id, String title, String start, String end, String description, String type, String backgroundColor, boolean allDay) {
 		int result = 0;
-		System.out.println(title+"/"+start+"/"+end+"/"+description+"/"+type+"/"+allDay+"/");
+		System.out.println("editediteditedit"+_id+"/"+title+"/"+start+"/"+end+"/"+description+"/"+type+"/"+allDay+"/");
 		String viewpage = "";
 		Tissue tissue = new Tissue();
 		System.out.println(start.length());
@@ -500,19 +500,26 @@ public class TeamController {
 		tissue.setTicontent(description);
 		tissue.setTiseq(_id);
 		tissue.setBackgroundColor(backgroundColor);
+		if(backgroundColor==null) {
+			tissue.setBackgroundColor("#D25565");
+		}
+		System.out.println("티슈다티슈티슈티슈티슈티슈티라미슈티라미슈"+tissue);
 		if(start.length()==16) {
 			System.out.println(start+":00");
 			tissue.setAllDay(0);
 			tissue.setTistart(java.sql.Timestamp.valueOf(start+":00"));
 			tissue.setTiend(java.sql.Timestamp.valueOf(end+":00"));
+			System.out.println("timestmap:"+java.sql.Timestamp.valueOf(start+":00"));
 			result = myissuedao.editTeamCalendar(tissue);
 		} else {
 			tissue.setAllDay(1);
 			System.out.println(start+" 00:00:00");
 			tissue.setTistart(java.sql.Timestamp.valueOf(start+" 00:00:00"));
+			System.out.println("timestmap:"+java.sql.Timestamp.valueOf(start+" 00:00:00"));
 			tissue.setTiend(java.sql.Timestamp.valueOf(end+" 00:00:00"));
 			result = myissuedao.editTeamCalendar(tissue);
 		}
+		
 		
 		if(result>0) {
 			System.out.println("성공");
@@ -695,5 +702,23 @@ public class TeamController {
 		model.addAttribute("mem",mem);
 		return "sidebar/calendar";
 	}
+	
+	@RequestMapping("/projectCalendar.do")
+	public String teamCalendar(HttpServletRequest request, HttpServletResponse response,Model model,HttpSession session, int tseq) {
+		System.out.println("calendar 왔냐?");
+		ProjectDao dao = sqlsession.getMapper(ProjectDao.class);
+		MemberDao memberdao = sqlsession.getMapper(MemberDao.class);
+		String email = (String)session.getAttribute("email");
+		TeamPjt pjt = dao.detailPJT(tseq);
+		int rank = dao.searchRank(tseq, email);
+		model.addAttribute("rank", rank);
+		model.addAttribute("tpj",pjt); //프로젝트 이름 , 설명
+		List<ProjectMemberlist> mem = memberdao.projectMemberlist(tseq);
+		
+		model.addAttribute("mem",mem);
+		
+		return "user/ProjectCalendar";
+	}
+	
 	
 }

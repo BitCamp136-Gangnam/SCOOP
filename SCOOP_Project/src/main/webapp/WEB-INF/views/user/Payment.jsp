@@ -114,9 +114,9 @@ function requestPay(){
             Content body start
         ***********************************-->
 		<div class="content-body">
-			<br>
+			
 			<div class="container-fluid">
-				<div class="card" style="min-height: 1080px">
+				<div class="card" >
 					<div class="row" style="margin: 2%">
 						<div class="col-sm-12" style="padding-left: 0">
 							<h3>결제 및 가격정보</h3>

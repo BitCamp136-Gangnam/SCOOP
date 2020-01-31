@@ -91,7 +91,7 @@ var editEvent = function (event, element, view) {
             };
 
         $("#calendar").fullCalendar('updateEvent', event);
-        if(typeof editData.tseq == "number"){
+        if(typeof editData.tseq == "number" || editData.type!="프라이빗 공간"){
         //일정 업데이트
         $.ajax({
         	url: "editTeamCalendar.do",
@@ -99,10 +99,18 @@ var editEvent = function (event, element, view) {
             data: editData,
             async: false,
             success: function (data) {
-                alert("데이터 넘기기 성공");
+            	Swal.fire(
+            			  '팀캘린더 변경 성공!',
+            			  '팀일정이 변경되었습니다',
+            			  'success'
+            			)
             },
             error: function() {
-		    	alert("에러");
+            	Swal.fire(
+          			  '캘린더 삭제 실패!',
+          			  '삭제 도중 에러가 발생했습니다',
+          			  'error'
+          			)
 		    }
         });
         } else{
@@ -112,10 +120,18 @@ var editEvent = function (event, element, view) {
                 data: editData,
                 async: false,
                 success: function (data) {
-                    alert("데이터 넘기기 성공");
+                	Swal.fire(
+              			  '개인캘린더 변경 성공!',
+              			  '개인일정이 변경되었습니다',
+              			  'success'
+              			)
                 },
                 error: function() {
-    		    	alert("에러");
+                	Swal.fire(
+                			  '캘린더 변경 실패!',
+                			  '변경 도중 에러가 발생했습니다',
+                			  'error'
+                			)
     		    }
             });
         }
@@ -123,13 +139,13 @@ var editEvent = function (event, element, view) {
 
     // 삭제버튼
     $('#deleteEvent').on('click', function () {
-        $('#deleteEvent').unbind();
+    	$('#deleteEvent').unbind();
         $("#calendar").fullCalendar('removeEvents', [event._id]);
         eventModal.modal('hide');
         console.log(event);
         
         //삭제시
-        if(typeof event.type == "number"){
+        if(typeof event.type == "number" || event.type!="프라이빗 공간"){
         	var tiseq = {tiseq:event._id,
             		username:event.username
             };
@@ -139,10 +155,18 @@ var editEvent = function (event, element, view) {
             data: tiseq,
             async: false,
             success: function (response) {
-                alert('삭제되었습니다.');
+            	Swal.fire(
+          			  '팀캘린더 삭제 성공!',
+          			  '팀일정이 삭제되었습니다',
+          			  'success'
+          			)
             },
             error: function() {
-		    	alert("에러");
+            	Swal.fire(
+            			  '팀캘린더 삭제 실패!',
+            			  '본인 외에는 삭제가 불가능합니다',
+            			  'error'
+            			)
 		    }
         });
         } else{
@@ -155,12 +179,22 @@ var editEvent = function (event, element, view) {
                 data: tiseq,
                 async: false,
                 success: function (response) {
-                    alert('삭제되었습니다.');
+                	Swal.fire(
+                			  '개인캘린더 삭제 성공!',
+                			  '개인일정이 삭제되었습니다',
+                			  'success'
+                			)
+                	
                 },
                 error: function() {
-    		    	alert("에러");
+                	Swal.fire(
+              			  '개인캘린더 삭제 실패!',
+              			  '개인일정 삭제 도중 에러가 발생했습니다',
+              			  'error'
+              			)
     		    }
             });
         }
+
     });
 };
