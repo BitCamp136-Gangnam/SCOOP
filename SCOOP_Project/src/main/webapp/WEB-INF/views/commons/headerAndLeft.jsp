@@ -534,7 +534,7 @@ input::placeholder {
       }
       var message = url;
       if (url != '') {
-         $('#todoresult').append('<div style="padding:5px"><a href='+url+'><span class="iconify" data-icon="whh:googledrive" data-inline="false"></span>'+ drivename + '</a><span id="annoDelete" style="cursor:pointer;" onclick="annotationDelete('+annotation+')"><span class="iconify" data-icon="octicon:x" data-inline="false"></span></span></div>');
+         $('#todoresult').append('<div style="padding:5px"><a href='+url+'><span class="iconify" data-icon="whh:googledrive" data-inline="false"></span>'+ drivename + '</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="annoDelete" style="cursor:pointer;" onclick="annotationDelete('+annotation+')"><span class="iconify" data-icon="octicon:x" data-inline="false"></span></span></div>');
          $('#todoresult').append('<input type="hidden" name="googleDrive" value="'+url+'~'+drivename+'">');
          $('#todoresult').show();
          if('#edittodoresult'){
@@ -1172,9 +1172,9 @@ span {
                <textarea class="form-control createmodal" rows="5"
                   id="issuecontent" name="issuecontent" style="width: 100%"
                   placeholder="@를 입력하여 멘션, 할 일, 파일 등을 추가해 보세요."></textarea>
-                
-               <textarea rows="" id="codemirrorarea" style="display: none"><-- 코드를 입력하세요 --></textarea>
-               <div id="todoresult" style="display: none">
+               <br>
+               <label for="annota">첨부</label>
+               <div id="todoresult" style="overflow: auto; height: 100px; border: 1px solid #c8c8c8">
                   <!-- mention -->
                </div>
                <!-- The Google API Loader script. -->
@@ -1575,7 +1575,7 @@ $('.menli').keydown(function(event) {
 		.append(
 				'<div style="padding:5px"><span class="iconify" data-icon="si-glyph:file-box" data-inline="false"></span> '
 						+ files[i].name
-						+ '<span id="annoDelete'+(++annotation)+'" style="cursor:pointer;" onclick="annotationDelete('+annotation+')"><span class="iconify" data-icon="octicon:x" data-inline="false"></span></span></div>');
+						+ '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="annoDelete'+(++annotation)+'" style="cursor:pointer;" onclick="annotationDelete('+annotation+')"><span class="iconify" data-icon="octicon:x" data-inline="false"></span></span></div>');
 		}
 $('#todoresult').show();
 		
@@ -1603,7 +1603,7 @@ $('#todoresult').show();
 							var text = "";
 							text = $('#issuecontent').val().replace("@", "");
 							$('#issuecontent').val(text);
-							$('#todoresult').append('<div style="padding:5px; width:100%"><input type="text" id="'+$(this).attr('id')+'" value="@'+ $(this).text() + '" style="border:none" readonly><span id="annoDelete'+(++annotation)+'" style="cursor:pointer;" onclick="annotationDelete('+annotation+')"><span class="iconify" data-icon="octicon:x" data-inline="false"></span></span></div>');
+							$('#todoresult').append('<div style="padding:5px; width:100%"><input type="text" id="'+$(this).attr('id')+'" value="@'+ $(this).text() + '" style="border:none;width:100px" readonly><span id="annoDelete'+(++annotation)+'" style="cursor:pointer;" onclick="annotationDelete('+annotation+')"><span class="iconify" data-icon="octicon:x" data-inline="false"></span></span></div>');
 							$('#todoresult').append('<input type="hidden" name="mentions" value="'+ $(this).attr('id').split('/')[1] + '">');
 							console.log($(this).text());
 							$('#todoresult').show();
@@ -1641,7 +1641,7 @@ $('#todoresult').show();
 												+ $('#todomem').val()
 												+ ' <span class="iconify" data-icon="bytesize:arrow-right" data-inline="false"></span> '
 												+ $('#todolist').val()
-												+ '<span id="annoDelete'+(++annotation)+'" style="cursor:pointer;" onclick="annotationDelete('+annotation+')"><span class="iconify" data-icon="octicon:x" data-inline="false"></span></span></div>');
+												+ '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="annoDelete'+(++annotation)+'" style="cursor:pointer;" onclick="annotationDelete('+annotation+')"><span class="iconify" data-icon="octicon:x" data-inline="false"></span></span></div>');
 						$('#todoresult').append('<input type="hidden" name="toWork" value="'+$('#todomem').attr('name').split("/")[1]+'">');
 						$('#todoresult').append('<input type="hidden" name="doWork" value="'+$('#todolist').val()+'">');
 						$('#todoresult').show();
@@ -1689,7 +1689,7 @@ $('#todoresult').show();
 												+ $('#to').val()
 												//+ ' <span class="iconify" data-icon="bytesize:arrow-right" data-inline="false"></span> '
 												//+ $('#datecontent').val()
-												+ '<span id="annoDelete'+(++annotation)+'" style="cursor:pointer;" onclick="annotationDelete('+annotation+')"><span class="iconify" data-icon="octicon:x" data-inline="false"></span></span></div>');
+												+ '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="annoDelete'+(++annotation)+'" style="cursor:pointer;" onclick="annotationDelete('+annotation+')"><span class="iconify" data-icon="octicon:x" data-inline="false"></span></span></div>');
 						$('#todoresult').append('<input type="hidden" name="fromDate" value="'+$('#from').val()+'">');
 						$('#todoresult').append('<input type="hidden" name="toDate" value="'+$('#to').val()+'">');
 						//$('#todoresult').append('<input type="hidden" name="dateMemo" value="'+$('#datecontent').val()+'">');
