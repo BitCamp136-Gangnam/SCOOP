@@ -358,9 +358,10 @@ public class MemberController {
 			model.addAttribute("myNewPjNoticeList", myNewPjNoticeList);
 			model.addAttribute("myNewTissueList", myNewTissueList);
 			model.addAttribute("myNewReplyList", myNewReplyList);
-			System.out.println(myNewReplyList);
+			System.out.println("이거" + myNewReplyList);
 		}
 		return "user/dashBoard-reply";
+		
 	}
 	@RequestMapping(value = "/newNotice.do", method = RequestMethod.GET)
 	public String userindexNotice(@RequestParam(required = false, name="lang") String language, HttpSession session, 
