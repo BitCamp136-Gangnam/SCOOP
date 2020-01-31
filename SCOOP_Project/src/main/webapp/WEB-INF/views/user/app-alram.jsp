@@ -111,7 +111,7 @@ p ,d ,c ,f{
         <div class="card" style="min-height: 1080px">
 		<div class="row" style="margin: 2%">
 			<div class="col-sm-12" style="padding-left: 0">
-				<h3>내 정보</h3>
+				<h3>알림</h3>
 			</div>
 		</div>
 		<div class="row" style="margin-left: 2%;">
@@ -122,9 +122,9 @@ p ,d ,c ,f{
 			    <li class="nav-item">
 			      <a class="nav-link" href="app-alram.do" style="color: #E71D36;">알림</a>
 			    </li>
-			    <li class="nav-item">
+			    <!-- <li class="nav-item">
 			      <a class="nav-link" href="app-external.do">외부 서비스 연결</a>
-			    </li>
+			    </li> -->
 			    <li class="nav-item">
 			      <a class="nav-link" href="paymentPage.do">가격 및 결제</a>
 			    </li>
