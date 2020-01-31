@@ -336,7 +336,12 @@ $(function(){
 				</span>
 				</c:when>	
 			</c:choose>
-         <a href="teamissueDetail.do?tiseq=${ti.tiseq}" style="margin-left: 5%;">${ti.tititle}</a> 
+			<c:if test="${fn:length(ti.tititle) > 40}">
+         <a href="teamissueDetail.do?tiseq=${ti.tiseq}" style="margin-left: 5%;"><c:out value="${fn:substring(ti.tititle,0,40)}"/>...</a>
+         </c:if> 
+			<c:if test="${fn:length(ti.tititle) <= 40}">
+         <a href="teamissueDetail.do?tiseq=${ti.tiseq}" style="margin-left: 5%;"><c:out value="${fn:substring(ti.tititle,0,40)}"/></a>
+         </c:if> 
          </div>
          <div class="col-sm-2 newissue" >
          <a href="teamissueDetail.do?tiseq=${ti.tiseq}">${ti.name}</a>
