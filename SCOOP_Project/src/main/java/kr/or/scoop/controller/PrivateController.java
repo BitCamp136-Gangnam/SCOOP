@@ -130,8 +130,8 @@ public class PrivateController {
 			result = myissuedao.writeMyCalendar(myissue);
 		} else {
 			System.out.println(start+" 00:00:00");
-			myissue.setTistart(java.sql.Timestamp.valueOf(start+" 00:00:00"));
-			myissue.setTiend(java.sql.Timestamp.valueOf(end+" 00:00:00"));
+			myissue.setPistart(java.sql.Timestamp.valueOf(start+" 00:00:00"));
+			myissue.setPiend(java.sql.Timestamp.valueOf(end+" 00:00:00"));
 			result = myissuedao.writeMyCalendar(myissue);
 		}
 		

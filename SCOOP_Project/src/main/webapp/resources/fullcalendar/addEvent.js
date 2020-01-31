@@ -9,7 +9,7 @@ var editType = $('#edit-type');
 var editColor = $('#edit-color');
 var editDesc = $('#edit-desc');
 var editName = $('#edit-name');
-var editTseq = $('#edit-type');
+var editTseq = $('#pjtselect');
 
 var addBtnContainer = $('.modalBtnContainer-addEvent');
 var modifyBtnContainer = $('.modalBtnContainer-modifyEvent');
@@ -75,20 +75,39 @@ var newEvent = function (start, end, eventType) {
         eventModal.find('input, textarea').val('');
         editAllDay.prop('checked', false);
         eventModal.modal('hide');
-
+        
+        alert(eventData.tseq);
         //새로운 일정 저장
+        if(typeof eventData.tseq == "number"){
+        	console.log("team");
+        	console.log(eventData);
         $.ajax({
         	url: "addTeamCalendar.do",
             type: "post",
             data: eventData,
+            async: false,
             success: function (data) {
             	location.href="addCalendarAjax.do";
-                alert("데이터 넘기기 성공");
-                
             },
             error: function() {
 		    	alert("에러");
 		    }
         });
+        } else{
+        	console.log(eventData);
+        	alert("pri");
+    	$.ajax({
+        	url: "addPrivateCalendar.do",
+            type: "post",
+            data: eventData,
+            async: false,
+            success: function (data) {
+            	location.href="addCalendarAjax.do";       
+            },
+            error: function() {
+		    	alert("에러");
+		    }
+        });
+    }
     });
 };

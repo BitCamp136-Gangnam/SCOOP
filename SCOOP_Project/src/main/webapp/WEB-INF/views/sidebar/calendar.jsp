@@ -46,11 +46,17 @@
 													<ul class="dropdown-menu dropNewEvent" role="menu"
 														aria-labelledby="dropdownMenu"
 														style="display: block; margin-bottom: 5px;">
+														
 														<c:forEach items="${pjtlist}" var="p">
 															<li class="pjtlist">
 																<a tabindex="-1" href="#" name="${p.tseq}">${p.pname}</a>
+																
 															</li>
                   										</c:forEach>
+                  										<li class="pjtlist">
+																<a tabindex="-1" href="#" name="프라이빗 공간">프라이빗 공간</a>
+																
+															</li>
 														<li class="divider"></li>
 														<li><a tabindex="-1" href="#" data-role="close">Close</a></li>
 													</ul>
@@ -109,6 +115,7 @@
 																	<div class="col-xs-12">
 																		<label class="col-xs-4" for="edit-type">협업공간 이름</label> 
 																		<select class="inputModal" type="text" name="edit-type" id="pjtselect">
+																		    <option value="프라이빗 공간">프라이빗 공간</option>
 																			<c:forEach items="${pjtlist}" var="p">
                          														  <option value="${p.tseq}">${p.pname}</option>
                   															</c:forEach>
@@ -171,7 +178,8 @@
 														<div class="col-lg-6">
 															<label for="calendar_view">협업공간</label>
 															<div class="input-group">
-																<select class="filter" id="select-tseq" multiple="multiple" name="edit-tseq">
+																<select class="filter" id="edit-tseq" multiple="multiple" name="edit-tseq">
+																	<option value="프라이빗 공간">프라이빗 공간</option>
 																	<c:forEach items="${pjtlist}" var="p">
 																	<input class="inputModal" type="text" name="edit-tseq${p.tseq }" id="edit-tseq${p.tseq }" value="${p.tseq}" readonly hidden="hidden">
                          											<option value="${p.tseq}">${p.pname}</option>
