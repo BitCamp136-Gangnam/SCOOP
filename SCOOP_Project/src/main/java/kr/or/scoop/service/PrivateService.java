@@ -19,14 +19,16 @@ public class PrivateService {
 		System.out.println("writetissue");
 		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
 		result = dao.writeTissue(tissue);
+		System.out.println(tissue);
 		System.out.println("writetissue2");
 		return result;
 	}
 	public int writeMyissue(MyIssue myissue) {
 		int result = 0 ;
 		System.out.println("writeMyissue");
-		System.out.println(myissue);
 		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
+		System.out.println(myissue);
+		System.out.println("writeMyissue2");
 		result = dao.writeMyissue(myissue);
 		return result;
 	}

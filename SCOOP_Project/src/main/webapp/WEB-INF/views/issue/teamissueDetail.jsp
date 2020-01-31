@@ -132,7 +132,6 @@ border-radius: 5px;
 }
 </style>
 <body>
-
     <jsp:include page="/WEB-INF/views/commons/preloader.jsp"></jsp:include>
 
     
@@ -278,7 +277,7 @@ border-radius: 5px;
 
      <script src="<c:url value="/resources/js/dashboard/dashboard-1.js"/>"></script>
 	<script type="text/javascript">
-		$(function(){
+/* 		$(function(){
 			let content = $('#myissueContent').text();
 			console.log(content.trim());
 
@@ -294,7 +293,7 @@ border-radius: 5px;
 			}
 			console.log(content);
 			$('#myissueContent').text(content);
-		})
+		}) */
 	</script>
 </body>
 </html>

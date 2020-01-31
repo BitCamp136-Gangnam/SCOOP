@@ -156,6 +156,7 @@ public class TeamController {
 				HttpSession session,HttpServletRequest request, String[] mentions, String[] toWork, String[] doWork, String[] googleDrive,@RequestParam(value="files") MultipartFile[] files) throws IOException {
 			String path = "";
 			String email = (String)session.getAttribute("email");
+			System.out.println("가나다" + issuecontent);
 			int tseq = 0;
 			 //실 DB Insert
 			if (selectTeam.equals((String) session.getAttribute("email")) || selectTeam == null) {
