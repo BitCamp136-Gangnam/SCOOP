@@ -132,10 +132,10 @@ border-radius: 5px;
     ***********************************-->
 <div class="list-group" id="editMentionlist" style="display: none">
       <a href="#" class="list-group-item list-group-item-action menli" id="editMen1"style="padding: 5px;">멘션</a> 
-      <a href="#" class="list-group-item list-group-item-action menli" id="editMen3"style="padding: 5px">구글 드라이브</a> 
-      <a href="#" class="list-group-item list-group-item-action menli" id="editMen4"style="padding: 5px">파일</a> 
-      <a href="#" class="list-group-item list-group-item-action menli" id="editMen7"style="padding: 5px">의사결정</a> 
-      <a href="#" class="list-group-item list-group-item-action menli" id="editMen8"style="padding: 5px">할 일</a> 
+      <a href="#" class="list-group-item list-group-item-action menli" id="editMen2"style="padding: 5px">구글 드라이브</a> 
+      <a href="#" class="list-group-item list-group-item-action menli" id="editMen3"style="padding: 5px">파일</a> 
+      <!-- <a href="#" class="list-group-item list-group-item-action menli" id="editMen7"style="padding: 5px">의사결정</a> --> 
+      <a href="#" class="list-group-item list-group-item-action menli" id="editMen4"style="padding: 5px">할 일</a> 
 </div>
 <div class="list-group" id="editMemlist" style="display: none">
 <c:forEach items="${tpmemlist}" var="t">
@@ -221,7 +221,41 @@ $('.divDelete2').click(function(){
 	$(this).parent().remove();
 })
 
-var tar = 1;
+var tar = 0;
+var tar2 = 1;
+$('.menli').keydown(function(event) {
+	   var key = event.keyCode;
+	    switch (key) {
+	    case 38:
+	       console.log("위");
+	       tar2--;
+	       break;
+	    case 40:
+	       tar2++;
+	       break;
+	    case 39:
+	       break;
+	    case 37:
+	       break;
+	    }
+	    console.log(tar2);
+	    if (tar2 < 0) {
+	       tar2 = 0;
+	    }
+	    if (tar2 > 4) {
+	       tar2 = 4;
+	    }
+	    $('#editMen' + tar2).focus();
+	    if ($('#editMen' + tar2).focus()) {
+	       $('.menli').css('background-color', '#fff');
+	       $('#editMen' + tar2).css(
+	             'background-color',
+	             'rgba(225, 225, 225,0.5)');
+	    }
+	    if(event.keyCode == 13){
+	       $(this).click();
+	    }
+	});
 	$('#editIssuecontent').keydown(
 			function(event) {
 				if($('#editMentionlist').css('display')==('flex')){
@@ -297,7 +331,7 @@ var tar = 1;
 			val : textarea.value
 		});
 	}); */
-	$('#editMen3').click(function() {
+	$('#editMen2').click(function() {
 		$('#editMentionlist').hide();
 		var text = "";
 		text = $('#editIssuecontent').val().replace("@", "");
@@ -306,7 +340,7 @@ var tar = 1;
 		$('#editIssuecontent').append($('.picker-dialog'));
 
 	});
-	$('#editMen4').click(function() {
+	$('#editMen3').click(function() {
 		$('#editMentionlist').hide();
 		$('#fileclick2').click();
 	});
@@ -347,7 +381,7 @@ var tar = 1;
 $('#todoresult').show();
 		
 	});
-	$('#editMen8').click(
+	$('#editMen4').click(
 			function() {
 				var text = "";
 				text = $('#editIssuecontent').val().replace("@", "");
