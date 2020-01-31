@@ -75,7 +75,7 @@
                <hr style="margin-top: 0; margin-left: 2%; margin-right: 2%">
                <div class="row">
 						<div class="col-sm-6"
-							style="margin: 2% 10px 2% 3%; border-radius: 0.5rem;">
+							style="margin: 2% 2% 2% 7%; border-radius: 0.5rem;">
 							<div class="row" style="margin-left: 2%; margin-right: 2%" id="ialarm">
 							<div class="col-sm-3 newissue" id="al"><p><b>협업공간</b></p></div>
 							<div class="col-sm-6 newissue" id="ti"><p><b>제목</b></p></div>
@@ -123,7 +123,7 @@
       </c:forEach>
       </c:if>
 						</div>
-						<div class="col-sm-5" >
+						<div class="col-sm-4" >
                 <select id="selectDash" name="selectDash" class="form-control" style="margin-top: 7%;">
                   <%-- <option value="${sessionScope.email}">여기는 select공간</option> --%>
                   <c:choose>
