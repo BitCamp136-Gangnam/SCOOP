@@ -101,7 +101,7 @@
          
          <c:choose>
          	<c:when test="${mpl.tseq==mynewtissue.tseq && mpl.tseq !=null && mynewreply.tiseq==mynewtissue.tiseq &&mynewreply.rdate > mpl.tpaddtime}">
-         	<p><a href="teamissueDetail.do?tiseq=${mynewtissue.tiseq}">[${mynewtissue.tititle}]에 [${mynewreply.email }]님이 댓글을 남겼습니다.</a></p>
+         	<p><a href="teamissueDetail.do?tiseq=${mynewtissue.tiseq}">[${mynewtissue.tititle}]에 [${mynewreply.name}]님이 댓글을 남겼습니다.</a></p>
          	</c:when>
          	
          </c:choose>

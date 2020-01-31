@@ -4,7 +4,7 @@
 <script>
 Swal.fire(
 		  '캘린더 생성 성공!',
-		  '일정이 생성되었습ㄴ다',
+		  '새로운 일정이 생성되었습니다',
 		  'success'
 		)
 window.setTimeout(function() {

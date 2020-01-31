@@ -92,7 +92,14 @@
          
          <c:choose>
          	<c:when test="${mpl.tseq==mynewpjnotice.tseq && mpl.tseq !=null && mpl.tpaddtime < mynewpjnotice.pntime}">
-         	<p><a href="projectDetail.do?tseq=${mynewpjnotice.tseq }">${mpl.pname }</a></p>
+         	<p>
+         	<c:if test="${fn:length(mpl.pname) > 8}">
+         	<a href="projectDetail.do?tseq=${mynewpjnotice.tseq }"><c:out value="${fn:substring(mpl.pname,0,8)}"/>...</a>
+         	</c:if>
+         	<c:if test="${fn:length(mpl.pname) <= 8}">
+         	<a href="projectDetail.do?tseq=${mynewpjnotice.tseq }"><c:out value="${fn:substring(mpl.pname,0,8)}"/></a>
+         	</c:if>
+         	</p>
          	</c:when>
          	
          </c:choose>
@@ -101,7 +108,14 @@
          
          <c:choose>
          	<c:when test="${mpl.tseq==mynewpjnotice.tseq && mpl.tseq !=null && mpl.tpaddtime < mynewpjnotice.pntime}">
-         	<p><a href="pjNoticeDetail.do?pnseq=${mynewpjnotice.pnseq }&tseq=${mynewpjnotice.tseq}">${mynewpjnotice.pntitle }</a></p>
+         	<p>
+         	<c:if test="${fn:length(mynewpjnotice.pntitle) > 19}">
+         	<a href="pjNoticeDetail.do?pnseq=${mynewpjnotice.pnseq }&tseq=${mynewpjnotice.tseq}"><c:out value="${fn:substring(mynewpjnotice.pntitle,0,19)}"/>...</a>
+         	</c:if>
+         	<c:if test="${fn:length(mynewpjnotice.pntitle) <= 19}">
+         	<a href="pjNoticeDetail.do?pnseq=${mynewpjnotice.pnseq }&tseq=${mynewpjnotice.tseq}"><c:out value="${fn:substring(mynewpjnotice.pntitle,0,19)}"/></a>
+         	</c:if>
+         	</p>
          	</c:when>
          	
          </c:choose>

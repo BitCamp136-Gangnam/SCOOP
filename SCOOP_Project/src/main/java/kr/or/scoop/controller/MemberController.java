@@ -199,7 +199,7 @@ public class MemberController {
 		} else {
 			viewpage = "redirect:/index.do";
 		}
-
+		
 		return viewpage;
 	}
 	
@@ -208,9 +208,11 @@ public class MemberController {
 	@RequestMapping(value = "/userindex.do", method = RequestMethod.GET)
 	public String userindex(@RequestParam(required = false, name="lang") String language, HttpSession session, 
 				HttpServletRequest request, HttpServletResponse response, Model model) {
+		language = (String)session.getAttribute("language");
 		if(language == null) {
 			language = "ko";
 		}
+		
 		Locale locale  = new Locale(language);
 		System.out.println(" locale : " + locale + "\n language : " + language);
 		localeResolver.setLocale(request, response, locale);
@@ -358,9 +360,10 @@ public class MemberController {
 			model.addAttribute("myNewPjNoticeList", myNewPjNoticeList);
 			model.addAttribute("myNewTissueList", myNewTissueList);
 			model.addAttribute("myNewReplyList", myNewReplyList);
-			System.out.println(myNewReplyList);
+			System.out.println("이거" + myNewReplyList);
 		}
 		return "user/dashBoard-reply";
+		
 	}
 	@RequestMapping(value = "/newNotice.do", method = RequestMethod.GET)
 	public String userindexNotice(@RequestParam(required = false, name="lang") String language, HttpSession session, 

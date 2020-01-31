@@ -94,7 +94,14 @@
          
          <c:choose>
          	<c:when test="${mpl.tseq==mynewtissue.tseq && mpl.tseq !=null && mynewreply.tiseq==mynewtissue.tiseq &&mynewreply.rdate > mpl.tpaddtime}">
-         	<p><a href="projectDetail.do?tseq=${mynewtissue.tseq }">${mpl.pname }</a></p>
+         	<p>
+         	<c:if test="${fn:length(mpl.pname) > 8}">
+         	<a href="projectDetail.do?tseq=${mynewtissue.tseq }"><c:out value="${fn:substring(mpl.pname,0,8)}"/>...</a>
+         	</c:if>
+         	<c:if test="${fn:length(mpl.pname) <= 8}">
+         	<a href="projectDetail.do?tseq=${mynewtissue.tseq }"><c:out value="${fn:substring(mpl.pname,0,8)}"/></a>
+         	</c:if>
+         	</p>
          	</c:when>
          	
          </c:choose>
@@ -103,7 +110,7 @@
          
          <c:choose>
          	<c:when test="${mpl.tseq==mynewtissue.tseq && mpl.tseq !=null && mynewreply.tiseq==mynewtissue.tiseq &&mynewreply.rdate > mpl.tpaddtime}">
-         	<p><a href="teamissueDetail.do?tiseq=${mynewtissue.tiseq}">[${mynewreply.email }]님이 댓글을 남겼습니다.</a></p>
+         	<p><a href="teamissueDetail.do?tiseq=${mynewtissue.tiseq}">[${mynewreply.name}]님이 댓글을 남겼습니다.</a></p>
          	</c:when>
          	
          </c:choose>

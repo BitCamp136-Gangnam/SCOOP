@@ -214,7 +214,7 @@ var calendar = $('#calendar').fullCalendar({
         };
     console.log(editData);
     //리사이즈한 일정 업데이트
-    if(typeof editData.tseq == "number"){
+    if(typeof editData.tseq == "number" || editData.type != "프라이빗 공간"){
         //일정 업데이트
         $.ajax({
         	url: "editTeamCalendar.do",
@@ -222,10 +222,18 @@ var calendar = $('#calendar').fullCalendar({
             data: editData,
             async: false,
             success: function (data) {
-                alert("데이터 넘기기 성공");
+            	Swal.fire(
+          			  '팀캘린더 변경 성공!',
+          			  '팀일정이 변경되었습니다',
+          			  'success'
+          			)
             },
             error: function() {
-		    	alert("에러");
+            	Swal.fire(
+            			  '팀캘린더 변경 실패!',
+            			  '변경 도중 에러가 발생했습니다',
+            			  'error'
+            			)
 		    }
         });
         } else{
@@ -235,10 +243,18 @@ var calendar = $('#calendar').fullCalendar({
                 data: editData,
                 async: false,
                 success: function (data) {
-                    alert("데이터 넘기기 성공");
+                	Swal.fire(
+              			  '개인캘린더 변경 성공!',
+              			  '개인일정이 변경되었습니다',
+              			  'success'
+              			)
                 },
                 error: function() {
-    		    	alert("에러");
+                	Swal.fire(
+                			  '개인캘린더 변경 실패!',
+                			  '개인일정 변경 도중 에러가 발생했습니다',
+                			  'error'
+                			)
     		    }
             });
         }
@@ -278,7 +294,9 @@ var calendar = $('#calendar').fullCalendar({
             allDay: event.allDay
         };
     //드롭한 일정 업데이트
-    if(typeof dropEditData.tseq == "number"){
+    console.log(dropEditData);
+    console.log(typeof dropEditData);
+    if(typeof dropEditData.tseq == "number" || dropEditData.type != "프라이빗 공간"){
         //일정 업데이트
         $.ajax({
         	url: "editTeamCalendar.do",
@@ -286,10 +304,18 @@ var calendar = $('#calendar').fullCalendar({
             data: dropEditData,
             async: false,
             success: function (data) {
-                alert("데이터 넘기기 성공");
+            	Swal.fire(
+            			  '팀캘린더 변경 성공!',
+            			  '팀일정이 변경되었습니다',
+            			  'success'
+            			)
             },
             error: function() {
-		    	alert("에러");
+            	Swal.fire(
+          			  '팀캘린더 변경 실패!',
+          			  '팀일정 변경 도중 에러가 발생했습니다',
+          			  'error'
+          			)
 		    }
         });
         } else{
@@ -299,10 +325,18 @@ var calendar = $('#calendar').fullCalendar({
                 data: dropEditData,
                 async: false,
                 success: function (data) {
-                    alert("데이터 넘기기 성공");
+                	Swal.fire(
+              			  '개인캘린더 변경 성공!',
+              			  '개인일정이 변경되었습니다',
+              			  'success'
+              			)
                 },
                 error: function() {
-    		    	alert("에러");
+                	Swal.fire(
+                			  '개인캘린더 변경 실패!',
+                			  '변경 도중 에러가 발생했습니다',
+                			  'error'
+                			)
     		    }
             });
         }

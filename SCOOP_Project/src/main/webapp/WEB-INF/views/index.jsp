@@ -554,13 +554,7 @@ function idOver(a) {
 							          });
 							        }
 
-							        $('#name').on('keyup', function() {
-							      		if(($(this).val().length) > 10) {
-							      			 Swal.fire("글자수를 초과 하셨습니다.");
-							      			$("#name").focus();
-							      			 $(this).val($(this).val().substring(0, 10));
-							      		}
-							      	});
+							     
 							      </script>
 							      <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
      </div>
