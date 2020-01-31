@@ -431,6 +431,9 @@ input::placeholder {
 
       });
 
+  
+
+		
    });
    /* 프로젝트 이름 검색 - 도연 */
    function filter() {
@@ -1764,5 +1767,13 @@ $('#todoresult').show();
 		console.log($('#annoDelete'+annotation).attr('id'));
 		$('#annoDelete'+annotation).parent().remove();
 	}
+
+    $('#issuetitle').on('keyup', function() {
+  		if(($(this).val().length) > 30) {
+  			 Swal.fire("글자수를 초과 하셨습니다.");
+  			$("#issuetitle").focus();
+  			 $(this).val($(this).val().substring(0, 30));
+  		}
+  	});
 
 </script>
