@@ -12,6 +12,18 @@
      <link href="<c:url value="/resources/css/meterial.css" />" rel="stylesheet">
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
+<script type="text/javascript">
+$(function(){
+	$('#returnPage').click(function(){
+		history.back();
+	})
+	$('.bar').keypress(function(e){
+		if(e.keyCode==13){
+			$('#button').click();
+		}
+	})
+})
+</script>
 <body style="height: 300px;">
     <div class="landing" id="landing">
        <div class="start-form">
@@ -22,7 +34,12 @@
                   <span class="bar"></span>
                   <label>참여자 수</label>
                     <div  id="button" class="button raised green">
-                      <div  class="center" fit>START</div>
+                      <div  class="center" fit style="cursor: pointer; background-color: #E71D36">시작</div>
+                      <paper-ripple fit></paper-ripple>
+                    </div>
+                    <br>
+                    <div class="button raised green">
+                      <div id="returnPage" class="center" fit style="cursor: pointer; background-color: #E71D36">돌아가기</div>
                       <paper-ripple fit></paper-ripple>
                     </div>
                 </div>
