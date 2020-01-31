@@ -89,7 +89,7 @@ console.log(${teamIssue});
 			<a class="pnameHover" href="projectDetail.do?tseq=${ti.tseq}" style="color:#2c9aa8;">${ti.pname}</a>
 			</div>
 			<div class="col-sm-2 newissue" >
-			<a href="projectDetail.do?tseq=${ti.tseq}">${fn:substring(ti.tidate,0,16)}</a>
+			${fn:substring(ti.tidate,0,16)}
 			</div>
 			</div>
 			</c:forEach>
@@ -98,13 +98,13 @@ console.log(${teamIssue});
 			<div class="row" style="margin-left: 2%; margin-right: 2%" id="row">
 			<div class="col-sm-7 newissue" >
 			<div class="iconify" data-icon="uil:file-lock-alt" data-inline="false" style="width:27px;height: auto;color:black"></div>			
-			<a href="myissueDetail.do?piseq=${my.piseq}">${my.pititle}</a>			
+			<a href="myissueDetail.do?piseq=${my.piseq}" style="margin-left: 5%;">${my.pititle}</a>			
 			</div>
 			<div class="col-sm-3 newissue" >
 			<a class="pnameHover" href="private.do" style="color:#2c9aa8;">프라이빗 공간</a>
 			</div>
 			<div class="col-sm-2 newissue" >
-			<a  href="private.do" style="color:#2c9aa8;">${fn:substring(my.pidate,0,16)}</a>
+			${fn:substring(my.pidate,0,16)}
 			</div>	
 			</div>
 			</c:forEach>
