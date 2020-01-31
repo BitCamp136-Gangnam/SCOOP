@@ -340,7 +340,7 @@
 </body>
 <script type="text/javascript">
 	for(let i=0; i< $('.countRow').length; i++){
-		if(i>=13){
+		if(i>=12){
 			$('.countRow')[i].setAttribute("id", "cR"+i);
 		}
 	}

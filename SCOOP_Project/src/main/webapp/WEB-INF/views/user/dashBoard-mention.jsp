@@ -37,14 +37,14 @@
 		});
 		var temp = 0;
 		var moreEventArray = document.querySelectorAll("#one > #ialarm ");
-		if (moreEventArray.length <= 10) {
+		if (moreEventArray.length <= 12) {
 			$('#load').remove();
 			$('#loadPlus').remove();
 			$('.tooltip').remove();
 		}
 		$(moreEventArray).attr("hidden", "hidden");
-		$(moreEventArray).slice(0, 10).removeAttr("hidden");
-		$(moreEventArray).slice(0, 10);
+		$(moreEventArray).slice(0, 12).removeAttr("hidden");
+		$(moreEventArray).slice(0, 12);
 		temp = 10;
 		$("#load").click(function(e) {
 			
@@ -55,10 +55,10 @@
 			console.log($('.card > a > .row'));
 			console.log($(".card > a > .row").val()); */
 			console.log("if");
-			$(moreEventArray).slice(temp, temp + 10).removeAttr("hidden");
+			$(moreEventArray).slice(temp, temp + 12).removeAttr("hidden");
 			temp += 10;
-			if (moreEventArray.length < temp + 10) {
-				$(moreEventArray).slice(temp, 10).removeAttr("hidden");
+			if (moreEventArray.length < temp + 12) {
+				$(moreEventArray).slice(temp, 12).removeAttr("hidden");
 				if (temp - moreEventArray.length >= 0) {
 					$('#load').remove();
 					$('#loadPlus').remove();
