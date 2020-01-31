@@ -38,9 +38,65 @@ input::placeholder {
 				}
 			}
 		}
-	   $('#myFile').click(function(){
+	   $('#searchFile').keypress(function(event){
+		   if (event.keyCode == 13) {
+			   console.log($('#searchFile').val());
+			   $.ajax({
+					url : 'teamFileSearch.do',
+					dataType:"json",
+					data : {word : $('#searchFile').val()},
+					success : function(data) {
+						console.log(data);
+						$('#fileLocation').empty();
+						$.each(data,function(index,object){
+							tempFname = object.fdname;
+							tempPname = object.pname;
+							if(object.fdname.length>=14){
+								tempFname = object.fdname.substr(0, 14) + ' ...';
+							}
+							if(object.pname.length>=4){
+								tempPname = object.pname.substr(0, 4) + ' ...';
+							}
+							$('#fileLocation').append(
+									'<div class="fileDown" id="'+object.fdname+'" style="width: 150px; height:150px; margin: 1%;">'+
+							      	'<a href="fileDownload.do?fileName='+object.fdname+'">'+
+							         '<img id="'+object.tseq+'" width="100px" height="100px" style="margin: 1%; display: block; margin-left: auto; margin-right: auto"'+
+							            'src="<c:url value="/upload/'+object.fdname+'" />">'+
+							        '</a><p style="font-size: 15px; text-align: center">'+
+							        tempFname+'<br>'+tempPname+
+							         '</p></div>'		
+							)
+						})	
+					}
+				}); 
+			   $.ajax({
+					url : 'myFileSearch.do',
+					dataType:"json",
+					data : {word : $('#searchFile').val()},
+					success : function(data) {
+						console.log(data);
+						$.each(data,function(index,object){
+							tempFname = object.pfdname;
+							if(object.pfdname.length>=14){
+								tempFname = object.pfdname.substr(0, 14) + ' ...';
+							}
+							$('#fileLocation').append(
+									'<div class="fileDown" id="'+object.pfdname+'" style="width: 150px; height:150px; margin: 1%;">'+
+							      	'<a href="fileDownload.do?fileName='+object.pfdname+'">'+
+							         '<img id="'+object.tseq+'" width="100px" height="100px" style="margin: 1%; display: block; margin-left: auto; margin-right: auto"'+
+							            'src="<c:url value="/upload/'+object.pfdname+'" />">'+
+							        '</a><p style="font-size: 15px; text-align: center">'+
+							        tempFname+'<br>프라이빗 공간'+
+							         '</p></div>'		
+							)
+						})	
+					}
+				}); 
+	         }
+	   })
+	   function clickMyFile(){
 		   console.log("마이파일");
-		   var tseq = $(this).val();
+		   var tseq = 0;
  			$.ajax({
 				url : 'myFileSelect.do',
 				dataType:"json",
@@ -48,22 +104,30 @@ input::placeholder {
 					console.log(data);
 					$('#fileLocation').empty();
 					$.each(data,function(index,object){
+						tempFname = object.pfdname;
+						if(object.pfdname.length>=14){
+							tempFname = object.pfdname.substr(0, 14) + ' ...';
+						}
 						$('#fileLocation').append(
 								'<div class="fileDown" id="'+object.pfdname+'" style="width: 150px; height:150px; margin: 1%;">'+
 						      	'<a href="fileDownload.do?fileName='+object.pfdname+'">'+
 						         '<img id="'+object.tseq+'" width="100px" height="100px" style="margin: 1%; display: block; margin-left: auto; margin-right: auto"'+
 						            'src="<c:url value="/upload/'+object.pfdname+'" />">'+
 						        '</a><p style="font-size: 15px; text-align: center">'+
-						        object.pfdname+'<br>프라이빗 공간'+
+						        tempFname+'<br>프라이빗 공간'+
 						         '</p></div>'		
 						)
 					})	
 				}
 			}); 
-	   })
+	   }
 	   $('#selectFile').change(function(){
 		   console.log("바뀜");
 		   var tseq = $(this).val();
+		   if(tseq=='myFile'){
+			   clickMyFile();
+			   return;
+		   }
  			$.ajax({
 				url : 'fileChange.do',
 				dataType:"json",
@@ -74,13 +138,21 @@ input::placeholder {
 					console.log(data);
 					$('#fileLocation').empty();
 					$.each(data,function(index,object){
+						tempFname = object.fdname;
+						tempPname = object.pname;
+						if(object.fdname.length>=14){
+							tempFname = object.fdname.substr(0, 14) + ' ...';
+						}
+						if(object.pname.length>=4){
+							tempPname = object.pname.substr(0, 4) + ' ...';
+						}
 						$('#fileLocation').append(
 								'<div class="fileDown" id="'+object.fdname+'" style="width: 150px; height:150px; margin: 1%;">'+
 						      	'<a href="fileDownload.do?fileName='+object.fdname+'">'+
 						         '<img id="'+object.tseq+'" width="100px" height="100px" style="margin: 1%; display: block; margin-left: auto; margin-right: auto"'+
 						            'src="<c:url value="/upload/'+object.fdname+'" />">'+
 						        '</a><p style="font-size: 15px; text-align: center">'+
-						        object.fdname+'<br>'+object.pname+
+						        tempFname+'<br>'+tempPname+
 						         '</p></div>'		
 						)
 					})	
@@ -1029,17 +1101,18 @@ span {
    </div>
    <div class="row" style="margin: 2%;">
       <ul class="nav nav-pills">
-         <li class="nav-item"><a class="nav-link" id="myFile" style="cursor: pointer;">내 파일</a></li>
+         <!-- <li class="nav-item"><a class="nav-link" id="myFile" style="cursor: pointer;">내 파일</a></li> -->
          <li class="nav-item" style="margin-right: 10px">
           <select id="selectFile" name="tseq" class="form-control" style="border: none; color: #76838f; font-size: 18px; padding-top: 0;">
                  <option value="0">프로젝트 전체 파일</option>
+          		<option value="myFile">내 파일</option>
               <c:forEach items="${pjtlist}" var="p">
                  <option value="${p.tseq}">${p.pname}</option>
               </c:forEach>
           </select>
          </li>
-         <li class="nav-item"><input type="search" class="form-control"
-            style="border-radius: 0.25rem; height: 20px" placeholder="파일 검색">
+         <li class="nav-item"><input type="search" id="searchFile" class="form-control"
+            style="border-radius: 0.25rem; height: 20px" placeholder="검색 후 Enter치세요">
          </li>
       </ul>
    </div>
@@ -1407,6 +1480,7 @@ $('.menli').keydown(function(event) {
 				}
 			});
 	$('#selectpro').change(function(){
+		$('#todoresult').empty();
 		if($(selectpro).val()=="${sessionScope.email}"){
 			$('.todo').show();
 			for(let i=0; i<$('#memlist').children().length-1; i++){

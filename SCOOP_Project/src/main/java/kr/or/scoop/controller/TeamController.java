@@ -31,6 +31,7 @@ import kr.or.scoop.dao.MyIssueDao;
 import kr.or.scoop.dao.ProjectDao;
 import kr.or.scoop.dao.TissueDao;
 import kr.or.scoop.dto.BookMark;
+import kr.or.scoop.dto.FileDrive;
 import kr.or.scoop.dto.Member;
 import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.dto.Process;
@@ -135,7 +136,13 @@ public class TeamController {
 		model.addAttribute("projectmember", projectMemberlist);
 		model.addAttribute("rank", rank);
 		model.addAttribute("bookMark", bookMark);
-		
+		List<FileDrive> filedrive = null;
+		try {
+			 filedrive = md.getFileDrive(email);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		session.setAttribute("filed", filedrive);
 		return "user/ProjectDetail";
 		
 	}
