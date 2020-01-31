@@ -137,7 +137,7 @@
       </c:forEach>
       </c:if>
 	</div>
-			<div class="col-sm-4" >
+			<div class="col-sm-4">
                 <select id="selectDash" name="selectDash" class="form-control" style="margin-top: 10%;">
                   <%-- <option value="${sessionScope.email}">여기는 select공간</option> --%>
                   <c:choose>
