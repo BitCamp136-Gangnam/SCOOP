@@ -76,9 +76,12 @@ var newEvent = function (start, end, eventType) {
         editAllDay.prop('checked', false);
         eventModal.modal('hide');
         
-        alert(eventData.tseq);
+        
+        console.log(typeof eventData.tseq);
+        console.log(eventData.tseq);
+        console.log(typeof eventData.tseq=="string");
         //새로운 일정 저장
-        if(typeof eventData.tseq == "number"){
+        if(typeof eventData.tseq != "string"){
         	console.log("team");
         	console.log(eventData);
         $.ajax({
@@ -90,12 +93,15 @@ var newEvent = function (start, end, eventType) {
             	location.href="addCalendarAjax.do";
             },
             error: function() {
-		    	alert("에러");
+            	Swal.fire(
+            			  '팀캘린더 생성 도중 실패!',
+            			  '팀일정 생성 도중 에러가 발생했습니다',
+            			  'error'
+            			)
 		    }
         });
         } else{
-        	console.log(eventData);
-        	alert("pri");
+        	
     	$.ajax({
         	url: "addPrivateCalendar.do",
             type: "post",
@@ -105,7 +111,11 @@ var newEvent = function (start, end, eventType) {
             	location.href="addCalendarAjax.do";       
             },
             error: function() {
-		    	alert("에러");
+            	Swal.fire(
+          			  '개인캘린더 생성 도중 실패!',
+          			  '개인일정 생성 도중 에러가 발생했습니다',
+          			  'error'
+          			)
 		    }
         });
     }
