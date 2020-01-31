@@ -54,6 +54,7 @@
             <div class="card">
                <div class="row" style="margin-left: 2%;margin-top: 3%">
                   <select id="selectMenu" name="menu" class="nav-item" onchange="changeItem()" style="color: #76838f; border: 0">
+                 <option value="99" style="color: #76838f">새로운 이슈 선택</option>
                  <option value="0" style="color: #76838f">새로운 팀이슈</option>
             	 <option value="1" style="color: #76838f">새로운 댓글</option>	
             	 <option value="3" style="color: #76838f">새로운 공지사항</option>
@@ -283,14 +284,4 @@
 	})
    </script>
 </body>
-<script type="text/javascript">
-	for(let i=0; i< $('.countRow').length; i++){
-		if(i>=13){
-			$('.countRow')[i].setAttribute("id", "cR"+i);
-		}
-	}
-	for(let i=$('.countRow').length; i>1 ; i--){
-		$('#cR'+i).remove();
-	}
-</script>
 </html>

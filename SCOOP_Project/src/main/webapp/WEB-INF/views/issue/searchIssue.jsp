@@ -54,18 +54,6 @@ console.log(${teamIssue});
 		</div>
 		<hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
 		<div class="row" style="margin-left: 2%; margin-right: 2%">
-			<c:forEach items="${myIssue}" var="my">
-			<div class="col-sm-12 newissue" >
-				<div class="iconify" data-icon="uil:file-lock-alt" data-inline="false" style="width:27px;height: auto;color:black"></div>
-							
-			<div style="float: right;min-width:97%;">
-			<a href="myissueDetail.do?piseq=${my.piseq}">${my.pititle}</a>			
-			<br>
-			<a class="pnameHover" href="private.do" style="color:#2c9aa8;">프라이빗 공간</a>&nbsp;&nbsp;&nbsp;${my.pidate}<br>
-			</div>
-			
-			</div>
-			</c:forEach>
 			
 			<c:forEach items="${teamIssue}" var="ti">
 			<div class="col-sm-12 newissue" >
@@ -88,6 +76,18 @@ console.log(${teamIssue});
 			<a href="teamissueDetail.do?tiseq=${ti.tiseq}">${ti.tititle}</a>			
 			<br>
 			<a class="pnameHover" href="projectDetail.do?tseq=${ti.tseq}" style="color:#2c9aa8;">${ti.pname}</a>&nbsp;&nbsp;&nbsp;${ti.tidate}<br>
+			</div>
+			
+			</div>
+			</c:forEach>
+			<c:forEach items="${myIssue}" var="my">
+			<div class="col-sm-12 newissue" >
+				<div class="iconify" data-icon="uil:file-lock-alt" data-inline="false" style="width:27px;height: auto;color:black"></div>
+							
+			<div style="float: right;min-width:97%;">
+			<a href="myissueDetail.do?piseq=${my.piseq}">${my.pititle}</a>			
+			<br>
+			<a class="pnameHover" href="private.do" style="color:#2c9aa8;">프라이빗 공간</a>&nbsp;&nbsp;&nbsp;${my.pidate}<br>
 			</div>
 			
 			</div>

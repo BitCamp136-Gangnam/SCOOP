@@ -56,7 +56,7 @@
                   <select id="selectMenu" name="menu" class="nav-item" onchange="changeItem()" style="color: #76838f; border: 0">
                  <option value="0" style="color: #76838f">새로운 팀이슈</option>
             	 <option value="1" style="color: #76838f">새로운 댓글</option>	
-            	 <option value="3" style="color: #E71D36">새로운 공지사항</option>
+            	 <option value="3" selected="selected" style="color: #E71D36">새로운 공지사항</option>
           </select>
                   <ul class="nav nav-pills">
                      <!-- <li class="nav-item dropdown"><a
