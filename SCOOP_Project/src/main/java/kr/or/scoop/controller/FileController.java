@@ -75,4 +75,29 @@ public class FileController {
 		return "ajax/ajax";
 	}
 	
+	@RequestMapping("/teamFileSearch.do")
+	public String teamFileSearch(HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model) throws Exception {
+		System.out.println(request.getParameter("word"));
+		MemberDao memberdao = sqlsession.getMapper(MemberDao.class);
+		String email = (String)session.getAttribute("email");
+		String word = request.getParameter("word");
+			List<FileDrive> filedrive = memberdao.searchFileDrive(email, word);
+			JSONArray jsonlist = JSONArray.fromObject(filedrive);
+			model.addAttribute("ajax",jsonlist);
+		return "ajax/ajax";
+	}
+	@RequestMapping("/myFileSearch.do")
+	public String myFileSearch(HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model) throws Exception {
+		System.out.println(request.getParameter("마이파일서치"));
+		MemberDao memberdao = sqlsession.getMapper(MemberDao.class);
+		String email = (String)session.getAttribute("email");
+		String word = request.getParameter("word");
+		System.out.println(email);
+		System.out.println(word);
+		List<FileDrive> filedrive = memberdao.searchMyFileDrive(email, word);
+		System.out.println(filedrive);
+		JSONArray jsonlist = JSONArray.fromObject(filedrive);
+		model.addAttribute("ajax",jsonlist);
+		return "ajax/ajax";
+	}
 }

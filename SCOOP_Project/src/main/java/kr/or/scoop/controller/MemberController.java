@@ -248,6 +248,7 @@ public class MemberController {
 		session.setAttribute("role", role.getRname());
 		session.setAttribute("count", count);
 		session.setAttribute("filed", filedrive);
+		System.out.println(filedrive);
 		try {
 			pjtlist = noticeDao.getPJT(email);
 			tpmemlist = memberdao.getTpmembers(member.getEmail());
