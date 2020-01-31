@@ -92,7 +92,14 @@
          
          <c:choose>
          	<c:when test="${mpl.tseq==mynewtissue.tseq && mpl.tseq !=null && mynewtissue.tidate > mpl.tpaddtime}">
-         	<p><a href="projectDetail.do?tseq=${mynewtissue.tseq }">${mpl.pname }</a></p>
+         	<p>
+         	<c:if test="${fn:length(mpl.pname) > 8}">
+         	<a href="projectDetail.do?tseq=${mynewtissue.tseq }"><c:out value="${fn:substring(mpl.pname,0,8)}"/>...</a>
+         	</c:if>
+         	<c:if test="${fn:length(mpl.pname) < 8}">
+         	<a href="projectDetail.do?tseq=${mynewtissue.tseq }"><c:out value="${fn:substring(mpl.pname,0,8)}"/></a>
+         	</c:if>
+         	</p>
          	</c:when>
          	
          </c:choose>
@@ -101,7 +108,14 @@
          
          <c:choose>
          	<c:when test="${mpl.tseq==mynewtissue.tseq && mpl.tseq !=null && mynewtissue.tidate > mpl.tpaddtime}">
-         	<p><a href="teamissueDetail.do?tiseq=${mynewtissue.tiseq}">${mynewtissue.tititle}</a></p>
+         	<p>
+         	<c:if test="${fn:length(mynewtissue.tititle) > 19}">
+         	<a href="teamissueDetail.do?tiseq=${mynewtissue.tiseq}"><c:out value="${fn:substring(mynewtissue.tititle,0,19)}"/>...</a>
+         	</c:if>
+         	<c:if test="${fn:length(mynewtissue.tititle) < 19}">
+         	<a href="teamissueDetail.do?tiseq=${mynewtissue.tiseq}"><c:out value="${fn:substring(mynewtissue.tititle,0,19)}"/></a>
+         	</c:if>
+         	</p>
          	</c:when>
          	
          </c:choose>
