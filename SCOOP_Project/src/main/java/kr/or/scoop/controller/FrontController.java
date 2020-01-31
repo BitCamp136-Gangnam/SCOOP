@@ -4,6 +4,7 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,14 +25,14 @@ public class FrontController {
 	private LocaleResolver localeResolver;
 	
 	@RequestMapping("/index.do")
-	public String change(@RequestParam(required = false, name="lang") String language, HttpServletRequest request, HttpServletResponse response) {
+	public String change(@RequestParam(required = false, name="lang") String language, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		if(language == null) {
 			language = "ko";
 		}
 		
 		Locale locale  = new Locale(language);
 		localeResolver.setLocale(request, response, locale);
-		
+		session.setAttribute("language", language);
 		return "index";
 	}
 	

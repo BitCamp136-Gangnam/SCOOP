@@ -248,9 +248,9 @@ CREATE TABLE TISSUE (
 	issee NUMBER NOT NULL, /* 확인여부 */
 	tidate DATE NOT NULL, /* 팀이슈 작성시간 */
 	turl VARCHAR2(1000), /* 팀링크 */
-	BACKGROUNDCOLOR VARCHAR2(100), /* 배경색 */
-	TEXTCOLOR VARCHAR2(100), /* 글자색깔 */
-	ALLDAY NUMBER /* 하루종일여부 */
+	BACKGROUNDCOLOR VARCHAR2(100) DEFAULT '#3a87ad' NULL, /* 배경색 */
+	TEXTCOLOR VARCHAR2(100) NULL, /* 글자색깔 */
+	ALLDAY NUMBER NULL /* 하루종일여부 */
 );
 
 COMMENT ON TABLE TISSUE IS '팀이슈';

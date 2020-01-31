@@ -138,6 +138,7 @@
 																		</select>
 																	</div>
 																</div>
+																
 																<div class="row">
 																	<div class="col-xs-12">
 																		<label class="col-xs-4" for="edit-desc">설명</label>
@@ -274,5 +275,6 @@
 				}
 			}
 		})
+	
 	</script>
 </html>
