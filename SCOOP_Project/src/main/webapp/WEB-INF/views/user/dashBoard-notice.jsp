@@ -53,7 +53,7 @@
          <div class="container-fluid">
             <div class="card">
                <div class="row" style="margin-left: 2%;margin-top: 3%">
-                  <select id="selectMenu" name="menu" class="nav-item" onchange="changeItem()" style="color: #76838f; border: 0">
+                  <select id="selectMenu" name="menu" class="nav-item" onchange="changeItem()" style="color: #E71D36; border: 0">
                  <option value="0" style="color: #76838f">새로운 팀이슈</option>
             	 <option value="1" style="color: #76838f">새로운 댓글</option>	
             	 <option value="3" selected="selected" style="color: #E71D36">새로운 공지사항</option>
@@ -69,7 +69,7 @@
                         data-toggle="tab" href="#">협업 진행률</a></li>
                      <li class="nav-item"><a class="nav-link active"
                         data-toggle="tab" href="#">이슈 업데이트</a></li> -->
-                     <li class="nav-item"><a href="mention.do" class="nav-link" style="color: #E71D36">@멘션</a></li>
+                     <li class="nav-item"><a href="mention.do" class="nav-link">@멘션</a></li>
                   </ul>
                </div>
                <hr style="margin-top: 0; margin-left: 2%; margin-right: 2%">
