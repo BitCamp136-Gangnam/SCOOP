@@ -72,14 +72,7 @@ border-radius: 5px;
 			<input type="button" class="form-control editdelete" value="돌아가기" id="returnIssue">
 		</div>
 		</div>
-		<c:choose>
-        <c:when test="${myissue.pistart!=null}">
 		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%; margin-top: 2%;margin-top: 1%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i><input type="text" id="editFrom" name="editFrom" style="border: 0; border-bottom: 1px solid #ced4da; text-align: center" value="${fn:substring(myissue.pistart,0,10)}"> ~ <input type="text" id="editTo" name="editTo" style="border: 0; border-bottom: 1px solid #ced4da; text-align: center" value="${fn:substring(myissue.piend,0,10)}"></div>
-		</c:when>
-		<c:otherwise>
-		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>등록된 일정이 없습니다.</div>
-		</c:otherwise>
-		</c:choose>
 		<div id="edittodoresult">
 		<c:forEach items="${mentions}" var="m">
 		<div class="myissueDetail" id="myissueMention">
