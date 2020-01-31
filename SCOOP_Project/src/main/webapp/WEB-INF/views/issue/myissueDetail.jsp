@@ -79,20 +79,23 @@ border-radius: 5px;
         <!--**********************************
             Content body start
         ***********************************-->
-        <div class="content-body"style="height: 680px;">
-        <div class="container-fluid row" style="padding-right: 0px; margin-right: 0px;margin-left: 0px; padding-left: 15px;">
-        <div class="card" style="padding-left: 2%;padding-right: 0px; padding-top:1%;min-width:900px;height: auto;overflow: auto;">
+        <div class="content-body">
+        <div class="container-fluid">
+        <div class="card">
 		<div class="row"style="margin:2% 2% 0 2%" >
-		<div class="col-sm-8">
-		<h3 id="myissueSubject" style="padding-top: 2%;padding-left: 1%;">${myissue.pititle}</h3>
+		<div class="col-sm-10">
+		<h3 id="myissueSubject" style="padding-top: 2%;">${myissue.pititle}</h3>
 		</div>
 		<c:if test="${myissue.email==sessionScope.email}">
-		<div class="col-sm-2" style="padding-right: 0">
-			<input type="button" class="form-control editdelete" value="수정" id="editIssue">
+		<div class="col-sm-2" style="padding-top: 2%;padding-left: 8%;">
+		<span data-toggle="tooltip" data-placement="top" title="프라이빗 이슈 수정" >
+        	<span class="fas fa-cog"  id="editIssue" style="margin-left: 5px;cursor: pointer; font-size: 25px"   ></span>
+         </span>
+         <span data-toggle="tooltip" data-placement="top" title="프라이빗 이슈 삭제" >
+			<span class="iconify" id="deleteIssue" data-icon="octicon:x" data-inline="false" style="cursor: pointer;font-size: 30px;margin-bottom: 12px;margin-left: 20px;"></span>
+		</span>
 		</div>
-		<div class="col-sm-2" style="padding-left: 0">
-			<input type="button" class="form-control editdelete" value="삭제" id="deleteIssue">
-		</div>
+		
 		</c:if>
 		</div>
 		<c:choose>

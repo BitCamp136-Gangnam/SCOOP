@@ -54,14 +54,14 @@ border-radius: 5px;
             Content body start
         ***********************************-->
         <div class="content-body"style="height: 680px;">
-        <div class="container-fluid row" style="padding-right: 0px; margin-right: 0px;margin-left: 0px; padding-left: 15px;">
-        <div class="card" style="padding-left: 2%;padding-right: 0px; padding-top:1%;min-width:900px;height: auto;overflow: auto;">
+        <div class="container-fluid" ">
+        <div class="card">
         <form action="myissueEditOk.do" method="POST" enctype="multipart/form-data">
         <%-- <input type="hidden" name="tseq" value="${tissue.tseq}"> --%>
         <input type="hidden" name="piseq" value="${myissue.piseq}">
 		<div class="row"style="margin:2% 2% 0 2%" >
-		<div class="col-sm-7">
-			<input type="text" class="form-control" name="title" value="${myissue.pititle}" style="border: 0px; border-bottom: 1px solid #ced4da; font-size: 20px">
+		<div class="col-sm-6">
+			<input type="text" class="form-control" name="title" value="${myissue.pititle}" style="border: 0px; border-bottom: 1px solid #ced4da; font-size: 20px;padding-left: 0px;">
 		</div>
 		<div class="col-sm-1">
 		</div>
@@ -74,7 +74,7 @@ border-radius: 5px;
 		</div>
 		<c:choose>
         <c:when test="${myissue.pistart!=null}">
-		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%; margin-top: 2%"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i><input type="text" id="editFrom" name="editFrom" style="border: 0; border-bottom: 1px solid #ced4da; text-align: center" value="${fn:substring(myissue.pistart,0,10)}"> ~ <input type="text" id="editTo" name="editTo" style="border: 0; border-bottom: 1px solid #ced4da; text-align: center" value="${fn:substring(myissue.piend,0,10)}"></div>
+		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%; margin-top: 2%;margin-top: 1%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i><input type="text" id="editFrom" name="editFrom" style="border: 0; border-bottom: 1px solid #ced4da; text-align: center" value="${fn:substring(myissue.pistart,0,10)}"> ~ <input type="text" id="editTo" name="editTo" style="border: 0; border-bottom: 1px solid #ced4da; text-align: center" value="${fn:substring(myissue.piend,0,10)}"></div>
 		</c:when>
 		<c:otherwise>
 		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>등록된 일정이 없습니다.</div>
