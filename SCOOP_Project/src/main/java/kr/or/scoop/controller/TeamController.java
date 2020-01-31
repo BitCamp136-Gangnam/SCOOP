@@ -678,4 +678,22 @@ public class TeamController {
 		return "sidebar/calendar";
 	}
 	
+	@RequestMapping("/projectCalendar.do")
+	public String teamCalendar(HttpServletRequest request, HttpServletResponse response,Model model,HttpSession session, int tseq) {
+		System.out.println("calendar 왔냐?");
+		ProjectDao dao = sqlsession.getMapper(ProjectDao.class);
+		MemberDao memberdao = sqlsession.getMapper(MemberDao.class);
+		String email = (String)session.getAttribute("email");
+		TeamPjt pjt = dao.detailPJT(tseq);
+		int rank = dao.searchRank(tseq, email);
+		model.addAttribute("rank", rank);
+		model.addAttribute("tpj",pjt); //프로젝트 이름 , 설명
+		List<ProjectMemberlist> mem = memberdao.projectMemberlist(tseq);
+		
+		model.addAttribute("mem",mem);
+		
+		return "user/ProjectCalendar";
+	}
+	
+	
 }
