@@ -696,4 +696,68 @@ public class TeamController {
 	}
 	
 	
+	@ResponseBody
+	@RequestMapping(value="getSelectTeamCalendar.do", method = RequestMethod.GET)
+	public JSONArray getSelectTeamCalendar(HttpSession session, HttpServletResponse response, Model model, int tseq) {
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json");
+		String email = (String)session.getAttribute("email");
+		ProjectDao projectdao = sqlsession.getMapper(ProjectDao.class);
+		TissueDao tissuedao = sqlsession.getMapper(TissueDao.class);
+		List<Tpmember> pjtlist = projectdao.getPJT(email);
+		List<Tissue> temptissuelist;
+		Map<Integer, Tissue> sortlist = new HashMap<Integer, Tissue>();
+		JSONArray jArray = new JSONArray();
+		
+		int tempnum = 0;
+		temptissuelist = tissuedao.getTissueList(tseq);
+		SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd'T'HH:mm" , Locale.KOREA );
+		SimpleDateFormat sdft = new SimpleDateFormat( "yyyy-MM-dd");
+		
+			if(!temptissuelist.isEmpty()) {
+				for(Tissue tissue : temptissuelist) {
+					if(tissue.getTistart()!=null) {
+					JSONObject data = new JSONObject();
+					int z = tissue.getAllDay();
+					
+					data.put("_id", tissue.getTiseq());
+					data.put("title", tissue.getTititle());
+					data.put("description", tissue.getTicontent());
+					boolean allDay;
+					if(z==0) {
+						allDay = false;
+						data.put("start", (String)sdf.format(tissue.getTistart()).toString());
+						data.put("end", (String)sdf.format(tissue.getTiend()).toString());
+					} else {
+						allDay = true;
+						data.put("start", (String)sdft.format(tissue.getTistart()).toString());
+						data.put("end", (String)sdft.format(tissue.getTiend()).toString());
+					}
+					for(Tpmember tpmember : pjtlist) {
+						if(tpmember.getTseq() == tissue.getTseq()) {
+							data.put("type", tpmember.getPname());
+						}
+					}
+					
+					data.put("username", tissue.getName());
+					data.put("backgroundColor", tissue.getBackgroundColor());
+					data.put("textColor", tissue.getTextColor());
+					
+					data.put("allDay", allDay);
+					data.put("tiseq", tissue.getTiseq());
+					jArray.add(data);
+					System.out.println("while문 도니?");
+					System.out.println(data);
+					
+				}
+					
+				}
+			}
+			
+		System.out.println("jArray 입니다"+jArray);
+		
+		return jArray;
+	}
+	
+	
 }

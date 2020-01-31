@@ -274,7 +274,7 @@
 	<script src="<c:url value="/resources/vendor/js/ko.js"/>"></script>
 	<script src="<c:url value="/resources/vendor/js/select2.min.js"/>"></script>
 	
-	<script src="<c:url value='/resources/fullcalendar/main.js'/>"></script>
+	<script src="<c:url value='/resources/fullcalendar/selectMain.js'/>"></script>
 	<script src="<c:url value='/resources/fullcalendar/addEvent.js'/>"></script>
 	<script src="<c:url value='/resources/fullcalendar/editEvent.js'/>"></script>
 	<script src="<c:url value='/resources/fullcalendar/etcSetting.js'/>"></script>
