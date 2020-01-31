@@ -121,6 +121,9 @@ public class TeamController {
 		
 		TeamPjt pjt = dao.detailPJT(tseq);
 		List<Tissue> tp = dao.getTissue(tseq);
+		for(int i=0; i<tp.size();i++) {
+			tp.get(i).setTicontent(tp.get(i).getTicontent().replace("<br>", " "));
+		}
 		List<ProjectMemberlist> projectMemberlist =md.projectMemberlist(tseq);
 		List<BookMark> bookMark = mydao.getBookMark(email);
 		
@@ -153,12 +156,14 @@ public class TeamController {
 				HttpSession session,HttpServletRequest request, String[] mentions, String[] toWork, String[] doWork, String[] googleDrive,@RequestParam(value="files") MultipartFile[] files) throws IOException {
 			String path = "";
 			String email = (String)session.getAttribute("email");
+			System.out.println("가나다" + issuecontent);
 			int tseq = 0;
 			 //실 DB Insert
 			if (selectTeam.equals((String) session.getAttribute("email")) || selectTeam == null) {
 				MyIssue myissue = new MyIssue();
 				myissue.setEmail((String) session.getAttribute("email"));
 				myissue.setPititle(issuetitle);
+				issuecontent = issuecontent.replace("\r\n", "<br>");
 				myissue.setPicontent(issuecontent);
 				myissue.setIspibook(0);
 				if(fromDate != null) {
@@ -218,6 +223,7 @@ public class TeamController {
 				tissue.setTseq(Integer.parseInt(selectTeam));
 				tissue.setEmail((String)session.getAttribute("email"));
 				tissue.setTititle(issuetitle);
+				issuecontent = issuecontent.replace("\r\n", "<br>");
 				tissue.setTicontent(issuecontent);
 				if(fromDate != null) {
 					 tissue.setTistart(java.sql.Timestamp.valueOf(fromDate+" 00:00:00"));
@@ -661,17 +667,13 @@ public class TeamController {
 	}
 	
 	@RequestMapping("/calendar.do")
-	public String object(@RequestParam(required = false, name="lang") String language, HttpServletRequest request, HttpServletResponse response,Model model,HttpSession session) {
+	public String object(HttpServletRequest request, HttpServletResponse response,Model model,HttpSession session) {
 		System.out.println("calendar 왔냐?");
-		if(language == null) {
-			language = "ko";
-		}
+		
 		String email = (String)session.getAttribute("email");
 		ProjectDao dao = sqlsession.getMapper(ProjectDao.class);
 		List<Tpmember> mem = dao.getTpMember(email);
-		Locale locale  = new Locale(language);
-		System.out.println("locale : " + locale + "\n language : " + language);
-		localeResolver.setLocale(request, response, locale);
+		
 		model.addAttribute("mem",mem);
 		return "sidebar/calendar";
 	}

@@ -204,8 +204,8 @@ function signOut() {
       var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
       var getCheck= RegExp(/^[a-zA-Z0-9]{8,16}$/);
       var getName= RegExp(/^[가-힣]+$/);
-		if($('#name').val().length>7){
-			alert("name은 7자 까지 입력가능합니다.")
+		if($('#name').val().length>10){
+			alert("name은 10자 까지 입력가능합니다.")
 			return false;
 		}
 		
@@ -553,6 +553,8 @@ function idOver(a) {
 							            'onfailure': onFailure
 							          });
 							        }
+
+							     
 							      </script>
 							      <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
      </div>
@@ -579,7 +581,7 @@ function idOver(a) {
         </div>
         <div class="form-group mb-4">
          <label>Name</label>
-         <input type="text" class="form-control" id="name" name ="name" placeholder="7자까지 입력가능합니다" required>
+         <input type="text" class="form-control" id="name" name ="name" placeholder="10자까지 입력가능합니다" required>
         </div>
         <div class="form-group mb-4">
          <label>Password</label>

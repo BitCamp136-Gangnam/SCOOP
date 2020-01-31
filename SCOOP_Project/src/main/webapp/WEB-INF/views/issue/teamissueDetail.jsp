@@ -132,7 +132,6 @@ border-radius: 5px;
 }
 </style>
 <body>
-
     <jsp:include page="/WEB-INF/views/commons/preloader.jsp"></jsp:include>
 
     
@@ -197,9 +196,12 @@ border-radius: 5px;
 		<br>
 		</div>
 		</c:forEach> 
-        <div class="myissueDetail" id="myissueContent">
+		<div class="row">
+        <div class="myissueDetail col-sm-7" id="myissueContent">
         ${tissue.ticontent}
-        </div>    
+        </div>
+        <div class="col-sm-3">크롤링 데이터</div>
+        </div>
             <!-- #/ container -->
             </div> 
             <div class="card" style="height: 600px;float:right;background-color: #fff;margin-left:10px;padding-left: 0px;padding-right: 0px;width:400px;">
@@ -278,7 +280,7 @@ border-radius: 5px;
 
      <script src="<c:url value="/resources/js/dashboard/dashboard-1.js"/>"></script>
 	<script type="text/javascript">
-		$(function(){
+/* 		$(function(){
 			let content = $('#myissueContent').text();
 			console.log(content.trim());
 
@@ -294,7 +296,7 @@ border-radius: 5px;
 			}
 			console.log(content);
 			$('#myissueContent').text(content);
-		})
+		}) */
 	</script>
 </body>
 </html>

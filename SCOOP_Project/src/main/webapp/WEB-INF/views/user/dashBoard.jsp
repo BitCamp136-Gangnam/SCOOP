@@ -96,7 +96,7 @@
          	<c:if test="${fn:length(mpl.pname) > 8}">
          	<a href="projectDetail.do?tseq=${mynewtissue.tseq }"><c:out value="${fn:substring(mpl.pname,0,8)}"/>...</a>
          	</c:if>
-         	<c:if test="${fn:length(mpl.pname) < 8}">
+         	<c:if test="${fn:length(mpl.pname) <= 8}">
          	<a href="projectDetail.do?tseq=${mynewtissue.tseq }"><c:out value="${fn:substring(mpl.pname,0,8)}"/></a>
          	</c:if>
          	</p>
@@ -112,7 +112,7 @@
          	<c:if test="${fn:length(mynewtissue.tititle) > 19}">
          	<a href="teamissueDetail.do?tiseq=${mynewtissue.tiseq}"><c:out value="${fn:substring(mynewtissue.tititle,0,19)}"/>...</a>
          	</c:if>
-         	<c:if test="${fn:length(mynewtissue.tititle) < 19}">
+         	<c:if test="${fn:length(mynewtissue.tititle) <= 19}">
          	<a href="teamissueDetail.do?tiseq=${mynewtissue.tiseq}"><c:out value="${fn:substring(mynewtissue.tititle,0,19)}"/></a>
          	</c:if>
          	</p>

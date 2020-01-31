@@ -96,6 +96,7 @@ public class BoardController {
 	public String teamissueDetail(int tiseq, Model model){
 		TissueDao dao = sqlSession.getMapper(TissueDao.class);
 		Tissue tissue = dao.teamissueDetail(tiseq);
+		System.out.println(tissue);
 		List<Reply> reply = dao.teamCommentOk(tiseq);
 		List<Mention> mentions = dao.getMentions(tiseq);
 		List<GoogleDrive> googledrive = dao.getGoogleDrive(tiseq);
@@ -389,6 +390,7 @@ public class BoardController {
 	public String myissueEdit(int piseq, Model model) {
 		MyIssueDao dao = sqlSession.getMapper(MyIssueDao.class);
 		MyIssue myissue = dao.myissueDetail(piseq);
+		myissue.setPicontent(myissue.getPicontent().replace("<br>", "\n"));
 		try {
 			List<Mention> mentions = dao.getMyMentions(piseq);
 			List<GoogleDrive> googledrive = dao.getMyGoogleDrive(piseq);
@@ -408,6 +410,7 @@ public class BoardController {
 	public String teamIssueEdit(int tiseq, Model model) {
 		TissueDao dao = sqlSession.getMapper(TissueDao.class);
 		Tissue tissue = dao.teamissueDetail(tiseq);
+		tissue.setTicontent(tissue.getTicontent().replace("<br>", "\n"));
 		try {
 			//List<Reply> reply = dao.teamCommentOk(tiseq);
 			List<Mention> mentions = dao.getMentions(tiseq);

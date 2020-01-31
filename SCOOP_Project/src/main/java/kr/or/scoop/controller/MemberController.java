@@ -199,7 +199,7 @@ public class MemberController {
 		} else {
 			viewpage = "redirect:/index.do";
 		}
-
+		
 		return viewpage;
 	}
 	
@@ -208,9 +208,11 @@ public class MemberController {
 	@RequestMapping(value = "/userindex.do", method = RequestMethod.GET)
 	public String userindex(@RequestParam(required = false, name="lang") String language, HttpSession session, 
 				HttpServletRequest request, HttpServletResponse response, Model model) {
+		language = (String)session.getAttribute("language");
 		if(language == null) {
 			language = "ko";
 		}
+		
 		Locale locale  = new Locale(language);
 		System.out.println(" locale : " + locale + "\n language : " + language);
 		localeResolver.setLocale(request, response, locale);

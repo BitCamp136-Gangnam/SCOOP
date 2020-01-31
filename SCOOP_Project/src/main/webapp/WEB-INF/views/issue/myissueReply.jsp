@@ -87,10 +87,20 @@ $(function(){
 			<div class="row" style="margin-left: 2%; margin-right: 2%" id="row">
 			<div class="col-sm-7 newissue" >
 			<div id="finish" class="iconify" data-icon="fa-solid:reply-all" data-inline="false" style="width:27px;height: auto;color:#26805c"></div>
-			<a href="teamissueDetail.do?tiseq=${re.tiseq}" style="padding-left: 5%;">${re.rcontent}</a>			
+			<c:if test="${fn:length(re.rcontent) > 40}">
+			<a href="teamissueDetail.do?tiseq=${re.tiseq}" style="padding-left: 5%;"><c:out value="${fn:substring(re.rcontent,0,40)}"/>...</a>			
+			</c:if>
+			<c:if test="${fn:length(re.rcontent) <= 40}">
+			<a href="teamissueDetail.do?tiseq=${re.tiseq}" style="padding-left: 5%;"><c:out value="${fn:substring(re.rcontent,0,40)}"/></a>			
+			</c:if>
 			</div>
 			<div class="col-sm-3 newissue" >
-			<a class="pnameHover" href="teamissueDetail.do?tiseq=${re.tiseq}" style="color:#2c9aa8;">${re.tititle}</a>
+			<c:if test="${fn:length(re.tititle) > 20}">
+			<a class="pnameHover" href="teamissueDetail.do?tiseq=${re.tiseq}" style="color:#2c9aa8;"><c:out value="${fn:substring(re.tititle,0,20)}"/>...</a>
+			</c:if>
+			<c:if test="${fn:length(re.tititle) <= 20}">
+			<a class="pnameHover" href="teamissueDetail.do?tiseq=${re.tiseq}" style="color:#2c9aa8;"><c:out value="${fn:substring(re.tititle,0,20)}"/></a>
+			</c:if>
 			</div>
 			<div class="col-sm-2 newissue" >
 			<a href="teamissueDetail.do?tiseq=${re.tiseq}">${fn:substring(re.rdate,0,16)}</a>
