@@ -38,9 +38,65 @@ input::placeholder {
 				}
 			}
 		}
-	   $('#myFile').click(function(){
+	   $('#searchFile').keypress(function(event){
+		   if (event.keyCode == 13) {
+			   console.log($('#searchFile').val());
+			   $.ajax({
+					url : 'teamFileSearch.do',
+					dataType:"json",
+					data : {word : $('#searchFile').val()},
+					success : function(data) {
+						console.log(data);
+						$('#fileLocation').empty();
+						$.each(data,function(index,object){
+							tempFname = object.fdname;
+							tempPname = object.pname;
+							if(object.fdname.length>=14){
+								tempFname = object.fdname.substr(0, 14) + ' ...';
+							}
+							if(object.pname.length>=4){
+								tempPname = object.pname.substr(0, 4) + ' ...';
+							}
+							$('#fileLocation').append(
+									'<div class="fileDown" id="'+object.fdname+'" style="width: 150px; height:150px; margin: 1%;">'+
+							      	'<a href="fileDownload.do?fileName='+object.fdname+'">'+
+							         '<img id="'+object.tseq+'" width="100px" height="100px" style="margin: 1%; display: block; margin-left: auto; margin-right: auto"'+
+							            'src="<c:url value="/upload/'+object.fdname+'" />">'+
+							        '</a><p style="font-size: 15px; text-align: center">'+
+							        tempFname+'<br>'+tempPname+
+							         '</p></div>'		
+							)
+						})	
+					}
+				}); 
+			   $.ajax({
+					url : 'myFileSearch.do',
+					dataType:"json",
+					data : {word : $('#searchFile').val()},
+					success : function(data) {
+						console.log(data);
+						$.each(data,function(index,object){
+							tempFname = object.pfdname;
+							if(object.pfdname.length>=14){
+								tempFname = object.pfdname.substr(0, 14) + ' ...';
+							}
+							$('#fileLocation').append(
+									'<div class="fileDown" id="'+object.pfdname+'" style="width: 150px; height:150px; margin: 1%;">'+
+							      	'<a href="fileDownload.do?fileName='+object.pfdname+'">'+
+							         '<img id="'+object.tseq+'" width="100px" height="100px" style="margin: 1%; display: block; margin-left: auto; margin-right: auto"'+
+							            'src="<c:url value="/upload/'+object.pfdname+'" />">'+
+							        '</a><p style="font-size: 15px; text-align: center">'+
+							        tempFname+'<br>프라이빗 공간'+
+							         '</p></div>'		
+							)
+						})	
+					}
+				}); 
+	         }
+	   })
+	   function clickMyFile(){
 		   console.log("마이파일");
-		   var tseq = $(this).val();
+		   var tseq = 0;
  			$.ajax({
 				url : 'myFileSelect.do',
 				dataType:"json",
@@ -48,22 +104,30 @@ input::placeholder {
 					console.log(data);
 					$('#fileLocation').empty();
 					$.each(data,function(index,object){
+						tempFname = object.pfdname;
+						if(object.pfdname.length>=14){
+							tempFname = object.pfdname.substr(0, 14) + ' ...';
+						}
 						$('#fileLocation').append(
 								'<div class="fileDown" id="'+object.pfdname+'" style="width: 150px; height:150px; margin: 1%;">'+
 						      	'<a href="fileDownload.do?fileName='+object.pfdname+'">'+
 						         '<img id="'+object.tseq+'" width="100px" height="100px" style="margin: 1%; display: block; margin-left: auto; margin-right: auto"'+
 						            'src="<c:url value="/upload/'+object.pfdname+'" />">'+
 						        '</a><p style="font-size: 15px; text-align: center">'+
-						        object.pfdname+'<br>프라이빗 공간'+
+						        tempFname+'<br>프라이빗 공간'+
 						         '</p></div>'		
 						)
 					})	
 				}
 			}); 
-	   })
+	   }
 	   $('#selectFile').change(function(){
 		   console.log("바뀜");
 		   var tseq = $(this).val();
+		   if(tseq=='myFile'){
+			   clickMyFile();
+			   return;
+		   }
  			$.ajax({
 				url : 'fileChange.do',
 				dataType:"json",
@@ -74,13 +138,21 @@ input::placeholder {
 					console.log(data);
 					$('#fileLocation').empty();
 					$.each(data,function(index,object){
+						tempFname = object.fdname;
+						tempPname = object.pname;
+						if(object.fdname.length>=14){
+							tempFname = object.fdname.substr(0, 14) + ' ...';
+						}
+						if(object.pname.length>=4){
+							tempPname = object.pname.substr(0, 4) + ' ...';
+						}
 						$('#fileLocation').append(
 								'<div class="fileDown" id="'+object.fdname+'" style="width: 150px; height:150px; margin: 1%;">'+
 						      	'<a href="fileDownload.do?fileName='+object.fdname+'">'+
 						         '<img id="'+object.tseq+'" width="100px" height="100px" style="margin: 1%; display: block; margin-left: auto; margin-right: auto"'+
 						            'src="<c:url value="/upload/'+object.fdname+'" />">'+
 						        '</a><p style="font-size: 15px; text-align: center">'+
-						        object.fdname+'<br>'+object.pname+
+						        tempFname+'<br>'+tempPname+
 						         '</p></div>'		
 						)
 					})	
@@ -359,6 +431,9 @@ input::placeholder {
 
       });
 
+  
+
+		
    });
    /* 프로젝트 이름 검색 - 도연 */
    function filter() {
@@ -1029,17 +1104,18 @@ span {
    </div>
    <div class="row" style="margin: 2%;">
       <ul class="nav nav-pills">
-         <li class="nav-item"><a class="nav-link" id="myFile" style="cursor: pointer;">내 파일</a></li>
+         <!-- <li class="nav-item"><a class="nav-link" id="myFile" style="cursor: pointer;">내 파일</a></li> -->
          <li class="nav-item" style="margin-right: 10px">
           <select id="selectFile" name="tseq" class="form-control" style="border: none; color: #76838f; font-size: 18px; padding-top: 0;">
                  <option value="0">프로젝트 전체 파일</option>
+          		<option value="myFile">내 파일</option>
               <c:forEach items="${pjtlist}" var="p">
                  <option value="${p.tseq}">${p.pname}</option>
               </c:forEach>
           </select>
          </li>
-         <li class="nav-item"><input type="search" class="form-control"
-            style="border-radius: 0.25rem; height: 20px" placeholder="파일 검색">
+         <li class="nav-item"><input type="search" id="searchFile" class="form-control"
+            style="border-radius: 0.25rem; height: 20px" placeholder="검색 후 Enter치세요">
          </li>
       </ul>
    </div>
@@ -1131,11 +1207,11 @@ span {
    <div class="list-group" id="mentionlist" style="display: none">
       <a href="#" class="list-group-item list-group-item-action menli" id="men1"style="padding: 5px;">멘션</a> 
       <!-- <a href="#" class="list-group-item list-group-item-action menli" id="men2"style="padding: 5px">소스코드</a> --> 
-      <a href="#" class="list-group-item list-group-item-action menli" id="men3"style="padding: 5px">구글 드라이브</a> 
-      <a href="#" class="list-group-item list-group-item-action menli" id="men4"style="padding: 5px">파일</a> 
-      <a href="#" class="list-group-item list-group-item-action menli" id="men7"style="padding: 5px">의사결정</a> 
-      <a href="#" class="list-group-item list-group-item-action menli" id="men8"style="padding: 5px">할 일</a> 
-      <a href="#" class="list-group-item list-group-item-action menli" id="men9"style="padding: 5px">일정</a>
+      <a href="#" class="list-group-item list-group-item-action menli" id="men2"style="padding: 5px">구글 드라이브</a> 
+      <a href="#" class="list-group-item list-group-item-action menli" id="men3"style="padding: 5px">파일</a> 
+      <!-- <a href="#" class="list-group-item list-group-item-action menli" id="men7"style="padding: 5px">의사결정</a> --> 
+      <a href="#" class="list-group-item list-group-item-action menli" id="men4"style="padding: 5px">할 일</a> 
+      <a href="#" class="list-group-item list-group-item-action menli" id="men5"style="padding: 5px">일정</a>
    </div>
    <!--  -->
    <!-- 멘션할 사람 목록 -->
@@ -1322,8 +1398,8 @@ $('.modal').on('hidden.bs.modal', function(e) {
    $('#invite_Input1').show();
    $('#invite_Input2').show();
 });
-var tar = 1;
-var tar2 = 2;
+var tar = 0;
+var tar2 = 1;
 $('.menli').keydown(function(event) {
    var key = event.keyCode;
     switch (key) {
@@ -1339,11 +1415,12 @@ $('.menli').keydown(function(event) {
     case 37:
        break;
     }
-    if (tar2 < 1) {
-       tar2 = 1;
+    console.log(tar2);
+    if (tar2 < 0) {
+       tar2 = 0;
     }
-    if (tar2 > 9) {
-       tar2 = 9;
+    if (tar2 > 5) {
+       tar2 = 5;
     }
     $('#men' + tar2).focus();
     if ($('#men' + tar2).focus()) {
@@ -1375,11 +1452,11 @@ $('.menli').keydown(function(event) {
 		               case 37:
 		                  break;
 		               }
-		               if (tar < 1) {
-		                  tar = 1;
+		               if (tar < 0) {
+		                  tar = 0;
 		               }
-		               if (tar > 9) {
-		                  tar = 9;
+		               if (tar > 5) {
+		                  tar = 5;
 		               }
 		               $('#men' + tar).focus();
 		               if ($('#men' + tar).focus()) {
@@ -1407,6 +1484,7 @@ $('.menli').keydown(function(event) {
 				}
 			});
 	$('#selectpro').change(function(){
+		$('#todoresult').empty();
 		if($(selectpro).val()=="${sessionScope.email}"){
 			$('.todo').show();
 			for(let i=0; i<$('#memlist').children().length-1; i++){
@@ -1456,7 +1534,7 @@ $('.menli').keydown(function(event) {
 			val : textarea.value
 		});
 	}); */
-	$('#men3').click(function() {
+	$('#men2').click(function() {
 		$('#mentionlist').hide();
 		var text = "";
 		text = $('#issuecontent').val().replace("@", "");
@@ -1465,7 +1543,7 @@ $('.menli').keydown(function(event) {
 		$('#issuecontent').append($('.picker-dialog'));
 
 	});
-	$('#men4').click(function() {
+	$('#men3').click(function() {
 		$('#mentionlist').hide();
 		$('#fileclick').click();
 	});
@@ -1502,7 +1580,7 @@ $('.menli').keydown(function(event) {
 $('#todoresult').show();
 		
 	});
-	$('#men8').click(
+	$('#men4').click(
 			function() {
 				var text = "";
 				text = $('#issuecontent').val().replace("@", "");
@@ -1576,7 +1654,7 @@ $('#todoresult').show();
 		$('#issuecontent').val(text);
 		$('#todolist').val('');
 	});
-	$('#men9').click(
+	$('#men5').click(
 			function() {
 				var top = ($('#issuecontent').offset().top);
 				var left = ($('#issuecontent').offset().left + 490);
@@ -1690,5 +1768,13 @@ $('#todoresult').show();
 		console.log($('#annoDelete'+annotation).attr('id'));
 		$('#annoDelete'+annotation).parent().remove();
 	}
+
+    $('#issuetitle').on('keyup', function() {
+  		if(($(this).val().length) > 30) {
+  			 Swal.fire("글자수를 초과 하셨습니다.");
+  			$("#issuetitle").focus();
+  			 $(this).val($(this).val().substring(0, 30));
+  		}
+  	});
 
 </script>

@@ -88,22 +88,40 @@ $(function(){
 			<div class="col-sm-7 newissue" >
 			<c:choose>
 				<c:when test="${ti.isprocess==0}">
-				<div id="create" class="iconify" data-icon="uil:file-exclamation-alt" data-inline="false" style="width:27px;height: auto;"></div>
+				<span data-toggle="tooltip" data-placement="left" title="발의됨" style="margin-left: 5px;">
+				<span id="create" class="iconify" data-icon="uil:file-exclamation-alt" data-inline="false" style="width:27px;height: auto;color:#ff6384;"></span>
+				</span>
 				</c:when>
 				<c:when test="${ti.isprocess==1}">
-				<div id="ing" class="iconify" data-icon="uil:file-edit-alt" data-inline="false" style="width:27px;height: auto;color: #2671bd;"></div>
+				<span data-toggle="tooltip" data-placement="left" title="진행중"style="margin-left: 5px;">
+				<span id="ing" class="iconify" data-icon="uil:file-edit-alt" data-inline="false" style="width:27px;height: auto;color: #36a2eb;"></span>
+				</span>
 				</c:when>
 				<c:when test="${ti.isprocess==2}">
-				<div id="stop" class="iconify" data-icon="uil:file-block-alt" data-inline="false" style="width:27px;height: auto;color:#cca352"></div>
+				<span data-toggle="tooltip" data-placement="left" title="일시중지" style="margin-left: 5px;">
+				<span id="stop" class="iconify" data-icon="uil:file-block-alt" data-inline="false" style="width:27px;height: auto;color:#e3ad29;"></span>
+				</span>
 				</c:when>
 				<c:when test="${ti.isprocess==3}">
-				<div id="finish" class="iconify" data-icon="uil:file-check-alt" data-inline="false" style="width:27px;height: auto;color:#26805c"></div>
+				<span data-toggle="tooltip" data-placement="left" title="완료" style="margin-left: 5px;">
+				<span id="finish" class="iconify" data-icon="uil:file-check-alt" data-inline="false" style="width:27px;height: auto;color:#4bc09b;"></span>
+				</span>
 				</c:when>	
 			</c:choose>
-			<a href="teamissueDetail.do?tiseq=${ti.tiseq}"style="margin-left: 5%;">${ti.tititle}</a>			
+			<c:if test="${fn:length(ti.tititle) > 45}">
+			<a href="teamissueDetail.do?tiseq=${ti.tiseq}"style="margin-left: 5%;"><c:out value="${fn:substring(ti.tititle,0,45)}"/>...</a>
+			</c:if>			
+			<c:if test="${fn:length(ti.tititle) <= 45}">
+			<a href="teamissueDetail.do?tiseq=${ti.tiseq}"style="margin-left: 5%;"><c:out value="${fn:substring(ti.tititle,0,45)}"/></a>
+			</c:if>			
 			</div>
 			<div class="col-sm-3 newissue" >
-			<a class="pnameHover" href="projectDetail.do?tseq=${ti.tseq}" style="color:#2c9aa8;">${ti.pname}</a>
+			<c:if test="${fn:length(ti.pname) > 20}">
+			<a class="pnameHover" href="projectDetail.do?tseq=${ti.tseq}" style="color:#2c9aa8;"><c:out value="${fn:substring(ti.pname,0,20)}"/>...</a>
+			</c:if>
+			<c:if test="${fn:length(ti.pname) <= 20}">
+			<a class="pnameHover" href="projectDetail.do?tseq=${ti.tseq}" style="color:#2c9aa8;"><c:out value="${fn:substring(ti.pname,0,20)}"/></a>
+			</c:if>
 			</div>
 			<div class="col-sm-2 newissue" >
 			<a href="projectDetail.do?tseq=${ti.tseq}">${fn:substring(ti.tidate,0,16)}</a>

@@ -132,7 +132,6 @@ border-radius: 5px;
 }
 </style>
 <body>
-
     <jsp:include page="/WEB-INF/views/commons/preloader.jsp"></jsp:include>
 
     
@@ -197,12 +196,9 @@ border-radius: 5px;
 		<br>
 		</div>
 		</c:forEach> 
-		<div class="row" style="width: 100%">
-        <div class="myissueDetail col-sm-7" id="myissueContent">
+        <div class="myissueDetail" id="myissueContent">
         ${tissue.ticontent}
-        </div>
-        <div class="crawling col-sm-3">크롤링 데이터</div>
-        </div>
+        </div>    
             <!-- #/ container -->
             </div> 
             <div class="card" style="height: 600px;float:right;background-color: #fff;margin-left:10px;padding-left: 0px;padding-right: 0px;width:400px;">
@@ -281,22 +277,23 @@ border-radius: 5px;
 
      <script src="<c:url value="/resources/js/dashboard/dashboard-1.js"/>"></script>
 	<script type="text/javascript">
-		$(function(){
-			let content = $('#myissueContent');
-			let text = content.text();
-			
-			let splitData = text.trim().split("\n");
+/* 		$(function(){
+			let content = $('#myissueContent').text();
+			console.log(content.trim());
+
+			let splitData = content.trim().split("\n");
 			console.log(splitData);
 
 			for(let i = 0; i < splitData.length; i++) {
 				if(splitData[i].indexOf('http') != -1) {
-					url = '<a href="' + splitData[i] + '">' + splitData[i] + '</a>'
-					text = text.replace(splitData[i], url);
+					
+					content = content.replace(splitData[i], splitData[i].wrap('<a></a>'));
 					
 				}
 			}
-			console.log(text);
-		})
+			console.log(content);
+			$('#myissueContent').text(content);
+		}) */
 	</script>
 </body>
 </html>

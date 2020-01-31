@@ -54,14 +54,14 @@ border-radius: 5px;
             Content body start
         ***********************************-->
         <div class="content-body"style="height: 680px;">
-        <div class="container-fluid row" style="padding-right: 0px; margin-right: 0px;margin-left: 0px; padding-left: 15px;">
-        <div class="card" style="padding-left: 2%;padding-right: 0px; padding-top:1%;min-width:900px;height: auto;overflow: auto;">
+        <div class="container-fluid" ">
+        <div class="card">
         <form action="myissueEditOk.do" method="POST" enctype="multipart/form-data">
         <%-- <input type="hidden" name="tseq" value="${tissue.tseq}"> --%>
         <input type="hidden" name="piseq" value="${myissue.piseq}">
 		<div class="row"style="margin:2% 2% 0 2%" >
-		<div class="col-sm-7">
-			<input type="text" class="form-control" name="title" value="${myissue.pititle}" style="border: 0px; border-bottom: 1px solid #ced4da; font-size: 20px">
+		<div class="col-sm-6">
+			<input type="text" class="form-control" name="title" value="${myissue.pititle}" style="border: 0px; border-bottom: 1px solid #ced4da; font-size: 20px;padding-left: 0px;">
 		</div>
 		<div class="col-sm-1">
 		</div>
@@ -72,14 +72,7 @@ border-radius: 5px;
 			<input type="button" class="form-control editdelete" value="돌아가기" id="returnIssue">
 		</div>
 		</div>
-		<c:choose>
-        <c:when test="${myissue.pistart!=null}">
-		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%; margin-top: 2%"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i><input type="text" id="editFrom" name="editFrom" style="border: 0; border-bottom: 1px solid #ced4da; text-align: center" value="${fn:substring(myissue.pistart,0,10)}"> ~ <input type="text" id="editTo" name="editTo" style="border: 0; border-bottom: 1px solid #ced4da; text-align: center" value="${fn:substring(myissue.piend,0,10)}"></div>
-		</c:when>
-		<c:otherwise>
-		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>등록된 일정이 없습니다.</div>
-		</c:otherwise>
-		</c:choose>
+		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%; margin-top: 2%;margin-top: 1%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i><input type="text" id="editFrom" name="editFrom" style="border: 0; border-bottom: 1px solid #ced4da; text-align: center" value="${fn:substring(myissue.pistart,0,10)}"> ~ <input type="text" id="editTo" name="editTo" style="border: 0; border-bottom: 1px solid #ced4da; text-align: center" value="${fn:substring(myissue.piend,0,10)}"></div>
 		<div id="edittodoresult">
 		<c:forEach items="${mentions}" var="m">
 		<div class="myissueDetail" id="myissueMention">
@@ -139,10 +132,10 @@ border-radius: 5px;
     ***********************************-->
 <div class="list-group" id="editMentionlist" style="display: none">
       <a href="#" class="list-group-item list-group-item-action menli" id="editMen1"style="padding: 5px;">멘션</a> 
-      <a href="#" class="list-group-item list-group-item-action menli" id="editMen3"style="padding: 5px">구글 드라이브</a> 
-      <a href="#" class="list-group-item list-group-item-action menli" id="editMen4"style="padding: 5px">파일</a> 
-      <a href="#" class="list-group-item list-group-item-action menli" id="editMen7"style="padding: 5px">의사결정</a> 
-      <a href="#" class="list-group-item list-group-item-action menli" id="editMen8"style="padding: 5px">할 일</a> 
+      <a href="#" class="list-group-item list-group-item-action menli" id="editMen2"style="padding: 5px">구글 드라이브</a> 
+      <a href="#" class="list-group-item list-group-item-action menli" id="editMen3"style="padding: 5px">파일</a> 
+      <!-- <a href="#" class="list-group-item list-group-item-action menli" id="editMen7"style="padding: 5px">의사결정</a> --> 
+      <a href="#" class="list-group-item list-group-item-action menli" id="editMen4"style="padding: 5px">할 일</a> 
 </div>
 <div class="list-group" id="editMemlist" style="display: none">
 <c:forEach items="${tpmemlist}" var="t">
@@ -228,7 +221,41 @@ $('.divDelete2').click(function(){
 	$(this).parent().remove();
 })
 
-var tar = 1;
+var tar = 0;
+var tar2 = 1;
+$('.menli').keydown(function(event) {
+	   var key = event.keyCode;
+	    switch (key) {
+	    case 38:
+	       console.log("위");
+	       tar2--;
+	       break;
+	    case 40:
+	       tar2++;
+	       break;
+	    case 39:
+	       break;
+	    case 37:
+	       break;
+	    }
+	    console.log(tar2);
+	    if (tar2 < 0) {
+	       tar2 = 0;
+	    }
+	    if (tar2 > 4) {
+	       tar2 = 4;
+	    }
+	    $('#editMen' + tar2).focus();
+	    if ($('#editMen' + tar2).focus()) {
+	       $('.menli').css('background-color', '#fff');
+	       $('#editMen' + tar2).css(
+	             'background-color',
+	             'rgba(225, 225, 225,0.5)');
+	    }
+	    if(event.keyCode == 13){
+	       $(this).click();
+	    }
+	});
 	$('#editIssuecontent').keydown(
 			function(event) {
 				if($('#editMentionlist').css('display')==('flex')){
@@ -304,7 +331,7 @@ var tar = 1;
 			val : textarea.value
 		});
 	}); */
-	$('#editMen3').click(function() {
+	$('#editMen2').click(function() {
 		$('#editMentionlist').hide();
 		var text = "";
 		text = $('#editIssuecontent').val().replace("@", "");
@@ -313,7 +340,7 @@ var tar = 1;
 		$('#editIssuecontent').append($('.picker-dialog'));
 
 	});
-	$('#editMen4').click(function() {
+	$('#editMen3').click(function() {
 		$('#editMentionlist').hide();
 		$('#fileclick2').click();
 	});
@@ -354,7 +381,7 @@ var tar = 1;
 $('#todoresult').show();
 		
 	});
-	$('#editMen8').click(
+	$('#editMen4').click(
 			function() {
 				var text = "";
 				text = $('#editIssuecontent').val().replace("@", "");

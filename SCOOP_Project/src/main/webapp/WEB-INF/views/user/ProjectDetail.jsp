@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="<c:url value="/resources/plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css" />">
     <!-- Custom Stylesheet -->
     <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
-
 </head>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -317,16 +316,24 @@ $(function(){
          <div class="col-sm-7 newissue">
          <c:choose>
 				<c:when test="${ti.isprocess==0}">
-				<div id="create" class="iconify" data-icon="uil:file-exclamation-alt" data-inline="false" style="width:27px;height: auto;margin-left: 1%;"></div>
+				<span data-toggle="tooltip" data-placement="left" title="발의됨" style="margin-left: 5px;">
+				<span id="create" class="iconify" data-icon="uil:file-exclamation-alt" data-inline="false" style="width:27px;height: auto;color:#ff6384;"></span>
+				</span>
 				</c:when>
 				<c:when test="${ti.isprocess==1}">
-				<div id="ing" class="iconify" data-icon="uil:file-edit-alt" data-inline="false" style="width:27px;height: auto;color: #2671bd;margin-left: 1%;"></div>
+				<span data-toggle="tooltip" data-placement="left" title="진행중"style="margin-left: 5px;">
+				<span id="ing" class="iconify" data-icon="uil:file-edit-alt" data-inline="false" style="width:27px;height: auto;color: #36a2eb;"></span>
+				</span>
 				</c:when>
 				<c:when test="${ti.isprocess==2}">
-				<div id="stop" class="iconify" data-icon="uil:file-block-alt" data-inline="false" style="width:27px;height: auto;color:#cca352;margin-left: 1%;"></div>
+				<span data-toggle="tooltip" data-placement="left" title="일시중지" style="margin-left: 5px;">
+				<span id="stop" class="iconify" data-icon="uil:file-block-alt" data-inline="false" style="width:27px;height: auto;color:#e3ad29;"></span>
+				</span>
 				</c:when>
 				<c:when test="${ti.isprocess==3}">
-				<div id="finish" class="iconify" data-icon="uil:file-check-alt" data-inline="false" style="width:27px;height: auto;color:#26805c;margin-left: 1%;"></div>
+				<span data-toggle="tooltip" data-placement="left" title="완료" style="margin-left: 5px;">
+				<span id="finish" class="iconify" data-icon="uil:file-check-alt" data-inline="false" style="width:27px;height: auto;color:#4bc09b;"></span>
+				</span>
 				</c:when>	
 			</c:choose>
          <a href="teamissueDetail.do?tiseq=${ti.tiseq}" style="margin-left: 5%;">${ti.tititle}</a> 

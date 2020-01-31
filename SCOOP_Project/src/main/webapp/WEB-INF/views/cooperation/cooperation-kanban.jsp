@@ -249,9 +249,9 @@ function drop(ev) {
 		<hr style="margin-top: 0;margin-left: 2%; margin-right: 2%;margin-bottom: 0px;">
 		<div class="row" style="margin-left: 2%; margin-right: 2%;">
 			<div id="todolist" class="col-sm-3 kanban">
-			<div class="realkan" id="first" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #888;height: 500px;overflow: auto;">
+			<div class="realkan" id="first" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #ff6384;height: 500px;overflow: auto;">
 			<div style="margin-bottom: 7%;">
-			<div class="iconify" data-icon="uil:file-exclamation-alt" data-inline="false" style="width: 25px;height: auto;"></div>
+			<div class="iconify" data-icon="uil:file-exclamation-alt" data-inline="false" style="width: 25px;height: auto;color:#ff6384"></div>
 			<span style="font-size:15px;padding-top:1%;">발의됨(<span id="todolistCnt">0</span>)</span><hr>
 			</div>
 			
@@ -266,9 +266,9 @@ function drop(ev) {
 			</div>
 			</div>
 			<div id="doing" class="col-sm-3 kanban">
-				<div class="realkan"id="second" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #2671bd;height: 500px;overflow: auto">
+				<div class="realkan"id="second" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #36a2eb;height: 500px;overflow: auto">
 				<div style="margin-bottom: 7%;">
-				<div class="iconify" data-icon="uil:file-edit-alt" data-inline="false"style="width: 25px;height: auto;color:#2671bd"></div>
+				<div class="iconify" data-icon="uil:file-edit-alt" data-inline="false"style="width: 25px;height: auto;color:#36a2eb"></div>
 				<span style="font-size:15px;padding-top:1%;">진행중 (<span id="doingCnt">0</span>)</span><hr>
 				</div>
 				
@@ -282,9 +282,9 @@ function drop(ev) {
 				</div>
 			</div>
 			<div id="validate" class="col-sm-3 kanban" ondrop="drop(event)">
-				<div class="realkan" id="third" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #cca352;height: 500px;overflow: auto">
+				<div class="realkan" id="third" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #e3ad29;height: 500px;overflow: auto">
 				<div style="margin-bottom: 7%;">
-				<div class="iconify" data-icon="uil:file-block-alt" data-inline="false" style="width: 25px;height: auto;color:#cca352"></div>
+				<div class="iconify" data-icon="uil:file-block-alt" data-inline="false" style="width: 25px;height: auto;color:#e3ad29"></div>
 				<span style="font-size:15px;padding-top:1%;">일시중지 (<span id="validateCnt">0</span>)</span><hr>
 				</div>
 				
@@ -298,9 +298,9 @@ function drop(ev) {
 				</div>
 			</div>
 			<div id="complete" class="col-sm-3 kanban" ondrop="drop(event)">
-				<div class="realkan" id="fourth" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #26805c;height: 500px;overflow: auto">
+				<div class="realkan" id="fourth" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #4bc09b;height: 500px;overflow: auto">
 				<div style="margin-bottom: 7%;">
-				<div class="iconify" data-icon="uil:file-check-alt" data-inline="false" style="width: 25px;height: auto;color:#26805c"></div>
+				<div class="iconify" data-icon="uil:file-check-alt" data-inline="false" style="width: 25px;height: auto;color:#4bc09b"></div>
 				<span style="font-size:15px;padding-top:1%;">완료 (<span id="completeCnt">0</span>)</span><hr>
 				</div>
 				

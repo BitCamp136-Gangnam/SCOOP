@@ -31,6 +31,7 @@ import kr.or.scoop.dao.MyIssueDao;
 import kr.or.scoop.dao.ProjectDao;
 import kr.or.scoop.dao.TissueDao;
 import kr.or.scoop.dto.BookMark;
+import kr.or.scoop.dto.FileDrive;
 import kr.or.scoop.dto.Member;
 import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.dto.Process;
@@ -120,6 +121,9 @@ public class TeamController {
 		
 		TeamPjt pjt = dao.detailPJT(tseq);
 		List<Tissue> tp = dao.getTissue(tseq);
+		for(int i=0; i<tp.size();i++) {
+			tp.get(i).setTicontent(tp.get(i).getTicontent().replace("<br>", " "));
+		}
 		List<ProjectMemberlist> projectMemberlist =md.projectMemberlist(tseq);
 		List<BookMark> bookMark = mydao.getBookMark(email);
 		
@@ -135,7 +139,13 @@ public class TeamController {
 		model.addAttribute("projectmember", projectMemberlist);
 		model.addAttribute("rank", rank);
 		model.addAttribute("bookMark", bookMark);
-		
+		List<FileDrive> filedrive = null;
+		try {
+			 filedrive = md.getFileDrive(email);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		session.setAttribute("filed", filedrive);
 		return "user/ProjectDetail";
 		
 	}
@@ -146,12 +156,14 @@ public class TeamController {
 				HttpSession session,HttpServletRequest request, String[] mentions, String[] toWork, String[] doWork, String[] googleDrive,@RequestParam(value="files") MultipartFile[] files) throws IOException {
 			String path = "";
 			String email = (String)session.getAttribute("email");
+			System.out.println("가나다" + issuecontent);
 			int tseq = 0;
 			 //실 DB Insert
 			if (selectTeam.equals((String) session.getAttribute("email")) || selectTeam == null) {
 				MyIssue myissue = new MyIssue();
 				myissue.setEmail((String) session.getAttribute("email"));
 				myissue.setPititle(issuetitle);
+				issuecontent = issuecontent.replace("\r\n", "<br>");
 				myissue.setPicontent(issuecontent);
 				myissue.setIspibook(0);
 				if(fromDate != null) {
@@ -211,6 +223,7 @@ public class TeamController {
 				tissue.setTseq(Integer.parseInt(selectTeam));
 				tissue.setEmail((String)session.getAttribute("email"));
 				tissue.setTititle(issuetitle);
+				issuecontent = issuecontent.replace("\r\n", "<br>");
 				tissue.setTicontent(issuecontent);
 				if(fromDate != null) {
 					 tissue.setTistart(java.sql.Timestamp.valueOf(fromDate+" 00:00:00"));

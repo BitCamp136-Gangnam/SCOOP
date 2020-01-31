@@ -21,12 +21,10 @@ var editEvent = function (event, element, view) {
     } else {
         editEnd.val(event.end.format('YYYY-MM-DD HH:mm'));
     }
-
     modalTitle.html('일정 수정');
     editTitle.val(event.title);
     editStart.val(event.start.format('YYYY-MM-DD HH:mm'));
     editType.val(event.type);
-    editType.attr("readonly", true);
     editTseq.val(event.tseq);
     /*editTiseq.val(event.tiseq);*/
     editDesc.val(event.description);
@@ -93,12 +91,13 @@ var editEvent = function (event, element, view) {
             };
 
         $("#calendar").fullCalendar('updateEvent', event);
-
+        if(typeof editData.tseq == "number"){
         //일정 업데이트
         $.ajax({
         	url: "editTeamCalendar.do",
             type: "post",
             data: editData,
+            async: false,
             success: function (data) {
                 alert("데이터 넘기기 성공");
             },
@@ -106,7 +105,20 @@ var editEvent = function (event, element, view) {
 		    	alert("에러");
 		    }
         });
-
+        } else{
+        	$.ajax({
+            	url: "editPrivateCalendar.do",
+                type: "post",
+                data: editData,
+                async: false,
+                success: function (data) {
+                    alert("데이터 넘기기 성공");
+                },
+                error: function() {
+    		    	alert("에러");
+    		    }
+            });
+        }
     });
 
     // 삭제버튼
@@ -114,14 +126,18 @@ var editEvent = function (event, element, view) {
         $('#deleteEvent').unbind();
         $("#calendar").fullCalendar('removeEvents', [event._id]);
         eventModal.modal('hide');
-        var tiseq = {tiseq:event._id,
-        		username:event.username
-        };
+        console.log(event);
+        
         //삭제시
+        if(typeof event.type == "number"){
+        	var tiseq = {tiseq:event._id,
+            		username:event.username
+            };
         $.ajax({
             type: "post",
             url: "deleteTeamCalendar.do",
             data: tiseq,
+            async: false,
             success: function (response) {
                 alert('삭제되었습니다.');
             },
@@ -129,5 +145,22 @@ var editEvent = function (event, element, view) {
 		    	alert("에러");
 		    }
         });
+        } else{
+        	var tiseq = {piseq:event._id,
+            		username:event.username
+            };
+        	$.ajax({
+                type: "post",
+                url: "deletePrivateCalendar.do",
+                data: tiseq,
+                async: false,
+                success: function (response) {
+                    alert('삭제되었습니다.');
+                },
+                error: function() {
+    		    	alert("에러");
+    		    }
+            });
+        }
     });
 };

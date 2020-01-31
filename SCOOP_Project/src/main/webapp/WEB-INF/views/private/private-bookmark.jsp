@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -112,10 +113,20 @@ $(document).ready(function(){
 			<c:choose>
 				<c:when test="${blist.tiseq != 0}">
 					<div class="col-sm-3 newissue"><!-- <i class="fas fa-angle-double-right" id="" name=""></i> -->
-						<a href="projectDetail.do?tseq=${blist.tseq}">${blist.pname}</a>
+					<c:if test="${fn:length(blist.pname) > 20}">
+						<a href="projectDetail.do?tseq=${blist.tseq}"><c:out value="${fn:substring(blist.pname,0,20)}"/>...</a>
+					</c:if>
+					<c:if test="${fn:length(blist.pname) <= 20}">
+						<a href="projectDetail.do?tseq=${blist.tseq}"><c:out value="${fn:substring(blist.pname,0,20)}"/></a>
+					</c:if>
 					</div>
 					<div class="col-sm-5 newissue">
-						<a href="teamissueDetail.do?tiseq=${blist.tiseq}">${blist.tititle}</a>
+					<c:if test="${fn:length(blist.tititle) > 40}">
+						<a href="teamissueDetail.do?tiseq=${blist.tiseq}"><c:out value="${fn:substring(blist.tititle,0,20)}"/>...</a>
+					</c:if>
+					<c:if test="${fn:length(blist.tititle) <= 40}">
+						<a href="teamissueDetail.do?tiseq=${blist.tiseq}"><c:out value="${fn:substring(blist.tititle,0,20)}"/></a>
+					</c:if>
 					</div>
 					<div class="col-sm-3 newissue">
 						${blist.tiname}
@@ -129,7 +140,12 @@ $(document).ready(function(){
 						<a href="private.do">프라이빗 공간</a>
 					</div>
 					<div class="col-sm-5 newissue" >
-						<a href="myissueDetail.do?piseq=${blist.piseq}">${blist.pititle}</a>
+					<c:if test="${fn:length(blist.pititle) > 40}">
+						<a href="myissueDetail.do?piseq=${blist.piseq}"><c:out value="${fn:substring(blist.pititle,0,40)}"/>...</a>
+					</c:if>
+					<c:if test="${fn:length(blist.pititle) <= 40}">
+						<a href="myissueDetail.do?piseq=${blist.piseq}"><c:out value="${fn:substring(blist.pititle,0,40)}"/></a>
+					</c:if>
 					</div>
 					<div class="col-sm-3 newissue" >
 						${blist.piname}

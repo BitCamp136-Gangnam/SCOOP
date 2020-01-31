@@ -53,6 +53,9 @@ public class PrivateController {
 		
 		MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
 		List<MyIssue> myissuelist = myissuedao.getMyissue(email);
+		for(int i=0; i<myissuelist.size();i++) {
+			myissuelist.get(i).setPicontent(myissuelist.get(i).getPicontent().replace("<br>", " "));
+		}
 		List<BookMark> bookMark = myissuedao.getBookMark(email);
 		
 		System.out.println("bookMark" + bookMark);
@@ -130,8 +133,8 @@ public class PrivateController {
 			result = myissuedao.writeMyCalendar(myissue);
 		} else {
 			System.out.println(start+" 00:00:00");
-			myissue.setTistart(java.sql.Timestamp.valueOf(start+" 00:00:00"));
-			myissue.setTiend(java.sql.Timestamp.valueOf(end+" 00:00:00"));
+			myissue.setPistart(java.sql.Timestamp.valueOf(start+" 00:00:00"));
+			myissue.setPiend(java.sql.Timestamp.valueOf(end+" 00:00:00"));
 			result = myissuedao.writeMyCalendar(myissue);
 		}
 		
