@@ -909,5 +909,12 @@ public class MemberController {
 			
 			return viewpage;
 		}*/
+		
+		// 이메일 인증 확인
+		@RequestMapping(value = "/addCalendarAjax.do")
+		public String addCalendarAjax() {
+			System.out.println("return certified");
+			return "ajax/addCalendarAjax";
+		}
 	
 }

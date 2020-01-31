@@ -138,13 +138,31 @@
 			</div>
 		<c:forEach items="${myissuelist}" var="m">
 		<div class="row" style="margin-left: 2%; margin-right: 2%" id="row">
-			<input type="hidden" name="piseq" value="${m.piseq}" /> 
+			<input type="hidden" name="piseq" value="${m.piseq}" />
+			<c:choose>
+			<c:when test="${fn:length(m.pititle) > 17}"> 
 			<div class="col-sm-3 newissue" >
-				<a href="myissueDetail.do?piseq=${m.piseq}">${m.pititle}</a>
+				<a href="myissueDetail.do?piseq=${m.piseq}"><c:out value="${fn:substring(m.pititle,0,17)}"/>...</a>
 			</div>
+			</c:when>
+			<c:otherwise>
+				<div class="col-sm-3 newissue" >
+				<a href="myissueDetail.do?piseq=${m.piseq}"><c:out value="${fn:substring(m.pititle,0,17)}"/></a>
+			</div>
+			</c:otherwise>
+			</c:choose>
+			<c:choose>
+			<c:when test="${fn:length(m.picontent) > 40}">
+			<div class="col-sm-6 newissue">
+				<a href="myissueDetail.do?piseq=${m.piseq}"><c:out value="${fn:substring(m.picontent,0,40)}"/>...</a>
+			</div>
+			</c:when>
+			<c:otherwise>
 			<div class="col-sm-6 newissue">
 				<a href="myissueDetail.do?piseq=${m.piseq}">${m.picontent}</a>
 			</div>
+			</c:otherwise>
+			</c:choose>
 			<div class="col-sm-2 newissue">
 				<a href="myissueDetail.do?piseq=${m.piseq}">${fn:substring(m.pidate,0,16)}</a>
 			</div>

@@ -82,7 +82,7 @@ var newEvent = function (start, end, eventType) {
             type: "post",
             data: eventData,
             success: function (data) {
-            	location.href="calendar.do";
+            	location.href="addCalendarAjax.do";
                 alert("데이터 넘기기 성공");
                 
             },
