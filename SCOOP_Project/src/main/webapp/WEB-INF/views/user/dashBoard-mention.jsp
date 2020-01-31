@@ -140,10 +140,20 @@
 								<div class="row countRow"
 									style="margin-left: 2%; margin-right: 2%" id="ialarm">
 									<div class="col-sm-3 newissue" id="al">
-										<a href="projectDetail.do?tseq=${m.tseq}">${m.pname}</a>
+									<c:if test="${fn:length(m.pname) > 8}">
+										<a href="projectDetail.do?tseq=${m.tseq}"><c:out value="${fn:substring(m.pname,0,8)}"/>...</a>
+										</c:if>
+									<c:if test="${fn:length(m.pname) <= 8}">
+										<a href="projectDetail.do?tseq=${m.tseq}"><c:out value="${fn:substring(m.pname,0,8)}"/></a>
+										</c:if>
 									</div>
 									<div class="col-sm-6 newissue" id="ti">
-										<a href="teamissueDetail.do?tiseq=${m.tiseq}">${m.tititle}</a>
+									<c:if test="${fn:length(m.tititle) > 19}">
+										<a href="teamissueDetail.do?tiseq=${m.tiseq}"><c:out value="${fn:substring(m.tititle,0,19)}"/>...</a>
+										</c:if>
+									<c:if test="${fn:length(m.tititle) <= 19}">
+										<a href="teamissueDetail.do?tiseq=${m.tiseq}"><c:out value="${fn:substring(m.tititle,0,19)}"/></a>
+										</c:if>
 									</div>
 									<div class="col-sm-3 newissue" id="day">
 										<p>${fn:substring(m.tidate,0,16)}</p>
