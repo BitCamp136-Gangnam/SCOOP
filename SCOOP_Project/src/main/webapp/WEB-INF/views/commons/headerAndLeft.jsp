@@ -822,13 +822,13 @@ span {
                         	<span>&nbsp;&nbsp;파일함</span></span>
                         </li>
                         <hr class="my-2">
-                        <li>
+                       <!--  <li>
                         	<span id="lockScoop" style="cursor: pointer;">
-                        	<!-- <a href="page-lock.jsp"> -->
+                        	<a href="page-lock.jsp">
                         	<span class="icon-lock"></span>
                         	<span>&nbsp;&nbsp;잠금모드</span>
                         	</span>
-                        </li>
+                        </li> -->
                         <c:choose>
                            <c:when test="${kind=='normal'}">
                           		<li>
