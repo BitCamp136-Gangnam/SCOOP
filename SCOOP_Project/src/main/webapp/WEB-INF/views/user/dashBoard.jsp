@@ -92,7 +92,14 @@
          
          <c:choose>
          	<c:when test="${mpl.tseq==mynewtissue.tseq && mpl.tseq !=null && mynewtissue.tidate > mpl.tpaddtime}">
-         	<p><a href="projectDetail.do?tseq=${mynewtissue.tseq }">${mpl.pname }</a></p>
+         	<p>
+         	<c:if test="${fn:length(mpl.pname) > 8}">
+         	<a href="projectDetail.do?tseq=${mynewtissue.tseq }"><c:out value="${fn:substring(mpl.pname,0,8)}"/>...</a>
+         	</c:if>
+         	<c:if test="${fn:length(mpl.pname) < 8}">
+         	<a href="projectDetail.do?tseq=${mynewtissue.tseq }"><c:out value="${fn:substring(mpl.pname,0,8)}"/></a>
+         	</c:if>
+         	</p>
          	</c:when>
          	
          </c:choose>
@@ -101,7 +108,14 @@
          
          <c:choose>
          	<c:when test="${mpl.tseq==mynewtissue.tseq && mpl.tseq !=null && mynewtissue.tidate > mpl.tpaddtime}">
-         	<p><a href="teamissueDetail.do?tiseq=${mynewtissue.tiseq}">${mynewtissue.tititle}</a></p>
+         	<p>
+         	<c:if test="${fn:length(mynewtissue.tititle) > 19}">
+         	<a href="teamissueDetail.do?tiseq=${mynewtissue.tiseq}"><c:out value="${fn:substring(mynewtissue.tititle,0,19)}"/>...</a>
+         	</c:if>
+         	<c:if test="${fn:length(mynewtissue.tititle) < 19}">
+         	<a href="teamissueDetail.do?tiseq=${mynewtissue.tiseq}"><c:out value="${fn:substring(mynewtissue.tititle,0,19)}"/></a>
+         	</c:if>
+         	</p>
          	</c:when>
          	
          </c:choose>
@@ -210,38 +224,13 @@
 				success: function(data) {
 					console.log(data);
 					/* 차트 생성 */
+					$('#myChart').remove();
+					$('#myChartDiv').append('<canvas id="myChart"></canvas>');
 					let ctx = document.getElementById('myChart').getContext('2d');
+					var chartName = '칸반 일정 진행도';
 					if(data.initiative==0 && data.progress==0 && data.pause==0 && data.complete==0){
 						console.log("없다");
-						let myChart = new Chart(ctx,
-								{
-									type : 'doughnut',
-									data : {
-										labels : [ '발의됨', '진행중', '일시중지', '완료' ],
-										datasets : [ {
-											label : '# of Votes',
-											data : [ 1, 1, 1, 1 ],
-											backgroundColor : [ 'rgba(136, 136, 136, 0.2)',
-													'rgba(38, 113, 189, 0.2)',
-													'rgba(204, 163, 82, 0.2)',
-													'rgba(38, 128, 92, 0.2)' ],
-											borderColor : [ 'rgba(136, 136, 136, 1)',
-												'rgba(38, 113, 189, 1)',
-												'rgba(204, 163, 82, 1)',
-												'rgba(38, 128, 92, 1)' ],
-											borderWidth : 1
-										} ]
-									},
-									options : {
-										title : {
-											display : true,
-											text : '아직 프로젝트에 등록된 이슈가 없습니다'
-										},
-										/* responsive : false, */
-										
-									}
-								});
-						return;
+						chartName = '아직 프로젝트에 등록된 이슈가 없습니다';
 					}
 					let myChart = new Chart(ctx,
 							{
@@ -251,21 +240,21 @@
 									datasets : [ {
 										label : '# of Votes',
 										data : [ data.initiative, data.progress, data.pause, data.complete ],
-										backgroundColor : [ 'rgba(136, 136, 136, 0.2)',
-											'rgba(38, 113, 189, 0.2)',
-											'rgba(204, 163, 82, 0.2)',
-											'rgba(38, 128, 92, 0.2)' ],
-									borderColor : [ 'rgba(136, 136, 136, 1)',
-										'rgba(38, 113, 189, 1)',
-										'rgba(204, 163, 82, 1)',
-										'rgba(38, 128, 92, 1)' ],
+										backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+		                                    'rgba(54, 162, 235, 0.2)',
+		                                    'rgba(255, 206, 86, 0.2)',
+		                                    'rgba(75, 192, 192, 0.2)' ],
+		                              borderColor : [ 'rgba(255, 99, 132, 1)',
+		                                    'rgba(54, 162, 235, 1)',
+		                                    'rgba(255, 206, 86, 1)',
+		                                    'rgba(75, 192, 192, 1)' ],
 										borderWidth : 1
 									} ]
 								},
 								options : {
 									title : {
 										display : true,
-										text : '칸반 일정 진행도'
+										text : chartName
 									},
 									/* responsive : false, */
 									
@@ -304,41 +293,13 @@
 				data: {"tseq" : tseq},
 				success: function(data) {
 					console.log(data);
-					if(data.initiative==0 && data.progress==0 && data.pause==0 && data.complete==0){
-						console.log("없다");
-					}
+					$('#myChart').remove();
+					$('#myChartDiv').append('<canvas id="myChart"></canvas>');
 					let ctx = document.getElementById('myChart').getContext('2d');
+					var chartName = '칸반 일정 진행도';
 					if(data.initiative==0 && data.progress==0 && data.pause==0 && data.complete==0){
 						console.log("없다");
-						let myChart = new Chart(ctx,
-								{
-									type : 'doughnut',
-									data : {
-										labels : [ '발의됨', '진행중', '일시중지', '완료' ],
-										datasets : [ {
-											label : '# of Votes',
-											data : [ 1, 1, 1, 1 ],
-											backgroundColor : [ 'rgba(136, 136, 136, 0.2)',
-													'rgba(38, 113, 189, 0.2)',
-													'rgba(204, 163, 82, 0.2)',
-													'rgba(38, 128, 92, 0.2)' ],
-											borderColor : [ 'rgba(136, 136, 136, 1)',
-												'rgba(38, 113, 189, 1)',
-												'rgba(204, 163, 82, 1)',
-												'rgba(38, 128, 92, 1)' ],
-											borderWidth : 1
-										} ]
-									},
-									options : {
-										title : {
-											display : true,
-											text : '아직 프로젝트에 등록된 이슈가 없습니다'
-										},
-										/* responsive : false, */
-										
-									}
-								});
-						return;
+						chartName = '아직 프로젝트에 등록된 이슈가 없습니다';
 					}
 					let myChart = new Chart(ctx,
 							{
@@ -348,14 +309,14 @@
 									datasets : [ {
 										label : 'Scoop',
 										data : [ data.initiative, data.progress, data.pause, data.complete ],
-										backgroundColor : [ 'rgba(136, 136, 136, 0.2)',
-											'rgba(38, 113, 189, 0.2)',
-											'rgba(204, 163, 82, 0.2)',
-											'rgba(38, 128, 92, 0.2)' ],
-									borderColor : [ 'rgba(136, 136, 136, 1)',
-										'rgba(38, 113, 189, 1)',
-										'rgba(204, 163, 82, 1)',
-										'rgba(38, 128, 92, 1)' ],
+										backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
+		                                    'rgba(54, 162, 235, 0.2)',
+		                                    'rgba(255, 206, 86, 0.2)',
+		                                    'rgba(75, 192, 192, 0.2)' ],
+		                              borderColor : [ 'rgba(255, 99, 132, 1)',
+		                                    'rgba(54, 162, 235, 1)',
+		                                    'rgba(255, 206, 86, 1)',
+		                                    'rgba(75, 192, 192, 1)' ],
 										borderWidth : 1
 									} ]
 								},
@@ -365,7 +326,7 @@
 									},
 									title : {
 										display : true,
-										text : '칸반 일정 진행도'
+										text : chartName
 									},
 									/* responsive : false, */
 									
