@@ -128,8 +128,8 @@ var editEvent = function (event, element, view) {
                 },
                 error: function() {
                 	Swal.fire(
-                			  '캘린더 삭제 실패!',
-                			  '삭제 도중 에러가 발생했습니다',
+                			  '캘린더 변경 실패!',
+                			  '변경 도중 에러가 발생했습니다',
                 			  'error'
                 			)
     		    }

@@ -216,11 +216,18 @@ var calendar = $('#calendar').fullCalendar({
       url: "editPrivateCalendar.do",
       data: editData,
       success: function (response) {
-        alert('수정: ' + newDates.startDate + ' ~ ' + newDates.endDate);
-        console.log(response);
+    	  Swal.fire(
+      			  '개인캘린더 변경 성공!',
+      			  '개인일정이 변경되었습니다',
+      			  'success'
+      			)
       },
       error: function() {
-	    	alert("에러");
+    	  Swal.fire(
+    			  '개인캘린더 변경 실패!',
+    			  '개인일정 변경 도중 에러가 발생했습니다',
+    			  'error'
+    			)
 	    }
     });
 
@@ -264,11 +271,18 @@ var calendar = $('#calendar').fullCalendar({
         url: "editPrivateCalendar.do",
         data: dropEditData,
         success: function (response) {
-          alert('수정: ' + newDates.startDate + ' ~ ' + newDates.endDate);
-          console.log(response);
+        	Swal.fire(
+        			  '개인캘린더 변경 성공!',
+        			  '개인일정이 변경되었습니다',
+        			  'success'
+        			)
         },
         error: function() {
-  	    	alert("에러");
+        	Swal.fire(
+      			  '개인캘린더 변경 실패!',
+      			  '변경 도중 에러가 발생했습니다',
+      			  'error'
+      			)
   	    }
       });
 
