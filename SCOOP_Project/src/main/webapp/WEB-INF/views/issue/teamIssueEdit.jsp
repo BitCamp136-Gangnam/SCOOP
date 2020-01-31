@@ -370,7 +370,7 @@ $('.menli').keydown(function(event) {
 		for(let i=0; i<$("#fileclick2")[0].files.length;i++){
 		$('#edittodoresult').append('<div class="myissueDetail" id="myissueMention">'+
 				'<a href="fileDownload.do?fileName='+files[i].name+'"><span class="iconify" data-icon="si-glyph:file-box" data-inline="false"></span>'+files[i].name+'</a>'+
-				'<span class="divDelete" style="cursor:pointer;"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span>'+
+				'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="divDelete" style="cursor:pointer;"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span>'+
 				//'<input type="file" multiple="multiple" hidden="" name="editFile" value="'+files[i].name+'">'+
 				'<br>'+
 				'</div>')
@@ -407,7 +407,7 @@ $('#todoresult').show();
 							$('#editIssuecontent').val(text);
 							$('#edittodoresult').append('<div class="myissueDetail" id="myissueMention">'+
 									'<sup><i class="fas fa-quote-left" style="color:#ca0000; font-size: 7px"></i></sup> @'+ $(this).text() + ' <sup><i class="fas fa-quote-right"style="color:#ca0000;font-size: 7px"></i></sup>'+
-									'<span class="divDelete" style="cursor:pointer;"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span>'+
+									'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="divDelete" style="cursor:pointer;"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span>'+
 									'<input type="hidden" name="editMention" value="'+$(this).attr('id').split('/')[1]+'">'+
 									'<br>');
 							$('#edittodoresult').append('<input type="hidden" name="mentions" value="'+ $(this).attr('id').split('/')[1] + '">');
@@ -445,7 +445,7 @@ $('#todoresult').show();
 								'<i class="far fa-check-circle"style="padding-right: 5px;"></i>${sessionScope.name}'+
 								'<i class="fas fa-long-arrow-alt-right" style="margin-left:5px;margin-right: 5px;"></i>'+ $('#edittodomem').val()+'<br>'+
 								': '+$('#edittodolist').val()+
-								'<span class="divDelete" style="cursor:pointer;"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span>'+
+								'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="divDelete" style="cursor:pointer;"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span>'+
 								'<input type="hidden" name="editToname" value="'+$('#edittodomem').attr('name').split("/")[1]+'">'+
 								'<input type="hidden" name="editDowork" value="'+$('#edittodolist').val()+'">'+
 								'<br>'+
