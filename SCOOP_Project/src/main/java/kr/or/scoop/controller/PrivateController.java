@@ -36,12 +36,13 @@ import net.sf.json.JSONObject;
 
 @Controller
 public class PrivateController {
+	
 	@Autowired
 	private MemberService service;
 
-	
 	@Autowired
 	private SqlSession sqlsession;
+	
 	//프라이빗 공간 이동
 	@RequestMapping(value="private.do" , method = RequestMethod.GET)
 	public String privateIn(HttpSession session, Model model) {

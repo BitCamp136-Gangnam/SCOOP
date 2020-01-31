@@ -31,6 +31,7 @@ import kr.or.scoop.dao.MyIssueDao;
 import kr.or.scoop.dao.ProjectDao;
 import kr.or.scoop.dao.TissueDao;
 import kr.or.scoop.dto.BookMark;
+import kr.or.scoop.dto.FileDrive;
 import kr.or.scoop.dto.Member;
 import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.dto.Process;
@@ -135,7 +136,13 @@ public class TeamController {
 		model.addAttribute("projectmember", projectMemberlist);
 		model.addAttribute("rank", rank);
 		model.addAttribute("bookMark", bookMark);
-		
+		List<FileDrive> filedrive = null;
+		try {
+			 filedrive = md.getFileDrive(email);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		session.setAttribute("filed", filedrive);
 		return "user/ProjectDetail";
 		
 	}
@@ -594,8 +601,45 @@ public class TeamController {
 				System.out.println(data);
 				
 			}
+			MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
+			List<MyIssue> myissuelist = myissuedao.getMyissue(email);
+			System.out.println("myissuelist for문 전");
+			if(!myissuelist.isEmpty()) {
+				System.out.println("myissuelist 빈공간체크");
+				for(MyIssue myissue : myissuelist) {
+					if(myissue.getPistart()!=null) {
+					JSONObject data = new JSONObject();
+					int y = myissue.getAllDay();
+					
+					data.put("_id", myissue.getPiseq());
+					data.put("title", myissue.getPititle());
+					data.put("description", myissue.getPicontent());
+					boolean allDay;
+					if(y==0) {
+						allDay = false;
+						data.put("start", (String)sdf.format(myissue.getPistart()).toString());
+						data.put("end", (String)sdf.format(myissue.getPiend()).toString());
+					} else {
+						allDay = true;
+						data.put("start", (String)sdft.format(myissue.getPistart()).toString());
+						data.put("end", (String)sdft.format(myissue.getPiend()).toString());
+					}
+					
+					data.put("type", "프라이빗 공간");
+					
+					
+					data.put("username", session.getAttribute("name"));
+					data.put("backgroundColor", myissue.getBackgroundColor());
+					data.put("textColor", myissue.getTextColor());
+					
+					data.put("allDay", allDay);
+					jArray.add(data);
+				}
+				}
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
+			System.out.println("myissuelist 에러");
 		}
 		System.out.println("jArray 입니다"+jArray);
 		

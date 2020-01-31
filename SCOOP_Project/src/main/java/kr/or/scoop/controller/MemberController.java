@@ -248,6 +248,7 @@ public class MemberController {
 		session.setAttribute("role", role.getRname());
 		session.setAttribute("count", count);
 		session.setAttribute("filed", filedrive);
+		System.out.println(filedrive);
 		try {
 			pjtlist = noticeDao.getPJT(email);
 			tpmemlist = memberdao.getTpmembers(member.getEmail());
@@ -908,5 +909,12 @@ public class MemberController {
 			
 			return viewpage;
 		}*/
+		
+		// 이메일 인증 확인
+		@RequestMapping(value = "/addCalendarAjax.do")
+		public String addCalendarAjax() {
+			System.out.println("return certified");
+			return "ajax/addCalendarAjax";
+		}
 	
 }
