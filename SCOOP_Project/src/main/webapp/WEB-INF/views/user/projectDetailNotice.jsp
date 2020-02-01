@@ -83,20 +83,26 @@
         <div class="container-fluid row" style="padding-right: 15px; margin-right: 0px;margin-left: 0px; padding-left: 15px;">
         <div class="card" style="padding-left: 15px;padding-right: 15px; padding-top:1%;width:100%;height: auto;overflow: auto;">
 		<div class="row"style="margin:2% 2% 0 2%" >
-				<h3 id="myissueSubject" style="padding-top: 2%;padding-left: 1%;">${detail.pntitle}
+				<div class="col-sm-9">
+				<h3 id="myissueSubject" style="padding-top: 2%;padding-left: 1%;">${detail.pntitle}</h3>
+				</div>
 				<c:if test="${rank == 100}">
-					<span id="pjNoticeEd" data-toggle="tooltip" data-placement="top" title="공지사항 수정">
-					<span class="fas fa-cog" id="pjnoticeedit" style="margin-left: 5px;cursor: pointer; font-size: 15px"></span>
+					<div class="col-sm-1" style="text-align: right; padding: 0">
+					<span id="pjNoticeEd">
+					<span class="fas fa-cog" id="pjnoticeedit" style="margin-left: 5px;cursor: pointer; font-size: 35px;padding-top: 15px"></span>
 					</span>
-					<span id="pjNoticeDel" data-toggle="tooltip" data-placement="top" title="공지사항 삭제" >
-					<span class="iconify" data-icon="octicon:x" data-inline="false" style="cursor: pointer;font-size: 17px;margin-bottom: 5px;"></span>
+					</div>
+					<div class="col-sm-1" style="text-align: center; padding: 0">
+					<span id="pjNoticeDel">
+					<span class="iconify" data-icon="topcoat:delete" data-inline="false" style="cursor: pointer;font-size: 50px;margin-bottom: 5px;padding-top: 10px"></span>
 					</span>
+					</div>
 				</c:if>		
-					<span id="pjNoticeBack" data-toggle="tooltip" data-placement="top" title="뒤로 돌아가기">
-					<span class="iconify" data-icon="typcn:arrow-back" data-inline="false" style="cursor: pointer; font-size: 17px;margin-bottom: 5px;"></span>
-					</span>			
-				</h3>
-
+					<div class="col-sm-1" style="padding: 0">
+					<span id="pjNoticeBack">
+					<span class="iconify" data-icon="entypo:back" data-inline="false" style="cursor: pointer; font-size: 55px;margin-bottom: 5px;padding-top: 10px"></span>
+					</span>
+					</div>			
 		</div>
 		<div class="myissueDetail" id="myissueMention"><sup><i class="fas fa-quote-left" style="color:#ca0000;"></i></sup> 멘션 멤버 이름 넣는 곳 <sup><i class="fas fa-quote-right"style="color:#ca0000;"></i></sup></div>
 		<div class="myissueDetail" id="myissueGoogledrive"><i class="fab fa-google-drive"></i>
