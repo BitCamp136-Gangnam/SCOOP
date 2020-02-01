@@ -182,4 +182,7 @@ where tseq = #{tseq}
 <delete id="teamIssueDelete">
 	delete tissue where tiseq= #{tiseq}
 </delete>
+<delete id="delComment">
+	delete reply where replyseq=#{replyseq}
+</delete>
 </mapper>

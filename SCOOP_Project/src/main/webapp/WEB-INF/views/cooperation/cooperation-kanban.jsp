@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html>
 
@@ -258,8 +259,15 @@ function drop(ev) {
 			  <c:forEach items="${tissuelist}" var="tl">
 			  	  <c:set value="${tl.tseq}" var="tseq"></c:set>
 			  	  <c:if test="${tl.isprocess==0 }">
-			  	  <div draggable="true" ondragstart="drag(event)" id="${tl.tiseq }" name="${tl.isprocess }" class="drags" style="margin-bottom: 5%;" >${tl.tititle}
-			  	  <a href="teamissueDetail.do?tiseq=${tl.tiseq}" ></a> 
+			  	  <div draggable="true" ondragstart="drag(event)" id="${tl.tiseq }" name="${tl.isprocess }" class="drags" style="margin-bottom: 5%;" >
+			  	   <c:choose>
+           				<c:when test="${fn:length(tl.tititle) > 15}">
+			  	  			<a href="teamissueDetail.do?tiseq=${tl.tiseq}" >${fn:substring(tl.tititle,0,15)}...</a>
+               			</c:when>
+               		<c:otherwise>
+               				<a href="teamissueDetail.do?tiseq=${tl.tiseq}" >${tl.tititle}</a>
+           			</c:otherwise> 
+          			</c:choose>     
 			      </div>
 			  	  </c:if>
 			  </c:forEach>
@@ -274,8 +282,15 @@ function drop(ev) {
 				
 				<c:forEach items="${tissuelist}" var="tl">
 			  	  <c:if test="${tl.isprocess==1 }">
-			  	  <div draggable="true" ondragstart="drag(event)" id="${tl.tiseq }" name="${tl.isprocess }" class="drags" style="margin-bottom: 5%;">${tl.tititle}
-			  	  <a href="teamissueDetail.do?tiseq=${tl.tiseq}"></a>
+			  	  <div draggable="true" ondragstart="drag(event)" id="${tl.tiseq }" name="${tl.isprocess }" class="drags" style="margin-bottom: 5%;">
+			  	  	  	   <c:choose>
+           				<c:when test="${fn:length(tl.tititle) > 15}">
+			  	  			<a href="teamissueDetail.do?tiseq=${tl.tiseq}" >${fn:substring(tl.tititle,0,15)}...</a>
+               			</c:when>
+               		<c:otherwise>
+               				<a href="teamissueDetail.do?tiseq=${tl.tiseq}" >${tl.tititle}</a>
+           			</c:otherwise> 
+          			</c:choose>  
 			      </div>
 			  	  </c:if>
 				  </c:forEach>
@@ -290,8 +305,15 @@ function drop(ev) {
 				
 				<c:forEach items="${tissuelist}" var="tl">
 			  	  <c:if test="${tl.isprocess==2 }">
-			  	  <div draggable="true" ondragstart="drag(event)" id="${tl.tiseq }" name="${tl.isprocess }" class="drags" style="margin-bottom: 5%;">${tl.tititle}
-			  	  <a href="teamissueDetail.do?tiseq=${tl.tiseq}"></a>
+			  	  <div draggable="true" ondragstart="drag(event)" id="${tl.tiseq }" name="${tl.isprocess }" class="drags" style="margin-bottom: 5%;">
+			  	  	  	   <c:choose>
+           				<c:when test="${fn:length(tl.tititle) > 15}">
+			  	  			<a href="teamissueDetail.do?tiseq=${tl.tiseq}" >${fn:substring(tl.tititle,0,15)}...</a>
+               			</c:when>
+               		<c:otherwise>
+               				<a href="teamissueDetail.do?tiseq=${tl.tiseq}" >${tl.tititle}</a>
+           			</c:otherwise> 
+          			</c:choose>  
 			      </div>
 			  	  </c:if>
 			  </c:forEach>
@@ -306,8 +328,15 @@ function drop(ev) {
 				
 				<c:forEach items="${tissuelist}" var="tl">
 			  	  <c:if test="${tl.isprocess==3 }">
-			  	  <div draggable="true" ondragstart="drag(event)" id="${tl.tiseq }" name="${tl.isprocess }" class="drags" style="margin-bottom: 5%;">${tl.tititle}
-			  	  <a href="teamissueDetail.do?tiseq=${tl.tiseq}"></a>
+			  	  <div draggable="true" ondragstart="drag(event)" id="${tl.tiseq }" name="${tl.isprocess }" class="drags" style="margin-bottom: 5%;">
+			  	  	  	   <c:choose>
+           				<c:when test="${fn:length(tl.tititle) > 15}">
+			  	  			<a href="teamissueDetail.do?tiseq=${tl.tiseq}" >${fn:substring(tl.tititle,0,15)}...</a>
+               			</c:when>
+               		<c:otherwise>
+               				<a href="teamissueDetail.do?tiseq=${tl.tiseq}" >${tl.tititle}</a>
+           			</c:otherwise> 
+          			</c:choose>  
 			      </div>
 			  	  </c:if>
 			  </c:forEach>
