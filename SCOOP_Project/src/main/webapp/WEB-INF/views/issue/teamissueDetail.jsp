@@ -24,7 +24,6 @@ $(function(){
 	$('#commentMain').scrollTop($('#commentMain')[0].scrollHeight);
 	$('#teamCommentBtn').click(function(){
 		var tiseqq = ${tissue.tiseq};
-		console.log("들어오니");
 		$.ajax({
 			
 			url:"teamComment.do",
@@ -43,7 +42,7 @@ $(function(){
 						tiseq: "${tissue.tiseq}"						
 					},
 					success:function(event){
-						console.log(event);
+						
 						$('#commentMain').empty();
 						$.each(event,function(index,object){
 							var src = "";
@@ -70,12 +69,11 @@ $(function(){
 						$('#teamComment').val("");
 						$('#commentMain').scrollTop($('#commentMain')[0].scrollHeight);
 						
-							console.log(object)
+						
 						})
 						
 						//댓글 삭제 
 						$('.deleteComment').click(function(){
-							console.log("dfdfdfdf");
 							var temp=$(this);
 							$.ajax({
 								type:"GET",
@@ -84,9 +82,7 @@ $(function(){
 									replyseq: $(this).attr("id")				
 								},
 								success:function(event){
-									console.log(temp);
-									console.log(temp.closest(".row"));
-									console.log(event);
+									
 									temp.closest(".row").remove();
 						            
 								},
@@ -133,7 +129,6 @@ $(function(){
 	})
 	//댓글 삭제 
 	$('.deleteComment').click(function(){
-		console.log("dfdfdfdf");
 		var temp=$(this);
 		$.ajax({
 			type:"GET",
@@ -142,9 +137,6 @@ $(function(){
 				replyseq: $(this).attr("id")				
 			},
 			success:function(event){
-				console.log(temp);
-				console.log(temp.closest(".row"));
-				console.log(event);
 				temp.closest(".row").remove();
 	            
 			},
@@ -332,7 +324,7 @@ border-radius: 5px;
 
      <script src="<c:url value="/resources/js/dashboard/dashboard-1.js"/>"></script>
 	<script type="text/javascript">
- 		
+ 		start()
 	</script>
 </body>
 </html>
