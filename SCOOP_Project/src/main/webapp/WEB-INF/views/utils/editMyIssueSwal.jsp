@@ -4,11 +4,11 @@
 <jsp:include page="/WEB-INF/views/commons/footer.jsp"></jsp:include>
 <script>
 Swal.fire(
-		  '이슈 수정 오류',
-		  '오류가 발생했습니다!',
-		  'warning'
+		  '이슈 수정 완료',
+		  '',
+		  'success'
 		)
 window.setTimeout(function() {
-	location.href='teamissueDetail.do?tiseq=${tiseq}';
-}, 1500);
+	location.href='myissueDetail.do?piseq=${piseq}';	
+}, 1000);
 </script>
