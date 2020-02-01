@@ -49,7 +49,6 @@ public class PrivateController {
 		String email = "";
 		email = (String)session.getAttribute("email");
 		
-		System.out.println("private Controller email : " + email);
 		
 		MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
 		List<MyIssue> myissuelist = myissuedao.getMyissue(email);
@@ -79,7 +78,6 @@ public class PrivateController {
 		for(int i = 0; i < bookMarkList.size(); i++) {
 			tseq = bookMarkList.get(i).getTseq();
 			tiseq = bookMarkList.get(i).getTiseq();
-			System.out.println("tseq : " + tseq + " / tiseq : " + tiseq);
 			if(tseq > 0) {
 				ProjectName projectName = dao.getPjtName(tseq, tiseq);
 				pname = projectName.getPname();
@@ -94,7 +92,6 @@ public class PrivateController {
 	
 	@RequestMapping("/private-calendar.do")
 	public String object(@RequestParam(required = false, name="lang") String language, HttpServletRequest request, HttpServletResponse response,Model model,HttpSession session) {
-		System.out.println("privatecalendar 왔냐?");
 		String email = (String)session.getAttribute("email");
 		return "private/private-calendar";
 	}
@@ -102,10 +99,8 @@ public class PrivateController {
 	@RequestMapping(value = "addPrivateCalendar.do", method = RequestMethod.POST)
 	public String addPrivateCalendar(HttpSession session,String title, String start, String end, String description, String type, String username, String backgroundColor, String textColor, String allDay, String tseq) {
 		int result = 0;
-		System.out.println(title+"/"+start+"/"+end+"/"+description+"/"+type+"/"+username+"/"+allDay+"/"+tseq);
 		String viewpage = "";
 		MyIssue myissue = new MyIssue();
-		System.out.println(start.length());
 		MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
 		myissue.setPititle(title);
 		myissue.setEmail((String)session.getAttribute("email"));
@@ -120,22 +115,18 @@ public class PrivateController {
 		}
 		myissue.setAllDay(alldayReturn);
 		if(start.length()==16) {
-			System.out.println(start+":00");
 			myissue.setPistart(java.sql.Timestamp.valueOf(start+":00"));
 			myissue.setPiend(java.sql.Timestamp.valueOf(end+":00"));
 			result = myissuedao.writeMyCalendar(myissue);
 		} else {
-			System.out.println(start+" 00:00:00");
 			myissue.setPistart(java.sql.Timestamp.valueOf(start+" 00:00:00"));
 			myissue.setPiend(java.sql.Timestamp.valueOf(end+" 00:00:00"));
 			result = myissuedao.writeMyCalendar(myissue);
 		}
 		
 		if(result>0) {
-			System.out.println("성공");
 			viewpage = "redirect:/private-calendar.do";
 		} else {
-			System.out.println("실패");
 			viewpage = "redirect:/private-calendar.do";
 		}
 		
@@ -146,35 +137,28 @@ public class PrivateController {
 	@RequestMapping(value = "editPrivateCalendar.do", method = RequestMethod.POST)
 	public String editPrivateCalendar(int _id, String title, String start, String end, String description, String type, String backgroundColor, boolean allDay) {
 		int result = 0;
-		System.out.println(title+"/"+start+"/"+end+"/"+description+"/"+type+"/"+allDay+"/");
 		String viewpage = "";
 		MyIssue myissue = new MyIssue();
-		System.out.println(start.length());
-		System.out.println("idididididididididididid :"+_id);
 		MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
 		myissue.setPititle(title);
 		myissue.setPicontent(description);
 		myissue.setPiseq(_id);
 		myissue.setBackgroundColor(backgroundColor);
 		if(start.length()==16) {
-			System.out.println(start+":00");
 			myissue.setAllDay(0);
 			myissue.setPistart(java.sql.Timestamp.valueOf(start+":00"));
 			myissue.setPiend(java.sql.Timestamp.valueOf(end+":00"));
 			result = myissuedao.editMyCalendar(myissue);
 		} else {
 			myissue.setAllDay(1);
-			System.out.println(start+" 00:00:00");
 			myissue.setTistart(java.sql.Timestamp.valueOf(start+" 00:00:00"));
 			myissue.setTiend(java.sql.Timestamp.valueOf(end+" 00:00:00"));
 			result = myissuedao.editMyCalendar(myissue);
 		}
 		
 		if(result>0) {
-			System.out.println("성공");
 			viewpage = "redirect:/private-calendar.do";
 		} else {
-			System.out.println("실패");
 			viewpage = "redirect:/private-calendar.do";
 		}
 		
@@ -194,10 +178,8 @@ public class PrivateController {
 			if(name.equals(username)) {
 				result = myissuedao.myIssueDelete(piseq);
 				if(result>0) {
-					System.out.println("성공");
 					viewpage = "redirect:/private-calendar.do";
 				} else {
-					System.out.println("실패");
 					viewpage = "redirect:/private-calendar.do";
 				}
 			}
@@ -250,7 +232,6 @@ public class PrivateController {
 			}
 			}
 		}
-		System.out.println(jArray);		
 		
 		return jArray;
 	}

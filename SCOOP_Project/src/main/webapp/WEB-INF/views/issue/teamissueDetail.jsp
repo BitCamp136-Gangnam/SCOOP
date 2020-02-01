@@ -199,11 +199,11 @@ border-radius: 5px;
 		<c:if test="${tissue.email==sessionScope.email}">
 		<div class="col-sm-4" style="padding-top: 2%;padding-left: 8%;">
 		<!-- <span data-toggle="tooltip" data-placement="top" title="수정" > -->
-        	<span class="fas fa-cog"  id="editIssue" style="margin-left: 5px;cursor: pointer; font-size: 32px;"></span>
+        	<span class="fas fa-cog"  id="editIssue" style="margin-left: 5px;cursor: pointer; font-size: 30px;"></span>
          <!-- </span> -->
          <!-- <span data-toggle="tooltip" data-placement="top" title="삭제" > -->
 			<span class="iconify" id="deleteIssue" data-icon="topcoat:delete" data-inline="false" style="cursor: pointer;font-size: 35px;margin-bottom: 20px;margin-left: 20px;"></span>
-			<span class="iconify" id="comeback" data-icon="entypo:back" data-inline="false" style="cursor: pointer; font-size: 45px;margin-bottom: 15px;margin-left: 15px;"></span>
+			<span class="iconify" id="comeback" data-icon="entypo:back" data-inline="false" style="cursor: pointer; font-size: 35px;margin-bottom: 15px;margin-left: 15px;"></span>
 		<!-- </span> -->
 		</div>
 		</c:if>

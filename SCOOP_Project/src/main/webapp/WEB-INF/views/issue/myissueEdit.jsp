@@ -60,20 +60,16 @@ border-radius: 5px;
         <%-- <input type="hidden" name="tseq" value="${tissue.tseq}"> --%>
         <input type="hidden" name="piseq" value="${myissue.piseq}">
 		<div class="row"style="margin:2% 2% 0 2%" >
-		<div class="col-sm-7">
+		<div class="col-sm-8">
 			<input type="text" class="form-control" name="title" value="${myissue.pititle}" style="border: 0px; border-bottom: 1px solid #ced4da; font-size: 20px;padding-left: 0px;">
 		</div>
-		<div class="col-sm-1">
-		</div>
-		<div class="col-sm-2" style="padding-right: 0; text-align: right">
+		<div class="col-sm-4" style="padding-right: 15px; text-align: right">
 		<span id="editCheckIssue">
-		<span class="iconify" data-icon="fa-solid:check" data-inline="false" style="cursor: pointer;font-size: 40px;margin-bottom: 20px;margin-left: 20px;"></span>
+		<span class="iconify" data-icon="fa-solid:check" data-inline="false" style="cursor: pointer;font-size: 30px;margin-bottom: 20px;margin-left: 20px;"></span>
 		</span>
 			<input type="submit" class="form-control editdelete" value="완료" id="editIssue" hidden="">
-		</div>
-		<div class="col-sm-2" style="padding-left: 0; text-align: center">
 			<span id="returnIssue">
-			<span class="iconify" data-icon="entypo:back" data-inline="false" style="cursor: pointer; font-size: 45px;margin-bottom: 15px;margin-left: 15px;"></span>
+			<span class="iconify" data-icon="entypo:back" data-inline="false" style="cursor: pointer; font-size: 35px;margin-bottom: 15px;margin-left: 15px;"></span>
 			</span>
 		</div>
 		</div>

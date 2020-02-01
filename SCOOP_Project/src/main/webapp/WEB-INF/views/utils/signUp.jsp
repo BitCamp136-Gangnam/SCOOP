@@ -3,11 +3,11 @@
 <jsp:include page="/WEB-INF/views/commons/footer.jsp"></jsp:include>
 <script>
 Swal.fire(
-		  '에러발생!',
-		  '협업공간 초대에 에러가 발생했습니다!',
-		  'warning'
+		  '이메일 전송 완료',
+		  '회원가입 이메일 발송완료!',
+		  'success'
 		)
 window.setTimeout(function() {
 	location.href='index.do';	
-}, 1500);
+}, 1000);
 </script>

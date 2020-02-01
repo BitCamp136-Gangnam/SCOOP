@@ -248,5 +248,7 @@ public class MyIssue {
 				+ ", isprocess=" + isprocess + ", issee=" + issee + ", backgroundColor=" + backgroundColor
 				+ ", textColor=" + textColor + ", allDay=" + allDay + "]";
 	}
+
+
 	
 }

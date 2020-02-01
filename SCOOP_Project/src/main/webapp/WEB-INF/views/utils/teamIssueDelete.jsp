@@ -4,11 +4,11 @@
 <jsp:include page="/WEB-INF/views/commons/footer.jsp"></jsp:include>
 <script>
 Swal.fire(
-		  '이슈 생성 완료',
+		  '이슈 삭제 완료',
 		  '',
 		  'success'
 		)
 window.setTimeout(function() {
-	location.href='projectDetail.do?tseq=${tseq}';	
-}, 1500);
+	location.href="projectDetail.do?tseq="+${tseq};	
+}, 1000);
 </script>

@@ -10,5 +10,5 @@ Swal.fire(
 		)
 window.setTimeout(function() {
 	location.href='projectDetail.do?tseq=${tseq}';
-}, 1500);
+}, 1000);
 </script>

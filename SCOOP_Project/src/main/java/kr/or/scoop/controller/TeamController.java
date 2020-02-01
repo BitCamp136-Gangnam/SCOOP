@@ -73,10 +73,8 @@ public class TeamController {
 		result = service.insertTeamPjt(team);
 		
 		if(result > 0) {
-			System.out.println("프로젝트 생성성공");
 			viewpage = "redirect:/userindex.do";
 		}else {
-			System.out.println("프로젝트 생성실패");
 			viewpage = "redirect:/userindex.do";
 		}
 		return viewpage;
@@ -92,10 +90,8 @@ public class TeamController {
 		int tseq = Integer.parseInt(temptseq);
 		result = service.insertTeamPjt2(email, tseq);
 		if (result > 0) {
-			System.out.println("협업공간 초대 성공");
 			viewpage = "ajax/inviteSuccessSwal";
 		} else {
-			System.out.println("가입실패");
 			viewpage = "ajax/inviteFailSwal";
 		}
 
@@ -105,7 +101,6 @@ public class TeamController {
 	
 	@RequestMapping(value = "/invitecertified.do")
 	public String certified() {
-		System.out.println("인바이트서티파이드");
 		return "certified/InviteCertified";
 	}
 	
@@ -113,7 +108,6 @@ public class TeamController {
 	@RequestMapping(value = "projectDetail.do" , method = RequestMethod.GET)
 	public String projectDetail(HttpSession session, int tseq, Model model) {
 		String email = (String)session.getAttribute("email");
-		System.out.println(tseq);
 		
 		ProjectDao dao = sqlsession.getMapper(ProjectDao.class);
 		MemberDao md = sqlsession.getMapper(MemberDao.class);
@@ -127,12 +121,8 @@ public class TeamController {
 		List<ProjectMemberlist> projectMemberlist =md.projectMemberlist(tseq);
 		List<BookMark> bookMark = mydao.getBookMark(email);
 		
-		System.out.println(pjt);
-		System.out.println(tp);
-		System.out.println(projectMemberlist);
 		
 		int rank = dao.searchRank(tseq, email);
-		System.out.println("rank : " + rank);
 		
 		model.addAttribute("tpj",pjt); //프로젝트 이름 , 설명
 		model.addAttribute("tp",tp); //프로젝트 글 목록
@@ -197,7 +187,6 @@ public class TeamController {
 						 long fsize = mutifile.getSize();
 						 String filepath = request.getServletContext().getRealPath("/upload");
 						 String fpath = filepath + "\\" + filename;
-						 System.out.println(filename + " , " + fpath);
 						 if(!filename.equals("")) {
 							 //서버에 파일 업로드 (write)
 							 FileOutputStream fs = new FileOutputStream(fpath);
@@ -256,7 +245,6 @@ public class TeamController {
 						 long fsize = mutifile.getSize();
 						 String filepath = request.getServletContext().getRealPath("/upload");
 						 String fpath = filepath + "\\" + filename;
-						 System.out.println(filename + " , " + fpath);
 						 if(!filename.equals("")) {
 							 //서버에 파일 업로드 (write)
 							 FileOutputStream fs = new FileOutputStream(fpath);
@@ -296,12 +284,10 @@ public class TeamController {
 					tseq = Integer.parseInt(selectTeam);
 					model.addAttribute("tseq", tseq);
 					path = "ajax/makeTeamIssueSwal";
-					System.out.println("success insert tissue");
 				}else {
 					tseq = Integer.parseInt(selectTeam);
 					model.addAttribute("tseq", tseq);
 					path = "ajax/makeTeamIssueFailSwal";
-					System.out.println("fail insert tissue");
 				}
 			}
 			return path;
@@ -325,7 +311,6 @@ public class TeamController {
 		} else {
 			path = "cooperation/cooperation-kanban";
 			model.addAttribute("tissuelist", tissuelist);
-			System.out.println();
 		}
 		return path;
 
@@ -353,7 +338,6 @@ public class TeamController {
 	public String kanbanEdit(int tseq, int tiseq, int isprocess, Model model) {
 		String path = "";
 		int result = 0;
-		System.out.println("result kanban edit 전");
 		result = teamservice.EditKanban(tseq, tiseq, isprocess);
 		if(result>0) {
 			path = "redirect:/cooperation-kanban.do?tseq="+tseq;
@@ -368,8 +352,6 @@ public class TeamController {
 	public String banMember(int tseq, String email, Model model) {
 		int result = 0;
 		String viewpage;
-		System.out.println("tseq" + tseq);
-		System.out.println("email" + email);
 		result = teamservice.banMember(tseq, email);
 		
 		if(result > 0) {
@@ -386,18 +368,14 @@ public class TeamController {
 	public String changeManager(int tseq, String email, Model model, HttpSession session) {
 		int result = 0;
 		String viewpage;
-		System.out.println("tseq" + tseq);
-		System.out.println("email" + email);
 		String myEmail = (String)session.getAttribute("email");
 		result = teamservice.changeManager(tseq, email);
 		result = teamservice.changeManagerTp(tseq, email);
 		result = teamservice.changeManagerTp2(tseq, myEmail);
 		if(result > 0) {
-			System.out.println("관리자변경성공");
 			//model.addAttribute("ajax", "관리자변경 성공했습니다");
 			viewpage = "redirect:/projectDetail.do?tseq="+tseq;
 		}else {
-			System.out.println("멤버 탈퇴실패");
 			//model.addAttribute("ajax", "관리자변경 실패했습니다");
 			viewpage = "redirect:/projectDetail.do?tseq="+tseq;
 		}
@@ -408,7 +386,6 @@ public class TeamController {
 	public String dropProjet(int tseq, Model model) {
 		int result = 0;
 		String viewpage;
-		System.out.println("tseq" + tseq);
 		result = teamservice.dropProject(tseq);
 		if(result > 0) {
 			viewpage = "redirect:/userindex.do";
@@ -438,10 +415,8 @@ public class TeamController {
 	@RequestMapping(value = "addTeamCalendar.do", method = RequestMethod.POST)
 	public String addTeamCalendar(HttpSession session,String title, String start, String end, String description, String type, String username, String backgroundColor, String textColor, String allDay, int tseq) {
 		int result = 0;
-		System.out.println(title+"/"+start+"/"+end+"/"+description+"/"+type+"/"+username+"/"+allDay+"/"+tseq);
 		String viewpage = "";
 		Tissue tissue = new Tissue();
-		System.out.println(start.length());
 		MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
 		tissue.setTititle(title);
 		tissue.setEmail((String)session.getAttribute("email"));
@@ -457,22 +432,18 @@ public class TeamController {
 		}
 		tissue.setAllDay(alldayReturn);
 		if(start.length()==16) {
-			System.out.println(start+":00");
 			tissue.setTistart(java.sql.Timestamp.valueOf(start+":00"));
 			tissue.setTiend(java.sql.Timestamp.valueOf(end+":00"));
 			result = myissuedao.writeCalendarTissue(tissue);
 		} else {
-			System.out.println(start+" 00:00:00");
 			tissue.setTistart(java.sql.Timestamp.valueOf(start+" 00:00:00"));
 			tissue.setTiend(java.sql.Timestamp.valueOf(end+" 00:00:00"));
 			result = myissuedao.writeCalendarTissue(tissue);
 		}
 		
 		if(result>0) {
-			System.out.println("성공");
 			viewpage = "redirect:/calendar.do";
 		} else {
-			System.out.println("실패");
 			viewpage = "redirect:/calendar.do";
 		}
 		
@@ -483,11 +454,8 @@ public class TeamController {
 	@RequestMapping(value = "editTeamCalendar.do", method = RequestMethod.POST)
 	public String editTeamCalendar(int _id, String title, String start, String end, String description, String type, String backgroundColor, boolean allDay) {
 		int result = 0;
-		System.out.println("editediteditedit"+_id+"/"+title+"/"+start+"/"+end+"/"+description+"/"+type+"/"+allDay+"/");
 		String viewpage = "";
 		Tissue tissue = new Tissue();
-		System.out.println(start.length());
-		System.out.println("idididididididididididid :"+_id);
 		MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
 		tissue.setTititle(title);
 		tissue.setTicontent(description);
@@ -496,29 +464,22 @@ public class TeamController {
 		if(backgroundColor==null) {
 			tissue.setBackgroundColor("#D25565");
 		}
-		System.out.println("티슈다티슈티슈티슈티슈티슈티라미슈티라미슈"+tissue);
 		if(start.length()==16) {
-			System.out.println(start+":00");
 			tissue.setAllDay(0);
 			tissue.setTistart(java.sql.Timestamp.valueOf(start+":00"));
 			tissue.setTiend(java.sql.Timestamp.valueOf(end+":00"));
-			System.out.println("timestmap:"+java.sql.Timestamp.valueOf(start+":00"));
 			result = myissuedao.editTeamCalendar(tissue);
 		} else {
 			tissue.setAllDay(1);
-			System.out.println(start+" 00:00:00");
 			tissue.setTistart(java.sql.Timestamp.valueOf(start+" 00:00:00"));
-			System.out.println("timestmap:"+java.sql.Timestamp.valueOf(start+" 00:00:00"));
 			tissue.setTiend(java.sql.Timestamp.valueOf(end+" 00:00:00"));
 			result = myissuedao.editTeamCalendar(tissue);
 		}
 		
 		
 		if(result>0) {
-			System.out.println("성공");
 			viewpage = "redirect:/calendar.do";
 		} else {
-			System.out.println("실패");
 			viewpage = "redirect:/calendar.do";
 		}
 		
@@ -538,10 +499,8 @@ public class TeamController {
 			if(name.equals(username)) {
 				result = myissuedao.deleteTeamCalendar(tissue);
 				if(result>0) {
-					System.out.println("성공");
 					viewpage = "redirect:/calendar.do";
 				} else {
-					System.out.println("실패");
 					viewpage = "redirect:/calendar.do";
 				}
 			}
@@ -565,14 +524,9 @@ public class TeamController {
 		List<Tissue> temptissuelist;
 		Map<Integer, Tissue> sortlist = new HashMap<Integer, Tissue>();
 		JSONArray jArray = new JSONArray();
-		System.out.println("pjtlist"+pjtlist);
-		System.out.println(pjtlist.size());
 		int tempnum = 0;
 		for(Tpmember tpmember : pjtlist) {
-			 System.out.println(tpmember.getTseq());
 			 temptissuelist = tissuedao.getTissueList(tpmember.getTseq());
-			 System.out.println(temptissuelist.size());
-			 System.out.println(temptissuelist);
 			 for(Tissue tissue : temptissuelist) {
 				 if(tissue.getTistart()!=null) {
 					 sortlist.put(tempnum++, tissue);
@@ -591,10 +545,7 @@ public class TeamController {
 			 
 		}
 		try {
-			
-			System.out.println(sortlist);
 			Iterator<Integer> tissueitor = sortlist.keySet().iterator();
-			System.out.println(tissueitor);
 			SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd'T'HH:mm" , Locale.KOREA );
 			SimpleDateFormat sdft = new SimpleDateFormat( "yyyy-MM-dd");
 			while(tissueitor.hasNext()) {
@@ -628,15 +579,11 @@ public class TeamController {
 				data.put("allDay", allDay);
 				data.put("tiseq", sortlist.get(key).getTiseq());
 				jArray.add(data);
-				System.out.println("while문 도니?");
-				System.out.println(data);
 				
 			}
 			MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
 			List<MyIssue> myissuelist = myissuedao.getMyissue(email);
-			System.out.println("myissuelist for문 전");
 			if(!myissuelist.isEmpty()) {
-				System.out.println("myissuelist 빈공간체크");
 				for(MyIssue myissue : myissuelist) {
 					if(myissue.getPistart()!=null) {
 					JSONObject data = new JSONObject();
@@ -670,9 +617,7 @@ public class TeamController {
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println("myissuelist 에러");
 		}
-		System.out.println("jArray 입니다"+jArray);
 		
 		
 		return jArray;
@@ -686,7 +631,6 @@ public class TeamController {
 	
 	@RequestMapping("/calendar.do")
 	public String object(HttpServletRequest request, HttpServletResponse response,Model model,HttpSession session) {
-		System.out.println("calendar 왔냐?");
 		
 		String email = (String)session.getAttribute("email");
 		ProjectDao dao = sqlsession.getMapper(ProjectDao.class);
@@ -698,7 +642,6 @@ public class TeamController {
 	
 	@RequestMapping("/projectCalendar.do")
 	public String teamCalendar(HttpServletRequest request, HttpServletResponse response,Model model,HttpSession session, int tseq) {
-		System.out.println("calendar 왔냐?");
 		ProjectDao dao = sqlsession.getMapper(ProjectDao.class);
 		MemberDao memberdao = sqlsession.getMapper(MemberDao.class);
 		String email = (String)session.getAttribute("email");
@@ -764,16 +707,10 @@ public class TeamController {
 					data.put("allDay", allDay);
 					data.put("tiseq", tissue.getTiseq());
 					jArray.add(data);
-					System.out.println("while문 도니?");
-					System.out.println(data);
-					
 				}
 					
 				}
 			}
-			
-		System.out.println("jArray 입니다"+jArray);
-		
 		return jArray;
 	}
 	
