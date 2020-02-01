@@ -81,33 +81,25 @@
 							<div class="col-sm-6 newissue" id="ti"><p><b>제목</b></p></div>
 							<div class="col-sm-3 newissue" id="day"><p><b>시간</b></p></div>
 							</div>
-	 <c:if test="${mypjtlist!=null }">
-      <c:forEach items="${mypjtlist}" var="mpl">
-      <c:if test="${myNewTissueList !=null }">
-      <c:forEach items="${myNewTissueList }" var="mynewtissue">
-      <c:if test="${mpl.tseq==mynewtissue.tseq && mpl.tseq !=null && mynewtissue.tidate > mpl.tpaddtime && mynewtissue.issee==0}">
+	 
+      <c:if test="${mytissuelist !=null }">
+      <c:forEach items="${mytissuelist }" var="mynewtissue">
       <div class="row countRow" style="margin-left: 2%; margin-right: 2%" id="ialarm">
 		
          <div class="col-sm-3 newissue" id="al">
-         
-         <c:choose>
-         	<c:when test="${mpl.tseq==mynewtissue.tseq && mpl.tseq !=null && mynewtissue.tidate > mpl.tpaddtime}">
          	<p>
-         	<c:if test="${fn:length(mpl.pname) > 8}">
-         	<a href="projectDetail.do?tseq=${mynewtissue.tseq }"><c:out value="${fn:substring(mpl.pname,0,8)}"/>...</a>
+         	<c:if test="${fn:length(mynewtissue.pname) > 8}">
+         	<a href="projectDetail.do?tseq=${mynewtissue.tseq }"><c:out value="${fn:substring(mynewtissue.pname,0,8)}"/>...</a>
          	</c:if>
-         	<c:if test="${fn:length(mpl.pname) <= 8}">
-         	<a href="projectDetail.do?tseq=${mynewtissue.tseq }"><c:out value="${fn:substring(mpl.pname,0,8)}"/></a>
+         	<c:if test="${fn:length(mynewtissue.pname) <= 8}">
+         	<a href="projectDetail.do?tseq=${mynewtissue.tseq }"><c:out value="${fn:substring(mynewtissue.pname,0,8)}"/></a>
          	</c:if>
          	</p>
-         	</c:when>
-         	
-         </c:choose>
+         
          </div>
          <div class="col-sm-6 newissue" id="ti">
          
-         <c:choose>
-         	<c:when test="${mpl.tseq==mynewtissue.tseq && mpl.tseq !=null && mynewtissue.tidate > mpl.tpaddtime}">
+         
          	<p>
          	<c:if test="${fn:length(mynewtissue.tititle) > 19}">
          	<a href="teamissueDetail.do?tiseq=${mynewtissue.tiseq}"><c:out value="${fn:substring(mynewtissue.tititle,0,19)}"/>...</a>
@@ -116,26 +108,21 @@
          	<a href="teamissueDetail.do?tiseq=${mynewtissue.tiseq}"><c:out value="${fn:substring(mynewtissue.tititle,0,19)}"/></a>
          	</c:if>
          	</p>
-         	</c:when>
-         	
-         </c:choose>
+
          </div>
          <div class="col-sm-3 newissue" id="day">
          
-         <c:choose>
-         	<c:when test="${mpl.tseq==mynewtissue.tseq && mpl.tseq !=null && mynewtissue.tidate > mpl.tpaddtime}">
+         
          	<p>${fn:substring(mynewtissue.tidate,0,16)}</p>
-         	</c:when>
-         	
-         </c:choose>
+         
          </div>
          
       </div>
-      </c:if>
       </c:forEach>
       </c:if>
-      </c:forEach>
-      </c:if>
+      
+      
+
 	</div>
 			<div class="col-sm-4">
                 <select id="selectDash" name="selectDash" class="form-control" style="margin-top: 10%;">

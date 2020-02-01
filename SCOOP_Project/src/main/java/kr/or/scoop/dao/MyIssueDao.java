@@ -56,7 +56,7 @@ public interface MyIssueDao {
 	public MyIssue myissueDetail(int piseq);
 
 	// 팀이 작성한 팀 이슈 리스트
-	public List<Tissue> teamWriteTiisueList(Timestamp idtime);
+	public List<Tissue> teamWriteTiisueList(Timestamp idtime, String email);
 
 	// 팀이 작성한 댓글 리스트
 	public List<Reply> teamWriteReplyList(Timestamp idtime);
