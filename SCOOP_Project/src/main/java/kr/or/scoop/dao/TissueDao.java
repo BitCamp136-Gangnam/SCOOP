@@ -48,7 +48,9 @@ public interface TissueDao {
 	//팀이슈 파일 출력
 	public List<FileDrive> getFiles(int tiseq);
 	
-
+	//팀이슈 댓글 삭제
+	public int delComment(int replyseq);
+	
 	//북마크 추가/제거
 	public int addTBookMark(int tiseq, String email);
 	public int delTBookMark(int tiseq, String email);
