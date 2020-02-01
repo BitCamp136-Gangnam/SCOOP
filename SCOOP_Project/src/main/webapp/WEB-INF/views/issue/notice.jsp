@@ -95,12 +95,24 @@ $(document).ready(function(){
         ***********************************-->
         <div class="content-body">
             <div class="container-fluid">
-        <div class="card" style="padding-bottom: 30px;">
-		<div class="row" style="margin: 2%">
+        <div class="card">
+		<div class="row" style="margin: 2% 2% 15px 2%">
 			<div class="col-sm-12" style="padding-left: 0">
-				<h3>공지사항</h3>
-				스쿱의 새로운 소식을 전해드립니다.
+				<h3 style="padding-left: 15px;">공지사항</h3>
+				<h6 style="padding-left: 15px;">스쿱의 새로운 소식을 전해드립니다.</h6>
 			</div>
+		</div>
+		 <hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
+		 <div class="row" style="margin-left: 2%; margin-right: 2%">
+				<div class="col-sm-3 newissue" >
+				제목
+				</div>
+				<div class="col-sm-7 newissue">
+				내용
+				</div>
+				<div class="col-sm-2 newissue">
+				작성시간
+				</div>
 		</div>
 		<c:set value="${notice}" var="no" />
 		<c:forEach items="${notice}" var="n">

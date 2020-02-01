@@ -136,7 +136,7 @@
 								</div>
 								<div class="col-sm-3 newissue" id="day">
 									<p>
-										<b>시간</b>
+										<b>작성시간</b>
 									</p>
 								</div>
 							</div>

@@ -43,6 +43,10 @@ $(function(){
 				   }
 				 })
 		})
+	$('#comeback').click(function(){
+		console.log("타니?");
+		history.back();
+	})
 	});
 </script>
 <style>
@@ -83,17 +87,19 @@ border-radius: 5px;
         <div class="container-fluid">
         <div class="card">
 		<div class="row"style="margin:2% 2% 0 2%" >
-		<div class="col-sm-10">
+		<div class="col-sm-8">
 		<h3 id="myissueSubject" style="padding-top: 2%;">${myissue.pititle}</h3>
 		</div>
 		<c:if test="${myissue.email==sessionScope.email}">
-		<div class="col-sm-2" style="padding-top: 2%;padding-left: 8%;">
-		<span data-toggle="tooltip" data-placement="top" title="프라이빗 이슈 수정" >
-        	<span class="fas fa-cog"  id="editIssue" style="margin-left: 5px;cursor: pointer; font-size: 25px"   ></span>
-         </span>
-         <span data-toggle="tooltip" data-placement="top" title="프라이빗 이슈 삭제" >
-			<span class="iconify" id="deleteIssue" data-icon="octicon:x" data-inline="false" style="cursor: pointer;font-size: 30px;margin-bottom: 12px;margin-left: 20px;"></span>
-		</span>
+		<div class="col-sm-4" style="padding-top: 2%;padding-left: 8%;text-align: center">
+		<!-- <span data-toggle="tooltip" data-placement="top" title="수정" > -->
+		
+        	<span class="fas fa-cog"  id="editIssue" style="margin-left: 5px;cursor: pointer; font-size: 40px;"   ></span>
+         <!-- </span> -->
+         <!-- <span data-toggle="tooltip" data-placement="top" title="삭제" > -->
+			<span class="iconify" id="deleteIssue" data-icon="topcoat:delete" data-inline="false" style="cursor: pointer;font-size: 50px;margin-bottom: 20px;margin-left: 20px;"></span>
+			<span class="iconify" id="comeback" data-icon="entypo:back" data-inline="false" style="cursor: pointer; font-size: 45px;margin-bottom: 15px;margin-left: 15px;"></span>
+		<!-- </span> -->
 		</div>
 		
 		</c:if>
