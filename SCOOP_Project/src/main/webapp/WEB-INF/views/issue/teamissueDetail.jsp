@@ -280,23 +280,7 @@ border-radius: 5px;
 
      <script src="<c:url value="/resources/js/dashboard/dashboard-1.js"/>"></script>
 	<script type="text/javascript">
-/* 		$(function(){
-			let content = $('#myissueContent').text();
-			console.log(content.trim());
-
-			let splitData = content.trim().split("\n");
-			console.log(splitData);
-
-			for(let i = 0; i < splitData.length; i++) {
-				if(splitData[i].indexOf('http') != -1) {
-					
-					content = content.replace(splitData[i], splitData[i].wrap('<a></a>'));
-					
-				}
-			}
-			console.log(content);
-			$('#myissueContent').text(content);
-		}) */
+ 		
 	</script>
 </body>
 </html>
