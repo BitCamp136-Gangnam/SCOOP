@@ -166,20 +166,23 @@ public class TeamController {
 					String[] url = contentline[i].split(" ");
 					
 					for(int j = 0; j < url.length; j++) {
-						System.out.println("url 분리 : "+url[j]);
+
 						if(url[j].indexOf("http") != -1) {
 							content += "<a href="+ url[j] + ">" + url[j] + "</a> ";
 						}else {
 							content += url[j] + " ";
 						}
 					}
-					content += "\n";
+					content += "<br>";
 				}else {
-					content += contentline[i]+"\n";
+					content += contentline[i]+"<br>";
 				}
 				
 			}
 			System.out.println("최종 컨텐츠 : " + content);
+			
+			
+			
 			String path = "";
 			String email = (String)session.getAttribute("email");
 			int tseq = 0;
@@ -189,7 +192,7 @@ public class TeamController {
 				myissue.setEmail((String) session.getAttribute("email"));
 				myissue.setPititle(issuetitle);
 				issuecontent = issuecontent.replace("\r\n", "<br>");
-				myissue.setPicontent(issuecontent);
+				myissue.setPicontent(content);
 				myissue.setIspibook(0);
 				if(fromDate != null) {
 					 myissue.setPistart(java.sql.Timestamp.valueOf(fromDate+" 00:00:00"));
@@ -249,7 +252,7 @@ public class TeamController {
 				tissue.setEmail((String)session.getAttribute("email"));
 				tissue.setTititle(issuetitle);
 				issuecontent = issuecontent.replace("\r\n", "<br>");
-				tissue.setTicontent(issuecontent);
+				tissue.setTicontent(content);
 				if(fromDate != null) {
 					 tissue.setTistart(java.sql.Timestamp.valueOf(fromDate+" 00:00:00"));
 					 tissue.setTiend(java.sql.Timestamp.valueOf(toDate+" 00:00:00"));
