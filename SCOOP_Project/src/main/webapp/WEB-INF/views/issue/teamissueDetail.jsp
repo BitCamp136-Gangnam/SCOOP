@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="<c:url value="/resources/plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css" />">
     <!-- Custom Stylesheet -->
      <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
+     <script src="<c:url value="/resources/js/crawling/app.js"/>"></script>
 </head>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript">
@@ -332,7 +333,7 @@ border-radius: 5px;
 
      <script src="<c:url value="/resources/js/dashboard/dashboard-1.js"/>"></script>
 	<script type="text/javascript">
- 		start()
+ 		
 	</script>
 </body>
 </html>
