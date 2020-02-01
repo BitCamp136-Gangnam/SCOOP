@@ -994,7 +994,7 @@ span {
          <li class="nav-label" style="padding-bottom: 0"><b style="font-size:15px;"><spring:message code="team.title" /></b></li>
          <li class="nav-label">
          <c:choose>
-         <c:when test="${count == 3 and role == 'ROLE_USER'}">
+         <c:when test="${count <= 3 and role == 'ROLE_USER'}">
          <button type="button" class="btn"
                style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;"
                data-toggle="modal" data-target="#myModal" disabled="disabled">
