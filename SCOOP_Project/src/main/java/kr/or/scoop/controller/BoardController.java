@@ -285,6 +285,25 @@ public class BoardController {
 		return viewpage;
 	}
 	
+	//팀이슈 댓글 삭제
+	@RequestMapping(value = "delComment.do",method = {RequestMethod.POST,RequestMethod.GET})
+	public String delComment(int replyseq,Model model) {
+		int result = 0;	
+		String viewpage = "";
+		System.out.println("댓글삭제 : "+replyseq);
+		result = tservice.delComment(replyseq);
+		
+		if(result > 0) {
+			model.addAttribute("ajax","댓글 성공");
+			viewpage = "ajax/ajax";
+			
+		}else {
+			model.addAttribute("ajax","댓글 실패ㅠㅠ");
+			viewpage = "ajax/ajax";
+		}
+		return viewpage;
+	}
+	
 	//공지사항 삭제 처리 
 	@RequestMapping(value="noticeDelete.do",method = RequestMethod.POST)
 	public String deleteNotice(int bnseq) {

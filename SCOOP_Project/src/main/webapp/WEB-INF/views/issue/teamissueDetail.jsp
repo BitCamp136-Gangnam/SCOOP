@@ -24,7 +24,6 @@ $(function(){
 	$('#commentMain').scrollTop($('#commentMain')[0].scrollHeight);
 	$('#teamCommentBtn').click(function(){
 		var tiseqq = ${tissue.tiseq};
-		console.log("들어오니");
 		$.ajax({
 			
 			url:"teamComment.do",
@@ -43,7 +42,7 @@ $(function(){
 						tiseq: "${tissue.tiseq}"						
 					},
 					success:function(event){
-						console.log(event);
+						
 						$('#commentMain').empty();
 						$.each(event,function(index,object){
 							var src = "";
@@ -63,16 +62,37 @@ $(function(){
 					            '<div id="commentMain" style="margin: 3% 5% 3% 5%;" >'+
 					            '<div style="margin-bottom: 1%;width: 260px;">'+
 					            '<span>'+object.name+'</span><span style="padding-left:3%"><i class="far fa-clock" style="color:#E71D36 "></i>'+object.rdate.substring(0,16)+'</span>'+
+					            '<span id="'+object.replyseq+'" class="deleteComment"><span class="iconify" id="deleteComment"  data-icon="octicon:x" data-inline="false" style="cursor: pointer;font-size:15px;margin-bottom: 3px;margin-left: 45px;"></span></span>'+	
 					            '<br><div>'+object.rcontent+'</div></div></div></div></div>'
 						           
 							);
 						$('#teamComment').val("");
 						$('#commentMain').scrollTop($('#commentMain')[0].scrollHeight);
 						
-							console.log(object)
+						
 						})
 						
-						
+						//댓글 삭제 
+						$('.deleteComment').click(function(){
+							var temp=$(this);
+							$.ajax({
+								type:"GET",
+								url:"delComment.do",
+								data:{
+									replyseq: $(this).attr("id")				
+								},
+								success:function(event){
+									
+									temp.closest(".row").remove();
+						            
+								},
+								error:function(error){
+									alert("에러");
+								}
+									
+							});
+							
+						});
 			            
 					},
 					error:function(error){
@@ -107,6 +127,27 @@ $(function(){
 		   }
 		 })
 	})
+	//댓글 삭제 
+	$('.deleteComment').click(function(){
+		var temp=$(this);
+		$.ajax({
+			type:"GET",
+			url:"delComment.do",
+			data:{
+				replyseq: $(this).attr("id")				
+			},
+			success:function(event){
+				temp.closest(".row").remove();
+	            
+			},
+			error:function(error){
+				alert("에러");
+			}
+				
+		});
+		
+	});
+		
 });
 
 
@@ -224,6 +265,9 @@ border-radius: 5px;
             <div id="commentMain" style="margin: 3% 5% 3% 5%;" >
             <div style="margin-bottom: 1%;width: 260px;">
             <span>${r.name}</span><span style="padding-left:3%"><i class="far fa-clock" style="color:#E71D36 "></i>${fn:substring(r.rdate,0,16)}</span>
+            <span id="${r.replyseq}" class="deleteComment">
+            <span class="iconify" id="deleteComment"  data-icon="octicon:x" data-inline="false" style="cursor: pointer;font-size:15px;margin-bottom: 3px;margin-left: 45px;"></span>
+            </span>
             <br>
             <div>${r.rcontent}</div>
             </div>
@@ -280,7 +324,7 @@ border-radius: 5px;
 
      <script src="<c:url value="/resources/js/dashboard/dashboard-1.js"/>"></script>
 	<script type="text/javascript">
- 		
+ 		start()
 	</script>
 </body>
 </html>
