@@ -280,7 +280,7 @@ border-radius: 5px;
 
      <script src="<c:url value="/resources/js/dashboard/dashboard-1.js"/>"></script>
 	<script type="text/javascript">
- 		
+ 		start()
 	</script>
 </body>
 </html>
