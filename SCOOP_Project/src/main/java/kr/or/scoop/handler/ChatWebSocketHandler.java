@@ -74,7 +74,6 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 	}
 
 	private void log(String logmsg) {
-		System.out.println(new Date() + " : " + logmsg);
 	}
 
 	private void sendMessage(WebSocketSession session, JSONObject data) throws Exception {
@@ -102,7 +101,6 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 	private void joinChatRoom(WebSocketSession session, String user, String room) throws Exception {
 		ChatRoom chatRoom = roomInfos.get(room);
 		chatRoom.addUser(user, session);
-		System.out.println("useruseruseruseruseruser"+user);
 		sendMemberInfoMessage(chatRoom, user + "님이 들어오셨습니다.");
 
 		sendChatRoomInfoMessage();

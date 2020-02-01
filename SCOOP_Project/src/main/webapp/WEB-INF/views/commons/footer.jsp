@@ -45,13 +45,10 @@
 		 	"ordering": false
  		}); */
  		$('#chatopen').click(function(){
- 			console.log($('#chattbody').children());
  	 		//if($('#chattbody').children().length==0){
  				for(let i=0; i<$('.resultsearch').length;i++){
  				var proname = $('.resultsearch')[i].innerHTML.substr(7);
  				var prohref = $('.resultsearch').parent()[i].getAttribute('href').substr(22);
- 					console.log(proname);
- 					console.log(prohref);
  				let data = { cmd : "createChatRoom", 
  		    	    	name : proname+"/"+prohref, 
  		    	    	max : 100,
@@ -133,8 +130,6 @@
 	}
 	
 	function onMessage(evt) { 
-		console.log(evt);
-		console.log(evt.data);
 		var data = JSON.parse(evt.data); 
 		setChatRooms(data);
 		
@@ -168,7 +163,6 @@
 		$.each(data.rooms, function(index, element){
 			for(let i=0; i<$('.resultsearch').length;i++){
 				if($('.resultsearch').parent()[i].getAttribute('href').substr(22)==data.rooms[index].name.split("/")[1]){
-					console.log("너는 같구나^^");
 					room = $("<tr></tr>");
 					//room.append("<td style='padding-top:5%;'>" + (num++) + "</td>");
 					room.append("<td style='padding-top:5%;'>"+element.name.split("/")[0]+"</td>");
@@ -247,7 +241,6 @@
 		})
 		$(document).keydown(function(event) {
 			if (event.ctrlKey && event.keyCode == 191) {
-				console.log("됏냐?");
 				if ($('#helpopen').attr('name') == 'on') {
 					$('#helpopen').attr('name', 'off');
 					$('#helpdivopen').show();

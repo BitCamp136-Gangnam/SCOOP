@@ -22,14 +22,10 @@ public class MemberService {
 	
 	public int insertMember(Member member){
 		int result = 0;
-		System.out.println(member.toString());
 		int isIdCheck = idCheck(member.getEmail());
 		if(isIdCheck>0) {
-			System.out.println("중복아이디 존재");
 		} else {
-			System.out.println("중복아이디가 없네요 등록합니당");
 			MemberDao dao = sqlsession.getMapper(MemberDao.class);
-			System.out.println("여기좀 와주라 ㅠㅠㅠㅠ");
 			result = dao.insertMember(member);
 		}
 		
@@ -44,10 +40,8 @@ public class MemberService {
 			boolean istrue = bCryptPasswordEncoder.matches(pwd, encodePwd);
 			MemberDao dao = sqlsession.getMapper(MemberDao.class);
 			if(istrue) {
-				System.out.println("true");
 				result = dao.loginCheck(email,encodePwd);
 			} else {
-				System.out.println("false");
 				result = 0;
 			}
 		} catch (Exception e) {
@@ -60,7 +54,6 @@ public class MemberService {
 	// 비밀번호 확인 
 	public Member pwdCheck(String email) {
 		Member member = null;
-		System.out.println("pwd check");
 		MemberDao dao = sqlsession.getMapper(MemberDao.class);
 		member = dao.pwdCheck(email);
 		return member;
@@ -71,16 +64,12 @@ public class MemberService {
 		MemberDao dao = sqlsession.getMapper(MemberDao.class);
 		result = dao.googleIdCheck(email, name);
 		if(result>0) {
-			System.out.println("구글아이디 존재");
 		} else {
-			System.out.println("구글아이디가 없네요 등록합니당");
 			int googleInsertCheck = 0;
 			googleInsertCheck = dao.googleInsertCheck(email, name);
 			if(googleInsertCheck>0) {
-				System.out.println("구글아이디 가입성공");
 				result = googleInsertCheck;
 			}else {
-				System.out.println("구글아이디 가입실패");
 			}
 		}
 		return result;
@@ -95,19 +84,14 @@ public class MemberService {
 	public int naverIdCheck(String email, String name) {
 		int result = 0;
 		MemberDao dao = sqlsession.getMapper(MemberDao.class);
-		System.out.println(email+"/"+name);
 		result = dao.googleIdCheck(email, name);
 		if(result>0) {
-			System.out.println("네이버아이디 존재");
 		} else {
-			System.out.println("네이버아이디가 없네요 등록합니당");
 			int naverInsertCheck = 0;
 			naverInsertCheck = dao.naverInsertCheck(email, name);
 			if(naverInsertCheck>0) {
-				System.out.println("네이버아이디 가입성공");
 				result = naverInsertCheck;
 			}else {
-				System.out.println("네이버아이디 가입실패");
 			}
 		}
 		return result;

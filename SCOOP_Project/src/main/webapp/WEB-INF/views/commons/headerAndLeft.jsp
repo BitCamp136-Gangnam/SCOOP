@@ -40,13 +40,11 @@ input::placeholder {
 		}
 	   $('#searchFile').keypress(function(event){
 		   if (event.keyCode == 13) {
-			   console.log($('#searchFile').val());
 			   $.ajax({
 					url : 'teamFileSearch.do',
 					dataType:"json",
 					data : {word : $('#searchFile').val()},
 					success : function(data) {
-						console.log(data);
 						$('#fileLocation').empty();
 						$.each(data,function(index,object){
 							tempFname = object.fdname;
@@ -74,7 +72,6 @@ input::placeholder {
 					dataType:"json",
 					data : {word : $('#searchFile').val()},
 					success : function(data) {
-						console.log(data);
 						$.each(data,function(index,object){
 							tempFname = object.pfdname;
 							if(object.pfdname.length>=14){
@@ -95,13 +92,11 @@ input::placeholder {
 	         }
 	   })
 	   function clickMyFile(){
-		   console.log("마이파일");
 		   var tseq = 0;
  			$.ajax({
 				url : 'myFileSelect.do',
 				dataType:"json",
 				success : function(data) {
-					console.log(data);
 					$('#fileLocation').empty();
 					$.each(data,function(index,object){
 						tempFname = object.pfdname;
@@ -122,7 +117,6 @@ input::placeholder {
 			}); 
 	   }
 	   $('#selectFile').change(function(){
-		   console.log("바뀜");
 		   var tseq = $(this).val();
 		   if(tseq=='myFile'){
 			   clickMyFile();
@@ -135,7 +129,6 @@ input::placeholder {
 					tseq:tseq,
 				},
 				success : function(data) {
-					console.log(data);
 					$('#fileLocation').empty();
 					$.each(data,function(index,object){
 						tempFname = object.fdname;
@@ -162,8 +155,6 @@ input::placeholder {
 	   $('#sIssue').focus(function(){
 		   $('#sIssue').keypress(function(event) {
 			   if (event.keyCode == 13) {
-		            //console.log($('#sIssue').val());
-		            //console.log($('#searchEmail').val())
 		            $('#searchSubmit').submit();
 		         }
 		   })
@@ -214,10 +205,8 @@ input::placeholder {
          }
 
          var key = event.keyCode;
-         console.log(key);
          switch (key) {
          case 38:
-            console.log("위");
             target--;
             break;
          case 40:
@@ -262,7 +251,6 @@ input::placeholder {
                
                if (event.shiftKey && event.keyCode == 50) {
             	   target=1;
-                  console.log("?????");
                   $('#invite_email_append').hide();
                   $('#invite_Input')
                         .append(
@@ -1373,7 +1361,6 @@ span {
 <script type="text/javascript">
 var annotation = 0;
 $('.modal').on('hidden.bs.modal', function(e) {
-   console.log('modal close');
    $('#memlist').hide();
    $('.CodeMirror').hide();
    $('#filename').empty();
@@ -1404,7 +1391,6 @@ $('.menli').keydown(function(event) {
    var key = event.keyCode;
     switch (key) {
     case 38:
-       console.log("위");
        tar2--;
        break;
     case 40:
@@ -1415,7 +1401,6 @@ $('.menli').keydown(function(event) {
     case 37:
        break;
     }
-    console.log(tar2);
     if (tar2 < 0) {
        tar2 = 0;
     }
@@ -1436,12 +1421,9 @@ $('.menli').keydown(function(event) {
 	$('#issuecontent').keydown(
 			function(event) {
 				if($('#mentionlist').css('display')==('flex')){
-					console.log('여기서라면?');
-					console.log(event.keyCode);
 					var key = event.keyCode;
 		               switch (key) {
 		               case 38:
-		                  console.log("위");
 		                  tar--;
 		                  break;
 		               case 40:
@@ -1472,7 +1454,6 @@ $('.menli').keydown(function(event) {
 				var top = ($('#issuecontent').offset().top);
 				var left = ($('#issuecontent').offset().left + 490);
 				if (event.shiftKey && event.keyCode == 50) {
-					console.log("top&left" + top + ", " + left);
 					$('#mentionlist').attr(
 							'style',
 							'position:fixed; width:20%;top:' + top + 'px;left:'
@@ -1489,8 +1470,6 @@ $('.menli').keydown(function(event) {
 			$('.todo').show();
 			for(let i=0; i<$('#memlist').children().length-1; i++){
 				for(let j=i+1; j<$('#memlist').children().length;j++){
-					console.log($('#memlist').children().eq(i))
-					console.log($('#memlist').children().eq(j))
 					if($('#memlist').children().eq(i).attr('id').split("/")[1] == $('#memlist').children().eq(j).attr('id').split("/")[1]){
 						$('#memlist').children().eq(j).hide();
 					}
@@ -1563,7 +1542,6 @@ $('.menli').keydown(function(event) {
 	}
 	$("#fileclick").change(function() {
 		readURL(this);
-		console.log($("#fileclick")[0].files);
 		var files = $("#fileclick")[0].files;
 		$('#filename').empty();
 		//$('#filename').append($("#fileclick").val().substring(12));
@@ -1605,7 +1583,6 @@ $('#todoresult').show();
 							$('#issuecontent').val(text);
 							$('#todoresult').append('<div style="padding:5px; width:100%"><input type="text" id="'+$(this).attr('id')+'" value="@'+ $(this).text() + '" style="border:none;width:100px" readonly><span id="annoDelete'+(++annotation)+'" style="cursor:pointer;" onclick="annotationDelete('+annotation+')"><span class="iconify" data-icon="octicon:x" data-inline="false"></span></span></div>');
 							$('#todoresult').append('<input type="hidden" name="mentions" value="'+ $(this).attr('id').split('/')[1] + '">');
-							console.log($(this).text());
 							$('#todoresult').show();
 							$('#memlist').hide();
 							$('#memlist').attr('class', 'list-group');
@@ -1765,7 +1742,6 @@ $('#todoresult').show();
 										'cursor: pointer;color:#535359;font-size: 18px;padding-bottom: 12px;');
 					});
 	function annotationDelete(annotation){
-		console.log($('#annoDelete'+annotation).attr('id'));
 		$('#annoDelete'+annotation).parent().remove();
 	}
 

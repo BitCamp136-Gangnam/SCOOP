@@ -10,10 +10,7 @@
   <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <%
-	System.out.println("이메일 인증 버튼 눌러서 오는곳");
-	System.out.println("세션값 : "+session.getAttribute("email"));
 	if(session.getAttribute("email") != null){
-		System.out.println("비밀번호 변경 if문 타니?");
 	%>
 	<script>
 	alert('인증 성공');
@@ -29,7 +26,6 @@
 }else{
 	%>
 	<script>
-	System.out.println("인증 실패");
 	alert('error');
 	Swal.fire({
 		  title: "본인 인증 실패",
