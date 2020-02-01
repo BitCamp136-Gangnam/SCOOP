@@ -139,7 +139,7 @@ public class BoardController {
 	public String noticeDetail(int bnseq,Model model) {
 		NoticeDao dao = sqlSession.getMapper(NoticeDao.class);
 		Notice notice = dao.detailNotice(bnseq);
-		model.addAttribute("n",notice);
+		model.addAttribute("notice",notice);
 		
 		return "issue/noticeDetail";
 	}
@@ -223,10 +223,25 @@ public class BoardController {
 		return viewpage;
 	}
 	
-	@RequestMapping(value="noticeEdit.do" , method=RequestMethod.POST)
+	@RequestMapping(value="noticeEdit.do" , method=RequestMethod.GET)
+	public String noticeUpdate(int bnseq,Notice notice,Model model) {
+		String viewpage = "";
+		NoticeDao dao = sqlSession.getMapper(NoticeDao.class);
+		Notice n = dao.detailNotice(bnseq);
+				
+		model.addAttribute("n",n);
+				
+	viewpage = "issue/noticeEdit";
+		
+			
+		return viewpage;
+	}
+	
+	@RequestMapping(value="noticeEditOk.do" , method=RequestMethod.POST)
 	public String noticeUpdateCheck(int bnseq,Notice notice,Model model) {
 		int result = 0;
 		String viewpage = "";
+	
 		result = service.updateNotice(notice);
 		if(result > 0) {
 			model.addAttribute("notice",notice);
@@ -305,14 +320,14 @@ public class BoardController {
 	}
 	
 	//공지사항 삭제 처리 
-	@RequestMapping(value="noticeDelete.do",method = RequestMethod.POST)
+	@RequestMapping(value="deleteNoitce.do",method = {RequestMethod.POST, RequestMethod.GET})
 	public String deleteNotice(int bnseq) {
 		int result = 0;
 		String viewpage;
 		
 		result = service.deleteNotice(bnseq);
 		if(result > 0) {
-			viewpage = "ajax/adminService";
+			viewpage = "redirect:/notice.do";
 		}else {
 			viewpage = "redirect:/index.do";
 		}
