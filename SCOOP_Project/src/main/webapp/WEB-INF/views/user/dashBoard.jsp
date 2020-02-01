@@ -72,7 +72,7 @@
                      <li class="nav-item"><a href="mention.do" class="nav-link">@멘션</a></li>
                   </ul>
                </div>
-               <hr style="margin-top: 0; margin-left: 4%; margin-right: 2%">
+               <hr style="margin-top: 0; margin-left: 4%; margin-right: 4%">
                <div class="row" style="height: 560px;">
 						<div class="col-sm-7"
 							style="margin: 0 0 0 3% ; border-radius: 0.5rem;">
