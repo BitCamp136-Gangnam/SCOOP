@@ -32,78 +32,7 @@
 	padding-bottom: 0.7%;
 }
 </style>
-<script>
 
- var array = new Array();
- var bnseq = new Array();
- var bntitle = new Array();
- var bncontent = new Array();
-
- function roll(a) {
-     //alert(a);
-     var no = '<c:out value="${no}"/>';
-     console.log(no);
-     console.log(a);
-     console.log(bnseq);
-     console.log(bntitle);
-     console.log(bncontent);
-     console.log(bnseq[0]);
-     var seq = 0;
-     $.each(bnseq, function(i, elt) {
-
-         
-     	  if(elt == a){
-         	console.log(elt);
-         	console.log(a);
-         	console.log(bntitle[i]);
-         	console.log(bncontent[i]);
-
-         	
-         	$("#title").attr("value",bntitle[i]);
-           $("#content").html(bncontent[i]);		
-         	$("#ntitle").attr("value",bntitle[i]);
-           $("#ncontent").html(bncontent[i]);
-           $("#nseq").attr("value",a);		
-           seq = a;
-			var bnseq = a;
-			console.log("b : " + bnseq);
-			$("#del").click(function(){
-				 $.ajax({
-					    url:'noticeDelete.do', //request 보낼 서버의 경로
-					    type:'post', // 메소드(get, post, put 등)
-					    data:{
-					    	'bnseq':bnseq
-					    	}, //보낼 데이터
-					    
-					    success: function(data) {
-					   	Swal.fire(
-					  		  '게시물 삭제에 성공했습니다',
-					  		  '게시물 삭제 성공',
-					  		  'success'
-					  		)
-					  		window.setTimeout(function() {
-					  		location.href='notice.do';	
-					  		}, 1500);
-					    		
-					    },
-					    error: function(err) {
-					    	Swal.fire({
-					    		  title: "변경 실패",
-					    		  text: "변경 실패",
-					    		  icon: "error",
-					    		  button: "확인"
-					    		})
-					    }
-					});
-				})
-			
-
-           }                  
-     });
-     
-   }
-	
-</script>
 <body>
 <script type="text/javascript">
 	
@@ -175,14 +104,8 @@ $(document).ready(function(){
 		</div>
 		<c:set value="${notice}" var="no" />
 		<c:forEach items="${notice}" var="n">
-		<a href="#" id="${n.bnseq}" name="bnseq" data-target="#noticeDetail" data-toggle="modal" class="bnseq" onclick="roll(this.id)">
-			<script>
-			array.push("${n}");
-			bnseq.push("${n.bnseq}");
-			bntitle.push("${n.bntitle}");
-			bncontent.push("${n.bncontent}");
-			</script>
-		<div class="row" style="margin-left: 2%; margin-right: 2%" id="row">
+		<a href="noticeDetail.do?bnseq=${n.bnseq}" name="bnseq" class="bnseq">	
+		<div class="row" style="margin-left: 2%; margin-right: 2%" id="row">	
 			<div class="col-sm-3 newissue">
 			<c:choose>
            		<c:when test="${fn:length(n.bntitle) > 19}">	
