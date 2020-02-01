@@ -102,6 +102,12 @@ public class TeamService {
 		List<Reply> result = dao.teamCommentOk(tiseq);
 		return result;
 	}
+	public int delComment(int replyseq) {
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		int result = dao.delComment(replyseq);
+		return result;
+	}
+	
 	
 	//팀 파일 업로드
 	public int fileInsert(int tseq, String fdname, long fdcapa, String email) {

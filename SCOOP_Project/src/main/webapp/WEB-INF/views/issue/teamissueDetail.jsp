@@ -63,6 +63,7 @@ $(function(){
 					            '<div id="commentMain" style="margin: 3% 5% 3% 5%;" >'+
 					            '<div style="margin-bottom: 1%;width: 260px;">'+
 					            '<span>'+object.name+'</span><span style="padding-left:3%"><i class="far fa-clock" style="color:#E71D36 "></i>'+object.rdate.substring(0,16)+'</span>'+
+					            '<span id="'+object.replyseq+'" class="deleteComment"><span class="iconify" id="deleteComment"  data-icon="octicon:x" data-inline="false" style="cursor: pointer;font-size:15px;margin-bottom: 3px;margin-left: 45px;"></span></span>'+	
 					            '<br><div>'+object.rcontent+'</div></div></div></div></div>'
 						           
 							);
@@ -72,7 +73,30 @@ $(function(){
 							console.log(object)
 						})
 						
-						
+						//댓글 삭제 
+						$('.deleteComment').click(function(){
+							console.log("dfdfdfdf");
+							var temp=$(this);
+							$.ajax({
+								type:"GET",
+								url:"delComment.do",
+								data:{
+									replyseq: $(this).attr("id")				
+								},
+								success:function(event){
+									console.log(temp);
+									console.log(temp.closest(".row"));
+									console.log(event);
+									temp.closest(".row").remove();
+						            
+								},
+								error:function(error){
+									alert("에러");
+								}
+									
+							});
+							
+						});
 			            
 					},
 					error:function(error){
@@ -107,6 +131,31 @@ $(function(){
 		   }
 		 })
 	})
+	//댓글 삭제 
+	$('.deleteComment').click(function(){
+		console.log("dfdfdfdf");
+		var temp=$(this);
+		$.ajax({
+			type:"GET",
+			url:"delComment.do",
+			data:{
+				replyseq: $(this).attr("id")				
+			},
+			success:function(event){
+				console.log(temp);
+				console.log(temp.closest(".row"));
+				console.log(event);
+				temp.closest(".row").remove();
+	            
+			},
+			error:function(error){
+				alert("에러");
+			}
+				
+		});
+		
+	});
+		
 });
 
 
@@ -224,6 +273,9 @@ border-radius: 5px;
             <div id="commentMain" style="margin: 3% 5% 3% 5%;" >
             <div style="margin-bottom: 1%;width: 260px;">
             <span>${r.name}</span><span style="padding-left:3%"><i class="far fa-clock" style="color:#E71D36 "></i>${fn:substring(r.rdate,0,16)}</span>
+            <span id="${r.replyseq}" class="deleteComment">
+            <span class="iconify" id="deleteComment"  data-icon="octicon:x" data-inline="false" style="cursor: pointer;font-size:15px;margin-bottom: 3px;margin-left: 45px;"></span>
+            </span>
             <br>
             <div>${r.rcontent}</div>
             </div>
