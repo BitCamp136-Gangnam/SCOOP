@@ -565,8 +565,7 @@ public class MemberController {
 			Map model = new HashMap();
 			model.put("title", "협업공간 SCOOP 본인 인증 이메일입니다");
 			// model.put("password", temp);
-			String mailBody = VelocityEngineUtils.mergeTemplateIntoString(
-					velocityEngineFactoryBean.createVelocityEngine(), "forgotPwd.vm", "UTF-8", model);
+			String mailBody = VelocityEngineUtils.mergeTemplateIntoString(velocityEngineFactoryBean.createVelocityEngine(), "forgotPwd.vm", "UTF-8", model);
 			messageHelper.setFrom("leeyong1321@gmail.com");
 			messageHelper.setTo(email);
 			messageHelper.setSubject("회원님의 SCOOP 계정의 본인 인증 이메일입니다");
@@ -614,10 +613,10 @@ public class MemberController {
 		
 		String viewpage = "";
 		if(result > 0) {
-			System.out.println("인서트 성공");
+			System.out.println("변경 성공");
 			viewpage = "index";
 		}else {
-			System.out.println("인서트 실패");
+			System.out.println("변경 실패");
 			viewpage = "index";
 		}
 		
