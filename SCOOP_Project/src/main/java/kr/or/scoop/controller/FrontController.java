@@ -24,9 +24,11 @@ public class FrontController {
 	@Autowired
 	private LocaleResolver localeResolver;
 	
+	//메인 페이지
 	@RequestMapping("/index.do")
 	public String change(@RequestParam(required = false, name="lang") String language, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 		
+		//언어 선택(변경)
 		if(language == null && session.getAttribute("language") != null) {
 			language = (String)session.getAttribute("language");
 		}else if(language == null) {
