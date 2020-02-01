@@ -7,6 +7,8 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -246,7 +248,7 @@ public class MemberController {
 		try {
 			pjtlist = noticeDao.getPJT(email);
 			tpmemlist = memberdao.getTpmembers(member.getEmail());
-			mytissuelist = myissuedao.teamWriteTiisueList(member.getIdtime());
+			mytissuelist = myissuedao.teamWriteTiisueList(member.getIdtime(), email);
 			myreplylist = myissuedao.teamWriteReplyList(member.getIdtime());
 			mypjtlist = myissuedao.teamWriteNoticeList(member.getEmail(), member.getIdtime());
 			model.addAttribute("mytissuelist",mytissuelist);
@@ -256,9 +258,10 @@ public class MemberController {
 			// TODO: handle exception
 		}
 		if(pjtlist!=null) {
+			
 			session.setAttribute("pjtlist", pjtlist);
 			session.setAttribute("tpmemlist", tpmemlist);
-			List<Tissue> myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime());
+			List<Tissue> myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime(), email);
 			/*MemberDao memberdao = sqlsession.getMapper(MemberDao.class);
 			MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
 			ProjectDao projectdao = sqlsession.getMapper(ProjectDao.class);
@@ -266,6 +269,32 @@ public class MemberController {
 				Member member = memberdao.getMember(email);
 				List<Tissue> myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime());
 				*/
+			/*
+			 * List<MyIssue> showNewTissueList = null; for(Tpmember tpmember : pjtlist) {
+			 * 
+			 * for(Tissue tissue : myNewTissueList) { if(tpmember.getTseq() ==
+			 * tissue.getTseq() && tissue.getTidate() !=null) { MyIssue myissue = new
+			 * MyIssue(); myissue.setEmail(tissue.getEmail());
+			 * myissue.setTseq(tissue.getTseq()); myissue.setTititle(tissue.getTititle());
+			 * myissue.setTicontent(tissue.getTicontent());
+			 * myissue.setPname(tpmember.getPname()); myissue.setTidate(tissue.getTidate());
+			 * myissue.setTiseq(tissue.getTiseq()); showNewTissueList.add(myissue); } } }
+			 * MyIssue[] temptissue = (MyIssue[])showNewTissueList.toArray();
+			 */
+			/*
+			 * for (int i = arr_size - 1; i > 0; i--) {
+            System.out.println("\n버블 정렬 " + (arr_size - i) + "단계");
+ 
+            for (int j = 0; j < i; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    SelectionSort.swap(arr, j, j + 1);
+                }
+                SelectionSort.printArr(arr);
+ 
+            }
+        }
+			*/
+			
 			model.addAttribute("mypjtlist", pjtlist);
 			model.addAttribute("myNewTissueList", myNewTissueList);
 			/*
@@ -327,7 +356,7 @@ public class MemberController {
 		try {
 			pjtlist = noticeDao.getPJT(email);
 			tpmemlist = memberdao.getTpmembers(member.getEmail());
-			mytissuelist = myissuedao.teamWriteTiisueList(member.getIdtime());
+			mytissuelist = myissuedao.teamWriteTiisueList(member.getIdtime(), email);
 			myreplylist = myissuedao.teamWriteReplyList(member.getIdtime());
 			mypjtlist = myissuedao.teamWriteNoticeList(member.getEmail(), member.getIdtime());
 			model.addAttribute("mytissuelist",mytissuelist);
@@ -339,7 +368,7 @@ public class MemberController {
 		if(pjtlist!=null) {
 			session.setAttribute("pjtlist", pjtlist);
 			session.setAttribute("tpmemlist", tpmemlist);
-			List<Tissue> myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime());
+			List<Tissue> myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime(), email);
 			List<PjNotice> myNewPjNoticeList = myissuedao.teamWriteNoticeList(email, member.getIdtime());
 			List<Reply> myNewReplyList = myissuedao.teamWriteReplyList(member.getIdtime());
 			model.addAttribute("mypjtlist", pjtlist);
@@ -395,7 +424,7 @@ public class MemberController {
 		try {
 			pjtlist = noticeDao.getPJT(email);
 			tpmemlist = memberdao.getTpmembers(member.getEmail());
-			mytissuelist = myissuedao.teamWriteTiisueList(member.getIdtime());
+			mytissuelist = myissuedao.teamWriteTiisueList(member.getIdtime(), email);
 			myreplylist = myissuedao.teamWriteReplyList(member.getIdtime());
 			mypjtlist = myissuedao.teamWriteNoticeList(member.getEmail(), member.getIdtime());
 			model.addAttribute("mytissuelist",mytissuelist);
@@ -407,7 +436,7 @@ public class MemberController {
 		if(pjtlist!=null) {
 			session.setAttribute("pjtlist", pjtlist);
 			session.setAttribute("tpmemlist", tpmemlist);
-			List<Tissue> myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime());
+			List<Tissue> myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime(), email);
 			List<PjNotice> myNewPjNoticeList = myissuedao.teamWriteNoticeList(email, member.getIdtime());
 			List<Reply> myNewReplyList = myissuedao.teamWriteReplyList(member.getIdtime());
 			model.addAttribute("mypjtlist", pjtlist);
@@ -464,7 +493,7 @@ public class MemberController {
 		try {
 			pjtlist = noticeDao.getPJT(email);
 			tpmemlist = memberdao.getTpmembers(member.getEmail());
-			mytissuelist = myissuedao.teamWriteTiisueList(member.getIdtime());
+			mytissuelist = myissuedao.teamWriteTiisueList(member.getIdtime(), email);
 			myreplylist = myissuedao.teamWriteReplyList(member.getIdtime());
 			mypjtlist = myissuedao.teamWriteNoticeList(member.getEmail(), member.getIdtime());
 			model.addAttribute("mytissuelist",mytissuelist);
@@ -476,7 +505,7 @@ public class MemberController {
 		if(pjtlist!=null) {
 			session.setAttribute("pjtlist", pjtlist);
 			session.setAttribute("tpmemlist", tpmemlist);
-			myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime());
+			myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime(), email);
 			mentions = memberdao.getMention(member.getEmail());
 			model.addAttribute("mypjtlist", pjtlist);
 			model.addAttribute("myNewTissueList", myNewTissueList);
@@ -782,7 +811,7 @@ public class MemberController {
 			try {
 				Member member = memberdao.getMember(email);
 				List<Tpmember> pjtlist = projectdao.getPJT(email);
-				List<Tissue> myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime());
+				List<Tissue> myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime(), email);
 				model.addAttribute("mypjtlist", pjtlist);
 				model.addAttribute("myNewTissueList", myNewTissueList);
 				viewpage = "user/UserNewTissue";
@@ -832,7 +861,7 @@ public class MemberController {
 				Member member = memberdao.getMember(email);
 				List<Tpmember> pjtlist = projectdao.getPJT(email);
 				List<PjNotice> myNewPjNoticeList = myissuedao.teamWriteNoticeList(email, member.getIdtime());
-				List<Tissue> myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime());
+				List<Tissue> myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime(), email);
 				List<Reply> myNewReplyList = myissuedao.teamWriteReplyList(member.getIdtime());
 				model.addAttribute("mypjtlist", pjtlist);
 				model.addAttribute("myNewPjNoticeList", myNewPjNoticeList);
