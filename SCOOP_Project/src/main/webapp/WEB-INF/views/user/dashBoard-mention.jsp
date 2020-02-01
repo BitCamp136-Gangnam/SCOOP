@@ -100,13 +100,13 @@
 				<div class="card">
 					<div class="row" style="margin-left: 4%; margin-top: 3%">
 						<select id="selectMenu" name="menu" class="nav-item"
-							onchange="changeItem()" style="color: #76838f; border: 0">
-							<option value="99" style="color: #76838f">새로운 이슈 선택</option>
-							<option value="0" style="color: #76838f">새로운 팀이슈</option>
-							<option value="1" style="color: #76838f">새로운 댓글</option>
-							<option value="3" style="color: #76838f">새로운 공지사항</option>
+							onchange="changeItem()" style="color: black; border: 0;font-size: 17px;">
+							<option value="99" style="color: black">새로운 이슈 선택</option>
+							<option value="0" style="color: black">새로운 팀이슈</option>
+							<option value="1" style="color: black">새로운 댓글</option>
+							<option value="3" style="color: black">새로운 공지사항</option>
 						</select>
-						<ul class="nav nav-pills">
+						<ul class="nav nav-pills" style="font-size: 17px;">
 							<!-- <li class="nav-item dropdown"><a
                         class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">정렬</a>
                         <div class="dropdown-menu">
@@ -136,10 +136,17 @@
 								</div>
 								<div class="col-sm-3 newissue" id="day">
 									<p>
-										<b>시간</b>
+										<b>작성시간</b>
 									</p>
 								</div>
 							</div>
+							<c:if test="${mentions =='[]' }">
+							<div class="row countRow" style="margin-left: 2%; margin-right: 2%" id="ialarm">
+								<div class="col-sm-12 newissue" id="al">
+									아직 공지사항이 없습니다! 팀장님이 작성할 때까지 기다려주세요 ^ㅁ^!
+								</div>
+							</div>
+							</c:if>
 							<c:forEach items="${mentions}" var="m">
 								<div class="row countRow"
 									style="margin-left: 2%; margin-right: 2%" id="ialarm">
@@ -171,8 +178,8 @@
 						</div>
 						
 						<div class="col-sm-4">
-							<select id="selectDash" name="selectDash" class="form-control"
-								style="margin-top: 10%;">
+						<h4 style="text-align: center;">협업공간 진행도</h4>
+							<select id="selectDash" name="selectDash" class="form-control">
 								<%-- <option value="${sessionScope.email}">여기는 select공간</option> --%>
 								<c:choose>
 									<c:when test="${fn:length(pjtlist) > 0}">

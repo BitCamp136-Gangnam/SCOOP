@@ -56,67 +56,27 @@ border-radius: 5px;
         <div class="content-body"style="height: 680px;">
         <div class="container-fluid" ">
         <div class="card">
-        <form action="myissueEditOk.do" method="POST" enctype="multipart/form-data">
+        <form action="noticeEditOk.do?bnseq=${n.bnseq}" method="POST">
         <%-- <input type="hidden" name="tseq" value="${tissue.tseq}"> --%>
-        <input type="hidden" name="piseq" value="${myissue.piseq}">
+        <input type="hidden" name="bnseq" value="${n.bnseq}">
 		<div class="row"style="margin:2% 2% 0 2%" >
-		<div class="col-sm-8">
-			<input type="text" class="form-control" name="title" value="${myissue.pititle}" style="border: 0px; border-bottom: 1px solid #ced4da; font-size: 20px;padding-left: 0px;">
+		<div class="col-sm-6">
+			<input type="text" class="form-control" name="bntitle" value="${n.bntitle}" style="border: 0px; border-bottom: 1px solid #ced4da; font-size: 20px;padding-left: 0px;">
 		</div>
-		<div class="col-sm-4" style="padding-right: 15px; text-align: right">
-		<span id="editCheckIssue">
-		<span class="iconify" data-icon="fa-solid:check" data-inline="false" style="cursor: pointer;font-size: 30px;margin-bottom: 20px;margin-left: 20px;"></span>
-		</span>
-			<input type="submit" class="form-control editdelete" value="완료" id="editIssue" hidden="">
-			<span id="returnIssue">
-			<span class="iconify" data-icon="entypo:back" data-inline="false" style="cursor: pointer; font-size: 35px;margin-bottom: 15px;margin-left: 15px;"></span>
-			</span>
+		<div class="col-sm-1">
+		</div>
+		<div class="col-sm-2" style="padding-right: 0">
+			<input type="submit" class="form-control editdelete" value="완료" id="editIssue">
+		</div>
+		<div class="col-sm-2" style="padding-left: 0">
+			<input type="button" class="form-control editdelete" value="돌아가기" id="returnIssue">
 		</div>
 		</div>
-		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%; margin-top: 2%;margin-top: 1%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i><input type="text" id="editFrom" name="editFrom" style="border: 0; border-bottom: 1px solid #ced4da; text-align: center" value="${fn:substring(myissue.pistart,0,10)}"> ~ <input type="text" id="editTo" name="editTo" style="border: 0; border-bottom: 1px solid #ced4da; text-align: center" value="${fn:substring(myissue.piend,0,10)}"></div>
 		<div id="edittodoresult">
-		<c:forEach items="${mentions}" var="m">
-		<div class="myissueDetail" id="myissueMention">
-		<sup><i class="fas fa-quote-left" style="color:#ca0000; font-size: 7px"></i></sup> @${m.name} <sup><i class="fas fa-quote-right"style="color:#ca0000;font-size: 7px"></i></sup>
-		<span class="divDelete" style="cursor:pointer;"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span>
-		<br>
-		</div>
-		<input type="hidden" name="editMention" value="${m.email}~${m.pmseq}">
-		</c:forEach>
-				<c:forEach items="${files}" var="f">
-		<div class="myissueDetail" id="myissueMention">
-		<a href="fileDownload.do?fileName=${f.pfdname}"><span class="iconify" data-icon="si-glyph:file-box" data-inline="false"></span>${f.pfdname}</a>
-		<span class="divDelete" style="cursor:pointer;"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span>
-		<br>
-		</div>
-		<input type="text" hidden="" name="editOriFile" value="${f.pfdname}~${f.pdseq}">
-		</c:forEach>
-			<c:forEach items="${gdrive}" var="gd">
-		<div class="myissueDetail" id="myissueGoogledrive">
-			<i class="fab fa-google-drive"></i>
-			<a href="${gd.pgurl}" onclick="window.open(this.href,'팝업창','width=800, height=800');return false;">${gd.pgfilename}</a>
-			<span class="divDelete2" style="cursor:pointer;"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span>
-			<br>
-		</div>
-			<input type="hidden" name="editGfilename" value="${gd.pgfilename}~${gd.pgseq}">
-			<input type="hidden" name="editGurl" value="${gd.pgurl}~${gd.pgseq}">
-			</c:forEach>
-		<c:forEach items="${dowork}" var="work">
-		<div class="myissueDetail" id="myissueTodo">
-		<i class="far fa-check-circle"style="padding-right: 5px;"></i>${work.fromname}
-		<i class="fas fa-long-arrow-alt-right" style="margin-left:5px;margin-right: 5px;"></i>${work.toname}<br>
-		: ${work.pdowork}
-		<span class="divDelete2" style="cursor:pointer;"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span>
-		<br>
-		</div>
-		<input type="hidden" name="editToname" value="${work.ptoemail}~${work.pwseq}">
-		<input type="hidden" name="editDowork" value="${work.pdowork}~${work.pwseq}">
-		</c:forEach> 
 		</div>
         <div class="myissueDetail" style="margin-top: 2%">
-        <textarea rows="5" style="width:50%;border: 0; border-bottom: 1px solid #ced4da;" id="editIssuecontent" name="editIssuecontent">${myissue.picontent}</textarea>
+        <textarea rows="5" style="width:50%;border: 0; border-bottom: 1px solid #ced4da;" id="editIssuecontent" name="bncontent">${n.bncontent}</textarea>
         </div>
-        <input type="file" multiple="multiple"  id="fileclick2" name="editFile" hidden="">    
             </form>
             </div> 
             </div>
@@ -131,30 +91,8 @@ border-radius: 5px;
     <!--**********************************
         Main wrapper end
     ***********************************-->
-<div class="list-group" id="editMentionlist" style="display: none">
-      <a href="#" class="list-group-item list-group-item-action menli" id="editMen1"style="padding: 5px;">멘션</a> 
-      <a href="#" class="list-group-item list-group-item-action menli" id="editMen2"style="padding: 5px">구글 드라이브</a> 
-      <a href="#" class="list-group-item list-group-item-action menli" id="editMen3"style="padding: 5px">파일</a> 
-      <!-- <a href="#" class="list-group-item list-group-item-action menli" id="editMen7"style="padding: 5px">의사결정</a> --> 
-      <a href="#" class="list-group-item list-group-item-action menli" id="editMen4"style="padding: 5px">할 일</a> 
-</div>
-<div class="list-group" id="editMemlist" style="display: none">
-<c:forEach items="${tpmemlist}" var="t">
-	<a href="#" class="list-group-item list-group-item-action todo projectmem${t.tseq}" style="padding: 5px; border-radius: 0" id="${t.tseq}/${t.email}">${t.name}</a>
-</c:forEach>
-</div>
- <div class="list-group" id="edittodo" style="display: none;">
-      <label for="todomem">담당자</label> <input
-         class="form-control createmodal" type="text" id="edittodomem"
-         style="width: 100%" name=""> <br> <label for="todolist">할
-         일</label>
-      <textarea class="form-control createmodal" rows="3" id="edittodolist"
-         style="width: 100%; margin-bottom: 2%" placeholder="할 일을 작성해주세요."></textarea>
-      <button type="button" id="edittodomake" class="btn btn-secondary"
-         style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;">만들기</button>
-      <button type="button" id="edittodocancle" class="btn btn-secondary"
-         style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;">취소</button>
-   </div>
+
+
     <!--**********************************
         Scripts
     ***********************************-->
@@ -190,28 +128,10 @@ border-radius: 5px;
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script type="text/javascript">
-$(function(){
-		$("#editFrom").flatpickr();
-		$("#editTo").flatpickr();
-		   for(let i=0; i<$('#editMemlist').children().length-1; i++){
-				for(let j=i+1; j<$('#editMemlist').children().length;j++){
-					if($('#editMemlist').children().eq(i).attr('id').split("/")[1] == $('#editMemlist').children().eq(j).attr('id').split("/")[1]){
-						$('#editMemlist').children().eq(j).hide();
-					}
-				}
-			}
-			for(let i=0; i<$('#editMemlist').children().length; i++){
-				if($('#editMemlist').children().eq(i).attr('id').split("/")[0] == $(selectpro).val()){
-					$('.projectmem'+$(selectpro).val()).show();
-				}
-			}
-})
-$('#editCheckIssue').click(function(){
-	$('#editIssue').click();
-})
+
 $('#returnIssue').click(function(){
-	history.back();
-})
+	location.href ='noticeDetail.do?bnseq='+${n.bnseq};
+});
 $('.divDelete').click(function(){
 	var dValue = $(this).parent().next().attr('value');
 	$(this).parent().next().attr('value', dValue+'~delete');

@@ -43,7 +43,7 @@ public class PrivateController {
 	@Autowired
 	private SqlSession sqlsession;
 	
-	//프라이빗 공간 이동
+	//프라이빗 공간
 	@RequestMapping(value="private.do" , method = RequestMethod.GET)
 	public String privateIn(HttpSession session, Model model) {
 		String email = "";
@@ -58,21 +58,15 @@ public class PrivateController {
 		}
 		List<BookMark> bookMark = myissuedao.getBookMark(email);
 		
-		System.out.println("bookMark" + bookMark);
-		
 		model.addAttribute("myissuelist", myissuelist);
 		model.addAttribute("bookMark", bookMark);
-		
-		System.out.println(myissuelist);
-		System.out.println("bookMark : " + bookMark);
 		
 		String viewpage = "private/private-place";
 		
 		return viewpage;
-		
 	}
 	
-	//북마크 공간 이동
+	//북마크 페이지
 	@RequestMapping(value = "/bookmark.do",method = RequestMethod.GET)
 	public String bookmark(HttpSession session, Model model) {
 		int tseq, tiseq;
@@ -91,7 +85,6 @@ public class PrivateController {
 				pname = projectName.getPname();
 				bookMarkList.get(i).setPname(pname);
 			}
-			System.out.println(i + " ------ " + bookMarkList.get(i));
 		}
 		
 		model.addAttribute("bookMarkList", bookMarkList);

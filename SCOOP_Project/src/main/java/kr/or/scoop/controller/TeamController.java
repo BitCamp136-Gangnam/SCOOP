@@ -429,15 +429,9 @@ public class TeamController {
 		
 		try {
 			processList = dao.chartData(tseq);
-			
-			System.out.println("결과는?" + processList.toString());
-
-			System.out.println("이제 리턴할 차례");
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-
-		
 		return processList;
 	}
 	

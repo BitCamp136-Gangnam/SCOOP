@@ -3,11 +3,11 @@
 <jsp:include page="/WEB-INF/views/commons/footer.jsp"></jsp:include>
 <script>
 Swal.fire(
-		  '아이디나 비밀번호가 다릅니다',
-		  '아이디나 비밀번호가 다릅니다',
-		  'error'
+		  '에러발생!',
+		  '협업공간 초대에 에러가 발생했습니다!',
+		  'warning'
 		)
 window.setTimeout(function() {
 	location.href='index.do';	
-}, 1500);
+}, 1000);
 </script>

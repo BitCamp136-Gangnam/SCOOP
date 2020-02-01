@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="<c:url value="/resources/plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css" />">
     <!-- Custom Stylesheet -->
      <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
-     <script src="<c:url value="/resources/js/crawling/app.js"/>"></script>
 </head>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript">
@@ -128,6 +127,10 @@ $(function(){
 		   }
 		 })
 	})
+	$('#comeback').click(function(){
+		console.log("타니?");
+		history.back();
+	})
 	//댓글 삭제 
 	$('.deleteComment').click(function(){
 		var temp=$(this);
@@ -148,12 +151,11 @@ $(function(){
 		});
 		
 	});
-		
 });
 
 
 </script>
-
+<script src="<c:url value="/resources/js/crawling/app.js"/>"></script>
 <style>
 .newissue{
 	border-bottom: 1px solid #c8c8c8;
@@ -195,11 +197,14 @@ border-radius: 5px;
 				<h3 id="myissueSubject" style="padding-top: 2%;padding-left: 1%;">${tissue.tititle}</h3>
 		</div>
 		<c:if test="${tissue.email==sessionScope.email}">
-		<div class="col-sm-2" style="padding-right: 0">
-			<input type="button" class="form-control editdelete" value="수정" id="editIssue">
-		</div>
-		<div class="col-sm-2" style="padding-left: 0">
-			<input type="button" class="form-control editdelete" value="삭제" id="deleteIssue">
+		<div class="col-sm-4" style="padding-top: 2%;padding-left: 8%;">
+		<!-- <span data-toggle="tooltip" data-placement="top" title="수정" > -->
+        	<span class="fas fa-cog"  id="editIssue" style="margin-left: 5px;cursor: pointer; font-size: 30px;"></span>
+         <!-- </span> -->
+         <!-- <span data-toggle="tooltip" data-placement="top" title="삭제" > -->
+			<span class="iconify" id="deleteIssue" data-icon="topcoat:delete" data-inline="false" style="cursor: pointer;font-size: 35px;margin-bottom: 20px;margin-left: 20px;"></span>
+			<span class="iconify" id="comeback" data-icon="entypo:back" data-inline="false" style="cursor: pointer; font-size: 35px;margin-bottom: 15px;margin-left: 15px;"></span>
+		<!-- </span> -->
 		</div>
 		</c:if>
 		</div>
@@ -242,7 +247,7 @@ border-radius: 5px;
         <div class="myissueDetail col-sm-7" id="myissueContent">
         ${tissue.ticontent}
         </div>
-        <div class="col-sm-3">크롤링 데이터</div>
+        <div class="col-sm-2"><span>네이버</span><br><img alt="logo" src="https://s.pstatic.net/static/www/mobile/edit/2016/0705/mobile_212852414260.png" style="width: 50%"></div>
         </div>
             <!-- #/ container -->
             </div> 
@@ -299,6 +304,11 @@ border-radius: 5px;
     <!--**********************************
         Scripts
     ***********************************-->
+    <script type="text/javascript">
+		$(function(){
+			start
+		})
+	</script>
     <script src="<c:url value="/resources/plugins/common/common.min.js" />"></script>
     <script src="<c:url value="/resources/js/custom.min.js" />"></script>
     <script src="<c:url value="/resources/js/settings.js" />"></script>
@@ -324,8 +334,6 @@ border-radius: 5px;
     <script src="<c:url value="/resources/plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"/>"></script>
 
      <script src="<c:url value="/resources/js/dashboard/dashboard-1.js"/>"></script>
-	<script type="text/javascript">
- 		
-	</script>
+	
 </body>
 </html>

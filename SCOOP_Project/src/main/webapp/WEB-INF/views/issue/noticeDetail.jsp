@@ -4,7 +4,7 @@
     <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html lang="en">
-
+<c:set var="role" value="${sessionScope.role}" />
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,12 +25,13 @@ $(function(){
 		console.log("${myissue.email}");
 		console.log("${sessionScope.email}");
 		$('#editIssue').click(function(){
-			location.href = 'myissueEdit.do?piseq='+${myissue.piseq};
+			location.href = 'noticeEdit.do?bnseq='+${notice.bnseq};
 		})
+		
 		$('#deleteIssue').click(function(){
 			   Swal.fire({
-				   title: '정말로 이슈를 삭제하시겠습니까??',
-				   text: "삭제하시면 이슈의 모든 정보가 사라집니다!",
+				   title: '정말로 공지사항을 삭제하시겠습니까??',
+				   text: "삭제하시면 공지사항의 모든 정보가 사라집니다!",
 				   icon: 'warning',
 				   showCancelButton: true,
 				   confirmButtonColor: '#d33',
@@ -39,14 +40,10 @@ $(function(){
 				   cancelButtonText: '취소'
 				 }).then((result) => {
 				   if (result.value) {
-					   location.href = 'deleteMyIssue.do?piseq='+${myissue.piseq};
+					   location.href = 'deleteNoitce.do?bnseq='+${notice.bnseq};
 				   }
 				 })
 		})
-	$('#comeback').click(function(){
-		console.log("타니?");
-		history.back();
-	})
 	});
 </script>
 <style>
@@ -87,60 +84,24 @@ border-radius: 5px;
         <div class="container-fluid">
         <div class="card">
 		<div class="row"style="margin:2% 2% 0 2%" >
-		<div class="col-sm-8">
-		<h3 id="myissueSubject" style="padding-top: 2%;">${myissue.pititle}</h3>
+		<div class="col-sm-10">
+		<h3 id="noticeSubject" style="padding-top: 2%;">${notice.bntitle}</h3>
 		</div>
-		<c:if test="${myissue.email==sessionScope.email}">
-		<div class="col-sm-4" style="padding-top: 2%;padding-left: 8%;text-align: center">
-		<!-- <span data-toggle="tooltip" data-placement="top" title="수정" > -->
-		
-        	<span class="fas fa-cog"  id="editIssue" style="margin-left: 5px;cursor: pointer; font-size: 30px;"   ></span>
-         <!-- </span> -->
-         <!-- <span data-toggle="tooltip" data-placement="top" title="삭제" > -->
-			<span class="iconify" id="deleteIssue" data-icon="topcoat:delete" data-inline="false" style="cursor: pointer;font-size: 35px;margin-bottom: 20px;margin-left: 20px;"></span>
-			<span class="iconify" id="comeback" data-icon="entypo:back" data-inline="false" style="cursor: pointer; font-size: 35px;margin-bottom: 15px;margin-left: 15px;"></span>
-		<!-- </span> -->
+		<c:if test="${role == 'ROLE_ADMIN'}">
+		<div class="col-sm-2" style="padding-top: 2%;padding-left: 8%;">
+		<span data-toggle="tooltip" data-placement="top" title="프라이빗 이슈 수정" >
+        	<span class="fas fa-cog"  id="editIssue" style="margin-left: 5px;cursor: pointer; font-size: 25px"   ></span>
+         </span>
+         <span data-toggle="tooltip" data-placement="top" title="프라이빗 이슈 삭제" >
+			<span class="iconify" id="deleteIssue" data-icon="octicon:x" data-inline="false" style="cursor: pointer;font-size: 30px;margin-bottom: 12px;margin-left: 20px;"></span>
+		</span>
 		</div>
 		
 		</c:if>
-		</div>
-		<c:choose>
-        <c:when test="${myissue.pistart!=null}">
-		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>${fn:substring(myissue.pistart,0,10)} ~ ${fn:substring(myissue.piend,0,10)}</div>
-		</c:when>
-		<c:otherwise>
-		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>등록된 일정이 없습니다.</div>
-		</c:otherwise>
-		</c:choose>
-		<c:forEach items="${mymention}" var="m">
-		<div class="myissueDetail" id="myissueMention">
-		<sup><i class="fas fa-quote-left" style="color:#ca0000; font-size: 7px"></i></sup> @${m.name} <sup><i class="fas fa-quote-right"style="color:#ca0000;font-size: 7px"></i></sup>
-		<br>
-		</div>
-		</c:forEach>
-		<c:forEach items="${files}" var="f">
-		<div class="myissueDetail" id="myissueMention">
-		<a href="fileDownload.do?fileName=${f.pfdname}"><span class="iconify" data-icon="si-glyph:file-box" data-inline="false"></span>${f.pfdname}</a>
-		<br>
-		</div>
-		</c:forEach>
-		<c:forEach items="${mygdrive}" var="gd">
-		<div class="myissueDetail" id="myissueGoogledrive">
-			<i class="fab fa-google-drive"></i>
-			<a href="${gd.pgurl}" onclick="window.open(this.href,'팝업창','width=800, height=800');return false;">${gd.pgfilename}</a>
-			<br>
-		</div>
-			</c:forEach>
-			<c:forEach items="${mydowork}" var="work">
-		<div class="myissueDetail" id="myissueTodo">
-		<i class="far fa-check-circle"style="padding-right: 5px;"></i>${work.fromname}
-		<i class="fas fa-long-arrow-alt-right" style="margin-left:5px;margin-right: 5px;"></i>${work.toname}<br>
-		: ${work.pdowork}
-		<br>
-		</div>
-		</c:forEach> 
+		</div>	
+		<hr>
         <div class="myissueDetail">
-        ${myissue.picontent}
+        ${notice.bncontent}
         </div>    
             <!-- #/ container -->
             </div> 
