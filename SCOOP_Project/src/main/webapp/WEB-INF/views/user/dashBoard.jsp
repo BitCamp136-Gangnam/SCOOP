@@ -81,6 +81,13 @@
 							<div class="col-sm-6 newissue" id="ti"><p><b>제목</b></p></div>
 							<div class="col-sm-3 newissue" id="day"><p><b>작성시간</b></p></div>
 							</div>
+		<c:if test="${mypjtlist =='[]'}">
+			<div class="row countRow" style="margin-left: 2%; margin-right: 2%" id="ialarm">
+			<div class="col-sm-12 newissue" id="al">
+			아직 공지사항이 없습니다
+			</div>
+			</div>
+		</c:if>
 	 <c:if test="${mypjtlist!=null }">
       <c:forEach items="${mypjtlist}" var="mpl">
       <c:if test="${myNewTissueList !=null }">
