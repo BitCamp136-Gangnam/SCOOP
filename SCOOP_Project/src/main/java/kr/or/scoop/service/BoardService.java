@@ -33,7 +33,12 @@ public class BoardService {
 		ProjectDao dao = sqlsession.getMapper(ProjectDao.class);
 		System.out.println("매퍼 후");
 		System.out.println(email + tseq);
-		result = dao.insertPJT2(email, tseq);
+		try {
+			result = dao.insertPJT2(email, tseq);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 		System.out.println("꺄르르륵");
 		return result;
 		
