@@ -196,8 +196,8 @@ $(document).ready(function(){
 			
 			<div class="col-sm-7 newissue">
 			<c:choose>
-          <c:when test="${fn:length(n.bncontent) > 56}">
-             <c:out value="${fn:substring(n.bncontent,0,55)}"/>...
+          <c:when test="${fn:length(n.bncontent) > 65}">
+             <c:out value="${fn:substring(n.bncontent,0,65)}"/>...
            </c:when>
            <c:otherwise>
            		<c:out value="${n.bncontent}"/>
