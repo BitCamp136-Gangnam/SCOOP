@@ -84,7 +84,7 @@
 		<c:if test="${mypjtlist =='[]'}">
 			<div class="row countRow" style="margin-left: 2%; margin-right: 2%" id="ialarm">
 			<div class="col-sm-12 newissue" id="al">
-			아직 공지사항이 없습니다
+				아직 이슈를 작성안하셨군요? 협업공간에서 새로운 이슈를 작성해 보세요 ^ㅁ^!
 			</div>
 			</div>
 		</c:if>
