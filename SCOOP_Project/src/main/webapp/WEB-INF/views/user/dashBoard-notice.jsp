@@ -139,7 +139,7 @@
 						</div>
 						<div class="col-sm-4" >
 						<h4 style="text-align: center;">협업공간 진행도</h4>
-                <select id="selectDash" name="selectDash" class="form-control" style="margin-top: 7%;">
+                <select id="selectDash" name="selectDash" class="form-control">
                   <%-- <option value="${sessionScope.email}">여기는 select공간</option> --%>
                   <c:choose>
                   	<c:when test="${fn:length(pjtlist) > 0}">
