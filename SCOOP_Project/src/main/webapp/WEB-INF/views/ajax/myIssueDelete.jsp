@@ -8,6 +8,6 @@ Swal.fire(
 		  'success'
 		)
 window.setTimeout(function() {
-	location.href="redirect:/private.do";	
+	location.href="private.do";	
 }, 1500);
 </script>
