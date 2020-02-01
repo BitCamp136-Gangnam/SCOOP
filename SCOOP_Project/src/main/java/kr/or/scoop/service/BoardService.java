@@ -56,6 +56,7 @@ public class BoardService {
 	public int updateNotice(Notice notice) {
 		int result = 0;
 		NoticeDao dao = sqlsession.getMapper(NoticeDao.class);
+		System.out.println("노티스  :" + notice);
 		result = dao.updateNotice(notice);
 		
 		return result;

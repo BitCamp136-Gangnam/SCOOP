@@ -91,11 +91,12 @@ $(document).ready(function(){
             Content body start
         ***********************************-->
         <div class="content-body">
-        <br>
-            <div class="container-fluid">
-        <div class="card" style="min-height: 1080px">
-		<div class="row" style="margin: 2%">
+        <div class="container-fluid">
+        <div class="card">
+		<div class="row" style="margin: 2% 2% 5px 2%">
+			<div class="col-sm-12" style="padding-left: 15px">
 				<h3>북마크</h3>
+			</div>
 		</div>
 		<hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
 		<div class="row" style="margin-left: 2%; margin-right: 2%">

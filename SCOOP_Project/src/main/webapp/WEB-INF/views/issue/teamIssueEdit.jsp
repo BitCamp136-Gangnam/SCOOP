@@ -65,11 +65,16 @@ border-radius: 5px;
 		</div>
 		<div class="col-sm-1">
 		</div>
-		<div class="col-sm-2" style="padding-right: 0">
-			<input type="submit" class="form-control editdelete" value="완료" id="editIssue">
+		<div class="col-sm-2" style="padding-right: 0; text-align: right">
+		<span id="editCheckIssue">
+		<span class="iconify" data-icon="fa-solid:check" data-inline="false" style="cursor: pointer;font-size: 40px;margin-bottom: 20px;margin-left: 20px;"></span>
+		</span>
+			<input type="submit" class="form-control editdelete" value="완료" id="editIssue" hidden="">
 		</div>
-		<div class="col-sm-2" style="padding-left: 0">
-			<input type="button" class="form-control editdelete" value="돌아가기" id="returnIssue">
+		<div class="col-sm-2" style="padding-left: 0; text-align: center">
+			<span id="returnIssue">
+			<span class="iconify" data-icon="entypo:back" data-inline="false" style="cursor: pointer; font-size: 45px;margin-bottom: 15px;margin-left: 15px;"></span>
+			</span>
 		</div>
 		</div>
 		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%; margin-top: 2%"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i><input type="text" id="editFrom" name="editFrom" style="border: 0; border-bottom: 1px solid #ced4da; text-align: center" value="${fn:substring(tissue.tistart,0,10)}"> ~ <input type="text" id="editTo" name="editTo" style="border: 0; border-bottom: 1px solid #ced4da; text-align: center" value="${fn:substring(tissue.tiend,0,10)}"></div>
@@ -205,8 +210,11 @@ $(function(){
 				}
 			}
 })
+$('#editCheckIssue').click(function(){
+	$('#editIssue').click();
+})
 $('#returnIssue').click(function(){
-	location.href ='teamissueDetail.do?tiseq='+${tissue.tiseq};
+	history.back();
 })
 $('.divDelete').click(function(){
 	var dValue = $(this).parent().next().attr('value');

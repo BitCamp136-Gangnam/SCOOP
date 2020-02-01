@@ -4,7 +4,7 @@
     <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html lang="en">
-
+<c:set var="role" value="${sessionScope.role}" />
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,15 +21,16 @@
 </head>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript">
-	$(function(){
-		//팀 공자사항 디테일 수정
-		$('#pjNoticeEd').click(function(){
-			location.href="pjNoticeEdit.do?pnseq=${detail.pnseq}";
-		});
-		//팀 공지사항 디테일 삭제 
-		$('#pjNoticeDel').click(function(){
-			Swal.fire({
-				   title:'공지사항을 삭제하시겠습니까?',
+$(function(){
+		console.log("${myissue.email}");
+		console.log("${sessionScope.email}");
+		$('#editIssue').click(function(){
+			location.href = 'noticeEdit.do?bnseq='+${notice.bnseq};
+		})
+		
+		$('#deleteIssue').click(function(){
+			   Swal.fire({
+				   title: '정말로 공지사항을 삭제하시겠습니까??',
 				   text: "삭제하시면 공지사항의 모든 정보가 사라집니다!",
 				   icon: 'warning',
 				   showCancelButton: true,
@@ -39,18 +40,11 @@
 				   cancelButtonText: '취소'
 				 }).then((result) => {
 				   if (result.value) {
-					   location.href="pjNoticeDelete.do?pnseq=${detail.pnseq}&tseq=${detail.tseq}";
+					   location.href = 'deleteNoitce.do?bnseq='+${notice.bnseq};
 				   }
 				 })
-			
-		});
-		//팀 공지사항으로 돌아가기
-		$('#pjNoticeBack').click(function(){
-			location.href="projectNotice.do?tseq=${detail.tseq}";
-		});
-		
+		})
 	});
-		
 </script>
 <style>
 .newissue{
@@ -62,6 +56,13 @@
 	font-size: 15px;
 	margin-left: 3%;
 	margin-bottom:1%;
+}
+.editdelete{
+background-color: #E71D36;
+border-color: #CCCCCC;
+color: #fff;
+cursor: pointer;
+border-radius: 5px;
 }
 </style>
 <body>
@@ -79,42 +80,57 @@
         <!--**********************************
             Content body start
         ***********************************-->
-        <div class="content-body"style="height: 680px;">
-        <div class="container-fluid row" style="padding-right: 15px; margin-right: 0px;margin-left: 0px; padding-left: 15px;">
-        <div class="card" style="padding-left: 15px;padding-right: 15px; padding-top:1%;width:100%;height: auto;overflow: auto;">
+        <div class="content-body">
+        <div class="container-fluid">
+        <div class="card">
 		<div class="row"style="margin:2% 2% 0 2%" >
-				<div class="col-sm-9">
-				<h3 id="myissueSubject" style="padding-top: 2%;padding-left: 1%;">${detail.pntitle}</h3>
-				</div>
-				<c:if test="${rank == 100}">
-					<div class="col-sm-1" style="text-align: right; padding: 0">
-					<span id="pjNoticeEd">
-					<span class="fas fa-cog" id="pjnoticeedit" style="margin-left: 5px;cursor: pointer; font-size: 35px;padding-top: 15px"></span>
-					</span>
-					</div>
-					<div class="col-sm-1" style="text-align: center; padding: 0">
-					<span id="pjNoticeDel">
-					<span class="iconify" data-icon="topcoat:delete" data-inline="false" style="cursor: pointer;font-size: 50px;margin-bottom: 5px;padding-top: 10px"></span>
-					</span>
-					</div>
-				</c:if>		
-					<div class="col-sm-1" style="padding: 0">
-					<span id="pjNoticeBack">
-					<span class="iconify" data-icon="entypo:back" data-inline="false" style="cursor: pointer; font-size: 55px;margin-bottom: 5px;padding-top: 10px"></span>
-					</span>
-					</div>			
+		<div class="col-sm-10">
+		<h3 id="noticeSubject" style="padding-top: 2%;">${notice.bntitle}</h3>
 		</div>
-		<div class="myissueDetail" id="myissueMention"><sup><i class="fas fa-quote-left" style="color:#ca0000;"></i></sup> 멘션 멤버 이름 넣는 곳 <sup><i class="fas fa-quote-right"style="color:#ca0000;"></i></sup></div>
-		<div class="myissueDetail" id="myissueGoogledrive"><i class="fab fa-google-drive"></i>
-			<a href="">여기에 구글드라이브 파일 올리면됨</a>
+		<c:if test="${role == 'ROLE_ADMIN'}">
+		<div class="col-sm-2" style="padding-top: 2%;padding-left: 8%;">
+		<span data-toggle="tooltip" data-placement="top" title="프라이빗 이슈 수정" >
+        	<span class="fas fa-cog"  id="editIssue" style="margin-left: 5px;cursor: pointer; font-size: 25px"   ></span>
+         </span>
+         <span data-toggle="tooltip" data-placement="top" title="프라이빗 이슈 삭제" >
+			<span class="iconify" id="deleteIssue" data-icon="octicon:x" data-inline="false" style="cursor: pointer;font-size: 30px;margin-bottom: 12px;margin-left: 20px;"></span>
+		</span>
 		</div>
-		<div class="myissueDetail" id="myissueTodo"><i class="far fa-check-circle"style="padding-right: 5px;"></i>From 멤버이름<i class="fas fa-long-arrow-alt-right" style="margin-left:5px;margin-right: 5px;"></i>To 멤버 이름 </div>
+		
+		</c:if>
+		</div>	
+		<hr>
         <div class="myissueDetail">
-        ${detail.pncontent}
+        ${notice.bncontent}
         </div>    
             <!-- #/ container -->
             </div> 
-            </div>		
+            <!-- <div class="card" style="float:right;background-color: #fff;margin-left:10px;padding-left: 0px;padding-right: 0px;width:400px;">
+            <div class="card" style="min-height:430px;padding-left: 3%;padding-top: 5%;padding-right: 3%;padding-bottom: 5%;overflow: auto;">
+            
+            <div class="row" style="margin-left: 3%;margin-right: 3%;">
+            <div class="col-sm-1" style="margin-top: 10px;margin-right:10px;padding-left:0;">
+            <img id="memberImage" class="img-circle" alt="멤버 프로필 사진 넣는 곳" src="resources/images/avatar/avatar.png" style="width:40px;height: auto;padding-top: 1%;margin-left: 10px;margin-right: 10px;">
+            </div>
+            <div class="col-sm-10">
+            <div id="commentMain" style="margin: 3% 5% 3% 5%;" >
+            <div style="margin-bottom: 1%;">
+            <span>도연(이름)</span><span style="padding-left:3%"><i class="far fa-clock" style="color:#E71D36 "></i>오후 16:03(시간)</span>
+            <br>
+            <div>보쌈 먹고 시퍼요(댓글 내용)</div>
+            </div>
+            </div>
+            </div>
+            
+            
+            
+            <img src="resources/images/logo/ScoopTitle.png" style="width:150px;height: auto;opacity:0.3;position:absolute;top:25%;left: 32%;">
+            </div>
+            </div>
+            <textarea id="myissueComment" rows="5" placeholder="말하지 않아도 아는것은 초코파이뿐입니다                        댓글 입력 후 저장을 클릭해주세요" style="resize: none;height:180px;width:auto;border: 1px solid #c8c8c8;border-radius: 0.5rem;margin-left: 15px;margin-bottom: 20px;margin-right: 15px;overflow:auto;padding: 4%"></textarea>
+            <input id="myissueCommentBtn" type="button" value="저장" style="width: 90px;border-radius:0.5rem ;padding-top:7px;padding-bottom:7px; background-color: #E71D36;color: #fff; cursor: pointer;position: absolute;top:590px;left: 290px;">
+            </div> -->
+            </div>
         </div>
         <!--**********************************
             Content body end
@@ -153,8 +169,6 @@
     <!-- ChartistJS -->
    <script src="<c:url value="/resources/plugins/chartist/js/chartist.min.js"/>"></script>
     <script src="<c:url value="/resources/plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"/>"></script>
-
-
 
      <script src="<c:url value="/resources/js/dashboard/dashboard-1.js"/>"></script>
 
