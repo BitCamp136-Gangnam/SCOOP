@@ -17,7 +17,7 @@ input::placeholder {
 <%-- <link rel="stylesheet"
    href="<c:url value="/resources/dist/summernote.css" />">
 <script src="<c:url value="/resources/dist/summernote.min.js" />"></script> --%>
-<script src="<c:url value="/resources/js/crawling/app.js"/>"></script>
+
 <meta name="google-signin-client_id" content="47797892299-i06tt9qhbs15g8mn89ncu1isa1eneql8.apps.googleusercontent.com">
 <script src="https://apis.google.com/js/platform.js?onload=loadAuthClient" async defer></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
@@ -952,7 +952,7 @@ span {
 <c:set var="kind" value="${session.kind}}"></c:set>
 <c:set var="email" value="${session.email}}"></c:set>
 
-<div class="nk-sidebar" style="z-index: 0;padding-bottom: 0px;">
+<div class="nk-sidebar" style="z-index: 0;">
    <div id="scnav" class="nk-nav-scroll">
       <ul class="metismenu" id="menu">
          <li class="nav-label" style="padding-bottom: 10px;">

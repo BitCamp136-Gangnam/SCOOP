@@ -79,7 +79,7 @@
 							<div class="row" style="margin-left: 2%; margin-right: 2%" id="ialarm">
 							<div class="col-sm-3 newissue" id="al"><p><b>협업공간</b></p></div>
 							<div class="col-sm-6 newissue" id="ti"><p><b>제목</b></p></div>
-							<div class="col-sm-3 newissue" id="day"><p><b>시간</b></p></div>
+							<div class="col-sm-3 newissue" id="day"><p><b>작성시간</b></p></div>
 							</div>
 	 <c:if test="${mypjtlist!=null }">
       <c:forEach items="${mypjtlist}" var="mpl">
