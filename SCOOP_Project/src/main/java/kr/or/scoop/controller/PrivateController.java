@@ -85,7 +85,6 @@ public class PrivateController {
 				pname = projectName.getPname();
 				bookMarkList.get(i).setPname(pname);
 			}
-			System.out.println(i + " ------ " + bookMarkList.get(i));
 		}
 		
 		model.addAttribute("bookMarkList", bookMarkList);

@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="<c:url value="/resources/plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css" />">
     <!-- Custom Stylesheet -->
      <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
-     <script src="<c:url value="/resources/js/crawling/app.js"/>"></script>
 </head>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript">
@@ -156,7 +155,7 @@ $(function(){
 
 
 </script>
-
+<script src="<c:url value="/resources/js/crawling/app.js"/>"></script>
 <style>
 .newissue{
 	border-bottom: 1px solid #c8c8c8;
@@ -248,7 +247,7 @@ border-radius: 5px;
         <div class="myissueDetail col-sm-7" id="myissueContent">
         ${tissue.ticontent}
         </div>
-        <div class="col-sm-3">크롤링 데이터</div>
+        <div class="col-sm-2"><span>네이버</span><br><img alt="logo" src="https://s.pstatic.net/static/www/mobile/edit/2016/0705/mobile_212852414260.png" style="width: 50%"></div>
         </div>
             <!-- #/ container -->
             </div> 
@@ -305,6 +304,11 @@ border-radius: 5px;
     <!--**********************************
         Scripts
     ***********************************-->
+    <script type="text/javascript">
+		$(function(){
+			start
+		})
+	</script>
     <script src="<c:url value="/resources/plugins/common/common.min.js" />"></script>
     <script src="<c:url value="/resources/js/custom.min.js" />"></script>
     <script src="<c:url value="/resources/js/settings.js" />"></script>
@@ -330,8 +334,6 @@ border-radius: 5px;
     <script src="<c:url value="/resources/plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"/>"></script>
 
      <script src="<c:url value="/resources/js/dashboard/dashboard-1.js"/>"></script>
-	<script type="text/javascript">
- 		
-	</script>
+	
 </body>
 </html>
