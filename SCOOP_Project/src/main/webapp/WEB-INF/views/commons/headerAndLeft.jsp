@@ -1655,6 +1655,14 @@ $('#todoresult').show();
 	$('#datemake')
 			.click(
 					function() {
+						if(($('#to').val()=='') || ($('#from').val()=='')){
+							   Swal.fire({
+									  title : '일정을 둘다 넣어야 합니다!',
+									  icon : 'warning',
+									  confirmButtonColor: '#d33'
+						   })
+						   return;
+						}
 						$('#datepick').hide();
 						var text = "";
 						text = $('#issuecontent').val().replace("@", "");
