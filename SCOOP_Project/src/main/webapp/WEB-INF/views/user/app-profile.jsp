@@ -210,7 +210,7 @@ $(function(){
 			      <a class="nav-link" href="paymentPage.do">가격 및 결제</a>
 			    </li>
 			    <li class="nav-item">
-			      <a class="nav-link" href="#">회원 탈퇴</a>
+			      <a class="nav-link" href="memberDelete.do">회원 탈퇴</a>
 			    </li>
 		    </ul>
 		</div>
