@@ -1,11 +1,19 @@
-const { request, cheerio } = require('../lib/modules')
+const { request, cheerio, express } = require('../lib/modules')
+
+let http = require('http').Server(express)
 
 let controller = {
     start: () => {
-        console.log('hi')
+        express.get('/', function(req, res){
+            res.send('<h1>안녕하세요 "/" 경로입니다</h1>')
+        })
+        http.listen(8091, function(){
+            console.log('listening on *:8091')
+        })
+        console.log('Controller')
         let options = {
-            url: 'https://www.instagram.com/?hl=ko',
-            method: 'get',
+            url: 'https://www.naver.com/',
+            method: 'GET',
             timeout: 3000
         }
         controller.getBody(options, (result) => {
@@ -36,13 +44,17 @@ let controller = {
         let image = $('head > meta[property="og:image"]').attr('content')
         let url = $('head > meta[property="og:url"]').attr('content')
         let title2 = $('head > title').text()
-        let robot = $('head > meta[name="robots"]').attr('content')
         //$('#PM_ID_ct > .header > .special_bg > .area_flex > .area_logo > h1 > a > span').text()
         console.log(title)
         console.log(image)
         console.log(url)
         console.log(title2)
-        console.log(robot)
+        let data = {
+            title: title,
+            img: image,
+            url: url,
+            sub: title2
+        }
     }
 }
 

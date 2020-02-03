@@ -146,21 +146,28 @@ public class TeamController {
 				HttpSession session,HttpServletRequest request, String[] mentions, String[] toWork, String[] doWork, String[] googleDrive,@RequestParam(value="files") MultipartFile[] files) throws IOException {
 			
 			// 이슈 내용에서 url 찾아서 링크 (a태그)
+			String regex =  "^(https?):\\/\\/([^:\\/\\s]+)(:([^\\/]*))?((\\/[^\\s/\\/]+)*)?\\/([^#\\s\\?]*)(\\?([^#\\s]*))?(#(\\w*))?$";
 			String[] contentline = issuecontent.split("\n");
 			String content = "";
+			System.out.println("이슈작성");
 			for(int i = 0; i < contentline.length; i++) {
-				if(contentline[i].indexOf("http") != -1) {
+				if(contentline[i].matches(regex)) {
 					String[] url = contentline[i].split(" ");
+					System.out.println("if 엔터 : " + contentline[i]);
 					for(int j = 0; j < url.length; j++) {
-						if(url[j].indexOf("http") != -1) {
+						System.out.println("split" + url[j]);
+						if(url[j].matches(regex)) {
 							content += "<a href="+ url[j] + " target='_blank'>" + url[j] + "</a> ";
+							System.out.println("if 띄움 : " + url[j]);
 						}else {
 							content += url[j] + " ";
+							System.out.println("else 띄움 : " + url[j]);
 						}
 					}
 					content += "<br>";
 				}else {
 					content += contentline[i]+"<br>";
+					System.out.println("else 엔터 : " + contentline[i]);
 				}
 			}
 			
