@@ -104,4 +104,10 @@ where tseq in (
                 	on m.tseq = p.tseq join pjnotice n on n.tseq = m.tseq
 	where m.email = #{param2} and n.pnseq = #{param1} and p.tseq= #{param3} 
 	</select>
+<select id="getCountProject" resultType="int">
+	select count(*) from tpmember where email = #{email}
+</select>
+<select id="getUserRole" resultType="kr.or.scoop.dto.Role">
+	select * from role where email = #{email}
+</select>
 </mapper>

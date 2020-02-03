@@ -3,6 +3,7 @@ package kr.or.scoop.dao;
 import java.util.List;
 
 import kr.or.scoop.dto.PjNotice;
+import kr.or.scoop.dto.Role;
 import kr.or.scoop.dto.TeamPjt;
 import kr.or.scoop.dto.Tissue;
 import kr.or.scoop.dto.Tpmember;
@@ -57,4 +58,10 @@ public interface ProjectDao {
 	
 	//프로젝트 공지사항 권한
 	public int searchNoticeRank(int pnseq, String email,int tseq);
+	
+	//프로젝트 갯수 세기
+	public int getCountProject(String email);
+	
+	//멤버 롤 검색
+	public Role getUserRole(String email);
 }

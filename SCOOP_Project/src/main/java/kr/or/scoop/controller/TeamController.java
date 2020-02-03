@@ -36,6 +36,7 @@ import kr.or.scoop.dto.Member;
 import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.dto.Process;
 import kr.or.scoop.dto.ProjectMemberlist;
+import kr.or.scoop.dto.Role;
 import kr.or.scoop.dto.TeamPjt;
 import kr.or.scoop.dto.Tissue;
 import kr.or.scoop.dto.Tpmember;
@@ -100,8 +101,22 @@ public class TeamController {
 	}
 	
 	@RequestMapping(value = "/invitecertified.do")
-	public String certified() {
-		return "certified/InviteCertified";
+	public String certified(int tseq, String mailTo) {
+		String path = "";
+		ProjectDao dao = sqlsession.getMapper(ProjectDao.class);
+		Role role = dao.getUserRole(mailTo);
+		if(role.getRname().equals("ROLE_USER")) {
+			int count = dao.getCountProject(mailTo);
+			if(count>=3) {
+				path =  "utils/rejectInvite";
+			}else {
+				path = "certified/InviteCertified";
+			}
+		}else {
+			path = "certified/InviteCertified";
+		}
+		
+		return path;
 	}
 	
 	//팀 디테일 

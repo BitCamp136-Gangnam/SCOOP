@@ -89,18 +89,18 @@
 				<c:if test="${rank == 100}">
 					<div class="col-sm-1" style="text-align: right; padding: 0">
 					<span id="pjNoticeEd">
-					<span class="fas fa-cog" id="pjnoticeedit" style="margin-left: 5px;cursor: pointer; font-size: 35px;padding-top: 15px"></span>
+					<span class="fas fa-cog" id="pjnoticeedit" style="margin-left: 5px;cursor: pointer; font-size: 25px;padding-top: 15px"></span>
 					</span>
 					</div>
 					<div class="col-sm-1" style="text-align: center; padding: 0">
 					<span id="pjNoticeDel">
-					<span class="iconify" data-icon="topcoat:delete" data-inline="false" style="cursor: pointer;font-size: 50px;margin-bottom: 5px;padding-top: 10px"></span>
+					<span class="iconify" data-icon="topcoat:delete" data-inline="false" style="cursor: pointer;font-size: 25px;margin-bottom: 5px;margin-top: 15px"></span>
 					</span>
 					</div>
 				</c:if>		
 					<div class="col-sm-1" style="padding: 0">
 					<span id="pjNoticeBack">
-					<span class="iconify" data-icon="entypo:back" data-inline="false" style="cursor: pointer; font-size: 55px;margin-bottom: 5px;padding-top: 10px"></span>
+					<span class="iconify" data-icon="entypo:back" data-inline="false" style="cursor: pointer; font-size: 25px;margin-bottom: 5px;margin-top: 15px"></span>
 					</span>
 					</div>			
 		</div>
