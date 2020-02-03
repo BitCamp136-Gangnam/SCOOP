@@ -88,7 +88,7 @@ $(function(){
 			<div class="col-sm-7 newissue" >
 			<c:choose>
 				<c:when test="${ti.isprocess==0}">
-				<span data-toggle="tooltip" data-placement="left" title="발의됨" ">
+				<span data-toggle="tooltip" data-placement="left" title="발의됨" >
 				<span id="create" class="iconify" data-icon="uil:file-exclamation-alt" data-inline="false" style="width:27px;height: auto;color:#ff6384;"></span>
 				</span>
 				</c:when>
