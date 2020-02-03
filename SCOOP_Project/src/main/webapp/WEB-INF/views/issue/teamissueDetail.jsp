@@ -225,8 +225,14 @@ border-radius: 5px;
 				<span class="iconify" id="comeback" data-icon="entypo:back" data-inline="false" style="cursor: pointer; font-size: 25px; margin-bottom: 10px;margin-left: 15px;"></span>
 				</div>				
 			</c:if>
-			<h3 id="myissueSubject">${tissue.tititle}</h3>
+			
 		</div>
+			<div class="row" style="margin-right: 0; margin-left: 0;">
+			<h3 id="myissueSubject" style="padding-left: 25px;">${tissue.tititle}</h3>
+			<span style="padding-left: 49%;padding-top: 10px;">${fn:substring(tissue.tidate,0,16)}</span>
+			</div>
+			
+		
 		<hr style="margin:10px 2% 0 0;">
 		
 		<c:choose>

@@ -53,9 +53,9 @@ border-radius: 5px;
         <!--**********************************
             Content body start
         ***********************************-->
-        <div class="content-body"style="height: 680px;">
-        <div class="container-fluid row" style="padding-right: 0px; margin-right: 0px;margin-left: 0px; padding-left: 15px;">
-        <div class="card" style="padding-left: 2%;padding-right: 0px; padding-top:1%;min-width:900px;height: auto;overflow: auto;">
+        <div class="content-body">
+        <div class="container-fluid">
+        <div class="card" >
         <form action="teamIssueEditOk.do" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="tseq" value="${tissue.tseq}">
         <input type="hidden" name="tiseq" value="${tissue.tiseq}">
@@ -65,11 +65,11 @@ border-radius: 5px;
 		</div>
 		<div class="col-sm-4" style="padding-right: 15px; text-align: right">
 		<span id="editCheckIssue">
-		<span class="iconify" data-icon="fa-solid:check" data-inline="false" style="cursor: pointer;font-size: 30px;margin-bottom: 20px;margin-left: 20px;"></span>
+		<span class="iconify" data-icon="fa-solid:check" data-inline="false" style="cursor: pointer;font-size: 25px;margin-bottom: 20px;margin-left: 20px;"></span>
 		</span>
 			<input type="submit" class="form-control editdelete" value="완료" id="editIssue" hidden="">
 			<span id="returnIssue">
-			<span class="iconify" data-icon="entypo:back" data-inline="false" style="cursor: pointer; font-size: 35px;margin-bottom: 15px;margin-left: 15px;"></span>
+			<span class="iconify" data-icon="entypo:back" data-inline="false" style="cursor: pointer; font-size: 25px;margin-bottom: 15px;margin-left: 15px;"></span>
 			</span>
 		</div>
 		</div>
