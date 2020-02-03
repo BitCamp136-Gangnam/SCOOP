@@ -8410,7 +8410,7 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
     [data-sidebar-style="full"][data-layout="vertical"] .menu-toggle .nk-sidebar .metismenu > li:hover > a {
       width: 15.625rem; }
       [data-sidebar-style="full"][data-layout="vertical"] .menu-toggle .nk-sidebar .metismenu > li:hover > a .nav-text {
-        display: inline-block;
+        /* display: inline-block; */
         padding-left: 1.6875rem; }
         [direction="rtl"][data-sidebar-style="full"][data-layout="vertical"] .menu-toggle .nk-sidebar .metismenu > li:hover > a .nav-text {
           padding-left: auto;

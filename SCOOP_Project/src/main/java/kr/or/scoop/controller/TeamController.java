@@ -356,9 +356,9 @@ public class TeamController {
 		result = teamservice.banMember(tseq, email);
 		
 		if(result > 0) {
-			viewpage = "userindex.do";
+			viewpage = "redirect:/userindex.do";
 		}else {
-			viewpage = "userindex.do";
+			viewpage = "redirect:/userindex.do";
 		}
 		return viewpage;
 		
