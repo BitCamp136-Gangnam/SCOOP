@@ -189,9 +189,9 @@ border-radius: 5px;
         <!--**********************************
             Content body start
         ***********************************-->
-        <div class="content-body"style="height: 680px;">
-        <div class="container-fluid row" style="padding-right: 0px; margin-right: 0px;margin-left: 0px; padding-left: 15px;">
-        <div class="card" style="padding-left: 2%;padding-right: 0px; padding-top:1%;min-width:900px;height: auto;overflow: auto;">
+        <div class="content-body">
+        <div class="container-fluid">
+        <div class="card">
 		<div class="row" style="margin:2% 2% 0 2%">
 			<c:choose>
 				<c:when test="${tissue.isprocess==0}">
