@@ -395,7 +395,6 @@ public class MemberController {
 			session.setAttribute("defaultlang", "English");
 		}
 		String email = "";
-		
 		email = (String)session.getAttribute("email");
 		ProjectDao noticeDao = sqlsession.getMapper(ProjectDao.class);
 		MemberDao memberdao = sqlsession.getMapper(MemberDao.class);
@@ -406,7 +405,6 @@ public class MemberController {
 		int count = 0;	
 		List<FileDrive> filedrive = null;
 		List<Tissue> mytissuelist = null;
-		List<Reply> myreplylist = null;
 		List<PjNotice> mypjtlist = null;
 		List<Tpmember> pjtlist = null;
 		List<Tpmember> tpmemlist =  null;
@@ -425,12 +423,11 @@ public class MemberController {
 			pjtlist = noticeDao.getPJT(email);
 			tpmemlist = memberdao.getTpmembers(member.getEmail());
 			mytissuelist = myissuedao.teamWriteTiisueList(member.getIdtime(), email);
-			myreplylist = myissuedao.teamWriteReplyList(member.getIdtime());
 			mypjtlist = myissuedao.teamWriteNoticeList(member.getEmail(), member.getIdtime());
 			model.addAttribute("mytissuelist",mytissuelist);
-			model.addAttribute("myreplylist",myreplylist);
 			model.addAttribute("mypjtlist",mypjtlist);
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			// TODO: handle exception
 		}
 		if(pjtlist!=null) {
@@ -740,9 +737,9 @@ public class MemberController {
 						}
 					}
 				}
-			String regex = "^[a-zA-Z0-9]{8,16}$";
+			
 		   MemberDao dao = sqlsession.getMapper(MemberDao.class);
-		if(member.getPwd().equals("") || member.getPwd().matches(regex)) {
+		if(member.getPwd().equals("")) {
 			Member checkmember = dao.getMember((String)session.getAttribute("email"));
 			member.setPwd(checkmember.getPwd());
 			dao.updateMember(member);
@@ -907,9 +904,19 @@ public class MemberController {
 			return "utils/addCalendarAjax";
 		}
 		
-		@RequestMapping(value="",method = RequestMethod.POST)
+		@RequestMapping(value="memberDelete.do", method = {RequestMethod.POST, RequestMethod.GET})
 		public String memberDelete(HttpSession session) {
-		return null;	
+		String email = (String)session.getAttribute("email");
+		String viewpage;
+		int result = 0;
+		result = service.deleteMember(email);
+		
+		if(result > 0) {
+			viewpage = "index";
+		}else {
+			viewpage = "user/userindex";
+		}
+		return viewpage;	
 		}
 	
 }

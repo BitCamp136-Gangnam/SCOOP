@@ -120,7 +120,7 @@ public class TeamController {
 		}
 		List<ProjectMemberlist> projectMemberlist =md.projectMemberlist(tseq);
 		List<BookMark> bookMark = mydao.getBookMark(email);
-		
+		Tpmember myInfo = md.getMyInfo(tseq, email);
 		
 		int rank = dao.searchRank(tseq, email);
 		
@@ -129,6 +129,7 @@ public class TeamController {
 		model.addAttribute("projectmember", projectMemberlist);
 		model.addAttribute("rank", rank);
 		model.addAttribute("bookMark", bookMark);
+		model.addAttribute("myInfo", myInfo);
 		List<FileDrive> filedrive = null;
 		try {
 			 filedrive = md.getFileDrive(email);
@@ -354,6 +355,21 @@ public class TeamController {
 		return path;
 	}
 
+	//협업공간 탈퇴하기
+	@RequestMapping(value = "getOutTeam.do", method = {RequestMethod.POST,RequestMethod.GET})
+	public String getOutTeam(int tseq, String email, Model model) {
+		int result = 0;
+		String viewpage;
+		result = teamservice.banMember(tseq, email);
+		
+		if(result > 0) {
+			viewpage = "redirect:/userindex.do";
+		}else {
+			viewpage = "redirect:/userindex.do";
+		}
+		return viewpage;
+		
+	}
 	//협업공간 멤버탈퇴
 	@RequestMapping(value = "banMember.do", method = {RequestMethod.POST,RequestMethod.GET})
 	public String banMember(int tseq, String email, Model model) {

@@ -86,90 +86,71 @@ border-radius: 5px;
         <div class="content-body">
         <div class="container-fluid">
         <div class="card">
-		<div class="row"style="margin:2% 2% 0 2%" >
-		<div class="col-sm-8">
-		<h3 id="myissueSubject" style="padding-top: 2%;">${myissue.pititle}</h3>
+        <div class="row" style="margin:2% 2% 0 2%;padding-left: 1%;">
+        <div class="col-sm-8">
+        <span data-toggle="tooltip" data-placement="top" title="발의됨" >
+		<span class="iconify" data-icon="uil:file-lock-alt" data-inline="false" style="width:27px;height: auto; mar"></span>
+		</span>
+		<span  style="font-size: 17px; padding-left: 1%;">프라이빗 공간</span>
 		</div>
 		<c:if test="${myissue.email==sessionScope.email}">
-		<div class="col-sm-4" style="padding-top: 2%;padding-left: 8%;text-align: center">
-		<!-- <span data-toggle="tooltip" data-placement="top" title="수정" > -->
-		
-        	<span class="fas fa-cog"  id="editIssue" style="margin-left: 5px;cursor: pointer; font-size: 30px;"   ></span>
-         <!-- </span> -->
-         <!-- <span data-toggle="tooltip" data-placement="top" title="삭제" > -->
-			<span class="iconify" id="deleteIssue" data-icon="topcoat:delete" data-inline="false" style="cursor: pointer;font-size: 35px;margin-bottom: 20px;margin-left: 20px;"></span>
-			<span class="iconify" id="comeback" data-icon="entypo:back" data-inline="false" style="cursor: pointer; font-size: 35px;margin-bottom: 15px;margin-left: 15px;"></span>
-		<!-- </span> -->
+		<div class="col-sm-4" style=" padding-left: 250px;">
+        	<span class="fas fa-cog"  id="editIssue" style="margin-left: 5px;cursor: pointer; font-size: 25px;"   ></span>
+			<span class="iconify" id="deleteIssue" data-icon="topcoat:delete" data-inline="false" style="cursor: pointer;font-size: 25px;margin-bottom: 15px;margin-left: 20px;"></span>
+			<span class="iconify" id="comeback" data-icon="entypo:back" data-inline="false" style="cursor: pointer; font-size: 25px;margin-bottom: 10px;margin-left: 15px;"></span>
 		</div>
-		
 		</c:if>
-		</div>
+        
+		<h3 id="myissueSubject" style="padding-left: 15px;">${myissue.pititle}</h3>
+		<span style="padding-left: 67%;padding-top: 10px;">${fn:substring(myissue.pidate,0,16)}</span>
+        </div>
+		
+        <hr style="margin:10px 2% 0 2%;">
+		
 		<c:choose>
         <c:when test="${myissue.pistart!=null}">
-		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>${fn:substring(myissue.pistart,0,10)} ~ ${fn:substring(myissue.piend,0,10)}</div>
+		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;padding-left: 20px;margin-top: 2%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>${fn:substring(myissue.pistart,0,10)} ~ ${fn:substring(myissue.piend,0,10)}</div>
 		</c:when>
 		<c:otherwise>
-		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>등록된 일정이 없습니다.</div>
+		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;padding-left: 20px;margin-top: 2%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>등록된 일정이 없습니다.</div>
 		</c:otherwise>
 		</c:choose>
+		
+		<div class="row" style="height:450px;overflow: auto;margin-left: 5px; margin-right: 5px;">
 		<c:forEach items="${mymention}" var="m">
-		<div class="myissueDetail" id="myissueMention">
+		<div class="myissueDetail col-sm-11" id="myissueMention" style="padding-left: 20px;">
 		<sup><i class="fas fa-quote-left" style="color:#ca0000; font-size: 7px"></i></sup> @${m.name} <sup><i class="fas fa-quote-right"style="color:#ca0000;font-size: 7px"></i></sup>
 		<br>
 		</div>
 		</c:forEach>
 		<c:forEach items="${files}" var="f">
-		<div class="myissueDetail" id="myissueMention">
+		<div class="myissueDetail col-sm-11" id="myissueMention" style="padding-left: 20px;">
 		<a href="fileDownload.do?fileName=${f.pfdname}"><span class="iconify" data-icon="si-glyph:file-box" data-inline="false"></span>${f.pfdname}</a>
 		<br>
 		</div>
 		</c:forEach>
 		<c:forEach items="${mygdrive}" var="gd">
-		<div class="myissueDetail" id="myissueGoogledrive">
+		<div class="myissueDetail col-sm-11" id="myissueGoogledrive" style="padding-left: 20px;">
 			<i class="fab fa-google-drive"></i>
 			<a href="${gd.pgurl}" onclick="window.open(this.href,'팝업창','width=800, height=800');return false;">${gd.pgfilename}</a>
 			<br>
 		</div>
 			</c:forEach>
-			<c:forEach items="${mydowork}" var="work">
-		<div class="myissueDetail" id="myissueTodo">
+		<c:forEach items="${mydowork}" var="work">
+		<div class="myissueDetail col-sm-11" id="myissueTodo" style="padding-left: 20px;">
 		<i class="far fa-check-circle"style="padding-right: 5px;"></i>${work.fromname}
 		<i class="fas fa-long-arrow-alt-right" style="margin-left:5px;margin-right: 5px;"></i>${work.toname}<br>
 		: ${work.pdowork}
 		<br>
 		</div>
 		</c:forEach> 
-        <div class="myissueDetail">
+        <div class="myissueDetail col-sm-11" style="padding-left: 20px;">
         ${myissue.picontent}
         </div>    
             <!-- #/ container -->
             </div> 
-            <!-- <div class="card" style="float:right;background-color: #fff;margin-left:10px;padding-left: 0px;padding-right: 0px;width:400px;">
-            <div class="card" style="min-height:430px;padding-left: 3%;padding-top: 5%;padding-right: 3%;padding-bottom: 5%;overflow: auto;">
-            
-            <div class="row" style="margin-left: 3%;margin-right: 3%;">
-            <div class="col-sm-1" style="margin-top: 10px;margin-right:10px;padding-left:0;">
-            <img id="memberImage" class="img-circle" alt="멤버 프로필 사진 넣는 곳" src="resources/images/avatar/avatar.png" style="width:40px;height: auto;padding-top: 1%;margin-left: 10px;margin-right: 10px;">
             </div>
-            <div class="col-sm-10">
-            <div id="commentMain" style="margin: 3% 5% 3% 5%;" >
-            <div style="margin-bottom: 1%;">
-            <span>도연(이름)</span><span style="padding-left:3%"><i class="far fa-clock" style="color:#E71D36 "></i>오후 16:03(시간)</span>
-            <br>
-            <div>보쌈 먹고 시퍼요(댓글 내용)</div>
-            </div>
-            </div>
-            </div>
-            
-            
-            
-            <img src="resources/images/logo/ScoopTitle.png" style="width:150px;height: auto;opacity:0.3;position:absolute;top:25%;left: 32%;">
-            </div>
-            </div>
-            <textarea id="myissueComment" rows="5" placeholder="말하지 않아도 아는것은 초코파이뿐입니다                        댓글 입력 후 저장을 클릭해주세요" style="resize: none;height:180px;width:auto;border: 1px solid #c8c8c8;border-radius: 0.5rem;margin-left: 15px;margin-bottom: 20px;margin-right: 15px;overflow:auto;padding: 4%"></textarea>
-            <input id="myissueCommentBtn" type="button" value="저장" style="width: 90px;border-radius:0.5rem ;padding-top:7px;padding-bottom:7px; background-color: #E71D36;color: #fff; cursor: pointer;position: absolute;top:590px;left: 290px;">
-            </div> -->
-            </div>
+        </div>
         </div>
         <!--**********************************
             Content body end

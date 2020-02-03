@@ -51,7 +51,10 @@ $(function(){
 		                     }else{
 		                        src = '/SCOOP/user/upload/'+object.profile;
 		                     }
-							
+							var xButton = '';
+							if(object.email=="${sessionScope.email}"){
+								xButton = '<span id="'+object.replyseq+'" class="deleteComment"><span class="iconify" id="deleteComment"  data-icon="octicon:x" data-inline="false" style="cursor: pointer;font-size:15px;margin-bottom: 3px;margin-left: 45px;"></span></span>';
+								}
 						$('#commentMain').append(
 
 					            '<div class="row" style="margin:2% 3% 2% 3%;">'+
@@ -62,7 +65,7 @@ $(function(){
 					            '<div id="commentMain" style="margin: 3% 5% 3% 5%;" >'+
 					            '<div style="margin-bottom: 1%;width: 260px;">'+
 					            '<span>'+object.name+'</span><span style="padding-left:3%"><i class="far fa-clock" style="color:#E71D36 "></i>'+object.rdate.substring(0,16)+'</span>'+
-					            '<span id="'+object.replyseq+'" class="deleteComment"><span class="iconify" id="deleteComment"  data-icon="octicon:x" data-inline="false" style="cursor: pointer;font-size:15px;margin-bottom: 3px;margin-left: 45px;"></span></span>'+	
+					            xButton +
 					            '<br><div>'+object.rcontent+'</div></div></div></div></div>'
 						           
 							);
@@ -166,7 +169,7 @@ $(function(){
 .myissueDetail{
 	font-size: 15px;
 	margin-left: 3%;
-	/* margin-bottom:1%; */
+	margin-bottom:1%;
 }
 .editdelete{
 background-color: #E71D36;
@@ -193,30 +196,58 @@ border-radius: 5px;
         <div class="content-body"style="height: 680px;">
         <div class="container-fluid row" style="padding-right: 0px; margin-right: 0px;margin-left: 0px; padding-left: 15px;">
         <div class="card" style="padding-left: 2%;padding-right: 0px; padding-top:1%;min-width:900px;height: auto;overflow: auto;">
-		<div class="row"style="margin:2% 2% 0 2%" >
-		<div class="col-sm-8">
-				<h3 id="myissueSubject" style="padding-top: 2%;padding-left: 1%;">${tissue.tititle}</h3>
+		<div class="row" style="margin:2% 2% 0 2%;padding-left: 10px;">
+			<c:choose>
+				<c:when test="${tissue.isprocess==0}">
+				<span data-toggle="tooltip" data-placement="top" title="발의됨" >
+				<span id="create" class="iconify" data-icon="uil:file-exclamation-alt" data-inline="false" style="width:27px;height: auto;color:#ff6384;"></span>
+				</span>
+				</c:when>
+				<c:when test="${tissue.isprocess==1}">
+				<span data-toggle="tooltip" data-placement="top" title="진행중">
+				<span id="ing" class="iconify" data-icon="uil:file-edit-alt" data-inline="false" style="width:27px;height: auto;color: #36a2eb;"></span>
+				</span>
+				</c:when>
+				<c:when test="${tissue.isprocess==2}">
+				<span data-toggle="tooltip" data-placement="top" title="일시중지" >
+				<span id="stop" class="iconify" data-icon="uil:file-block-alt" data-inline="false" style="width:27px;height: auto;color:#e3ad29;"></span>
+				</span>
+				</c:when>
+				<c:when test="${tissue.isprocess==3}">
+				<span data-toggle="tooltip" data-placement="top" title="완료">
+				<span id="finish" class="iconify" data-icon="uil:file-check-alt" data-inline="false" style="width:27px;height: auto;color:#4bc09b;"></span>
+				</span>
+				</c:when>	
+			</c:choose>
+			
+			<div class="col-sm-8" style="font-size: 17px; padding-left: 1%;">${fn:substring(tissue.pname,0,20)}</div>
+			
+			<c:if test="${tissue.email==sessionScope.email}">
+				<div class="col-sm-3" style="float: right;margin-left: 5%;padding-left: 60px;">
+	        	<span class="fas fa-cog"  id="editIssue" style="margin-left: 5px;cursor: pointer; font-size: 25px;"></span>
+				<span class="iconify" id="deleteIssue" data-icon="topcoat:delete" data-inline="false" style="cursor: pointer;font-size:25px; margin-bottom: 15px;margin-left: 20px;"></span>
+				<span class="iconify" id="comeback" data-icon="entypo:back" data-inline="false" style="cursor: pointer; font-size: 25px; margin-bottom: 10px;margin-left: 15px;"></span>
+				</div>				
+			</c:if>
+			
 		</div>
-		<c:if test="${tissue.email==sessionScope.email}">
-		<div class="col-sm-4" style="padding-top: 2%;padding-left: 8%;">
-		<!-- <span data-toggle="tooltip" data-placement="top" title="수정" > -->
-        	<span class="fas fa-cog"  id="editIssue" style="margin-left: 5px;cursor: pointer; font-size: 30px;"></span>
-         <!-- </span> -->
-         <!-- <span data-toggle="tooltip" data-placement="top" title="삭제" > -->
-			<span class="iconify" id="deleteIssue" data-icon="topcoat:delete" data-inline="false" style="cursor: pointer;font-size: 35px;margin-bottom: 20px;margin-left: 20px;"></span>
-			<span class="iconify" id="comeback" data-icon="entypo:back" data-inline="false" style="cursor: pointer; font-size: 35px;margin-bottom: 15px;margin-left: 15px;"></span>
-		<!-- </span> -->
-		</div>
-		</c:if>
-		</div>
+			<div class="row" style="margin-right: 0; margin-left: 0;">
+			<h3 id="myissueSubject" style="padding-left: 25px;">${tissue.tititle}</h3>
+			<span style="padding-left: 49%;padding-top: 10px;">${fn:substring(tissue.tidate,0,16)}</span>
+			</div>
+			
+		
+		<hr style="margin:10px 2% 0 0;">
+		
 		<c:choose>
         <c:when test="${tissue.tistart!=null}">
-		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>${fn:substring(tissue.tistart,0,10)} ~ ${fn:substring(tissue.tiend,0,10)}</div>
+		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;margin-top: 2%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>${fn:substring(tissue.tistart,0,10)} ~ ${fn:substring(tissue.tiend,0,10)}</div>
 		</c:when>
 		<c:otherwise>
-		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>등록된 일정이 없습니다.</div>
+		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;margin-top: 2%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>등록된 일정이 없습니다.</div>
 		</c:otherwise>
 		</c:choose>
+		
 		<c:forEach items="${mentions}" var="m">
 		<div class="myissueDetail" id="myissueMention">
 		<sup><i class="fas fa-quote-left" style="color:#ca0000; font-size: 7px"></i></sup> @${m.name} <sup><i class="fas fa-quote-right"style="color:#ca0000;font-size: 7px"></i></sup>
@@ -244,7 +275,7 @@ border-radius: 5px;
 		<br>
 		</div>
 		</c:forEach> 
-		<div class="row">
+		<div class="row" style="margin-right: 0;">
         <div class="myissueDetail col-sm-7" id="myissueContent">
         ${tissue.ticontent}
         </div>
@@ -272,9 +303,11 @@ border-radius: 5px;
             <div id="commentMain" style="margin: 3% 5% 3% 5%;" >
             <div style="margin-bottom: 1%;width: 260px;">
             <span>${r.name}</span><span style="padding-left:3%"><i class="far fa-clock" style="color:#E71D36 "></i>${fn:substring(r.rdate,0,16)}</span>
+            <c:if test="${r.email==sessionScope.email }">
             <span id="${r.replyseq}" class="deleteComment">
             <span class="iconify" id="deleteComment"  data-icon="octicon:x" data-inline="false" style="cursor: pointer;font-size:15px;margin-bottom: 3px;margin-left: 45px;"></span>
             </span>
+            </c:if>
             <br>
             <div>${r.rcontent}</div>
             </div>

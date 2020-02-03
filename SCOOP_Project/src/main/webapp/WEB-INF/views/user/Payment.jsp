@@ -50,25 +50,20 @@ function requestPay(){
                 }).done(function(data) {
                     //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
                     if ( everythings_fine ) {
-
-                        Swal.fire({
-            	    		  title: "결제에 성공하였습니다",
-            	    		  text: rsp.imp_uid+"\n"
-            	    		  +rsp.merchant_uid+"\n"
-            	    		  +rsp.paid_amount+"\n"
-            	    		  +rsp.apply_num+"\n",
-            	    		  icon: "error",
-            	    		  button: "확인"
-            	    		})
-            	    		 
             	    		
                     } else {
                         //[3] 아직 제대로 결제가 되지 않았습니다.
                         //[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
                     }
                 });
-                //성공시 이동할 페이지
-                location.href='paymentPage.do';
+                Swal.fire(
+                        '결제를 성공하셨습니다.',
+                        '결제 해주셔서 감사합니다.',
+                        'success'
+                      )
+                window.setTimeout(function() {
+                   location.href='userindex.do';
+                }, 1000);
             } else {
                 //실패시 이동할 페이지
                 location.href="paymentPage.do";
@@ -132,6 +127,9 @@ function requestPay(){
 								href="app-external.do">외부 서비스 연결</a></li> -->
 							<li class="nav-item"><a class="nav-link"
 								href="paymentPage.do" style="color: #E71D36;">가격 및 결제</a></li>
+								 <li class="nav-item">
+			      <a class="nav-link" href="memberDelete.do">회원 탈퇴</a>
+			    </li>
 						</ul>
 					</div>
 					<hr style="margin-top: 0">

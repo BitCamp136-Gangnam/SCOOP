@@ -152,6 +152,9 @@ input::placeholder {
 				}
 			}); 
 	   })
+	   $('#searchSubmitIcon').click(function(){
+		   $('#searchSubmit').submit();
+	   })
 	   $('#sIssue').focus(function(){
 		   $('#sIssue').keypress(function(event) {
 			   if (event.keyCode == 13) {
@@ -747,7 +750,7 @@ span {
          <div class="input-group icons">
             <div class="input-group-prepend">
                <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3"
-                  id="basic-addon1"><i class="mdi mdi-magnify"></i></span>
+                  id="searchSubmitIcon"><i class="mdi mdi-magnify" style="cursor: pointer;"></i></span>
             </div>
             <form action="searchIssue.do" id="searchSubmit">
             <input type="search" id="sIssue" name="word" class="form-control" placeholder="검색 후 Enter치세요"
@@ -1655,6 +1658,14 @@ $('#todoresult').show();
 	$('#datemake')
 			.click(
 					function() {
+						if(($('#to').val()=='') || ($('#from').val()=='')){
+							   Swal.fire({
+									  title : '일정을 둘다 넣어야 합니다!',
+									  icon : 'warning',
+									  confirmButtonColor: '#d33'
+						   })
+						   return;
+						}
 						$('#datepick').hide();
 						var text = "";
 						text = $('#issuecontent').val().replace("@", "");

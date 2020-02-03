@@ -131,20 +131,22 @@ $(function(){
 		        return false;
 		      }
 				//비밀번호 유효성
-			if (!getCheck.test($("#pwd").val())) {
+			/* if (!getCheck.test($("#pwd").val())) {
 				Swal.fire("비밀번호 형식에 맞게 입력해주세요.");
 				$("#pwd").val("");
 				$("#pwd").focus();
 				return false;
-			}
+			} */
 			
 			//비밀번호 공백 확인
-			if ($("#pwd").val() == "") {
+			/* if ($("#pwd").val() == "") {
 				Swal.fire("비밀번호를 입력해주세요");
 				$("#pwd").focus();
 				return false;
-			}
+			} */
 			//회원가입 시 메일 보낼 때 얼럿창
+
+
 	   		
    			Swal.fire({
    				  icon: 'success',
@@ -210,7 +212,7 @@ $(function(){
 			      <a class="nav-link" href="paymentPage.do">가격 및 결제</a>
 			    </li>
 			    <li class="nav-item">
-			      <a class="nav-link" href="#">회원 탈퇴</a>
+			      <a class="nav-link" href="memberDelete.do">회원 탈퇴</a>
 			    </li>
 		    </ul>
 		</div>
@@ -251,8 +253,11 @@ $(function(){
     		<c:otherwise>
     		<label for="pwd">비밀번호</label>
     		<input class="form-control myinfo" type="password" id="pwd" name="pwd" style="width: 60%" >
+    		<label for="pwdchk">비밀번호 확인</label>
+    		<input class="form-control myinfo" type="password" id="pwdchk" name="pwdchk" style="width: 60%" >
     		</c:otherwise>
     		</c:choose>
+    		<div id="chkmsg" style="color: green;"><br></div>
     		<br>
     		<label for="name">이름</label>
     		<input class="form-control myinfo" type="text" id="name" name="name" style="width: 60%" placeholder="7자까지 입력가능합니다" value="${member.name}">
@@ -309,7 +314,51 @@ $(function(){
     <script src="<c:url value="/resources/js/settings.js" />"></script>
     <script src="<c:url value="/resources/js/gleek.js" />"></script>
     <script src="<c:url value="/resources/js/styleSwitcher.js" />"></script>
+	<script type="text/javascript">
+	$(function(){
+   		
+   		$('#pwd').keypress(function(event) {
+	if(event.keyCode==13){
+		$('#pwdchk').focus();
+	}
+});
+$('#pwdchk').keypress(function(){
+	if(event.keyCode==13){
+		$('#pwdBtn').submit();
+	}
+});
+$('#pwd').keyup(function(){
+	console.log('pwd');
+	let pwd = $('#pwd').val();
+	let chk = $('#pwdchk').val();
+	
+	if(chk != "") {
+		if(pwd != chk){
+			$('#chkmsg').empty().css("color", "red").text('비밀번호가 일치하지 않습니다.');
+		} else{
+			$('#chkmsg').empty().css("color", "blue").text('비밀번호가 일치합니다.');
+		} 
+	}
+	if(pwd == "" && chk == ""){
+		$('#chkmsg').empty().append('<br>');
+	}
+});
 
+$('#pwdchk').keyup(function(event) {
+	console.log('pwdchk');
+	let pwd = $('#pwd').val();
+	let chk = $('#pwdchk').val();
+
+	if(pwd != chk){
+		$('#chkmsg').empty().css("color", "red").text('비밀번호가 일치하지 않습니다');
+	} else{
+		$('#chkmsg').empty().css("color", "blue").text('비밀번호가 일치합니다');
+	} 
+});
+	
+
+		});
+	</script>
 </body>
 
 </html>

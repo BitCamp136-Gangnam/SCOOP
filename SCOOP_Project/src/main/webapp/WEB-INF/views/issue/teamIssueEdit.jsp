@@ -53,10 +53,10 @@ border-radius: 5px;
         <!--**********************************
             Content body start
         ***********************************-->
-        <div class="content-body"style="height: 680px;">
-        <div class="container-fluid row" style="padding-right: 0px; margin-right: 0px;margin-left: 0px; padding-left: 15px;">
-        <div class="card" style="padding-left: 2%;padding-right: 0px; padding-top:1%;min-width:900px;height: auto;overflow: auto;">
-        <form action="teamIssueEditOk.do" method="POST" enctype="multipart/form-data">
+        <div class="content-body">
+        <div class="container-fluid">
+        <div class="card" >
+        <form action="teamIssueEditOk.do" method="POST" enctype="multipart/form-data" onsubmit="return checkDate();">
         <input type="hidden" name="tseq" value="${tissue.tseq}">
         <input type="hidden" name="tiseq" value="${tissue.tiseq}">
 		<div class="row"style="margin:2% 2% 0 2%" >
@@ -65,15 +65,16 @@ border-radius: 5px;
 		</div>
 		<div class="col-sm-4" style="padding-right: 15px; text-align: right">
 		<span id="editCheckIssue">
-		<span class="iconify" data-icon="fa-solid:check" data-inline="false" style="cursor: pointer;font-size: 30px;margin-bottom: 20px;margin-left: 20px;"></span>
+		<span class="iconify" data-icon="fa-solid:check" data-inline="false" style="cursor: pointer;font-size: 25px;margin-bottom: 20px;margin-left: 20px;"></span>
 		</span>
 			<input type="submit" class="form-control editdelete" value="완료" id="editIssue" hidden="">
 			<span id="returnIssue">
-			<span class="iconify" data-icon="entypo:back" data-inline="false" style="cursor: pointer; font-size: 35px;margin-bottom: 15px;margin-left: 15px;"></span>
+			<span class="iconify" data-icon="entypo:back" data-inline="false" style="cursor: pointer; font-size: 25px;margin-bottom: 15px;margin-left: 15px;"></span>
 			</span>
 		</div>
 		</div>
-		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%; margin-top: 2%"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i><input type="text" id="editFrom" name="editFrom" style="border: 0; border-bottom: 1px solid #ced4da; text-align: center" value="${fn:substring(tissue.tistart,0,10)}"> ~ <input type="text" id="editTo" name="editTo" style="border: 0; border-bottom: 1px solid #ced4da; text-align: center" value="${fn:substring(tissue.tiend,0,10)}"></div>
+		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%; margin-top: 2%"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i><input type="text" id="editFrom" name="editFrom" style="border: 0; border-bottom: 1px solid #ced4da; text-align: center" value="${fn:substring(tissue.tistart,0,10)}"> ~ <input type="text" id="editTo" name="editTo" style="border: 0; border-bottom: 1px solid #ced4da; text-align: center" value="${fn:substring(tissue.tiend,0,10)}">
+		<span id="dateDelete" style="cursor:pointer;margin-left: 15px"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span></div>
 		<div id="edittodoresult">
 		<c:forEach items="${mentions}" var="m">
 		<div class="myissueDetail" id="myissueMention">
@@ -205,6 +206,10 @@ $(function(){
 					$('.projectmem'+$(selectpro).val()).show();
 				}
 			}
+})
+$('#dateDelete').click(function(){
+ 	$("#editFrom").val('');
+	$("#editTo").val('');
 })
 $('#editCheckIssue').click(function(){
 	$('#editIssue').click();
@@ -467,5 +472,32 @@ $('#todoresult').show();
 		$('#editIssuecontent').val(text);
 		$('#edittodolist').val('');
 	});
+	function checkDate(){
+		if($('#editFrom').val()!=''){
+			if($('#editTo').val()==''){
+			   Swal.fire({
+					  title : '일정을 둘다 넣어야 합니다!',
+					  icon : 'warning',
+					  confirmButtonColor: '#d33'
+			   })
+				return false;
+			}else{
+				return true;
+			}
+		}else if($('#editTo').val()!=''){
+			if($('#editFrom').val()==''){
+				Swal.fire({
+					  title : '일정을 둘다 넣어야 합니다!',
+					  icon : 'warning',
+					  confirmButtonColor: '#d33'
+			   })
+				return false;
+			}else{
+				return true;
+			}
+		}else{
+			return true;
+		}
+	}
 </script>
 </html>

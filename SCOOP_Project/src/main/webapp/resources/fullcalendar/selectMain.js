@@ -160,7 +160,6 @@ var calendar = $('#calendar').fullCalendar({
    * ************** */
   events: function (start, end, timezone, callback) {
 	  var para = document.location.href.split("?tseq=");
-	  alert(para);
     $.ajax({
       type: "get",
       url: "getSelectTeamCalendar.do?tseq="+para[1],
