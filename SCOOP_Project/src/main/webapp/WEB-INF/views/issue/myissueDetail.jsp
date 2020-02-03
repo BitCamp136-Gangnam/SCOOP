@@ -86,33 +86,39 @@ border-radius: 5px;
         <div class="content-body">
         <div class="container-fluid">
         <div class="card">
-        <div class="row" style="margin:2% 2% 15px 2%">
-		<div class="iconify" data-icon="uil:file-lock-alt" data-inline="false" style="width:27px;height: auto;"></div>
-		<div>프라이빗 공간</div>
-        </div>
-		<div class="row" style="margin:2% 2% 0 2%" >
-		<div class="col-sm-8">
-		<h3 id="myissueSubject" style="padding-top: 2%;">${myissue.pititle}</h3>
+        <div class="row" style="margin:2% 2% 0 2%;padding-left: 1%;">
+        <div class="col-sm-8">
+        <span data-toggle="tooltip" data-placement="top" title="발의됨" >
+		<span class="iconify" data-icon="uil:file-lock-alt" data-inline="false" style="width:27px;height: auto; mar"></span>
+		</span>
+		<span  style="font-size: 17px; padding-left: 1%;">프라이빗 공간</span>
 		</div>
 		<c:if test="${myissue.email==sessionScope.email}">
-		<div class="col-sm-4" style="padding-top: 2%;padding-left: 8%;text-align: center">
-        	<span class="fas fa-cog"  id="editIssue" style="margin-left: 5px;cursor: pointer; font-size: 30px;"   ></span>
-			<span class="iconify" id="deleteIssue" data-icon="topcoat:delete" data-inline="false" style="cursor: pointer;font-size: 35px;margin-bottom: 20px;margin-left: 20px;"></span>
-			<span class="iconify" id="comeback" data-icon="entypo:back" data-inline="false" style="cursor: pointer; font-size: 35px;margin-bottom: 15px;margin-left: 15px;"></span>
+		<div class="col-sm-4" style=" padding-left: 250px;">
+        	<span class="fas fa-cog"  id="editIssue" style="margin-left: 5px;cursor: pointer; font-size: 25px;"   ></span>
+			<span class="iconify" id="deleteIssue" data-icon="topcoat:delete" data-inline="false" style="cursor: pointer;font-size: 25px;margin-bottom: 15px;margin-left: 20px;"></span>
+			<span class="iconify" id="comeback" data-icon="entypo:back" data-inline="false" style="cursor: pointer; font-size: 25px;margin-bottom: 10px;margin-left: 15px;"></span>
+		</div>
+		</c:if>
+        
+        </div>
+        <hr style="margin:10px 2% 0 2%;">
+		<div class="row" style="margin:0% 2% 0 2%" >
+		<div class="col-sm-8" style="padding-left: 30px;">
+		<h3 id="myissueSubject" style="padding-top: 2%;">${myissue.pititle}</h3>
 		</div>
 		
-		</c:if>
 		</div>
 		<c:choose>
         <c:when test="${myissue.pistart!=null}">
-		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>${fn:substring(myissue.pistart,0,10)} ~ ${fn:substring(myissue.piend,0,10)}</div>
+		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;padding-left: 20px;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>${fn:substring(myissue.pistart,0,10)} ~ ${fn:substring(myissue.piend,0,10)}</div>
 		</c:when>
 		<c:otherwise>
-		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>등록된 일정이 없습니다.</div>
+		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;padding-left: 20px;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>등록된 일정이 없습니다.</div>
 		</c:otherwise>
 		</c:choose>
 		<c:forEach items="${mymention}" var="m">
-		<div class="myissueDetail" id="myissueMention">
+		<div class="myissueDetail" id="myissueMention" style="padding-left: 20px;">
 		<sup><i class="fas fa-quote-left" style="color:#ca0000; font-size: 7px"></i></sup> @${m.name} <sup><i class="fas fa-quote-right"style="color:#ca0000;font-size: 7px"></i></sup>
 		<br>
 		</div>
@@ -138,7 +144,7 @@ border-radius: 5px;
 		<br>
 		</div>
 		</c:forEach> 
-        <div class="myissueDetail">
+        <div class="myissueDetail" style="padding-left: 20px;">
         ${myissue.picontent}
         </div>    
             <!-- #/ container -->
