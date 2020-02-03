@@ -56,7 +56,7 @@ border-radius: 5px;
         <div class="content-body">
         <div class="container-fluid">
         <div class="card" >
-        <form action="teamIssueEditOk.do" method="POST" enctype="multipart/form-data">
+        <form action="teamIssueEditOk.do" method="POST" enctype="multipart/form-data" onsubmit="return checkDate();">
         <input type="hidden" name="tseq" value="${tissue.tseq}">
         <input type="hidden" name="tiseq" value="${tissue.tiseq}">
 		<div class="row"style="margin:2% 2% 0 2%" >
@@ -73,7 +73,8 @@ border-radius: 5px;
 			</span>
 		</div>
 		</div>
-		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%; margin-top: 2%"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i><input type="text" id="editFrom" name="editFrom" style="border: 0; border-bottom: 1px solid #ced4da; text-align: center" value="${fn:substring(tissue.tistart,0,10)}"> ~ <input type="text" id="editTo" name="editTo" style="border: 0; border-bottom: 1px solid #ced4da; text-align: center" value="${fn:substring(tissue.tiend,0,10)}"></div>
+		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%; margin-top: 2%"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i><input type="text" id="editFrom" name="editFrom" style="border: 0; border-bottom: 1px solid #ced4da; text-align: center" value="${fn:substring(tissue.tistart,0,10)}"> ~ <input type="text" id="editTo" name="editTo" style="border: 0; border-bottom: 1px solid #ced4da; text-align: center" value="${fn:substring(tissue.tiend,0,10)}">
+		<span id="dateDelete" style="cursor:pointer;margin-left: 15px"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span></div>
 		<div id="edittodoresult">
 		<c:forEach items="${mentions}" var="m">
 		<div class="myissueDetail" id="myissueMention">
@@ -205,6 +206,10 @@ $(function(){
 					$('.projectmem'+$(selectpro).val()).show();
 				}
 			}
+})
+$('#dateDelete').click(function(){
+ 	$("#editFrom").val('');
+	$("#editTo").val('');
 })
 $('#editCheckIssue').click(function(){
 	$('#editIssue').click();
@@ -467,5 +472,32 @@ $('#todoresult').show();
 		$('#editIssuecontent').val(text);
 		$('#edittodolist').val('');
 	});
+	function checkDate(){
+		if($('#editFrom').val()!=''){
+			if($('#editTo').val()==''){
+			   Swal.fire({
+					  title : '일정을 둘다 넣어야 합니다!',
+					  icon : 'warning',
+					  confirmButtonColor: '#d33'
+			   })
+				return false;
+			}else{
+				return true;
+			}
+		}else if($('#editTo').val()!=''){
+			if($('#editFrom').val()==''){
+				Swal.fire({
+					  title : '일정을 둘다 넣어야 합니다!',
+					  icon : 'warning',
+					  confirmButtonColor: '#d33'
+			   })
+				return false;
+			}else{
+				return true;
+			}
+		}else{
+			return true;
+		}
+	}
 </script>
 </html>
