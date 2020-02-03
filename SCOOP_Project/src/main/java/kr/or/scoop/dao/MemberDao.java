@@ -77,4 +77,6 @@ public interface MemberDao {
 	public List<Tpmember> getTpmembers(String email);
 	//mention 불러오기
 	public List<Mention> getMention(String tmemail);
+	//프로젝트에서 나의 정보
+	public Tpmember getMyInfo(int tseq, String email);
 }
