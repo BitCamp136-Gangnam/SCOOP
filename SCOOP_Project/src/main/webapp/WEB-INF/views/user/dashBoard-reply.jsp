@@ -84,6 +84,7 @@
 		<c:if test="${myNewReplyList =='[]' }">
 		<div class="row countRow" style="margin-left: 2%; margin-right: 2%" id="ialarm">
 		<div class="col-sm-12 newissue" id="al">
+		<img src= '<c:url value="/resources/images/logo/ScoopBig.png"/>' style="width: 60px;padding-right: 5px;">
 			아직 댓글을 안다셨군요? 협업공간에서 새로운 댓글을 달아 보세요 ^ㅁ^!
 		</div>
 		</div>

@@ -81,8 +81,14 @@ $(function(){
          	작성시간 
          </div>
       	</div>
-      	
-		
+		 	<c:if test="${re =='[]' }">
+				<div class="row" style="margin-left: 2%; margin-right: 2%" id="row">
+					<div class="col-sm-12 newissue">
+					<img src= '<c:url value="/resources/images/logo/ScoopBig.png"/>' style="width: 60px;padding-right: 5px;">	
+					아직 작성하신 댓글이 없습니다. 회원님의 첫 댓글을 작성해보세요 ^ㅁ^!
+					</div>
+				</div>
+			</c:if>
 			<c:forEach items="${re}" var="re">
 			<div class="row" style="margin-left: 2%; margin-right: 2%" id="row">
 			<div class="col-sm-7 newissue" >
