@@ -16,44 +16,31 @@ public class PrivateService {
 	private SqlSession sqlsession;
 	public int writeTissue(MyIssue tissue) {
 		int result = 0 ;
-		System.out.println("writetissue");
 		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
 		result = dao.writeTissue(tissue);
-		System.out.println(tissue);
-		System.out.println("writetissue2");
 		return result;
 	}
 	public int writeMyissue(MyIssue myissue) {
 		int result = 0 ;
-		System.out.println("writeMyissue");
 		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
-		System.out.println(myissue);
-		System.out.println("writeMyissue2");
 		result = dao.writeMyissue(myissue);
 		return result;
 	}
 	public int editTissue(MyIssue tissue) {
 		int result = 0 ;
-		System.out.println("edittissue");
-		System.out.println(tissue);
 		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
 		result = dao.editTissue(tissue);
-		System.out.println("edittissue2");
 		return result;
 	}
 	public int editMyissue(MyIssue myissue) {
 		int result = 0 ;
-		System.out.println("editmyissue");
-		System.out.println(myissue);
 		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
 		result = dao.editMyissue(myissue);
-		System.out.println("editmyissue2");
 		return result;
 	}
 	//마이파일 수정
 	public int pfileEdit(String pfdname, long pdcapa, String email, int piseq) {
 		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
-		System.out.println("파일 에딧");
 		int result = dao.pfileEdit(pfdname, pdcapa, email, piseq);
 		return result;
 	}
@@ -71,8 +58,6 @@ public class PrivateService {
 	}
 	//마이 멘션 수정
 	public int pmentionEdit(String email, int piseq) {
-		System.out.println("멘션 에딧");
-		System.out.println("멘션후에딧"+piseq);
 		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
 		int result = dao.pmentionEdit(email, piseq);
 		return result;
@@ -85,7 +70,6 @@ public class PrivateService {
 	}
 	//마이 구글드라이브 수정
 	public int pgoogleDriveEdit(String pgfilename, String pgurl, int piseq) {
-		System.out.println("구글 에딧");
 		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
 		int result = dao.pgoogleDriveEdit(pgfilename, pgurl, piseq);
 		return result;
@@ -98,9 +82,7 @@ public class PrivateService {
 	}
 	//팀 할일 수정
 	public int pdoWorkEdit(String fromWork, String toWork, String pdoWork, int piseq) {
-		System.out.println("두워크 에딧");
 		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
-		System.out.println(fromWork+ toWork+ pdoWork);
 		int result = dao.pdoWorkEdit(fromWork, toWork, pdoWork, piseq);
 		return result;
 	}

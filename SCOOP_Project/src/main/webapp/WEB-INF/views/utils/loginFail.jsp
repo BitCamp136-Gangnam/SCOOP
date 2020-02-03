@@ -1,14 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <jsp:include page="/WEB-INF/views/commons/footer.jsp"></jsp:include>
 <script>
 Swal.fire(
-		  '이슈 수정 완료',
-		  '',
-		  'success'
+		  '아이디나 비밀번호가 다릅니다',
+		  '아이디나 비밀번호가 다릅니다',
+		  'error'
 		)
 window.setTimeout(function() {
-	location.href='teamissueDetail.do?tiseq=${tiseq}';	
-}, 1500);
+	location.href='index.do';	
+}, 1000);
 </script>

@@ -10,7 +10,6 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <%
 if(session.getAttribute("checkemail")!=null){
-	System.out.println("세션에있다");
 	%>
 	<script type="text/javascript">
 	$(document).ready(function(){
@@ -28,7 +27,6 @@ if(session.getAttribute("checkemail")!=null){
 	</script>
 	<%
 }else{
-	System.out.println("세션에없다");
 	%>
 	<script>
 	$(document).ready(function(){

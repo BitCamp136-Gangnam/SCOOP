@@ -100,17 +100,31 @@ $(document).ready(function(){
 		</div>
 		<hr style="margin-top: 0;margin-left: 2%; margin-right: 2%">
 		<div class="row" style="margin-left: 2%; margin-right: 2%">
-			<div class="row col-sm-12">
-				<div class="col-sm-3 newissue"><b>협업 공간</b></div>
-				<div class="col-sm-5 newissue"><b>글 제목</b></div>
-				<div class="col-sm-3 newissue"><b>글쓴이</b></div>
-				<div class="col-sm-1 newissue">취소</div>
+         
+         <div class="col-sm-3 newissue" >
+         	협업 공간
+         </div>
+         <div class="col-sm-5 newissue">
+         	글 제목
+         </div>
+         <div class="col-sm-3 newissue">
+         	작성자
+         </div>
+         <div class="col-sm-1 newissue">
+         	취소
+         </div>
+      	</div>
+		
+		<c:if test="${bookMarkList =='[]' }">
+			<div class="row countRow" style="margin-left: 2%; margin-right: 2%" id="ialarm">
+				<div class="col-sm-12 newissue" id="al">
+					아직 북마크를 안하셨나요? 원하는 이슈를 북마크해서 저장해보세요 ^ㅁ^!
+				</div>
 			</div>
-			
-		</div>
+		</c:if>
 		<c:forEach items="${bookMarkList}" var="blist">
 		<div class="row bm" style="margin-left: 2%; margin-right: 2%" id="row">
-			<div class="row col-sm-12">
+	
 			<c:choose>
 				<c:when test="${blist.tiseq != 0}">
 					<div class="col-sm-3 newissue"><!-- <i class="fas fa-angle-double-right" id="" name=""></i> -->
@@ -157,7 +171,7 @@ $(document).ready(function(){
 				</c:when>
 			</c:choose>
 			
-			</div>
+		
 		</div>
 		</c:forEach>
 			<div id="loadPlus" data-toggle="tooltip" data-placement="bottom" title="더 보기" >

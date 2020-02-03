@@ -88,20 +88,16 @@
 						 };
 		
 		wsocket.send(JSON.stringify(data));
-		console.log(data.img);
 		$("#message").val("");
 	}
 
 	function appendMessage(data) {
-		console.log(data);
-		console.log(data.img);
 		var src = "";
         if(data.img==''){
            src = '/SCOOP/resources/images/avatar/avatar.png';
         }else{
            src = '/SCOOP/user/upload/'+data.img;
         }
-        console.log(src);
  		if (data.type == "my") {
 			 let messageBox = "<div class='direct-chat-msg right clearfix'>"
 									+ "	<div class='direct-chat-info text-right'>"

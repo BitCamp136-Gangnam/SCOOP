@@ -19,27 +19,20 @@ public class BoardService {
 		int result = 0;
 		// 아이디 존재 함 등록 못함
 			ProjectDao dao = sqlsession.getMapper(ProjectDao.class);
-			System.out.println("여기좀 와주라 ㅠㅠㅠㅠ123");	
-			System.out.println(team.toString());
 			result = dao.insertPJT(team);
-			System.out.println("꺄르르륵");
 		return result;
 		
 	}
 	public int insertTeamPjt2(String email, int tseq) {
 		int result = 0;
 		// 아이디 존재 함 등록 못함
-		System.out.println("매퍼 전");
 		ProjectDao dao = sqlsession.getMapper(ProjectDao.class);
-		System.out.println("매퍼 후");
-		System.out.println(email + tseq);
 		try {
 			result = dao.insertPJT2(email, tseq);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		
-		System.out.println("꺄르르륵");
 		return result;
 		
 	}
@@ -56,7 +49,6 @@ public class BoardService {
 	public int updateNotice(Notice notice) {
 		int result = 0;
 		NoticeDao dao = sqlsession.getMapper(NoticeDao.class);
-		System.out.println("노티스  :" + notice);
 		result = dao.updateNotice(notice);
 		
 		return result;

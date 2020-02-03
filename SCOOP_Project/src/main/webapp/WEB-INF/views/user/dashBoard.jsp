@@ -53,12 +53,12 @@
          <div class="container-fluid">
             <div class="card">
                <div class="row" style="margin-left: 4%;margin-top: 3%">
-                  <select id="selectMenu" name="menu" class="nav-item" onchange="changeItem()" style="color: #E71D36; border: 0">
-                 	<option value="0" selected="selected" style="color: #76838f">새로운 팀이슈</option>
-            	 	<option value="1" style="color: #76838f">새로운 댓글</option>	
-            	 	<option value="3" style="color: #76838f">새로운 공지사항</option>
+                  <select id="selectMenu" name="menu" class="nav-item" onchange="changeItem()" style="color: #E71D36; border: 0;font-size: 17px;">
+                 	<option value="0" selected="selected" style="color: black">새로운 팀이슈</option>
+            	 	<option value="1" style="color: black">새로운 댓글</option>	
+            	 	<option value="3" style="color: black">새로운 공지사항</option>
           		  </select>
-                  <ul class="nav nav-pills">
+                  <ul class="nav nav-pills" style="font-size: 17px;">
                     <!--  <li class="nav-item dropdown"><a
                         class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">정렬</a>
                         <div class="dropdown-menu">
@@ -88,34 +88,26 @@
 			</div>
 			</div>
 		</c:if>
-	 <c:if test="${mypjtlist!=null }">
-      <c:forEach items="${mypjtlist}" var="mpl">
-      <c:if test="${myNewTissueList !=null }">
-      <c:forEach items="${myNewTissueList }" var="mynewtissue">
-      <c:if test="${mpl.tseq==mynewtissue.tseq && mpl.tseq !=null && mynewtissue.tidate > mpl.tpaddtime && mynewtissue.issee==0}">
+	 <c:if test="${mytissuelist !=null }">
+      <c:forEach items="${mytissuelist }" var="mynewtissue">
+      
       <div class="row countRow" style="margin-left: 2%; margin-right: 2%" id="ialarm">
 		
          <div class="col-sm-3 newissue" id="al">
          
-         <c:choose>
-         	<c:when test="${mpl.tseq==mynewtissue.tseq && mpl.tseq !=null && mynewtissue.tidate > mpl.tpaddtime}">
-         	<p>
-         	<c:if test="${fn:length(mpl.pname) > 8}">
-         	<a href="projectDetail.do?tseq=${mynewtissue.tseq }"><c:out value="${fn:substring(mpl.pname,0,8)}"/>...</a>
+         <p>
+         	<c:if test="${fn:length(mynewtissue.pname) > 8}">
+         	<a href="projectDetail.do?tseq=${mynewtissue.tseq }"><c:out value="${fn:substring(mynewtissue.pname,0,8)}"/>...</a>
          	</c:if>
-         	<c:if test="${fn:length(mpl.pname) <= 8}">
-         	<a href="projectDetail.do?tseq=${mynewtissue.tseq }"><c:out value="${fn:substring(mpl.pname,0,8)}"/></a>
+         	<c:if test="${fn:length(mynewtissue.pname) <= 8}">
+         	<a href="projectDetail.do?tseq=${mynewtissue.tseq }"><c:out value="${fn:substring(mynewtissue.pname,0,8)}"/></a>
          	</c:if>
          	</p>
-         	</c:when>
          	
-         </c:choose>
          </div>
          <div class="col-sm-6 newissue" id="ti">
          
-         <c:choose>
-         	<c:when test="${mpl.tseq==mynewtissue.tseq && mpl.tseq !=null && mynewtissue.tidate > mpl.tpaddtime}">
-         	<p>
+        <p>
          	<c:if test="${fn:length(mynewtissue.tititle) > 19}">
          	<a href="teamissueDetail.do?tiseq=${mynewtissue.tiseq}"><c:out value="${fn:substring(mynewtissue.tititle,0,19)}"/>...</a>
          	</c:if>
@@ -123,29 +115,25 @@
          	<a href="teamissueDetail.do?tiseq=${mynewtissue.tiseq}"><c:out value="${fn:substring(mynewtissue.tititle,0,19)}"/></a>
          	</c:if>
          	</p>
-         	</c:when>
          	
-         </c:choose>
          </div>
          <div class="col-sm-3 newissue" id="day">
          
-         <c:choose>
-         	<c:when test="${mpl.tseq==mynewtissue.tseq && mpl.tseq !=null && mynewtissue.tidate > mpl.tpaddtime}">
-         	<p>${fn:substring(mynewtissue.tidate,0,16)}</p>
-         	</c:when>
+        <p>${fn:substring(mynewtissue.tidate,0,16)}</p>
          	
-         </c:choose>
+         	
+         
          </div>
          
       </div>
-      </c:if>
-      </c:forEach>
-      </c:if>
+      
+      
       </c:forEach>
       </c:if>
 	</div>
 			<div class="col-sm-4">
-                <select id="selectDash" name="selectDash" class="form-control" style="margin-top: 10%;">
+			<h4 style="text-align: center;">협업공간 진행도</h4>
+                <select id="selectDash" name="selectDash" class="form-control">
                   <%-- <option value="${sessionScope.email}">여기는 select공간</option> --%>
                   <c:choose>
                   	<c:when test="${fn:length(pjtlist) > 0}">

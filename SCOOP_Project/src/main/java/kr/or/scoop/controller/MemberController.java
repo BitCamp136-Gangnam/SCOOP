@@ -7,6 +7,8 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -85,7 +87,6 @@ public class MemberController {
 		session.setAttribute("checkemail", member.getEmail());
 		session.setAttribute("checkpwd", this.bCryptPasswordEncoder.encode(member.getPwd()));
 		session.setAttribute("checkname", member.getName());
-		System.out.println("인서트 들어오니" + member);
 		member.setPwd(this.bCryptPasswordEncoder.encode(member.getPwd()));
 		int number = (int) ((Math.random() * 99999) + 100000);
 		String temp = String.valueOf(number);
@@ -112,9 +113,7 @@ public class MemberController {
 					"							        	    		})</script>");
 			out.flush(); 
 			viewpage = "ajax/signUp";
-			System.out.println("메일발송완료");
 		} catch (Exception e) {
-			System.out.println("모시모시" + e.getMessage());
 			viewpage = "index";
 			PrintWriter out;
 			try {
@@ -126,7 +125,6 @@ public class MemberController {
 						"							        	    		  button: \"확인\"\r\n" + 
 						"							        	    		})</script>");
 				out.flush();
-				System.out.println("메일발송에러");
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -146,7 +144,6 @@ public class MemberController {
 		member.setPwd((String)session.getAttribute("checkpwd"));
 		member.setEmail((String)session.getAttribute("checkemail"));
 		member.setName((String)session.getAttribute("checkname"));
-		System.out.println(session.getAttribute("checkpwd"));
 		result = service.insertMember(member);
 
 		if (result > 0) {
@@ -157,7 +154,6 @@ public class MemberController {
 			session.removeAttribute("checkname");
 		} else {
 			
-			System.out.println("가입실패");
 			viewpage = "redirect:/index.do";
 		}
 
@@ -192,7 +188,6 @@ public class MemberController {
 		String viewpage = "";
 		result = service.googleIdCheck(email, name);
 		if (result > 0) {
-			System.out.println("성공");
 			viewpage = "redirect:/userindex.do";
 			session.setAttribute("email", email);
 			session.setAttribute("kind", "google");
@@ -216,13 +211,10 @@ public class MemberController {
 		}
 		
 		Locale locale  = new Locale(language);
-		System.out.println(" locale : " + locale + "\n language : " + language);
 		localeResolver.setLocale(request, response, locale);
 		if(language.equals("ko")) {
-			System.out.println("????");
 			session.setAttribute("defaultlang", "한국어");
 		}else{
-			System.out.println("!!!!");
 			session.setAttribute("defaultlang", "English");
 		}
 		session.setAttribute("language", language);
@@ -253,11 +245,10 @@ public class MemberController {
 		session.setAttribute("role", role.getRname());
 		session.setAttribute("count", count);
 		session.setAttribute("filed", filedrive);
-		System.out.println(filedrive);
 		try {
 			pjtlist = noticeDao.getPJT(email);
 			tpmemlist = memberdao.getTpmembers(member.getEmail());
-			mytissuelist = myissuedao.teamWriteTiisueList(member.getIdtime());
+			mytissuelist = myissuedao.teamWriteTiisueList(member.getIdtime(), email);
 			myreplylist = myissuedao.teamWriteReplyList(member.getIdtime());
 			mypjtlist = myissuedao.teamWriteNoticeList(member.getEmail(), member.getIdtime());
 			model.addAttribute("mytissuelist",mytissuelist);
@@ -267,9 +258,10 @@ public class MemberController {
 			// TODO: handle exception
 		}
 		if(pjtlist!=null) {
+			
 			session.setAttribute("pjtlist", pjtlist);
 			session.setAttribute("tpmemlist", tpmemlist);
-			List<Tissue> myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime());
+			List<Tissue> myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime(), email);
 			/*MemberDao memberdao = sqlsession.getMapper(MemberDao.class);
 			MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
 			ProjectDao projectdao = sqlsession.getMapper(ProjectDao.class);
@@ -277,9 +269,34 @@ public class MemberController {
 				Member member = memberdao.getMember(email);
 				List<Tissue> myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime());
 				*/
+			/*
+			 * List<MyIssue> showNewTissueList = null; for(Tpmember tpmember : pjtlist) {
+			 * 
+			 * for(Tissue tissue : myNewTissueList) { if(tpmember.getTseq() ==
+			 * tissue.getTseq() && tissue.getTidate() !=null) { MyIssue myissue = new
+			 * MyIssue(); myissue.setEmail(tissue.getEmail());
+			 * myissue.setTseq(tissue.getTseq()); myissue.setTititle(tissue.getTititle());
+			 * myissue.setTicontent(tissue.getTicontent());
+			 * myissue.setPname(tpmember.getPname()); myissue.setTidate(tissue.getTidate());
+			 * myissue.setTiseq(tissue.getTiseq()); showNewTissueList.add(myissue); } } }
+			 * MyIssue[] temptissue = (MyIssue[])showNewTissueList.toArray();
+			 */
+			/*
+			 * for (int i = arr_size - 1; i > 0; i--) {
+            System.out.println("\n버블 정렬 " + (arr_size - i) + "단계");
+ 
+            for (int j = 0; j < i; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    SelectionSort.swap(arr, j, j + 1);
+                }
+                SelectionSort.printArr(arr);
+ 
+            }
+        }
+			*/
+			
 			model.addAttribute("mypjtlist", pjtlist);
 			model.addAttribute("myNewTissueList", myNewTissueList);
-			System.out.println(tpmemlist);
 			/*
 			 AlarmDao dao = sqlsession.getMapper(AlarmDao.class); 
 			 List<Alarm> alarm = dao.getAlarm((String)session.getAttribute("email"));
@@ -303,13 +320,10 @@ public class MemberController {
 			language = "ko";
 		}
 		Locale locale  = new Locale(language);
-		System.out.println(" locale : " + locale + "\n language : " + language);
 		localeResolver.setLocale(request, response, locale);
 		if(language.equals("ko")) {
-			System.out.println("????");
 			session.setAttribute("defaultlang", "한국어");
 		}else{
-			System.out.println("!!!!");
 			session.setAttribute("defaultlang", "English");
 		}
 		String email = "";
@@ -342,7 +356,7 @@ public class MemberController {
 		try {
 			pjtlist = noticeDao.getPJT(email);
 			tpmemlist = memberdao.getTpmembers(member.getEmail());
-			mytissuelist = myissuedao.teamWriteTiisueList(member.getIdtime());
+			mytissuelist = myissuedao.teamWriteTiisueList(member.getIdtime(), email);
 			myreplylist = myissuedao.teamWriteReplyList(member.getIdtime());
 			mypjtlist = myissuedao.teamWriteNoticeList(member.getEmail(), member.getIdtime());
 			model.addAttribute("mytissuelist",mytissuelist);
@@ -354,7 +368,7 @@ public class MemberController {
 		if(pjtlist!=null) {
 			session.setAttribute("pjtlist", pjtlist);
 			session.setAttribute("tpmemlist", tpmemlist);
-			List<Tissue> myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime());
+			List<Tissue> myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime(), email);
 			List<PjNotice> myNewPjNoticeList = myissuedao.teamWriteNoticeList(email, member.getIdtime());
 			List<Reply> myNewReplyList = myissuedao.teamWriteReplyList(member.getIdtime());
 			model.addAttribute("mypjtlist", pjtlist);
@@ -363,7 +377,6 @@ public class MemberController {
 			model.addAttribute("myNewPjNoticeList", myNewPjNoticeList);
 			model.addAttribute("myNewTissueList", myNewTissueList);
 			model.addAttribute("myNewReplyList", myNewReplyList);
-			System.out.println("이거" + myNewReplyList);
 		}
 		return "user/dashBoard-reply";
 		
@@ -375,13 +388,10 @@ public class MemberController {
 			language = "ko";
 		}
 		Locale locale  = new Locale(language);
-		System.out.println(" locale : " + locale + "\n language : " + language);
 		localeResolver.setLocale(request, response, locale);
 		if(language.equals("ko")) {
-			System.out.println("????");
 			session.setAttribute("defaultlang", "한국어");
 		}else{
-			System.out.println("!!!!");
 			session.setAttribute("defaultlang", "English");
 		}
 		String email = "";
@@ -414,7 +424,7 @@ public class MemberController {
 		try {
 			pjtlist = noticeDao.getPJT(email);
 			tpmemlist = memberdao.getTpmembers(member.getEmail());
-			mytissuelist = myissuedao.teamWriteTiisueList(member.getIdtime());
+			mytissuelist = myissuedao.teamWriteTiisueList(member.getIdtime(), email);
 			myreplylist = myissuedao.teamWriteReplyList(member.getIdtime());
 			mypjtlist = myissuedao.teamWriteNoticeList(member.getEmail(), member.getIdtime());
 			model.addAttribute("mytissuelist",mytissuelist);
@@ -426,7 +436,7 @@ public class MemberController {
 		if(pjtlist!=null) {
 			session.setAttribute("pjtlist", pjtlist);
 			session.setAttribute("tpmemlist", tpmemlist);
-			List<Tissue> myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime());
+			List<Tissue> myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime(), email);
 			List<PjNotice> myNewPjNoticeList = myissuedao.teamWriteNoticeList(email, member.getIdtime());
 			List<Reply> myNewReplyList = myissuedao.teamWriteReplyList(member.getIdtime());
 			model.addAttribute("mypjtlist", pjtlist);
@@ -435,7 +445,6 @@ public class MemberController {
 			model.addAttribute("myNewPjNoticeList", myNewPjNoticeList);
 			model.addAttribute("myNewTissueList", myNewTissueList);
 			model.addAttribute("myNewReplyList", myNewReplyList);
-			System.out.println(myNewPjNoticeList);
 		}
 		return "user/dashBoard-notice";
 	}
@@ -446,13 +455,10 @@ public class MemberController {
 			language = "ko";
 		}
 		Locale locale  = new Locale(language);
-		System.out.println(" locale : " + locale + "\n language : " + language);
 		localeResolver.setLocale(request, response, locale);
 		if(language.equals("ko")) {
-			System.out.println("????");
 			session.setAttribute("defaultlang", "한국어");
 		}else{
-			System.out.println("!!!!");
 			session.setAttribute("defaultlang", "English");
 		}
 		String email = "";
@@ -487,7 +493,7 @@ public class MemberController {
 		try {
 			pjtlist = noticeDao.getPJT(email);
 			tpmemlist = memberdao.getTpmembers(member.getEmail());
-			mytissuelist = myissuedao.teamWriteTiisueList(member.getIdtime());
+			mytissuelist = myissuedao.teamWriteTiisueList(member.getIdtime(), email);
 			myreplylist = myissuedao.teamWriteReplyList(member.getIdtime());
 			mypjtlist = myissuedao.teamWriteNoticeList(member.getEmail(), member.getIdtime());
 			model.addAttribute("mytissuelist",mytissuelist);
@@ -499,12 +505,11 @@ public class MemberController {
 		if(pjtlist!=null) {
 			session.setAttribute("pjtlist", pjtlist);
 			session.setAttribute("tpmemlist", tpmemlist);
-			myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime());
+			myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime(), email);
 			mentions = memberdao.getMention(member.getEmail());
 			model.addAttribute("mypjtlist", pjtlist);
 			model.addAttribute("myNewTissueList", myNewTissueList);
 			model.addAttribute("mentions",mentions);
-			System.out.println(mentions);
 		}
 		return "user/dashBoard-mention";
 	}
@@ -512,7 +517,6 @@ public class MemberController {
 	@RequestMapping(value = "/logout.do")
 	public String logout(HttpSession session, HttpServletResponse response) {
 		String viewpage = "";
-		System.out.println("로그아웃 함수");
 		viewpage = "redirect:/index.do";
 		session.invalidate();
 		return viewpage;
@@ -536,13 +540,11 @@ public class MemberController {
 		String viewpage = "";
 		result = service.naverIdCheck(email, name);
 		if (result > 0) {
-			System.out.println("성공");
 			viewpage = "redirect:/userindex.do";
 			session.setAttribute("email", email);
 			session.setAttribute("kind", "naver");
 			System.out.println(session.getAttribute("kind"));
 		} else {
-			System.out.println("실패");
 			viewpage = "redirect:/index.do";
 		}
 
@@ -576,7 +578,6 @@ public class MemberController {
 			
 		} catch (Exception e1) {
 			e1.printStackTrace();
-			System.out.println("인증 메일 발송 에러");
 			try {
 			viewpage = "index";
 			} catch (Exception e2) {
@@ -589,7 +590,6 @@ public class MemberController {
 	// 이메일 인증 확인
 	@RequestMapping(value="/emailCertified.do")
 	public String emailCertified() {
-		System.out.println("return certified");
 		return "certified/emailCertified";
 	}
 	
@@ -605,7 +605,6 @@ public class MemberController {
 		String pwd = this.bCryptPasswordEncoder.encode(request.getParameter("pwd"));
 		String email = (String)session.getAttribute("email");
 		
-		System.out.println("Email : " + email);
 		System.out.println("Password : " + pwd);
 		
 		MemberDao dao = sqlsession.getMapper(MemberDao.class);
@@ -613,10 +612,8 @@ public class MemberController {
 		
 		String viewpage = "";
 		if(result > 0) {
-			System.out.println("변경 성공");
 			viewpage = "index";
 		}else {
-			System.out.println("변경 실패");
 			viewpage = "index";
 		}
 		
@@ -641,7 +638,6 @@ public class MemberController {
 			request.setCharacterEncoding("UTF-8");
 			String tseq = request.getParameter("tseq");
 			int cnt = Integer.parseInt(request.getParameter("invitecnt"));
-			System.out.println("cnt:"+cnt);
 			String[] invitemem = new String[cnt];
 			for(int i=0;i<cnt;i++) {
 				invitemem[i] = request.getParameter("email"+i);
@@ -653,7 +649,6 @@ public class MemberController {
 			for(int i=0;i<cnt;i++) {
 				if(request.getParameter("email"+i)!=null) {
 					invitemem[i] = request.getParameter("email"+i);
-					System.out.println(invitemem[i]);
 					messageHelper.setFrom("leeyong1321@gmail.com");
 					messageHelper.setTo(invitemem[i]);
 					messageHelper.setSubject("협업공간 SCOOP 팀 멤버 초대 인증 이메일입니다");
@@ -674,12 +669,10 @@ public class MemberController {
 			request.setCharacterEncoding("UTF-8");
 			String tseq = request.getParameter("tseq");
 			int cnt = Integer.parseInt(request.getParameter("invitecnt"));
-			System.out.println("cnt:"+cnt);
 			String[] invitemem = new String[cnt];
 			for(int i=0;i<cnt;i++) {
 				if(request.getParameter("email"+i)!=null) {
 					invitemem[i] = request.getParameter("email"+i);
-					System.out.println(invitemem[i]);
 					messageHelper.setFrom("leeyong1321@gmail.com");
 					messageHelper.setTo(invitemem[i]);
 					messageHelper.setSubject("협업공간 SCOOP 팀 멤버 초대 인증 이메일입니다");
@@ -705,7 +698,6 @@ public class MemberController {
 		
 		String pwd = this.bCryptPasswordEncoder.encode(member.getPwd());
 		
-		System.out.println(pwd);
 		model.addAttribute("member",member);
 		model.addAttribute("pass",pwd);
 		session.setAttribute("img", member.getProfile());
@@ -717,7 +709,6 @@ public class MemberController {
 	//회원수정 체크
 	@RequestMapping(value="editCheck.do" , method = RequestMethod.POST)
 	public String UpdateProfile(Member member,HttpServletRequest request,HttpSession session) {
-		    System.out.println(member);
 		    
 				
 			CommonsMultipartFile multifile = member.getFilesrc();
@@ -742,7 +733,6 @@ public class MemberController {
 					}finally {
 						try {
 							fs.write(multifile.getBytes());
-							System.out.println(multifile.getBytes()[0]);
 							fs.close();
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
@@ -797,7 +787,6 @@ public class MemberController {
 	// 이메일 인증 확인
 	@RequestMapping(value = "/naverCertified.do")
 	public String naverCertified() {
-		System.out.println("return certified");
 		return "ajax/naverCertified";
 	}
 	
@@ -805,7 +794,6 @@ public class MemberController {
 	@RequestMapping(value = "/idOverlab.do")
 	@ResponseBody
 	public int emailCheck(String email) {
-		System.out.println(email);
 		int result = 0;
 		MemberDao dao = sqlsession.getMapper(MemberDao.class);
 		result = dao.idCheck(email);
@@ -823,13 +811,12 @@ public class MemberController {
 			try {
 				Member member = memberdao.getMember(email);
 				List<Tpmember> pjtlist = projectdao.getPJT(email);
-				List<Tissue> myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime());
+				List<Tissue> myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime(), email);
 				model.addAttribute("mypjtlist", pjtlist);
 				model.addAttribute("myNewTissueList", myNewTissueList);
 				viewpage = "user/UserNewTissue";
 			} catch (Exception e) {
 				// TODO: handle exception
-				System.out.println(e.getMessage());
 				viewpage = "redirect:/userindex.do";
 			}
 			
@@ -874,7 +861,7 @@ public class MemberController {
 				Member member = memberdao.getMember(email);
 				List<Tpmember> pjtlist = projectdao.getPJT(email);
 				List<PjNotice> myNewPjNoticeList = myissuedao.teamWriteNoticeList(email, member.getIdtime());
-				List<Tissue> myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime());
+				List<Tissue> myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime(), email);
 				List<Reply> myNewReplyList = myissuedao.teamWriteReplyList(member.getIdtime());
 				model.addAttribute("mypjtlist", pjtlist);
 				model.addAttribute("myNewPjNoticeList", myNewPjNoticeList);
@@ -882,7 +869,6 @@ public class MemberController {
 				model.addAttribute("myNewReplyList", myNewReplyList);
 				viewpage = "user/UserNewVote";
 			} catch(Exception e) {
-				System.out.println(e.getMessage());
 				viewpage = "redirect:/userindex.do";
 			}
 			
@@ -918,7 +904,6 @@ public class MemberController {
 		// 이메일 인증 확인
 		@RequestMapping(value = "/addCalendarAjax.do")
 		public String addCalendarAjax() {
-			System.out.println("return certified");
 			return "ajax/addCalendarAjax";
 		}
 	

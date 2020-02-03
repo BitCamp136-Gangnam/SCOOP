@@ -35,7 +35,14 @@ public class Tissue {
 	private String tmemail;
 	private String turl;
 	private String name;
+	private String pname;
 	
+	public String getPname() {
+		return pname;
+	}
+	public void setPname(String pname) {
+		this.pname = pname;
+	}
 	public int getAllDay() {
 		return allDay;
 	}
@@ -181,7 +188,7 @@ public class Tissue {
 				+ tistart + ", tiend=" + tiend + ", isprocess=" + isprocess + ", backgroundColor=" + backgroundColor
 				+ ", textColor=" + textColor + ", allDay=" + allDay + ", tfilesize=" + tfilesize + ", istbook="
 				+ istbook + ", issee=" + issee + ", tidate=" + tidate + ", tgfilename=" + tgfilename + ", tmemail="
-				+ tmemail + ", turl=" + turl + ", name=" + name + "]";
+				+ tmemail + ", turl=" + turl + ", name=" + name + ", pname=" + pname + "]";
 	}
 	
 	

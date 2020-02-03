@@ -3,11 +3,11 @@
 <jsp:include page="/WEB-INF/views/commons/footer.jsp"></jsp:include>
 <script>
 Swal.fire(
-		  '캘린더 생성 성공!',
-		  '새로운 일정이 생성되었습니다',
-		  'success'
+		  '이메일 전송 에러',
+		  '이미 협업공간에 초대되어있는 멤버가 있습니다!',
+		  'question'
 		)
 window.setTimeout(function() {
-	location.href='calendar.do';	
-}, 1500);
+	location.href='userindex.do';	
+}, 1000);
 </script>
