@@ -451,7 +451,9 @@ $(function(){
                         	<c:when test="${pm.pjuserrank==100}"><i class="fas fa-user-cog" id="icon_First${status.index}" style="font-size: 20px;color:#195ac2;"></i></c:when>
                         	<%-- <c:when test="${pm.pjuserrank==200}">매니저</c:when> --%>
                         </c:choose>
+                        <c:if test="${pm.pjuserrank==300}">
                            <i class="fas fa-cog admin_EditIcon" id="admin_EditIcon${status.index}" style="cursor: pointer;font-size: 20px;color:black;"></i>
+                        </c:if>
                         </span>
                         <div class="drop-down dropdown-language animated fadeIn  dropdown-menu"  id="admindrop">
                         <div class="dropdown-content-body">
