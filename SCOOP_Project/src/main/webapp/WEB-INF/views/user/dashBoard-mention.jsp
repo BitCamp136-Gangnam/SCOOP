@@ -143,6 +143,7 @@
 							<c:if test="${mentions =='[]' }">
 							<div class="row countRow" style="margin-left: 2%; margin-right: 2%" id="ialarm">
 								<div class="col-sm-12 newissue" id="al">
+								<img src= '<c:url value="/resources/images/logo/ScoopBig.png"/>' style="width: 60px;padding-right: 5px;" >
 									아직 공지사항이 없습니다! 팀장님이 작성할 때까지 기다려주세요 ^ㅁ^!
 								</div>
 							</div>
