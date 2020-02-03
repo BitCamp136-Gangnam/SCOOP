@@ -96,7 +96,6 @@ public class BoardController {
 	public String teamissueDetail(int tiseq, Model model){
 		TissueDao dao = sqlSession.getMapper(TissueDao.class);
 		Tissue tissue = dao.teamissueDetail(tiseq);
-		System.out.println(tissue);
 		List<Reply> reply = dao.teamCommentOk(tiseq);
 		List<Mention> mentions = dao.getMentions(tiseq);
 		List<GoogleDrive> googledrive = dao.getGoogleDrive(tiseq);
@@ -472,7 +471,7 @@ public class BoardController {
 		tissue.setEmail(email);
 		tissue.setPititle(title);
 		tissue.setPicontent(editIssuecontent);
-		if(editFrom != null) {
+		if(!editFrom.equals("")) {
 			tissue.setPistart(java.sql.Timestamp.valueOf(editFrom+" 00:00:00"));
 			tissue.setPiend(java.sql.Timestamp.valueOf(editTo+" 00:00:00"));
 		}
@@ -567,7 +566,7 @@ public class BoardController {
 		tissue.setEmail(email);
 		tissue.setTititle(title);
 		tissue.setTicontent(editIssuecontent);
-		if(editFrom != null) {
+		if(!editFrom.equals("")) {
 			 tissue.setTistart(java.sql.Timestamp.valueOf(editFrom+" 00:00:00"));
 			 tissue.setTiend(java.sql.Timestamp.valueOf(editTo+" 00:00:00"));
 		}
@@ -619,7 +618,7 @@ public class BoardController {
 					 int tgseq = Integer.parseInt(editGfilename[i].split("~")[1]);
 					 tservice.googleDriveDelete(tgseq);
 				 }else {
-					 if(!editGfilename[i].contains("~")) {
+					 if(editGfilename[i].contains("~")) {
 						 //editGfilename[i] = editGfilename[i].split("/")[0];
 						 //editGurl[i] = editGurl[i].split("/")[0];
 					 }else {
