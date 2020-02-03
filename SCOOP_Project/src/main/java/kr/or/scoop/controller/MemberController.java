@@ -907,9 +907,19 @@ public class MemberController {
 			return "utils/addCalendarAjax";
 		}
 		
-		@RequestMapping(value="",method = RequestMethod.POST)
+		@RequestMapping(value="memberDelete.do", method = {RequestMethod.POST, RequestMethod.GET})
 		public String memberDelete(HttpSession session) {
-		return null;	
+		String email = (String)session.getAttribute("email");
+		String viewpage;
+		int result = 0;
+		result = service.deleteMember(email);
+		
+		if(result > 0) {
+			viewpage = "index";
+		}else {
+			viewpage = "user/userindex";
+		}
+		return viewpage;	
 		}
 	
 }

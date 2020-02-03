@@ -96,6 +96,7 @@ public class BoardController {
 	public String teamissueDetail(int tiseq, Model model){
 		TissueDao dao = sqlSession.getMapper(TissueDao.class);
 		Tissue tissue = dao.teamissueDetail(tiseq);
+		System.out.println(tissue);
 		List<Reply> reply = dao.teamCommentOk(tiseq);
 		List<Mention> mentions = dao.getMentions(tiseq);
 		List<GoogleDrive> googledrive = dao.getGoogleDrive(tiseq);

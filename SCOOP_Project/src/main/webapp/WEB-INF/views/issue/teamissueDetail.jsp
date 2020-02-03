@@ -189,24 +189,49 @@ border-radius: 5px;
         <!--**********************************
             Content body start
         ***********************************-->
-        <div class="content-body"style="height: 680px;">
-        <div class="container-fluid row" style="padding-right: 0px; margin-right: 0px;margin-left: 0px; padding-left: 15px;">
-        <div class="card" style="padding-left: 2%;padding-right: 0px; padding-top:1%;min-width:900px;height: auto;overflow: auto;">
-		<div class="row"style="margin:2% 2% 0 2%" >
+        <div class="content-body">
+        <div class="container-fluid">
+        <div class="card">
+		<div class="row" style="margin:2% 2% 0 2%">
+			<c:choose>
+				<c:when test="${tissue.isprocess==0}">
+				<span data-toggle="tooltip" data-placement="top" title="발의됨" >
+				<span id="create" class="iconify" data-icon="uil:file-exclamation-alt" data-inline="false" style="width:27px;height: auto;color:#ff6384;"></span>
+				</span>
+				</c:when>
+				<c:when test="${tissue.isprocess==1}">
+				<span data-toggle="tooltip" data-placement="top" title="진행중">
+				<span id="ing" class="iconify" data-icon="uil:file-edit-alt" data-inline="false" style="width:27px;height: auto;color: #36a2eb;"></span>
+				</span>
+				</c:when>
+				<c:when test="${tissue.isprocess==2}">
+				<span data-toggle="tooltip" data-placement="top" title="일시중지" >
+				<span id="stop" class="iconify" data-icon="uil:file-block-alt" data-inline="false" style="width:27px;height: auto;color:#e3ad29;"></span>
+				</span>
+				</c:when>
+				<c:when test="${tissue.isprocess==3}">
+				<span data-toggle="tooltip" data-placement="top" title="완료">
+				<span id="finish" class="iconify" data-icon="uil:file-check-alt" data-inline="false" style="width:27px;height: auto;color:#4bc09b;"></span>
+				</span>
+				</c:when>	
+			</c:choose>
+			
+			<div class="col-sm-8" style="font-size: 17px; padding-left: 1%;">${fn:substring(tissue.pname,0,20)}</div>
+			<c:if test="${tissue.email==sessionScope.email}">
+				<div class="col-sm-3" style="float: right;margin-left: 5%;padding-left: 60px;">
+	        	<span class="fas fa-cog"  id="editIssue" style="margin-left: 5px;cursor: pointer; font-size: 25px;"></span>
+				<span class="iconify" id="deleteIssue" data-icon="topcoat:delete" data-inline="false" style="cursor: pointer;font-size:25px; margin-bottom: 15px;margin-left: 20px;"></span>
+				<span class="iconify" id="comeback" data-icon="entypo:back" data-inline="false" style="cursor: pointer; font-size: 25px; margin-bottom: 10px;margin-left: 15px;"></span>
+				</div>				
+			</c:if>
+		</div>
+		<hr style="margin:10px 0 0 0;">
+		<div class="row"style="margin:1% 2% 0 0" >
+				
 		<div class="col-sm-8">
 				<h3 id="myissueSubject" style="padding-top: 2%;padding-left: 1%;">${tissue.tititle}</h3>
 		</div>
-		<c:if test="${tissue.email==sessionScope.email}">
-		<div class="col-sm-4" style="padding-top: 2%;padding-left: 8%;">
-		<!-- <span data-toggle="tooltip" data-placement="top" title="수정" > -->
-        	<span class="fas fa-cog"  id="editIssue" style="margin-left: 5px;cursor: pointer; font-size: 30px;"></span>
-         <!-- </span> -->
-         <!-- <span data-toggle="tooltip" data-placement="top" title="삭제" > -->
-			<span class="iconify" id="deleteIssue" data-icon="topcoat:delete" data-inline="false" style="cursor: pointer;font-size: 35px;margin-bottom: 20px;margin-left: 20px;"></span>
-			<span class="iconify" id="comeback" data-icon="entypo:back" data-inline="false" style="cursor: pointer; font-size: 35px;margin-bottom: 15px;margin-left: 15px;"></span>
-		<!-- </span> -->
-		</div>
-		</c:if>
+		
 		</div>
 		<c:choose>
         <c:when test="${tissue.tistart!=null}">
