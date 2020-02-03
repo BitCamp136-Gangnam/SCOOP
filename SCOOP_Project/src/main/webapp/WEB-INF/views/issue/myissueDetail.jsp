@@ -101,55 +101,58 @@ border-radius: 5px;
 		</div>
 		</c:if>
         
+		<h3 id="myissueSubject" style="padding-left: 15px;">${myissue.pititle}</h3>
         </div>
+		
         <hr style="margin:10px 2% 0 2%;">
 		<div class="row" style="margin:0% 2% 0 2%" >
-		<div class="col-sm-8" style="padding-left: 30px;">
-		<h3 id="myissueSubject" style="padding-top: 2%;">${myissue.pititle}</h3>
-		</div>
+		
 		
 		</div>
 		<c:choose>
         <c:when test="${myissue.pistart!=null}">
-		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;padding-left: 20px;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>${fn:substring(myissue.pistart,0,10)} ~ ${fn:substring(myissue.piend,0,10)}</div>
+		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;padding-left: 20px;margin-top: 2%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>${fn:substring(myissue.pistart,0,10)} ~ ${fn:substring(myissue.piend,0,10)}</div>
 		</c:when>
 		<c:otherwise>
-		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;padding-left: 20px;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>등록된 일정이 없습니다.</div>
+		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;padding-left: 20px;margin-top: 2%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>등록된 일정이 없습니다.</div>
 		</c:otherwise>
 		</c:choose>
+		
+		<div class="row" style="height:450px;overflow: auto;margin-left: 5px; margin-right: 5px;">
 		<c:forEach items="${mymention}" var="m">
-		<div class="myissueDetail" id="myissueMention" style="padding-left: 20px;">
+		<div class="myissueDetail col-sm-11" id="myissueMention" style="padding-left: 20px;">
 		<sup><i class="fas fa-quote-left" style="color:#ca0000; font-size: 7px"></i></sup> @${m.name} <sup><i class="fas fa-quote-right"style="color:#ca0000;font-size: 7px"></i></sup>
 		<br>
 		</div>
 		</c:forEach>
 		<c:forEach items="${files}" var="f">
-		<div class="myissueDetail" id="myissueMention">
+		<div class="myissueDetail col-sm-11" id="myissueMention" style="padding-left: 20px;">
 		<a href="fileDownload.do?fileName=${f.pfdname}"><span class="iconify" data-icon="si-glyph:file-box" data-inline="false"></span>${f.pfdname}</a>
 		<br>
 		</div>
 		</c:forEach>
 		<c:forEach items="${mygdrive}" var="gd">
-		<div class="myissueDetail" id="myissueGoogledrive">
+		<div class="myissueDetail col-sm-11" id="myissueGoogledrive" style="padding-left: 20px;">
 			<i class="fab fa-google-drive"></i>
 			<a href="${gd.pgurl}" onclick="window.open(this.href,'팝업창','width=800, height=800');return false;">${gd.pgfilename}</a>
 			<br>
 		</div>
 			</c:forEach>
 		<c:forEach items="${mydowork}" var="work">
-		<div class="myissueDetail" id="myissueTodo">
+		<div class="myissueDetail col-sm-11" id="myissueTodo" style="padding-left: 20px;">
 		<i class="far fa-check-circle"style="padding-right: 5px;"></i>${work.fromname}
 		<i class="fas fa-long-arrow-alt-right" style="margin-left:5px;margin-right: 5px;"></i>${work.toname}<br>
 		: ${work.pdowork}
 		<br>
 		</div>
 		</c:forEach> 
-        <div class="myissueDetail" style="padding-left: 20px;">
+        <div class="myissueDetail col-sm-11" style="padding-left: 20px;">
         ${myissue.picontent}
         </div>    
             <!-- #/ container -->
             </div> 
             </div>
+        </div>
         </div>
         <!--**********************************
             Content body end

@@ -165,7 +165,7 @@ $(function(){
 .myissueDetail{
 	font-size: 15px;
 	margin-left: 3%;
-	/* margin-bottom:1%; */
+	margin-bottom:1%;
 }
 .editdelete{
 background-color: #E71D36;
@@ -192,7 +192,7 @@ border-radius: 5px;
         <div class="content-body"style="height: 680px;">
         <div class="container-fluid row" style="padding-right: 0px; margin-right: 0px;margin-left: 0px; padding-left: 15px;">
         <div class="card" style="padding-left: 2%;padding-right: 0px; padding-top:1%;min-width:900px;height: auto;overflow: auto;">
-		<div class="row" style="margin:2% 2% 0 2%">
+		<div class="row" style="margin:2% 2% 0 2%;padding-left: 10px;">
 			<c:choose>
 				<c:when test="${tissue.isprocess==0}">
 				<span data-toggle="tooltip" data-placement="top" title="발의됨" >
@@ -217,6 +217,7 @@ border-radius: 5px;
 			</c:choose>
 			
 			<div class="col-sm-8" style="font-size: 17px; padding-left: 1%;">${fn:substring(tissue.pname,0,20)}</div>
+			
 			<c:if test="${tissue.email==sessionScope.email}">
 				<div class="col-sm-3" style="float: right;margin-left: 5%;padding-left: 60px;">
 	        	<span class="fas fa-cog"  id="editIssue" style="margin-left: 5px;cursor: pointer; font-size: 25px;"></span>
@@ -224,23 +225,19 @@ border-radius: 5px;
 				<span class="iconify" id="comeback" data-icon="entypo:back" data-inline="false" style="cursor: pointer; font-size: 25px; margin-bottom: 10px;margin-left: 15px;"></span>
 				</div>				
 			</c:if>
+			<h3 id="myissueSubject">${tissue.tititle}</h3>
 		</div>
-		<hr style="margin:10px 0 0 0;">
-		<div class="row"style="margin:1% 2% 0 0" >
-				
-		<div class="col-sm-8">
-				<h3 id="myissueSubject" style="padding-top: 2%;padding-left: 1%;">${tissue.tititle}</h3>
-		</div>
+		<hr style="margin:10px 2% 0 0;">
 		
-		</div>
 		<c:choose>
         <c:when test="${tissue.tistart!=null}">
-		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>${fn:substring(tissue.tistart,0,10)} ~ ${fn:substring(tissue.tiend,0,10)}</div>
+		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;margin-top: 2%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>${fn:substring(tissue.tistart,0,10)} ~ ${fn:substring(tissue.tiend,0,10)}</div>
 		</c:when>
 		<c:otherwise>
-		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>등록된 일정이 없습니다.</div>
+		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;margin-top: 2%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>등록된 일정이 없습니다.</div>
 		</c:otherwise>
 		</c:choose>
+		
 		<c:forEach items="${mentions}" var="m">
 		<div class="myissueDetail" id="myissueMention">
 		<sup><i class="fas fa-quote-left" style="color:#ca0000; font-size: 7px"></i></sup> @${m.name} <sup><i class="fas fa-quote-right"style="color:#ca0000;font-size: 7px"></i></sup>
