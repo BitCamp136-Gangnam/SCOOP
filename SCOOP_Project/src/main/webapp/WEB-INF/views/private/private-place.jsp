@@ -136,6 +136,15 @@
 				북마크
 				</div>
 			</div>
+		<c:if test="${myissuelist =='[]' }">
+			<div class="row countRow" style="margin-left: 2%; margin-right: 2%" id="ialarm">
+				<div class="col-sm-12 newissue" id="al">
+				<img src= '<c:url value="/resources/images/logo/ScoopBig.png"/>' style="width: 60px;padding-right: 5px;">
+					아직 프라이빗 공간 사용을 안해보셨나요? 나만의 공간에 이슈를 생성해보세요^ㅁ^!
+				</div>
+			</div>
+		</c:if>	
+			
 		<c:forEach items="${myissuelist}" var="m">
 		<div class="row" style="margin-left: 2%; margin-right: 2%" id="row">
 			<input type="hidden" name="piseq" value="${m.piseq}" />
