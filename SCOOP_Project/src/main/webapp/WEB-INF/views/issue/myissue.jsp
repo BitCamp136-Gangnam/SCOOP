@@ -88,7 +88,7 @@ $(function(){
 			<div class="col-sm-7 newissue" >
 			<c:choose>
 				<c:when test="${ti.isprocess==0}">
-				<span data-toggle="tooltip" data-placement="left" title="발의됨" ">
+				<span data-toggle="tooltip" data-placement="left" title="발의됨" >
 				<span id="create" class="iconify" data-icon="uil:file-exclamation-alt" data-inline="false" style="width:27px;height: auto;color:#ff6384;"></span>
 				</span>
 				</c:when>
@@ -130,7 +130,7 @@ $(function(){
 			</div>
 		</c:forEach>
 			
-		<%-- 	<c:forEach items="${pi}" var="pi">
+		<%-- <c:forEach items="${pi}" var="pi">
 			<div class="row" style="margin-left: 2%; margin-right: 2%" id="row">
 			<div class="col-sm-7 newissue" >
 			<div class="iconify" data-icon="uil:file-lock-alt" data-inline="false" style="width:27px;height: auto;"></div>
@@ -143,7 +143,7 @@ $(function(){
 			<a href="private.do" style="color:#2c9aa8;">${fn:substring(pi.pidate,0,16)} </a>
 			</div>
 			</div>
-			</c:forEach> --%>
+		</c:forEach> --%>
 		
 			<div id="loadPlus" data-toggle="tooltip" data-placement="bottom" title="더 보기" >
 			<div id="load" class="iconify" style="font-size: 40px; color:#464a53;cursor: pointer; margin-left: 627px; margin-top: 1%;" data-icon="mdi:chevron-double-down" data-inline="false">더 보기</div>

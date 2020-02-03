@@ -54,6 +54,32 @@ $(function(){
       $('#c_Management').show();
       $('#c_Information').hide();
    });
+   $('#getOutTeam').click(function(){
+	   console.log("???");
+	   Swal.fire({
+		   title: '정말로 협업공간을 탈퇴 하시겠습니까??',
+		   text: "탈퇴하시면 프로젝트의 모든 정보가 사라집니다!",
+		   icon: 'warning',
+		   showCancelButton: true,
+		   confirmButtonColor: '#d33',
+		   cancelButtonColor: '#c8c8c8',
+		   confirmButtonText: '확인',
+		   cancelButtonText: '취소'
+		 }).then((result) => {
+		   if (result.value) {
+			   if('${myInfo.pjuserrank}'==300){
+				   location.href = 'getOutTeam.do?tseq='+$('#getTseq').val()+'&email='+'${sessionScope.email}';
+			   }else{
+				   Swal.fire({
+							  title : '협업공간 탈퇴 실패',
+							  text : '팀장을 위임하고 탈퇴해주세요!',
+							  icon : 'warning',
+							  confirmButtonColor: '#d33'
+				   })
+			   }
+		   }
+		 })
+   })
    $('#c_DropProject').click(function(){
 	   Swal.fire({
 		   title: '정말로 프로젝트를 삭제하시겠습니까??',
@@ -258,7 +284,7 @@ $(function(){
         <div class="container-fluid">
         <div class="card" style="padding-bottom: 30px;">
       <div class="row" style="margin: 2% 2% 15px 2%">
-         <div class="col-sm-12" style="padding-left: 0">
+         <div class="col-sm-10" style="padding-left: 0">
             <h3 style="padding-left: 1%;">${tpj.pname}
             	<c:if test="${rank == 100}">
             		<span data-toggle="tooltip" data-placement="top" title="협업공간 관리" >
@@ -271,6 +297,11 @@ $(function(){
             	</c:if>
             </h3>
             <p style="padding-left: 1%;margin-bottom: 0px;">[${tpj.pcontent}]</p>
+         </div>
+         <div class="col-sm-2" style="text-align: right">
+         	<span id="getOutTeam" style="cursor: pointer;">
+         	<span class="iconify" data-icon="vs:door-open" data-inline="false" style="font-size: 20px;"></span> 협업공간 탈퇴하기
+         	</span>
          </div>
       </div>
       <div class="row" style="margin-left: 2%;">
