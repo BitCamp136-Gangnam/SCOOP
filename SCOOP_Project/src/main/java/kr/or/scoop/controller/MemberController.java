@@ -395,7 +395,7 @@ public class MemberController {
 			session.setAttribute("defaultlang", "English");
 		}
 		String email = "";
-		
+		System.out.println("오냐");
 		email = (String)session.getAttribute("email");
 		ProjectDao noticeDao = sqlsession.getMapper(ProjectDao.class);
 		MemberDao memberdao = sqlsession.getMapper(MemberDao.class);
@@ -406,7 +406,6 @@ public class MemberController {
 		int count = 0;	
 		List<FileDrive> filedrive = null;
 		List<Tissue> mytissuelist = null;
-		List<Reply> myreplylist = null;
 		List<PjNotice> mypjtlist = null;
 		List<Tpmember> pjtlist = null;
 		List<Tpmember> tpmemlist =  null;
@@ -422,15 +421,19 @@ public class MemberController {
 		session.setAttribute("count", count);
 		session.setAttribute("filed", filedrive);
 		try {
+			System.out.println("오냐2");
 			pjtlist = noticeDao.getPJT(email);
 			tpmemlist = memberdao.getTpmembers(member.getEmail());
+			System.out.println("오냐2.1");
 			mytissuelist = myissuedao.teamWriteTiisueList(member.getIdtime(), email);
-			myreplylist = myissuedao.teamWriteReplyList(member.getIdtime());
+			System.out.println("오냐2.2");
+			System.out.println(member.getEmail() + member.getIdtime());
 			mypjtlist = myissuedao.teamWriteNoticeList(member.getEmail(), member.getIdtime());
+			System.out.println("오냐4 :"+ mypjtlist.get(0));
 			model.addAttribute("mytissuelist",mytissuelist);
-			model.addAttribute("myreplylist",myreplylist);
 			model.addAttribute("mypjtlist",mypjtlist);
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			// TODO: handle exception
 		}
 		if(pjtlist!=null) {
