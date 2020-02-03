@@ -737,9 +737,9 @@ public class MemberController {
 						}
 					}
 				}
-			String regex = "^[a-zA-Z0-9]{8,16}$";
+			
 		   MemberDao dao = sqlsession.getMapper(MemberDao.class);
-		if(member.getPwd().equals("") || member.getPwd().matches(regex)) {
+		if(member.getPwd().equals("")) {
 			Member checkmember = dao.getMember((String)session.getAttribute("email"));
 			member.setPwd(checkmember.getPwd());
 			dao.updateMember(member);
