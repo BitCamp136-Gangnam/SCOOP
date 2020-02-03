@@ -102,13 +102,11 @@ border-radius: 5px;
 		</c:if>
         
 		<h3 id="myissueSubject" style="padding-left: 15px;">${myissue.pititle}</h3>
+		<span style="padding-left: 67%;padding-top: 10px;">${fn:substring(myissue.pidate,0,16)}</span>
         </div>
 		
         <hr style="margin:10px 2% 0 2%;">
-		<div class="row" style="margin:0% 2% 0 2%" >
 		
-		
-		</div>
 		<c:choose>
         <c:when test="${myissue.pistart!=null}">
 		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;padding-left: 20px;margin-top: 2%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>${fn:substring(myissue.pistart,0,10)} ~ ${fn:substring(myissue.piend,0,10)}</div>
