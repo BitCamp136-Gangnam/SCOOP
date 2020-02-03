@@ -136,4 +136,7 @@ where tseq in (
 	<select id="getMyInfo" resultType="kr.or.scoop.dto.Tpmember">
 		select * from tpmember where tseq = #{param1} and email = #{param2}
 	</select>
+	<delete id="deleteMember">
+		delete from member where email = #{param1}
+	</delete>
 </mapper>
