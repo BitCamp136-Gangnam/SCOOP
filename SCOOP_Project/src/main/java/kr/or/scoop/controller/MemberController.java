@@ -112,7 +112,7 @@ public class MemberController {
 					"							        	    		  button: \"확인\"" + 
 					"							        	    		})</script>");
 			out.flush(); 
-			viewpage = "ajax/signUp";
+			viewpage = "utils/signUp";
 		} catch (Exception e) {
 			viewpage = "index";
 			PrintWriter out;
@@ -174,7 +174,7 @@ public class MemberController {
 			session.setAttribute("email", email);
 			session.setAttribute("kind", "normal");
 		} else {
-			viewpage = "ajax/loginFail";
+			viewpage = "utils/loginFail";
 		}
 
 		return viewpage;
@@ -643,7 +643,7 @@ public class MemberController {
 				invitemem[i] = request.getParameter("email"+i);
 				int rank = dao.searchRank(Integer.parseInt(tseq), invitemem[i]);
 				if(rank>0) {
-					return "ajax/emailSwal";
+					return "utils/emailSwal";
 				}
 			}
 			for(int i=0;i<cnt;i++) {
@@ -687,7 +687,7 @@ public class MemberController {
 			}
 			
 		} 
-		return "ajax/emailSwalOk";
+		return "utils/emailSwalOk";
 	}
 	
 	//회원수정 페이지 이동
@@ -787,7 +787,7 @@ public class MemberController {
 	// 이메일 인증 확인
 	@RequestMapping(value = "/naverCertified.do")
 	public String naverCertified() {
-		return "ajax/naverCertified";
+		return "utils/naverCertified";
 	}
 	
 	// 아이디 중복 확인
@@ -904,7 +904,12 @@ public class MemberController {
 		// 이메일 인증 확인
 		@RequestMapping(value = "/addCalendarAjax.do")
 		public String addCalendarAjax() {
-			return "ajax/addCalendarAjax";
+			return "utils/addCalendarAjax";
+		}
+		
+		@RequestMapping(value="",method = RequestMethod.POST)
+		public String memberDelete(HttpSession session) {
+		return null;	
 		}
 	
 }

@@ -63,7 +63,7 @@ public class FileController {
 			JSONArray jsonlist = JSONArray.fromObject(filedrive);
 			model.addAttribute("ajax",jsonlist);
 		}
-		return "ajax/ajax";
+		return "utils/ajax";
 	}
 	@RequestMapping("/myFileSelect.do")
 	public String myFileSelect(HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model) throws Exception {
@@ -72,7 +72,7 @@ public class FileController {
 			List<PrivateFileDrive> filedrive = memberdao.getMyFile(email);
 			JSONArray jsonlist = JSONArray.fromObject(filedrive);
 			model.addAttribute("ajax",jsonlist);
-		return "ajax/ajax";
+		return "utils/ajax";
 	}
 	
 	@RequestMapping("/teamFileSearch.do")
@@ -83,7 +83,7 @@ public class FileController {
 			List<FileDrive> filedrive = memberdao.searchFileDrive(email, word);
 			JSONArray jsonlist = JSONArray.fromObject(filedrive);
 			model.addAttribute("ajax",jsonlist);
-		return "ajax/ajax";
+		return "utils/ajax";
 	}
 	@RequestMapping("/myFileSearch.do")
 	public String myFileSearch(HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model) throws Exception {
@@ -93,6 +93,6 @@ public class FileController {
 		List<FileDrive> filedrive = memberdao.searchMyFileDrive(email, word);
 		JSONArray jsonlist = JSONArray.fromObject(filedrive);
 		model.addAttribute("ajax",jsonlist);
-		return "ajax/ajax";
+		return "utils/ajax";
 	}
 }

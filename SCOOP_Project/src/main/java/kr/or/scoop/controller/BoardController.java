@@ -281,18 +281,18 @@ public class BoardController {
 		
 		if(result > 0) {
 			model.addAttribute("ajax","댓글 성공");
-			viewpage = "ajax/ajax";
+			viewpage = "utils/ajax";
 			
 		}else {
 			model.addAttribute("ajax","댓글 실패ㅠㅠ");
-			viewpage = "ajax/ajax";
+			viewpage = "utils/ajax";
 		}
 		return viewpage;
 	}
 	//팀이슈 댓글 비동기 뿌리기
 	@RequestMapping(value = "teamCommentOk.do",method = {RequestMethod.POST,RequestMethod.GET})
 	public String teamCommentOk(int tiseq,Model model) {
-		String viewpage = "ajax/ajax";
+		String viewpage = "utils/ajax";
 		List<Reply> reply = tservice.teamCommentOk(tiseq);
 		JSONArray jsonlist = JSONArray.fromObject(reply);
 		model.addAttribute("ajax",jsonlist);
@@ -308,11 +308,11 @@ public class BoardController {
 		
 		if(result > 0) {
 			model.addAttribute("ajax","댓글 성공");
-			viewpage = "ajax/ajax";
+			viewpage = "utils/ajax";
 			
 		}else {
 			model.addAttribute("ajax","댓글 실패ㅠㅠ");
-			viewpage = "ajax/ajax";
+			viewpage = "utils/ajax";
 		}
 		return viewpage;
 	}
@@ -548,10 +548,10 @@ public class BoardController {
 		}
 		if(result >0) {
 			model.addAttribute("piseq", piseq);
-			path = "ajax/editMyIssueSwal";
+			path = "utils/editMyIssueSwal";
 		}else {
 			model.addAttribute("piseq", piseq);
-			path = "ajax/editMyIssueFailSwal";
+			path = "utils/editMyIssueFailSwal";
 		}
 		return path;
 	}
@@ -644,10 +644,10 @@ public class BoardController {
 		 }
 		if(result >0) {
 			model.addAttribute("tiseq", tiseq);
-			path = "ajax/editTeamIssueSwal";
+			path = "utils/editTeamIssueSwal";
 		}else {
 			model.addAttribute("tiseq", tiseq);
-			path = "ajax/editTeamIssueFailSwal";
+			path = "utils/editTeamIssueFailSwal";
 		}
 	return path;
 	}
@@ -658,7 +658,7 @@ public class BoardController {
 		privateservice.myIssueGoogleDriveDelete(piseq);
 		privateservice.myIssueDoWorkDelete(piseq);
 		privateservice.myIssueDelete(piseq);
-		return "ajax/myIssueDelete";
+		return "utils/myIssueDelete";
 	}
 	@RequestMapping(value="deleteTeamIssue.do" , method = {RequestMethod.POST, RequestMethod.GET})
 	public String deleteTeamIssue(int tiseq,int tseq, Model model) {
@@ -668,6 +668,6 @@ public class BoardController {
 		tservice.teamIssueDoWorkDelete(tiseq);
 		tservice.teamIssueDelete(tiseq);
 		model.addAttribute("tseq", tseq);
-		return "ajax/teamIssueDelete";
+		return "utils/teamIssueDelete";
 	}
 }

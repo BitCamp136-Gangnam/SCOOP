@@ -90,9 +90,9 @@ public class TeamController {
 		int tseq = Integer.parseInt(temptseq);
 		result = service.insertTeamPjt2(email, tseq);
 		if (result > 0) {
-			viewpage = "ajax/inviteSuccessSwal";
+			viewpage = "utils/inviteSuccessSwal";
 		} else {
-			viewpage = "ajax/inviteFailSwal";
+			viewpage = "utils/inviteFailSwal";
 		}
 
 		return viewpage; // 주의 (website/index.htm
@@ -221,9 +221,9 @@ public class TeamController {
 					 }
 				 }
 				if(result >0) {
-					path = "ajax/makeMyIssueSwal";
+					path = "utils/makeMyIssueSwal";
 				}else {
-					path = "ajax/makeMyIssueFailSwal";
+					path = "utils/makeMyIssueFailSwal";
 				}
 				return path;
 			} else {
@@ -283,11 +283,11 @@ public class TeamController {
 				if(result >0) {
 					tseq = Integer.parseInt(selectTeam);
 					model.addAttribute("tseq", tseq);
-					path = "ajax/makeTeamIssueSwal";
+					path = "utils/makeTeamIssueSwal";
 				}else {
 					tseq = Integer.parseInt(selectTeam);
 					model.addAttribute("tseq", tseq);
-					path = "ajax/makeTeamIssueFailSwal";
+					path = "utils/makeTeamIssueFailSwal";
 				}
 			}
 			return path;
@@ -356,10 +356,10 @@ public class TeamController {
 		
 		if(result > 0) {
 			model.addAttribute("ajax", "멤버탈퇴 성공했습니다");
-			viewpage = "ajax/ajax";
+			viewpage = "utils/ajax";
 		}else {
 			model.addAttribute("ajax", "멤버탈퇴 실패했습니다");
-			viewpage = "ajax/ajax";
+			viewpage = "utils/ajax";
 		}
 		return viewpage;
 		
