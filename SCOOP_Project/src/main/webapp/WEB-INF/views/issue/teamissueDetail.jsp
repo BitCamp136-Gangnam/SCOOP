@@ -159,6 +159,7 @@ $(function(){
 
 </script>
 <script src="<c:url value="/resources/js/crawling/app.js"/>"></script>
+<%-- <script type="text/javascript" th:src="@{<c:url value="/resources/js/crawling/app.js"/>}"></script> --%>
 <style>
 .newissue{
 	border-bottom: 1px solid #c8c8c8;
@@ -339,7 +340,7 @@ border-radius: 5px;
     ***********************************-->
     <script type="text/javascript">
 		$(function(){
-			start()
+			
 		})
 	</script>
     <script src="<c:url value="/resources/plugins/common/common.min.js" />"></script>
