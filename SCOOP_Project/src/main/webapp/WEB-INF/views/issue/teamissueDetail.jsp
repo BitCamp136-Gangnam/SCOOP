@@ -306,7 +306,7 @@ border-radius: 5px;
     ***********************************-->
     <script type="text/javascript">
 		$(function(){
-			start
+			start()
 		})
 	</script>
     <script src="<c:url value="/resources/plugins/common/common.min.js" />"></script>
