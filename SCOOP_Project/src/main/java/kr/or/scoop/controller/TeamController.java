@@ -163,7 +163,7 @@ public class TeamController {
 					String[] url = contentline[i].split(" ");
 					for(int j = 0; j < url.length; j++) {
 						if(url[j].indexOf("http") != -1) {
-							content += "<a href="+ url[j] + ">" + url[j] + "</a> ";
+							content += "<a href="+ url[j] + " target='_blank'>" + url[j] + "</a> ";
 						}else {
 							content += url[j] + " ";
 						}
