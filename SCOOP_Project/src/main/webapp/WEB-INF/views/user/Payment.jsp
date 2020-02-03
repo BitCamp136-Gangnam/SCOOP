@@ -127,6 +127,9 @@ function requestPay(){
 								href="app-external.do">외부 서비스 연결</a></li> -->
 							<li class="nav-item"><a class="nav-link"
 								href="paymentPage.do" style="color: #E71D36;">가격 및 결제</a></li>
+								 <li class="nav-item">
+			      <a class="nav-link" href="memberDelete.do">회원 탈퇴</a>
+			    </li>
 						</ul>
 					</div>
 					<hr style="margin-top: 0">
