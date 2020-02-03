@@ -18,6 +18,14 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 $(function(){
+	$('#getOutTeam').mouseover(function(){
+		console.log("열려라 참깨")
+		 $('#door').attr("style","font-size: 20px;color:#E71D36;");
+	});
+	$('#getOutTeam').mouseout(function(){
+		 $('#door').attr("style","font-size: 20px;");
+	});
+		
 	$('#nowrite').mouseover(function(){
 	      $(this).attr("style","cursor: pointer;color:#E71D36;font-size:20px;padding-bottom:3px;");
 	});
@@ -230,7 +238,7 @@ function project_filter() {
 									<div class="col-md-12">
 										<div class="card-box">
 											<div class="container">
-												<div class="row" style="margin: 2% 2% 15px 2%">
+												<div class="row">
 													<div class="col-sm-10" style="padding-left: 0">
 														<h3 style="padding-left: 1%;">${tpj.pname}
 															<c:if test="${rank == 100}">
@@ -253,19 +261,20 @@ function project_filter() {
 													</div>
 													         <div class="col-sm-2" style="text-align: right">
 												         	<span id="getOutTeam" style="cursor: pointer;">
-												         	<span class="iconify" data-icon="vs:door-open" data-inline="false" style="font-size: 20px;"></span> 협업공간 탈퇴하기
+												         	<span id="door" class="iconify" data-icon="vs:door-open" data-inline="false" style="font-size: 20px;"></span> 
+												         	<span id="quit">협업공간 탈퇴하기</span>
 												         	</span>
 												         </div>
 												</div>
-												<div class="row" style="margin-left: 2%;">
+												<div class="row">
 													<ul class="nav nav-pills">
 														<li class="nav-item"><a class="nav-link"
 															href="projectDetail.do?tseq=${tpj.tseq}">팀이슈</a></li>
 														<li class="nav-item"><a class="nav-link"
-															href="projectCalendar.do?tseq=${tpj.tseq }">팀 캘린더</a></li>
+															href="projectCalendar.do?tseq=${tpj.tseq }" style="color: #E71D36;">팀 캘린더</a></li>
 														<li class="nav-item"><a class="nav-link"
 															href="cooperation-kanban.do?tseq=${tpj.tseq}"
-															style="color: #E71D36;">칸반</a></li>
+															>칸반</a></li>
 														<li class="nav-item"><a class="nav-link"
 															href="projectNotice.do?tseq=${tpj.tseq}">공지사항</a></li>
 														<li class="nav-item"><a class="nav-link"
