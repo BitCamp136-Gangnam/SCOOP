@@ -111,4 +111,11 @@ public class MemberService {
 		return result;
 	}
 	
+	public int deleteMember(String email) {
+		int result = 0;
+		MemberDao dao = sqlsession.getMapper(MemberDao.class);
+		result = dao.deleteMember(email);
+		return result;
+	}
+	
 }

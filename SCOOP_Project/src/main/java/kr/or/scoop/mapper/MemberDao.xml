@@ -133,4 +133,8 @@ where tseq in (
 	<select id="getMention" resultType="kr.or.scoop.dto.Mention">
 		select * from teammention m join tissue t on m.tiseq = t.tiseq join teampjt p on t.tseq=p.tseq where tmemail=#{tmemail} order by t.tidate desc
 	</select>
+	<delete id="deleteMember">
+		delete from member where email = #{param1}
+	</delete>
+	
 </mapper>

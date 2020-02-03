@@ -77,4 +77,7 @@ public interface MemberDao {
 	public List<Tpmember> getTpmembers(String email);
 	//mention 불러오기
 	public List<Mention> getMention(String tmemail);
+	
+	//회원 탈퇴 
+	public int deleteMember(String email);
 }
