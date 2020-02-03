@@ -94,7 +94,7 @@ $(function(){
 			<a href="teamissueDetail.do?tiseq=${re.tiseq}" style="padding-left: 5%;"><c:out value="${fn:substring(re.rcontent,0,40)}"/></a>			
 			</c:if>
 			</div>
-			<div class="col-sm-3 newissue" >
+			<div class="col-sm-3 newissue" style="padding-left: 10px;">
 			<c:if test="${fn:length(re.tititle) > 20}">
 			<a class="pnameHover" href="teamissueDetail.do?tiseq=${re.tiseq}" style="color:#2c9aa8;"><c:out value="${fn:substring(re.tititle,0,20)}"/>...</a>
 			</c:if>
