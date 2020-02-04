@@ -15,6 +15,7 @@ public class BoardService {
 	@Autowired
 	private SqlSession sqlsession;
 	
+	//프로젝트 생성 
 	public int insertTeamPjt(TeamPjt team) {
 		int result = 0;
 		// 아이디 존재 함 등록 못함
@@ -23,6 +24,7 @@ public class BoardService {
 		return result;
 		
 	}
+	//프로젝트 멤버 초대 성공
 	public int insertTeamPjt2(String email, int tseq) {
 		int result = 0;
 		// 아이디 존재 함 등록 못함
@@ -36,7 +38,7 @@ public class BoardService {
 		return result;
 		
 	}
-	
+	//전체 공지사항 등록 --스쿱 관리자 
 	public int insertNotice(Notice notice) {
 		int result = 0;
 		NoticeDao dao = sqlsession.getMapper(NoticeDao.class);
@@ -45,7 +47,7 @@ public class BoardService {
 		return result;
 		
 	}
-	
+	//전체 공지사항 수정 -- 스쿱 관리자
 	public int updateNotice(Notice notice) {
 		int result = 0;
 		NoticeDao dao = sqlsession.getMapper(NoticeDao.class);
@@ -53,7 +55,7 @@ public class BoardService {
 		
 		return result;
 	}
-	
+	//전체 공지사항 삭제 -- 스쿱 관리자
 	public int deleteNotice(int bnseq) {
 		int result = 0;
 		NoticeDao dao = sqlsession.getMapper(NoticeDao.class);

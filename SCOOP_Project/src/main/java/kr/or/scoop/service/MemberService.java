@@ -20,6 +20,7 @@ public class MemberService {
 	
 	public PasswordEncoder passwordEncoder;
 	
+	//회원가입
 	public int insertMember(Member member){
 		int result = 0;
 		int isIdCheck = idCheck(member.getEmail());
@@ -32,6 +33,7 @@ public class MemberService {
 		return result;
 	}
 	
+	//로그인
 	public int loginMember(String email, String pwd) {
 		int result = 0;
 		try {
@@ -59,6 +61,7 @@ public class MemberService {
 		return member;
 	}
 	
+	//구글 아이디 로그인 
 	public int googleIdCheck(String email, String name) {
 		int result = 0;
 		MemberDao dao = sqlsession.getMapper(MemberDao.class);
@@ -80,7 +83,8 @@ public class MemberService {
 		return 0;
 		
 	}
-
+	
+	//네이버 아이디 로그인
 	public int naverIdCheck(String email, String name) {
 		int result = 0;
 		MemberDao dao = sqlsession.getMapper(MemberDao.class);
@@ -96,7 +100,8 @@ public class MemberService {
 		}
 		return result;
 	}
-
+	
+	//아이디 중복 체크 
 	public int idCheck(String email) {
 		int result = 0;
 		MemberDao dao = sqlsession.getMapper(MemberDao.class);
@@ -104,6 +109,7 @@ public class MemberService {
 		return result;
 	}
 	
+	//유료회원 무료회원 등록
 	public int updateRole(String email) {
 		int result = 0;
 		MemberDao dao = sqlsession.getMapper(MemberDao.class);
@@ -111,6 +117,7 @@ public class MemberService {
 		return result;
 	}
 	
+	//스쿱에서 회원 탈퇴
 	public int deleteMember(String email) {
 		int result = 0;
 		MemberDao dao = sqlsession.getMapper(MemberDao.class);

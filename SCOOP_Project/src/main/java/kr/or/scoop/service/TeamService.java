@@ -19,12 +19,13 @@ public class TeamService {
 	@Autowired
 	private SqlSession sqlsession;
 	
+	//칸반 리스트 내용 불러오기 
 	public List<Tissue> loadKanban(int tseq) {
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		List<Tissue> tissuelist = dao.loadKanban(tseq);
 		return tissuelist;
 	}
-	
+	//협업공간 멤버 권한 수정 (일반 멤버, 팀장)
 	public int teamSetting(int[] pjuserrank, int tseq, String[] email) {
 		int result = 0 ;
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
@@ -33,42 +34,49 @@ public class TeamService {
 		}
 		return result;
 	}
+	// 칸반 수정
 	public int EditKanban(int tseq, int tiseq, int isprocess) {
 		int result = 0;
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		result = dao.kanbanEdit(tseq, tiseq, isprocess);
 		return result;
 	}
+	//협업 공간 멤버 탈퇴
 	public int banMember(int tseq, String email) {
 		int result = 0;
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		result = dao.banMember(tseq, email);
 		return result;
 	}
+	//협업공간 팀장위임 --팀장변경
 	public int changeManager(int tseq, String email) {
 		int result = 0;
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		result = dao.changeMember(tseq, email);
 		return result;
 	}
+	//협업공간 팀장위임 --팀장으로 등급번호 변경
 	public int changeManagerTp(int tseq, String email) {
 		int result = 0;
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		result = dao.changeMemberTp(tseq, email);
 		return result;
 	}
+	//협업공간 팀장위임 --일반 멤버로 등급번호 변경
 	public int changeManagerTp2(int tseq, String email) {
 		int result = 0;
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		result = dao.changeMemberTp2(tseq, email);
 		return result;
 	}
+	//협업공간 삭제하기
 	public int dropProject(int tseq) {
 		int result = 0;
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		result = dao.dropProject(tseq);
 		return result;
 	}
+	//프로젝트 수정
 	public int teamUpdate(TeamPjt teampjt) {
 		int result = 0;
 		ProjectDao dao = sqlsession.getMapper(ProjectDao.class);
@@ -88,12 +96,12 @@ public class TeamService {
 		List<Reply> result = dao.teamCommentOk(tiseq);
 		return result;
 	}
+	//팀이슈 댓글 삭제
 	public int delComment(int replyseq) {
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		int result = dao.delComment(replyseq);
 		return result;
 	}
-	
 	
 	//팀 파일 업로드
 	public int fileInsert(int tseq, String fdname, long fdcapa, String email) {
@@ -107,16 +115,19 @@ public class TeamService {
 		int result = dao.fileEdit(tseq, fdname, fdcapa, email, tiseq);
 		return result;
 	}
+	//협업공간 이슈 파일 삭제
 	public int fileDelete(int fdseq) {
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		int result = dao.fileDelete(fdseq);
 		return result;
 	}
+	//협업공간 이슈 수정화면에서 원래 있던 파일들의 사이즈 가져오기
 	public List<Long> getOriFilesize(int tiseq) {
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		List<Long> result = dao.getOriFilesize(tiseq);
 		return result;
 	}
+	//나의이슈 수정화면에서 원래 있던 파일들의 사이즈 가져오기
 	public List<Long> getMyOriFilesize(int piseq) {
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		List<Long> result = dao.getMyOriFilesize(piseq);
@@ -145,7 +156,7 @@ public class TeamService {
 		int result = dao.mentionInsert(email);
 		return result;
 	}
-	//팀 멘션 생성
+	//팀 멘션 수정
 	public int mentionEdit(String email, int tiseq) {
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		int result = dao.mentionEdit(email, tiseq);
@@ -170,7 +181,7 @@ public class TeamService {
 		int result = dao.googleDriveInsert(gfilename, gurl);
 		return result;
 	}
-	//팀 구글드라이브 생성
+	//팀 구글드라이브 수정
 	public int googleDriveEdit(String gfilename, String gurl, int tiseq) {
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		int result = dao.googleDriveEdit(gfilename, gurl, tiseq);
@@ -194,6 +205,7 @@ public class TeamService {
 		int result = dao.doWorkInsert(fromWork, toWork, doWork);
 		return result;
 	}
+	//팀 할일 수정
 	public int doWorkEdit(String fromWork, String toWork, String doWork, int tiseq) {
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		int result = dao.doWorkEdit(fromWork, toWork, doWork, tiseq);
@@ -218,27 +230,31 @@ public class TeamService {
 		int result = dao.updatePjNotice(pjnotice);
 		return result;
 	}
-	
+	//협업공간 파일 삭제
 	public int teamIssueFileDelete(int tiseq) {
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		int result = dao.teamIssueFileDelete(tiseq);
 		return result;
 	}
+	//협업공간 멘션 삭제
 	public int teamIssueMentionDelete(int tiseq) {
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		int result = dao.teamIssueMentionDelete(tiseq);
 		return result;
 	}
+	//협업공간 구글드라이브 삭제
 	public int teamIssueGoogleDriveDelete(int tiseq) {
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		int result = dao.teamIssueGoogleDriveDelete(tiseq);
 		return result;
 	}
+	//협업공간 할일 삭제
 	public int teamIssueDoWorkDelete(int tiseq) {
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		int result = dao.teamIssueDoWorkDelete(tiseq);
 		return result;
 	}
+	//협업공간 이슈 삭제
 	public int teamIssueDelete(int tiseq) {
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		int result = dao.teamIssueDelete(tiseq);

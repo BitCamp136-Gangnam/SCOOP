@@ -14,24 +14,30 @@ public class PrivateService {
 	
 	@Autowired
 	private SqlSession sqlsession;
+	
+	//팀 이슈 작성
 	public int writeTissue(MyIssue tissue) {
 		int result = 0 ;
 		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
 		result = dao.writeTissue(tissue);
 		return result;
 	}
+	//마이 이슈 작성
 	public int writeMyissue(MyIssue myissue) {
 		int result = 0 ;
 		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
 		result = dao.writeMyissue(myissue);
 		return result;
 	}
+	
+	//팀 이슈 수정
 	public int editTissue(MyIssue tissue) {
 		int result = 0 ;
 		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
 		result = dao.editTissue(tissue);
 		return result;
 	}
+	//마이 이슈 수정 
 	public int editMyissue(MyIssue myissue) {
 		int result = 0 ;
 		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
@@ -86,26 +92,31 @@ public class PrivateService {
 		int result = dao.pdoWorkEdit(fromWork, toWork, pdoWork, piseq);
 		return result;
 	}
+	//마이 이슈 파일 삭제 
 	public int myIssueFileDelete(int piseq) {
 		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
 		int result = dao.myIssueFileDelete(piseq);
 		return result;
 	}
+	//마이 이슈 멘션 삭제 
 	public int myIssueMentionDelete(int piseq) {
 		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
 		int result = dao.myIssueMentionDelete(piseq);
 		return result;
 	}
+	//마이 이슈 구글 드라이브 파일 삭제 
 	public int myIssueGoogleDriveDelete(int piseq) {
 		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
 		int result = dao.myIssueGoogleDriveDelete(piseq);
 		return result;
 	}
+	//마이 이슈 할일 삭제 
 	public int myIssueDoWorkDelete(int piseq) {
 		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
 		int result = dao.myIssueDoWorkDelete(piseq);
 		return result;
 	}
+	//마이 이슈 삭제
 	public int myIssueDelete(int piseq) {
 		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
 		int result = dao.myIssueDelete(piseq);
