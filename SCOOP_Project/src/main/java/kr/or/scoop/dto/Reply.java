@@ -6,14 +6,14 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class Reply {
 	
-	private int replyseq;
-	private String rcontent;
-	private String email;
-	private String rdate;
-	private int tiseq;
-	private String name;
-	private String tititle;
-	private String profile;
+	private int replyseq; //댓글 번호 
+	private String rcontent; //댓글 내용
+	private String email; //댓글 작성자 이메일
+	private String rdate; //댓글 생성 날짜및시간
+	private int tiseq; //팀이슈 번호 
+	private String name; //댓글 작성자 이름
+	private String tititle; //팀이슈제목
+	private String profile; //댓글 작성자 이미지 이름
 	public int getReplyseq() {
 		return replyseq;
 	}
