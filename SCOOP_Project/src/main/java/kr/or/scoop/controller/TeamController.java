@@ -160,7 +160,14 @@ public class TeamController {
 		@RequestMapping(value = "writeIssue.do", method = {RequestMethod.POST,RequestMethod.GET})
 		public String writeIssue(String issuetitle, String fileclick, String issuecontent, String selectTeam, Model model, String fromDate, String toDate,
 				HttpSession session,HttpServletRequest request, String[] mentions, String[] toWork, String[] doWork, String[] googleDrive,@RequestParam(value="files") MultipartFile[] files) throws IOException {
-			
+			long fullSize = 0;
+			for(MultipartFile mutifile : files) {
+				long fsize = mutifile.getSize();
+				fullSize += fsize;
+			}
+			if(fullSize>=20971520) {
+				return "utils/fileSizeFail"; //여기부터 해야됨!
+			}
 			// 이슈 내용에서 url 찾아서 링크 (a태그)
 			String regex =  "^(https?):\\/\\/([^:\\/\\s]+)(:([^\\/]*))?((\\/[^\\s/\\/]+)*)?\\/([^#\\s\\?]*)(\\?([^#\\s]*))?(#(\\w*))?$";
 			String[] contentline = issuecontent.split("\n");
@@ -205,14 +212,6 @@ public class TeamController {
 				int result = privateservice.writeMyissue(myissue);
 				 if(files != null && files.length > 0) {
 					 //업로드한 파일이 하나라도 있다면
-					 long fullSize = 0;
-					 for(MultipartFile mutifile : files) {
-						 long fsize = mutifile.getSize();
-						 fullSize += fsize;
-					 }
-					 if(fullSize>20971520) {
-						 return "utils/fileSizeFail"; //여기부터 해야됨!
-					 }
 					 for(MultipartFile mutifile : files) {
 						 String filename = mutifile.getOriginalFilename();
 						 long fsize = mutifile.getSize();
@@ -272,14 +271,6 @@ public class TeamController {
 				int result = privateservice.writeTissue(tissue);
 				 if(files != null && files.length > 0) {
 					 //업로드한 파일이 하나라도 있다면
-					 long fullSize = 0;
-					 for(MultipartFile mutifile : files) {
-						 long fsize = mutifile.getSize();
-						 fullSize += fsize;
-					 }
-					 if(fullSize>20971520) {
-						 return "utils/fileSizeFail"; //여기부터 해야됨!
-					 }
 					 for(MultipartFile mutifile : files) {
 						 String filename = mutifile.getOriginalFilename();
 						 long fsize = mutifile.getSize();
