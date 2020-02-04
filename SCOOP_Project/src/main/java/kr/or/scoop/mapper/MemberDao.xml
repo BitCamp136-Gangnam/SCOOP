@@ -137,6 +137,6 @@ where tseq in (
 		select * from tpmember where tseq = #{param1} and email = #{param2}
 	</select>
 	<delete id="deleteMember">
-		delete from member where email = #{param1}
+		delete from member where email = #{email}
 	</delete>
 </mapper>

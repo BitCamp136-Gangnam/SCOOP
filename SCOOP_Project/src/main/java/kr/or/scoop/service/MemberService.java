@@ -115,6 +115,7 @@ public class MemberService {
 		int result = 0;
 		MemberDao dao = sqlsession.getMapper(MemberDao.class);
 		result = dao.deleteMember(email);
+		
 		return result;
 	}
 	
