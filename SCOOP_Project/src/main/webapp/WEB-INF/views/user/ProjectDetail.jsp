@@ -29,6 +29,12 @@
 </style>
 <script type="text/javascript">
 $(function(){
+	$('#getOutTeam').mouseover(function(){
+		 $('#door').attr("style","font-size: 20px;color:#E71D36;");
+	});
+	$('#getOutTeam').mouseout(function(){
+		 $('#door').attr("style","font-size: 20px;");
+	});
    $('#myModal_Edit_Icon').mouseover(function(){
       $(this).attr("style","margin-left: 5px;cursor: pointer;font-size: 15px;color:#E71D36;");
    });
@@ -55,7 +61,7 @@ $(function(){
       $('#c_Information').hide();
    });
    $('#getOutTeam').click(function(){
-	   console.log("???");
+
 	   Swal.fire({
 		   title: '정말로 협업공간을 탈퇴 하시겠습니까??',
 		   text: "탈퇴하시면 프로젝트의 모든 정보가 사라집니다!",
@@ -299,9 +305,12 @@ $(function(){
             <p style="padding-left: 1%;margin-bottom: 0px;">[${tpj.pcontent}]</p>
          </div>
          <div class="col-sm-2" style="text-align: right">
+         	
          	<span id="getOutTeam" style="cursor: pointer;">
-         	<span class="iconify" data-icon="vs:door-open" data-inline="false" style="font-size: 20px;"></span> 협업공간 탈퇴하기
+	         	<span id="door" class="iconify" data-icon="vs:door-open" data-inline="false" style="font-size: 20px;"></span> 
+	         	<span id="quit">협업공간 탈퇴하기</span>
          	</span>
+
          </div>
       </div>
       <div class="row" style="margin-left: 2%;">

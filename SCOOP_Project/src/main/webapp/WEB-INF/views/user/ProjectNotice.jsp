@@ -30,6 +30,13 @@
 </style>
 <script type="text/javascript">
 $(function(){
+	$('#getOutTeam').mouseover(function(){
+		console.log("열려라 참깨")
+		 $('#door').attr("style","font-size: 20px;color:#E71D36;");
+	});
+	$('#getOutTeam').mouseout(function(){
+		 $('#door').attr("style","font-size: 20px;");
+	});
 	$('#nowrite').mouseover(function(){
 	      $(this).attr("style","cursor: pointer;color:#E71D36;font-size:20px;padding-bottom:3px;");
 	});
@@ -278,7 +285,8 @@ $(function(){
          </div>
        <div class="col-sm-2" style="text-align: right">
         	<span id="getOutTeam" style="cursor: pointer;">
-        	<span class="iconify" data-icon="vs:door-open" data-inline="false" style="font-size: 20px;"></span> 협업공간 탈퇴하기
+        		<span id="door" class="iconify" data-icon="vs:door-open" data-inline="false" style="font-size: 20px;"></span> 
+				<span id="quit">협업공간 탈퇴하기</span>
         	</span>
         </div>
       </div>
