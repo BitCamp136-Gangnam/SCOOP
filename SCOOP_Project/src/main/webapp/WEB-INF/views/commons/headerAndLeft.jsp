@@ -1154,18 +1154,18 @@ span {
              협업공간을 만들고 함께 일할 멤버들을 초대해보세요.</p> -->
                <label for="title">이슈 제목</label> <input
                   class="form-control createmodal" type="text" id="issuetitle"
-                  name="issuetitle" style="width: 100%" placeholder="제목을 입력해 주세요.">
+                  name="issuetitle" style="width: 100%;border-radius:0.5rem;" placeholder="제목을 입력해 주세요.">
                <br> <label for="content">이슈 설명</label> <span id="filename"></span>
                <img id="imgpreview" alt="사진 미리보기 자리"
                   style="display: none; width: 40px; height: 40px" src="#" /> 
                   <input type="file" multiple="multiple"  id="fileclick" name="files" hidden="">
                <button type="button" id="auth" disabled hidden="">Authenticate</button>
                <textarea class="form-control createmodal" rows="5"
-                  id="issuecontent" name="issuecontent" style="width: 100%"
+                  id="issuecontent" name="issuecontent" style="width: 100%;border-radius: 0.5rem;"
                   placeholder="@를 입력하여 멘션, 할 일, 파일 등을 추가해 보세요."></textarea>
                <br>
                <label for="annota">첨부</label>
-               <div id="todoresult" style="overflow: auto; height: 100px; border: 1px solid #c8c8c8">
+               <div id="todoresult" style="overflow: auto; height: 100px; border: 1px solid #c8c8c8; border-radius: 0.5rem;">
                   <!-- mention -->
                </div>
                <!-- The Google API Loader script. -->
@@ -1342,7 +1342,7 @@ span {
              협업공간을 만들고 함께 일할 멤버들을 초대해보세요.</p> -->
                <label for="bntitle">공지사항</label> <input
                   class="form-control createmodal" type="text" id="bntitle"
-                  name="bntitle" style="width: 100%" placeholder="제목을 입력해 주세요.">
+                  name="bntitle" style="width: 100%;border-radius: 0.5rem;" placeholder="제목을 입력해 주세요.">
                <br> <label for="noticecontent">공지 설명</label>
                <textarea class="form-control createmodal" rows="5"
                   id="bncontent" name="bncontent" style="width: 100%"
