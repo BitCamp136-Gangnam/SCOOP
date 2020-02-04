@@ -1195,7 +1195,7 @@ span {
       </div>
    </div>
 
-   <div class="list-group" id="mentionlist" style="display: none">
+   <div class="list-group" id="mentionlist" style="display: none;border:10px solid #cbc9d4">
       <a href="#" class="list-group-item list-group-item-action menli" id="men1"style="padding: 5px;">멘션</a> 
       <!-- <a href="#" class="list-group-item list-group-item-action menli" id="men2"style="padding: 5px">소스코드</a> --> 
       <a href="#" class="list-group-item list-group-item-action menli" id="men2"style="padding: 5px">구글 드라이브</a> 
@@ -1459,7 +1459,7 @@ $('.menli').keydown(function(event) {
 				if (event.shiftKey && event.keyCode == 50) {
 					$('#mentionlist').attr(
 							'style',
-							'position:fixed; width:20%;top:' + top + 'px;left:'
+							'position:fixed;border:1px solid black;border-radius:0.5rem; width:20%;top:' + top + 'px;left:'
 									+ left + 'px; z-index:4');
 					$('#mentionlist').show();
 					$('div').not('#mentionlist').click(function() {

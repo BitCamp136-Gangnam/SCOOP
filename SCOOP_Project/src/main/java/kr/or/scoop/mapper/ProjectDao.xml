@@ -8,8 +8,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   values (tseq_teampjt_seq.nextval,#{email},#{pname},#{pcontent},sysdate,#{istpalarm},#{ischarge})
 </insert>
 <insert id="insertPJT2">
- insert into tpmember (email,tseq,pjuserrank)
-  values (#{param1},#{param2},300)
+ insert into tpmember (email,tseq,pjuserrank,tpaddtime)
+  values (#{param1},#{param2},300,systimestamp)
 </insert>
 <resultMap type="kr.or.scoop.dto.Tissue" id="Tissue">
 	<result column="tiseq" property="tiseq"/>

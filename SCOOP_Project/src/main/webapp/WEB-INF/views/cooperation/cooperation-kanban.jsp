@@ -448,7 +448,8 @@ function drop(ev) {
 			<div class="realkan" id="first" ondrop="drop(event)" ondragover="allowDrop(event)" style="border-top: 4px solid #ff6384;height: 500px;overflow: auto;">
 			<div style="margin-bottom: 7%;">
 			<div class="iconify" data-icon="uil:file-exclamation-alt" data-inline="false" style="width: 25px;height: auto;color:#ff6384"></div>
-			<span style="font-size:15px;padding-top:1%;">발의됨(<span id="todolistCnt">0</span>)</span><hr>
+			<span style="font-size:15px;padding-top:1%;">발의됨(<span id="todolistCnt">0</span>)</span>
+			<hr>
 			</div>
 			
 			  <c:forEach items="${tissuelist}" var="tl">

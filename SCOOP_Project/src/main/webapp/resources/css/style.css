@@ -126,7 +126,7 @@ body {
   line-height: 1.5;
   /* color: #76838f; */
   text-align: left;
-  background-color: #F3F3F9; }
+  background-color: #cbc9d4; }
 
 [tabindex="-1"]:focus {
   outline: 0 !important; }
@@ -3794,7 +3794,7 @@ input[type="button"].btn-block {
   .list-group-item-action:hover, .list-group-item-action:focus {
     color: #495057;
     text-decoration: none;
-    background-color: #f8f9fa; }
+    background-color: #cbc9d4; }
   .list-group-item-action:active {
     color: #76838f;
     background-color: #e9ecef; }
@@ -3805,7 +3805,7 @@ input[type="button"].btn-block {
   padding: 0.75rem 1.25rem;
   margin-bottom: -1px;
   background-color: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.125); }
+  border: 1px solid rgba(0, 0, 0, 0.3); }
   .list-group-item:first-child {
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem; }
@@ -8189,10 +8189,10 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
       .nk-sidebar .metismenu > li:hover span, .nk-sidebar .metismenu > li:focus span, .nk-sidebar .metismenu > li.active span {
         color: #464a53; }
       .nk-sidebar .metismenu > li:hover > a {
-        background: #F3F1FA;
+        background: rgba(203, 201, 212,0.5);
         color: #E71D36; }
       .nk-sidebar .metismenu > li.active > a {
-        background: #F3F1FA;
+        background: #cbc9d4;
         color: #464a53; }
       .nk-sidebar .metismenu > li.active ul a {
         color: #464a53; }
@@ -8219,7 +8219,7 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
       transition: all 0.4s ease-in-out; }
       .nk-sidebar .metismenu a:hover, .nk-sidebar .metismenu a:active, .nk-sidebar .metismenu a.active {
         text-decoration: none;
-        background-color: #F3F1FA; }
+        background-color: #cbc9d4; }
     .nk-sidebar .metismenu .has-arrow:after {
       position: absolute;
       content: "";
