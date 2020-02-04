@@ -160,19 +160,27 @@ public class TeamController {
 		@RequestMapping(value = "writeIssue.do", method = {RequestMethod.POST,RequestMethod.GET})
 		public String writeIssue(String issuetitle, String fileclick, String issuecontent, String selectTeam, Model model, String fromDate, String toDate,
 				HttpSession session,HttpServletRequest request, String[] mentions, String[] toWork, String[] doWork, String[] googleDrive,@RequestParam(value="files") MultipartFile[] files) throws IOException {
+			String email = (String)session.getAttribute("email");
+			ProjectDao dao = sqlsession.getMapper(ProjectDao.class);
+			Role role = dao.getUserRole(email);
 			long fullSize = 0;
 			for(MultipartFile mutifile : files) {
 				long fsize = mutifile.getSize();
 				fullSize += fsize;
 			}
-			if(fullSize>=20971520) {
-				return "utils/fileSizeFail"; //여기부터 해야됨!
+			if(role.getRname().equals("ROLE_USER")) {
+				if(fullSize>=20971520) {
+					return "utils/fileSizeFail"; //여기부터 해야됨!
+				}
+			}else if(role.getRname().equals("ROLE_CHARGE")) {
+				if(fullSize>=52428800) {
+					return "utils/chargeFileSizeFail"; //여기부터 해야됨!
+				}
 			}
 			// 이슈 내용에서 url 찾아서 링크 (a태그)
 			String regex =  "^(https?):\\/\\/([^:\\/\\s]+)(:([^\\/]*))?((\\/[^\\s/\\/]+)*)?\\/([^#\\s\\?]*)(\\?([^#\\s]*))?(#(\\w*))?$";
 			String[] contentline = issuecontent.split("\n");
 			String content = "";
-			System.out.println("이슈작성");
 			for(int i = 0; i < contentline.length; i++) {
 				if(contentline[i].matches(regex)) {
 					String[] url = contentline[i].split(" ");
@@ -195,7 +203,6 @@ public class TeamController {
 			}
 			
 			String path = "";
-			String email = (String)session.getAttribute("email");
 			int tseq = 0;
 			 //실 DB Insert
 			if (selectTeam.equals((String) session.getAttribute("email")) || selectTeam == null) {
@@ -215,7 +222,6 @@ public class TeamController {
 					 for(MultipartFile mutifile : files) {
 						 String filename = mutifile.getOriginalFilename();
 						 long fsize = mutifile.getSize();
-						 System.out.println("너의 사이즈는?! : "+ fsize);
 						 String filepath = request.getServletContext().getRealPath("/upload");
 						 String fpath = filepath + "\\" + filename;
 						 if(!filename.equals("")) {

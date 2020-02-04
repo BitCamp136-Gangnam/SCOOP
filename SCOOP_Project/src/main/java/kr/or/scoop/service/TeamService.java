@@ -112,6 +112,16 @@ public class TeamService {
 		int result = dao.fileDelete(fdseq);
 		return result;
 	}
+	public List<Long> getOriFilesize(int tiseq) {
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		List<Long> result = dao.getOriFilesize(tiseq);
+		return result;
+	}
+	public List<Long> getMyOriFilesize(int piseq) {
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		List<Long> result = dao.getMyOriFilesize(piseq);
+		return result;
+	}
 	
 	//개인 파일 업로드
 	public int myFileInsert(String pfdname, long pdcapa, String email) {
