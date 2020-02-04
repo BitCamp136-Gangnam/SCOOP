@@ -58,7 +58,7 @@ function requestPay(){
                 });
                 Swal.fire(
                         '결제를 성공하셨습니다.',
-                        '결제 해주셔서 감사합니다.',
+                        '로그아웃 후 다시 로그인 해주세요',
                         'success'
                       )
                 window.setTimeout(function() {
