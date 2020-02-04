@@ -196,7 +196,7 @@ border-radius: 5px;
         <div class="content-body"style="height: 680px;">
         <div class="container-fluid row" style="padding-right: 0px; margin-right: 0px;margin-left: 0px; padding-left: 15px;">
         <div class="card" style="padding-left: 2%;padding-right: 0px; padding-top:1%;min-width:900px;height: auto;overflow: auto;">
-		<div class="row" style="margin:2% 2% 0 2%;padding-left: 10px;">
+		<div class="row" style="margin:2% 2% 0 2%;">
 			<c:choose>
 				<c:when test="${tissue.isprocess==0}">
 				<span data-toggle="tooltip" data-placement="top" title="발의됨" >
@@ -231,9 +231,9 @@ border-radius: 5px;
 			</c:if>
 			
 		</div>
-			<div class="row" style="margin-right: 0; margin-left: 0;">
-			<h3 id="myissueSubject" style="padding-left: 25px;">${tissue.tititle}</h3>
-			<span style="padding-left: 49%;padding-top: 10px;">${fn:substring(tissue.tidate,0,16)}</span>
+			<div style="margin-right: 0; margin-left: 0;">
+			<span id="myissueSubject" style="padding-left: 25px;font-size: 20px;padding-top: 1%;">${tissue.tititle}</span>
+			<span style="float: right;padding-right: 2%;padding-top: 2%;">${fn:substring(tissue.tidate,0,16)}</span>
 			</div>
 			
 		
@@ -275,11 +275,11 @@ border-radius: 5px;
 		<br>
 		</div>
 		</c:forEach> 
-		<div class="row" style="margin-right: 0;">
-        <div class="myissueDetail col-sm-7" id="myissueContent">
+		<div class="row" style="margin-right: 0;width:900px;">
+        <div class="myissueDetail col-sm-11" id="myissueContent">
         ${tissue.ticontent}
         </div>
-        <div class="col-sm-2"><span>네이버</span><br><img alt="logo" src="https://s.pstatic.net/static/www/mobile/edit/2016/0705/mobile_212852414260.png" style="width: 50%"></div>
+        <!-- <div class="col-sm-2"><span>네이버</span><br><img alt="logo" src="https://s.pstatic.net/static/www/mobile/edit/2016/0705/mobile_212852414260.png" style="width: 50%"></div> -->
         </div>
             <!-- #/ container -->
             </div> 

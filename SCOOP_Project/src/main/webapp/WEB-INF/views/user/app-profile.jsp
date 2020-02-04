@@ -111,7 +111,7 @@ $(function(){
 	//회원정보 유효성검사
 	function pwdcheck() {
 			var getCheck = RegExp(/^[a-zA-Z0-9]{8,16}$/);
-			var getName= RegExp(/^[가-힣]+$/);
+			var getName= RegExp(/^[가-힣|a-z|A-Z]+$/);
 			if($('#name').val().length>7){
 				alert("name은 7자 까지 입력가능합니다.")
 				return false;
