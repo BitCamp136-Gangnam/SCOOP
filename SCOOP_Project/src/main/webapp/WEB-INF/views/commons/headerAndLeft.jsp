@@ -1034,7 +1034,7 @@ span {
          -->
 <style>
 .createmodal {
-   border: 1px solid #c8c8c8;
+   border: 1px solid #000;
    background-color: white;
 }
 </style>
@@ -1302,7 +1302,7 @@ span {
                   	<spring:message code="invite.list" />
                   </label>
                   <div id="invite_Input"
-                     style="border: 1px solid rgba(124, 119, 119, 0.3); border-radius: 0.5rem; margin-right: 3%; height: 280px; overflow: auto; margin-bottom: 10px;">
+                     style="border: 2px solid rgba(0,0, 0, 0.3); border-radius: 0.5rem; margin-right: 3%; height: 280px; overflow: auto; margin-bottom: 10px;">
                      <span id="invite_Input1"
                         style="margin-left: 35%; margin-top: 18%;"> <img
                         src="<c:url value="/resources/images/icon/mail.png" />"

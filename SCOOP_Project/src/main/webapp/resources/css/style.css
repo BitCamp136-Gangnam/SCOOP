@@ -1433,7 +1433,7 @@ pre {
   color: #495057;
   background-color: #fff;
   background-clip: padding-box;
-  border: 1px solid #ced4da;
+  border: 1px solid #000;
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; }
   @media screen and (prefers-reduced-motion: reduce) {
@@ -1445,7 +1445,7 @@ pre {
   .form-control:focus {
     color: #495057;
     background-color: #fff;
-    border-color: #ecebfe;
+    border-color: #E71D36;
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgba(117, 113, 249, 0.25); }
   .form-control::placeholder {
