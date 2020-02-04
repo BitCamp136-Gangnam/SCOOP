@@ -1,10 +1,10 @@
 package kr.or.scoop.dto;
-
+//이슈 진행상황
 public class Process {
-	private int initiative;
-	private int progress;
-	private int pause;
-	private int complete;
+	private int initiative; //발의됨
+	private int progress; //진행중
+	private int pause; //일시중지
+	private int complete; //완료
 	public int getInitiative() {
 		return initiative;
 	}

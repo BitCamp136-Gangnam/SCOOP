@@ -5,19 +5,19 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
-
+//멤버
 @Repository
 public class Member {
-	private String email;
-	private String pwd;
-	private String name;
-	private CommonsMultipartFile filesrc;
-	private String dname;
-	private String drank;
-	private String address;
-	private Timestamp idtime;
-	private int loginnum;
-	private String profile;
+	private String email; //이메일
+	private String pwd; //비밀번호
+	private String name; //이름
+	private CommonsMultipartFile filesrc; //프로필사진
+	private String dname; //부서이름
+	private String drank; //부서직함
+	private String address; //주소
+	private Timestamp idtime; //가입 시간
+	private int loginnum; //로그인 횟수
+	private String profile; //프로필 사진 파일 이름
 	
 	public void setIdtime(Timestamp idtime) {
 		this.idtime = idtime;

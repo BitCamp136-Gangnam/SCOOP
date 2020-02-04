@@ -10,7 +10,7 @@ import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor;
 
-
+//채팅방 인터셉터
 public class HandShakeInterceptor extends HttpSessionHandshakeInterceptor{
 	
     @Override

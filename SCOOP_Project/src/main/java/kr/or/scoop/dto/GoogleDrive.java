@@ -1,14 +1,15 @@
 package kr.or.scoop.dto;
 
+//구글드라이브
 public class GoogleDrive {
-	private String tgfilename;
-	private String tgurl;
-	private int tiseq;
-	private int pgseq;
-	private String pgfilename;
-	private String pgurl;
-	private int piseq;
-	private int tgseq;
+	private String tgfilename; //협업공간 구글드라이브 이름
+	private String tgurl; //협업공간 구글드라이브 url
+	private int tiseq; //협업공간 이슈 번호
+	private int pgseq; //프라이빗 구글드라이브 번호
+	private String pgfilename; //프라이빗 구글드라이브 이름
+	private String pgurl; //프라이빗 구글드라이브 url
+	private int piseq; //프라이빗 이슈 번호
+	private int tgseq; //협업공간 구글드라이브 번호
 	public String getTgfilename() {
 		return tgfilename;
 	}

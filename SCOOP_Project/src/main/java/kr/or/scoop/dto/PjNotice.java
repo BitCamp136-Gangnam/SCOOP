@@ -1,16 +1,16 @@
 package kr.or.scoop.dto;
 
 import java.sql.Timestamp;
-
+//프로젝트 공지사항
 public class PjNotice {
-	private int pnseq;
-	private String pntitle;
-	private String pncontent;
-	private Timestamp pntime;
-	private String email;
-	private int tseq;
-	private String name;
-	private String pname;
+	private int pnseq; //협업공간 공지사항 번호
+	private String pntitle; //협업공간 공지사항 제목
+	private String pncontent; //협업공간 공지사항 내용
+	private Timestamp pntime; //협업공간 공지사항 작성시간
+	private String email; //협업공간 공지사항 글쓴이 이메일
+	private int tseq; //협업공간 번호
+	private String name; //협업공간 공지사항 글쓴이 이름
+	private String pname; //협업공간 이름
 	
 	public String getPname() {
 		return pname;
