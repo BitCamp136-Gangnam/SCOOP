@@ -286,10 +286,10 @@ $(function(){
       <div class="row" style="margin: 2% 2% 15px 2%">
          <div class="col-sm-10" style="padding-left: 0">
             <h3 style="padding-left: 1%;">${tpj.pname}
-            	<c:if test="${rank == 100}">
             		<span data-toggle="tooltip" data-placement="top" title="협업공간 관리" >
             		<i class="fas fa-cog" id="myModal_Edit_Icon" style="margin-left: 5px;cursor: pointer; font-size: 15px" data-toggle="modal" data-target="#myModal_Edit" ></i>
             		</span>
+            	<c:if test="${rank == 100}">
 					<span data-toggle="tooltip" data-placement="top" title="공지사항 관리" >
             		<span id="nowrite" class="iconify" data-icon="jam:write" style="font-size:20px;cursor: pointer;padding-bottom: 3px;" data-inline="false" data-toggle="modal" data-target="#pnoticewrite">
             		</span>
@@ -427,17 +427,27 @@ $(function(){
             <div style="padding-left: 25px;">
             <button id="c_InformationBtn" style=" border:none; border:hidden; ; color: #E71D36;background-color: #fff;padding-left: 16px;padding-top: 16px;padding-right: 16px; cursor: pointer;"><i class="far fa-edit" style="padding-right: 5px;"></i>협업공간 정보</button>
             <button id="c_ManagementBtn" style="border:none; color: #000;background-color: #fff;padding-right: 16px; cursor: pointer;" ><i class="fas fa-user-friends" style="padding-right: 5px;"></i>멤버 관리</button>
+            <c:if test="${rank == 100}">
             <button id="c_DropProject" style="border:none; color: #000;background-color: #fff; cursor: pointer;" ><i class="far fa-trash-alt" style="padding-right: 5px;"></i>협업공간 삭제하기</button>
+            </c:if>
             </div>
 
          <!-- Modal body -->
          <form action="teamSetting.do" method="post">
             <div class="modal-body" id="admDiv" style="width: 450px;height: 250px;margin-left: 25px;">
                <div  id="c_Information">
+               <c:if test="${rank == 100}">
                <label for="pname_Edit">협업공간 이름</label> 
-               <input class="form-control createmodal" type="text" id="pname_Edit" name="pname" style="width: 100%" value="${tpj.pname}"> <br> 
+               <input class="form-control createmodal" type="text" id="pname_Edit" name="pname" style="width: 100%" value="${tpj.pname}"> <br>
                   <label for="pcontent_Edit">협업공간 설명</label>
                <textarea class="form-control createmodal" rows="3" id="pcontent_Edit"name="pcontent" style="width: 100%">${tpj.pcontent }</textarea>
+               </c:if> 
+               <c:if test="${rank == 300}">
+               <label for="pname_Edit">협업공간 이름</label> 
+               <input class="form-control createmodal" type="text" id="pname_Edit" name="pname" style="width: 100%" value="${tpj.pname}" readonly="readonly"> <br>
+                  <label for="pcontent_Edit">협업공간 설명</label>
+               <textarea class="form-control createmodal" rows="3" id="pcontent_Edit"name="pcontent" style="width: 100%" readonly="readonly">${tpj.pcontent }</textarea>
+               </c:if> 
                </div>
 
                <div id="c_Management" class="nav-label" style="display: none;padding-left: 0px;padding-right: 0px;">
@@ -448,11 +458,13 @@ $(function(){
                         <span class="nav-text finalsearch" id="member_Name${status.index}" style="color: #4d4d46;font-size: 13px;padding-bottom:5px;padding-top: 10px;"> &nbsp;${pm.name}</span>
                         <span class="log-user" id="iconAdd${status.index}" data-toggle="dropdown" style="float: right;top: 0px;padding-top: 10px;">
                         <c:choose>
-                        	<c:when test="${pm.pjuserrank==100}"><i class="fas fa-user-cog" id="icon_First${status.index}" style="font-size: 20px;color:#195ac2;"></i></c:when>
+                        	<c:when test="${pm.pjuserrank==100}"><i class="fas fa-user-cog" style="font-size: 20px;color:#195ac2;"></i></c:when>
                         	<%-- <c:when test="${pm.pjuserrank==200}">매니저</c:when> --%>
                         </c:choose>
+                        <c:if test="${rank == 100}">
                         <c:if test="${pm.pjuserrank==300}">
                            <i class="fas fa-cog admin_EditIcon" id="admin_EditIcon${status.index}" style="cursor: pointer;font-size: 20px;color:black;"></i>
+                        </c:if>
                         </c:if>
                         </span>
                         <div class="drop-down dropdown-language animated fadeIn  dropdown-menu"  id="admindrop">
@@ -484,11 +496,18 @@ $(function(){
             <!-- <input type="hidden" name="istpalarm" value="0"> -->
             <!-- <input type="hidden" name="ptime" value="20/01/08"> -->
             <div class="modal-footer" id="c_InformationSubmit">
+            <c:if test="${rank == 100}">
                <input type="submit" class="btn btn-secondary" id="admSubmit" value="수정 완료"
                   style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;">
                <input type="button" class="btn btn-secondary" value="취소"
                   style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;"
                   data-dismiss="modal">
+            </c:if>
+            <c:if test="${rank == 300}">
+            <input type="button" class="btn btn-secondary" value="돌아가기"
+                  style="background-color: #E71D36; border-color: #CCCCCC; color: #fff; cursor: pointer;"
+                  data-dismiss="modal">
+            </c:if>
             </div>
          </form>
          
