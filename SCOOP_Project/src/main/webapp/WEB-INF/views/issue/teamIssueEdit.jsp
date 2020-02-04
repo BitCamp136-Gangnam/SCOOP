@@ -375,7 +375,7 @@ $('.menli').keydown(function(event) {
 		//$('#filename').append($("#fileclick2").val().substring(12));
 		var text = "";
 		text = $('#editIssuecontent').val().replace("@", "");
-		//$('#issuecontent').val(text);
+		$('#editIssuecontent').val(text);
 		for(let i=0; i<$("#fileclick2")[0].files.length;i++){
 		$('#edittodoresult').append('<div class="myissueDetail" id="myissueMention">'+
 				'<a href="fileDownload.do?fileName='+files[i].name+'"><span class="iconify" data-icon="si-glyph:file-box" data-inline="false"></span>'+files[i].name+'</a>'+

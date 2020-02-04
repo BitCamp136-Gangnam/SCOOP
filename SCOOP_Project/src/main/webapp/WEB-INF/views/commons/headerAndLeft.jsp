@@ -1550,7 +1550,7 @@ $('.menli').keydown(function(event) {
 		//$('#filename').append($("#fileclick").val().substring(12));
 		var text = "";
 		text = $('#issuecontent').val().replace("@", "");
-		//$('#issuecontent').val(text);
+		$('#issuecontent').val(text);
 		for(let i=0; i<$("#fileclick")[0].files.length;i++){
 		$('#todoresult')
 		.append(
