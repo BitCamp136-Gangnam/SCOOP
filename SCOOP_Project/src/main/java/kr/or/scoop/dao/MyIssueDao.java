@@ -15,23 +15,43 @@ import kr.or.scoop.dto.Reply;
 import kr.or.scoop.dto.Tissue;
 
 public interface MyIssueDao {
-	//팀이슈 작성
+	//협업공간이슈 작성
 	public int writeTissue(MyIssue tissue);
+	
 	//나의 이슈 작성
 	public int writeMyissue(MyIssue myissue);
 	
-	//팀이슈 수정
+	//협업공간이슈 수정
 	public int editTissue(MyIssue tissue);
-	//마이이슈 수정
+	
+	//나의이슈 수정
 	public int editMyissue(MyIssue myissue);
+	
+	//나의이슈 수정
 	public int pfileEdit(String pfdname, long pdcapa, String email, int piseq);
+	
+	//나의파일함 삭제
 	public int pfileDelete(int pdseq);
+	
+	//나의멘션 삭제
 	public int pmentionDelete(int pmseq);
+	
+	//나의 멘션 수정
 	public int pmentionEdit(String email, int piseq);
+	
+	//나의 구글드라이브 삭제
 	public int pgoogleDriveDelete(int pgseq);
+	
+	//나의 구글드라이브 수정
 	public int pgoogleDriveEdit(String pgfilename, String pgurl, int piseq);
+	
+	//나의 할일 삭제
 	public int pdoWorkDelete(int pwseq);
+	
+	//나의 할일 수정
 	public int pdoWorkEdit(String fromWork, String toWork, String pdoWork, int piseq);
+	
+	//나의 이슈 목록 불러오기
 	public List<MyIssue> getMyissue(String email);
 	
 	//내가 작성한 이슈 리스트
@@ -54,10 +74,10 @@ public interface MyIssueDao {
 	
 	//내가 작성한 이슈 디테일
 	public MyIssue myissueDetail(int piseq);
-
+	
 	// 팀이 작성한 팀 이슈 리스트
 	public List<Tissue> teamWriteTiisueList(Timestamp idtime, String email);
-
+	
 	// 팀이 작성한 댓글 리스트
 	public List<Reply> teamWriteReplyList(Timestamp idtime);
 	
@@ -75,7 +95,7 @@ public interface MyIssueDao {
 	
 	//나의이슈 구글드라이브 출력
 	public List<GoogleDrive> getMyGoogleDrive(int piseq);
-
+	
 	//나의이슈 할일 출력
 	public List<DoWork> getMyDoWork(int piseq);
 	
@@ -88,14 +108,25 @@ public interface MyIssueDao {
 	//팀이슈 캘린더 삭제
 	public int deleteTeamCalendar(Tissue tissue);
 	
+	//나의이슈 파일 삭제
 	public int myIssueFileDelete(int piseq);
+	
+	//나의 이슈멘션 삭제
 	public int myIssueMentionDelete(int piseq);
+	
+	//나의 구글드라이브 삭제
 	public int myIssueGoogleDriveDelete(int piseq);
+	
+	//나의 할일 삭제
 	public int myIssueDoWorkDelete(int piseq);
+	
+	//나의 이슈 삭제
 	public int myIssueDelete(int piseq);
 	
-	
+	//나의 캘린더 작성
 	public int writeMyCalendar(MyIssue myissue);
 	
+	//나의 캘린더 수정
 	public int editMyCalendar(MyIssue myissue);
+	
 }
