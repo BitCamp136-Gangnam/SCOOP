@@ -29,6 +29,7 @@ import kr.or.scoop.dto.Notice;
 import kr.or.scoop.dto.PjNotice;
 import kr.or.scoop.dto.ProjectMemberlist;
 import kr.or.scoop.dto.Reply;
+import kr.or.scoop.dto.Role;
 import kr.or.scoop.dto.TeamPjt;
 import kr.or.scoop.dto.Tissue;
 import kr.or.scoop.service.BoardService;
@@ -463,10 +464,37 @@ public class BoardController {
 	@RequestMapping(value="myissueEditOk.do" , method = {RequestMethod.POST, RequestMethod.GET})
 	public String myissueEditOk(int piseq,Model model, String[] editMention, String[] editGfilename, HttpSession session, HttpServletRequest request
 			, String[] editGurl, String[] editToname, String[] editOriFile,String[] editDowork, String title, String editIssuecontent, String editFrom, String editTo, @RequestParam(value="editFile") MultipartFile[] editFile) throws Exception {
+		String email = (String)session.getAttribute("email");
+		if(editOriFile != null && editOriFile.length > 0) {
+			for(int i=0;i<editOriFile.length;i++) {
+				if(editOriFile[i].contains("~delete")) {
+					int pdseq = Integer.parseInt(editOriFile[i].split("~")[1]);
+					privateservice.pfileDelete(pdseq);
+				}
+			}
+		}
+		long fullSize = 0;
+		List<Long> orifilesize = tservice.getMyOriFilesize(piseq);
+		for(int i=0;i<orifilesize.size();i++) {
+			fullSize += orifilesize.get(i);
+		}
+		ProjectDao dao = sqlSession.getMapper(ProjectDao.class);
+		Role role = dao.getUserRole(email);
+		for(MultipartFile mutifile : editFile) {
+			long fsize = mutifile.getSize();
+			fullSize += fsize;
+		}
+		if(role.getRname().equals("ROLE_USER")) {
+			if(fullSize>=20971520) {
+				return "utils/fileSizeFail"; //여기부터 해야됨!
+			}
+		}else if(role.getRname().equals("ROLE_CHARGE")) {
+			if(fullSize>=52428800) {
+				return "utils/chargeFileSizeFail"; //여기부터 해야됨!
+			}
+		}
 		String path = "";
 		MyIssue tissue = new MyIssue();
-		String email = (String)session.getAttribute("email");
-		//tissue.setTseq(tseq);
 		tissue.setPiseq(piseq);
 		tissue.setEmail(email);
 		tissue.setPititle(title);
@@ -494,14 +522,6 @@ public class BoardController {
 					} catch (Exception e) {
 						privateservice.pfileEdit(filename, fsize, email, piseq);
 					}
-				}
-			}
-		}
-		if(editOriFile != null && editOriFile.length > 0) {
-			for(int i=0;i<editOriFile.length;i++) {
-				if(editOriFile[i].contains("~delete")) {
-					int pdseq = Integer.parseInt(editOriFile[i].split("~")[1]);
-					privateservice.pfileDelete(pdseq);
 				}
 			}
 		}
@@ -559,9 +579,37 @@ public class BoardController {
 	@RequestMapping(value="teamIssueEditOk.do" , method = {RequestMethod.POST, RequestMethod.GET})
 	public String teamIssueEditOk(int tseq, int tiseq,Model model, String[] editMention, String[] editGfilename, HttpSession session, HttpServletRequest request
 			, String[] editGurl, String[] editToname, String[] editOriFile,String[] editDowork, String title, String editIssuecontent, String editFrom, String editTo, @RequestParam(value="editFile") MultipartFile[] editFile) throws Exception {
+		String email = (String)session.getAttribute("email");
+		 if(editOriFile != null && editOriFile.length > 0) {
+			 for(int i=0;i<editOriFile.length;i++) {
+				 if(editOriFile[i].contains("~delete")) {
+					 int fdseq = Integer.parseInt(editOriFile[i].split("~")[1]);
+					 tservice.fileDelete(fdseq);
+				 }
+			 }
+		 }
+		long fullSize = 0;
+		List<Long> orifilesize = tservice.getOriFilesize(tiseq);
+		for(int i=0;i<orifilesize.size();i++) {
+			fullSize += orifilesize.get(i);
+		}
+		ProjectDao dao = sqlSession.getMapper(ProjectDao.class);
+		Role role = dao.getUserRole(email);
+		for(MultipartFile mutifile : editFile) {
+			long fsize = mutifile.getSize();
+			fullSize += fsize;
+		}
+		if(role.getRname().equals("ROLE_USER")) {
+			if(fullSize>=20971520) {
+				return "utils/fileSizeFail"; //여기부터 해야됨!
+			}
+		}else if(role.getRname().equals("ROLE_CHARGE")) {
+			if(fullSize>=52428800) {
+				return "utils/chargeFileSizeFail"; //여기부터 해야됨!
+			}
+		}
 		String path = "";
 		MyIssue tissue = new MyIssue();
-		String email = (String)session.getAttribute("email");
 		tissue.setTseq(tseq);
 		tissue.setTiseq(tiseq);
 		tissue.setEmail(email);
@@ -591,14 +639,6 @@ public class BoardController {
 							 tservice.fileEdit(tseq, filename, fsize, email, tiseq);
 						 }
 					 }
-			 }
-		 }
-		 if(editOriFile != null && editOriFile.length > 0) {
-			 for(int i=0;i<editOriFile.length;i++) {
-				 if(editOriFile[i].contains("~delete")) {
-					 int fdseq = Integer.parseInt(editOriFile[i].split("~")[1]);
-					 tservice.fileDelete(fdseq);
-				 }
 			 }
 		 }
 		 if(editMention != null && editMention.length > 0) {

@@ -72,7 +72,8 @@ public interface TissueDao {
 	public int doWorkDelete(int tdseq);
 	public int myDoWorkInsert(String email, String ptoEmail, String pdoWork);
 	public List chartData(int tseq, int isprocess);
-	
+	public List<Long> getOriFilesize(int tiseq);
+	public List<Long> getMyOriFilesize(int piseq);
 	//칸반 게시글 상태 정보
 	public Process chartData(int tseq);
 	
