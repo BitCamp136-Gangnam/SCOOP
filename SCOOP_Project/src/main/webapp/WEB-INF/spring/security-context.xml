@@ -89,7 +89,7 @@ error-if-maximum-exceeded : max-sessions을 넘었을때 접속한 세션을 실
 		                     login-page="/index.do"
 		                     authentication-failure-url="/login.do?error" />
 		<security:logout  logout-success-url="/index.do" />
-	  	<security:intercept-url pattern="*/*.do" access="hasRole('ROLE_USER')" />
+	  	<security:intercept-url pattern="*/*.do" access="hasRole('ROLE_USER')" requires-channel="https" />
 	</security:http>
 	
 	<security:authentication-manager>
