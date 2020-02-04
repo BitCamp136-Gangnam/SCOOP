@@ -345,6 +345,15 @@ $('.menli').keydown(function(event) {
 		var text = "";
 		text = $('#editIssuecontent').val().replace("@", "");
 		$('#editIssuecontent').val(text);
+		if("${role}"=="ROLE_USER"){
+			   Swal.fire({
+					  title : '이용 불가',
+					  text : '무료회원은 구글드라이브를 이용할 수 없습니다!',
+					  icon : 'warning',
+					  confirmButtonColor: '#d33'
+		   })
+		   return;
+		}
 		$('#auth').click();
 		$('#editIssuecontent').append($('.picker-dialog'));
 
