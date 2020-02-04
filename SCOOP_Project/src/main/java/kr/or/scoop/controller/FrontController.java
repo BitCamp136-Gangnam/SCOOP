@@ -15,12 +15,6 @@ import org.springframework.web.servlet.LocaleResolver;
 @Controller
 public class FrontController {
 
-	/*
-	 * // Index.do 서블릿
-	 * 
-	 * @RequestMapping(value="/index.do") public String index(HttpSession session) {
-	 * session.invalidate(); return "index"; }
-	 */
 	@Autowired
 	private LocaleResolver localeResolver;
 	

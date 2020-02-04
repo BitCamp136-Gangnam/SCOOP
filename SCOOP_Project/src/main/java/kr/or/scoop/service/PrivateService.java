@@ -5,9 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.scoop.dao.MyIssueDao;
-import kr.or.scoop.dao.TissueDao;
 import kr.or.scoop.dto.MyIssue;
-import kr.or.scoop.dto.Tissue;
 
 @Service
 public class PrivateService {

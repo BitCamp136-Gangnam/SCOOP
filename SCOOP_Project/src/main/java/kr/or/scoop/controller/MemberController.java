@@ -488,7 +488,6 @@ public class MemberController {
 			viewpage = "redirect:/userindex.do";
 			session.setAttribute("email", email);
 			session.setAttribute("kind", "naver");
-			System.out.println(session.getAttribute("kind"));
 		} else {
 			viewpage = "redirect:/index.do";
 		}
@@ -550,7 +549,6 @@ public class MemberController {
 		String pwd = this.bCryptPasswordEncoder.encode(request.getParameter("pwd"));
 		String email = (String)session.getAttribute("email");
 		
-		System.out.println("Password : " + pwd);
 		
 		MemberDao dao = sqlsession.getMapper(MemberDao.class);
 		int result = dao.changePassword(pwd, email);
