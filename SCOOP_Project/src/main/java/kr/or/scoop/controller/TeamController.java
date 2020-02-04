@@ -211,7 +211,7 @@ public class TeamController {
 						 fullSize += fsize;
 					 }
 					 if(fullSize>20971520) {
-						 return "userindex.do"; //여기부터 해야됨!
+						 return "utils/fileSizeFail"; //여기부터 해야됨!
 					 }
 					 for(MultipartFile mutifile : files) {
 						 String filename = mutifile.getOriginalFilename();
@@ -272,6 +272,14 @@ public class TeamController {
 				int result = privateservice.writeTissue(tissue);
 				 if(files != null && files.length > 0) {
 					 //업로드한 파일이 하나라도 있다면
+					 long fullSize = 0;
+					 for(MultipartFile mutifile : files) {
+						 long fsize = mutifile.getSize();
+						 fullSize += fsize;
+					 }
+					 if(fullSize>20971520) {
+						 return "utils/fileSizeFail"; //여기부터 해야됨!
+					 }
 					 for(MultipartFile mutifile : files) {
 						 String filename = mutifile.getOriginalFilename();
 						 long fsize = mutifile.getSize();
