@@ -7,41 +7,41 @@ import java.util.Arrays;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
-
+//프라이빗 이슈
 @Repository
 public class MyIssue {
-	private int tseq;
-	private int piseq;
-	private int tiseq;
-	private String pfilename;
-	private String pfilesize;
-	private String pititle;
-	private String tititle;
-	private String picontent;
-	private String ticontent;
-	private Timestamp pistart;
-	private Timestamp piend;
-	private Timestamp tistart;
-	private Timestamp tiend;
-	private int ispibook;
-	private int istbook;
-	private String email;
-	private Timestamp pidate;
-	private Timestamp tidate;
-	private String mygfilename;
-	private String tgfilename;
-	private String mymention;
-	private String myurl;
-	private String turl;
-	private String pname;
-	private MultipartFile[] files;
-	private String tfilename;
-	private String tfilesize;
-	private int isprocess;
-	private int issee;
-	private String backgroundColor;
-	private String textColor;
-	private int allDay;
+	private int tseq; //협업공간 번호
+	private int piseq; //프라이빗 이슈 번호
+	private int tiseq; //협업공간 이슈 번호
+	private String pfilename; //프라이빗 파일 이름
+	private String pfilesize; //프라이빗 파일 사이즈
+	private String pititle; //프라이빗 이슈 제목
+	private String tititle; //협업공간 이슈 제목
+	private String picontent; //프라이빗 이슈 내용
+	private String ticontent; //협업공간 이슈 내용
+	private Timestamp pistart; //프라이빗 일정 시작
+	private Timestamp piend; //프라이빗 일정 끝
+	private Timestamp tistart; //협업공간 일정 시작
+	private Timestamp tiend; //협업공간 일정 끝
+	private int ispibook; //프라이빗 북마크 여부
+	private int istbook; //협업공간 북마크 여부
+	private String email; //글쓴이
+	private Timestamp pidate; //프라이빗 이슈 작성 시간
+	private Timestamp tidate; //협업공간 이슈 작성 시간
+	private String mygfilename; //프라이빗 구글 파일 이름
+	private String tgfilename; //협업공간 구글 파일 이름
+	private String mymention; //프라이빗 멘션
+	private String myurl; //프라이빗 url
+	private String turl; //협업공간 url
+	private String pname; //협업공간 이름
+	private MultipartFile[] files; //첨부 파일들
+	private String tfilename; //협업공간 파일 이름
+	private String tfilesize; //협업공간 파일 사이즈
+	private int isprocess; //진행상황
+	private int issee; //읽음 여부
+	private String backgroundColor; //이슈 캘린더 백그라운드 색상
+	private String textColor; //이슈 캘린더 글색상
+	private int allDay; //하루종일 체크 여부
 	
 	
 	public String getBackgroundColor() {

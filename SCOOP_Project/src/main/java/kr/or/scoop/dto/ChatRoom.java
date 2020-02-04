@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.web.socket.WebSocketSession;
-
+//채팅방
 public class ChatRoom {
-	private String name;
-	private int max;
+	private String name; //참여자 이름
+	private int max; //최대 인원
 	private Map<String, WebSocketSession> users;
 
 	public ChatRoom(String name, int max) {

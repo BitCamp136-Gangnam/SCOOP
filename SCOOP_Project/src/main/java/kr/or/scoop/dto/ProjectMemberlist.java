@@ -1,10 +1,10 @@
 package kr.or.scoop.dto;
-
+//협업공간 멤버리스트
 public class ProjectMemberlist {
-	private String email;
-	private String name;
-	private int tseq;
-	private int pjuserrank;
+	private String email; //이메일
+	private String name; //이름
+	private int tseq; //협업공간 번호
+	private int pjuserrank; //유저 등급
 	
 	public String getEmail() {
 		return email;

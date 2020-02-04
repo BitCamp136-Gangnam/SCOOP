@@ -1,19 +1,19 @@
 package kr.or.scoop.dto;
 
 import java.sql.Timestamp;
-
+//멘션
 public class Mention {
-	private int tiseq;
-	private int tmseq;
-	private String email;
-	private String name;
-	private int pmseq;
-	private String pemail;
-	private int piseq;
-	private String pname;
-	private int tseq;
-	private String tititle;
-	private Timestamp tidate;
+	private int tiseq; //협업공간 이슈 번호
+	private int tmseq; //협업공간 이슈 멘션 번호
+	private String email; //협업공간 이슈 멘션 된 사람 이메일
+	private String name;  //협업공간 이슈 멘션 된 사람 이름
+	private int pmseq; //프라이빗 이슈 멘션 번호
+	private String pemail; //프라이빗 이슈 멘션 된 사람 이메
+	private int piseq; //프라이빗 이슈 번호
+	private String pname; //협업공간 이름
+	private int tseq; //협업공간 번호
+	private String tititle; //협업공간 이슈 내용
+	private Timestamp tidate; //협업공간 이슈 작성 시간
 	public int getTiseq() {
 		return tiseq;
 	}

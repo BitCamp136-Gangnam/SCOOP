@@ -1,5 +1,5 @@
 package kr.or.scoop.dto;
-
+//북마크
 public class BookMark {
 	private int piseq; //나의 이슈번호
 	private String pititle; //나의 이슈제목
