@@ -83,7 +83,7 @@
         <div class="container-fluid row" style="padding-right: 15px; margin-right: 0px;margin-left: 0px; padding-left: 15px;">
         <div class="card" style="padding-left: 15px;padding-right: 15px; padding-top:1%;width:100%;height: auto;overflow: auto;">
 		<div class="row"style="margin:2% 2% 0 2%" >
-				<div class="col-sm-9">
+				<div class="col-sm-9"style="padding-left: 0px;">
 				<h3 id="myissueSubject" style="padding-top: 2%;padding-left: 1%;">${detail.pntitle}</h3>
 				</div>
 				<c:if test="${rank == 100}">
@@ -97,18 +97,16 @@
 					<span class="iconify" data-icon="topcoat:delete" data-inline="false" style="cursor: pointer;font-size: 25px;margin-bottom: 5px;margin-top: 15px"></span>
 					</span>
 					</div>
-				</c:if>		
-					<div class="col-sm-1" style="padding: 0">
+				</c:if>	
+					<div class="col-sm-2" style="text-align: right; padding: 0">
+					</div>
+					<div class="col-sm-1" style="padding-left: 40px;">
 					<span id="pjNoticeBack">
 					<span class="iconify" data-icon="entypo:back" data-inline="false" style="cursor: pointer; font-size: 25px;margin-bottom: 5px;margin-top: 15px"></span>
 					</span>
 					</div>			
 		</div>
-		<div class="myissueDetail" id="myissueMention"><sup><i class="fas fa-quote-left" style="color:#ca0000;"></i></sup> 멘션 멤버 이름 넣는 곳 <sup><i class="fas fa-quote-right"style="color:#ca0000;"></i></sup></div>
-		<div class="myissueDetail" id="myissueGoogledrive"><i class="fab fa-google-drive"></i>
-			<a href="">여기에 구글드라이브 파일 올리면됨</a>
-		</div>
-		<div class="myissueDetail" id="myissueTodo"><i class="far fa-check-circle"style="padding-right: 5px;"></i>From 멤버이름<i class="fas fa-long-arrow-alt-right" style="margin-left:5px;margin-right: 5px;"></i>To 멤버 이름 </div>
+		<br>
         <div class="myissueDetail">
         ${detail.pncontent}
         </div>    

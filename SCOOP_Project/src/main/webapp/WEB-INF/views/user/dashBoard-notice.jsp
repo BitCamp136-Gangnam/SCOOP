@@ -89,8 +89,8 @@
 		</div>
 		</div>
 		</c:if>			
-							
-        <c:if test="${mypjtlist!=null }">
+		
+       <c:if test="${mypjtlist!=null }">
       <c:forEach items="${mypjtlist}" var="mpl">
       <c:if test="${myNewPjNoticeList !=null }">
       <c:forEach items="${myNewPjNoticeList}" var="mynewpjnotice">
