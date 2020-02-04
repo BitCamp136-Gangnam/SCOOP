@@ -1,6 +1,5 @@
 package kr.or.scoop.handler;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -13,7 +12,7 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import kr.or.scoop.dto.ChatRoom;
-
+//socket handler
 public class ChatWebSocketHandler extends TextWebSocketHandler {
 
 	// 접속한 전체 유저 관리
@@ -36,7 +35,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 			joinChatRoom(session, user, getAttribute(session, "room"));
 		}
 	}
-
+	//메시지 수신
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		log(session.getId() + "로부터 메시지 수신: " + message.getPayload());
@@ -48,7 +47,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 		} else if (cmd.equals("createChatRoom"))
 			createChatRoom(session, data);
 	}
-	
+	//누군가 채팅방 나가면
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		String cmd = getAttribute(session, "cmd");
@@ -67,7 +66,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 			sendChatRoomInfoMessage();
 		}
 	}
-
+	//예외 발생
 	@Override
 	public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
 		log(session.getId() + " 익셉션 발생: " + exception.getMessage());
@@ -75,7 +74,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 
 	private void log(String logmsg) {
 	}
-
+	//메시지 전송
 	private void sendMessage(WebSocketSession session, JSONObject data) throws Exception {
 		String sendUser = getAttribute(session, "user");
 		JSONObject json = new JSONObject().put("message", data.getString("message"))
@@ -89,7 +88,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 			userInfo.getValue().sendMessage(new TextMessage(json.toString()));
 		}
 	}
-
+	//채팅방 생성
 	private void createChatRoom(WebSocketSession session, JSONObject data) throws Exception {
 		ChatRoom room = new ChatRoom(data.getString("name")
 														, Integer.parseInt(data.getString("max")));
@@ -97,7 +96,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 		roomInfos.put(room.getName(), room);
 		sendChatRoomInfoMessage();
 	}
-
+	//채팅방 참여
 	private void joinChatRoom(WebSocketSession session, String user, String room) throws Exception {
 		ChatRoom chatRoom = roomInfos.get(room);
 		chatRoom.addUser(user, session);
@@ -105,7 +104,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 
 		sendChatRoomInfoMessage();
 	}
-
+	//정보 전송
 	private void sendMemberInfoMessage(ChatRoom room, String message) throws Exception {
 		String jsonString = new JSONObject().put("message", message)
 																.put("type", "memberInfo")
@@ -114,7 +113,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 		for (WebSocketSession s : room.getUsers().values())
 			s.sendMessage(new TextMessage(jsonString));
 	}
-
+	//정보 전송
 	private void sendChatRoomInfoMessage() throws Exception {
 		JSONArray array = new JSONArray();
 		for(ChatRoom room : roomInfos.values()) {
@@ -129,7 +128,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 		for (WebSocketSession s : users.values())
 			s.sendMessage(new TextMessage(jsonString));
 	}
-	
+	//정보 전송
 	private void sendChatRoomInfoMessage(WebSocketSession session) throws Exception {
 		JSONArray array = new JSONArray();
 		for (ChatRoom room : roomInfos.values()) {

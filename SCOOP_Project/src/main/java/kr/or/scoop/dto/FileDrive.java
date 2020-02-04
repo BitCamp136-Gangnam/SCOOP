@@ -1,19 +1,19 @@
 package kr.or.scoop.dto;
 
 import java.sql.Timestamp;
-
+//파일드라이브
 public class FileDrive {
-	private int fdseq;
-	private int fdcapa;
-	private String fdname;
-	private String email;
-	private Timestamp fddate;
-	private String pname;
-	private int tseq;
-	private int pdseq;
-	private int pdcapa;
-	private String pfdname;
-	private int piseq;
+	private int fdseq; //협업공간 파일번호
+	private int fdcapa; //협업공간 파일 사이즈
+	private String fdname; //협업공간 파일이름
+	private String email; //올린 사람
+	private Timestamp fddate; //파일 올린 시간
+	private String pname; //협업공간 이름
+	private int tseq; //협업공간 번호
+	private int pdseq; //프라이빗 파일번호
+	private int pdcapa;//프라이빗 파일사이즈
+	private String pfdname; //프라이빗 파일이름
+	private int piseq;//프라이빗 파일번호
 	public int getFdseq() {
 		return fdseq;
 	}

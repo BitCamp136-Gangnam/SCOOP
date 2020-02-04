@@ -1,9 +1,9 @@
 package kr.or.scoop.dto;
-
+//협업공간 이름
 public class ProjectName {
-	private int tseq;
-	private int tiseq;
-	private String pname;
+	private int tseq; //협업공간 번호
+	private int tiseq; //협업공간 이슈 번호
+	private String pname; //협업공간 이름
 	
 	public int getTseq() {
 		return tseq;

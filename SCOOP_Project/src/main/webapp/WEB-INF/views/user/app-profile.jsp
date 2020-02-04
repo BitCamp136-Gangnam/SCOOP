@@ -158,8 +158,22 @@ $(function(){
 	}
 
 
-	
-	
+	function getOutMember(){
+	 Swal.fire({
+		   title: '정말로 회원 탈퇴하시겠습니까??',
+		   text: "삭제하시면 스쿱의 모든 정보가 사라집니다!",
+		   icon: 'warning',
+		   showCancelButton: true,
+		   confirmButtonColor: '#d33',
+		   cancelButtonColor: '#c8c8c8',
+		   confirmButtonText: '확인',
+		   cancelButtonText: '취소'
+		 }).then((result) => {
+		   if (result.value) {
+			   location.href = 'memberDelete.do';
+		   }
+		 })
+		}
 
 </script>
 
@@ -212,7 +226,7 @@ $(function(){
 			      <a class="nav-link" href="paymentPage.do">가격 및 결제</a>
 			    </li>
 			    <li class="nav-item">
-			      <a class="nav-link" href="memberDelete.do">회원 탈퇴</a>
+			      <a class="nav-link" href="javascript:getOutMember();">회원 탈퇴</a>
 			    </li>
 		    </ul>
 		</div>

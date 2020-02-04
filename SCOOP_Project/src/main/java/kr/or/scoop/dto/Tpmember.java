@@ -6,15 +6,13 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class Tpmember {
-	private int tseq;
-	private String email;
-	private int pjuserrank;
-	private String pname;
-	private String name;
-	private Timestamp tpaddtime;
-	private int pnseq;
-	
-	
+	private int tseq; //프로젝트 번호 
+	private String email; //프로젝트 멤버 이메일 
+	private int pjuserrank; //프로젝트 등급번호 (일반사용자 , 팀장)
+	private String pname; //프로젝트 이름 
+	private String name; //멤버 이름 
+	private Timestamp tpaddtime; //프로젝트 가입 시간
+	private int pnseq;//프로젝트 공지사항 글번호
 	
 	public int getPnseq() {
 		return pnseq;

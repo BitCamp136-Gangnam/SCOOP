@@ -75,7 +75,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	where p.tseq=#{param1} and m.email = #{param2}
 </select>
 <select id="getPjNotice" resultType="kr.or.scoop.dto.PjNotice">
-select p.pnseq,p.pntitle,p.pncontent,m.name,p.tseq,p.pntime,p.email from pjnotice p join member m on p.email = m.email join teampjt t on p.tseq = t.tseq where t.tseq = #{tseq}
+select p.pnseq,p.pntitle,p.pncontent,m.name,p.tseq,p.pntime,p.email from pjnotice p join member m on p.email = m.email join teampjt t on p.tseq = t.tseq where t.tseq = #{tseq} order by p.pntime desc
 </select>
 <insert id="pjNoticeWrite" parameterType="kr.or.scoop.dto.PjNotice">
 	insert into pjnotice(pnseq,pntitle,pncontent,tseq,pntime,email) values (pnseq_pjnotice_seq.nextval,#{pntitle},#{pncontent},#{tseq},systimestamp,#{email})

@@ -1,14 +1,14 @@
 package kr.or.scoop.dto;
-
+//할일
 public class DoWork {
- private String fromname;
- private String toname;
- private String dowork;
- private String pdowork;
- private String toemail;
- private int tdseq;
- private String ptoemail;
- private int pwseq;
+ private String fromname; //보낸사람
+ private String toname; //받는사람
+ private String dowork; //협업공간 할일내용
+ private String pdowork; //프라이빗 할일내용
+ private String toemail; //보낸사람 이메일
+ private int tdseq; //협업공간 할일 번호
+ private String ptoemail; //받는사람 이메일
+ private int pwseq; //프라이빗 할일 번호
 public String getFromname() {
 	return fromname;
 }
