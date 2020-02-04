@@ -24,7 +24,7 @@ public class FileController {
 	
 	@Autowired
 	private SqlSession sqlsession;
-	
+	//파일을 클릭하면 다운로드
 	@RequestMapping("/fileDownload.do")
 	public void fileDownload(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String realPath = "C:/SmartWeb/FinalProjectEclipse/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/SCOOP_Project/upload/";
@@ -49,6 +49,7 @@ public class FileController {
 		fin.close();
 		sout.close();
 	}
+	//파일함에서 select 협업공간 변경하면 비동기로 파일 리스트 바꿔줌
 	@RequestMapping("/fileChange.do")
 	public String fileChange(HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model) throws Exception {
 		MemberDao memberdao = sqlsession.getMapper(MemberDao.class);
@@ -65,6 +66,7 @@ public class FileController {
 		}
 		return "utils/ajax";
 	}
+	//파일함에서 select 내파일로 변경하면 비동기로 파일 리스트 바꿔줌
 	@RequestMapping("/myFileSelect.do")
 	public String myFileSelect(HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model) throws Exception {
 		MemberDao memberdao = sqlsession.getMapper(MemberDao.class);
@@ -74,7 +76,7 @@ public class FileController {
 			model.addAttribute("ajax",jsonlist);
 		return "utils/ajax";
 	}
-	
+	//파일함에서 비동기로 검색
 	@RequestMapping("/teamFileSearch.do")
 	public String teamFileSearch(HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model) throws Exception {
 		MemberDao memberdao = sqlsession.getMapper(MemberDao.class);
@@ -85,6 +87,7 @@ public class FileController {
 			model.addAttribute("ajax",jsonlist);
 		return "utils/ajax";
 	}
+	//파일함에서 비동기로 검색
 	@RequestMapping("/myFileSearch.do")
 	public String myFileSearch(HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model) throws Exception {
 		MemberDao memberdao = sqlsession.getMapper(MemberDao.class);

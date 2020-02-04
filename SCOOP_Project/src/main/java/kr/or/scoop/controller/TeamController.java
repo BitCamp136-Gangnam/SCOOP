@@ -65,7 +65,7 @@ public class TeamController {
 	
 	@Autowired
 	private LocaleResolver localeResolver;
-	
+	//협업공간 생성
 	@RequestMapping(value = "team.do" , method= {RequestMethod.POST,RequestMethod.GET})
 	public String CreateProject(TeamPjt team) {
 		int result = 0;
@@ -81,7 +81,7 @@ public class TeamController {
 		return viewpage;
 		
 	}
-	
+	//협업공간 초대되면 DB에 멤버 추가
 	@RequestMapping(value = "inviteOk.do", method = { RequestMethod.POST, RequestMethod.GET })
 	public String normalInsert(HttpSession session) throws ClassNotFoundException, SQLException {
 		int result = 0;
@@ -99,7 +99,7 @@ public class TeamController {
 		return viewpage; // 주의 (website/index.htm
 
 	}
-	
+	//협업공간 초대 인증
 	@RequestMapping(value = "/invitecertified.do")
 	public String certified(int tseq, String mailTo) {
 		String path = "";
@@ -119,7 +119,7 @@ public class TeamController {
 		return path;
 	}
 	
-	//팀 디테일 
+	//협업공간 디테일 
 	@RequestMapping(value = "projectDetail.do" , method = RequestMethod.GET)
 	public String projectDetail(HttpSession session, int tseq, Model model) {
 		String email = (String)session.getAttribute("email");
@@ -129,12 +129,12 @@ public class TeamController {
 		MyIssueDao mydao = sqlsession.getMapper(MyIssueDao.class);
 		
 		TeamPjt pjt = dao.detailPJT(tseq);
-		List<Tissue> tp = dao.getTissue(tseq);
+		List<Tissue> tp = dao.getTissue(tseq); //협업공간 이슈 목록 불러오기
 		for(int i=0; i<tp.size();i++) {
-			tp.get(i).setTicontent(tp.get(i).getTicontent().replace("<br>", " "));
+			tp.get(i).setTicontent(tp.get(i).getTicontent().replace("<br>", " ")); //<br> 띄어쓰기로 치환
 		}
-		List<ProjectMemberlist> projectMemberlist =md.projectMemberlist(tseq);
-		List<BookMark> bookMark = mydao.getBookMark(email);
+		List<ProjectMemberlist> projectMemberlist =md.projectMemberlist(tseq); //프로젝트 멤버 리스트 불러오기
+		List<BookMark> bookMark = mydao.getBookMark(email); //북마크 불러오기
 		Tpmember myInfo = md.getMyInfo(tseq, email);
 		
 		int rank = dao.searchRank(tseq, email);
@@ -164,17 +164,17 @@ public class TeamController {
 			ProjectDao dao = sqlsession.getMapper(ProjectDao.class);
 			Role role = dao.getUserRole(email);
 			long fullSize = 0;
-			for(MultipartFile mutifile : files) {
+			for(MultipartFile mutifile : files) { //파일들의 사이즈 측정
 				long fsize = mutifile.getSize();
 				fullSize += fsize;
 			}
 			if(role.getRname().equals("ROLE_USER")) {
 				if(fullSize>=20971520) {
-					return "utils/fileSizeFail"; //여기부터 해야됨!
+					return "utils/fileSizeFail"; //무료회원은 20mb 넘어가면 이슈작성 실패
 				}
 			}else if(role.getRname().equals("ROLE_CHARGE")) {
 				if(fullSize>=52428800) {
-					return "utils/chargeFileSizeFail"; //여기부터 해야됨!
+					return "utils/chargeFileSizeFail"; //유료회원은 50mb 넘어가면 이슈작성 실패
 				}
 			}
 			// 이슈 내용에서 url 찾아서 링크 (a태그)
@@ -204,19 +204,19 @@ public class TeamController {
 			
 			String path = "";
 			int tseq = 0;
-			 //실 DB Insert
+			//만약 선택한 팀의 번호가 자신의 이메일이라면 프라이빗 이슈 작성
 			if (selectTeam.equals((String) session.getAttribute("email")) || selectTeam == null) {
 				MyIssue myissue = new MyIssue();
 				myissue.setEmail((String) session.getAttribute("email"));
 				myissue.setPititle(issuetitle);
-				issuecontent = issuecontent.replace("\r\n", "<br>");
+				issuecontent = issuecontent.replace("\r\n", "<br>"); //\r\n <br>로 치환
 				myissue.setPicontent(content);
 				myissue.setIspibook(0);
-				if(fromDate != null) {
+				if(fromDate != null) { //일정이 비어있지 않다면 추가
 					 myissue.setPistart(java.sql.Timestamp.valueOf(fromDate+" 00:00:00"));
 					 myissue.setPiend(java.sql.Timestamp.valueOf(toDate+" 00:00:00"));
 				}
-				int result = privateservice.writeMyissue(myissue);
+				int result = privateservice.writeMyissue(myissue); //이슈 추가
 				 if(files != null && files.length > 0) {
 					 //업로드한 파일이 하나라도 있다면
 					 for(MultipartFile mutifile : files) {
@@ -230,7 +230,7 @@ public class TeamController {
 							 fs.write(mutifile.getBytes());
 							 fs.close();
 							 try {
-								 teamservice.myFileInsert(filename, fsize, email);
+								 teamservice.myFileInsert(filename, fsize, email); //내 파일함에 파일 추가
 							 } catch (Exception e) {
 								 teamservice.myFileInsert(filename, fsize, email);
 							 }
@@ -239,7 +239,7 @@ public class TeamController {
 				 }
 				 if(mentions != null && mentions.length > 0) {
 					 for(int i=0;i<mentions.length;i++) {
-						 teamservice.myMentionInsert(mentions[i]);
+						 teamservice.myMentionInsert(mentions[i]); //프라이빗 멘션 추가
 					 }
 				 }
 				 if(googleDrive != null && googleDrive.length > 0) {
@@ -248,13 +248,13 @@ public class TeamController {
 					 for(int i=0;i<googleDrive.length;i++) {
 						 gfileurl = googleDrive[i].split("~")[0];
 						 gfilename = googleDrive[i].split("~")[1];
-						 teamservice.myGoogleDriveInsert(gfilename, gfileurl);
+						 teamservice.myGoogleDriveInsert(gfilename, gfileurl); //프라이빗 구글드라이브 추가
 					 }
 				 }
 				 if(toWork != null && toWork.length > 0) {
 					 String fromWork = email;
 					 for(int i=0;i<toWork.length;i++) {
-						 teamservice.myDoWorkInsert(fromWork, toWork[i], doWork[i]);
+						 teamservice.myDoWorkInsert(fromWork, toWork[i], doWork[i]); //프라이빗 할일 추가
 					 }
 				 }
 				if(result >0) {
@@ -263,14 +263,14 @@ public class TeamController {
 					path = "utils/makeMyIssueFailSwal";
 				}
 				return path;
-			} else {
+			} else { //tseq가 존재한다면 협업공간 이슈 작성
 				MyIssue tissue = new MyIssue();
 				tissue.setTseq(Integer.parseInt(selectTeam));
 				tissue.setEmail((String)session.getAttribute("email"));
 				tissue.setTititle(issuetitle);
-				issuecontent = issuecontent.replace("\r\n", "<br>");
+				issuecontent = issuecontent.replace("\r\n", "<br>"); //\r\n <br>로 치환
 				tissue.setTicontent(content);
-				if(fromDate != null) {
+				if(fromDate != null) { //일정이 있다면 추가
 					 tissue.setTistart(java.sql.Timestamp.valueOf(fromDate+" 00:00:00"));
 					 tissue.setTiend(java.sql.Timestamp.valueOf(toDate+" 00:00:00"));
 				}
@@ -289,7 +289,7 @@ public class TeamController {
 							 fs.close();
 							 try {
 								 tseq = Integer.parseInt(selectTeam);
-								 teamservice.fileInsert(tseq, filename, fsize, email);
+								 teamservice.fileInsert(tseq, filename, fsize, email); //협업공간 파일함에 추가
 							 } catch (Exception e) {
 								 tseq = Integer.parseInt(selectTeam);
 								 teamservice.fileInsert(tseq, filename, fsize, email);
@@ -299,7 +299,7 @@ public class TeamController {
 				 }
 				 if(mentions != null && mentions.length > 0) {
 					 for(int i=0;i<mentions.length;i++) {
-						 teamservice.mentionInsert(mentions[i]);
+						 teamservice.mentionInsert(mentions[i]); //협업공간 멘션에 추가
 					 }
 				 }
 				 if(googleDrive != null && googleDrive.length > 0) {
@@ -308,13 +308,13 @@ public class TeamController {
 					 for(int i=0;i<googleDrive.length;i++) {
 						 gfileurl = googleDrive[i].split("~")[0];
 						 gfilename = googleDrive[i].split("~")[1];
-						 teamservice.googleDriveInsert(gfilename, gfileurl);
+						 teamservice.googleDriveInsert(gfilename, gfileurl); //협업공간 구글드라이브에 추가
 					 }
 				 }
 				 if(toWork != null && toWork.length > 0) {
 					 String fromWork = email;
 					 for(int i=0;i<toWork.length;i++) {
-						 teamservice.doWorkInsert(fromWork, toWork[i], doWork[i]);
+						 teamservice.doWorkInsert(fromWork, toWork[i], doWork[i]); //협업공간 할일에 추가
 					 }
 				 }
 				if(result >0) {
@@ -332,7 +332,7 @@ public class TeamController {
 		}
 	
 	
-	// 칸반 받기
+	//협업공간 칸반 불러오기
 	@RequestMapping(value = "cooperation-kanban.do", method = RequestMethod.GET)
 	public String kanbanView(int tseq, Model model,HttpSession session) {
 		String path = "";
@@ -353,7 +353,7 @@ public class TeamController {
 
 	}
 	
-	//협업공간 권한설정
+	//협업공간 설정
 	@RequestMapping(value = "teamSetting.do", method = {RequestMethod.POST,RequestMethod.GET})
 	public String teamSetting(int tseq, String[] email, int[] pjuserrank, Model model,TeamPjt teampjt) {
 		int result = 0;
@@ -370,7 +370,7 @@ public class TeamController {
 		return viewpage;
 		
 	}
-	// 칸반 수정
+	//협업공간 칸반 수정
 	@RequestMapping(value = "kanbanEdit.do", method = RequestMethod.POST)
 	public String kanbanEdit(int tseq, int tiseq, int isprocess, Model model) {
 		String path = "";
@@ -399,7 +399,7 @@ public class TeamController {
 		return viewpage;
 		
 	}
-	//협업공간 멤버탈퇴
+	//협업공간 멤버탈퇴시키기
 	@RequestMapping(value = "banMember.do", method = {RequestMethod.POST,RequestMethod.GET})
 	public String banMember(int tseq, String email, Model model) {
 		int result = 0;
@@ -416,6 +416,7 @@ public class TeamController {
 		return viewpage;
 		
 	}
+	//협업공간 팀장 위임하기
 	@RequestMapping(value = "changeManager.do", method = {RequestMethod.POST,RequestMethod.GET})
 	public String changeManager(int tseq, String email, Model model, HttpSession session) {
 		int result = 0;
@@ -434,6 +435,7 @@ public class TeamController {
 		return viewpage;
 		
 	}
+	//협업공간 삭제하기(팀장만 가능)
 	@RequestMapping(value = "dropProjet.do", method = {RequestMethod.POST,RequestMethod.GET})
 	public String dropProjet(int tseq, Model model) {
 		int result = 0;
@@ -447,7 +449,7 @@ public class TeamController {
 		return viewpage;
 		
 	}
-	
+	//대시보드에 협업공간별로 차트 변경
 	@ResponseBody
 	@RequestMapping(value="selectChart.do", method = RequestMethod.POST)
 	public Process chart(int tseq) {
@@ -463,7 +465,7 @@ public class TeamController {
 		}
 		return processList;
 	}
-	
+	//협업공간 캘린더 이슈 작성
 	@RequestMapping(value = "addTeamCalendar.do", method = RequestMethod.POST)
 	public String addTeamCalendar(HttpSession session,String title, String start, String end, String description, String type, String username, String backgroundColor, String textColor, String allDay, int tseq) {
 		int result = 0;
@@ -502,7 +504,7 @@ public class TeamController {
 		return viewpage;
 		
 	}
-	
+	//프라이빗공간 캘린더 이슈 작성
 	@RequestMapping(value = "editTeamCalendar.do", method = RequestMethod.POST)
 	public String editTeamCalendar(int _id, String title, String start, String end, String description, String type, String backgroundColor, boolean allDay) {
 		int result = 0;
@@ -538,7 +540,7 @@ public class TeamController {
 		return viewpage;
 		
 	}
-	
+	//협업공간 캘린더 이슈 삭제
 	@RequestMapping(value = "deleteTeamCalendar.do", method = RequestMethod.POST)
 	public String deleteTeamCalendar(int tiseq, String username, HttpSession session) {
 		int result = 0;
@@ -563,7 +565,7 @@ public class TeamController {
 		return viewpage;
 		
 	}
-	
+	//협업공간 캘린더 이슈 디테일 불러오기
 	@ResponseBody
 	@RequestMapping(value="getTeamCalendar.do", method = RequestMethod.GET)
 	public JSONArray getTeamCalendar(HttpSession session, HttpServletResponse response, Model model) {
@@ -583,18 +585,7 @@ public class TeamController {
 				 if(tissue.getTistart()!=null) {
 					 sortlist.put(tempnum++, tissue);
 				 }
-				 
 			 }
-			 
-//			 temptissuelist = tissuedao.loadKanban(pjtlist.get(i).getTseq());
-			 
-//			 for(int j = 0 ; j > temptissuelist.size() ; j++) {
-//				 System.out.println("2중포문오니?");
-//				 System.out.println("temptissue"+temptissuelist.get(j));
-//				 caltissuelist.add(temptissuelist.get(j));
-//			 }
-			 
-			 
 		}
 		try {
 			Iterator<Integer> tissueitor = sortlist.keySet().iterator();
@@ -674,13 +665,13 @@ public class TeamController {
 		
 		return jArray;
 	}
-	
+	//사다리타기 불러오기
 	@RequestMapping(value="projectLadder.do",method = RequestMethod.GET)
 	public String ladder(int tseq,Model model) {
 		
 		return "user/projectLadder";
 	}
-	
+	//전체 캘린더 불러오기
 	@RequestMapping("/calendar.do")
 	public String object(HttpServletRequest request, HttpServletResponse response,Model model,HttpSession session) {
 		
@@ -691,7 +682,7 @@ public class TeamController {
 		model.addAttribute("mem",mem);
 		return "sidebar/calendar";
 	}
-	
+	//협업공간 캘린더 불러오기
 	@RequestMapping("/projectCalendar.do")
 	public String teamCalendar(HttpServletRequest request, HttpServletResponse response,Model model,HttpSession session, int tseq) {
 		ProjectDao dao = sqlsession.getMapper(ProjectDao.class);
@@ -708,7 +699,7 @@ public class TeamController {
 		return "user/ProjectCalendar";
 	}
 	
-	
+	//협업공간 캘린더 내용 비동기 불러오기
 	@ResponseBody
 	@RequestMapping(value="getSelectTeamCalendar.do", method = RequestMethod.GET)
 	public JSONArray getSelectTeamCalendar(HttpSession session, HttpServletResponse response, Model model, int tseq) {
