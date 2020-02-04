@@ -1,17 +1,17 @@
 package kr.or.scoop.dto;
 
 public class BookMark {
-	private int piseq;
-	private String pititle;
-	private String picontent;
-	private int tseq;
-	private int tiseq;
-	private String tititle;
-	private String ticontent;
-	private String email;
+	private int piseq; //나의 이슈번호
+	private String pititle; //나의 이슈제목
+	private String picontent; //나의 이슈 내용
+	private int tseq; //협업공간 번호
+	private int tiseq; //헙업 이슈 번호
+	private String tititle; //협업 이슈 제목
+	private String ticontent; //협업 이슈 내용
+	private String email; //이메일
 	private String piname;
 	private String tiname;
-	private String pname;
+	private String pname; //협업공간 이름
 	
 	public int getTseq() {
 		return tseq;
