@@ -231,7 +231,7 @@ border-radius: 5px;
 			</c:if>
 			
 		</div>
-			<div style="margin-right: 0; margin-left: 0;">
+			<div style="margin-right: 0; margin-left: 0;padding-top: 10px;">
 			<span id="myissueSubject" style="padding-left: 20px;font-size: 20px;">${tissue.tititle}</span>
 			<span style="float: right;padding-right: 5%;padding-top:1%;">${fn:substring(tissue.tidate,0,16)}</span>
 			</div>
@@ -248,6 +248,7 @@ border-radius: 5px;
 		</c:otherwise>
 		</c:choose>
 		
+		<div style="height:100px;overflow: auto;margin-left: 5px; margin-right: 5px;">
 		<c:forEach items="${mentions}" var="m">
 		<div class="myissueDetail" id="myissueMention">
 		<sup><i class="fas fa-quote-left" style="color:#ca0000; font-size: 7px"></i></sup> @${m.name} <sup><i class="fas fa-quote-right"style="color:#ca0000;font-size: 7px"></i></sup>
@@ -266,7 +267,9 @@ border-radius: 5px;
 			<a href="${gd.tgurl}" onclick="window.open(this.href,'팝업창','width=800, height=800');return false;">${gd.tgfilename}</a>
 			<br>
 		</div>
-			</c:forEach>
+		</c:forEach>
+		</div>
+		<br>
 		<c:forEach items="${dowork}" var="work">
 		<div class="myissueDetail" id="myissueTodo">
 		<i class="far fa-check-circle"style="padding-right: 5px;"></i>${work.fromname}

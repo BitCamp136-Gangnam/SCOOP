@@ -100,10 +100,13 @@ border-radius: 5px;
 			<span class="iconify" id="comeback" data-icon="entypo:back" data-inline="false" style="cursor: pointer; font-size: 25px;margin-bottom: 10px;margin-left: 15px;"></span>
 		</div>
 		</c:if>
-        
-		<h3 id="myissueSubject" style="padding-left: 15px;">${myissue.pititle}</h3>
-		<span style="padding-left: 67%;padding-top: 10px;">${fn:substring(myissue.pidate,0,16)}</span>
+			
+		
         </div>
+        	<div style="margin-right: 0; margin-left: 0;">
+			<span id="myissueSubject" style="padding-left: 60px;font-size: 20px;">${myissue.pititle}</span>
+			<span style="float:right ;padding-top: 1%;padding-right: 55px;">${fn:substring(myissue.pidate,0,16)}</span>
+			</div>
 		
         <hr style="margin:10px 2% 0 2%;">
 		
