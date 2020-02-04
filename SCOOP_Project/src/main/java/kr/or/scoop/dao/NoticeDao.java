@@ -25,5 +25,6 @@ public interface NoticeDao {
 	//마이이슈 검색
 	public List<MyIssue> searchMyIssue(String email, String word);
 	
+	//공지사항 삭제
 	public int deleteNotice(int bnseq);
 }	
