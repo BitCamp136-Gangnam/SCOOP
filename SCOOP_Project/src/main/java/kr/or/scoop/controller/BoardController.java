@@ -470,6 +470,7 @@ public class BoardController {
 		tissue.setPiseq(piseq);
 		tissue.setEmail(email);
 		tissue.setPititle(title);
+		editIssuecontent = editIssuecontent.replace("\r\n", "<br>");
 		tissue.setPicontent(editIssuecontent);
 		if(!editFrom.equals("")) {
 			tissue.setPistart(java.sql.Timestamp.valueOf(editFrom+" 00:00:00"));
@@ -565,6 +566,7 @@ public class BoardController {
 		tissue.setTiseq(tiseq);
 		tissue.setEmail(email);
 		tissue.setTititle(title);
+		editIssuecontent = editIssuecontent.replace("\r\n", "<br>");
 		tissue.setTicontent(editIssuecontent);
 		if(!editFrom.equals("")) {
 			 tissue.setTistart(java.sql.Timestamp.valueOf(editFrom+" 00:00:00"));

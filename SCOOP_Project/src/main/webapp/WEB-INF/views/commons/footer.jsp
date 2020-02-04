@@ -120,7 +120,7 @@
 	} */
 
 	 function connect() {
-		wsocket = new WebSocket("ws://192.168.6.16:8090/SCOOP/Chat-ws.do?cmd=on");
+		wsocket = new WebSocket("ws://192.168.6.13:8090/SCOOP/Chat-ws.do?cmd=on");
 		wsocket.onmessage = onMessage;
 		wsocket.onclose = onClose;
 	}
