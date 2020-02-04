@@ -11,20 +11,20 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 @Repository
 public class Tissue {
 	
-	private int tiseq;
-	private int tseq;
-	private int tmseq;
-	private String email;
-	private String tititle;
-	private String ticontent;	
-	private List<CommonsMultipartFile> files;
-	private String tfilename;
-	private Timestamp tistart;
-	private Timestamp tiend;
-	private String isprocess;
-	private String backgroundColor;
-	private String textColor;
-	private int allDay;
+	private int tiseq;	//팀이슈번호
+	private int tseq; 	//프로젝트 번호	
+	private int tmseq;	//팀멘션 번호 
+	private String email; //이슈 작성자 이메일
+	private String tititle; // 팀이슈 제목
+	private String ticontent;	//팀이슈 내용
+	private List<CommonsMultipartFile> files; //올린 파일 목록
+	private String tfilename; //파일 이름
+	private Timestamp tistart; //일정 시작
+	private Timestamp tiend;   //일정 끝
+	private String isprocess; //진행과정
+	private String backgroundColor; //캘린더 일정 색상
+	private String textColor; //캘린더 일정 글자 색상
+	private int allDay; //캘린더 하루 종일 여부 
 
 	
 	private long tfilesize;

@@ -1034,7 +1034,7 @@ span {
          -->
 <style>
 .createmodal {
-   border: 1px solid #c8c8c8;
+   border: 1px solid #000;
    background-color: white;
 }
 </style>
@@ -1154,18 +1154,18 @@ span {
              협업공간을 만들고 함께 일할 멤버들을 초대해보세요.</p> -->
                <label for="title">이슈 제목</label> <input
                   class="form-control createmodal" type="text" id="issuetitle"
-                  name="issuetitle" style="width: 100%" placeholder="제목을 입력해 주세요.">
+                  name="issuetitle" style="width: 100%;border-radius:0.5rem;" placeholder="제목을 입력해 주세요.">
                <br> <label for="content">이슈 설명</label> <span id="filename"></span>
                <img id="imgpreview" alt="사진 미리보기 자리"
                   style="display: none; width: 40px; height: 40px" src="#" /> 
                   <input type="file" multiple="multiple"  id="fileclick" name="files" hidden="">
                <button type="button" id="auth" disabled hidden="">Authenticate</button>
                <textarea class="form-control createmodal" rows="5"
-                  id="issuecontent" name="issuecontent" style="width: 100%"
+                  id="issuecontent" name="issuecontent" style="width: 100%;border-radius: 0.5rem;"
                   placeholder="@를 입력하여 멘션, 할 일, 파일 등을 추가해 보세요."></textarea>
                <br>
                <label for="annota">첨부</label>
-               <div id="todoresult" style="overflow: auto; height: 100px; border: 1px solid #c8c8c8">
+               <div id="todoresult" style="overflow: auto; height: 100px; border: 1px solid #c8c8c8; border-radius: 0.5rem;">
                   <!-- mention -->
                </div>
                <!-- The Google API Loader script. -->
@@ -1195,7 +1195,7 @@ span {
       </div>
    </div>
 
-   <div class="list-group" id="mentionlist" style="display: none">
+   <div class="list-group" id="mentionlist" style="display: none;border:10px solid #cbc9d4">
       <a href="#" class="list-group-item list-group-item-action menli" id="men1"style="padding: 5px;">멘션</a> 
       <!-- <a href="#" class="list-group-item list-group-item-action menli" id="men2"style="padding: 5px">소스코드</a> --> 
       <a href="#" class="list-group-item list-group-item-action menli" id="men2"style="padding: 5px">구글 드라이브</a> 
@@ -1302,7 +1302,7 @@ span {
                   	<spring:message code="invite.list" />
                   </label>
                   <div id="invite_Input"
-                     style="border: 1px solid rgba(124, 119, 119, 0.3); border-radius: 0.5rem; margin-right: 3%; height: 280px; overflow: auto; margin-bottom: 10px;">
+                     style="border: 2px solid rgba(0,0, 0, 0.3); border-radius: 0.5rem; margin-right: 3%; height: 280px; overflow: auto; margin-bottom: 10px;">
                      <span id="invite_Input1"
                         style="margin-left: 35%; margin-top: 18%;"> <img
                         src="<c:url value="/resources/images/icon/mail.png" />"
@@ -1342,7 +1342,7 @@ span {
              협업공간을 만들고 함께 일할 멤버들을 초대해보세요.</p> -->
                <label for="bntitle">공지사항</label> <input
                   class="form-control createmodal" type="text" id="bntitle"
-                  name="bntitle" style="width: 100%" placeholder="제목을 입력해 주세요.">
+                  name="bntitle" style="width: 100%;border-radius: 0.5rem;" placeholder="제목을 입력해 주세요.">
                <br> <label for="noticecontent">공지 설명</label>
                <textarea class="form-control createmodal" rows="5"
                   id="bncontent" name="bncontent" style="width: 100%"
@@ -1459,7 +1459,7 @@ $('.menli').keydown(function(event) {
 				if (event.shiftKey && event.keyCode == 50) {
 					$('#mentionlist').attr(
 							'style',
-							'position:fixed; width:20%;top:' + top + 'px;left:'
+							'position:fixed;border:1px solid black;border-radius:0.5rem; width:20%;top:' + top + 'px;left:'
 									+ left + 'px; z-index:4');
 					$('#mentionlist').show();
 					$('div').not('#mentionlist').click(function() {
@@ -1521,6 +1521,15 @@ $('.menli').keydown(function(event) {
 		var text = "";
 		text = $('#issuecontent').val().replace("@", "");
 		$('#issuecontent').val(text);
+		if("${role}"=="ROLE_USER"){
+			   Swal.fire({
+					  title : '이용 불가',
+					  text : '무료회원은 구글드라이브를 이용할 수 없습니다!',
+					  icon : 'warning',
+					  confirmButtonColor: '#d33'
+		   })
+		   return;
+		}
 		$('#auth').click();
 		$('#issuecontent').append($('.picker-dialog'));
 
@@ -1550,7 +1559,7 @@ $('.menli').keydown(function(event) {
 		//$('#filename').append($("#fileclick").val().substring(12));
 		var text = "";
 		text = $('#issuecontent').val().replace("@", "");
-		//$('#issuecontent').val(text);
+		$('#issuecontent').val(text);
 		for(let i=0; i<$("#fileclick")[0].files.length;i++){
 		$('#todoresult')
 		.append(

@@ -100,10 +100,13 @@ border-radius: 5px;
 			<span class="iconify" id="comeback" data-icon="entypo:back" data-inline="false" style="cursor: pointer; font-size: 25px;margin-bottom: 10px;margin-left: 15px;"></span>
 		</div>
 		</c:if>
-        
-		<h3 id="myissueSubject" style="padding-left: 15px;">${myissue.pititle}</h3>
-		<span style="padding-left: 67%;padding-top: 10px;">${fn:substring(myissue.pidate,0,16)}</span>
+			
+		
         </div>
+        	<div style="margin-right: 0; margin-left: 0;">
+			<span id="myissueSubject" style="padding-left: 60px;font-size: 20px;">${myissue.pititle}</span>
+			<span style="float:right ;padding-top: 1%;padding-right: 55px;">${fn:substring(myissue.pidate,0,16)}</span>
+			</div>
 		
         <hr style="margin:10px 2% 0 2%;">
 		
@@ -116,7 +119,7 @@ border-radius: 5px;
 		</c:otherwise>
 		</c:choose>
 		
-		<div class="row" style="height:450px;overflow: auto;margin-left: 5px; margin-right: 5px;">
+		<div class="row" style="height:100px; overflow: auto; margin-left: 5px; margin-right: 5px;">
 		<c:forEach items="${mymention}" var="m">
 		<div class="myissueDetail col-sm-11" id="myissueMention" style="padding-left: 20px;">
 		<sup><i class="fas fa-quote-left" style="color:#ca0000; font-size: 7px"></i></sup> @${m.name} <sup><i class="fas fa-quote-right"style="color:#ca0000;font-size: 7px"></i></sup>
@@ -143,7 +146,10 @@ border-radius: 5px;
 		: ${work.pdowork}
 		<br>
 		</div>
-		</c:forEach> 
+		</c:forEach>
+		</div>
+		<br>
+		<div class="row" style="overflow: auto;margin-left: 5px; margin-right: 5px;"> 
         <div class="myissueDetail col-sm-11" style="padding-left: 20px;">
         ${myissue.picontent}
         </div>    

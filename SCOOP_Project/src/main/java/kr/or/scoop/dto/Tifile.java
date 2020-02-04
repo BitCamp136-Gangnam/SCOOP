@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 public class Tifile {
-	private int tiseq;
-	private List<CommonsMultipartFile> files;
-	private String tfilename;
-	private long tfilesize;
+	private int tiseq; //팀이슈 번호 
+	private List<CommonsMultipartFile> files; //올린 파일들
+	private String tfilename; //파일 이름
+	private long tfilesize; //파일 사이즈
 	public int getTiseq() {
 		return tiseq;
 	}

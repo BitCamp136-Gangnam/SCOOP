@@ -185,4 +185,10 @@ where tseq = #{tseq}
 <delete id="delComment">
 	delete reply where replyseq=#{replyseq}
 </delete>
+<select id="getOriFilesize" resultType="Long">
+	select fdcapa from filedrive where tiseq=#{tiseq}
+</select>
+<select id="getMyOriFilesize" resultType="Long">
+	select pdcapa from pfiledrive where piseq=#{piseq}
+</select>
 </mapper>

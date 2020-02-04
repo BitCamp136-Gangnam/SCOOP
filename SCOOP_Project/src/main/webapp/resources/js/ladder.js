@@ -237,7 +237,7 @@ $(function(){
                 var node = x + '-' + y;
                 var nodeInfo  = GLOBAL_FOOT_PRINT[node];
                 if(nodeInfo["change"] && nodeInfo["draw"] ){
-                     stokeLine(x, y ,'w' , 'r' , '#ddd' , '2')
+                     stokeLine(x, y ,'w' , 'r' , '#414550' , '2')
                 }else{
 
                 }
@@ -292,7 +292,7 @@ $(function(){
          for(var y =0; y < heightNode-1; y++){
             html += '<tr>';
             for(var x =0; x <widthNode-1 ; x++){
-                html += '<td style="width:98px; height:25px; border-left:2px solid #ddd; border-right:2px solid #ddd;"></td>';
+                html += '<td style="width:98px; height:25px; border-left:2px solid #414550; border-right:2px solid #414550;"></td>';
             }
             html += '</tr>';
         }

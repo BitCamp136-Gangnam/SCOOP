@@ -4,14 +4,14 @@ package kr.or.scoop.dto;
 import java.sql.Timestamp;
 
 import org.springframework.stereotype.Repository;
-
+//전체 공지사항
 @Repository
 public class Notice {
-	private int bnseq;
-	private String bntitle;
-	private String bncontent;
-	private Timestamp bntime;
-	private String email;
+	private int bnseq; //공지사항 번호
+	private String bntitle; //공지사항 제목
+	private String bncontent; //공지사항 내용
+	private Timestamp bntime; //공지사항 작성시간
+	private String email; //공지사항 글쓴이
 	
 	
 	public int getBnseq() {

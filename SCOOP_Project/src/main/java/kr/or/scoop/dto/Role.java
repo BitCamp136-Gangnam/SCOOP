@@ -4,9 +4,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class Role {
-	private String email;
-	private String rname;
-	private int count;
+	private String email; //사용자 이메일
+	private String rname; //사용자 등급
+	private int count; //사용자 프로젝트 개수
 	
 	public String getEmail() {
 		return email;

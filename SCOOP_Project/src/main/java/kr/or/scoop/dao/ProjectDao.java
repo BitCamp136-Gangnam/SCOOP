@@ -9,10 +9,10 @@ import kr.or.scoop.dto.Tissue;
 import kr.or.scoop.dto.Tpmember;
 
 public interface ProjectDao {
-	//프로젝트 생성 1
+	//협업공간 생성
 	public int insertPJT(TeamPjt team);
 	
-	//프로젝트 생성 2
+	//협업공간 멤버 초대 성공
 	public int insertPJT2(String email, int tseq);
 	
 	//프로젝트 리스트 
@@ -24,15 +24,16 @@ public interface ProjectDao {
 	//팀이슈 리스트
 	public List<Tissue> getTissue(int tseq); 
 	
-
 	//프로젝트 수정
 	public int updatePjt(TeamPjt teampjt);
 	
 	//팀 권한 조회
 	public int searchRank(int tseq, String email);
 
-	//북마크
+	//북마크 추가
 	public int addBookMark(int tiseq, String email);
+	
+	//북마크 삭제
 	public int delBookMark(int tiseq, String email);
 	
 	//북마크 조회

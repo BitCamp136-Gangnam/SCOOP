@@ -96,14 +96,13 @@ public class MemberController {
 			
 			Map model = new HashMap();
 			model.put("title", "협업공간 SCOOP 회원가입 인증 이메일입니다");
-			// model.put("password", temp);
 			String mailBody = VelocityEngineUtils.mergeTemplateIntoString(
 					velocityEngineFactoryBean.createVelocityEngine(), "emailTemplate.vm", "UTF-8", model);
 			messageHelper.setFrom("leeyong1321@gmail.com");
 			messageHelper.setTo(member.getEmail());
 			messageHelper.setSubject("협업공간 SCOOP 회원가입 인증 이메일입니다");
 			messageHelper.setText(mailBody, true);
-			mailSender.send(message);
+			mailSender.send(message); //회원가입 인증 메일 보내기
 			PrintWriter out = response.getWriter();
 			out.println("<script>Swal.fire({" + 
 					"							        	    		  title: \"인증 이메일 발송\"," + 
@@ -131,11 +130,11 @@ public class MemberController {
 			}
 			
 		}
-		return viewpage; // 주의 (website/index.htm
+		return viewpage; 
 
 	}
 
-	// 일반 회원가입 인증 후 가입
+	// 일반 회원가입 인증
 	@RequestMapping(value = "registerOk.do", method = { RequestMethod.POST, RequestMethod.GET })
 	public String normalInsert(Member member, HttpSession session, HttpServletResponse response) throws ClassNotFoundException, SQLException {
 		response.setContentType("text/html; charset=UTF-8");
@@ -199,7 +198,7 @@ public class MemberController {
 	}
 	
 
-	// 로그인 성공
+	// 로그인 성공후 메인페이지 이동
 	@RequestMapping(value = "/userindex.do", method = RequestMethod.GET)
 	public String userindex(@RequestParam(required = false, name="lang") String language, HttpSession session, 
 				HttpServletRequest request, HttpServletResponse response, Model model) {
@@ -224,9 +223,9 @@ public class MemberController {
 		ProjectDao noticeDao = sqlsession.getMapper(ProjectDao.class);
 		MemberDao memberdao = sqlsession.getMapper(MemberDao.class);
 		MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
-		Member member = memberdao.getMember((String)session.getAttribute("email"));
-		Role role = memberdao.getRole(email);
-		String img = memberdao.getProfile(email);
+		Member member = memberdao.getMember((String)session.getAttribute("email")); //로그인한 사람 정보 불러오기
+		Role role = memberdao.getRole(email); //로그인한 사람 등급 불러오기
+		String img = memberdao.getProfile(email); //로그인한 사람 프로필사진 불러오기
 		int count = 0;	
 		List<FileDrive> filedrive = null;
 		List<Tissue> mytissuelist = null;
@@ -235,22 +234,22 @@ public class MemberController {
 		List<Tpmember> pjtlist = null;
 		List<Tpmember> tpmemlist =  null;
 		try {
-			 filedrive = memberdao.getFileDrive(email);
-			 count = memberdao.getCount(email);
+			 filedrive = memberdao.getFileDrive(email); //로그인한 사람 파일드라이브 불러오기
+			 count = memberdao.getCount(email); //로그인한 사람 프로젝트 갯수 불러오기
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		session.setAttribute("name", member.getName());
-		session.setAttribute("img",img); 
-		session.setAttribute("role", role.getRname());
-		session.setAttribute("count", count);
-		session.setAttribute("filed", filedrive);
+		session.setAttribute("name", member.getName()); //이름 세션저장
+		session.setAttribute("img",img); //프로필사진 세션저장
+		session.setAttribute("role", role.getRname()); //등급 세션저장
+		session.setAttribute("count", count); //협업공간 갯수 세션 저장
+		session.setAttribute("filed", filedrive); //파일드라이브 세션 저장
 		try {
-			pjtlist = noticeDao.getPJT(email);
-			tpmemlist = memberdao.getTpmembers(member.getEmail());
-			mytissuelist = myissuedao.teamWriteTiisueList(member.getIdtime(), email);
-			myreplylist = myissuedao.teamWriteReplyList(member.getIdtime());
-			mypjtlist = myissuedao.teamWriteNoticeList(member.getEmail(), member.getIdtime());
+			pjtlist = noticeDao.getPJT(email); //로그인한사람이 속한 협업공간 불러오기
+			tpmemlist = memberdao.getTpmembers(member.getEmail()); //로그인한 사람이 속한 협업공간의 멤버목록 불러오기
+			mytissuelist = myissuedao.teamWriteTiisueList(member.getIdtime(), email); //새로운 이슈목록 불러오기
+			myreplylist = myissuedao.teamWriteReplyList(member.getIdtime()); //새로운 댓글목록 불러오기
+			mypjtlist = myissuedao.teamWriteNoticeList(member.getEmail(), member.getIdtime()); //새로운 공지사항목록 불러오기
 			model.addAttribute("mytissuelist",mytissuelist);
 			model.addAttribute("myreplylist",myreplylist);
 			model.addAttribute("mypjtlist",mypjtlist);
@@ -261,58 +260,14 @@ public class MemberController {
 			
 			session.setAttribute("pjtlist", pjtlist);
 			session.setAttribute("tpmemlist", tpmemlist);
-			List<Tissue> myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime(), email);
-			/*MemberDao memberdao = sqlsession.getMapper(MemberDao.class);
-			MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
-			ProjectDao projectdao = sqlsession.getMapper(ProjectDao.class);
-			try {
-				Member member = memberdao.getMember(email);
-				List<Tissue> myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime());
-				*/
-			/*
-			 * List<MyIssue> showNewTissueList = null; for(Tpmember tpmember : pjtlist) {
-			 * 
-			 * for(Tissue tissue : myNewTissueList) { if(tpmember.getTseq() ==
-			 * tissue.getTseq() && tissue.getTidate() !=null) { MyIssue myissue = new
-			 * MyIssue(); myissue.setEmail(tissue.getEmail());
-			 * myissue.setTseq(tissue.getTseq()); myissue.setTititle(tissue.getTititle());
-			 * myissue.setTicontent(tissue.getTicontent());
-			 * myissue.setPname(tpmember.getPname()); myissue.setTidate(tissue.getTidate());
-			 * myissue.setTiseq(tissue.getTiseq()); showNewTissueList.add(myissue); } } }
-			 * MyIssue[] temptissue = (MyIssue[])showNewTissueList.toArray();
-			 */
-			/*
-			 * for (int i = arr_size - 1; i > 0; i--) {
-            System.out.println("\n버블 정렬 " + (arr_size - i) + "단계");
- 
-            for (int j = 0; j < i; j++) {
-                if (arr[j] > arr[j + 1]) {
-                    SelectionSort.swap(arr, j, j + 1);
-                }
-                SelectionSort.printArr(arr);
- 
-            }
-        }
-			*/
+			List<Tissue> myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime(), email); //새로운 이슈목록 불러오기
 			
 			model.addAttribute("mypjtlist", pjtlist);
 			model.addAttribute("myNewTissueList", myNewTissueList);
-			/*
-			 AlarmDao dao = sqlsession.getMapper(AlarmDao.class); 
-			 List<Alarm> alarm = dao.getAlarm((String)session.getAttribute("email"));
-			 */
-			/*
-			 if(alarm == null) {
-			 System.out.println("유저인덱스 알람 널"); 
-			 } else {
-			 System.out.println("유저인덱스 알람"); model.addAttribute("alarm", alarm);
-			 System.out.println("유저인덱스 알람 끝"); 
-			 }
-			 */
 		}
-		/* System.out.println(pjtlist.get(0)); */
 		return "user/dashBoard";
 	}
+	//새로운 댓글 목록 불러오기
 	@RequestMapping(value = "/newReply.do", method = RequestMethod.GET)
 	public String userindexReply(@RequestParam(required = false, name="lang") String language, HttpSession session, 
 			HttpServletRequest request, HttpServletResponse response, Model model) {
@@ -381,6 +336,7 @@ public class MemberController {
 		return "user/dashBoard-reply";
 		
 	}
+	//새로운 공지사항 목록 불러오기
 	@RequestMapping(value = "/newNotice.do", method = RequestMethod.GET)
 	public String userindexNotice(@RequestParam(required = false, name="lang") String language, HttpSession session, 
 			HttpServletRequest request, HttpServletResponse response, Model model) {
@@ -445,6 +401,7 @@ public class MemberController {
 		}
 		return "user/dashBoard-notice";
 	}
+	//멘션 목록 불러오기
 	@RequestMapping(value = "/mention.do", method = RequestMethod.GET)
 	public String mention(@RequestParam(required = false, name="lang") String language, HttpSession session, 
 				HttpServletRequest request, HttpServletResponse response, Model model) {
@@ -520,15 +477,6 @@ public class MemberController {
 
 	}
 
-	/*
-	 * //이슈작성
-	 * 
-	 * @RequestMapping(value="issue.do",method = RequestMethod.POST) public String
-	 * issue(HttpSession session,Issue issue,String selectpro) { return null; }
-	 */
-	
-	
-
 	// 네이버회원 로그인
 	@RequestMapping(value = "naverLogin.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String naverLogin(String email, String name, HttpSession session) {
@@ -548,7 +496,7 @@ public class MemberController {
 		return viewpage;
 	}
 
-	// 본인 인증 메일 발송
+	// 비밀번호 찾기 메일 발송
 	@RequestMapping(value="/forgotpwd.do")
 	@ResponseBody
 	public String forgotPwd(Mail mail, HttpServletRequest request, HttpServletResponse response, HttpSession session, String email) {
@@ -619,12 +567,12 @@ public class MemberController {
 		return viewpage;
 	}
 	
-	// 캘린더 // 이게 왜 캘린더야?
+	// 회원가입 인증
 	@RequestMapping(value = "/certified.do")
 	public String certified() {
 		return "certified/Certified";
 	}
-	
+	//협업공간에 멤버 초대 메일 발송하기
 	@RequestMapping(value = "inviteTeam.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public String inviteTeam(HttpServletRequest request, HttpSession session) throws MessagingException, VelocityException, IOException {
 		try {
@@ -687,7 +635,7 @@ public class MemberController {
 		return "utils/emailSwalOk";
 	}
 	
-	//회원수정 페이지 이동
+	//회원정보수정 페이지 이동
 	@RequestMapping(value="memberEdit.do" , method = RequestMethod.GET)
 	public String EditProfile(Model model,HttpSession session) {
 		MemberDao dao = sqlsession.getMapper(MemberDao.class);
@@ -703,7 +651,7 @@ public class MemberController {
 		
 	}
 	
-	//회원수정 체크
+	//회원정보 수정
 	@RequestMapping(value="editCheck.do" , method = RequestMethod.POST)
 	public String UpdateProfile(Member member,HttpServletRequest request,HttpSession session) {
 		    
@@ -762,11 +710,7 @@ public class MemberController {
 		return "user/app-alram";
 	}
 	
-	@RequestMapping(value="app-external.do", method=RequestMethod.GET)
-	public String externalpage() {
-		return "user/app-external";
-	}
-	
+	//회원 등급 수정
 	@RequestMapping(value="updateRole.do", method=RequestMethod.POST)
 	public String updateRole(HttpSession session) {
 		int result = 0;
@@ -781,7 +725,7 @@ public class MemberController {
 		
 	}
 	
-	// 이메일 인증 확인
+	// 네이버이메일 인증 확인
 	@RequestMapping(value = "/naverCertified.do")
 	public String naverCertified() {
 		return "utils/naverCertified";
@@ -820,90 +764,13 @@ public class MemberController {
 			return viewpage;
 		}
 		
-		/*@RequestMapping(value = "newReply.do", method = RequestMethod.GET)
-		public String newReply(HttpSession session, Model model) {
-			String viewpage = "";
-			String email = (String)session.getAttribute("email");
-			MemberDao memberdao = sqlsession.getMapper(MemberDao.class);
-			MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
-			ProjectDao projectdao = sqlsession.getMapper(ProjectDao.class);
-			try {
-				Member member = memberdao.getMember(email);
-				List<Tpmember> pjtlist = projectdao.getPJT(email);
-				List<PjNotice> myNewPjNoticeList = myissuedao.teamWriteNoticeList(email, member.getIdtime());
-				List<Tissue> myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime());
-				List<Reply> myNewReplyList = myissuedao.teamWriteReplyList(member.getIdtime());
-				model.addAttribute("mypjtlist", pjtlist);
-				model.addAttribute("myNewPjNoticeList", myNewPjNoticeList);
-				model.addAttribute("myNewTissueList", myNewTissueList);
-				model.addAttribute("myNewReplyList", myNewReplyList);
-				viewpage = "user/UserNewReply";
-			} catch (Exception e) {
-				// TODO: handle exception
-				System.out.println(e.getMessage());
-				viewpage = "redirect:/userindex.do";
-			}
-			
-			return viewpage;
-		}*/
 		
-		@RequestMapping(value = "newVote.do", method = RequestMethod.GET)
-		public String newVote(HttpSession session, Model model) {
-			String viewpage = "";
-			String email = (String)session.getAttribute("email");
-			MemberDao memberdao = sqlsession.getMapper(MemberDao.class);
-			MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
-			ProjectDao projectdao = sqlsession.getMapper(ProjectDao.class);
-			try {
-				Member member = memberdao.getMember(email);
-				List<Tpmember> pjtlist = projectdao.getPJT(email);
-				List<PjNotice> myNewPjNoticeList = myissuedao.teamWriteNoticeList(email, member.getIdtime());
-				List<Tissue> myNewTissueList = myissuedao.teamWriteTiisueList(member.getIdtime(), email);
-				List<Reply> myNewReplyList = myissuedao.teamWriteReplyList(member.getIdtime());
-				model.addAttribute("mypjtlist", pjtlist);
-				model.addAttribute("myNewPjNoticeList", myNewPjNoticeList);
-				model.addAttribute("myNewTissueList", myNewTissueList);
-				model.addAttribute("myNewReplyList", myNewReplyList);
-				viewpage = "user/UserNewVote";
-			} catch(Exception e) {
-				viewpage = "redirect:/userindex.do";
-			}
-			
-			return viewpage;
-		}
-		
-		/*@RequestMapping(value = "newNotice.do", method = RequestMethod.GET)
-		public String newNotice(HttpSession session, Model model) {
-			String viewpage = "";
-			String email = (String)session.getAttribute("email");
-			MemberDao memberdao = sqlsession.getMapper(MemberDao.class);
-			MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
-			ProjectDao projectdao = sqlsession.getMapper(ProjectDao.class);
-			try {
-				Member member = memberdao.getMember(email);
-				List<Tpmember> pjtlist = projectdao.getPJT(email);
-				List<PjNotice> myNewPjNoticeList = myissuedao.teamWriteNoticeList(email, member.getIdtime());
-				
-				model.addAttribute("mypjtlist", pjtlist);
-				model.addAttribute("myNewPjNoticeList", myNewPjNoticeList);
-				System.out.println(member);
-				System.out.println(pjtlist);
-				System.out.println(myNewPjNoticeList);
-				viewpage = "user/UserNewNotice";
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-				viewpage = "redirect:/userindex.do";
-			}
-			
-			return viewpage;
-		}*/
-		
-		// 이메일 인증 확인
+		// 캘린더 이슈 추가
 		@RequestMapping(value = "/addCalendarAjax.do")
 		public String addCalendarAjax() {
 			return "utils/addCalendarAjax";
 		}
-		
+		// 팀장이 멤버 탈퇴시키기
 		@RequestMapping(value="memberDelete.do", method = {RequestMethod.POST, RequestMethod.GET})
 		public String memberDelete(HttpSession session) {
 		String email = (String)session.getAttribute("email");

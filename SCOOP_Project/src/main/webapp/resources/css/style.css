@@ -126,7 +126,7 @@ body {
   line-height: 1.5;
   /* color: #76838f; */
   text-align: left;
-  background-color: #F3F3F9; }
+  background-color: #cbc9d4; }
 
 [tabindex="-1"]:focus {
   outline: 0 !important; }
@@ -1433,7 +1433,7 @@ pre {
   color: #495057;
   background-color: #fff;
   background-clip: padding-box;
-  border: 1px solid #ced4da;
+  border: 1px solid #000;
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; }
   @media screen and (prefers-reduced-motion: reduce) {
@@ -1445,7 +1445,7 @@ pre {
   .form-control:focus {
     color: #495057;
     background-color: #fff;
-    border-color: #ecebfe;
+    border-color: #E71D36;
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgba(117, 113, 249, 0.25); }
   .form-control::placeholder {
@@ -3794,7 +3794,7 @@ input[type="button"].btn-block {
   .list-group-item-action:hover, .list-group-item-action:focus {
     color: #495057;
     text-decoration: none;
-    background-color: #f8f9fa; }
+    background-color: #cbc9d4; }
   .list-group-item-action:active {
     color: #76838f;
     background-color: #e9ecef; }
@@ -3805,7 +3805,7 @@ input[type="button"].btn-block {
   padding: 0.75rem 1.25rem;
   margin-bottom: -1px;
   background-color: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.125); }
+  border: 1px solid rgba(0, 0, 0, 0.3); }
   .list-group-item:first-child {
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem; }
@@ -8189,10 +8189,10 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
       .nk-sidebar .metismenu > li:hover span, .nk-sidebar .metismenu > li:focus span, .nk-sidebar .metismenu > li.active span {
         color: #464a53; }
       .nk-sidebar .metismenu > li:hover > a {
-        background: #F3F1FA;
+        background: rgba(203, 201, 212,0.5);
         color: #E71D36; }
       .nk-sidebar .metismenu > li.active > a {
-        background: #F3F1FA;
+        background: #cbc9d4;
         color: #464a53; }
       .nk-sidebar .metismenu > li.active ul a {
         color: #464a53; }
@@ -8219,7 +8219,7 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
       transition: all 0.4s ease-in-out; }
       .nk-sidebar .metismenu a:hover, .nk-sidebar .metismenu a:active, .nk-sidebar .metismenu a.active {
         text-decoration: none;
-        background-color: #F3F1FA; }
+        background-color: #cbc9d4; }
     .nk-sidebar .metismenu .has-arrow:after {
       position: absolute;
       content: "";
@@ -10010,7 +10010,7 @@ input[type="checkbox"]:after {
   height: 1.2rem;
   margin-top: -3px;
   margin-left: -3px;
-  border: 1px solid #EEEEEE;
+  border: 1px solid #382b2b;
   border-radius: 0px;
   background: #fff;
   line-height: 1.3; }

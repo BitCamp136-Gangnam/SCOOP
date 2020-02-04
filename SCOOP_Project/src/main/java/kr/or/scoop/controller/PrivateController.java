@@ -51,11 +51,11 @@ public class PrivateController {
 		
 		
 		MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
-		List<MyIssue> myissuelist = myissuedao.getMyissue(email);
+		List<MyIssue> myissuelist = myissuedao.getMyissue(email); //나의 이슈목록 불러오기
 		for(int i=0; i<myissuelist.size();i++) {
-			myissuelist.get(i).setPicontent(myissuelist.get(i).getPicontent().replace("<br>", " "));
+			myissuelist.get(i).setPicontent(myissuelist.get(i).getPicontent().replace("<br>", " ")); //<br>을 띄어쓰기로 치환해서 보여줌
 		}
-		List<BookMark> bookMark = myissuedao.getBookMark(email);
+		List<BookMark> bookMark = myissuedao.getBookMark(email); //북마크 목록 불러오기
 		
 		model.addAttribute("myissuelist", myissuelist);
 		model.addAttribute("bookMark", bookMark);
@@ -89,13 +89,13 @@ public class PrivateController {
 		
 		return "private/private-bookmark";
 	}
-	
+	//프라이빗 캘린더 불러오기
 	@RequestMapping("/private-calendar.do")
 	public String object(@RequestParam(required = false, name="lang") String language, HttpServletRequest request, HttpServletResponse response,Model model,HttpSession session) {
 		String email = (String)session.getAttribute("email");
 		return "private/private-calendar";
 	}
-	
+	//프라이빗 캘린더 이슈 작성
 	@RequestMapping(value = "addPrivateCalendar.do", method = RequestMethod.POST)
 	public String addPrivateCalendar(HttpSession session,String title, String start, String end, String description, String type, String username, String backgroundColor, String textColor, String allDay, String tseq) {
 		int result = 0;
@@ -133,7 +133,7 @@ public class PrivateController {
 		return viewpage;
 		
 	}
-	
+	//프라이빗 캘린더 이슈 수정
 	@RequestMapping(value = "editPrivateCalendar.do", method = RequestMethod.POST)
 	public String editPrivateCalendar(int _id, String title, String start, String end, String description, String type, String backgroundColor, boolean allDay) {
 		int result = 0;
@@ -165,7 +165,7 @@ public class PrivateController {
 		return viewpage;
 		
 	}
-	
+	//프라이빗 캘린더 이슈 삭제
 	@RequestMapping(value = "deletePrivateCalendar.do", method = RequestMethod.POST)
 	public String deletePrivateCalendar(int piseq, String username, HttpSession session) {
 		int result = 0;
@@ -190,7 +190,7 @@ public class PrivateController {
 		return viewpage;
 		
 	}
-	
+	//프라이빗 캘린더 이슈 디테일
 	@ResponseBody
 	@RequestMapping(value="getPrivateCalendar.do", method = RequestMethod.GET)
 	public JSONArray getPrivateCalendar(HttpSession session, HttpServletResponse response, Model model) {

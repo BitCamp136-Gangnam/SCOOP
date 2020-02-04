@@ -8,13 +8,13 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class TeamPjt {
-	private int tseq;
-	private String email;
-	private String pname;
-	private String pcontent;
-	private Date ptime;
-	private int istpalarm;
-	private int ischarge;
+	private int tseq; 		//프로젝트 번호 
+	private String email;  	//팀장이메일 
+	private String pname; 	//프로젝트 이름
+	private String pcontent;//프로젝트 설명
+	private Date ptime;  	//프로젝트 생성 날짜
+	private int istpalarm; 	//알림 여부
+	private int ischarge; 	//유료 여부
 	
 	public int getTseq() {
 		return tseq;

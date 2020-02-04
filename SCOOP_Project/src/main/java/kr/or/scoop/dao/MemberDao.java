@@ -48,7 +48,7 @@ public interface MemberDao {
 	//비밀번호 변경
 	public int changePassword(@Param("pwd")String pwd, @Param("email")String email);
 
-	//프로젝트 멤버 리스트 출력 -- 도연
+	//프로젝트 멤버 리스트 출력
 	public List<ProjectMemberlist> projectMemberlist(int tseq);
 	
 	//롤 권한 변경

@@ -1,14 +1,14 @@
 package kr.or.scoop.dto;
 
 import java.sql.Timestamp;
-
+//프라이빗 파일함
 public class PrivateFileDrive {
-	private int pdseq;
-	private int pdcapa;
-	private String pfdname;
-	private Timestamp pfddate;
-	private String email;
-	private int piseq;
+	private int pdseq; //프라이빗 파일 번호
+	private int pdcapa; //프라이빗 파일 사이즈
+	private String pfdname; //프라이빗 파일 이름
+	private Timestamp pfddate; //프라이빗 파일 올린 시간
+	private String email; //프라이빗 파일 올린 사람 이메일
+	private int piseq; //프라이빗 이슈 번호
 	public int getPdseq() {
 		return pdseq;
 	}

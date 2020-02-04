@@ -1,5 +1,5 @@
 package kr.or.scoop.dto;
-
+//알람
 public class Alarm {
 	private String pnaemail;
 	private String pnatitle;

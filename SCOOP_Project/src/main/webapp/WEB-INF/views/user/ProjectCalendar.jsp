@@ -19,7 +19,6 @@
 <script>
 $(function(){
 	$('#getOutTeam').mouseover(function(){
-		console.log("열려라 참깨")
 		 $('#door').attr("style","font-size: 20px;color:#E71D36;");
 	});
 	$('#getOutTeam').mouseout(function(){

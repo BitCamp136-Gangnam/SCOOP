@@ -75,9 +75,8 @@
 
 																<div class="row">
 																	<div class="col-xs-12">
-																		<label class="col-xs-4" for="edit-allDay">하루종일</label>
-																		<input class='allDayNewEvent' id="edit-allDay"
-																			type="checkbox"></label>
+																		<label class="col-xs-4" for="edit-allDay"  style="margin-right: 3px;">하루종일</label>
+																		<input class='allDayNewEvent' id="edit-allDay"type="checkbox"/>
 																	</div>
 																</div>
 

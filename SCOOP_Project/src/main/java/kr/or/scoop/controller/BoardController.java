@@ -29,6 +29,7 @@ import kr.or.scoop.dto.Notice;
 import kr.or.scoop.dto.PjNotice;
 import kr.or.scoop.dto.ProjectMemberlist;
 import kr.or.scoop.dto.Reply;
+import kr.or.scoop.dto.Role;
 import kr.or.scoop.dto.TeamPjt;
 import kr.or.scoop.dto.Tissue;
 import kr.or.scoop.service.BoardService;
@@ -50,39 +51,39 @@ public class BoardController {
 	@Autowired
 	private PrivateService privateservice;
 	
-	// 내가 작성한 이슈
+	// 내가 작성한 이슈불러오기
 	@RequestMapping(value = "/myissue.do", method = RequestMethod.GET)
 	public String myissue(HttpSession session, Model model) {
 		String email = "";
-		email = (String)session.getAttribute("email");
+		email = (String)session.getAttribute("email"); //로그인한 사람 이메일
 		MyIssueDao dao = sqlSession.getMapper(MyIssueDao.class);
-		List<MyIssue> ti = dao.MyWriteTiisueList(email);
-		List<MyIssue> pi = dao.MyWriteIssueList(email);
+		List<MyIssue> ti = dao.MyWriteTiisueList(email); //내가작성한 협업공간 이슈 리스트
+		List<MyIssue> pi = dao.MyWriteIssueList(email); //내가 작성한 프라이빗 이슈 리스트
 		model.addAttribute("pi",pi);
 		model.addAttribute("ti",ti);
 		return "issue/myissue";
 	}
-	// 내가 작성한 이슈
+	// 내가 작성한 이슈 댓글리스트 불러오기
 	@RequestMapping(value = "/myissueReply.do", method = RequestMethod.GET)
 	public String myissueReply(HttpSession session, Model model) {
 		String email = "";
-		email = (String)session.getAttribute("email");
+		email = (String)session.getAttribute("email");//로그인한 사람 이메일
 		MyIssueDao dao = sqlSession.getMapper(MyIssueDao.class);
-		List<Reply> reply = dao.MyWriteReplyList(email);
+		List<Reply> reply = dao.MyWriteReplyList(email); //내가 작성한 댓글 불러오기
 		model.addAttribute("re",reply);
 		return "issue/myissueReply";
 	}
 	
-	// 마이이슈디테일 
+	// 프라이빗이슈디테일 불러오기 
 	@RequestMapping(value = "/myissueDetail.do", method = {RequestMethod.POST,RequestMethod.GET})
 	public String myissueDetail(int piseq, Model model) {
 		
 		MyIssueDao dao = sqlSession.getMapper(MyIssueDao.class);
 		MyIssue myissue = dao.myissueDetail(piseq);
-		List<Mention> mentions = dao.getMyMentions(piseq);
-		List<GoogleDrive> googledrive = dao.getMyGoogleDrive(piseq);
-		List<DoWork> dowork = dao.getMyDoWork(piseq);
-		List<FileDrive> files = dao.getMyFiles(piseq);
+		List<Mention> mentions = dao.getMyMentions(piseq); //멘션리스트 불러오기
+		List<GoogleDrive> googledrive = dao.getMyGoogleDrive(piseq); //구글드라이브 리스트 불러오기
+		List<DoWork> dowork = dao.getMyDoWork(piseq); //할일 리스트 불러오기
+		List<FileDrive> files = dao.getMyFiles(piseq); //파일 리스트 불러오기
 		model.addAttribute("myissue", myissue);
 		model.addAttribute("mymention", mentions);
 		model.addAttribute("mygdrive", googledrive);
@@ -91,16 +92,16 @@ public class BoardController {
 		return "issue/myissueDetail";
 	}
 	
-	// 팀이슈디테일 
+	// 협업공간 이슈디테일 
 	@RequestMapping(value="/teamissueDetail.do",method = {RequestMethod.POST,RequestMethod.GET})
 	public String teamissueDetail(int tiseq, Model model){
 		TissueDao dao = sqlSession.getMapper(TissueDao.class);
 		Tissue tissue = dao.teamissueDetail(tiseq);
-		List<Reply> reply = dao.teamCommentOk(tiseq);
-		List<Mention> mentions = dao.getMentions(tiseq);
-		List<GoogleDrive> googledrive = dao.getGoogleDrive(tiseq);
-		List<DoWork> dowork = dao.getDoWork(tiseq);
-		List<FileDrive> files = dao.getFiles(tiseq);
+		List<Reply> reply = dao.teamCommentOk(tiseq); //댓글 리스트 불러오기 
+		List<Mention> mentions = dao.getMentions(tiseq); // 멘션 리스트 불러오기
+		List<GoogleDrive> googledrive = dao.getGoogleDrive(tiseq); //구글드라이브 리스트 불러오기
+		List<DoWork> dowork = dao.getDoWork(tiseq); // 할일 리스트 불러오기
+		List<FileDrive> files = dao.getFiles(tiseq); // 파일 드라이브 리스트 불러오기
 		model.addAttribute("tissue", tissue);
 		model.addAttribute("reply",reply);
 		model.addAttribute("mentions",mentions);
@@ -109,7 +110,7 @@ public class BoardController {
 		model.addAttribute("files", files);
 		return "issue/teamissueDetail";
 	}
-
+	//전체 공지사항 불러오기
 	@RequestMapping(value="notice.do" , method = RequestMethod.GET)
 	public String noticeJoin(Notice notice, Model model) {
 		NoticeDao dao = sqlSession.getMapper(NoticeDao.class);
@@ -117,12 +118,12 @@ public class BoardController {
 		model.addAttribute("notice",n);
 		return "issue/notice";
 	}
-	
+	//공지사항 글쓰기
 	@RequestMapping(value="noticeWrite.do" , method=RequestMethod.POST)
 	public String noticeWrite(Notice notice) {
 		int result = 0;
 		String viewpage;
-		result = service.insertNotice(notice);
+		result = service.insertNotice(notice);//공지사항 작성
 		
 		if(result > 0) {
 			viewpage = "redirect:/notice.do";
@@ -133,11 +134,11 @@ public class BoardController {
 		return viewpage;
 	
 	}
-	
+	//공지사항 디테일 불러오기
 	@RequestMapping(value="noticeDetail.do" , method=RequestMethod.GET)	
 	public String noticeDetail(int bnseq,Model model) {
 		NoticeDao dao = sqlSession.getMapper(NoticeDao.class);
-		Notice notice = dao.detailNotice(bnseq);
+		Notice notice = dao.detailNotice(bnseq); //공지사항 디테일
 		model.addAttribute("notice",notice);
 		
 		return "issue/noticeDetail";
@@ -202,7 +203,7 @@ public class BoardController {
 		
 		return viewpage;
 	}
-	
+	//북마크 삭제하기
 	@RequestMapping("delbook.do")
 	public String delBookMark(HttpSession session, int piseq, int tiseq) {
 		String email = (String)session.getAttribute("email");
@@ -221,7 +222,7 @@ public class BoardController {
 		
 		return viewpage;
 	}
-	
+	//공지사항 수정불러오기
 	@RequestMapping(value="noticeEdit.do" , method=RequestMethod.GET)
 	public String noticeUpdate(int bnseq,Notice notice,Model model) {
 		String viewpage = "";
@@ -235,7 +236,7 @@ public class BoardController {
 			
 		return viewpage;
 	}
-	
+	//공지사항 수정하기
 	@RequestMapping(value="noticeEditOk.do" , method=RequestMethod.POST)
 	public String noticeUpdateCheck(int bnseq,Notice notice,Model model) {
 		int result = 0;
@@ -252,6 +253,7 @@ public class BoardController {
 			
 		return viewpage;
 	}
+	//모든 이슈 키워드 검색하기
 	@RequestMapping(value="searchIssue.do", method = {RequestMethod.POST,RequestMethod.GET})
 	public String searchIssue(String email,String word,Model model) {
 		int result = 0;
@@ -284,7 +286,7 @@ public class BoardController {
 			viewpage = "utils/ajax";
 			
 		}else {
-			model.addAttribute("ajax","댓글 실패ㅠㅠ");
+			model.addAttribute("ajax","댓글 실패");
 			viewpage = "utils/ajax";
 		}
 		return viewpage;
@@ -311,7 +313,7 @@ public class BoardController {
 			viewpage = "utils/ajax";
 			
 		}else {
-			model.addAttribute("ajax","댓글 실패ㅠㅠ");
+			model.addAttribute("ajax","댓글 실패");
 			viewpage = "utils/ajax";
 		}
 		return viewpage;
@@ -418,11 +420,12 @@ public class BoardController {
 		
 		return viewpage;
 	}
+	//프라이빗 이슈 수정 불러오기
 	@RequestMapping(value="myissueEdit.do" , method = {RequestMethod.POST, RequestMethod.GET})
 	public String myissueEdit(int piseq, Model model) {
 		MyIssueDao dao = sqlSession.getMapper(MyIssueDao.class);
 		MyIssue myissue = dao.myissueDetail(piseq);
-		myissue.setPicontent(myissue.getPicontent().replace("<br>", "\n"));
+		myissue.setPicontent(myissue.getPicontent().replace("<br>", "\n")); //textarea <br>치환
 		try {
 			List<Mention> mentions = dao.getMyMentions(piseq);
 			List<GoogleDrive> googledrive = dao.getMyGoogleDrive(piseq);
@@ -438,11 +441,12 @@ public class BoardController {
 		}
 		return "issue/myissueEdit";
 	}
+	//협업공간 이슈 수정 불러오기
 	@RequestMapping(value="teamIssueEdit.do" , method = {RequestMethod.POST, RequestMethod.GET})
 	public String teamIssueEdit(int tiseq, Model model) {
 		TissueDao dao = sqlSession.getMapper(TissueDao.class);
 		Tissue tissue = dao.teamissueDetail(tiseq);
-		tissue.setTicontent(tissue.getTicontent().replace("<br>", "\n"));
+		tissue.setTicontent(tissue.getTicontent().replace("<br>", "\n")); //textarea <br>치환
 		try {
 			//List<Reply> reply = dao.teamCommentOk(tiseq);
 			List<Mention> mentions = dao.getMentions(tiseq);
@@ -460,23 +464,51 @@ public class BoardController {
 		}
 		return "issue/teamIssueEdit";
 	}
+	//프라이빗 이슈 수정하기
 	@RequestMapping(value="myissueEditOk.do" , method = {RequestMethod.POST, RequestMethod.GET})
 	public String myissueEditOk(int piseq,Model model, String[] editMention, String[] editGfilename, HttpSession session, HttpServletRequest request
 			, String[] editGurl, String[] editToname, String[] editOriFile,String[] editDowork, String title, String editIssuecontent, String editFrom, String editTo, @RequestParam(value="editFile") MultipartFile[] editFile) throws Exception {
+		String email = (String)session.getAttribute("email");
+		if(editOriFile != null && editOriFile.length > 0) { 
+			for(int i=0;i<editOriFile.length;i++) {
+				if(editOriFile[i].contains("~delete")) {
+					int pdseq = Integer.parseInt(editOriFile[i].split("~")[1]);
+					privateservice.pfileDelete(pdseq); //만약 지운 파일이 있다면 DB에서 삭제
+				}
+			}
+		}
+		long fullSize = 0;
+		List<Long> orifilesize = tservice.getMyOriFilesize(piseq);
+		for(int i=0;i<orifilesize.size();i++) {
+			fullSize += orifilesize.get(i); //삭제하고나서 남은 원래 파일들의 사이즈 측정
+		}
+		ProjectDao dao = sqlSession.getMapper(ProjectDao.class);
+		Role role = dao.getUserRole(email); //사용자의 등급을 가져옴
+		for(MultipartFile mutifile : editFile) {
+			long fsize = mutifile.getSize();
+			fullSize += fsize; //새로들어온 파일들의 사이즈 측정
+		}
+		if(role.getRname().equals("ROLE_USER")) {
+			if(fullSize>=20971520) {
+				return "utils/fileSizeFail"; //만약 무료회원이 20mb이상 업로드라면 이슈작성 실패
+			}
+		}else if(role.getRname().equals("ROLE_CHARGE")) {
+			if(fullSize>=52428800) {
+				return "utils/chargeFileSizeFail"; //만약 유료회원이 50mb이상 업로드라면 이슈작성 실패
+			}
+		}
 		String path = "";
 		MyIssue tissue = new MyIssue();
-		String email = (String)session.getAttribute("email");
-		//tissue.setTseq(tseq);
 		tissue.setPiseq(piseq);
 		tissue.setEmail(email);
 		tissue.setPititle(title);
-		editIssuecontent = editIssuecontent.replace("\r\n", "<br>");
+		editIssuecontent = editIssuecontent.replace("\r\n", "<br>"); //\r\n <br>로 치환
 		tissue.setPicontent(editIssuecontent);
-		if(!editFrom.equals("")) {
+		if(!editFrom.equals("")) { //일정이 비지 않았다면 수정
 			tissue.setPistart(java.sql.Timestamp.valueOf(editFrom+" 00:00:00"));
 			tissue.setPiend(java.sql.Timestamp.valueOf(editTo+" 00:00:00"));
 		}
-		int result = privateservice.editMyissue(tissue);
+		int result = privateservice.editMyissue(tissue); //프라이빗 이슈 수정
 		if(editFile != null && editFile.length > 0) {
 			//업로드한 파일이 하나라도 있다면
 			for(MultipartFile mutifile : editFile) {
@@ -490,18 +522,10 @@ public class BoardController {
 					fs.write(mutifile.getBytes());
 					fs.close();
 					try {
-						privateservice.pfileEdit(filename, fsize, email, piseq);
+						privateservice.pfileEdit(filename, fsize, email, piseq); //새로올린 파일이 있다면 추가해줌
 					} catch (Exception e) {
-						privateservice.pfileEdit(filename, fsize, email, piseq);
+						privateservice.pfileEdit(filename, fsize, email, piseq); //새로올린 파일이 있다면 추가해줌
 					}
-				}
-			}
-		}
-		if(editOriFile != null && editOriFile.length > 0) {
-			for(int i=0;i<editOriFile.length;i++) {
-				if(editOriFile[i].contains("~delete")) {
-					int pdseq = Integer.parseInt(editOriFile[i].split("~")[1]);
-					privateservice.pfileDelete(pdseq);
 				}
 			}
 		}
@@ -509,11 +533,11 @@ public class BoardController {
 			for(int i=0;i<editMention.length;i++) {
 				if(editMention[i].contains("~delete")) {
 					int pmseq = Integer.parseInt(editMention[i].split("~")[1]);
-					privateservice.pmentionDelete(pmseq);
+					privateservice.pmentionDelete(pmseq); //만약 지운 멘션이 있다면 DB에서 삭제
 				}else {
 					if(!editMention[i].contains("~")) {
 						//editMention[i] = editMention[i].split("~")[0];
-						privateservice.pmentionEdit(editMention[i], piseq);
+						privateservice.pmentionEdit(editMention[i], piseq); //만약 추가된 멘션이 있다면 DB에서 추가
 					}
 				}
 			}
@@ -522,12 +546,12 @@ public class BoardController {
 			for(int i=0;i<editGfilename.length;i++) {
 				if(editGfilename[i].contains("~delete")) {
 					int pgseq = Integer.parseInt(editGfilename[i].split("~")[1]);
-					privateservice.pgoogleDriveDelete(pgseq);
+					privateservice.pgoogleDriveDelete(pgseq); //만약 지운 구글드라이브가 있다면 DB에서 삭제
 				}else {
 					if(!editGfilename[i].contains("~")) {
 						//editGfilename[i] = editGfilename[i].split("/")[0];
 						//editGurl[i] = editGurl[i].split("/")[0];
-						privateservice.pgoogleDriveEdit(editGfilename[i], editGurl[i], piseq);
+						privateservice.pgoogleDriveEdit(editGfilename[i], editGurl[i], piseq); //만약 추가된 구글드라이브가 있다면 DB에서 추가
 					}
 				}
 			}
@@ -537,12 +561,12 @@ public class BoardController {
 			for(int i=0;i<editToname.length;i++) {
 				if(editToname[i].contains("~delete")) {
 					int pwseq = Integer.parseInt(editToname[i].split("~")[1]);
-					privateservice.pdoWorkDelete(pwseq);
+					privateservice.pdoWorkDelete(pwseq); //만약 지운 할일이 있다면 DB에서 삭제
 				}else {
 					if(!editToname[i].contains("~")) {
 						//editToname[i] = editToname[i].split("/")[0];
 						//editDowork[i] = editDowork[i].split("/")[0];
-						privateservice.pdoWorkEdit(fromWork, editToname[i], editDowork[i], piseq);
+						privateservice.pdoWorkEdit(fromWork, editToname[i], editDowork[i], piseq); //만약 추가된 할일이 있다면 DB에서 추가
 					}
 				}
 			}
@@ -556,23 +580,52 @@ public class BoardController {
 		}
 		return path;
 	}
+	//협업공간 이슈 수정하기
 	@RequestMapping(value="teamIssueEditOk.do" , method = {RequestMethod.POST, RequestMethod.GET})
 	public String teamIssueEditOk(int tseq, int tiseq,Model model, String[] editMention, String[] editGfilename, HttpSession session, HttpServletRequest request
 			, String[] editGurl, String[] editToname, String[] editOriFile,String[] editDowork, String title, String editIssuecontent, String editFrom, String editTo, @RequestParam(value="editFile") MultipartFile[] editFile) throws Exception {
+		String email = (String)session.getAttribute("email");
+		 if(editOriFile != null && editOriFile.length > 0) {
+			 for(int i=0;i<editOriFile.length;i++) {
+				 if(editOriFile[i].contains("~delete")) {
+					 int fdseq = Integer.parseInt(editOriFile[i].split("~")[1]);
+					 tservice.fileDelete(fdseq); //만약 지운 파일이 있다면 DB에서 삭제
+				 }
+			 }
+		 }
+		long fullSize = 0;
+		List<Long> orifilesize = tservice.getOriFilesize(tiseq); //원래 있던 파일들의 사이즈 측정
+		for(int i=0;i<orifilesize.size();i++) {
+			fullSize += orifilesize.get(i);
+		}
+		ProjectDao dao = sqlSession.getMapper(ProjectDao.class);
+		Role role = dao.getUserRole(email); //현재 로그인된 멤버의 등급 불러오기
+		for(MultipartFile mutifile : editFile) {
+			long fsize = mutifile.getSize(); //새로 추가된 파일의 사이즈 측정
+			fullSize += fsize;
+		}
+		if(role.getRname().equals("ROLE_USER")) {
+			if(fullSize>=20971520) {
+				return "utils/fileSizeFail"; //만약 무료회원이 20mb이상 업로드라면 이슈작성 실패
+			}
+		}else if(role.getRname().equals("ROLE_CHARGE")) {
+			if(fullSize>=52428800) {
+				return "utils/chargeFileSizeFail"; //만약 유료회원이 50mb이상 업로드라면 이슈작성 실패
+			}
+		}
 		String path = "";
 		MyIssue tissue = new MyIssue();
-		String email = (String)session.getAttribute("email");
 		tissue.setTseq(tseq);
 		tissue.setTiseq(tiseq);
 		tissue.setEmail(email);
 		tissue.setTititle(title);
-		editIssuecontent = editIssuecontent.replace("\r\n", "<br>");
+		editIssuecontent = editIssuecontent.replace("\r\n", "<br>"); // \r\n을 <br>로 치환
 		tissue.setTicontent(editIssuecontent);
-		if(!editFrom.equals("")) {
+		if(!editFrom.equals("")) { //만약 일정이 비어있지 않다면 수정
 			 tissue.setTistart(java.sql.Timestamp.valueOf(editFrom+" 00:00:00"));
 			 tissue.setTiend(java.sql.Timestamp.valueOf(editTo+" 00:00:00"));
 		}
-		int result = privateservice.editTissue(tissue);
+		int result = privateservice.editTissue(tissue); //프라이빗 이슈 수정
 		 if(editFile != null && editFile.length > 0) {
 			 //업로드한 파일이 하나라도 있다면
 			 for(MultipartFile mutifile : editFile) {
@@ -586,30 +639,22 @@ public class BoardController {
 						 fs.write(mutifile.getBytes());
 						 fs.close();
 						 try {
-							 tservice.fileEdit(tseq, filename, fsize, email, tiseq);
+							 tservice.fileEdit(tseq, filename, fsize, email, tiseq); //만약 추가한 파일이 있다면 DB에서 추가
 						 } catch (Exception e) {
 							 tservice.fileEdit(tseq, filename, fsize, email, tiseq);
 						 }
 					 }
 			 }
 		 }
-		 if(editOriFile != null && editOriFile.length > 0) {
-			 for(int i=0;i<editOriFile.length;i++) {
-				 if(editOriFile[i].contains("~delete")) {
-					 int fdseq = Integer.parseInt(editOriFile[i].split("~")[1]);
-					 tservice.fileDelete(fdseq);
-				 }
-			 }
-		 }
 		 if(editMention != null && editMention.length > 0) {
 			 for(int i=0;i<editMention.length;i++) {
 				 if(editMention[i].contains("~delete")) {
 					 int tmseq = Integer.parseInt(editMention[i].split("~")[1]);
-					 tservice.mentionDelete(tmseq);
+					 tservice.mentionDelete(tmseq); //만약 지운 멘션이 있다면 DB에서 삭제
 				 }else {
 					 if(!editMention[i].contains("~")) {
 						 //editMention[i] = editMention[i].split("~")[0];
-						 tservice.mentionEdit(editMention[i], tiseq);
+						 tservice.mentionEdit(editMention[i], tiseq); //만약 추가한 멘션이 있다면 DB에서 추가
 					 }
 				 }
 			 }
@@ -618,13 +663,13 @@ public class BoardController {
 			 for(int i=0;i<editGfilename.length;i++) {
 				 if(editGfilename[i].contains("~delete")) {
 					 int tgseq = Integer.parseInt(editGfilename[i].split("~")[1]);
-					 tservice.googleDriveDelete(tgseq);
+					 tservice.googleDriveDelete(tgseq); //만약 지운 구글드라이브가 있다면 DB에서 삭제
 				 }else {
 					 if(editGfilename[i].contains("~")) {
 						 //editGfilename[i] = editGfilename[i].split("/")[0];
 						 //editGurl[i] = editGurl[i].split("/")[0];
 					 }else {
-						 tservice.googleDriveEdit(editGfilename[i], editGurl[i], tiseq);
+						 tservice.googleDriveEdit(editGfilename[i], editGurl[i], tiseq); //만약 추가한 구글드라이브가 있다면 DB에서 추가
 					 }
 				 }
 			 }
@@ -634,12 +679,12 @@ public class BoardController {
 			 for(int i=0;i<editToname.length;i++) {
 				 if(editToname[i].contains("~delete")) {
 					 int tdseq = Integer.parseInt(editToname[i].split("~")[1]);
-					 tservice.doWorkDelete(tdseq);
+					 tservice.doWorkDelete(tdseq); //만약 지운 할일이 있다면 DB에서 삭제
 				 }else {
 					 if(!editToname[i].contains("~")) {
 						 //editToname[i] = editToname[i].split("/")[0];
 						 //editDowork[i] = editDowork[i].split("/")[0];
-						 tservice.doWorkEdit(fromWork, editToname[i], editDowork[i], tiseq);
+						 tservice.doWorkEdit(fromWork, editToname[i], editDowork[i], tiseq); //만약 추가한 할일이 있다면 DB에서 추가
 					 }
 				 }
 			 }
@@ -653,6 +698,7 @@ public class BoardController {
 		}
 	return path;
 	}
+	//프라이빗 이슈 삭제
 	@RequestMapping(value="deleteMyIssue.do" , method = {RequestMethod.POST, RequestMethod.GET})
 	public String deleteMyIssue(int piseq, Model model) {
 		privateservice.myIssueFileDelete(piseq);
@@ -662,6 +708,7 @@ public class BoardController {
 		privateservice.myIssueDelete(piseq);
 		return "utils/myIssueDelete";
 	}
+	//협업공간 이슈 삭제
 	@RequestMapping(value="deleteTeamIssue.do" , method = {RequestMethod.POST, RequestMethod.GET})
 	public String deleteTeamIssue(int tiseq,int tseq, Model model) {
 		tservice.teamIssueFileDelete(tiseq);
