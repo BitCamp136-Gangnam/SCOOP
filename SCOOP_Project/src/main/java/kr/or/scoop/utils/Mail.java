@@ -1,9 +1,9 @@
 package kr.or.scoop.utils;
-
+//velocity 메일
 public class Mail {
-	private String mailTo;
-	private String setForm;
-	private String title;
+	private String mailTo; //받는 사람
+	private String setForm; //보내는 사람
+	private String title; //제목
 	public String getMailTo() {
 		return mailTo;
 	}
