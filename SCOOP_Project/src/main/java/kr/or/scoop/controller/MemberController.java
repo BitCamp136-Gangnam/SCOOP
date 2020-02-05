@@ -185,11 +185,20 @@ public class MemberController {
 	public String googleLogin(String email, String name, HttpSession session) {
 
 		int result = 0;
+		String status = "";
 		String viewpage = "";
+		MemberDao dao = sqlsession.getMapper(MemberDao.class);
+		int val = dao.getIsAlarm(email);
+		if(val == 1) {
+			status = "ON";
+		}else {
+			status = "OFF";
+		}
 		result = service.googleIdCheck(email, name);
 		if (result > 0) {
 			viewpage = "redirect:/userindex.do";
 			session.setAttribute("email", email);
+			session.setAttribute("status", status);
 			session.setAttribute("kind", "google");
 		} else {
 			viewpage = "redirect:/index.do";
@@ -564,10 +573,19 @@ public class MemberController {
 
 		int result = 0;
 		String viewpage = "";
+		String status = "";
+		MemberDao dao = sqlsession.getMapper(MemberDao.class);
+		int val = dao.getIsAlarm(email);
+		if(val == 1) {
+			status = "ON";
+		}else {
+			status = "OFF";
+		}
 		result = service.naverIdCheck(email, name);
 		if (result > 0) {
 			viewpage = "redirect:/userindex.do";
 			session.setAttribute("email", email);
+			session.setAttribute("status", status);
 			session.setAttribute("kind", "naver");
 		} else {
 			viewpage = "redirect:/index.do";
