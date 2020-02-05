@@ -1099,7 +1099,7 @@ span {
          <li class="nav-item" style="margin-right: 10px">
           <select id="selectFile" name="tseq" class="form-control" style="border: none; color: #76838f; font-size: 18px; padding-top: 0;">
                  <option value="0">프로젝트 전체 파일</option>
-          		<option value="myFile">내 파일</option>
+          		<option value="myFile">프라이빗 공간</option>
               <c:forEach items="${pjtlist}" var="p">
                  <option value="${p.tseq}">${p.pname}</option>
               </c:forEach>
