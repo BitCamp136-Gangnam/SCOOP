@@ -650,11 +650,11 @@ function idOver(a) {
         <!-- Platforms-->
         <div class="platforms d-none d-lg-block"><span class="platforms-title">Compatible with</span>
          <ul class="platforms-list list-inline">
-           <li class="list-inline-item"><img src="resources/img/netflix.svg" alt="" class="platform-image img-fluid"></li>
+           
            <li class="list-inline-item"><img src="resources/img/apple.svg" alt="" class="platform-image img-fluid"></li>
            <li class="list-inline-item"><img src="resources/img/android.svg" alt="" class="platform-image img-fluid"></li>
            <li class="list-inline-item"><img src="resources/img/windows.svg" alt="" class="platform-image img-fluid"></li>
-           <li class="list-inline-item"><img src="resources/img/synology.svg" alt="" class="platform-image img-fluid"></li>
+           
          </ul>
         </div>
       </div>
@@ -690,15 +690,10 @@ function idOver(a) {
 									<li><spring:message code="payment.alam" /></li>
 									<li><spring:message code="payment.team" /></li>
 									<li><spring:message code="payment.upload" /></li>
-									<li><spring:message code="payment.retiree" /></li>
-									<li><spring:message code="payment.comMgm" /></li>
 									<li><spring:message code="payment.teamMgm" /></li>
-									<li><spring:message code="payment.publicMgm" /></li>
-									<li><spring:message code="payment.member" /></li>
-									<li><spring:message code="payment.collabo" /></li>
 									<li><spring:message code="payment.cs" /></li>
 									<li><spring:message code="payment.api" /></li>
-									<li><spring:message code="payment.email" /></li>
+									
 								</ul>
 								<h5> <spring:message code="payment.start" /> </h5>
 							</div>
@@ -713,18 +708,15 @@ function idOver(a) {
 										data-inline="false"></span>
 								</div>
 								<ul class="list-unstyled pricing-list">
+									<li>-</li>
 									<li>3개</li>
-									<li><spring:message code="payment.unlimited" /></li>
 									<li>20MB</li>
-									<li>-</li>
-									<li>-</li>
-									<li>-</li>
 									<li><span class="iconify" data-icon="bx:bx-check"
 										data-inline="false" style="color: #E71D36;"></span></li>
-									<li><spring:message code="payment.unlimited" /></li>
+									<li><span class="iconify" data-icon="bx:bx-check"
+										data-inline="false" style="color: #E71D36;"></span></li>
 									<li>-</li>
-									<li>구글 드라이브</li>
-									<li>-</li>
+									
 								</ul>
 								<a href="#" data-toggle="modal" data-target="#login" class="btn btn-secondary"> <spring:message code="payment.start" /> </a>
 							</div>
@@ -742,16 +734,7 @@ function idOver(a) {
 										data-inline="false" style="color: #E71D36;"></span></li>
 									<li><span class="iconify" data-icon="bx:bx-check"
 										data-inline="false" style="color: #E71D36;"></span></li>
-									<li><span class="iconify" data-icon="bx:bx-check"
-										data-inline="false" style="color: #E71D36;"></span></li>
-									<li><span class="iconify" data-icon="bx:bx-check"
-										data-inline="false" style="color: #E71D36;"></span></li>
-									<li><spring:message code="payment.unlimited" /></li>
-									<li><spring:message code="payment.unlimited" /></li>
-									<li><span class="iconify" data-icon="bx:bx-check"
-										data-inline="false" style="color: #E71D36;"></span></li>
 									<li>구글 드라이브</li>
-									<li>-</li>
 								</ul>
 								<a href="requestPay" data-toggle="modal" data-target="#login" class="btn btn-primary"> <spring:message code="payment.start" /> </a>
 
@@ -768,7 +751,7 @@ function idOver(a) {
 						<div class="col-sm-12" style="text-align: center;padding-bottom: 5%;">
 						<h2><spring:message code="qna" /></h2>
 						</div>
-						<button class="accordion">Section 1</button>
+						<button class="accordion">스쿱은 어떤 협업툴인가요?</button>
 						<div class="panel">
 						  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 						</div>
@@ -790,54 +773,7 @@ function idOver(a) {
 			Collect from <a href="http://www.cssmoban.com/" title=""></a>
 		</div>
 	</section>
-  
-  <!-- App Showcase Section-->
-  <section class="app-showcase pb-big">
-   <div class="container">
-     <div class="row align-items-center">
-      <div class="col-lg-6">
-        <h2 class="mb-4">Easy-to-use interfaces on every platform</h2>
-        <p class="lead">Since most of our features work in a completely automated way, you will mainly use our apps to discover new TV shows recommended for you and discuss the most interesting episodes with like-minded people.</p>
-        <div class="row mt-5">
-         <div class="col-lg-8">
-           <div id="v-pills-tab" role="tablist" aria-orientation="vertical" class="nav flex-column nav-pills showcase-nav"><a id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true" class="nav-link active showcase-link"> <i class="icon ion-md-pie mr-4"></i>Customized Dashboard</a><a id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false" class="nav-link showcase-link"> <i class="icon ion-ios-moon mr-4"></i>Automatic Day &amp; Night Modes</a><a id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false" class="nav-link showcase-link"> <i class="icon ion-md-chatbubbles mr-4"></i>Integrated Chat Platform</a></div>
-         </div>
-        </div>
-      </div>
-      <div class="col-lg-6">
-        <div id="v-pills-tabContent" class="tab-content showcase-content">
-         <div id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab" class="tab-pane fade show active">
-           <div class="showcase-image-holder">
-            <div class="device-wrapper">
-              <div data-device="iPhone7" data-orientation="portrait" data-color="black" class="device">
-               <div class="screen"><img src="resources/img/showcase-screen-1.jpg" alt="..." class="img-fluid"></div>
-              </div>
-            </div><img src="resources/img/showcase-img-1.jpg" alt="..." class="showcase-image d-none d-lg-block">
-           </div>
-         </div>
-         <div id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" class="tab-pane fade">
-           <div class="showcase-image-holder">
-            <div class="device-wrapper">
-              <div data-device="iPhone7" data-orientation="portrait" data-color="black" class="device">
-               <div class="screen"><img src="resources/img/showcase-screen-2.jpg" alt="..." class="img-fluid"></div>
-              </div>
-            </div><img src="resources/img/showcase-img-2.jpg" alt="..." class="showcase-image d-none d-lg-block">
-           </div>
-         </div>
-         <div id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab" class="tab-pane fade">
-           <div class="showcase-image-holder">
-            <div class="device-wrapper">
-              <div data-device="iPhone7" data-orientation="portrait" data-color="black" class="device">
-               <div class="screen"><img src="resources/img/showcase-screen-3.jpg" alt="..." class="img-fluid"></div>
-              </div>
-            </div><img src="resources/img/showcase-img-3.jpg" alt="..." class="showcase-image d-none d-lg-block">
-           </div>
-         </div>
-        </div>
-      </div>
-     </div>
-   </div>
-  </section>
+ 
   <div class="tlinks">Collect from <a href="http://www.cssmoban.com/"  title="网站模板">网站模板</a></div>
   <!-- Testimonials Section-->
   <!-- Subscription Section-->
@@ -845,9 +781,35 @@ function idOver(a) {
    <div class="container text-center">
      <div class="section-header">
       <div class="row">
-        <div class="col-lg-8 mx-auto"><span class="section-header-title">Get Started</span>
-         <h2 class="h1">Start tracking your TV shows for free </h2>
-         <p class="lead">In order to start tracking your TV shows, all you have to do is enter your email address. Everything else will be taken care of by us. All you have to do is sit back, relax and enjoy your TV shows..</p>
+        <div class="col-lg-10 mx-auto">
+         <h3>모든 팀의 업무 프로세스를 함께할 수 있어요</h3>
+         <p class="lead">한 가지 업무 방식이 아닐거에요.다양한 팀과 함께 일하는 프로세스를 <span style="color:#E71D36;">스쿱</span>과 함께 하세요.</p>
+         <div class="row" style="padding-left: 20%; padding-top: 5%;">
+         <div class="col-sm-3">
+          <img src="resources/images/icon/idea.png" style="width: 100px;height: auto;">
+          <p style="padding-top: 10px;">서비스 개발</p>
+         </div>
+         <div class="col-sm-3">
+         <img src="resources/images/icon/presentation.png" style="width: 110px;height: auto;">
+         <p>제품 마케팅</p>
+         </div>
+         <div class="col-sm-3">
+         <img src="resources/images/icon/technical-support.png" style="width: 80px;height: auto;padding-top:10px; ">
+         <p style="padding-top:20px;">품질 관리</p>
+         </div>
+         </div>
+         
+         <div class="row" style="padding-left: 30%; padding-top: 3%;">
+         <div class="col-sm-4" style="padding-left: 0px;" >
+         	<img src="resources/images/icon/pass.png" style="width: 80px;height: auto;">
+         	<p style="padding-top: 15px;">채용 & 인사관리</p>
+         </div>
+         <div class="col-sm-4"style=" padding-right: 70px;padding-left: 0px;">
+         	<img src="resources/images/icon/message.png" style="width: 80px;height: auto;padding-top:10px;">
+         	<p style="padding-top:3px;">회의 및 협업</p>
+         </div>
+         </div>
+         
         </div>
       </div>
       <div class="row">
@@ -856,8 +818,8 @@ function idOver(a) {
          <form action="#" class="subscription-form mt-5">
            <div class="form-group">
             <label>Email</label>
-            <input type="email" name="email" placeholder="your@email.com" class="form-control">
-            <button type="submit" class="btn btn-primary">Start tracking</button>
+            <input type="email" name="email" placeholder="E-mail@company.com" class="form-control">
+            <button type="submit" class="btn btn-primary"><spring:message code="register" /></button>
            </div>
          </form>
         </div>
@@ -867,17 +829,14 @@ function idOver(a) {
   </section>
 </div>
 
+
+
 <footer class="footer">
   <div class="container text-center">
    <!-- Copyrights-->
    <div class="copyrights">
-     <!-- Social menu-->
-     <ul class="social list-inline-item">
-      <li class="list-inline-item"><a href="#" target="_blank" class="social-link"><i class="icon ion-logo-twitter"></i></a></li>
-      <li class="list-inline-item"><a href="#" target="_blank" class="social-link"><i class="icon ion-logo-facebook"></i></a></li>
-      <li class="list-inline-item"><a href="#" target="_blank" class="social-link"><i class="icon ion-logo-youtube"></i></a></li>
-     </ul>
-     <p class="copyrights-text mb-0">Copyright &copy; 2019.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+     <p class="copyrights-text mb-0">&copy; 2019 scoop Team Inc. All rights reserved. |  Privacy Policy&Terms of Service.
+     </p>
    </div>
   </div>
 
