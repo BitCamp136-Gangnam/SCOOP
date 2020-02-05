@@ -341,66 +341,87 @@
 <div id="helpdivopen" class="scrollbar">
 	<h4 style="margin: 15%; margin-bottom: 5%; color: white">도움센터(Ctrl+/)</h4>
 	<h5 style="color: white; padding-top: 15px;">추천 팁</h5>
-	<p
-		style="border-bottom: 1px solid rgba(255, 255, 255, 0.3); margin-bottom: 0px; color: rgba(255, 255, 255, 0.3); font-size: 12px; padding: 10px 0px 5px 0px;">새로운
-		소식</p>
-	<button class="accordion">이슈 업데이트</button>
+	<p style="border-bottom: 1px solid rgba(255, 255, 255, 0.3); margin-bottom: 0px; color: rgba(255, 255, 255, 0.3); font-size: 12px; padding: 10px 0px 5px 0px;">
+	새로운 소식</p>
+	<button class="accordion"><span class="iconify" data-icon="ic:twotone-autorenew" data-inline="false" style="width:17px;height: auto;"></span>&nbsp;이슈 업데이트</button>
 	<div class="panel">
-		<p>이미지 넣어줘야해~~</p>
+		<p style="color: #fff;font-size: 11px;">
+			새로운 소식들을 '새로운 팀이슈','새로운 댓글','새로운 공지사항'을 통해 확인할 수 있습니다.
+			협업공간 및 이슈의 알림을 끄더라도, 나를 언급한 소식은 업데이트 됩니다.
+		</p>
 	</div>
-	<button class="accordion">호출됨</button>
+	<button class="accordion"><span style="font-size: 16px;">@</span>&nbsp;호출됨</button>
 	<div class="panel">
-		<p>이미지 넣어줘야해~~~</p>
+		<p style="color: #fff;font-size: 11px;">
+			이슈나 댓글에서 동료가 나를 멘션하면 '호출됨' 에서 확인할 수 있습니다.
+		</p>
 	</div>
-
-	<p
-		style="border-bottom: 1px solid rgba(255, 255, 255, 0.3); margin-bottom: 0px; color: rgba(255, 255, 255, 0.3); font-size: 12px; padding: 10px 0px 5px 0px;">협업공간</p>
-	<button class="accordion">협업공간 만들기</button>
+	<button class="accordion"><span class="iconify" data-icon="bx:bxs-doughnut-chart" data-inline="false" style="width:17px;height: auto;"></span>&nbsp;협업 진행도</button>
 	<div class="panel">
-		<p>이미지 넣어줘야해~~</p>
+		<p style="color: #fff;font-size: 11px;">
+			협업 공간마다 칸반의 발의됨,일시중지,진행중,완료 4가지 단계의 진행률을 한눈에 확인할 수 있습니다.
+		</p>
 	</div>
-	<button class="accordion">멤버 초대</button>
+	<p style="border-bottom: 1px solid rgba(255, 255, 255, 0.3); margin-bottom: 0px; color: rgba(255, 255, 255, 0.3); font-size: 12px; padding: 10px 0px 5px 0px;">
+		협업공간</p>
+	<button class="accordion"><span class="iconify" data-icon="ant-design:flag-filled" data-inline="false" style="width:17px;height: auto;"></span>&nbsp;협업공간 만들기</button>
 	<div class="panel">
-		<p>이미지 넣어줘야해~~~</p>
+		<p style="color: #fff;font-size: 11px;">
+			협업공간은 동료와 함께 이슈를 해결하기 위해 협업할 수 있는 공간입니다.<br>
+			팀 공간(ex.개발팀), 게시판 공간(ex.주간업무공유), 협업공간을 진행하기 위한 용도로 공간을 만들 수 있습니다.<br>
+			협업공간을 만들면 꼭 함께할 멤버를 초대해 주세요.
+		</p>
 	</div>
-	<button class="accordion">협업공간 관리</button>
+	<button class="accordion"><span class="iconify" data-icon="ic:baseline-person-add" data-inline="false" style="width:17px;height: auto;padding-bottom: 2px;"></span>&nbsp;멤버 초대</button>
 	<div class="panel">
-		<p>이미지 넣어줘야해~~~</p>
+		<p style="color: #fff;font-size: 11px;">
+			협업공간에서 함께할 '멤버'를 초대해 주세요.<br>
+			여러개의 이메일로 한번에 초대도 가능합니다.<br>
+		</p>
+	</div>
+	<button class="accordion"><span class="iconify" data-icon="raphael:smallgear" data-inline="false" style="width:17px;height: auto;"></span>&nbsp;협업공간 관리</button>
+	<div class="panel">
+		<p style="color: #fff;font-size: 11px;">
+			협업공간의 '관리자'는 멤버탈퇴, 관리자 위임등 공간을 관리할 수 있습니다.
+			협업공간 타이틀 옆의 '톱니바퀴' 버튼을 누르면 협업공간 관리 메뉴를 확인할 수 있습니다.
+		</p>
 	</div>
 
 	<p
 		style="border-bottom: 1px solid rgba(255, 255, 255, 0.3); margin-bottom: 0px; color: rgba(255, 255, 255, 0.3); font-size: 12px; padding: 10px 0px 5px 0px;">이슈</p>
-	<button class="accordion">멘션</button>
+	<button class="accordion"><span style="font-size: 16px;">@</span> 멘션</button>
 	<div class="panel">
-		<p>이미지 넣어줘야해~~</p>
+		<p style="color: #fff;font-size: 11px;">
+			이슈 및 댓글에서 "@이름"을 입력하면 동료를 호출할 수 있습니다.<br>
+			할 일과 의사결정에서도 동료를 멘션하면 해당 동료에게 할당됩니다.
+		</p>
 	</div>
-	<button class="accordion">소스 코드</button>
+	<button class="accordion"><span class="iconify" data-icon="entypo-social:google-drive" data-inline="false"  style="width:17px;height: auto;"></span>&nbsp;구글 드라이브</button>
 	<div class="panel">
-		<p>이미지 넣어줘야해~~~</p>
+		<p style="color: #fff;font-size: 11px;">
+			유료회원은 구글드라이브의 파일과 이미지 등을 업로드 하고 공유할 수 있습니다.<br>
+		</p>
 	</div>
-	<button class="accordion">구글 드라이브</button>
+	<button class="accordion"><span class="iconify" data-icon="ant-design:file-filled" data-inline="false"  style="width:17px;height: auto;"></span>&nbsp;파일 공유</button>
 	<div class="panel">
-		<p>이미지 넣어줘야해~~~</p>
+		<p style="color: #fff;font-size: 11px;">
+		이슈에서 "@파일" 또는 "@구글 드라이브"를 찾아 파일을 공유해 보세요.<br>
+		또한 Ctrl+.(파일함)에 자동으로 업로드 됩니다.
+		</p>
 	</div>
-	<button class="accordion">파일 공유</button>
+	<button class="accordion"><span class="iconify" data-icon="ant-design:check-circle-outlined" data-inline="false" style="width:17px;height: auto;"></span>&nbsp;할일 주기</button>
 	<div class="panel">
-		<p>이미지 넣어줘야해~~~</p>
+		<p style="color: #fff;font-size: 11px;">
+		이슈에서 "@할 일"에서 동료를 호출해 할일을 주세요.<br>
+		할일 할당 시 상대방에게 알림이 가게 됩니다.
+		</p>
 	</div>
-	<button class="accordion">관련 이슈 공유</button>
+	<button class="accordion"><span class="iconify" data-icon="bx:bxs-calendar-event" data-inline="false" style="width:17px;height: auto;"></span>&nbsp;일정 공유</button>
 	<div class="panel">
-		<p>이미지 넣어줘야해~~~</p>
-	</div>
-	<button class="accordion">의사결정 할당</button>
-	<div class="panel">
-		<p>이미지 넣어줘야해~~~</p>
-	</div>
-	<button class="accordion">할일 주기</button>
-	<div class="panel">
-		<p>이미지 넣어줘야해~~~</p>
-	</div>
-	<button class="accordion">일정 공유</button>
-	<div class="panel">
-		<p>이미지 넣어줘야해~~~</p>
+		<p style="color: #fff;font-size: 11px;margin-bottom: 30px;">
+		팀 캘린더에서 협공공간 전체 일정을 공유할 수 있습니다.<br>
+		프라이빗 공간에서의 캘린더는 본인만 작성 및 수정 등을 할 수 있습니다.
+		</p>
 	</div>
 
 	<script>
@@ -422,7 +443,7 @@
 	</script>
 
 </div>
-<img src="<c:url value="/resources/images/chat/chatopen.png" />"
+<img src='<c:url value="/resources/images/chat/chatopen.png" />'
 	id="chatopen" name="on" width=50px height=auto style="cursor: pointer;">
 <img src="<c:url value="/resources/images/chat/questionmark.png" />"
 	id="helpopen" name="on" width=50px height=auto style="cursor: pointer;">
