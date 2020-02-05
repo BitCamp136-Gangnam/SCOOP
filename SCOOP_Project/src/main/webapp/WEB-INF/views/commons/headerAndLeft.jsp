@@ -570,6 +570,23 @@ input::placeholder {
          }
       }
    }
+   // notification 시간설정
+   function calculate() {
+       setTimeout(function () {
+           notify();
+       }, 10);
+   }
+   
+	// notification 아이콘 및 body 설정, permission 
+   function notify() {
+       if (Notification.permission !== 'granted') {
+           
+       }
+       else {
+       	Notification.requestPermission();
+           
+       }
+   }
 
    //이슈작성 validation
     function checkz() {
@@ -586,7 +603,30 @@ input::placeholder {
        $("#issuecontent").focus();
        return false;
      }
-
+     
+     var sessionEmail = "<%=session.getAttribute("email")%>";
+     var sessionNickName = "<%=session.getAttribute("name")%>";
+     alert(sessionEmail);
+     alert(sessionNickName);
+     if($('#selectpro').val() != sessionEmail){
+    	 calculate();
+    	 var notification = new Notification('SCOOP Notification', {
+             icon: '<c:url value="/resources/images/logo/ScoopNoti.png" />',
+             body: sessionNickName+'님이 새로운 이슈를 발의하셨습니다. :)',
+         });
+         // 클릭 시 링크
+         notification.onclick = function () {
+             window.open('http://localhost:8090/SCOOP/userindex.do');
+         };
+         var title = '새로운 팀 이슈가 생성되었습니다.';
+         var options = {
+           body: sessionNickName+'님이 새로운 이슈를 발의하셨습니다. :)'
+         };
+         // onsubmit시 notification
+         registration.showNotification(title, options);
+    		
+     }
+     
    return true;
    }
 
@@ -1791,5 +1831,9 @@ $('#todoresult').show();
   			 $(this).val($(this).val().substring(0, 30));
   		}
   	});
+
+    
+    
+    
 
 </script>
