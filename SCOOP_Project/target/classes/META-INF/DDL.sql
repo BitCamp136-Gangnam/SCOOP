@@ -1,4 +1,4 @@
-/* 맴버 */
+﻿/* 맴버 */
 DROP TABLE Member 
 	CASCADE CONSTRAINTS;
 
@@ -201,7 +201,7 @@ CREATE TABLE TEAMPJT (
 	email VARCHAR2(100) NOT NULL, /* 이메일 */
 	pname VARCHAR2(300) NOT NULL, /* 프로젝트이름 */
 	pcontent VARCHAR2(300) NOT NULL, /* 프로젝트설명 */
-	ptime DATE NOT NULL, /* 생성날짜 */
+	ptime TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL, /* 생성날짜 */
 	istpalarm NUMBER NOT NULL, /* 알림여부 */
 	ischarge NUMBER NOT NULL /* 유료여부 */
 );
@@ -246,11 +246,11 @@ CREATE TABLE TISSUE (
 	isprocess VARCHAR2(13) NOT NULL, /* 진행과정 */
 	istbook NUMBER NOT NULL, /* 북마크여부 */
 	issee NUMBER NOT NULL, /* 확인여부 */
-	tidate DATE NOT NULL, /* 팀이슈 작성시간 */
+	tidate TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL, /* 팀이슈 작성시간 */
 	turl VARCHAR2(1000), /* 팀링크 */
-	BACKGROUNDCOLOR VARCHAR2(100), /* 배경색 */
-	TEXTCOLOR VARCHAR2(100), /* 글자색깔 */
-	ALLDAY NUMBER /* 하루종일여부 */
+	BACKGROUNDCOLOR VARCHAR2(100) DEFAULT '#3a87ad' NULL, /* 배경색 */
+	TEXTCOLOR VARCHAR2(100) NULL, /* 글자색깔 */
+	ALLDAY NUMBER NULL /* 하루종일여부 */
 );
 
 COMMENT ON TABLE TISSUE IS '팀이슈';
@@ -306,7 +306,7 @@ CREATE TABLE MYISSUE (
 	piend TIMESTAMP DEFAULT SYSTIMESTAMP, /* 종료날짜 */
 	ispibook NUMBER NOT NULL, /* 북마크여부 */
 	email VARCHAR2(100) NOT NULL, /* 이메일 */
-	pidate DATE NOT NULL, /* 마이이슈작성날짜 */
+	pidate TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL, /* 마이이슈작성날짜 */
 	backgroundcolor VARCHAR2(100) null,
 	textcolor VARCHAR2(100) null,
 	allday NUMBER default 1 null
@@ -351,7 +351,7 @@ CREATE TABLE VOTE (
 	vcontent VARCHAR2(600) NOT NULL, /* 투표내용 */
 	tiseq NUMBER NOT NULL, /* 팀이슈번호 */
 	email VARCHAR2(100) NOT NULL, /* 이메일 */
-	vdate DATE NOT NULL /* 알림작성시간 */
+	vdate TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL /* 알림작성시간 */
 );
 
 COMMENT ON TABLE VOTE IS '의사결정';
@@ -416,7 +416,7 @@ CREATE TABLE PJNOTICE (
 	pnseq NUMBER NOT NULL, /* 프로젝트공지사항글번호 */
 	pntitle VARCHAR2(300) NOT NULL, /* 글제목 */
 	pncontent VARCHAR2(4000) NOT NULL, /* 글내용 */
-	pntime DATE NOT NULL, /* 작성일 */
+	pntime TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL, /* 작성일 */
 	email VARCHAR2(100) NOT NULL, /* 이메일 */
 	tseq NUMBER NOT NULL /* 프로젝트 번호 */
 );
@@ -450,14 +450,14 @@ ALTER TABLE PJNOTICE
 /* 팀캘린더 */
 CREATE TABLE TCALENDAR (
 	tcseq NUMBER NOT NULL, /* 팀캘린더번호 */
-	tcstart DATE NOT NULL, /* 시작날짜 */
-	tcend DATE NOT NULL, /* 종료날짜 */
+	tcstart TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL, /* 시작날짜 */
+	tcend TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL, /* 종료날짜 */
 	isend NUMBER NOT NULL, /* 완료여부 */
 	tcname VARCHAR2(30) NOT NULL, /* 캘린더이름 */
 	email VARCHAR2(100) NOT NULL, /* 이메일 */
 	tseq NUMBER NOT NULL, /* 프로젝트 번호 */
 	color VARCHAR2(40) NOT NULL, /* 색깔 */
-	tcdate DATE NOT NULL /* 팀캘린더 작성시간 */
+	tcdate TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL /* 팀캘린더 작성시간 */
 );
 
 COMMENT ON TABLE TCALENDAR IS '팀캘린더';
@@ -497,7 +497,7 @@ CREATE TABLE REPLY (
 	replyseq NUMBER NOT NULL, /* 댓글식별번호 */
 	rcontent VARCHAR2(600) NOT NULL, /* 댓글내용 */
 	email VARCHAR2(100) NOT NULL, /* 이메일 */
-	rdate DATE NOT NULL, /* 댓글작성시간 */
+	rdate TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL, /* 댓글작성시간 */
 	tiseq NUMBER NOT NULL /* 팀이슈번호 */
 );
 
@@ -528,8 +528,8 @@ ALTER TABLE REPLY
 /* 개인 캘린더 */
 CREATE TABLE MYCALENDAR (
 	pcseq NUMBER NOT NULL, /* 캘린더식별번호 */
-	pcstart DATE NOT NULL, /* 시작날짜 */
-	pcend DATE NOT NULL, /* 종료날짜 */
+	pcstart TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL, /* 시작날짜 */
+	pcend TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL, /* 종료날짜 */
 	pcsuccess NUMBER NOT NULL, /* 완료여부 */
 	cname VARCHAR2(100) NOT NULL, /* 캘린더 이름 */
 	pcolor VARCHAR2(100) NOT NULL, /* 색깔 */
@@ -569,7 +569,7 @@ CREATE TABLE MYLINK (
 	mylinkseq NUMBER NOT NULL, /* 개인링크 식별번호 */
 	plink VARCHAR2(300) NOT NULL, /* 링크주소 */
 	email VARCHAR2(100) NOT NULL, /* 이메일 */
-	plinkdate DATE NOT NULL /* 마이링크작성날짜 */
+	plinkdate TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL /* 마이링크작성날짜 */
 );
 
 COMMENT ON TABLE MYLINK IS '개인 링크';
@@ -600,7 +600,7 @@ CREATE TABLE TLINK (
 	tseq NUMBER NOT NULL, /* 프로젝트 번호 */
 	tlink VARCHAR2(2000) NOT NULL, /* 링크 주소 */
 	email VARCHAR2(100) NOT NULL, /* 이메일 */
-	tlinkdate DATE NOT NULL /* 팀링크 작성시간 */
+	tlinkdate TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL /* 팀링크 작성시간 */
 );
 
 COMMENT ON TABLE TLINK IS '팀 링크';
@@ -677,7 +677,7 @@ CREATE TABLE NOTICE (
 	bnseq NUMBER NOT NULL, /* 전체공지사항 글번호 */
 	bntitle VARCHAR2(300) NOT NULL, /* 글제목 */
 	bncontent VARCHAR2(4000) NOT NULL, /* 글내용 */
-	bntime DATE NOT NULL, /* 작성일 */
+	bntime TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL, /* 작성일 */
 	email VARCHAR2(100) NOT NULL /* 이메일 */
 );
 
@@ -742,7 +742,7 @@ CREATE TABLE FILEDRIVE (
 	fdcapa VARCHAR2(500) NOT NULL, /* 파일용량 */
 	fdname VARCHAR2(300) NOT NULL, /* 파일명 */
 	email VARCHAR2(100) NOT NULL, /* 이메일 */
-	fddate DATE NOT NULL, /* 파일작성날짜 */
+	fddate TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL, /* 파일작성날짜 */
 	tseq NUMBER NOT NULL /* 프로젝트 번호 */
 );
 
@@ -914,7 +914,7 @@ CREATE TABLE PFILEDRIVE (
 	pdseq NUMBER NOT NULL, /* 파일디스크식별번호 */
 	pdcapa VARCHAR2(500) NOT NULL, /* 파일용량 */
 	pfdname VARCHAR2(300) NOT NULL, /* 파일명 */
-	pfddate DATE NOT NULL, /* 파일작성날짜 */
+	pfddate TIMESTAMP DEFAULT SYSTIMESTAMP NOT NULL, /* 파일작성날짜 */
 	email VARCHAR2(100) NOT NULL, /* 이메일 */
 	piseq NUMBER /* 개인이슈번호 */
 );

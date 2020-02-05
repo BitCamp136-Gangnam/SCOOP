@@ -41,4 +41,5 @@
 </websocket:handlers>
 
 <beans:bean id="chatHandler" class="kr.or.scoop.handler.ChatWebSocketHandler" />
+<!-- <beans:bean id="alarmHandler" class="kr.or.scoop.handler.AlarmWebSocketHandler" /> -->
 </beans:beans>
