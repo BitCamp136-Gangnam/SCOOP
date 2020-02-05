@@ -852,7 +852,7 @@ span {
                      	 <li>
                            <p style="display: inline-block; padding-right: 33%">전체 알람
                               설정</p> <label class="switch_alarm"> <input type="checkbox"
-                              id="alarmbox" name="on"> <span
+                              id="alarmbox" name="off"> <span
                               class="slider_alarm round_alarm" id="alarmbtn"></span>
                         </label> <span id="alarm_power">${sessionScope.status}</span>
                         </li>
