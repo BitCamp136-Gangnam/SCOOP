@@ -1,3 +1,4 @@
+<!-- 내정보에서 외부 연결 서비스 jsp -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -51,9 +52,6 @@
 			<ul class="nav nav-pills">
 			    <li class="nav-item">
 			      <a class="nav-link" href="memberEdit.do?${sessionScope.email}">내 정보</a>
-			    </li>
-			    <li class="nav-item">
-			      <a class="nav-link" href="app-alram.do">알림</a>
 			    </li>
 			    <li class="nav-item">
 			      <a class="nav-link" href="app-external.do">외부 서비스 연결</a>

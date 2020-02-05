@@ -1,3 +1,6 @@
+<!-- 
+	회원가입 인증 jsp
+ -->
 <%@page import="java.io.PrintWriter"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>

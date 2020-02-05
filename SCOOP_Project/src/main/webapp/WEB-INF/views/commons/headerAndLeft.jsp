@@ -1,3 +1,4 @@
+<!-- 페이지에서 대부분 공통으로 쓰이는 head and left jsp -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -6,6 +7,7 @@
 <c:set var="role" value="${sessionScope.role}" />
 <c:set var="count" value="${sessionScope.count}" />
 <c:set var="img" value="${sessionScope.img}" />
+<c:set var="status" value="${sessionScope.status}" />
 <style>
 input::placeholder {
    color: #fff;
@@ -31,14 +33,14 @@ input::placeholder {
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script> -->
 <script type="text/javascript">
    $(function() {
-	   for(let i=0; i<$('#memlist').children().length-1; i++){
+	   for(let i=0; i<$('#memlist').children().length-1; i++){ //멘션에서 멤버리스트 불러올때 서로 다른 협업공간에 중복되는 유저 제거
 			for(let j=i+1; j<$('#memlist').children().length;j++){
 				if($('#memlist').children().eq(i).attr('id').split("/")[1] == $('#memlist').children().eq(j).attr('id').split("/")[1]){
 					$('#memlist').children().eq(j).hide();
 				}
 			}
 		}
-	   $('#searchFile').keypress(function(event){
+	   $('#searchFile').keypress(function(event){ //파일함에서 파일 검색
 		   if (event.keyCode == 13) {
 			   $.ajax({
 					url : 'teamFileSearch.do',
@@ -91,7 +93,7 @@ input::placeholder {
 				}); 
 	         }
 	   })
-	   function clickMyFile(){
+	   function clickMyFile(){ //파일함에서 프라이빗공간 선택시 비동기로 불러오기
 		   var tseq = 0;
  			$.ajax({
 				url : 'myFileSelect.do',
@@ -116,7 +118,7 @@ input::placeholder {
 				}
 			}); 
 	   }
-	   $('#selectFile').change(function(){
+	   $('#selectFile').change(function(){ //파일함에서 협업공간 선택시 비동기로 불러오기
 		   var tseq = $(this).val();
 		   if(tseq=='myFile'){
 			   clickMyFile();
@@ -152,17 +154,17 @@ input::placeholder {
 				}
 			}); 
 	   })
-	   $('#searchSubmitIcon').click(function(){
+	   $('#searchSubmitIcon').click(function(){ //이슈 전체 키워드 검색 돋보기 클릭
 		   $('#searchSubmit').submit();
 	   })
-	   $('#sIssue').focus(function(){
+	   $('#sIssue').focus(function(){ //이슈 전체 키워드 검색 Enter로
 		   $('#sIssue').keypress(function(event) {
 			   if (event.keyCode == 13) {
 		            $('#searchSubmit').submit();
 		         }
 		   })
 	   })
-	   $('#invitebtn').click(function(){
+	   $('#invitebtn').click(function(){ //협업공간 이메일 초대에서 Enter를 누르면 모달에서 자동으로 submit이 되기때문에 Enter 방지
 		   $('#inviteForm').append($('#inviteContent'));
 		   $('#invitebtn').click();
 	   });
@@ -170,7 +172,7 @@ input::placeholder {
 
       var target = 1;
      
-      $('#invite_Submit').keyup(function(event) {
+      $('#invite_Submit').keyup(function(event) { //협업공간 이메일 초대 이메일 자동완성
          $('#invite_email_append').show();
          $('#invite_email_append').empty();
 
@@ -233,7 +235,7 @@ input::placeholder {
                   'background-color',
                   'rgba(225, 225, 225,0.5)');
 
-            if (event.keyCode == 13) {
+            if (event.keyCode == 13) { //Enter눌렀을때 이메일 정규표현식
             	if ($('#invite_Submit').val().match('@')){
             		target=1;
             	}
@@ -252,7 +254,7 @@ input::placeholder {
                   }
                }
                
-               if (event.shiftKey && event.keyCode == 50) {
+               if (event.shiftKey && event.keyCode == 50) { //만약 @를 입력하면 자동완성 없앰
             	   target=1;
                   $('#invite_email_append').hide();
                   $('#invite_Input')
@@ -297,7 +299,7 @@ input::placeholder {
                target = 1;
             }
 
-            $('.invite_close')
+            $('.invite_close') //모달 닫으면 안에 내용 초기화
                   .click(
                         function() {
                            $('#invitebtn').empty();
@@ -363,6 +365,7 @@ input::placeholder {
          $('#helpopen').hide();
          $('#filediv2').show();
       });
+      //파일함 닫기
       $('#fileclose').click(function() {
          $('#filediv').hide();
          $('#fileclose').hide();
@@ -373,6 +376,7 @@ input::placeholder {
          $('#helpopen').show();
          $('#filediv2').hide();
       });
+      //파일함 왼쪽 투명한 부분 클릭하면 닫힘
       $('#filediv2').click(function() {
          $('#filediv').hide();
          $('#fileclose').hide();
@@ -383,6 +387,7 @@ input::placeholder {
          $('#helpopen').show();
          $('#filediv2').hide();
       });
+      //파일함 단축키 ctrl + .
       $(document).keydown(function(event) {
          if (event.ctrlKey && event.keyCode == 190) {
             if ($('.fileon').attr('class') == 'fileon') {
@@ -409,15 +414,44 @@ input::placeholder {
             }
          }
       });
-
+		//알람 버튼
       $('#alarmbtn').click(function(event) {
+          let status = $('#alarmbox').attr('name');
          event.stopPropagation();
          if ($('#alarmbox').attr('name') == 'on') {
-            $('#alarmbox').attr('name', 'off');
+           
+            
+            $.ajax({
+             	 url: "updateAlarm.do", //cross-domain error가 발생하지 않도록 주의해주세요
+       			 type: 'POST',
+       			 dataType: 'json',
+                 data: {
+						"status": status
+                     //기타 필요한 데이터가 있으면 추가 전달
+                 },
+                 success: function(data){
+              	 		console.log($("#alarm_power").val())
+                     }
+             }) 
+             $('#alarmbox').attr('name', 'off');
             $('#alarm_power').text('OFF');
          } else {
-            $('#alarmbox').attr('name', 'on');
-            $('#alarm_power').text('ON');
+           
+            
+             $.ajax({
+              	 url: "updateAlarm.do", //cross-domain error가 발생하지 않도록 주의해주세요
+        			 type: 'POST',
+        			 dataType: 'json',
+                  data: {
+						"status": status
+                      //기타 필요한 데이터가 있으면 추가 전달
+                  },
+                  success: function(data){
+               	 		console.log($("#alarm_power").val())
+                      }
+              })  
+              $('#alarmbox').attr('name', 'on');
+             $('#alarm_power').text('ON');
          }
 
       });
@@ -426,7 +460,7 @@ input::placeholder {
 
 		
    });
-   /* 프로젝트 이름 검색 - 도연 */
+   /* 프로젝트 이름 검색 */
    function filter() {
       var value, name, item, i;
       value = document.getElementById("searchpjt").value.toUpperCase();
@@ -441,22 +475,16 @@ input::placeholder {
          }
       }
    }
-/*    $('#summernote').summernote({
-       height: 300,                 // set editor height
-       minHeight: null,             // set minimum height of editor
-       maxHeight: null,             // set maximum height of editor
-       focus: true                  // set focus to editable area after initializing summernote
-}); */
-
 	/*언어 변경 : 한글 ,영어*/
 	$('#kor').click(function(){
 		$('#selectLang').text("한국어");
 	});
+	
 	$('#eng').click(function(){
 		$('#selectLang').text("English");
 	});
 </script>
-<script type="text/javascript">
+<script type="text/javascript"> //구글 picker(구글드라이브 api)
    // The Browser API key obtained from the Google API Console.
    var developerKey = 'AIzaSyBIu-Whybpm37l7vHw8O5f48kjpG_bQtzo';
 
@@ -524,7 +552,7 @@ input::placeholder {
          drivename = doc.name;
       }
       var message = url;
-      if (url != '') {
+      if (url != '') { //url이 비어있지 않다면 이슈작성 첨부에 append
          $('#todoresult').append('<div style="padding:5px"><a href='+url+'><span class="iconify" data-icon="whh:googledrive" data-inline="false"></span>'+ drivename + '</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="annoDelete" style="cursor:pointer;" onclick="annotationDelete('+annotation+')"><span class="iconify" data-icon="octicon:x" data-inline="false"></span></span></div>');
          $('#todoresult').append('<input type="hidden" name="googleDrive" value="'+url+'~'+drivename+'">');
          $('#todoresult').show();
@@ -850,15 +878,25 @@ span {
                   class="drop-down animated fadeIn dropdown-menu dropdown-notfication">
                   <div class="dropdown-content-body">
                      <ul>
+                    	
+                     	<c:if test="${status=='ON'}">
                         <li>
                            <p style="display: inline-block; padding-right: 33%">전체 알람
                               설정</p> <label class="switch_alarm"> <input type="checkbox"
                               checked="checked" id="alarmbox" name="on"> <span
                               class="slider_alarm round_alarm" id="alarmbtn"></span>
-                        </label> <span id="alarm_power">ON</span>
-
+                        </label> <span id="alarm_power">${sessionScope.status}</span>
                         </li>
-
+                     	</c:if>
+                     	<c:if test="${status=='OFF'}">
+                     	 <li>
+                           <p style="display: inline-block; padding-right: 33%">전체 알람
+                              설정</p> <label class="switch_alarm"> <input type="checkbox"
+                              id="alarmbox" name="on"> <span
+                              class="slider_alarm round_alarm" id="alarmbtn"></span>
+                        </label> <span id="alarm_power">${sessionScope.status}</span>
+                        </li>
+                     	</c:if>     
                         <li><a href="javascript:void()"> <span
                               class="mr-3 avatar-icon bg-success-lighten-2"><i
                                  class="icon-present"></i></span>
@@ -1139,7 +1177,7 @@ span {
          <li class="nav-item" style="margin-right: 10px">
           <select id="selectFile" name="tseq" class="form-control" style="border: none; color: #76838f; font-size: 18px; padding-top: 0;">
                  <option value="0">프로젝트 전체 파일</option>
-          		<option value="myFile">내 파일</option>
+          		<option value="myFile">프라이빗 공간</option>
               <c:forEach items="${pjtlist}" var="p">
                  <option value="${p.tseq}">${p.pname}</option>
               </c:forEach>
@@ -1205,7 +1243,7 @@ span {
                   placeholder="@를 입력하여 멘션, 할 일, 파일 등을 추가해 보세요."></textarea>
                <br>
                <label for="annota">첨부</label>
-               <div id="todoresult" style="overflow: auto; height: 100px; border: 1px solid #c8c8c8; border-radius: 0.5rem;">
+               <div id="todoresult" style="overflow: auto; height: 100px; border: 1px solid #000; border-radius: 0.5rem;">
                   <!-- mention -->
                </div>
                <!-- The Google API Loader script. -->
@@ -1236,13 +1274,11 @@ span {
    </div>
 
    <div class="list-group" id="mentionlist" style="display: none;border:10px solid #cbc9d4">
-      <a href="#" class="list-group-item list-group-item-action menli" id="men1"style="padding: 5px;">멘션</a> 
-      <!-- <a href="#" class="list-group-item list-group-item-action menli" id="men2"style="padding: 5px">소스코드</a> --> 
-      <a href="#" class="list-group-item list-group-item-action menli" id="men2"style="padding: 5px">구글 드라이브</a> 
-      <a href="#" class="list-group-item list-group-item-action menli" id="men3"style="padding: 5px">파일</a> 
-      <!-- <a href="#" class="list-group-item list-group-item-action menli" id="men7"style="padding: 5px">의사결정</a> --> 
-      <a href="#" class="list-group-item list-group-item-action menli" id="men4"style="padding: 5px">할 일</a> 
-      <a href="#" class="list-group-item list-group-item-action menli" id="men5"style="padding: 5px">일정</a>
+      <a href="#" class="list-group-item list-group-item-action menli" id="men1"style="padding: 5px;">@ 멘션</a> 
+      <a href="#" class="list-group-item list-group-item-action menli" id="men2"style="padding: 5px"><span class="iconify" data-icon="whh:googledrive" data-inline="false"></span> 구글 드라이브</a> 
+      <a href="#" class="list-group-item list-group-item-action menli" id="men3"style="padding: 5px"><span class="iconify" data-icon="si-glyph:file-box" data-inline="false"></span> 파일</a> 
+      <a href="#" class="list-group-item list-group-item-action menli" id="men4"style="padding: 5px"><span class="iconify" data-icon="bx:bx-check-circle" data-inline="false"></span> 할 일</a> 
+      <a href="#" class="list-group-item list-group-item-action menli" id="men5"style="padding: 5px"><span class="iconify" data-icon="bx:bx-calendar" data-inline="false"></span> 일정</a>
    </div>
    <!--  -->
    <!-- 멘션할 사람 목록 -->
@@ -1403,7 +1439,7 @@ span {
    </div>
 <script type="text/javascript">
 var annotation = 0;
-$('.modal').on('hidden.bs.modal', function(e) {
+$('.modal').on('hidden.bs.modal', function(e) { //모달이 닫힌다면 안에 내용 초기화
    $('#memlist').hide();
    $('.CodeMirror').hide();
    $('#filename').empty();
@@ -1415,8 +1451,8 @@ $('.modal').on('hidden.bs.modal', function(e) {
    $('#todoresult').empty();
    $('#todoresult').hide();
    $('#datepick').hide();
-   $('#from').empty();
-   $('#to').empty();
+   $('#from').val('');
+   $('#to').val('');
    $('#memlist').attr('class', 'list-group');
    $(this).find('form')[0].reset();
    $('#invite_Input').children('.emailList').remove();
@@ -1430,7 +1466,7 @@ $('.modal').on('hidden.bs.modal', function(e) {
 });
 var tar = 0;
 var tar2 = 1;
-$('.menli').keydown(function(event) {
+$('.menli').keydown(function(event) { //이슈작성에서 @단축키 사용했을때 방향키로 조절가능
    var key = event.keyCode;
     switch (key) {
     case 38:
@@ -1461,7 +1497,7 @@ $('.menli').keydown(function(event) {
        $(this).click();
     }
 });
-	$('#issuecontent').keydown(
+	$('#issuecontent').keydown( //이슈작성에서 @단축키 사용했을때 방향키로 조절가능
 			function(event) {
 				if($('#mentionlist').css('display')==('flex')){
 					var key = event.keyCode;
@@ -1507,7 +1543,7 @@ $('.menli').keydown(function(event) {
 					});
 				}
 			});
-	$('#selectpro').change(function(){
+	$('#selectpro').change(function(){ //이슈작성에서 협업공간 선택했을때
 		$('#todoresult').empty();
 		if($(selectpro).val()=="${sessionScope.email}"){
 			$('.todo').show();
@@ -1527,7 +1563,7 @@ $('.menli').keydown(function(event) {
 			}
 		}
 	})
-	$('#men1').click(
+	$('#men1').click( //멘션 클릭하면 멤버 목록 나옴
 			function() {
 				var top = ($('#issuecontent').offset().top);
 				var left = ($('#issuecontent').offset().left + 490);
@@ -1535,7 +1571,7 @@ $('.menli').keydown(function(event) {
 				$('#memlist').attr(
 						'style',
 						'position:fixed; width:20%;top:' + top + 'px;left:'
-								+ left + 'px; z-index:4');
+								+ left + 'px; z-index:4;height:160px;overflow:auto;');
 				$('#memlist').show();
 				$('#memlist').attr('class', 'list-group mem');
 				$('.modal-content').not('#memlist').click(function() {
@@ -1543,20 +1579,7 @@ $('.menli').keydown(function(event) {
 					$('#memlist').attr('class', 'list-group');
 				});
 			});
-	/* $('#men2').click(function() {
-		$('#mentionlist').hide();
-		$('#issuecontent').empty();
-		$('#issuecontent').hide();
-		var textarea = document.getElementById('codemirrorarea');
-		var editor = CodeMirror.fromTextArea(textarea, {
-			mode : "javascript",
-			lineNumbers : true,
-			lineWrapping : true,
-			theme : "eclipse",
-			val : textarea.value
-		});
-	}); */
-	$('#men2').click(function() {
+	$('#men2').click(function() { //구글드라이브 클릭하면 구글picker 실행
 		$('#mentionlist').hide();
 		var text = "";
 		text = $('#issuecontent').val().replace("@", "");
@@ -1574,7 +1597,7 @@ $('.menli').keydown(function(event) {
 		$('#issuecontent').append($('.picker-dialog'));
 
 	});
-	$('#men3').click(function() {
+	$('#men3').click(function() { //파일 클릭하면 hidden으로 숨겨놓은 파일선택 실행
 		$('#mentionlist').hide();
 		$('#fileclick').click();
 	});
@@ -1592,11 +1615,10 @@ $('.menli').keydown(function(event) {
 			reader.readAsDataURL(input.files[0]);
 		}
 	}
-	$("#fileclick").change(function() {
+	$("#fileclick").change(function() { //파일들을 선택하면 첨부에 append
 		readURL(this);
 		var files = $("#fileclick")[0].files;
 		$('#filename').empty();
-		//$('#filename').append($("#fileclick").val().substring(12));
 		var text = "";
 		text = $('#issuecontent').val().replace("@", "");
 		$('#issuecontent').val(text);
@@ -1610,7 +1632,7 @@ $('.menli').keydown(function(event) {
 $('#todoresult').show();
 		
 	});
-	$('#men4').click(
+	$('#men4').click( //할 일을 선택하면 멤버목록 불러오기
 			function() {
 				var text = "";
 				text = $('#issuecontent').val().replace("@", "");
@@ -1621,10 +1643,10 @@ $('#todoresult').show();
 				$('#memlist').attr(
 						'style',
 						'position:fixed; width:20%;top:' + top + 'px;left:'
-								+ left + 'px; z-index:4');
+								+ left + 'px; z-index:4;height:160px;overflow:auto;');
 				$('#memlist').show();
 			});
-	$('.todo')
+	$('.todo') //멘션에서 멤버목록을 클릭하면 @로 첨부에 append 그리고 할 일에서 멤버목록을 클릭하면 할일 div 불러오기
 			.click(
 					function() {
 						var top = ($('#issuecontent').offset().top);
@@ -1657,7 +1679,7 @@ $('#todoresult').show();
 							$('#todo').hide();
 						});
 					});
-	$('#todomake')
+	$('#todomake') //할 일div에서 만들기를 클릭하면 담당자와 내용을 첨부에 append
 			.click(
 					function() {
 						$('#todo').hide();
@@ -1676,14 +1698,14 @@ $('#todoresult').show();
 						$('#todoresult').show();
 						$('#todolist').val('');
 					})
-	$('#todocancle').click(function() {
+	$('#todocancle').click(function() { //할 일 div 닫기
 		$('#todo').hide();
 		var text = "";
 		text = $('#issuecontent').val().replace("@", "");
 		$('#issuecontent').val(text);
 		$('#todolist').val('');
 	});
-	$('#men5').click(
+	$('#men5').click( //일정을 클릭하면 datepicker 불러오기
 			function() {
 				var top = ($('#issuecontent').offset().top);
 				var left = ($('#issuecontent').offset().left + 490);
@@ -1704,7 +1726,7 @@ $('#todoresult').show();
 					$('#datepick').append($('#ui-datepicker-div'));
 				});
 			});
-	$('#datemake')
+	$('#datemake') //일정 만들면 첨부에 append
 			.click(
 					function() {
 						if(($('#to').val()=='') || ($('#from').val()=='')){
@@ -1724,16 +1746,13 @@ $('#todoresult').show();
 												+ $('#from').val()
 												+ '~'
 												+ $('#to').val()
-												//+ ' <span class="iconify" data-icon="bytesize:arrow-right" data-inline="false"></span> '
-												//+ $('#datecontent').val()
 												+ '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="annoDelete'+(++annotation)+'" style="cursor:pointer;" onclick="annotationDelete('+annotation+')"><span class="iconify" data-icon="octicon:x" data-inline="false"></span></span></div>');
 						$('#todoresult').append('<input type="hidden" name="fromDate" value="'+$('#from').val()+'">');
 						$('#todoresult').append('<input type="hidden" name="toDate" value="'+$('#to').val()+'">');
-						//$('#todoresult').append('<input type="hidden" name="dateMemo" value="'+$('#datecontent').val()+'">');
 						$('#todoresult').show();
 						$('#todolist').val('');
 					})
-	$('#datecancle').click(function() {
+	$('#datecancle').click(function() { //일정 취소버튼 누르기
 		$('#datepick').hide();
 		var text = "";
 		text = $('#issuecontent').val().replace("@", "");
@@ -1801,11 +1820,11 @@ $('#todoresult').show();
 								.attr('style',
 										'cursor: pointer;color:#535359;font-size: 18px;padding-bottom: 12px;');
 					});
-	function annotationDelete(annotation){
+	function annotationDelete(annotation){ //첨부에서 x버튼 누르면 삭제
 		$('#annoDelete'+annotation).parent().remove();
 	}
 
-    $('#issuetitle').on('keyup', function() {
+    $('#issuetitle').on('keyup', function() { //이슈 제목은 30자까지만 제한
   		if(($(this).val().length) > 30) {
   			 Swal.fire("글자수를 초과 하셨습니다.");
   			$("#issuetitle").focus();
