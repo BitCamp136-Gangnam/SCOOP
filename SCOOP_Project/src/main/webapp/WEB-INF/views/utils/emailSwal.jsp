@@ -1,3 +1,4 @@
+<!-- 협업공간에 이메일 초대 중복 에러 sweetalert -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:include page="/WEB-INF/views/commons/footer.jsp"></jsp:include>

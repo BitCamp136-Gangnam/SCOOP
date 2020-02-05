@@ -1,3 +1,4 @@
+<!-- 무료회원이 3개 이상의 협업공간에 참여하려할 때 오류 sweetalert -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

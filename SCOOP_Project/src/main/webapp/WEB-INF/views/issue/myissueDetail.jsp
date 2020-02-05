@@ -1,3 +1,4 @@
+<!-- 프라이빗 이슈 detail jsp -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -24,10 +25,10 @@
 $(function(){
 		console.log("${myissue.email}");
 		console.log("${sessionScope.email}");
-		$('#editIssue').click(function(){
+		$('#editIssue').click(function(){ //이슈 수정으로 이동
 			location.href = 'myissueEdit.do?piseq='+${myissue.piseq};
 		})
-		$('#deleteIssue').click(function(){
+		$('#deleteIssue').click(function(){ //이슈 삭제
 			   Swal.fire({
 				   title: '정말로 이슈를 삭제하시겠습니까??',
 				   text: "삭제하시면 이슈의 모든 정보가 사라집니다!",
@@ -43,8 +44,7 @@ $(function(){
 				   }
 				 })
 		})
-	$('#comeback').click(function(){
-		console.log("타니?");
+	$('#comeback').click(function(){ //뒤로가기
 		history.back();
 	})
 	});

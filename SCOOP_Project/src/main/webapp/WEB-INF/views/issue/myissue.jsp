@@ -1,3 +1,4 @@
+<!-- 내가작성한 이슈 jsp -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -137,21 +138,6 @@ $(function(){
 			
 			</div>
 		</c:forEach>
-			
-		<%-- <c:forEach items="${pi}" var="pi">
-			<div class="row" style="margin-left: 2%; margin-right: 2%" id="row">
-			<div class="col-sm-7 newissue" >
-			<div class="iconify" data-icon="uil:file-lock-alt" data-inline="false" style="width:27px;height: auto;"></div>
-			<a href="myissueDetail.do?piseq=${pi.piseq}">${pi.pititle}</a>
-			</div>
-			<div class="col-sm-3 newissue" >
-			<a class="pnameHover" href="private.do" style="color:#2c9aa8;">프라이빗 공간</a>
-			</div>
-			<div class="col-sm-2 newissue" >
-			<a href="private.do" style="color:#2c9aa8;">${fn:substring(pi.pidate,0,16)} </a>
-			</div>
-			</div>
-		</c:forEach> --%>
 		
 			<div id="loadPlus" data-toggle="tooltip" data-placement="bottom" title="더 보기" >
 			<div id="load" class="iconify" style="font-size: 40px; color:#464a53;cursor: pointer; margin-left: 627px; margin-top: 1%;" data-icon="mdi:chevron-double-down" data-inline="false">더 보기</div>
@@ -223,10 +209,6 @@ $(document).ready(function(){
 	 temp = 10;
 	$("#load").click(function(e){
 		console.log(moreEventArray);
-		/* console.log($('.card'));
-		console.log($('.card > a'));
-		console.log($('.card > a > .row'));
-		console.log($(".card > a > .row").val()); */
 		console.log("if");
 		$(moreEventArray).slice(temp,temp+10).removeAttr("hidden");
 		 temp +=10;
@@ -238,8 +220,6 @@ $(document).ready(function(){
 		            $('.tooltip').remove();
 		         }
 			}
-		
-			
 	}); 
 
 });

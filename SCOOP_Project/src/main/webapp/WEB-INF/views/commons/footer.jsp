@@ -1,3 +1,4 @@
+<!-- 페이지에서 대부분 공통으로 쓰이는 footer jsp -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -148,7 +149,7 @@
 			$('#helpdivopen').hide();
 			$('#closeopen').hide();
 		})
-		$(document).keydown(function(event) { //도움말 show() and hide() ctrl + , 단축키
+		$(document).keydown(function(event) { //도움말 show() and hide() ctrl + / 단축키
 			if (event.ctrlKey && event.keyCode == 191) {
 				if ($('#helpopen').attr('name') == 'on') {
 					$('#helpopen').attr('name', 'off');
@@ -160,7 +161,7 @@
 					$('#closeopen').hide();
 				}
 			}
-			if (event.ctrlKey && event.keyCode == 188) {
+			if (event.ctrlKey && event.keyCode == 188) { //채팅방 단축키 show() and hide() ctrl + , 단축키
 				if ($('#chatopen').attr('name') == 'on') {
 					$('#chatopen').attr('src',"<c:url value='/resources/images/chat/chatclose.png' />");
 					$('#chatopen').attr('name', 'off');
@@ -403,6 +404,7 @@
 	</div>
 
 	<script>
+	// 도움말 accordion
 		var acc = document.getElementsByClassName("accordion");
 		var i;
 

@@ -1,3 +1,4 @@
+<!-- 협업공간 칸반 jsp -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -109,7 +110,7 @@ $(function(){
 	   }
 	   
  })
-    $('#getOutTeam').click(function(){
+    $('#getOutTeam').click(function(){ //협업공간 탈퇴 함수 but 팀장은 탈퇴할 수 없음
 	   console.log("???");
 	   Swal.fire({
 		   title: '정말로 협업공간을 탈퇴 하시겠습니까??',
@@ -135,7 +136,7 @@ $(function(){
 		   }
 		 })
  })
- $('.banMember').click(function(){
+ $('.banMember').click(function(){ //팀장이 멤버 강제 탈퇴시키기
 	   var memDiv = $(this).parents(".search_NameEmail");
 	   Swal.fire({
 		   title: '정말로 삭제하시겠습니까?',
@@ -238,7 +239,7 @@ $(function(){
   	$('#validateCnt').text($('#third').children().length-1);
   	$('#completeCnt').text($('#fourth').children().length-1);
 });
-function project_filter() {
+function project_filter() { //협업공간에서 멤버 검색
 	var value, name, item, i;
 	value = document.getElementById("searchId").value.toUpperCase();
 	item = document.getElementsByClassName("search_NameEmail");
@@ -253,6 +254,7 @@ function project_filter() {
 		}
 	}
 }
+/* 칸반 비동기 함수들 */
 function allowDrop(ev) {
   ev.preventDefault();
 }
