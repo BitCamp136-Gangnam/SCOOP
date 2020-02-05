@@ -20,13 +20,20 @@ public class HandShakeInterceptor extends HttpSessionHandshakeInterceptor{
     	String ip = req.getHeader("X-Forwarded-For");
         if (ip == null) ip = req.getRemoteAddr();
     	String cmd  = req.getParameter("cmd");
+    	String all = req.getParameter("all");
     	String user  = (String) req.getSession().getAttribute("email");
     	//String user  = ip;
         // 파라미터로 입력된 attributes에 put을 하면 WebSocketSession에서 접근가능
     	attributes.put("cmd", cmd);
+    	attributes.put("all", all);
     	attributes.put("user", user);
+    	System.out.println("handshakeinterceptor"+user);
     	if(cmd.equals("join")) {
     		attributes.put("room", req.getParameter("room"));
+    		System.out.println("room handshakeinterceptor"+ip);
+    	} 
+    	if(all.equals("all")) {
+    		
     	}
     	
         return super.beforeHandshake(request, response, wsHandler, attributes);

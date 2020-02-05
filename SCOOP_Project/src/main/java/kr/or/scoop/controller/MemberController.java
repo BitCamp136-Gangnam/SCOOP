@@ -227,6 +227,7 @@ public class MemberController {
 		Member member = memberdao.getMember((String)session.getAttribute("email")); //로그인한 사람 정보 불러오기
 		Role role = memberdao.getRole(email); //로그인한 사람 등급 불러오기
 		String img = memberdao.getProfile(email); //로그인한 사람 프로필사진 불러오기
+		try {
 		int val = memberdao.getIsAlarm(email);
 		System.out.println("val값   " + val);
 		if(val == 1) {
@@ -236,6 +237,10 @@ public class MemberController {
 			status = "OFF";
 			session.setAttribute("status", status);
 		}
+		} catch(Exception e){
+			
+		}
+		
 		int count = 0;	
 		List<FileDrive> filedrive = null;
 		List<Tissue> mytissuelist = null;
