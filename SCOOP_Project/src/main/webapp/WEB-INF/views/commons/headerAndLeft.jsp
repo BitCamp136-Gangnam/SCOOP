@@ -870,15 +870,17 @@ span {
                style="cursor: pointer; color: #535359; font-size: 18px; padding-bottom: 12px;"></i>
 
             </li>
+            
+         <c:if test="${role == 'ROLE_CHARGE'}">
             <li class="icons dropdown"><a href="javascript:void(0)"
-               data-toggle="dropdown"> <i class="mdi mdi-bell-outline"></i> <span
-                  class="badge badge-pill gradient-2">0</span>
+               data-toggle="dropdown">
+                <i class="mdi mdi-bell-outline"></i>
+                 <span class="badge badge-pill gradient-2">0</span>
             </a>
                <div
                   class="drop-down animated fadeIn dropdown-menu dropdown-notfication">
                   <div class="dropdown-content-body">
                      <ul>
-                    	
                      	<c:if test="${status=='ON'}">
                         <li>
                            <p style="display: inline-block; padding-right: 33%">전체 알람
@@ -892,7 +894,7 @@ span {
                      	 <li>
                            <p style="display: inline-block; padding-right: 33%">전체 알람
                               설정</p> <label class="switch_alarm"> <input type="checkbox"
-                              id="alarmbox" name="on"> <span
+                              id="alarmbox" name="off"> <span
                               class="slider_alarm round_alarm" id="alarmbtn"></span>
                         </label> <span id="alarm_power">${sessionScope.status}</span>
                         </li>
@@ -901,39 +903,41 @@ span {
                               class="mr-3 avatar-icon bg-success-lighten-2"><i
                                  class="icon-present"></i></span>
                               <div class="notification-content">
-                                 <h6 class="notification-heading">무슨 알림인지</h6>
-                                 <span class="notification-text">알림 몇분전에 왔는지</span>
+                                 <h6 class="notification-heading">팀이슈 알림</h6>
+                                 <span class="notification-text">팀이슈의 알림을 받을 수 있습니다.</span>
                               </div>
                         </a></li>
                         <li><a href="javascript:void()"> <span
                               class="mr-3 avatar-icon bg-danger-lighten-2"><i
                                  class="icon-present"></i></span>
                               <div class="notification-content">
-                                 <h6 class="notification-heading">Event Started</h6>
-                                 <span class="notification-text">One hour ago</span>
+                                 <h6 class="notification-heading">댓글 알림</h6>
+                                 <span class="notification-text">댓글이 달리면 알림을 받을 수 있습니다.</span>
                               </div>
                         </a></li>
                         <li><a href="javascript:void()"> <span
                               class="mr-3 avatar-icon bg-success-lighten-2"><i
                                  class="icon-present"></i></span>
                               <div class="notification-content">
-                                 <h6 class="notification-heading">Event Ended
-                                    Successfully</h6>
-                                 <span class="notification-text">One hour ago</span>
+                                 <h6 class="notification-heading">멘션 알림</h6>
+                                 <span class="notification-text">사용자가 멘션이 되면 알림을 받을 수 있습니다.</span>
                               </div>
                         </a></li>
                         <li><a href="javascript:void()"> <span
-                              class="mr-3 avatar-icon bg-danger-lighten-2"><i
+                              class="mr-3 avatar-icon" style="background-color: #000000"><i
                                  class="icon-present"></i></span>
                               <div class="notification-content">
-                                 <h6 class="notification-heading">Events to Join</h6>
-                                 <span class="notification-text">After two days</span>
+                                 <h6 class="notification-heading">할일 알림</h6>
+                                 <span class="notification-text">다른 팀원이 할일을 주면 알림을 받을 수 있습니다.</span>
                               </div>
-                        </a></li>
+                        </a>
+                        </li>
                      </ul>
 
                   </div>
-               </div></li>
+               </div>
+               </li>
+         </c:if>           	
 
             <li class="icons dropdown">
                <div class="user-img c-pointer position-relative"
