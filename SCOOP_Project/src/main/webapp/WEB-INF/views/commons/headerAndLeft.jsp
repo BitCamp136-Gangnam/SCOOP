@@ -1193,13 +1193,11 @@ span {
    </div>
 
    <div class="list-group" id="mentionlist" style="display: none;border:10px solid #cbc9d4">
-      <a href="#" class="list-group-item list-group-item-action menli" id="men1"style="padding: 5px;">멘션</a> 
-      <!-- <a href="#" class="list-group-item list-group-item-action menli" id="men2"style="padding: 5px">소스코드</a> --> 
-      <a href="#" class="list-group-item list-group-item-action menli" id="men2"style="padding: 5px">구글 드라이브</a> 
-      <a href="#" class="list-group-item list-group-item-action menli" id="men3"style="padding: 5px">파일</a> 
-      <!-- <a href="#" class="list-group-item list-group-item-action menli" id="men7"style="padding: 5px">의사결정</a> --> 
-      <a href="#" class="list-group-item list-group-item-action menli" id="men4"style="padding: 5px">할 일</a> 
-      <a href="#" class="list-group-item list-group-item-action menli" id="men5"style="padding: 5px">일정</a>
+      <a href="#" class="list-group-item list-group-item-action menli" id="men1"style="padding: 5px;">@ 멘션</a> 
+      <a href="#" class="list-group-item list-group-item-action menli" id="men2"style="padding: 5px"><span class="iconify" data-icon="whh:googledrive" data-inline="false"></span> 구글 드라이브</a> 
+      <a href="#" class="list-group-item list-group-item-action menli" id="men3"style="padding: 5px"><span class="iconify" data-icon="si-glyph:file-box" data-inline="false"></span> 파일</a> 
+      <a href="#" class="list-group-item list-group-item-action menli" id="men4"style="padding: 5px"><span class="iconify" data-icon="bx:bx-check-circle" data-inline="false"></span> 할 일</a> 
+      <a href="#" class="list-group-item list-group-item-action menli" id="men5"style="padding: 5px"><span class="iconify" data-icon="bx:bx-calendar" data-inline="false"></span> 일정</a>
    </div>
    <!--  -->
    <!-- 멘션할 사람 목록 -->
@@ -1492,7 +1490,7 @@ $('.menli').keydown(function(event) { //이슈작성에서 @단축키 사용했�
 				$('#memlist').attr(
 						'style',
 						'position:fixed; width:20%;top:' + top + 'px;left:'
-								+ left + 'px; z-index:4');
+								+ left + 'px; z-index:4;height:160px;overflow:auto;');
 				$('#memlist').show();
 				$('#memlist').attr('class', 'list-group mem');
 				$('.modal-content').not('#memlist').click(function() {
@@ -1564,7 +1562,7 @@ $('#todoresult').show();
 				$('#memlist').attr(
 						'style',
 						'position:fixed; width:20%;top:' + top + 'px;left:'
-								+ left + 'px; z-index:4');
+								+ left + 'px; z-index:4;height:160px;overflow:auto;');
 				$('#memlist').show();
 			});
 	$('.todo') //멘션에서 멤버목록을 클릭하면 @로 첨부에 append 그리고 할 일에서 멤버목록을 클릭하면 할일 div 불러오기
