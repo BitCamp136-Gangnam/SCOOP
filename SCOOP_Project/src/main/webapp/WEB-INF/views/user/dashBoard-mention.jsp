@@ -119,7 +119,7 @@
                      <li class="nav-item"><a class="nav-link active"
                         data-toggle="tab" href="#">이슈 업데이트</a></li> -->
 							<li class="nav-item"><a href="mention.do" class="nav-link" style="color: #E71D36">@멘션</a></li>
-							<li class="nav-item"><a href="dowork.do" class="nav-link" style="color: #E71D36"><span class="iconify" data-icon="bx:bx-check-circle" data-inline="false"></span>할 일</a></li>
+							<li class="nav-item"><a href="dowork.do" class="nav-link"><span class="iconify" data-icon="bx:bx-check-circle" data-inline="false"></span>할 일</a></li>
 						</ul>
 					</div>
 					<hr style="margin-top: 0; margin-left: 4%; margin-right: 4%">
@@ -151,7 +151,7 @@
 							<div class="row countRow" style="margin-left: 2%; margin-right: 2%" id="ialarm">
 								<div class="col-sm-12 newissue" id="al">
 								<img src= '<c:url value="/resources/images/logo/ScoopBig.png"/>' style="width: 60px;padding-right: 5px;" >
-									아직 공지사항이 없습니다! 팀장님이 작성할 때까지 기다려주세요 ^ㅁ^!
+									아직 멘션이 없습니다! 멤버들이 작성할 때까지 기다려주세요 ^ㅁ^!
 								</div>
 							</div>
 							</c:if>
