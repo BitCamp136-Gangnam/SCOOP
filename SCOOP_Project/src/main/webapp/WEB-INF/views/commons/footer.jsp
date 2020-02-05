@@ -341,9 +341,8 @@
 <div id="helpdivopen" class="scrollbar">
 	<h4 style="margin: 15%; margin-bottom: 5%; color: white">도움센터(Ctrl+/)</h4>
 	<h5 style="color: white; padding-top: 15px;">추천 팁</h5>
-	<p
-		style="border-bottom: 1px solid rgba(255, 255, 255, 0.3); margin-bottom: 0px; color: rgba(255, 255, 255, 0.3); font-size: 12px; padding: 10px 0px 5px 0px;">새로운
-		소식</p>
+	<p style="border-bottom: 1px solid rgba(255, 255, 255, 0.3); margin-bottom: 0px; color: rgba(255, 255, 255, 0.3); font-size: 12px; padding: 10px 0px 5px 0px;">
+	새로운 소식</p>
 	<button class="accordion">이슈 업데이트</button>
 	<div class="panel">
 		<p>이미지 넣어줘야해~~</p>
