@@ -1116,7 +1116,7 @@ span {
          -->
 <style>
 .createmodal {
-   border: 1px solid #000;
+   border: 1px solid rgba(0,0,0,0.5);
    background-color: white;
 }
 </style>
@@ -1179,7 +1179,7 @@ span {
       <ul class="nav nav-pills">
          <!-- <li class="nav-item"><a class="nav-link" id="myFile" style="cursor: pointer;">내 파일</a></li> -->
          <li class="nav-item" style="margin-right: 10px">
-          <select id="selectFile" name="tseq" class="form-control" style="border: none; color: #76838f; font-size: 18px; padding-top: 0;">
+          <select id="selectFile" name="tseq" class="form-control" style="border: 1px solid rgba(0,0,0,0.5) ; color: #000; font-size: 18px; padding-top: 0;">
                  <option value="0">프로젝트 전체 파일</option>
           		<option value="myFile">프라이빗 공간</option>
               <c:forEach items="${pjtlist}" var="p">
@@ -1352,7 +1352,7 @@ span {
          </form>
             <div class="row" style="margin-bottom: 1%;" id="inviteContent">
                <div class="col-sm-6"
-                  style="border-right: 1px solid #c8c8c8; padding-left: 20px;">
+                  style="border-right: 1px solid rgba(0,0,0,0.5); padding-left: 20px;">
                   <div class="modal-body">
                      <p style="font-size: 12px">
 		              <spring:message code="invite.content1" /><br> 
