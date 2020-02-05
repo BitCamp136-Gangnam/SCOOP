@@ -80,7 +80,8 @@
 							style="margin: 0 0 0 3% ; border-radius: 0.5rem;">
 							<div class="row" style="margin-left: 2%; margin-right: 2%" id="ialarm">
 							<div class="col-sm-3 newissue" id="al"><p><b>협업공간</b></p></div>
-							<div class="col-sm-6 newissue" id="ti"><p><b>제목</b></p></div>
+							<div class="col-sm-4 newissue" id="ti"><p><b>제목</b></p></div>
+							<div class="col-sm-2 newissue" id="ti"><p><b>작성자</b></p></div>
 							<div class="col-sm-3 newissue" id="day"><p><b>작성시간</b></p></div>
 							</div>
 		<c:if test="${mypjtlist =='[]'}">
@@ -108,15 +109,22 @@
          	</p>
          	
          </div>
-         <div class="col-sm-6 newissue" id="ti">
+         <div class="col-sm-4 newissue" id="ti">
          
         <p>
-         	<c:if test="${fn:length(mynewtissue.tititle) > 19}">
-         	<a href="teamissueDetail.do?tiseq=${mynewtissue.tiseq}"><c:out value="${fn:substring(mynewtissue.tititle,0,19)}"/>...</a>
+         	<c:if test="${fn:length(mynewtissue.tititle) > 16}">
+         	<a href="teamissueDetail.do?tiseq=${mynewtissue.tiseq}"><c:out value="${fn:substring(mynewtissue.tititle,0,16)}"/>...</a>
          	</c:if>
-         	<c:if test="${fn:length(mynewtissue.tititle) <= 19}">
-         	<a href="teamissueDetail.do?tiseq=${mynewtissue.tiseq}"><c:out value="${fn:substring(mynewtissue.tititle,0,19)}"/></a>
+         	<c:if test="${fn:length(mynewtissue.tititle) <= 16}">
+         	<a href="teamissueDetail.do?tiseq=${mynewtissue.tiseq}"><c:out value="${fn:substring(mynewtissue.tititle,0,16)}"/></a>
          	</c:if>
+         	</p>
+         	
+         </div>
+         <div class="col-sm-2 newissue" id="ti">
+         
+        <p>
+         	${mynewtissue.name}
          	</p>
          	
          </div>
