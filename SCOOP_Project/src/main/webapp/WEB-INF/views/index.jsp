@@ -639,7 +639,7 @@ function idOver(a) {
         <p class="lead mt-5 font-weight-light"><spring:message code="main.content" />🍿</p>
         <!-- Subscription form-->
         <form action="#" class="subscription-form mt-5">
-         <div class="form-group">
+         <div class="form-group" style="border: 1px solid #656a6f; border-radius: 0.25rem;">
            <label>Email</label>
            <input type="text" name="email" id="emailTo" placeholder="E-mail@company.com" class="form-control">
      	   <button type="button" id="scoop_input" data-toggle="modal" data-target="#signUp"class="btn btn-primary"><spring:message code="register" /></button>     
@@ -816,7 +816,7 @@ function idOver(a) {
         <div class="col-lg-7 mx-auto">
          <!-- Subscription form-->
          <form action="#" class="subscription-form mt-5">
-           <div class="form-group">
+           <div class="form-group" style="border: 1px solid #656a6f; border-radius: 0.25rem;">
             <label>Email</label>
             <input type="email" name="email" placeholder="E-mail@company.com" class="form-control">
             <button type="submit" class="btn btn-primary"><spring:message code="register" /></button>
