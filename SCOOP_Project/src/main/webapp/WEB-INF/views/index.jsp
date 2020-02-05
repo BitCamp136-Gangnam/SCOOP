@@ -754,13 +754,13 @@ function idOver(a) {
 						</div>
 						<button class="accordion" style="font-size: 23px;color: #000;">1. 스쿱은 어떤 협업툴인가요?</button>
 						<div class="panel"  style="width: 1000px;">
-						  <p>스쿱은 하나의 페이지에서 할 일, 파일 공유, 의사결정, 일정 및 커뮤니케이션을 모두 담아내어, 이슈를 함께 해결하는 '이슈기반 협업툴' 입니다.<br>
-						         스쿱은 제품/서비스 개선 프로젝트, 예산 관리, 마케팅 컨텐츠 제작, 채용&인사 관리, 사내 공지 등 각 회사의 프로세스를 모두 적용할 수 있습니다.</p>
+						  <p>- 스쿱은 하나의 페이지에서 할 일, 파일 공유, 의사결정, 일정 및 커뮤니케이션을 모두 담아내어, 이슈를 함께 해결하는 '이슈기반 협업툴' 입니다.<br><br>
+						     - 스쿱은 제품/서비스 개선 프로젝트, 예산 관리, 마케팅 컨텐츠 제작, 채용&인사 관리, 사내 공지 등 각 회사의 프로세스를 모두 적용할 수 있습니다.</p>
 						</div>
 						
 						<button class="accordion" style="font-size: 23px;color: #000;">2. 스쿱으로 어떻게 일을 진행할 수 있나요?</button>
 						<div class="panel"  style="width: 1000px;">
-						<p><span style="color:#ca1e4d;">콜라비로 동료와 어떻게 일을 진행할 수 있는지 알려드릴게요.</span><br> 
+						<p><span style="color:#ca1e4d;">콜라비로 동료와 어떻게 일을 진행할 수 있는지 알려드릴게요.</span><br> <br>
 							<b>1) 협업공간 만들기 & 멤버초대</b><br>
 							- 먼저, 협업을 할 수 있는 협업공간을 팀별공간, 프로젝트용공간 등 만들어 보세요. 그리고, 함께 협업할 동료를 협업공간에 초대해 보세요. 협업공간의 관리자가 초대하면 바로 참여할 수 있습니다. <br><br>
 							<b>2) 이슈 공유하기</b><br>
@@ -774,7 +774,7 @@ function idOver(a) {
 						</div>
 						<button class="accordion" style="font-size: 23px;color: #000;">3. 더 궁금한 사항이 있으시다면?</button>
 						<div class="panel" style="width: 1000px;">
-						  <p>오른쪽 하단 채팅 버튼을 클릭해주세요! 스쿱 CS팀이 친절하게 상담해드립니다^ㅁ^</p>
+						  <p>- 오른쪽 하단 채팅 버튼을 클릭해주세요! 스쿱 CS팀이 친절하게 상담해드립니다^ㅁ^</p>
 						</div>
 					</div>
 				</div>
