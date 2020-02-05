@@ -1,24 +1,11 @@
-const { request, cheerio, express } = require('../lib/modules')
+const { request, cheerio, http, express } = require('../lib/modules')
 
-let http = require('http').Server(express)
+
 
 let controller = {
     start: () => {
-        express.get('/', function(req, res){
-            res.send('<h1>안녕하세요 "/" 경로입니다</h1>')
-        })
-        http.listen(8091, function(){
-            console.log('listening on *:8091')
-        })
-        console.log('Controller')
-        let options = {
-            url: 'https://www.naver.com/',
-            method: 'GET',
-            timeout: 3000
-        }
-        controller.getBody(options, (result) => {
-            controller.convertCheerio(result)
-        })
+        controller.restApi()
+        
     },
     getBody: (options, callback) => {
         request(options, (err, res, body) => {
@@ -38,7 +25,7 @@ let controller = {
             }
         })
     },
-    convertCheerio: (body) => {
+    convertCheerio: (body, callback) => {
         let $ = cheerio.load(body)
         let title = $('head > meta[property="og:title"]').attr('content')
         let image = $('head > meta[property="og:image"]').attr('content')
@@ -55,6 +42,57 @@ let controller = {
             url: url,
             sub: title2
         }
+        callback(data)
+    },
+    restApi: (req, res) => {
+        let app = express()
+        let getUrl = "";
+        app.use(function(req, res, next) {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+            next();
+        });
+
+        app.listen(8091, () => {
+            console.log('Listening on port : 8091')
+        })
+
+        app.get('/index', function(req, res){
+            
+            getUrl = req.param('url')
+            console.log(getUrl)
+            let resultData = {
+                message: ''
+            }
+            if(getUrl.indexOf('http') < 0){
+                getUrl = 'http://' + getUrl
+                console.log(getUrl)
+            }
+            let options = {
+                url: getUrl,
+                method: 'GET',
+                timeout: 3000
+            }
+            let message = '';
+            controller.getBody(options, (result) => {
+                controller.convertCheerio(result, (data) => {
+                    console.log(data)
+                    let resData = data
+                    if(getUrl !== null && getUrl !== undefined){
+                        console.log('if')
+                        resultData.message = resData
+                        res.setHeader('Content-Type','application/json')
+                        res.json(resultData)
+                    }else{
+                        console.log('else')
+                        res.status(400).end()
+                    }
+                })
+                
+            })
+
+            
+        })
     }
 }
 

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -178,21 +179,20 @@ public class TeamController {
 				}
 			}
 			// 이슈 내용에서 url 찾아서 링크 (a태그)
-			String regex =  "^(https?):\\/\\/([^:\\/\\s]+)(:([^\\/]*))?((\\/[^\\s/\\/]+)*)?\\/([^#\\s\\?]*)(\\?([^#\\s]*))?(#(\\w*))?$";
 			String[] contentline = issuecontent.split("\n");
 			String content = "";
 			for(int i = 0; i < contentline.length; i++) {
-				if(contentline[i].matches(regex)) {
-					String[] url = contentline[i].split(" ");
+				if(contentline[i].indexOf("http") != -1 || contentline[i].indexOf("www") != -1) {
+					String[] link = contentline[i].split(" ");
 					System.out.println("if 엔터 : " + contentline[i]);
-					for(int j = 0; j < url.length; j++) {
-						System.out.println("split" + url[j]);
-						if(url[j].matches(regex)) {
-							content += "<a href="+ url[j] + " target='_blank'>" + url[j] + "</a> ";
-							System.out.println("if 띄움 : " + url[j]);
+					for(int j = 0; j < link.length; j++) {
+						System.out.println("split : " + link[j]);
+						if(link[j].indexOf("http") != -1 || link[j].indexOf("www") != -1) {
+							content += "<a href="+ link[j] + " target='_blank'>" + link[j] + "</a> ";
+							System.out.println("if 띄움 : " + link[j]);
 						}else {
-							content += url[j] + " ";
-							System.out.println("else 띄움 : " + url[j]);
+							content += link[j] + " ";
+							System.out.println("else 띄움 : " + link[j]);
 						}
 					}
 					content += "<br>";

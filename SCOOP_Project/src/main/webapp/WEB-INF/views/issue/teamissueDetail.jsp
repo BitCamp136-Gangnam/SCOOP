@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -158,8 +159,6 @@ $(function(){
 
 
 </script>
-<script src="<c:url value="/resources/js/crawling/app.js"/>"></script>
-<%-- <script type="text/javascript" th:src="@{<c:url value="/resources/js/crawling/app.js"/>}"></script> --%>
 <style>
 .newissue{
 	border-bottom: 1px solid #c8c8c8;
@@ -341,11 +340,49 @@ border-radius: 5px;
     <!--**********************************
         Scripts
     ***********************************-->
+   
     <script type="text/javascript">
 		$(function(){
+			let content = $('#myissueContent').text()
+			let contentline = content.split('\n')
+			let urlData = [];
 			
+			for(let i = 0; i < contentline.length; i++){
+				if(contentline[i].indexOf("http") != -1 || contentline[i].indexOf("www") != -1) {
+					let link = contentline[i].split(' ')
+					for(let j = 0; j < link.length; j++){
+						if(link[j].indexOf("http") != -1 || link[j].indexOf("www") != -1){
+							urlData.push(link[j])
+						}
+					}
+				}
+			}
+			
+			console.log(urlData)
+			
+			console.log('start')
+			for(let i = 0; i < urlData.length; i++){
+				console.log(urlData[i])
+				let udata = urlData[i]
+				$.ajax({
+					url: 'http://192.168.6.45:8091/index',
+					type: 'GET',
+					data: 'url='+udata,
+					success: function(data){
+						console.log('success')
+						console.log(data)
+					},
+					error: function(xhr, status, error){
+						console.log('xhr : ' + xhr.status)
+						console.log(error)
+					}
+				})
+			}
 		})
+		
+		
 	</script>
+	
     <script src="<c:url value="/resources/plugins/common/common.min.js" />"></script>
     <script src="<c:url value="/resources/js/custom.min.js" />"></script>
     <script src="<c:url value="/resources/js/settings.js" />"></script>
