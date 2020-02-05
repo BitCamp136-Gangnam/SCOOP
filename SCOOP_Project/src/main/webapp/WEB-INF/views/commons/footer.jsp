@@ -1,3 +1,4 @@
+<!-- 페이지에서 대부분 공통으로 쓰이는 footer jsp -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -40,12 +41,7 @@
 	var wsocket;
 	$(function() {
 		connect();
-/* 		$('#dataTable').DataTable({
-		 	"searching": false,
-		 	"ordering": false
- 		}); */
- 		$('#chatopen').click(function(){
- 	 		//if($('#chattbody').children().length==0){
+ 		$('#chatopen').click(function(){ //채팅방 목록보기
  				for(let i=0; i<$('.resultsearch').length;i++){
  				var proname = $('.resultsearch')[i].innerHTML.substr(7);
  				var prohref = $('.resultsearch').parent()[i].getAttribute('href').substr(22);
@@ -56,7 +52,6 @@
  		    	    		};
  		   		wsocket.send(JSON.stringify(data));
  				}
- 			//}
  	 		})
 		$("#createChat").click( function() {
 			backAndForth();
@@ -68,56 +63,6 @@
 	    	openChat($(this).attr("id"));
 	    });
 	})
-	
-		
-/* 	const steps = ['방 제목', '최대 인원'];
-	const swalQueueStep = Swal.mixin({
-	  confirmButtonText: 'Next',
-	  cancelButtonText: 'Back',
-	  progressSteps: ['1','2'],
-	  input: 'text',
-	  inputAttributes: {
-	    required: true
-	  },
-	  reverseButtons: true,
-	  validationMessage: '필수 입력사항입니다.'
-	})
-
-	 async function backAndForth () {
-	  const values = [];
-	  let currentStep;
-
-	  for (currentStep = 0; currentStep < steps.length;) {
-	    const result = await swalQueueStep.fire({
-	      title: steps[currentStep],
-	      inputValue: values[currentStep],
-	      showCancelButton: currentStep > 0,
-	      confirmButtonColor: '#E71D36',
-	      cancelButtonColor: '#E71D36',
-	      currentProgressStep: currentStep
-	    })
-	
-	    if (result.value) {
-	      values[currentStep] = result.value
-	      currentStep++
-	    } else if (result.dismiss === 'cancel') {
-	      currentStep--
-	    } else {
-	      break
-	    }
-	  }
-
-	  if (currentStep === steps.length) {
-	    let data = { cmd : "createChatRoom", 
-	    	    	name : values[0], 
-	    	    	max : values[1],
-	    	    	ref : "${ref}"
-	    	    		};
-
-	    wsocket.send(JSON.stringify(data));   
-	    openChat(data.name);
-	  }
-	} */
 
 	 function connect() {
 		wsocket = new WebSocket("ws://192.168.6.13:8090/SCOOP/Chat-ws.do?cmd=on");
@@ -138,35 +83,13 @@
 	function onClose(evt) {
 		
 	}
-
-/* 	function setChatRooms(data){
-		var room = "";
-		var btn = "";
-		$('#dataTable > tbody').empty();
-		$.each(data.rooms, function(index, element){
-			for(let i=0; i<$('.resultsearch').length;i++){
-				if($('.resultsearch').parent()[i].getAttribute('href').substr(22)==data.rooms[index].name.split("/")[1]){
-					console.log("너는 같구나^^");
-					room = $("<tr></tr>");
-					//room.append("<td style='padding-top:5%;'>" + (num++) + "</td>");
-					room.append("<td style='padding-top:5%;'>"+element.name+"</td>");
-					//room.append("<td style='padding-top:5%;'>"+element.users.length+ " / " +element.max+"</td>");
-		 			btn = $("<button id="+element.name+" class='btn btn-primary'>입장</button>");
-					room.append($("<td></td>").append(btn));
-					$('#dataTable > tbody').append(room);
-				}
-			}
-		})
-	} */
 	function setChatRooms(data){
 		$('#dataTable > tbody').empty();
 		$.each(data.rooms, function(index, element){
 			for(let i=0; i<$('.resultsearch').length;i++){
 				if($('.resultsearch').parent()[i].getAttribute('href').substr(22)==data.rooms[index].name.split("/")[1]){
 					room = $("<tr></tr>");
-					//room.append("<td style='padding-top:5%;'>" + (num++) + "</td>");
 					room.append("<td style='padding-top:5%;'>"+element.name.split("/")[0]+"</td>");
-					//room.append("<td style='padding-top:5%;'>"+element.users.length+ " / " +element.max+"</td>");
 		 			btn = $("<button class='btn btn-primary'>입장</button>");
 					btn.attr("id", element.name);
 					room.append($("<td></td>").append(btn));
@@ -180,29 +103,16 @@
     
     }
 
-    function openChat(room){
+    function openChat(room){ //채팅방 팝업창 띄우기
     	let url = "Chat.do?room="+room;
     	let name = room;
     	let option = "width = 400, height = 500, top = 230, left = 1170, location = no, channelmode = yes";
         window.open(url, name, option);
-        /* $('#chatdivopen').hide();
-        $('#chatroomdivopen').load(url);
-        $('#chatroomdivopen').show();
-        $('#chatdivopen').attr('class','false');
-        $('#chatroomdivopen').attr('class','true');
-        $('#chatback').show();
-        $('#chatback').click(function(){
-        	$('#chatback').hide();
-        	$('#chatroomdivopen').hide();
-        	$('#chatdivopen').show();
-        	$('#chatdivopen').attr('class','true');
-            $('#chatroomdivopen').attr('class','false');
-        }) */
     }
 </script>
 <script type="text/javascript">
 	$(function() {
-		$('#chatopen')
+		$('#chatopen') //채팅방 div show() and hide()
 				.click(
 						function() {
 							if ($(this).attr('name') == 'on') {
@@ -227,19 +137,19 @@
 								$('#chatroomdivopen').hide();
 							}
 						});
-		$('#helpopen').click(function() {
+		$('#helpopen').click(function() { //도움말 show()
 			if ($(this).attr('name') == 'on') {
 				$(this).attr('name', 'off');
 				$('#helpdivopen').show();
 				$('#closeopen').show();
 			}
 		});
-		$('#closeopen').click(function() {
+		$('#closeopen').click(function() { //도움말 hide()
 			$('#helpopen').attr('name', 'on');
 			$('#helpdivopen').hide();
 			$('#closeopen').hide();
 		})
-		$(document).keydown(function(event) {
+		$(document).keydown(function(event) { //도움말 show() and hide() ctrl + / 단축키
 			if (event.ctrlKey && event.keyCode == 191) {
 				if ($('#helpopen').attr('name') == 'on') {
 					$('#helpopen').attr('name', 'off');
@@ -251,7 +161,7 @@
 					$('#closeopen').hide();
 				}
 			}
-			if (event.ctrlKey && event.keyCode == 188) {
+			if (event.ctrlKey && event.keyCode == 188) { //채팅방 단축키 show() and hide() ctrl + , 단축키
 				if ($('#chatopen').attr('name') == 'on') {
 					$('#chatopen').attr('src',"<c:url value='/resources/images/chat/chatclose.png' />");
 					$('#chatopen').attr('name', 'off');
@@ -494,6 +404,7 @@
 	</div>
 
 	<script>
+	// 도움말 accordion
 		var acc = document.getElementsByClassName("accordion");
 		var i;
 

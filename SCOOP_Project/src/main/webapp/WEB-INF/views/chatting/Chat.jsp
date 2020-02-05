@@ -1,3 +1,6 @@
+<!-- 
+	채팅 팝업창 jsp 
+-->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -40,8 +43,8 @@
 	//var wsocket;
 
 	$(function() {
-		connect();
-		$('#message').keypress(function(event) {
+		connect();	//연결
+		$('#message').keypress(function(event) { //메시지 전송하면 스크롤 맨아래로
 			var keycode = (event.keyCode ? event.keyCode : event.which);
 			if (keycode == '13'){
 				send($('#message').val());
@@ -51,11 +54,11 @@
 			event.stopPropagation();
 		});
 
-		$('#sendBtn').click(function() {
+		$('#sendBtn').click(function() { //전송 버튼 누르면 메시지 전송
 			send($('#message').val());
 		});
 		
-		$('#closeBtn').click(function() {
+		$('#closeBtn').click(function() { //닫기 버튼 누르면 채팅 닫힘
 			self.close();
 		});
 
@@ -80,7 +83,7 @@
 		appendMessage(data);
 	}
 
-	function send(message) {
+	function send(message) { //전송할때 json형태로 전송
 		let data = { message : message
 						, cmd : "message"
 						, room : "${room}"
@@ -91,7 +94,7 @@
 		$("#message").val("");
 	}
 
-	function appendMessage(data) {
+	function appendMessage(data) { //메시지 뷰단에 append
 		var src = "";
         if(data.img==''){
            src = '/SCOOP/resources/images/avatar/avatar.png';
@@ -121,13 +124,6 @@
 									
 			$("#chatMessageArea").append(messageBox);
 		}
-		/* let chatAreaHeight = $(".box-body").height();
-		console.log(chatAreaHeight);
-		console.log($("#chatMessageArea").height());
-		let maxScroll = $("#chatMessageArea").height() - chatAreaHeight;
-		console.log("scroll");
-		console.log(maxScroll);
-		$(".box-body").scrollTop(maxScroll); */
 		$('#chatMessageArea').scrollTop($('#chatMessageArea')[0].scrollHeight);
 	}
 	

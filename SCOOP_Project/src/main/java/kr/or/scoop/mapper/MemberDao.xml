@@ -140,7 +140,7 @@ where tseq in (
 	</select>
 	<!-- 멘션목록 불러오기 -->
 	<select id="getMention" resultType="kr.or.scoop.dto.Mention">
-		select * from teammention m join tissue t on m.tiseq = t.tiseq join teampjt p on t.tseq=p.tseq where tmemail=#{tmemail} order by t.tidate desc
+		select * from teammention m join tissue t on m.tiseq = t.tiseq join teampjt p on t.tseq=p.tseq join member b on t.email = b.email where tmemail=#{tmemail} order by t.tidate desc
 	</select>
 	<!-- 내정보 불러오기 -->
 	<select id="getMyInfo" resultType="kr.or.scoop.dto.Tpmember">

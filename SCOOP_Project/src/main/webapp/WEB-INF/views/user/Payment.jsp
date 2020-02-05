@@ -1,3 +1,4 @@
+<!-- 내정보에서 가격 및 결제 jsp -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -80,6 +81,23 @@ function requestPay(){
     
 	
 }
+
+function getOutMember(){
+	 Swal.fire({
+		   title: '정말로 회원 탈퇴하시겠습니까??',
+		   text: "삭제하시면 스쿱의 모든 정보가 사라집니다!",
+		   icon: 'warning',
+		   showCancelButton: true,
+		   confirmButtonColor: '#d33',
+		   cancelButtonColor: '#c8c8c8',
+		   confirmButtonText: '확인',
+		   cancelButtonText: '취소'
+		 }).then((result) => {
+		   if (result.value) {
+			   location.href = 'memberDelete.do';
+		   }
+		 })
+		}
 </script>
 
 <style>
@@ -127,15 +145,15 @@ function requestPay(){
 								href="app-external.do">외부 서비스 연결</a></li> -->
 							<li class="nav-item"><a class="nav-link"
 								href="paymentPage.do" style="color: #E71D36;">가격 및 결제</a></li>
-								 <li class="nav-item">
-			      <a class="nav-link" href="memberDelete.do">회원 탈퇴</a>
-			    </li>
+							<li class="nav-item">
+								<a class="nav-link" href="javascript:getOutMember();">회원 탈퇴</a>
+						    </li>
 						</ul>
 					</div>
 					<hr style="margin-top: 0">
-					<div class="row" style="margin-left: 4%; margin-top: 2%"></div>
+					<div class="row" style="margin-left: 4%;"></div>
 					<!-- #/ container -->
-					<section class="pt-4" id="pricing">
+					<section class="pt-4" id="pricing" style="height: 500px;">
 						<div id="pricing_area"></div>
 						<div class="container">
 							<div class="row">
@@ -143,17 +161,17 @@ function requestPay(){
 									<h2>
 										<spring:message code="payment.title" />
 									</h2>
-									<br>
+									
 									<p class="text-muted lead">
 										<spring:message code="payment.content" />
 									</p>
 								</div>
 							</div>
 							<!--pricing tables-->
-							<div class="row pt-5 pricing-table">
+							<div class="row pricing-table">
 								<div class="col-sm-12">
 									<div class="card-deck pricing-table">
-										<div class="card text-center" style="border-color: #fff">
+										<div class="card text-center" style="border-color: #fff;min-height: 20px;height: 100%;">
 											<div class="card-body">
 												<h4 class="card-title pt-3" style="color: #0E2866">CHOICE</h4>
 												<h2 class="card-title pt-4" style="color: #0E2866">PRICE</h2>
@@ -161,18 +179,12 @@ function requestPay(){
 													<spring:message code="payment.date" />
 												</div>
 												<ul class="list-unstyled pricing-list">
-													<li><spring:message code="payment.team" /></li>
 													<li><spring:message code="payment.alam" /></li>
+													<li><spring:message code="payment.team" /></li>
 													<li><spring:message code="payment.upload" /></li>
-													<li><spring:message code="payment.retiree" /></li>
-													<li><spring:message code="payment.comMgm" /></li>
 													<li><spring:message code="payment.teamMgm" /></li>
-													<li><spring:message code="payment.publicMgm" /></li>
-													<li><spring:message code="payment.member" /></li>
-													<li><spring:message code="payment.collabo" /></li>
 													<li><spring:message code="payment.cs" /></li>
 													<li><spring:message code="payment.api" /></li>
-													<li><spring:message code="payment.email" /></li>
 												</ul>
 												<h5>
 													<spring:message code="payment.start" />
@@ -180,7 +192,7 @@ function requestPay(){
 											</div>
 										</div>
 
-										<div class="card text-center" style="border-color: #fff">
+										<div class="card text-center" style="border-color: #fff;min-height: 20px;height: 100%;">
 											<div class="card-body">
 												<h4 class="card-title pt-3">Free</h4>
 												<h2 class="card-title pt-4">$0</h2>
@@ -189,18 +201,13 @@ function requestPay(){
 														data-inline="false"></span>
 												</div>
 												<ul class="list-unstyled pricing-list">
+													<li>-</li>
 													<li>3개</li>
-													<li>무제한</li>
 													<li>20MB</li>
-													<li>-</li>
-													<li>-</li>
-													<li>-</li>
 													<li><span class="iconify" data-icon="bx:bx-check"
 														data-inline="false" style="color: #E71D36;"></span></li>
-													<li>무제한</li>
-													<li>무제한</li>
-													<li>-</li>
-													<li>구글 드라이브</li>
+													<li><span class="iconify" data-icon="bx:bx-check"
+														data-inline="false" style="color: #E71D36;"></span></li>
 													<li>-</li>
 												</ul>
 												<c:choose>
@@ -216,29 +223,20 @@ function requestPay(){
 										</div>
 										 <c:choose>
                   							<c:when test="${role == 'ROLE_CHARGE' || role == 'ROLE_ADMIN'}">
-										<div class="card text-center" style="border-color: #fff">
+										<div class="card text-center" style="border-color: #fff;min-height: 20px;height: 100%;">
 											<div class="card-body">
 												<h4 class="card-title text-primary pt-3">Premium</h4>
 												<h2 class="card-title text-primary pt-4">$4</h2>
 												<div class="text-muted mt-4">30일</div>
 												<ul class="list-unstyled pricing-list">
-													<li>무제한</li>
-													<li>무제한</li>
+													<li><spring:message code="payment.unlimited" /></li>
+													<li><spring:message code="payment.unlimited" /></li>
 													<li>50MB</li>
 													<li><span class="iconify" data-icon="bx:bx-check"
 														data-inline="false" style="color: #E71D36;"></span></li>
 													<li><span class="iconify" data-icon="bx:bx-check"
 														data-inline="false" style="color: #E71D36;"></span></li>
-													<li><span class="iconify" data-icon="bx:bx-check"
-														data-inline="false" style="color: #E71D36;"></span></li>
-													<li><span class="iconify" data-icon="bx:bx-check"
-														data-inline="false" style="color: #E71D36;"></span></li>
-													<li>무제한</li>
-													<li>무제한</li>
-													<li><span class="iconify" data-icon="bx:bx-check"
-														data-inline="false" style="color: #E71D36;"></span></li>
 													<li>구글 드라이브</li>
-													<li>-</li>
 												</ul>
 												<button class="btn btn-primary" onclick="charge();" 
 													type="button">사용 중</button>
@@ -250,29 +248,20 @@ function requestPay(){
 										</div>
 										</c:when>
 										<c:otherwise>
-										<div class="card text-center" style="border-color: #fff">
+										<div class="card text-center" style="border-color: #fff;min-height: 20px;height: 100%;">
 											<div class="card-body">
 												<h4 class="card-title text-primary pt-3">Premium</h4>
 												<h2 class="card-title text-primary pt-4">$4</h2>
 												<div class="text-muted mt-4">per month</div>
 												<ul class="list-unstyled pricing-list">
-													<li>무제한</li>
-													<li>무제한</li>
+													<li><spring:message code="payment.unlimited" /></li>
+													<li><spring:message code="payment.unlimited" /></li>
 													<li>50MB</li>
 													<li><span class="iconify" data-icon="bx:bx-check"
 														data-inline="false" style="color: #E71D36;"></span></li>
 													<li><span class="iconify" data-icon="bx:bx-check"
 														data-inline="false" style="color: #E71D36;"></span></li>
-													<li><span class="iconify" data-icon="bx:bx-check"
-														data-inline="false" style="color: #E71D36;"></span></li>
-													<li><span class="iconify" data-icon="bx:bx-check"
-														data-inline="false" style="color: #E71D36;"></span></li>
-													<li>무제한</li>
-													<li>무제한</li>
-													<li><span class="iconify" data-icon="bx:bx-check"
-														data-inline="false" style="color: #E71D36;"></span></li>
 													<li>구글 드라이브</li>
-													<li>-</li>
 												</ul>
 												<button class="btn btn-primary" onclick="requestPay()"
 													type="button">유료회원 전환</button>
