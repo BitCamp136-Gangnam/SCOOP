@@ -75,10 +75,22 @@ public interface MemberDao {
 	
 	//Tpmember 불러오기
 	public List<Tpmember> getTpmembers(String email);
+	
 	//mention 불러오기
 	public List<Mention> getMention(String tmemail);
+	
 	//프로젝트에서 나의 정보
 	public Tpmember getMyInfo(int tseq, String email);
+	
 	//회원 탈퇴 
 	public int deleteMember(String email);
+	
+	//알람 설정 (True)
+	public int updateAlarmTrue(String email);
+	
+	//알람 설정 (False)
+	public int updateAlarmFalse(String email);
+	
+	//알람 설정 여부 불러오기
+	public int getIsAlarm(String email);
 }

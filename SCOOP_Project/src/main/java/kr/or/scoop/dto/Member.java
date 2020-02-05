@@ -18,6 +18,7 @@ public class Member {
 	private Timestamp idtime; //가입 시간
 	private int loginnum; //로그인 횟수
 	private String profile; //프로필 사진 파일 이름
+	private int isalarm; //알람여부 
 	
 	public void setIdtime(Timestamp idtime) {
 		this.idtime = idtime;
@@ -87,13 +88,36 @@ public class Member {
 	public void setProfile(String profile) {
 		this.profile = profile;
 	}
-	
-	
+
+
+
+	public int getIsalarm() {
+		return isalarm;
+	}
+
+
+
+	public void setIsalarm(int isalarm) {
+		this.isalarm = isalarm;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "Member [email=" + email + ", pwd=" + pwd + ", name=" + name + ", filesrc=" + filesrc + ", dname="
 				+ dname + ", drank=" + drank + ", address=" + address + ", idtime=" + idtime + ", loginnum=" + loginnum
-				+ ", profile=" + profile + "]";
+				+ ", profile=" + profile + ", isalarm=" + isalarm + ", getIdtime()=" + getIdtime() + ", getEmail()="
+				+ getEmail() + ", getPwd()=" + getPwd() + ", getName()=" + getName() + ", getDname()=" + getDname()
+				+ ", getDrank()=" + getDrank() + ", getLoginnum()=" + getLoginnum() + ", getAddress()=" + getAddress()
+				+ ", getFilesrc()=" + getFilesrc() + ", getProfile()=" + getProfile() + ", getIsalarm()=" + getIsalarm()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ "]";
 	}
+
+
+
+
+	
 	
 }

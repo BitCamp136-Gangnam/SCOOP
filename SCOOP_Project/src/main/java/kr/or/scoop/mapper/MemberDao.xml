@@ -150,4 +150,13 @@ where tseq in (
 	<delete id="deleteMember">
 		delete from member where email = #{email}
 	</delete>
+	<update id="updateAlarmTrue" parameterType="kr.or.scoop.dto.Member">
+		update setting set isalarm=1 where email = #{email}
+	</update>
+	<update id="updateAlarmFalse" parameterType="kr.or.scoop.dto.Member">
+		update setting set isalarm=0 where email = #{email}
+	</update>
+	<select id="getIsAlarm" parameterType="kr.or.scoop.dto.Member" resultType="int">
+		select isalarm from setting where email = #{email}
+	</select>
 </mapper>
