@@ -760,7 +760,7 @@ function idOver(a) {
 						
 						<button class="accordion" style="font-size: 23px;color: #000;">2. 스쿱으로 어떻게 일을 진행할 수 있나요?</button>
 						<div class="panel"  style="width: 1000px;">
-						<p><span style="color:#ca1e4d;">콜라비로 동료와 어떻게 일을 진행할 수 있는지 알려드릴게요.</span><br> <br>
+						<p><span style="color:#ca1e4d;">스쿱으로 동료와 어떻게 일을 진행할 수 있는지 알려드릴게요.</span><br> <br>
 							<b>1) 협업공간 만들기 & 멤버초대</b><br>
 							- 먼저, 협업을 할 수 있는 협업공간을 팀별공간, 프로젝트용공간 등 만들어 보세요. 그리고, 함께 협업할 동료를 협업공간에 초대해 보세요. 협업공간의 관리자가 초대하면 바로 참여할 수 있습니다. <br><br>
 							<b>2) 이슈 공유하기</b><br>
