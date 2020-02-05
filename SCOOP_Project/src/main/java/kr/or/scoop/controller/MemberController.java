@@ -219,7 +219,7 @@ public class MemberController {
 		}
 		session.setAttribute("language", language);
 		String email = "";
-		
+		String status = "";
 		email = (String)session.getAttribute("email");
 		ProjectDao noticeDao = sqlsession.getMapper(ProjectDao.class);
 		MemberDao memberdao = sqlsession.getMapper(MemberDao.class);
@@ -227,6 +227,15 @@ public class MemberController {
 		Member member = memberdao.getMember((String)session.getAttribute("email")); //로그인한 사람 정보 불러오기
 		Role role = memberdao.getRole(email); //로그인한 사람 등급 불러오기
 		String img = memberdao.getProfile(email); //로그인한 사람 프로필사진 불러오기
+		int val = memberdao.getIsAlarm(email);
+		System.out.println("val값   " + val);
+		if(val == 1) {
+			status = "ON";
+			session.setAttribute("status", status);
+		}else {
+			status = "OFF";
+			session.setAttribute("status", status);
+		}
 		int count = 0;	
 		List<FileDrive> filedrive = null;
 		List<Tissue> mytissuelist = null;
@@ -240,6 +249,7 @@ public class MemberController {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+		
 		session.setAttribute("name", member.getName()); //이름 세션저장
 		session.setAttribute("img",img); //프로필사진 세션저장
 		session.setAttribute("role", role.getRname()); //등급 세션저장
@@ -268,6 +278,7 @@ public class MemberController {
 		}
 		return "user/dashBoard";
 	}
+	
 	//새로운 댓글 목록 불러오기
 	@RequestMapping(value = "/newReply.do", method = RequestMethod.GET)
 	public String userindexReply(@RequestParam(required = false, name="lang") String language, HttpSession session, 
@@ -852,6 +863,27 @@ public class MemberController {
 			viewpage = "user/userindex";
 		}
 		return viewpage;	
+		}
+		
+		// 알람 설정 
+		@RequestMapping(value="updateAlarm.do" , method = RequestMethod.POST)
+		public String updateAlarm(HttpSession session,Model model,String status) {
+			System.out.println("들어옴?");
+			System.out.println("들어옴? " + status);
+			String viewpage;
+			int val = 0;
+			int result = 0;
+			String email = (String)session.getAttribute("email");
+			MemberDao dao = sqlsession.getMapper(MemberDao.class);
+			if(status.equals("off")) {
+				val = dao.updateAlarmTrue(email);
+				viewpage = "commons/headerAndLeft";
+			}else {
+				val = dao.updateAlarmFalse(email);
+				viewpage = "commons/headerAndLeft";
+			}
+			
+			return viewpage;
 		}
 	
 }

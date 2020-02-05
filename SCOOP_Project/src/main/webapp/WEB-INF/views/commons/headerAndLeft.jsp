@@ -7,6 +7,7 @@
 <c:set var="role" value="${sessionScope.role}" />
 <c:set var="count" value="${sessionScope.count}" />
 <c:set var="img" value="${sessionScope.img}" />
+<c:set var="status" value="${sessionScope.status}" />
 <style>
 input::placeholder {
    color: #fff;
@@ -415,13 +416,42 @@ input::placeholder {
       });
 		//알람 버튼
       $('#alarmbtn').click(function(event) {
+          let status = $('#alarmbox').attr('name');
          event.stopPropagation();
          if ($('#alarmbox').attr('name') == 'on') {
-            $('#alarmbox').attr('name', 'off');
+           
+            
+            $.ajax({
+             	 url: "updateAlarm.do", //cross-domain error가 발생하지 않도록 주의해주세요
+       			 type: 'POST',
+       			 dataType: 'json',
+                 data: {
+						"status": status
+                     //기타 필요한 데이터가 있으면 추가 전달
+                 },
+                 success: function(data){
+              	 		console.log($("#alarm_power").val())
+                     }
+             }) 
+             $('#alarmbox').attr('name', 'off');
             $('#alarm_power').text('OFF');
          } else {
-            $('#alarmbox').attr('name', 'on');
-            $('#alarm_power').text('ON');
+           
+            
+             $.ajax({
+              	 url: "updateAlarm.do", //cross-domain error가 발생하지 않도록 주의해주세요
+        			 type: 'POST',
+        			 dataType: 'json',
+                  data: {
+						"status": status
+                      //기타 필요한 데이터가 있으면 추가 전달
+                  },
+                  success: function(data){
+               	 		console.log($("#alarm_power").val())
+                      }
+              })  
+              $('#alarmbox').attr('name', 'on');
+             $('#alarm_power').text('ON');
          }
 
       });
@@ -449,6 +479,7 @@ input::placeholder {
 	$('#kor').click(function(){
 		$('#selectLang').text("한국어");
 	});
+	
 	$('#eng').click(function(){
 		$('#selectLang').text("English");
 	});
@@ -539,6 +570,23 @@ input::placeholder {
          }
       }
    }
+   // notification 시간설정
+   function calculate() {
+       setTimeout(function () {
+           notify();
+       }, 10);
+   }
+   
+	// notification 아이콘 및 body 설정, permission 
+   function notify() {
+       if (Notification.permission !== 'granted') {
+           
+       }
+       else {
+       	Notification.requestPermission();
+           
+       }
+   }
 
    //이슈작성 validation
     function checkz() {
@@ -555,7 +603,30 @@ input::placeholder {
        $("#issuecontent").focus();
        return false;
      }
-
+     
+     var sessionEmail = "<%=session.getAttribute("email")%>";
+     var sessionNickName = "<%=session.getAttribute("name")%>";
+     alert(sessionEmail);
+     alert(sessionNickName);
+     if($('#selectpro').val() != sessionEmail){
+    	 calculate();
+    	 var notification = new Notification('SCOOP Notification', {
+             icon: '<c:url value="/resources/images/logo/ScoopNoti.png" />',
+             body: sessionNickName+'님이 새로운 이슈를 발의하셨습니다. :)',
+         });
+         // 클릭 시 링크
+         notification.onclick = function () {
+             window.open('http://localhost:8090/SCOOP/userindex.do');
+         };
+         var title = '새로운 팀 이슈가 생성되었습니다.';
+         var options = {
+           body: sessionNickName+'님이 새로운 이슈를 발의하셨습니다. :)'
+         };
+         // onsubmit시 notification
+         registration.showNotification(title, options);
+    		
+     }
+     
    return true;
    }
 
@@ -799,60 +870,74 @@ span {
                style="cursor: pointer; color: #535359; font-size: 18px; padding-bottom: 12px;"></i>
 
             </li>
+            
+         <c:if test="${role == 'ROLE_CHARGE'}">
             <li class="icons dropdown"><a href="javascript:void(0)"
-               data-toggle="dropdown"> <i class="mdi mdi-bell-outline"></i> <span
-                  class="badge badge-pill gradient-2">0</span>
+               data-toggle="dropdown">
+                <i class="mdi mdi-bell-outline"></i>
+                 <span class="badge badge-pill gradient-2">0</span>
             </a>
                <div
                   class="drop-down animated fadeIn dropdown-menu dropdown-notfication">
                   <div class="dropdown-content-body">
                      <ul>
+                     	<c:if test="${status=='ON'}">
                         <li>
                            <p style="display: inline-block; padding-right: 33%">전체 알람
                               설정</p> <label class="switch_alarm"> <input type="checkbox"
                               checked="checked" id="alarmbox" name="on"> <span
                               class="slider_alarm round_alarm" id="alarmbtn"></span>
-                        </label> <span id="alarm_power">ON</span>
-
+                        </label> <span id="alarm_power">${sessionScope.status}</span>
                         </li>
-
+                     	</c:if>
+                     	<c:if test="${status=='OFF'}">
+                     	 <li>
+                           <p style="display: inline-block; padding-right: 33%">전체 알람
+                              설정</p> <label class="switch_alarm"> <input type="checkbox"
+                              id="alarmbox" name="off"> <span
+                              class="slider_alarm round_alarm" id="alarmbtn"></span>
+                        </label> <span id="alarm_power">${sessionScope.status}</span>
+                        </li>
+                     	</c:if>     
                         <li><a href="javascript:void()"> <span
                               class="mr-3 avatar-icon bg-success-lighten-2"><i
                                  class="icon-present"></i></span>
                               <div class="notification-content">
-                                 <h6 class="notification-heading">무슨 알림인지</h6>
-                                 <span class="notification-text">알림 몇분전에 왔는지</span>
+                                 <h6 class="notification-heading">팀이슈 알림</h6>
+                                 <span class="notification-text">팀이슈의 알림을 받을 수 있습니다.</span>
                               </div>
                         </a></li>
                         <li><a href="javascript:void()"> <span
                               class="mr-3 avatar-icon bg-danger-lighten-2"><i
                                  class="icon-present"></i></span>
                               <div class="notification-content">
-                                 <h6 class="notification-heading">Event Started</h6>
-                                 <span class="notification-text">One hour ago</span>
+                                 <h6 class="notification-heading">댓글 알림</h6>
+                                 <span class="notification-text">댓글이 달리면 알림을 받을 수 있습니다.</span>
                               </div>
                         </a></li>
                         <li><a href="javascript:void()"> <span
                               class="mr-3 avatar-icon bg-success-lighten-2"><i
                                  class="icon-present"></i></span>
                               <div class="notification-content">
-                                 <h6 class="notification-heading">Event Ended
-                                    Successfully</h6>
-                                 <span class="notification-text">One hour ago</span>
+                                 <h6 class="notification-heading">멘션 알림</h6>
+                                 <span class="notification-text">사용자가 멘션이 되면 알림을 받을 수 있습니다.</span>
                               </div>
                         </a></li>
                         <li><a href="javascript:void()"> <span
-                              class="mr-3 avatar-icon bg-danger-lighten-2"><i
+                              class="mr-3 avatar-icon" style="background-color: #000000"><i
                                  class="icon-present"></i></span>
                               <div class="notification-content">
-                                 <h6 class="notification-heading">Events to Join</h6>
-                                 <span class="notification-text">After two days</span>
+                                 <h6 class="notification-heading">할일 알림</h6>
+                                 <span class="notification-text">다른 팀원이 할일을 주면 알림을 받을 수 있습니다.</span>
                               </div>
-                        </a></li>
+                        </a>
+                        </li>
                      </ul>
 
                   </div>
-               </div></li>
+               </div>
+               </li>
+         </c:if>           	
 
             <li class="icons dropdown">
                <div class="user-img c-pointer position-relative"
@@ -1750,5 +1835,9 @@ $('#todoresult').show();
   			 $(this).val($(this).val().substring(0, 30));
   		}
   	});
+
+    
+    
+    
 
 </script>

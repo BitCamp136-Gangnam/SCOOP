@@ -1850,7 +1850,13 @@ BEGIN
   insert INTO pnalert VALUES (:NEW.pntitle, 0,:NEW.pnseq,:NEW.email);
 END;
 
-
+--member setting trigger
+create or replace trigger insert_tri_setting
+after insert on member
+for each row
+BEGIN
+  insert INTO setting VALUES (:NEW.email, 0);
+END;
 
 insert into login values (1,'NORMAL');
 insert into login values (2,'NAVER');
