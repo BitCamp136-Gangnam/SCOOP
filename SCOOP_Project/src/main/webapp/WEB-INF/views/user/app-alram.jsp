@@ -1,3 +1,4 @@
+<!-- 내정보에서 알람 jsp -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -8,6 +9,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script language="javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     <jsp:include page="/WEB-INF/views/commons/title.jsp"></jsp:include>
     <!-- Custom Stylesheet -->
     <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
@@ -118,9 +120,6 @@ p ,d ,c ,f{
 			    <li class="nav-item">
 			      <a class="nav-link" href="memberEdit.do?${sessionScope.email}">내 정보</a>
 			    </li>
-			    <li class="nav-item">
-			      <a class="nav-link" href="app-alram.do" style="color: #E71D36;">알림</a>
-			    </li>
 			    <!-- <li class="nav-item">
 			      <a class="nav-link" href="app-external.do">외부 서비스 연결</a>
 			    </li> -->
@@ -137,30 +136,30 @@ p ,d ,c ,f{
 			<div class="col-sm-12" style="padding-left: 0">
 				<h4>알림</h4>
 				<br>
-				<h5>프로젝트 알림</h5>
+				<h5>알림 여부</h5>
 			<label class="switch">
-  			<input type="checkbox" name="pnalert" id="one" class="danger">
+  			<input type="checkbox" name="pnalert" id="checkAll" class="danger" onclick="cAll()">
  			 <span class="slider round"></span>
 			</label>
 			<p>OFF</p><p style="display:none;">ON</p>
 			<hr>
 			<h5>댓글 알림</h5>
 			<label class="switch">
-  			<input type="checkbox" name="replyalert" id="two">
+  			<input type="checkbox" name="replyalert" id="reply">
  			 <span class="slider round"></span>
 			</label>
 			<d>OFF</d><d style="display:none;">ON</d>
 			<hr>
 			<h5>팀이슈 알림</h5>
 			<label class="switch">
-  			<input type="checkbox" name="tialert" id="three">
+  			<input type="checkbox" name="tialert" id="issue">
  			 <span class="slider round"></span>
 			</label>
 			<c>OFF</c><c  style="display:none;">ON</c>
 			<hr>
-			<h5>의사결정 알림</h5>
+			<h5>멘션 알림</h5>
 			<label class="switch">
-  			<input type="checkbox" name="votealert" id="four" >
+  			<input type="checkbox" name="votealert" id="mention" >
  			 <span class="slider round"></span>
 			</label>
 			<f>OFF</f><f style="display:none;">ON</f>
@@ -197,25 +196,61 @@ p ,d ,c ,f{
     <script src="<c:url value="/resources/js/styleSwitcher.js" />"></script>
 	<script type="text/javascript">
 	
- 	var check1 = $("#one");
-	check1.click(function(){
-		$("p").toggle();
-	});
+ 	
 
-	var check2 = $("#two");
+	var check2 = $("#reply");
 	check2.click(function(){
 		$("d").toggle();
 	});
 
-	var check3 = $("#three");
+	var check3 = $("#issue");
 	check3.click(function(){
 		$("c").toggle();
 	});
 
-	var check4 = $("#four");
+	var check4 = $("#mention");
 	check4.click(function(){
 		$("f").toggle();
+		console.log($("#mention"));
 	}); 
+
+		function cAll() {
+            if ($("#checkAll").is(':checked')) {
+                
+                $("p").toggle();
+                $("d").toggle();
+                $("c").toggle();
+                $("f").toggle();
+                
+                 $.ajax({
+               	 url: "updateAlarm.do", //cross-domain error가 발생하지 않도록 주의해주세요
+         			 type: 'POST',
+         			 dataType: 'json',
+                   data: {
+ 						
+                       //기타 필요한 데이터가 있으면 추가 전달
+                   },
+                   success: function(data){
+                	   $("input[type=checkbox]").prop("checked", true);
+                	    $("#reply").prop("disabled", false);
+                        $("#issue").prop("disabled", false);
+                        $("#memtion").prop("disabled", false);
+                       }
+               }) 
+               
+            } else {
+                $("input[type=checkbox]").prop("checked", false);
+                $("#reply").prop("disabled", true);
+                $("#issue").prop("disabled", true);
+                $("#memtion").prop("disabled", true);
+                $("p").toggle();
+                $("d").toggle();
+                $("c").toggle();
+                $("f").toggle();
+            }
+        }
+		
+	
 
 
 </script>

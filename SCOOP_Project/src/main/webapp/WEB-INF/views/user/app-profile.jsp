@@ -1,3 +1,4 @@
+<!-- 내정보 jsp -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -217,12 +218,6 @@ $(function(){
 			      <a class="nav-link" href="memberEdit.do?${sessionScope.email}" style="color: #E71D36;">내 정보</a>
 			    </li>
 			    <li class="nav-item">
-			      <a class="nav-link" href="app-alram.do">알림</a>
-			    </li>
-			    <!-- <li class="nav-item">
-			      <a class="nav-link" href="app-external.do">외부 서비스 연결</a>
-			    </li> -->
-			    <li class="nav-item">
 			      <a class="nav-link" href="paymentPage.do">가격 및 결제</a>
 			    </li>
 			    <li class="nav-item">
@@ -245,7 +240,7 @@ $(function(){
 						</c:otherwise>
 					</c:choose>
                                     <div class="media-body">
-                                        <h3 class="mb-0">${member.name}</h3>
+                                        <h3 class="mb-0" style="padding-left: 2%;">${member.name}</h3>
                                         <p class="text-muted mb-0" style="margin-left: 2%; width: 300px;">${member.email}</p>
                                     </div>
                                 </div>

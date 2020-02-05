@@ -1,3 +1,4 @@
+<!-- 협업공간 이슈 수정 jsp -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -327,19 +328,6 @@ $('.menli').keydown(function(event) {
 				$('#editMemlist').show();
 				$('#editMemlist').attr('class', 'list-group mem');
 			});
-	/* $('#men2').click(function() {
-		$('#mentionlist').hide();
-		$('#issuecontent').empty();
-		$('#issuecontent').hide();
-		var textarea = document.getElementById('codemirrorarea');
-		var editor = CodeMirror.fromTextArea(textarea, {
-			mode : "javascript",
-			lineNumbers : true,
-			lineWrapping : true,
-			theme : "eclipse",
-			val : textarea.value
-		});
-	}); */
 	$('#editMen2').click(function() {
 		$('#editMentionlist').hide();
 		var text = "";

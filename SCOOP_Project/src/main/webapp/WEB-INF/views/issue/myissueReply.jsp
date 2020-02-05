@@ -1,3 +1,4 @@
+<!-- 내가 쓴 댓글 jsp -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -181,10 +182,6 @@ $(function(){
 	 temp = 10;
 	$("#load").click(function(e){
 		console.log(moreEventArray);
-		/* console.log($('.card'));
-		console.log($('.card > a'));
-		console.log($('.card > a > .row'));
-		console.log($(".card > a > .row").val()); */
 		console.log("if");
 		$(moreEventArray).slice(temp,temp+10).removeAttr("hidden");
 		 temp +=10;

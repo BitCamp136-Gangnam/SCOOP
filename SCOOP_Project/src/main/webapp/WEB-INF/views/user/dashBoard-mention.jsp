@@ -1,3 +1,4 @@
+<!-- 새로운 소식에서 멘션 jsp -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -118,6 +119,7 @@
                      <li class="nav-item"><a class="nav-link active"
                         data-toggle="tab" href="#">이슈 업데이트</a></li> -->
 							<li class="nav-item"><a href="mention.do" class="nav-link" style="color: #E71D36">@멘션</a></li>
+							<li class="nav-item"><a href="dowork.do" class="nav-link"><span class="iconify" data-icon="bx:bx-check-circle" data-inline="false"></span>할 일</a></li>
 						</ul>
 					</div>
 					<hr style="margin-top: 0; margin-left: 4%; margin-right: 4%">
@@ -129,7 +131,12 @@
 										<b>협업공간</b>
 									</p>
 								</div>
-								<div class="col-sm-6 newissue" id="ti">
+								<div class="col-sm-2 newissue" id="al">
+									<p>
+										<b>멘션한 사람</b>
+									</p>
+								</div>
+								<div class="col-sm-4 newissue" id="ti">
 									<p>
 										<b>제목</b>
 									</p>
@@ -144,7 +151,7 @@
 							<div class="row countRow" style="margin-left: 2%; margin-right: 2%" id="ialarm">
 								<div class="col-sm-12 newissue" id="al">
 								<img src= '<c:url value="/resources/images/logo/ScoopBig.png"/>' style="width: 60px;padding-right: 5px;" >
-									아직 공지사항이 없습니다! 팀장님이 작성할 때까지 기다려주세요 ^ㅁ^!
+									아직 멘션이 없습니다! 멤버들이 작성할 때까지 기다려주세요 ^ㅁ^!
 								</div>
 							</div>
 							</c:if>
@@ -152,19 +159,22 @@
 								<div class="row countRow"
 									style="margin-left: 2%; margin-right: 2%" id="ialarm">
 									<div class="col-sm-3 newissue" id="al">
-									<c:if test="${fn:length(m.pname) > 8}">
-										<a href="projectDetail.do?tseq=${m.tseq}"><c:out value="${fn:substring(m.pname,0,8)}"/>...</a>
+									<c:if test="${fn:length(m.pname) > 10}">
+										<a href="projectDetail.do?tseq=${m.tseq}"><c:out value="${fn:substring(m.pname,0,10)}"/>...</a>
 										</c:if>
-									<c:if test="${fn:length(m.pname) <= 8}">
-										<a href="projectDetail.do?tseq=${m.tseq}"><c:out value="${fn:substring(m.pname,0,8)}"/></a>
+									<c:if test="${fn:length(m.pname) <= 10}">
+										<a href="projectDetail.do?tseq=${m.tseq}"><c:out value="${fn:substring(m.pname,0,10)}"/></a>
 										</c:if>
 									</div>
-									<div class="col-sm-6 newissue" id="ti">
-									<c:if test="${fn:length(m.tititle) > 19}">
-										<a href="teamissueDetail.do?tiseq=${m.tiseq}"><c:out value="${fn:substring(m.tititle,0,19)}"/>...</a>
+									<div class="col-sm-2 newissue" id="ti">
+									${m.name}
+									</div>
+									<div class="col-sm-4 newissue" id="ti">
+									<c:if test="${fn:length(m.tititle) > 16}">
+										<a href="teamissueDetail.do?tiseq=${m.tiseq}"><c:out value="${fn:substring(m.tititle,0,16)}"/>...</a>
 										</c:if>
-									<c:if test="${fn:length(m.tititle) <= 19}">
-										<a href="teamissueDetail.do?tiseq=${m.tiseq}"><c:out value="${fn:substring(m.tititle,0,19)}"/></a>
+									<c:if test="${fn:length(m.tititle) <= 16}">
+										<a href="teamissueDetail.do?tiseq=${m.tiseq}"><c:out value="${fn:substring(m.tititle,0,16)}"/></a>
 										</c:if>
 									</div>
 									<div class="col-sm-3 newissue" id="day">

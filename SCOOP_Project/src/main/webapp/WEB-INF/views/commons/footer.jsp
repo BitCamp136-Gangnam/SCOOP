@@ -1,3 +1,4 @@
+<!-- 페이지에서 대부분 공통으로 쓰이는 footer jsp -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -40,12 +41,7 @@
 	var wsocket;
 	$(function() {
 		connect();
-/* 		$('#dataTable').DataTable({
-		 	"searching": false,
-		 	"ordering": false
- 		}); */
- 		$('#chatopen').click(function(){
- 	 		//if($('#chattbody').children().length==0){
+ 		$('#chatopen').click(function(){ //채팅방 목록보기
  				for(let i=0; i<$('.resultsearch').length;i++){
  				var proname = $('.resultsearch')[i].innerHTML.substr(7);
  				var prohref = $('.resultsearch').parent()[i].getAttribute('href').substr(22);
@@ -56,7 +52,6 @@
  		    	    		};
  		   		wsocket.send(JSON.stringify(data));
  				}
- 			//}
  	 		})
 		$("#createChat").click( function() {
 			backAndForth();
@@ -68,56 +63,6 @@
 	    	openChat($(this).attr("id"));
 	    });
 	})
-	
-		
-/* 	const steps = ['방 제목', '최대 인원'];
-	const swalQueueStep = Swal.mixin({
-	  confirmButtonText: 'Next',
-	  cancelButtonText: 'Back',
-	  progressSteps: ['1','2'],
-	  input: 'text',
-	  inputAttributes: {
-	    required: true
-	  },
-	  reverseButtons: true,
-	  validationMessage: '필수 입력사항입니다.'
-	})
-
-	 async function backAndForth () {
-	  const values = [];
-	  let currentStep;
-
-	  for (currentStep = 0; currentStep < steps.length;) {
-	    const result = await swalQueueStep.fire({
-	      title: steps[currentStep],
-	      inputValue: values[currentStep],
-	      showCancelButton: currentStep > 0,
-	      confirmButtonColor: '#E71D36',
-	      cancelButtonColor: '#E71D36',
-	      currentProgressStep: currentStep
-	    })
-	
-	    if (result.value) {
-	      values[currentStep] = result.value
-	      currentStep++
-	    } else if (result.dismiss === 'cancel') {
-	      currentStep--
-	    } else {
-	      break
-	    }
-	  }
-
-	  if (currentStep === steps.length) {
-	    let data = { cmd : "createChatRoom", 
-	    	    	name : values[0], 
-	    	    	max : values[1],
-	    	    	ref : "${ref}"
-	    	    		};
-
-	    wsocket.send(JSON.stringify(data));   
-	    openChat(data.name);
-	  }
-	} */
 
 	 function connect() {
 		wsocket = new WebSocket("ws://192.168.6.13:8090/SCOOP/Chat-ws.do?cmd=on");
@@ -138,35 +83,13 @@
 	function onClose(evt) {
 		
 	}
-
-/* 	function setChatRooms(data){
-		var room = "";
-		var btn = "";
-		$('#dataTable > tbody').empty();
-		$.each(data.rooms, function(index, element){
-			for(let i=0; i<$('.resultsearch').length;i++){
-				if($('.resultsearch').parent()[i].getAttribute('href').substr(22)==data.rooms[index].name.split("/")[1]){
-					console.log("너는 같구나^^");
-					room = $("<tr></tr>");
-					//room.append("<td style='padding-top:5%;'>" + (num++) + "</td>");
-					room.append("<td style='padding-top:5%;'>"+element.name+"</td>");
-					//room.append("<td style='padding-top:5%;'>"+element.users.length+ " / " +element.max+"</td>");
-		 			btn = $("<button id="+element.name+" class='btn btn-primary'>입장</button>");
-					room.append($("<td></td>").append(btn));
-					$('#dataTable > tbody').append(room);
-				}
-			}
-		})
-	} */
 	function setChatRooms(data){
 		$('#dataTable > tbody').empty();
 		$.each(data.rooms, function(index, element){
 			for(let i=0; i<$('.resultsearch').length;i++){
 				if($('.resultsearch').parent()[i].getAttribute('href').substr(22)==data.rooms[index].name.split("/")[1]){
 					room = $("<tr></tr>");
-					//room.append("<td style='padding-top:5%;'>" + (num++) + "</td>");
 					room.append("<td style='padding-top:5%;'>"+element.name.split("/")[0]+"</td>");
-					//room.append("<td style='padding-top:5%;'>"+element.users.length+ " / " +element.max+"</td>");
 		 			btn = $("<button class='btn btn-primary'>입장</button>");
 					btn.attr("id", element.name);
 					room.append($("<td></td>").append(btn));
@@ -180,29 +103,16 @@
     
     }
 
-    function openChat(room){
+    function openChat(room){ //채팅방 팝업창 띄우기
     	let url = "Chat.do?room="+room;
     	let name = room;
     	let option = "width = 400, height = 500, top = 230, left = 1170, location = no, channelmode = yes";
         window.open(url, name, option);
-        /* $('#chatdivopen').hide();
-        $('#chatroomdivopen').load(url);
-        $('#chatroomdivopen').show();
-        $('#chatdivopen').attr('class','false');
-        $('#chatroomdivopen').attr('class','true');
-        $('#chatback').show();
-        $('#chatback').click(function(){
-        	$('#chatback').hide();
-        	$('#chatroomdivopen').hide();
-        	$('#chatdivopen').show();
-        	$('#chatdivopen').attr('class','true');
-            $('#chatroomdivopen').attr('class','false');
-        }) */
     }
 </script>
 <script type="text/javascript">
 	$(function() {
-		$('#chatopen')
+		$('#chatopen') //채팅방 div show() and hide()
 				.click(
 						function() {
 							if ($(this).attr('name') == 'on') {
@@ -227,19 +137,19 @@
 								$('#chatroomdivopen').hide();
 							}
 						});
-		$('#helpopen').click(function() {
+		$('#helpopen').click(function() { //도움말 show()
 			if ($(this).attr('name') == 'on') {
 				$(this).attr('name', 'off');
 				$('#helpdivopen').show();
 				$('#closeopen').show();
 			}
 		});
-		$('#closeopen').click(function() {
+		$('#closeopen').click(function() { //도움말 hide()
 			$('#helpopen').attr('name', 'on');
 			$('#helpdivopen').hide();
 			$('#closeopen').hide();
 		})
-		$(document).keydown(function(event) {
+		$(document).keydown(function(event) { //도움말 show() and hide() ctrl + / 단축키
 			if (event.ctrlKey && event.keyCode == 191) {
 				if ($('#helpopen').attr('name') == 'on') {
 					$('#helpopen').attr('name', 'off');
@@ -251,7 +161,7 @@
 					$('#closeopen').hide();
 				}
 			}
-			if (event.ctrlKey && event.keyCode == 188) {
+			if (event.ctrlKey && event.keyCode == 188) { //채팅방 단축키 show() and hide() ctrl + , 단축키
 				if ($('#chatopen').attr('name') == 'on') {
 					$('#chatopen').attr('src',"<c:url value='/resources/images/chat/chatclose.png' />");
 					$('#chatopen').attr('name', 'off');
@@ -431,69 +341,91 @@
 <div id="helpdivopen" class="scrollbar">
 	<h4 style="margin: 15%; margin-bottom: 5%; color: white">도움센터(Ctrl+/)</h4>
 	<h5 style="color: white; padding-top: 15px;">추천 팁</h5>
-	<p
-		style="border-bottom: 1px solid rgba(255, 255, 255, 0.3); margin-bottom: 0px; color: rgba(255, 255, 255, 0.3); font-size: 12px; padding: 10px 0px 5px 0px;">새로운
-		소식</p>
-	<button class="accordion">이슈 업데이트</button>
+	<p style="border-bottom: 1px solid rgba(255, 255, 255, 0.3); margin-bottom: 0px; color: rgba(255, 255, 255, 0.3); font-size: 12px; padding: 10px 0px 5px 0px;">
+	새로운 소식</p>
+	<button class="accordion"><span class="iconify" data-icon="ic:twotone-autorenew" data-inline="false" style="width:17px;height: auto;"></span>&nbsp;이슈 업데이트</button>
 	<div class="panel">
-		<p>이미지 넣어줘야해~~</p>
+		<p style="color: #fff;font-size: 11px;">
+			새로운 소식들을 '새로운 팀이슈','새로운 댓글','새로운 공지사항'을 통해 확인할 수 있습니다.
+			협업공간 및 이슈의 알림을 끄더라도, 나를 언급한 소식은 업데이트 됩니다.
+		</p>
 	</div>
-	<button class="accordion">호출됨</button>
+	<button class="accordion"><span style="font-size: 16px;">@</span>&nbsp;호출됨</button>
 	<div class="panel">
-		<p>이미지 넣어줘야해~~~</p>
+		<p style="color: #fff;font-size: 11px;">
+			이슈나 댓글에서 동료가 나를 멘션하면 '호출됨' 에서 확인할 수 있습니다.
+		</p>
 	</div>
-
-	<p
-		style="border-bottom: 1px solid rgba(255, 255, 255, 0.3); margin-bottom: 0px; color: rgba(255, 255, 255, 0.3); font-size: 12px; padding: 10px 0px 5px 0px;">협업공간</p>
-	<button class="accordion">협업공간 만들기</button>
+	<button class="accordion"><span class="iconify" data-icon="bx:bxs-doughnut-chart" data-inline="false" style="width:17px;height: auto;"></span>&nbsp;협업 진행도</button>
 	<div class="panel">
-		<p>이미지 넣어줘야해~~</p>
+		<p style="color: #fff;font-size: 11px;">
+			협업 공간마다 칸반의 발의됨,일시중지,진행중,완료 4가지 단계의 진행률을 한눈에 확인할 수 있습니다.
+		</p>
 	</div>
-	<button class="accordion">멤버 초대</button>
+	<p style="border-bottom: 1px solid rgba(255, 255, 255, 0.3); margin-bottom: 0px; color: rgba(255, 255, 255, 0.3); font-size: 12px; padding: 10px 0px 5px 0px;">
+		협업공간</p>
+	<button class="accordion"><span class="iconify" data-icon="ant-design:flag-filled" data-inline="false" style="width:17px;height: auto;"></span>&nbsp;협업공간 만들기</button>
 	<div class="panel">
-		<p>이미지 넣어줘야해~~~</p>
+		<p style="color: #fff;font-size: 11px;">
+			협업공간은 동료와 함께 이슈를 해결하기 위해 협업할 수 있는 공간입니다.<br>
+			팀 공간(ex.개발팀), 게시판 공간(ex.주간업무공유), 협업공간을 진행하기 위한 용도로 공간을 만들 수 있습니다.<br>
+			협업공간을 만들면 꼭 함께할 멤버를 초대해 주세요.
+		</p>
 	</div>
-	<button class="accordion">협업공간 관리</button>
+	<button class="accordion"><span class="iconify" data-icon="ic:baseline-person-add" data-inline="false" style="width:17px;height: auto;padding-bottom: 2px;"></span>&nbsp;멤버 초대</button>
 	<div class="panel">
-		<p>이미지 넣어줘야해~~~</p>
+		<p style="color: #fff;font-size: 11px;">
+			협업공간에서 함께할 '멤버'를 초대해 주세요.<br>
+			여러개의 이메일로 한번에 초대도 가능합니다.<br>
+		</p>
+	</div>
+	<button class="accordion"><span class="iconify" data-icon="raphael:smallgear" data-inline="false" style="width:17px;height: auto;"></span>&nbsp;협업공간 관리</button>
+	<div class="panel">
+		<p style="color: #fff;font-size: 11px;">
+			협업공간의 '관리자'는 멤버탈퇴, 관리자 위임등 공간을 관리할 수 있습니다.
+			협업공간 타이틀 옆의 '톱니바퀴' 버튼을 누르면 협업공간 관리 메뉴를 확인할 수 있습니다.
+		</p>
 	</div>
 
 	<p
 		style="border-bottom: 1px solid rgba(255, 255, 255, 0.3); margin-bottom: 0px; color: rgba(255, 255, 255, 0.3); font-size: 12px; padding: 10px 0px 5px 0px;">이슈</p>
-	<button class="accordion">멘션</button>
+	<button class="accordion"><span style="font-size: 16px;">@</span> 멘션</button>
 	<div class="panel">
-		<p>이미지 넣어줘야해~~</p>
+		<p style="color: #fff;font-size: 11px;">
+			이슈 및 댓글에서 "@이름"을 입력하면 동료를 호출할 수 있습니다.<br>
+			할 일과 의사결정에서도 동료를 멘션하면 해당 동료에게 할당됩니다.
+		</p>
 	</div>
-	<button class="accordion">소스 코드</button>
+	<button class="accordion"><span class="iconify" data-icon="entypo-social:google-drive" data-inline="false"  style="width:17px;height: auto;"></span>&nbsp;구글 드라이브</button>
 	<div class="panel">
-		<p>이미지 넣어줘야해~~~</p>
+		<p style="color: #fff;font-size: 11px;">
+			유료회원은 구글드라이브의 파일과 이미지 등을 업로드 하고 공유할 수 있습니다.<br>
+		</p>
 	</div>
-	<button class="accordion">구글 드라이브</button>
+	<button class="accordion"><span class="iconify" data-icon="ant-design:file-filled" data-inline="false"  style="width:17px;height: auto;"></span>&nbsp;파일 공유</button>
 	<div class="panel">
-		<p>이미지 넣어줘야해~~~</p>
+		<p style="color: #fff;font-size: 11px;">
+		이슈에서 "@파일" 또는 "@구글 드라이브"를 찾아 파일을 공유해 보세요.<br>
+		또한 Ctrl+.(파일함)에 자동으로 업로드 됩니다.
+		</p>
 	</div>
-	<button class="accordion">파일 공유</button>
+	<button class="accordion"><span class="iconify" data-icon="ant-design:check-circle-outlined" data-inline="false" style="width:17px;height: auto;"></span>&nbsp;할일 주기</button>
 	<div class="panel">
-		<p>이미지 넣어줘야해~~~</p>
+		<p style="color: #fff;font-size: 11px;">
+		이슈에서 "@할 일"에서 동료를 호출해 할일을 주세요.<br>
+		할일 할당 시 상대방에게 알림이 가게 됩니다.
+		</p>
 	</div>
-	<button class="accordion">관련 이슈 공유</button>
+	<button class="accordion"><span class="iconify" data-icon="bx:bxs-calendar-event" data-inline="false" style="width:17px;height: auto;"></span>&nbsp;일정 공유</button>
 	<div class="panel">
-		<p>이미지 넣어줘야해~~~</p>
-	</div>
-	<button class="accordion">의사결정 할당</button>
-	<div class="panel">
-		<p>이미지 넣어줘야해~~~</p>
-	</div>
-	<button class="accordion">할일 주기</button>
-	<div class="panel">
-		<p>이미지 넣어줘야해~~~</p>
-	</div>
-	<button class="accordion">일정 공유</button>
-	<div class="panel">
-		<p>이미지 넣어줘야해~~~</p>
+		<p style="color: #fff;font-size: 11px;margin-bottom: 30px;">
+		팀 캘린더에서 협공공간 전체 일정을 공유할 수 있습니다.<br>
+		프라이빗 공간에서의 캘린더는 본인만 작성 및 수정 등을 할 수 있습니다.
+		</p>
 	</div>
 
 	<script>
+	// 도움말 accordion
 		var acc = document.getElementsByClassName("accordion");
 		var i;
 
@@ -511,7 +443,7 @@
 	</script>
 
 </div>
-<img src="<c:url value="/resources/images/chat/chatopen.png" />"
+<img src='<c:url value="/resources/images/chat/chatopen.png" />'
 	id="chatopen" name="on" width=50px height=auto style="cursor: pointer;">
 <img src="<c:url value="/resources/images/chat/questionmark.png" />"
 	id="helpopen" name="on" width=50px height=auto style="cursor: pointer;">
