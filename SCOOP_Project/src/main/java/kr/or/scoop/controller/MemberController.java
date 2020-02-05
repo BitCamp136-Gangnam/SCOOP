@@ -227,14 +227,19 @@ public class MemberController {
 		Member member = memberdao.getMember((String)session.getAttribute("email")); //로그인한 사람 정보 불러오기
 		Role role = memberdao.getRole(email); //로그인한 사람 등급 불러오기
 		String img = memberdao.getProfile(email); //로그인한 사람 프로필사진 불러오기
-		int val = memberdao.getIsAlarm(email);
-		System.out.println("val값   " + val);
-		if(val == 1) {
-			status = "ON";
-			session.setAttribute("status", status);
-		}else {
-			status = "OFF";
-			session.setAttribute("status", status);
+		try {
+			int val = memberdao.getIsAlarm(email);
+			System.out.println("val값   " + val);
+			if(val == 1) {
+				status = "ON";
+				session.setAttribute("status", status);
+			}else {
+				status = "OFF";
+				session.setAttribute("status", status);
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 		int count = 0;	
 		List<FileDrive> filedrive = null;
