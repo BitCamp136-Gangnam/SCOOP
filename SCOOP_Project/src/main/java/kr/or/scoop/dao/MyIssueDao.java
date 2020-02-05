@@ -84,6 +84,9 @@ public interface MyIssueDao {
 	// 팀이 작성한 프로잭트 공지사항 리스트
 	public List<PjNotice> teamWriteNoticeList(String email, Timestamp idtime);
 	
+	//나에게 주어진 할일
+	public List<DoWork> teamWriteDoworkList(String email);
+	
 	// 팀 이름 찾기
 	public ProjectName getPjtName(int tseq, int tiseq);
 	
