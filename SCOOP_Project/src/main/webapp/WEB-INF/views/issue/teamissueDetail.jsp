@@ -233,7 +233,7 @@ border-radius: 5px;
 		</div>
 			<div style="margin-right: 0; margin-left: 0;padding-top: 10px;">
 			<span id="myissueSubject" style="padding-left: 20px;font-size: 20px;">${tissue.tititle}</span>
-			<span style="float: right;padding-right: 5%;padding-top:1%;">${fn:substring(tissue.tidate,0,16)}</span>
+			<span style="float: right;padding-right: 5%;padding-top:1%;">${tissue.name}&nbsp;&nbsp;${fn:substring(tissue.tidate,0,16)}</span>
 			</div>
 			
 		

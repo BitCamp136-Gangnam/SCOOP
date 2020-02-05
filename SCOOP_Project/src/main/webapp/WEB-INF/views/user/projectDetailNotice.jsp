@@ -86,6 +86,7 @@
 		<div class="row"style="margin:2% 2% 0 2%" >
 				<div class="col-sm-9"style="padding-left: 0px;">
 				<h3 id="myissueSubject" style="padding-top: 2%;padding-left: 1%;">${detail.pntitle}</h3>
+				<span style="padding-right: 5%;padding-top:1%;">${detail.name}&nbsp;&nbsp;${fn:substring(detail.pntime,0,16)}</span>
 				</div>
 				<c:if test="${rank == 100}">
 					<div class="col-sm-1" style="text-align: right; padding: 0">
