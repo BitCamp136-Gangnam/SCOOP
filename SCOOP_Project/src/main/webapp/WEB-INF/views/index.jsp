@@ -835,7 +835,7 @@ function idOver(a) {
   <div class="container text-center">
    <!-- Copyrights-->
    <div class="copyrights">
-     <p class="copyrights-text mb-0">&copy; 2019 scoop Team Inc. All rights reserved. |  Privacy Policy&Terms of Service.
+     <p class="copyrights-text mb-0">&copy; 2020 scoop Team Inc. All rights reserved. |  Privacy Policy&Terms of Service.
      </p>
    </div>
   </div>
