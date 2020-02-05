@@ -881,6 +881,16 @@ function idOver(a) {
    </div>
   </div>
 
+ 
+    <script type="text/javascript">
+        window.onload = function () {
+            if (window.Notification) {
+                Notification.requestPermission();
+            }
+        }
+ 
+        
+    </script>
 </footer>
 <!-- JavaScript files-->
 <!-- JavaScript files-->
