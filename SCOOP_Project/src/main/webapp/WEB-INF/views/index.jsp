@@ -1,3 +1,4 @@
+<!-- 로그인과 회원가입을 할 수 있는 맨 처음 페이지 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
