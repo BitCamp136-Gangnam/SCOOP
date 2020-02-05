@@ -341,7 +341,7 @@
 <div id="helpdivopen" class="scrollbar">
 	<h4 style="margin: 15%; margin-bottom: 5%; color: white">도움센터(Ctrl+/)</h4>
 	<h5 style="color: white; padding-top: 15px;">추천 팁</h5>
-	<p style="border-bottom: 1px solid rgba(255, 255, 255, 0.3); margin-bottom: 0px; color: rgba(255, 255, 255, 0.3); font-size: 12px; padding: 10px 0px 5px 0px;">
+	<p style="border-bottom: 1px solid rgba(255, 255, 255, 0.3); margin-bottom: 0px; color: #fff; font-size: 12px; padding: 10px 0px 5px 0px;">
 	새로운 소식</p>
 	<button class="accordion"><span class="iconify" data-icon="ic:twotone-autorenew" data-inline="false" style="width:17px;height: auto;"></span>&nbsp;이슈 업데이트</button>
 	<div class="panel">
@@ -362,7 +362,7 @@
 			협업 공간마다 칸반의 발의됨,일시중지,진행중,완료 4가지 단계의 진행률을 한눈에 확인할 수 있습니다.
 		</p>
 	</div>
-	<p style="border-bottom: 1px solid rgba(255, 255, 255, 0.3); margin-bottom: 0px; color: rgba(255, 255, 255, 0.3); font-size: 12px; padding: 10px 0px 5px 0px;">
+	<p style="border-bottom: 1px solid rgba(255, 255, 255, 0.3); margin-bottom: 0px; color: #fff; font-size: 12px; padding: 10px 0px 5px 0px;">
 		협업공간</p>
 	<button class="accordion"><span class="iconify" data-icon="ant-design:flag-filled" data-inline="false" style="width:17px;height: auto;"></span>&nbsp;협업공간 만들기</button>
 	<div class="panel">
@@ -388,7 +388,7 @@
 	</div>
 
 	<p
-		style="border-bottom: 1px solid rgba(255, 255, 255, 0.3); margin-bottom: 0px; color: rgba(255, 255, 255, 0.3); font-size: 12px; padding: 10px 0px 5px 0px;">이슈</p>
+		style="border-bottom: 1px solid rgba(255, 255, 255, 0.3); margin-bottom: 0px; color: #fff; font-size: 12px; padding: 10px 0px 5px 0px;">이슈</p>
 	<button class="accordion"><span style="font-size: 16px;">@</span> 멘션</button>
 	<div class="panel">
 		<p style="color: #fff;font-size: 11px;">
@@ -423,7 +423,6 @@
 		프라이빗 공간에서의 캘린더는 본인만 작성 및 수정 등을 할 수 있습니다.
 		</p>
 	</div>
-
 	<script>
 	// 도움말 accordion
 		var acc = document.getElementsByClassName("accordion");
@@ -441,7 +440,6 @@
 			});
 		}
 	</script>
-
 </div>
 <img src='<c:url value="/resources/images/chat/chatopen.png" />'
 	id="chatopen" name="on" width=50px height=auto style="cursor: pointer;">
