@@ -630,7 +630,7 @@ input::placeholder {
 	}
 
 	function notificationMessage(data) { //메시지 뷰단에 append
-		
+		alert(data);
 	}
 
    //이슈작성 validation
