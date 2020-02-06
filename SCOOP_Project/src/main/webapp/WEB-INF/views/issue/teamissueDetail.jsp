@@ -87,7 +87,12 @@ $(function(){
 								success:function(event){
 									
 									temp.closest(".row").remove();
-						            
+									Swal.fire({
+						 				  title: '댓글삭제완료!',
+						 				  showConfirmButton: false,
+						 				  icon: 'success',
+						 				  timer: 1000
+						 			})
 								},
 								error:function(error){
 									alert("에러");
@@ -145,11 +150,17 @@ $(function(){
 			},
 			success:function(event){
 				temp.closest(".row").remove();
-	            
+				Swal.fire({
+	 				  title: '댓글삭제완료!',
+	 				  showConfirmButton: false,
+	 				  icon: 'success',
+	 				  timer: 1000
+	 			})
 			},
 			error:function(error){
 				alert("에러");
 			}
+
 				
 		});
 		

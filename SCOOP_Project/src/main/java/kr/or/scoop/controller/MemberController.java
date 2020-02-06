@@ -191,12 +191,18 @@ public class MemberController {
 		
 		result = service.googleIdCheck(email, name);
 		if (result > 0) {
-			int val = dao.getIsAlarm(email);
-			if(val == 1) {
-				status = "ON";
-			}else {
-				status = "OFF";
+			try {
+				int val = dao.getIsAlarm(email);
+				if(val == 1) {
+					status = "ON";
+				}else {
+					status = "OFF";
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
 			}
+			
+			
 			viewpage = "redirect:/userindex.do";
 			session.setAttribute("email", email);
 			session.setAttribute("status", status);
@@ -574,7 +580,7 @@ public class MemberController {
 	}
 
 	// 네이버회원 로그인
-	@RequestMapping(value = "naverLogin.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "naverLogin.do", method = {RequestMethod.GET,RequestMethod.POST})
 	public String naverLogin(String email, String name, HttpSession session) {
 
 		int result = 0;
@@ -590,12 +596,12 @@ public class MemberController {
 			}else {
 				status = "OFF";
 			}
-			viewpage = "redirect:/userindex.do";
+			viewpage = "redirect:/naverCertified.do";
 			session.setAttribute("email", email);
 			session.setAttribute("status", status);
 			session.setAttribute("kind", "naver");
 		} else {
-			viewpage = "redirect:/index.do";
+			viewpage = "redirect:/userindex.do";
 		}
 
 		return viewpage;
