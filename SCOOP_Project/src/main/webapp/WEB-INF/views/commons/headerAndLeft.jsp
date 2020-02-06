@@ -606,8 +606,7 @@ input::placeholder {
      
      var sessionEmail = "<%=session.getAttribute("email")%>";
      var sessionNickName = "<%=session.getAttribute("name")%>";
-     alert(sessionEmail);
-     alert(sessionNickName);
+     
      if($('#selectpro').val() != sessionEmail){
     	 calculate();
     	 var notification = new Notification('SCOOP Notification', {
