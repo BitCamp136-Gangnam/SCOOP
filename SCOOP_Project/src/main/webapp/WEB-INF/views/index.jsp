@@ -37,7 +37,7 @@
 <!-- Tweaks for older IEs--><!--[if lt IE 9]>
    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
-    <meta name="google-signin-client_id" content="47797892299-i06tt9qhbs15g8mn89ncu1isa1eneql8.apps.googleusercontent.com">
+    <meta name="google-signin-client_id" content="806433148370-o0ss3i4kp8dhj6p0d2cvkdjfus8kivds.apps.googleusercontent.com">
 </head>
 <script language="javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
@@ -498,10 +498,10 @@ function idOver(a) {
       	</form>
 		<!-- 네이버아이디로로그인 버튼 노출 영역 -->
 								  <script type="text/javascript">
-								  	var naver_id_login = new naver_id_login("idXo9CECDTdxmjiuAWdC", "http://localhost:8090/SCOOP/naverCertified.do");
+								  	var naver_id_login = new naver_id_login("idXo9CECDTdxmjiuAWdC", "http://scoop.com:8090/SCOOP/naverCertified.do");
 								  	var state = naver_id_login.getUniqState();
 								  	naver_id_login.setButton("white", 3,40);
-								  	naver_id_login.setDomain("http://localhost:8090/");
+								  	naver_id_login.setDomain("http://scoop.com:8090/");
 								  	naver_id_login.setState(state);
 								  	naver_id_login.init_naver_id_login();
 								  </script>

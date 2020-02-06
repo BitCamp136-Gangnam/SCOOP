@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import kr.or.scoop.dao.ProjectDao;
 import kr.or.scoop.dao.TissueDao;
+import kr.or.scoop.dto.Link;
 import kr.or.scoop.dto.PjNotice;
 import kr.or.scoop.dto.Reply;
 import kr.or.scoop.dto.TeamPjt;
@@ -258,6 +259,12 @@ public class TeamService {
 	public int teamIssueDelete(int tiseq) {
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		int result = dao.teamIssueDelete(tiseq);
+		return result;
+	}
+	//팀 링크 추가
+	public int teamLink(int tseq, String link, String email) {
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		int result = dao.teamLinkInsert(tseq, link, email);
 		return result;
 	}
 }

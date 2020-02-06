@@ -140,4 +140,7 @@ public interface TissueDao {
 	
 	//협업공간 이슈 삭제
 	public int teamIssueDelete(int tiseq);
+	
+	//팀 링크 추가
+	public int teamLinkInsert(int tseq, String link, String email);
 }

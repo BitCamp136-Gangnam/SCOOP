@@ -603,7 +603,7 @@ input::placeholder {
 		});
 	});
 	
-	function connect() { //입장 버튼 클릭시 작동 함수(웹소켓 생성)
+	/* function connect() { //입장 버튼 클릭시 작동 함수(웹소켓 생성)
 		wsocket = new WebSocket("ws://scoop.com:8090/SCOOP/Chat-ws.do?cmd=join&room=${room}");
 
 		//해당 함수 정의
@@ -632,7 +632,7 @@ input::placeholder {
 	function notificationMessage(data) { //메시지 뷰단에 append
 		alert(data);
 	}
-
+ */
    //이슈작성 validation
     function checkz() {
     //공지사항 제목 공백 확인
@@ -1228,6 +1228,15 @@ span {
          <li class="nav-item" style="margin-right: 10px">
           <select id="selectFile" name="tseq" class="form-control" style="border: 1px solid rgba(0,0,0,0.5) ; color: #000; font-size: 18px; padding-top: 0;">
                  <option value="0">프로젝트 전체 파일</option>
+          		<option value="myFile">프라이빗 공간</option>
+              <c:forEach items="${pjtlist}" var="p">
+                 <option value="${p.tseq}">${p.pname}</option>
+              </c:forEach>
+          </select>
+         </li>
+         <li class="nav-item" style="margin-right: 10px">
+          <select id="selectFile" name="tlink" class="form-control" style="border: 1px solid rgba(0,0,0,0.5) ; color: #000; font-size: 18px; padding-top: 0;">
+                 <option value="0">프로젝트 전체 링크</option>
           		<option value="myFile">프라이빗 공간</option>
               <c:forEach items="${pjtlist}" var="p">
                  <option value="${p.tseq}">${p.pname}</option>

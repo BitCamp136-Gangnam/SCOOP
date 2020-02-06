@@ -191,12 +191,18 @@ public class MemberController {
 		
 		result = service.googleIdCheck(email, name);
 		if (result > 0) {
-			int val = dao.getIsAlarm(email);
-			if(val == 1) {
-				status = "ON";
-			}else {
-				status = "OFF";
+			try {
+				int val = dao.getIsAlarm(email);
+				if(val == 1) {
+					status = "ON";
+				}else {
+					status = "OFF";
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
 			}
+			
+			
 			viewpage = "redirect:/userindex.do";
 			session.setAttribute("email", email);
 			session.setAttribute("status", status);

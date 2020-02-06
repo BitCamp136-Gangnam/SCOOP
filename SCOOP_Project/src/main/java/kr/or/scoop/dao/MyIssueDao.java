@@ -132,4 +132,6 @@ public interface MyIssueDao {
 	//나의 캘린더 수정
 	public int editMyCalendar(MyIssue myissue);
 	
+	//마이 링크 추가
+	public int myLinkInsert(String link, String email);
 }
