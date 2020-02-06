@@ -604,7 +604,7 @@ input::placeholder {
 	});
 	
 	function connect() { //입장 버튼 클릭시 작동 함수(웹소켓 생성)
-		wsocket = new WebSocket("ws://192.168.6.13:8090/SCOOP/Chat-ws.do?cmd=join&room=${room}");
+		wsocket = new WebSocket("ws://scoop.com:8090/SCOOP/Chat-ws.do?cmd=join&room=${room}");
 
 		//해당 함수 정의
 		wsocket.onmessage = onMessage;
