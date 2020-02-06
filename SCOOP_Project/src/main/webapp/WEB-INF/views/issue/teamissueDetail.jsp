@@ -24,6 +24,15 @@
 $(function(){
 	$('#commentMain').scrollTop($('#commentMain')[0].scrollHeight);
 	$('#teamCommentBtn').click(function(){
+		if($("#teamComment").val()==''){
+			Swal.fire({
+				  title: '댓글을 작성해주세요!',
+				  showConfirmButton: false,
+				  icon: 'warning',
+				  timer: 1000
+			})
+			return;
+		}
 		var tiseqq = ${tissue.tiseq};
 		$.ajax({
 			
@@ -71,7 +80,12 @@ $(function(){
 							);
 						$('#teamComment').val("");
 						$('#commentMain').scrollTop($('#commentMain')[0].scrollHeight);
-						
+						Swal.fire({
+							  title: '댓글작성 완료!',
+							  showConfirmButton: false,
+							  icon: 'success',
+							  timer: 1000
+						})
 						
 						})
 						
@@ -88,7 +102,7 @@ $(function(){
 									
 									temp.closest(".row").remove();
 									Swal.fire({
-						 				  title: '댓글삭제완료!',
+						 				  title: '댓글삭제 완료!',
 						 				  showConfirmButton: false,
 						 				  icon: 'success',
 						 				  timer: 1000
