@@ -133,7 +133,7 @@ $(function(){
 			</c:if>
 			</div>
 			<div class="col-sm-2 newissue" >
-			<a href="projectDetail.do?tseq=${ti.tseq}">${fn:substring(ti.tidate,0,16)}</a>
+			${fn:substring(ti.tidate,0,16)}
 			</div>
 			
 			</div>
