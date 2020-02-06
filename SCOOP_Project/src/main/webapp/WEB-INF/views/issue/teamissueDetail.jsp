@@ -344,6 +344,7 @@ border-radius: 5px;
    
     <script type="text/javascript">
 		$(function(){
+			console.log('start')
 			let content = $('#myissueContent').text()
 			let contentline = content.split('\n')
 			let urlData = [];
