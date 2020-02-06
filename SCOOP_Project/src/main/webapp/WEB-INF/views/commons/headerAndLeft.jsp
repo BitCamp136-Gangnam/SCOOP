@@ -603,7 +603,7 @@ input::placeholder {
 		});
 	});
 	
-	function connect() { //입장 버튼 클릭시 작동 함수(웹소켓 생성)
+	/* function connect() { //입장 버튼 클릭시 작동 함수(웹소켓 생성)
 		wsocket = new WebSocket("ws://scoop.com:8090/SCOOP/Chat-ws.do?cmd=join&room=${room}");
 
 		//해당 함수 정의
@@ -632,7 +632,7 @@ input::placeholder {
 	function notificationMessage(data) { //메시지 뷰단에 append
 		alert(data);
 	}
-
+ */
    //이슈작성 validation
     function checkz() {
     //공지사항 제목 공백 확인
