@@ -15,7 +15,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.or.scoop.dao.MemberDao;
+import kr.or.scoop.dao.MyIssueDao;
+import kr.or.scoop.dao.TissueDao;
 import kr.or.scoop.dto.FileDrive;
+import kr.or.scoop.dto.Link;
 import kr.or.scoop.dto.PrivateFileDrive;
 import net.sf.json.JSONArray;
 
@@ -96,6 +99,31 @@ public class FileController {
 		List<FileDrive> filedrive = memberdao.searchMyFileDrive(email, word);
 		JSONArray jsonlist = JSONArray.fromObject(filedrive);
 		model.addAttribute("ajax",jsonlist);
+		return "utils/ajax";
+	}
+	
+	//마이 링크 리스트
+	@RequestMapping("/getMyLink.do")
+	public String getMyLink(HttpSession session, Model model) {
+		String email = (String)session.getAttribute("email");
+		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
+		
+		List<Link> link = dao.getMyLink(email);
+		model.addAttribute("link", link);
+		
+		return "utils/ajax";
+	}
+	
+	//팀 링크 리스트
+	@RequestMapping("/getTLink.do")
+	public String getTLink(HttpSession session, Model model, HttpServletRequest request) {
+		String email = (String)session.getAttribute("email");
+		int tseq = Integer.parseInt(request.getParameter("tseq"));
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		
+		List<Link> link = dao.getTLink(tseq, email);
+		model.addAttribute("link", link);
+		
 		return "utils/ajax";
 	}
 }

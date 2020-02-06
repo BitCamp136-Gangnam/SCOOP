@@ -262,7 +262,7 @@ public class TeamService {
 		return result;
 	}
 	//팀 링크 추가
-	public int teamLink(int tseq, String link, String email) {
+	public int teamLinkInsert(int tseq, String link, String email) {
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		int result = dao.teamLinkInsert(tseq, link, email);
 		return result;

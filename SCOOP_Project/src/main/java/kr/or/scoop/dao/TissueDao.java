@@ -5,6 +5,7 @@ import java.util.List;
 import kr.or.scoop.dto.DoWork;
 import kr.or.scoop.dto.FileDrive;
 import kr.or.scoop.dto.GoogleDrive;
+import kr.or.scoop.dto.Link;
 import kr.or.scoop.dto.Mention;
 import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.dto.Process;
@@ -143,4 +144,7 @@ public interface TissueDao {
 	
 	//팀 링크 추가
 	public int teamLinkInsert(int tseq, String link, String email);
+	
+	//팀 링크 리스트
+	public List<Link> getTLink(int tseq, String email);
 }

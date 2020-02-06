@@ -185,9 +185,7 @@ public class TeamController {
 			for(int i = 0; i < contentline.length; i++) {
 				if(contentline[i].indexOf("http") != -1 || contentline[i].indexOf("www") != -1) {
 					String[] url = contentline[i].split(" ");
-					System.out.println("if 엔터 : " + contentline[i]);
 					for(int j = 0; j < url.length; j++) {
-						System.out.println("split : " + url[j]);
 						if(url[j].indexOf("http") != -1 || url[j].indexOf("www") != -1) {
 							if(url[j].indexOf("http") == -1) {
 								link += "http://" + url[j] + ",";
@@ -195,20 +193,15 @@ public class TeamController {
 								link += url[j] + ",";
 							}
 							content += "<a href= "+ url[j] + " target='_blank'>" + url[j] + "</a> ";
-							System.out.println("if 띄움 : " + url[j]);
 						}else {
 							content += url[j] + " ";
-							System.out.println("else 띄움 : " + url[j]);
 						}
 					}
 					content += "<br>";
 				}else {
 					content += contentline[i]+"<br>";
-					System.out.println("else 엔터 : " + contentline[i]);
 				}
 			}
-			System.out.println(link);
-			System.out.println(selectTeam);
 			
 			String path = "";
 			int tseq = 0;
@@ -339,7 +332,7 @@ public class TeamController {
 				}
 				if(link != null && link.length() > 0) {
 					tseq = Integer.parseInt(selectTeam);
-					teamservice.teamLink(tseq, link, email);
+					teamservice.teamLinkInsert(tseq, link, email);
 				}
 			}
 			return path;
