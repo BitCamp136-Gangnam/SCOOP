@@ -228,4 +228,9 @@ where tseq = #{tseq}
 <select id="getMyOriFilesize" resultType="Long">
 	select pdcapa from pfiledrive where piseq=#{piseq}
 </select>
+<!-- 팀 링크 추가 -->
+<insert id="teamLinkInsert">
+	insert into tlink(tlinkseq, tseq, tlink, email, tlinkdate)
+	values (TLINKSEQ_TLINK_SEQ.nextval, #{tseq}, #{link}, #{email}, sysdate)
+</insert>
 </mapper>

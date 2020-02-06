@@ -120,4 +120,10 @@ public class PrivateService {
 		int result = dao.myIssueDelete(piseq);
 		return result;
 	}
+	//마이 링크 추가
+	public int myLinkInsert(String link, String email) {
+		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
+		int result = dao.myLinkInsert(link, email);
+		return result;
+	}
 }
