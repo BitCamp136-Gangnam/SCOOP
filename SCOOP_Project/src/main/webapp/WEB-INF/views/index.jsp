@@ -501,7 +501,7 @@ function idOver(a) {
 								  	var naver_id_login = new naver_id_login("idXo9CECDTdxmjiuAWdC", "http://scoop.com:8090/SCOOP/naverCertified.do");
 								  	var state = naver_id_login.getUniqState();
 								  	naver_id_login.setButton("white", 3,40);
-								  	naver_id_login.setDomain("http://scoop.com:8090/");
+								  	naver_id_login.setDomain("http://scoop.com:8090/SCOOP/");
 								  	naver_id_login.setState(state);
 								  	naver_id_login.init_naver_id_login();
 								  </script>

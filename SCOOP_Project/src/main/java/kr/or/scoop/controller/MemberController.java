@@ -580,7 +580,7 @@ public class MemberController {
 	}
 
 	// 네이버회원 로그인
-	@RequestMapping(value = "naverLogin.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "naverLogin.do", method = RequestMethod.GET)
 	public String naverLogin(String email, String name, HttpSession session) {
 
 		int result = 0;
@@ -596,12 +596,12 @@ public class MemberController {
 			}else {
 				status = "OFF";
 			}
-			viewpage = "redirect:/userindex.do";
+			viewpage = "성공";
 			session.setAttribute("email", email);
 			session.setAttribute("status", status);
 			session.setAttribute("kind", "naver");
 		} else {
-			viewpage = "redirect:/index.do";
+			viewpage = "실패";
 		}
 
 		return viewpage;
