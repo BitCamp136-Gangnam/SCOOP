@@ -90,7 +90,7 @@ select p.pnseq,p.pntitle,p.pncontent,m.name,p.tseq,p.pntime,p.email from pjnotic
 </insert>
 <!-- 프로젝트 공지사항 디테일 불러오기 -->
 <select id="pjNoticeDetail" resultType="kr.or.scoop.dto.PjNotice" parameterType="String">
-	select tseq,pnseq,pntitle,pncontent from pjnotice where pnseq = #{pnseq}
+	select p.tseq,p.pnseq,p.pntitle,p.pncontent,p.pntime,m.name from pjnotice p join member m on p.email=m.email where pnseq = #{pnseq}
 </select>
 <!-- 프로젝트 공지사항 수정하기 -->
 <update id="updatePjNotice" parameterType="kr.or.scoop.dto.PjNotice">

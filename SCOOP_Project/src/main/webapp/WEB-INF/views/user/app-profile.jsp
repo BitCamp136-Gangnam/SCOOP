@@ -261,7 +261,7 @@ $(function(){
     		</c:when>
     		<c:otherwise>
     		<label for="pwd">비밀번호</label>
-    		<input class="form-control myinfo" type="password" id="pwd" name="pwd" style="width: 60%" >
+    		<input class="form-control myinfo" type="password" id="pwd" name="pwd" style="width: 60%" ><br>
     		<label for="pwdchk">비밀번호 확인</label>
     		<input class="form-control myinfo" type="password" id="pwdchk" name="pwdchk" style="width: 60%" >
     		</c:otherwise>
