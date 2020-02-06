@@ -334,6 +334,7 @@ public class TeamController {
 					path = "utils/makeTeamIssueFailSwal";
 				}
 				if(link != null && link.length() > 0) {
+					tseq = Integer.parseInt(selectTeam);
 					teamservice.teamLink(tseq, link, email);
 				}
 			}

@@ -196,6 +196,6 @@ insert into myissue (piseq,pititle,picontent,pistart, piend, ispibook, email, pi
 <!-- 마이이슈 링크 추가 -->
 <insert id="myLinkInsert">
 	insert into mylink(mylinkseq, plink, email, plinkdate) 
-	values(mylinkseq_mylink_seq.nextval, #{link}, #{email}, sysdate)
+	values(mylinkseq_mylink_seq.nextval, #{param1}, #{param2}, sysdate)
 </insert>
 </mapper>
