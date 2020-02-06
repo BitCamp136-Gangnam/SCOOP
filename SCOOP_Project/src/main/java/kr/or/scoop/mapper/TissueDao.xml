@@ -139,7 +139,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </select>
 <!-- 협업공간 할일 불러오기 -->
 <select id="getDoWork" resultType="kr.or.scoop.dto.DoWork">
-	select m.name, m2.name, d.dowork, d.toemail, d.tdseq from teamdowork d join member m on d.email=m.email join member m2 on d.toemail=m2.email where d.tiseq=#{tiseq}
+	select m.name fromname, m2.name toname, d.dowork, d.toemail, d.tdseq from teamdowork d join member m on d.email=m.email join member m2 on d.toemail=m2.email where d.tiseq=#{tiseq}
 </select>
 <!-- 차트 불러오기 -->
 <select id="chartData" resultType="kr.or.scoop.dto.Process">
@@ -233,4 +233,7 @@ where tseq = #{tseq}
 	insert into tlink(tlinkseq, tseq, tlink, email, tlinkdate)
 	values (TLINKSEQ_TLINK_SEQ.nextval, #{param1}, #{param2}, #{param3}, sysdate)
 </insert>
+<select id="getTlink" resultType="kr.or.scoop.dto.Link">
+	select tlinkseq, tseq, tlink from tlink where tseq=#{tseq} and email=#{email}
+</select>
 </mapper>

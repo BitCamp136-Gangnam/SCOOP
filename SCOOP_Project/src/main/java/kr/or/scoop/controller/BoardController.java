@@ -101,6 +101,7 @@ public class BoardController {
 		List<Mention> mentions = dao.getMentions(tiseq); // 멘션 리스트 불러오기
 		List<GoogleDrive> googledrive = dao.getGoogleDrive(tiseq); //구글드라이브 리스트 불러오기
 		List<DoWork> dowork = dao.getDoWork(tiseq); // 할일 리스트 불러오기
+		System.out.println(tiseq);
 		List<FileDrive> files = dao.getFiles(tiseq); // 파일 드라이브 리스트 불러오기
 		model.addAttribute("tissue", tissue);
 		model.addAttribute("reply",reply);
@@ -493,7 +494,7 @@ public class BoardController {
 				return "utils/fileSizeFail"; //만약 무료회원이 20mb이상 업로드라면 이슈작성 실패
 			}
 		}else if(role.getRname().equals("ROLE_CHARGE")) {
-			if(fullSize>=52428800) {
+			if(fullSize>=104857600) {
 				return "utils/chargeFileSizeFail"; //만약 유료회원이 50mb이상 업로드라면 이슈작성 실패
 			}
 		}
@@ -609,7 +610,7 @@ public class BoardController {
 				return "utils/fileSizeFail"; //만약 무료회원이 20mb이상 업로드라면 이슈작성 실패
 			}
 		}else if(role.getRname().equals("ROLE_CHARGE")) {
-			if(fullSize>=52428800) {
+			if(fullSize>=104857600) {
 				return "utils/chargeFileSizeFail"; //만약 유료회원이 50mb이상 업로드라면 이슈작성 실패
 			}
 		}

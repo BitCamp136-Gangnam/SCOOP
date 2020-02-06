@@ -193,9 +193,13 @@ insert into myissue (piseq,pititle,picontent,pistart, piend, ispibook, email, pi
 <select id="teamWriteDoworkList" resultType="kr.or.scoop.dto.DoWork">
 	select * from teamdowork d join tissue t on d.tiseq = t.tiseq join teampjt p on t.tseq=p.tseq join member m on d.email = m.email where d.toemail=#{email} order by t.tidate desc
 </select>
-<!-- 마이이슈 링크 추가 -->
+<!-- 마이 링크 추가 -->
 <insert id="myLinkInsert">
 	insert into mylink(mylinkseq, plink, email, plinkdate) 
 	values(mylinkseq_mylink_seq.nextval, #{param1}, #{param2}, sysdate)
 </insert>
+<!-- 마이 링크 리스트 -->
+<select id="getMyLink" resultType="kr.or.scoop.dto.Link">
+	select mylinkseq, plink from mylink where email=#{email};
+</select>
 </mapper>
