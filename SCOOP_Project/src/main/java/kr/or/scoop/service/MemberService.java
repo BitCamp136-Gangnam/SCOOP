@@ -96,6 +96,7 @@ public class MemberService {
 			if(naverInsertCheck>0) {
 				result = naverInsertCheck;
 			}else {
+				result = 1;
 			}
 		}
 		return result;
