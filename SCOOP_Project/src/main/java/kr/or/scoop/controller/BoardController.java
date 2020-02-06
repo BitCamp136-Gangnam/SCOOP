@@ -116,6 +116,9 @@ public class BoardController {
 	public String noticeJoin(Notice notice, Model model) {
 		NoticeDao dao = sqlSession.getMapper(NoticeDao.class);
 		List<Notice> n = dao.getNotice();
+		for(int i=0; i<n.size();i++) {
+			n.get(i).setBncontent(n.get(i).getBncontent().replace("<br>", " ")); //<br>을 띄어쓰기로 치환해서 보여줌
+		}
 		model.addAttribute("notice",n);
 		return "issue/notice";
 	}
@@ -124,6 +127,7 @@ public class BoardController {
 	public String noticeWrite(Notice notice) {
 		int result = 0;
 		String viewpage;
+		notice.setBncontent(notice.getBncontent().replace("\r\n", "<br>"));
 		result = service.insertNotice(notice);//공지사항 작성
 		
 		if(result > 0) {
@@ -229,7 +233,7 @@ public class BoardController {
 		String viewpage = "";
 		NoticeDao dao = sqlSession.getMapper(NoticeDao.class);
 		Notice n = dao.detailNotice(bnseq);
-				
+		n.setBncontent(n.getBncontent().replace("<br>", "\n"));
 		model.addAttribute("n",n);
 				
 	viewpage = "issue/noticeEdit";
@@ -242,7 +246,7 @@ public class BoardController {
 	public String noticeUpdateCheck(int bnseq,Notice notice,Model model) {
 		int result = 0;
 		String viewpage = "";
-	
+		notice.setBncontent(notice.getBncontent().replace("\r\n", "<br>"));
 		result = service.updateNotice(notice);
 		if(result > 0) {
 			model.addAttribute("notice",notice);
