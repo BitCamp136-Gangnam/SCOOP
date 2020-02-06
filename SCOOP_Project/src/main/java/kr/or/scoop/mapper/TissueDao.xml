@@ -236,4 +236,10 @@ where tseq = #{tseq}
 <select id="getTlink" resultType="kr.or.scoop.dto.Link">
 	select tlinkseq, tseq, tlink from tlink where tseq=#{tseq} and email=#{email}
 </select>
+<select id="getMaxTiseq" resultType="Integer">
+	select max(tiseq) from tissue
+</select>
+<select id="getMaxMyTiseq" resultType="Integer">
+	select max(piseq) from myissue
+</select>
 </mapper>

@@ -10,6 +10,6 @@ Swal.fire(
 		  'success'
 		)
 window.setTimeout(function() {
-	location.href='projectDetail.do?tseq=${tseq}';	
+	location.href='teamissueDetail.do?tiseq=${tiseq}';	
 }, 1000);
 </script>

@@ -9,6 +9,6 @@ Swal.fire(
 		  'success'
 		)
 window.setTimeout(function() {
-	location.href='private.do';	
+	location.href='myissueDetail.do?piseq=${piseq}';
 }, 1000);
 </script>

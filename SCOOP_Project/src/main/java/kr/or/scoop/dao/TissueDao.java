@@ -111,6 +111,12 @@ public interface TissueDao {
 	
 	//나의 할일 추가
 	public int myDoWorkInsert(String email, String ptoEmail, String pdoWork);
+
+	//글작성할때 협업공간 이슈 번호 불러오기
+	public int getMaxTiseq();
+	
+	//글작성할때 프라이빗 이슈 번호 불러오기
+	public int getMaxMyTiseq();
 	
 	//대시보드 차트 불러오기
 	public List chartData(int tseq, int isprocess);

@@ -259,6 +259,8 @@ public class TeamController {
 					 }
 				 }
 				if(result >0) {
+					int piseq = teamservice.getMaxMyTiseq();
+					model.addAttribute("piseq", piseq);
 					path = "utils/makeMyIssueSwal";
 				}else {
 					path = "utils/makeMyIssueFailSwal";
@@ -322,8 +324,8 @@ public class TeamController {
 					 }
 				 }
 				if(result >0) {
-					tseq = Integer.parseInt(selectTeam);
-					model.addAttribute("tseq", tseq);
+					int tiseq = teamservice.getMaxTiseq();
+					model.addAttribute("tiseq", tiseq);
 					path = "utils/makeTeamIssueSwal";
 				}else {
 					tseq = Integer.parseInt(selectTeam);
