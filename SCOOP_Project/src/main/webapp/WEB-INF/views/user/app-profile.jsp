@@ -72,7 +72,6 @@ $(function(){
 		$('#Photo').click();
 	})
   $('#address_btn').click(function(){
-     console.log("함수 시작 ~~");
      var realaddr = $('#sample6_postcode').val() + "/" + $('#sample6_address').val() + "/" + $('#sample6_detailAddress').val();
      console.log(realaddr);
      $('#address').val(realaddr);
@@ -131,20 +130,7 @@ $(function(){
 		        $("#name").focus();
 		        return false;
 		      }
-				//비밀번호 유효성
-			/* if (!getCheck.test($("#pwd").val())) {
-				Swal.fire("비밀번호 형식에 맞게 입력해주세요.");
-				$("#pwd").val("");
-				$("#pwd").focus();
-				return false;
-			} */
 			
-			//비밀번호 공백 확인
-			/* if ($("#pwd").val() == "") {
-				Swal.fire("비밀번호를 입력해주세요");
-				$("#pwd").focus();
-				return false;
-			} */
 			//회원가입 시 메일 보낼 때 얼럿창
 
 
@@ -345,7 +331,7 @@ $('#pwd').keyup(function(){
 		if(pwd != chk){
 			$('#chkmsg').empty().css("color", "red").text('비밀번호가 일치하지 않습니다.');
 		} else{
-			$('#chkmsg').empty().css("color", "blue").text('비밀번호가 일치합니다.');
+			$('#chkmsg').empty().css("color", "#069e03").text('비밀번호가 일치합니다.');
 		} 
 	}
 	if(pwd == "" && chk == ""){
@@ -361,7 +347,7 @@ $('#pwdchk').keyup(function(event) {
 	if(pwd != chk){
 		$('#chkmsg').empty().css("color", "red").text('비밀번호가 일치하지 않습니다');
 	} else{
-		$('#chkmsg').empty().css("color", "blue").text('비밀번호가 일치합니다');
+		$('#chkmsg').empty().css("color", "#069e03").text('비밀번호가 일치합니다');
 	} 
 });
 	
