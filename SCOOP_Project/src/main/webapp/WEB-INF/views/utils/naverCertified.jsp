@@ -43,12 +43,12 @@
 		    },
 	    error:function(data) {
 	    	Swal.fire(
-	    			  '이미 존재하는 아이디',
-	    			  '네이버 아이디로 로그인 환영합니다',
-	    			  'success'
+	    			  '에러발생!',
+	    			  '이미 가입된 아이디가 있습니다',
+	    			  'warning'
 	    			)
 	    			window.setTimeout(function() {
-	    				location.href='userindex.do';	
+	    				location.href='index.do';	
 	    			}, 1500);
 	    }
 	});

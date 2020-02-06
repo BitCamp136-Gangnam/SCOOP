@@ -590,17 +590,12 @@ public class MemberController {
 		
 		result = service.naverIdCheck(email, name);
 		if (result > 0) {
-			try {
 			int val = dao.getIsAlarm(email);
 			if(val == 1) {
 				status = "ON";
 			}else {
 				status = "OFF";
 			}
-			} catch(Exception e) {
-				
-			}
-			
 			viewpage = "성공";
 			session.setAttribute("email", email);
 			session.setAttribute("status", status);
