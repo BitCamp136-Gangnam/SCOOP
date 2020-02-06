@@ -7,6 +7,7 @@ import kr.or.scoop.dto.BookMark;
 import kr.or.scoop.dto.DoWork;
 import kr.or.scoop.dto.FileDrive;
 import kr.or.scoop.dto.GoogleDrive;
+import kr.or.scoop.dto.Link;
 import kr.or.scoop.dto.Mention;
 import kr.or.scoop.dto.MyIssue;
 import kr.or.scoop.dto.PjNotice;
@@ -134,4 +135,7 @@ public interface MyIssueDao {
 	
 	//마이 링크 추가
 	public int myLinkInsert(String link, String email);
+	
+	//마이 링크 리스트
+	public List<Link> getMyLink(String email);
 }

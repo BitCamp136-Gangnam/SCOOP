@@ -154,6 +154,38 @@ input::placeholder {
 				}
 			}); 
 	   })
+	$('#selectLink').change(function(){
+		let tseq = $(this).val()
+
+		if(tseq == 'myLink'){
+			myLinkList()
+			return;
+		}
+		$.ajax({
+			url: 'getTLink.do',
+			data: { tseq: tseq },
+			success: function(data){
+				console.log(data)
+				$('#fileLocation').empty()
+				
+			}
+		})
+	})
+	/* 파일함 링크 */
+	function myLinkList(){
+		let tseq = 0;
+		$.ajax({
+			url: 'getMyLink.do',
+			success: function(data){
+				console.log(data)
+				$('#fileLocation').empty()
+				/* $.each(data, function(index, list){
+					
+				}) */
+			}
+		})
+	}
+	   
 	   $('#searchSubmitIcon').click(function(){ //이슈 전체 키워드 검색 돋보기 클릭
 		   $('#searchSubmit').submit();
 	   })
@@ -1235,9 +1267,9 @@ span {
           </select>
          </li>
          <li class="nav-item" style="margin-right: 10px">
-          <select id="selectFile" name="tlink" class="form-control" style="border: 1px solid rgba(0,0,0,0.5) ; color: #000; font-size: 18px; padding-top: 0;">
+          <select id="selectLink" name="tlink" class="form-control" style="border: 1px solid rgba(0,0,0,0.5) ; color: #000; font-size: 18px; padding-top: 0;">
                  <option value="0">프로젝트 전체 링크</option>
-          		<option value="myFile">프라이빗 공간</option>
+          		<option value="myLink">프라이빗 공간</option>
               <c:forEach items="${pjtlist}" var="p">
                  <option value="${p.tseq}">${p.pname}</option>
               </c:forEach>
