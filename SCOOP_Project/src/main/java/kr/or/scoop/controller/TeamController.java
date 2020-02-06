@@ -189,7 +189,11 @@ public class TeamController {
 					for(int j = 0; j < url.length; j++) {
 						System.out.println("split : " + url[j]);
 						if(url[j].indexOf("http") != -1 || url[j].indexOf("www") != -1) {
-							link = url[j] + ",";
+							if(url[j].indexOf("http") == -1) {
+								link += "http://" + url[j] + ",";
+							}else {
+								link += url[j] + ",";
+							}
 							content += "<a href= "+ url[j] + " target='_blank'>" + url[j] + "</a> ";
 							System.out.println("if 띄움 : " + url[j]);
 						}else {
@@ -334,6 +338,7 @@ public class TeamController {
 					path = "utils/makeTeamIssueFailSwal";
 				}
 				if(link != null && link.length() > 0) {
+					tseq = Integer.parseInt(selectTeam);
 					teamservice.teamLink(tseq, link, email);
 				}
 			}
