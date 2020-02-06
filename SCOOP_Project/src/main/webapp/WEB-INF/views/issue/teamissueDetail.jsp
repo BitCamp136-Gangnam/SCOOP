@@ -257,7 +257,7 @@ border-radius: 5px;
 		</c:otherwise>
 		</c:choose>
 		
-		<div style="height:100px;overflow: auto;margin-left: 5px; margin-right: 5px;">
+		<div style="height:100px;overflow: auto;margin-left: 12px; margin-right: 5px;width: 824px;border: 1px solid rgba(0, 0, 0, 0.5); border-radius: 0.5rem">
 		<c:forEach items="${mentions}" var="m">
 		<div class="myissueDetail" id="myissueMention">
 		<sup><i class="fas fa-quote-left" style="color:#ca0000; font-size: 7px"></i></sup> @${m.name} <sup><i class="fas fa-quote-right"style="color:#ca0000;font-size: 7px"></i></sup>
@@ -277,8 +277,6 @@ border-radius: 5px;
 			<br>
 		</div>
 		</c:forEach>
-		</div>
-		<br>
 		<c:forEach items="${dowork}" var="work">
 		<div class="myissueDetail" id="myissueTodo">
 		<i class="far fa-check-circle"style="padding-right: 5px;"></i>${work.fromname}
@@ -287,8 +285,10 @@ border-radius: 5px;
 		<br>
 		</div>
 		</c:forEach> 
+		</div>
+		<br>
 		<div class="row" style="margin-right: 0;width:900px;">
-        <div class="myissueDetail col-sm-11" id="myissueContent">
+        <div class="myissueDetail col-sm-11" id="myissueContent" style="height:100px;overflow: auto;border: 1px solid rgba(0, 0, 0, 0.5); border-radius: 0.5rem">
         ${tissue.ticontent}
         </div>
         <!-- <div class="col-sm-2"><span>네이버</span><br><img alt="logo" src="https://s.pstatic.net/static/www/mobile/edit/2016/0705/mobile_212852414260.png" style="width: 50%"></div> -->

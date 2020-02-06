@@ -119,7 +119,7 @@ border-radius: 5px;
 		</c:otherwise>
 		</c:choose>
 		
-		<div class="row" style="height:100px; overflow: auto; margin-left: 5px; margin-right: 5px;">
+		<div class="row" style="height:100px; overflow: auto; margin-left: 5px; margin-right: 5px;width: 1220px">
 		<c:forEach items="${mymention}" var="m">
 		<div class="myissueDetail col-sm-11" id="myissueMention" style="padding-left: 20px;">
 		<sup><i class="fas fa-quote-left" style="color:#ca0000; font-size: 7px"></i></sup> @${m.name} <sup><i class="fas fa-quote-right"style="color:#ca0000;font-size: 7px"></i></sup>
@@ -150,7 +150,7 @@ border-radius: 5px;
 		</div>
 		<br>
 		<div class="row" style="overflow: auto;margin-left: 5px; margin-right: 5px;"> 
-        <div class="myissueDetail col-sm-11" style="padding-left: 20px;">
+        <div class="myissueDetail col-sm-11" style="padding-left: 20px;height:100px;overflow: auto;border: 1px solid rgba(0, 0, 0, 0.5); border-radius: 0.5rem">
         ${myissue.picontent}
         </div>    
             <!-- #/ container -->

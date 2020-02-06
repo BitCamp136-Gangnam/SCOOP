@@ -174,7 +174,7 @@ public class TeamController {
 					return "utils/fileSizeFail"; //무료회원은 20mb 넘어가면 이슈작성 실패
 				}
 			}else if(role.getRname().equals("ROLE_CHARGE")) {
-				if(fullSize>=52428800) {
+				if(fullSize>=104857600) {
 					return "utils/chargeFileSizeFail"; //유료회원은 50mb 넘어가면 이슈작성 실패
 				}
 			}
