@@ -56,9 +56,9 @@ select r.replyseq, r.rcontent, r.email, r.rdate, t.tiseq, t.tititle from reply r
 <!-- 새로운 협업공간 이슈 목록 불러오기 -->
 <select id="teamWriteTiisueList" resultType="kr.or.scoop.dto.Tissue">
 select 
-t.tseq,t.tititle,t.tidate,t.tiseq, t.isprocess,p.pname 
+t.tseq,t.tititle,t.tidate,t.tiseq, t.isprocess,p.pname, m.name 
 from tissue t join teampjt p 
-on t.tseq = p.tseq 
+on t.tseq = p.tseq join member m on t.email = m.email
 where p.tseq in (
             select tseq
             from tpmember

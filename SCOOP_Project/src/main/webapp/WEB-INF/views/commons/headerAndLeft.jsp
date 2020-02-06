@@ -20,7 +20,7 @@ input::placeholder {
    href="<c:url value="/resources/dist/summernote.css" />">
 <script src="<c:url value="/resources/dist/summernote.min.js" />"></script> --%>
 
-<meta name="google-signin-client_id" content="47797892299-i06tt9qhbs15g8mn89ncu1isa1eneql8.apps.googleusercontent.com">
+<meta name="google-signin-client_id" content="806433148370-o0ss3i4kp8dhj6p0d2cvkdjfus8kivds.apps.googleusercontent.com">
 <script src="https://apis.google.com/js/platform.js?onload=loadAuthClient" async defer></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
 <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
@@ -486,10 +486,10 @@ input::placeholder {
 </script>
 <script type="text/javascript"> //구글 picker(구글드라이브 api)
    // The Browser API key obtained from the Google API Console.
-   var developerKey = 'AIzaSyBIu-Whybpm37l7vHw8O5f48kjpG_bQtzo';
+   var developerKey = 'AIzaSyAu4AzZjAr2mdObRPPmSvAw_n-BPrsaADE';
 
    // The Client ID obtained from the Google API Console. Replace with your own Client ID.
-   var clientId = "237537328130-p9jshmj42atouica42uq96prsjk4qvtf.apps.googleusercontent.com";
+   var clientId = "806433148370-o0ss3i4kp8dhj6p0d2cvkdjfus8kivds.apps.googleusercontent.com";
 
    // Scope to use to access user's photos.
    var scope = 'https://www.googleapis.com/auth/drive.file';
@@ -606,8 +606,6 @@ input::placeholder {
      
      var sessionEmail = "<%=session.getAttribute("email")%>";
      var sessionNickName = "<%=session.getAttribute("name")%>";
-     alert(sessionEmail);
-     alert(sessionNickName);
      if($('#selectpro').val() != sessionEmail){
     	 calculate();
     	 var notification = new Notification('SCOOP Notification', {
@@ -1116,7 +1114,7 @@ span {
          -->
 <style>
 .createmodal {
-   border: 1px solid #000;
+   border: 1px solid rgba(0,0,0,0.5);
    background-color: white;
 }
 </style>
@@ -1179,7 +1177,7 @@ span {
       <ul class="nav nav-pills">
          <!-- <li class="nav-item"><a class="nav-link" id="myFile" style="cursor: pointer;">내 파일</a></li> -->
          <li class="nav-item" style="margin-right: 10px">
-          <select id="selectFile" name="tseq" class="form-control" style="border: none; color: #76838f; font-size: 18px; padding-top: 0;">
+          <select id="selectFile" name="tseq" class="form-control" style="border: 1px solid rgba(0,0,0,0.5) ; color: #000; font-size: 18px; padding-top: 0;">
                  <option value="0">프로젝트 전체 파일</option>
           		<option value="myFile">프라이빗 공간</option>
               <c:forEach items="${pjtlist}" var="p">
@@ -1352,7 +1350,7 @@ span {
          </form>
             <div class="row" style="margin-bottom: 1%;" id="inviteContent">
                <div class="col-sm-6"
-                  style="border-right: 1px solid #c8c8c8; padding-left: 20px;">
+                  style="border-right: 1px solid rgba(0,0,0,0.5); padding-left: 20px;">
                   <div class="modal-body">
                      <p style="font-size: 12px">
 		              <spring:message code="invite.content1" /><br> 
@@ -1765,50 +1763,19 @@ $('#todoresult').show();
 	});
 	$("#to").datepicker({ dateFormat: 'yy-mm-dd' });
 	$("#from").datepicker({ dateFormat: 'yy-mm-dd' });
-/* 	 if(!gapi.auth2){
+   if(!gapi.auth2){
 		    gapi.load('auth2', function() {
 		        gapi.auth2.init();
 		    });
 		 }
 	 
-	function signOut() {
-		window.gapi.auth2.init({
-			client_id: "47797892299-i06tt9qhbs15g8mn89ncu1isa1eneql8.apps.googleusercontent.com",
-			scope,
-			}).then(() => {
-		        console.log('signed in', gapi.auth2.getAuthInstance().isSignedIn.get());
-		        var auth2 = gapi.auth2.getAuthInstance();
-		        console.log(auth2);				
-				auth2.disconnect();
-				console.log("오이오이");
-				location.href="logout.do"; */
-		        /* window.gapi.auth2.signOut().then(function() {
-					console.log("google logout");			
-				});
-				auth2.disconnect(); */
-		      //});
-		/* console.log(gapi.auth2);
+	function signOut(){
 		var auth2 = gapi.auth2.getAuthInstance();
-		auth2.signOut().then(function() {
-			console.log("google logout");			
-		});
-		auth2.disconnect(); */
-/* 	}
-	function googleSignOut() { 
-		var auth2 = gapi.auth2.getAuthInstance();
-		auth2.signOut().then(function () {
-			
-		});
-		
-		console.log("오이오이");
-	}
-
-
-	function onLoad() {
-		gapi.load('auth2', function() {
-			gapi.auth2.init();
-		});
-	} */
+		auth2.signOut().then(function(){
+			location.href="logout.do";
+			});
+		auth2.disconnect();
+		}
 
 	$('#inviteModal_id')
 			.mouseover(

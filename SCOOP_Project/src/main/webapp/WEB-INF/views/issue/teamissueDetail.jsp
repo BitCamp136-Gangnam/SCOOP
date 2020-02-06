@@ -2,7 +2,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,7 +43,6 @@ $(function(){
 						tiseq: "${tissue.tiseq}"						
 					},
 					success:function(event){
-						
 						$('#commentMain').empty();
 						$.each(event,function(index,object){
 							var src = "";
@@ -162,7 +160,7 @@ $(function(){
 </script>
 <style>
 .newissue{
-	border-bottom: 1px solid #c8c8c8;
+	border-bottom: 1px solid rgba(0,0,0,0.5);
 	padding-top: 0.7%;
 	padding-bottom: 0.7%;
 }
@@ -233,7 +231,7 @@ border-radius: 5px;
 		</div>
 			<div style="margin-right: 0; margin-left: 0;padding-top: 10px;">
 			<span id="myissueSubject" style="padding-left: 20px;font-size: 20px;">${tissue.tititle}</span>
-			<span style="float: right;padding-right: 5%;padding-top:1%;">${fn:substring(tissue.tidate,0,16)}</span>
+			<span style="float: right;padding-right: 5%;padding-top:1%;">${tissue.name}&nbsp;&nbsp;${fn:substring(tissue.tidate,0,16)}</span>
 			</div>
 			
 		
@@ -322,7 +320,7 @@ border-radius: 5px;
             
             </div>
             <img src="resources/images/logo/ScoopTitle.png" style="width:150px;height: auto;opacity:0.3;position:absolute;top:25%;left: 32%;">
-            <textarea id="teamComment" rows="5" placeholder="말하지 않아도 아는것은 초코파이뿐입니다                        댓글 입력 후 저장을 클릭해주세요" style="resize: none;height:180px;width:auto;border: 1px solid #c8c8c8;border-radius: 0.5rem;margin-left: 15px;margin-bottom: 20px;margin-right: 15px;overflow:auto;padding: 4%"></textarea>
+            <textarea id="teamComment" rows="5" placeholder="말하지 않아도 아는것은 초코파이뿐입니다                        댓글 입력 후 저장을 클릭해주세요" style="resize: none;height:180px;width:auto;border: 1px solid rgba(0,0,0,0.5);border-radius: 0.5rem;margin-left: 15px;margin-bottom: 20px;margin-right: 15px;overflow:auto;padding: 4%"></textarea>
             <input id="teamCommentBtn" type="submit" value="저장" style="width: 90px;border-radius:0.5rem ;padding-top:7px;padding-bottom:7px; background-color: #E71D36;color: #fff; cursor: pointer;position: absolute;top:585px;left: 290px;">
             </div>
             </div>

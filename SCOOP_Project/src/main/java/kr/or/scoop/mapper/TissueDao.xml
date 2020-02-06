@@ -47,7 +47,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </select>
 <!-- 협업공간 이슈 디테일 -->
 <select id="teamissueDetail" resultType="kr.or.scoop.dto.Tissue">
-	select * from tissue t join teampjt p on t.tseq=p.tseq where t.tiseq=#{tiseq}
+	select * from tissue t join teampjt p on t.tseq=p.tseq join member m on t.email=m.email where t.tiseq=#{tiseq}
 </select>
 <!-- 협업공간 팀장 위임 -->
 <update id="teamSetting">
@@ -139,7 +139,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </select>
 <!-- 협업공간 할일 불러오기 -->
 <select id="getDoWork" resultType="kr.or.scoop.dto.DoWork">
-	select (select m.name from teamdowork d join member m on d.email=m.email where d.tiseq=#{tiseq}) fromname, (select m.name from teamdowork d join member m on d.toemail=m.email where d.tiseq=#{tiseq}) toname, dowork, toemail, tdseq from teamdowork where tiseq=#{tiseq}
+	select m.name, m2.name, d.dowork, d.toemail, d.tdseq from teamdowork d join member m on d.email=m.email join member m2 on d.toemail=m2.email where d.tiseq=#{tiseq}
 </select>
 <!-- 차트 불러오기 -->
 <select id="chartData" resultType="kr.or.scoop.dto.Process">

@@ -71,7 +71,7 @@
                      <li class="nav-item"><a class="nav-link active"
                         data-toggle="tab" href="#">이슈 업데이트</a></li> -->
                      <li class="nav-item"><a href="mention.do" class="nav-link">@호출됨</a></li>
-                     <li class="nav-item"><a href="dowork.do" class="nav-link" style="color: #E71D36"><span class="iconify" data-icon="bx:bx-check-circle" data-inline="false"></span>할 일</a></li>
+                     <li class="nav-item"><a href="dowork.do" class="nav-link"><span class="iconify" data-icon="bx:bx-check-circle" data-inline="false"></span>할 일</a></li>
                   </ul>
                </div>
                <hr style="margin-top: 0; margin-left: 4%; margin-right: 4%">
