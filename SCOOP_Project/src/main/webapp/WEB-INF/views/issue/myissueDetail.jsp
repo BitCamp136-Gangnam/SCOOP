@@ -118,29 +118,29 @@ border-radius: 5px;
 		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;padding-left: 20px;margin-top: 2%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>등록된 일정이 없습니다.</div>
 		</c:otherwise>
 		</c:choose>
-		
-		<div class="row" style="height:100px; overflow: auto; margin-left: 5px; margin-right: 5px;width: 1220px">
+		<c:if test="${mymention!='[]' || files!='[]' || mygdrive!='[]' || mydowork!='[]'}">
+		<div class="row" style="height:135px; overflow: auto; margin-left: 35px; margin-right: 5px;padding-top:1%;padding-bottom:1%;width: 824px;border: 1px solid rgba(0, 0, 0, 0.5); border-radius: 0.5rem">
 		<c:forEach items="${mymention}" var="m">
-		<div class="myissueDetail col-sm-11" id="myissueMention" style="padding-left: 20px;">
+		<div class="myissueDetail col-sm-11" id="myissueMention" style="padding-left: 10px;">
 		<sup><i class="fas fa-quote-left" style="color:#ca0000; font-size: 7px"></i></sup> @${m.name} <sup><i class="fas fa-quote-right"style="color:#ca0000;font-size: 7px"></i></sup>
 		<br>
 		</div>
 		</c:forEach>
 		<c:forEach items="${files}" var="f">
-		<div class="myissueDetail col-sm-11" id="myissueMention" style="padding-left: 20px;">
+		<div class="myissueDetail col-sm-11" id="myissueMention" style="padding-left: 10px;">
 		<a href="fileDownload.do?fileName=${f.pfdname}"><span class="iconify" data-icon="si-glyph:file-box" data-inline="false"></span>${f.pfdname}</a>
 		<br>
 		</div>
 		</c:forEach>
 		<c:forEach items="${mygdrive}" var="gd">
-		<div class="myissueDetail col-sm-11" id="myissueGoogledrive" style="padding-left: 20px;">
+		<div class="myissueDetail col-sm-11" id="myissueGoogledrive" style="padding-left: 10px;">
 			<i class="fab fa-google-drive"></i>
 			<a href="${gd.pgurl}" onclick="window.open(this.href,'팝업창','width=800, height=800');return false;">${gd.pgfilename}</a>
 			<br>
 		</div>
 			</c:forEach>
 		<c:forEach items="${mydowork}" var="work">
-		<div class="myissueDetail col-sm-11" id="myissueTodo" style="padding-left: 20px;">
+		<div class="myissueDetail col-sm-11" id="myissueTodo" style="padding-left: 10px;">
 		<i class="far fa-check-circle"style="padding-right: 5px;"></i>${work.fromname}
 		<i class="fas fa-long-arrow-alt-right" style="margin-left:5px;margin-right: 5px;"></i>${work.toname}<br>
 		: ${work.pdowork}
@@ -148,9 +148,10 @@ border-radius: 5px;
 		</div>
 		</c:forEach>
 		</div>
+		</c:if>
 		<br>
 		<div class="row" style="overflow: auto;margin-left: 5px; margin-right: 5px;"> 
-        <div class="myissueDetail col-sm-11" style="padding-left: 20px;height:100px;overflow: auto;border: 1px solid rgba(0, 0, 0, 0.5); border-radius: 0.5rem">
+        <div class="myissueDetail col-sm-11" style="padding-left: 20px;height:100px;overflow: auto;">
         ${myissue.picontent}
         </div>    
             <!-- #/ container -->

@@ -224,7 +224,18 @@ public class TeamService {
 		int result = dao.myDoWorkInsert(fromWork, toWork, doWork);
 		return result;
 	}
-
+	//글작성할때 협업공간 이슈 번호 불러오기
+	public int getMaxTiseq() {
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		int result = dao.getMaxTiseq();
+		return result;
+	}
+	//글작성할때 프라이빗 이슈 번호 불러오기
+	public int getMaxMyTiseq() {
+		TissueDao dao = sqlsession.getMapper(TissueDao.class);
+		int result = dao.getMaxMyTiseq();
+		return result;
+	}
 	//프로젝트 공지사항 수정
 	public int pjNoticeEdit(PjNotice pjnotice) {
 		ProjectDao dao = sqlsession.getMapper(ProjectDao.class);

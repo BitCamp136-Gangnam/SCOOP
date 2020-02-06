@@ -59,12 +59,12 @@ function requestPay(){
                 });
                 Swal.fire(
                         '결제를 성공하셨습니다.',
-                        '로그아웃 후 다시 로그인 해주세요',
+                        '스쿱 프리미엄이 되신 것을 환영합니다!',
                         'success'
                       )
                 window.setTimeout(function() {
                    location.href='userindex.do';
-                }, 1000);
+                }, 1500);
             } else {
                 //실패시 이동할 페이지
                 location.href="paymentPage.do";
