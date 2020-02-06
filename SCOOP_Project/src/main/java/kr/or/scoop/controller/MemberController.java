@@ -188,14 +188,15 @@ public class MemberController {
 		String status = "";
 		String viewpage = "";
 		MemberDao dao = sqlsession.getMapper(MemberDao.class);
-		int val = dao.getIsAlarm(email);
-		if(val == 1) {
-			status = "ON";
-		}else {
-			status = "OFF";
-		}
+		
 		result = service.googleIdCheck(email, name);
 		if (result > 0) {
+			int val = dao.getIsAlarm(email);
+			if(val == 1) {
+				status = "ON";
+			}else {
+				status = "OFF";
+			}
 			viewpage = "redirect:/userindex.do";
 			session.setAttribute("email", email);
 			session.setAttribute("status", status);
@@ -580,14 +581,15 @@ public class MemberController {
 		String viewpage = "";
 		String status = "";
 		MemberDao dao = sqlsession.getMapper(MemberDao.class);
-		int val = dao.getIsAlarm(email);
-		if(val == 1) {
-			status = "ON";
-		}else {
-			status = "OFF";
-		}
+		
 		result = service.naverIdCheck(email, name);
 		if (result > 0) {
+			int val = dao.getIsAlarm(email);
+			if(val == 1) {
+				status = "ON";
+			}else {
+				status = "OFF";
+			}
 			viewpage = "redirect:/userindex.do";
 			session.setAttribute("email", email);
 			session.setAttribute("status", status);

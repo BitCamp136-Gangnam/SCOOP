@@ -5,7 +5,7 @@ const { request, cheerio, http, express } = require('../lib/modules')
 let controller = {
     start: () => {
         controller.restApi()
-        
+        console.log('start')
     },
     getBody: (options, callback) => {
         request(options, (err, res, body) => {
@@ -27,20 +27,21 @@ let controller = {
     },
     convertCheerio: (body, callback) => {
         let $ = cheerio.load(body)
-        let title = $('head > meta[property="og:title"]').attr('content')
+        let title1 = $('head > meta[property="og:title"]').attr('content')
         let image = $('head > meta[property="og:image"]').attr('content')
         let url = $('head > meta[property="og:url"]').attr('content')
         let title2 = $('head > title').text()
         //$('#PM_ID_ct > .header > .special_bg > .area_flex > .area_logo > h1 > a > span').text()
-        console.log(title)
-        console.log(image)
-        console.log(url)
-        console.log(title2)
+        
+        if(title1 !== null && title1 !== undefined){
+            title = title1
+        }else{
+            title = title2
+        }
         let data = {
             title: title,
             img: image,
-            url: url,
-            sub: title2
+            url: url
         }
         callback(data)
     },
@@ -64,9 +65,11 @@ let controller = {
             let resultData = {
                 message: ''
             }
-            if(getUrl.indexOf('http') < 0){
+            if(getUrl.indexOf('http') < 0 && getUrl !== null){
                 getUrl = 'http://' + getUrl
                 console.log(getUrl)
+            }else if(getUrl === null || getUrl === undefined){
+                res.status(400).end()
             }
             let options = {
                 url: getUrl,
@@ -79,12 +82,10 @@ let controller = {
                     console.log(data)
                     let resData = data
                     if(getUrl !== null && getUrl !== undefined){
-                        console.log('if')
                         resultData.message = resData
                         res.setHeader('Content-Type','application/json')
                         res.json(resultData)
                     }else{
-                        console.log('else')
                         res.status(400).end()
                     }
                 })

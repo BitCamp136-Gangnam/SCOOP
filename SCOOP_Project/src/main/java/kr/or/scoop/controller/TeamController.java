@@ -188,7 +188,7 @@ public class TeamController {
 					for(int j = 0; j < link.length; j++) {
 						System.out.println("split : " + link[j]);
 						if(link[j].indexOf("http") != -1 || link[j].indexOf("www") != -1) {
-							content += "<a href="+ link[j] + " target='_blank'>" + link[j] + "</a> ";
+							content += "<a href= "+ link[j] + " target='_blank'>" + link[j] + "</a> ";
 							System.out.println("if 띄움 : " + link[j]);
 						}else {
 							content += link[j] + " ";
