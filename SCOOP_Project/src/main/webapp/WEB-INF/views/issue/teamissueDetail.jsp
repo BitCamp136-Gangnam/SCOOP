@@ -53,7 +53,7 @@ $(function(){
 		                     }
 							var xButton = '';
 							if(object.email=="${sessionScope.email}"){
-								xButton = '<span id="'+object.replyseq+'" class="deleteComment"><span class="iconify" id="deleteComment"  data-icon="octicon:x" data-inline="false" style="cursor: pointer;font-size:15px;margin-bottom: 3px;margin-left: 45px;"></span></span>';
+								xButton = '<span id="'+object.replyseq+'" class="deleteComment"><span class="iconify" id="deleteComment"  data-icon="octicon:x" data-inline="false" style="cursor: pointer;font-size:15px;margin-bottom: 3px;"></span></span>';
 								}
 						$('#commentMain').append(
 
@@ -306,7 +306,7 @@ border-radius: 5px;
             <span>${r.name}</span><span style="padding-left:3%"><i class="far fa-clock" style="color:#E71D36 "></i>${fn:substring(r.rdate,0,16)}</span>
             <c:if test="${r.email==sessionScope.email }">
             <span id="${r.replyseq}" class="deleteComment">
-            <span class="iconify" id="deleteComment"  data-icon="octicon:x" data-inline="false" style="cursor: pointer;font-size:15px;margin-bottom: 3px;margin-left: 45px;"></span>
+            <span class="iconify" id="deleteComment"  data-icon="octicon:x" data-inline="false" style="cursor: pointer;font-size:15px;margin-bottom: 3px;"></span>
             </span>
             </c:if>
             <br>

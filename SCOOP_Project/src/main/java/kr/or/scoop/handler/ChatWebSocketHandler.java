@@ -1,6 +1,7 @@
 package kr.or.scoop.handler;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -11,6 +12,7 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import kr.or.scoop.dto.AllNotification;
 import kr.or.scoop.dto.ChatRoom;
 //socket handler
 public class ChatWebSocketHandler extends TextWebSocketHandler {
@@ -19,6 +21,8 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 	private Map<String, WebSocketSession> users = new ConcurrentHashMap<>();
 	// 채팅방 관리
 	private Map<String, ChatRoom> roomInfos = new HashMap<>();
+	// 접속한 noti user 관리
+	private Map<String, WebSocketSession> notiusers = new ConcurrentHashMap<>();
 
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
@@ -26,6 +30,13 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 		String cmd = getAttribute(session, "cmd");
 		String user = getAttribute(session, "user");
 		// 채팅 접속
+		Iterator<String> mapiter = users.keySet().iterator();
+		while(mapiter.hasNext()) {
+			String key = mapiter.next();
+			WebSocketSession value = users.get(key);
+			System.out.println(key+" : "+value);
+		}
+		
 		if(cmd.equals("on")) {
 			users.put(user, session);			
 			sendChatRoomInfoMessage(session);
@@ -33,6 +44,8 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 		// 채팅방 접속
 		else if(cmd.equals("join")) {
 			joinChatRoom(session, user, getAttribute(session, "room"));
+		} else if(cmd.equals("all")) {
+			System.out.println("요왔다 ..");
 		}
 	}
 	//메시지 수신
@@ -145,5 +158,12 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 	
 	public String getAttribute(WebSocketSession session, String parameter) {
 		return (String) session.getAttributes().get(parameter);
+	}
+	
+	// 접속 유저 등록
+	private void createNoti(WebSocketSession session, JSONObject data) throws Exception {
+		AllNotification noti = new AllNotification(data.getString("name"));
+		
+		sendChatRoomInfoMessage();
 	}
 }
