@@ -33,6 +33,8 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 		// 채팅방 접속
 		else if(cmd.equals("join")) {
 			joinChatRoom(session, user, getAttribute(session, "room"));
+		} else if(cmd.equals("all")) {
+			
 		}
 	}
 	//메시지 수신

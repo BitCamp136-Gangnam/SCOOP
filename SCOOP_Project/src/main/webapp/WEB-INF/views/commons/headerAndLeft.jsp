@@ -588,6 +588,51 @@ input::placeholder {
        }
    }
 
+   $(function() { // onload
+		connect();	//연결
+		
+
+		$('#logout').onclick(function(){
+			disconnect();
+		});
+		$('#logoutNaver').onclick(function(){
+			disconnect();
+		});
+		$('#logoutGoogle').onclick(function(){
+			disconnect();
+		});
+	});
+	
+	function connect() { //입장 버튼 클릭시 작동 함수(웹소켓 생성)
+		wsocket = new WebSocket("ws://192.168.6.13:8090/SCOOP/Chat-ws.do?cmd=join&room=${room}");
+
+		//해당 함수 정의
+		wsocket.onmessage = onMessage;
+	}
+	
+	function disconnect() {
+		wsocket.close();
+	}
+
+	function onMessage(evt) { 
+		var data = JSON.parse(evt.data);
+		notificationMessage(data);
+	}
+
+	function send(message) { //전송할때 json형태로 전송
+		let data = { message : message
+						, cmd : "message"
+						, room : "${room}"
+						, img : "${sessionScope.img}"
+						 };
+		
+		wsocket.send(JSON.stringify(data));
+	}
+
+	function notificationMessage(data) { //메시지 뷰단에 append
+		
+	}
+
    //이슈작성 validation
     function checkz() {
     //공지사항 제목 공백 확인
@@ -613,13 +658,17 @@ input::placeholder {
              body: sessionNickName+'님이 새로운 이슈를 발의하셨습니다. :)',
          });
          // 클릭 시 링크
-         notification.onclick = function () {
-             window.open('http://localhost:8090/SCOOP/userindex.do');
-         };
+
          var title = '새로운 팀 이슈가 생성되었습니다.';
          var options = {
            body: sessionNickName+'님이 새로운 이슈를 발의하셨습니다. :)'
          };
+         let data = { message : message
+					, cmd : "message"
+					, room : $('#selectpro').val()
+					 };
+		 
+		 wsocket.send(JSON.stringify(data));
          // onsubmit시 notification
          registration.showNotification(title, options);
     		
