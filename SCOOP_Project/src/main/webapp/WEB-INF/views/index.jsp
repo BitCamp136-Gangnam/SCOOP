@@ -830,7 +830,7 @@ function idOver(a) {
            <div class="form-group" style="border: 1px solid #656a6f; border-radius: 0.25rem;">
             <label>Email</label>
             <input type="email" name="email" placeholder="E-mail@company.com" class="form-control">
-            <button type="submit" class="btn btn-primary"><spring:message code="register" /></button>
+            <button type="button" data-toggle="modal" data-target="#signUp"class="btn btn-primary"><spring:message code="register" /></button>
            </div>
          </form>
         </div>
