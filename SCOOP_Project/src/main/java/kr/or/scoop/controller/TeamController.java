@@ -181,18 +181,20 @@ public class TeamController {
 			// 이슈 내용에서 url 찾아서 링크 (a태그)
 			String[] contentline = issuecontent.split("\n");
 			String content = "";
+			String link = "";
 			for(int i = 0; i < contentline.length; i++) {
 				if(contentline[i].indexOf("http") != -1 || contentline[i].indexOf("www") != -1) {
-					String[] link = contentline[i].split(" ");
+					String[] url = contentline[i].split(" ");
 					System.out.println("if 엔터 : " + contentline[i]);
-					for(int j = 0; j < link.length; j++) {
-						System.out.println("split : " + link[j]);
-						if(link[j].indexOf("http") != -1 || link[j].indexOf("www") != -1) {
-							content += "<a href= "+ link[j] + " target='_blank'>" + link[j] + "</a> ";
-							System.out.println("if 띄움 : " + link[j]);
+					for(int j = 0; j < url.length; j++) {
+						System.out.println("split : " + url[j]);
+						if(url[j].indexOf("http") != -1 || url[j].indexOf("www") != -1) {
+							link = url[j] + ",";
+							content += "<a href= "+ url[j] + " target='_blank'>" + url[j] + "</a> ";
+							System.out.println("if 띄움 : " + url[j]);
 						}else {
-							content += link[j] + " ";
-							System.out.println("else 띄움 : " + link[j]);
+							content += url[j] + " ";
+							System.out.println("else 띄움 : " + url[j]);
 						}
 					}
 					content += "<br>";
@@ -201,6 +203,8 @@ public class TeamController {
 					System.out.println("else 엔터 : " + contentline[i]);
 				}
 			}
+			System.out.println(link);
+			System.out.println(selectTeam);
 			
 			String path = "";
 			int tseq = 0;
@@ -261,6 +265,9 @@ public class TeamController {
 					path = "utils/makeMyIssueSwal";
 				}else {
 					path = "utils/makeMyIssueFailSwal";
+				}
+				if(link != null && link.length() > 0) {
+					privateservice.myLinkInsert(link, email);
 				}
 				return path;
 			} else { //tseq가 존재한다면 협업공간 이슈 작성
@@ -325,6 +332,9 @@ public class TeamController {
 					tseq = Integer.parseInt(selectTeam);
 					model.addAttribute("tseq", tseq);
 					path = "utils/makeTeamIssueFailSwal";
+				}
+				if(link != null && link.length() > 0) {
+					teamservice.teamLink(tseq, link, email);
 				}
 			}
 			return path;

@@ -1185,6 +1185,15 @@ span {
               </c:forEach>
           </select>
          </li>
+         <li class="nav-item" style="margin-right: 10px">
+          <select id="selectFile" name="tlink" class="form-control" style="border: 1px solid rgba(0,0,0,0.5) ; color: #000; font-size: 18px; padding-top: 0;">
+                 <option value="0">프로젝트 전체 링크</option>
+          		<option value="myFile">프라이빗 공간</option>
+              <c:forEach items="${pjtlist}" var="p">
+                 <option value="${p.tseq}">${p.pname}</option>
+              </c:forEach>
+          </select>
+         </li>
          <li class="nav-item"><input type="search" id="searchFile" class="form-control"
             style="border-radius: 0.25rem; height: 20px" placeholder="검색 후 Enter치세요">
          </li>
