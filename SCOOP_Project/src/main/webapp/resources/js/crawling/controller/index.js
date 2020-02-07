@@ -31,7 +31,7 @@ let controller = {
         let image = $('head > meta[property="og:image"]').attr('content')
         let url = $('head > meta[property="og:url"]').attr('content')
         let title2 = $('head > title').text()
-        let robot = $('head > meta[name="robot"]').attr('content')
+        let gimage = $('head > meta[itemprop="image"]').attr('content')
         //$('#PM_ID_ct > .header > .special_bg > .area_flex > .area_logo > h1 > a > span').text()
         console.log(title1)
         console.log(title2)
@@ -46,10 +46,11 @@ let controller = {
         
         if(title == 'YouTube'){
             image = 'http://www.youtube.com/'+image
-        }else if(title)
-
-        if(robot == null || robot == undefined){
-            console.log('true')
+            url = 'http://www.youtube.com'
+        }else if(title.indexOf('Google') != -1){
+            image = 'http://www.google.com/'+gimage
+        }else if(title == null || title == undefined || title == ''){
+            title = '제목 없음'
         }
 
         let data = {
