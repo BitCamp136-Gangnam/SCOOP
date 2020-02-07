@@ -200,6 +200,6 @@ insert into myissue (piseq,pititle,picontent,pistart, piend, ispibook, email, pi
 </insert>
 <!-- 마이 링크 리스트 -->
 <select id="getMyLink" resultType="kr.or.scoop.dto.Link">
-	select mylinkseq, plink from mylink where email=#{email};
+	select mylinkseq, plink from mylink where email=#{email}
 </select>
 </mapper>

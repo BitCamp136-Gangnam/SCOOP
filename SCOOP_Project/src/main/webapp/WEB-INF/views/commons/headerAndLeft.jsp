@@ -156,17 +156,50 @@ input::placeholder {
 	   })
 	$('#selectLink').change(function(){
 		let tseq = $(this).val()
-
 		if(tseq == 'myLink'){
 			myLinkList()
 			return;
 		}
 		$.ajax({
 			url: 'getTLink.do',
+			type: 'POST',
+			dataType: 'json',
 			data: { tseq: tseq },
 			success: function(data){
-				console.log(data)
+				console.log(data.toString())
 				$('#fileLocation').empty()
+				$.each(data, function(index, list){
+					let link = list.tlink.split(',')
+					for(let i = 0; i < link.length - 1; i++){
+						if(link[i] != "" || link[i] != null || link[i] != undefined){
+							$.ajax({
+								url: 'http://192.168.6.45:8091/index',
+								type: 'GET',
+								data: 'url='+link[i],
+								dataType: 'json',
+								success: function(data){
+									console.log(data.message.title)
+									console.log(data.message.img)
+									console.log(data.message.url)
+
+									$('#fileLocation').append(
+										'<div class="fileDown" id="" style="width: 150px; height:150px; margin: 1%;">'+
+						      			'<a href="'+data.message.url+'">'+
+										'<img id="" width="100px" height="100px" style="margin: 1%; display: block; margin-left: auto; margin-right: auto"'+
+										'src="<c:url value="'+data.message.img+'" />" onError="this.src=''">'+
+						        		'</a><p style="font-size: 15px; text-align: center">'+
+						        		data.message.title+'<br>'+'프라이빗 공간'+
+						         		'</p></div>'		
+									)
+								},
+								error: function(xhr, status, error){
+									console.log('xhr : ' + xhr.status)
+									console.log(error)
+								}
+							})
+						}
+					}
+				})
 				
 			}
 		})
@@ -176,12 +209,42 @@ input::placeholder {
 		let tseq = 0;
 		$.ajax({
 			url: 'getMyLink.do',
-			success: function(data){
-				console.log(data)
+			dataType: 'json',
+			type: 'POST',
+			success: function(resData){
 				$('#fileLocation').empty()
-				/* $.each(data, function(index, list){
-					
-				}) */
+				$.each(resData, function(index, list){
+					let link = list.plink.split(',')
+					for(let i = 0; i < link.length-1; i++){
+						if(link[i] != "" || link[i] != null || link[i] != undefined){
+							$.ajax({
+								url: 'http://192.168.6.45:8091/index',
+								type: 'GET',
+								data: 'url='+link[i],
+								dataType: 'json',
+								success: function(data){
+									console.log(data.message.title)
+									console.log(data.message.img)
+									console.log(data.message.url)
+
+									$('#fileLocation').append(
+										'<div class="fileDown" id="" style="width: 150px; height:150px; margin: 1%;">'+
+						      			'<a href="'+data.message.url+'">'+
+										'<img id="" width="100px" height="100px" style="margin: 1%; display: block; margin-left: auto; margin-right: auto"'+
+										'src="<c:url value="'+data.message.img+'" />" onError="this.src=''">'+
+						        		'</a><p style="font-size: 15px; text-align: center">'+
+						        		data.message.title+'<br>'+'프라이빗 공간'+
+						         		'</p></div>'		
+									)
+								},
+								error: function(xhr, status, error){
+									console.log('xhr : ' + xhr.status)
+									console.log(error)
+								}
+							})
+						}
+					}
+				})
 			}
 		})
 	}

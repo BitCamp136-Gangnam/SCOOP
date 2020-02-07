@@ -38,6 +38,11 @@ let controller = {
         }else{
             title = title2
         }
+        
+        if(title == 'YouTube'){
+            image = 'http://www.youtube.com/'+image
+        }
+
         let data = {
             title: title,
             img: image,
