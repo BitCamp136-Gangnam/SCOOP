@@ -39,6 +39,13 @@ cursor: pointer;
 border-radius: 5px;
 }
 </style>
+<script type="text/javascript">
+$(function(){
+$('#editCheckIssue').click(function(){
+	$('#editIssue').click();
+})
+})
+</script>
 <body>
 
     <jsp:include page="/WEB-INF/views/commons/preloader.jsp"></jsp:include>
@@ -68,10 +75,15 @@ border-radius: 5px;
 		<div class="col-sm-1">
 		</div>
 		<div class="col-sm-2" style="padding-right: 0">
-			<input type="submit" class="form-control editdelete" value="완료" id="editIssue">
 		</div>
-		<div class="col-sm-2" style="padding-left: 0">
-			<input type="button" class="form-control editdelete" value="돌아가기" id="returnIssue">
+		<div class="col-sm-2" style="padding-left: 0; text-align: right">
+		<span id="editCheckIssue">
+		<span class="iconify" data-icon="fa-solid:check" data-inline="false" style="cursor: pointer;font-size: 30px;margin-bottom: 20px;margin-left: 20px;"></span>
+		</span>
+			<input type="submit" class="form-control editdelete" value="완료" id="editIssue" hidden="">
+		<span id="returnIssue">
+		<span class="iconify" data-icon="entypo:back" data-inline="false" style="cursor: pointer; font-size: 35px;margin-bottom: 15px;margin-left: 15px;"></span>
+		</span>
 		</div>
 		</div>
 		<hr>
