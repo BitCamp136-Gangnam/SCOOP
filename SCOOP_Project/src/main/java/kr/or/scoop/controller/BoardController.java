@@ -94,13 +94,21 @@ public class BoardController {
 	
 	// 협업공간 이슈디테일 
 	@RequestMapping(value="/teamissueDetail.do",method = {RequestMethod.POST,RequestMethod.GET})
-	public String teamissueDetail(int tiseq, Model model){
+	public String teamissueDetail(int tiseq, Model model, HttpSession session){
 		TissueDao dao = sqlSession.getMapper(TissueDao.class);
+		MemberDao mdao = sqlSession.getMapper(MemberDao.class);
 		Tissue tissue = dao.teamissueDetail(tiseq);
 		List<Reply> reply = dao.teamCommentOk(tiseq); //댓글 리스트 불러오기 
 		List<Mention> mentions = dao.getMentions(tiseq); // 멘션 리스트 불러오기
 		List<GoogleDrive> googledrive = dao.getGoogleDrive(tiseq); //구글드라이브 리스트 불러오기
 		List<DoWork> dowork = dao.getDoWork(tiseq); // 할일 리스트 불러오기
+		try {
+			String email = (String)session.getAttribute("email");
+			List<FileDrive> filedrive = mdao.getFileDrive(email); //로그인한 사람 파일드라이브 불러오기
+			session.setAttribute("filed", filedrive); //파일드라이브 세션 저장
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		System.out.println(tiseq);
 		List<FileDrive> files = dao.getFiles(tiseq); // 파일 드라이브 리스트 불러오기
 		model.addAttribute("tissue", tissue);

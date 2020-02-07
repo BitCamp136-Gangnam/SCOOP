@@ -110,15 +110,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<!-- 파일드라이브 불러오기 -->
 	<select id="getFileDrive" resultType="kr.or.scoop.dto.FileDrive">
-		select * from filedrive f join teampjt t on f.tseq=t.tseq where f.email=#{email,jdbcType=VARCHAR} order by f.fddate desc
+		select * from filedrive f join teampjt t on t.tseq=f.tseq where t.tseq in (select tseq from tpmember where email=#{email,jdbcType=VARCHAR}) order by f.fddate desc
 	</select>
 	<!-- 파일드라이브 검색하기 -->
 	<select id="searchFileDrive" resultType="kr.or.scoop.dto.FileDrive">
-		select * from filedrive f join teampjt t on f.tseq=t.tseq where f.email=#{param1} and f.fdname like '%'||#{param2}||'%' order by f.fddate desc
+		select * from filedrive f join teampjt t on t.tseq=f.tseq where t.tseq in (select tseq from tpmember where email=#{param1}) and f.fdname like '%'||#{param2}||'%' order by f.fddate desc
 	</select>
 	<!-- 파일드라이브 프로젝트별로 불러오기 -->
 	<select id="getFileProject" resultType="kr.or.scoop.dto.FileDrive">
-		select * from filedrive f join teampjt t on f.tseq=t.tseq where f.email=#{param1} and f.tseq=#{param2} order by f.fddate desc
+		select * from filedrive f join teampjt t on f.tseq=t.tseq where f.tseq=#{param1} order by f.fddate desc
 	</select>
 	<!-- 내 파일드라이브 불러오기 -->
 	<select id="getMyFile" resultType="kr.or.scoop.dto.PrivateFileDrive">
