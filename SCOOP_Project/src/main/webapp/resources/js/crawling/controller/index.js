@@ -31,7 +31,12 @@ let controller = {
         let image = $('head > meta[property="og:image"]').attr('content')
         let url = $('head > meta[property="og:url"]').attr('content')
         let title2 = $('head > title').text()
+        let robot = $('head > meta[name="robot"]').attr('content')
         //$('#PM_ID_ct > .header > .special_bg > .area_flex > .area_logo > h1 > a > span').text()
+        console.log(title1)
+        console.log(title2)
+        console.log(image)
+        console.log(url)
         
         if(title1 !== null && title1 !== undefined){
             title = title1
@@ -41,6 +46,10 @@ let controller = {
         
         if(title == 'YouTube'){
             image = 'http://www.youtube.com/'+image
+        }else if(title)
+
+        if(robot == null || robot == undefined){
+            console.log('true')
         }
 
         let data = {

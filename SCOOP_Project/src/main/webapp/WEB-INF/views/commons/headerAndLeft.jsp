@@ -187,8 +187,16 @@ input::placeholder {
 								dataType: 'json',
 								async: true,
 								success: function(data){
+									let pname = $('#selectLink option:checked').text()
+									console.log('팀이름 : ' + pname)
 									if(data.message.url == undefined || data.message.url == null){
 										data.message.url = "userindex.do"
+									}
+									if(data.message.title.length>=14){
+										tempTitle = data.message.title.substr(0, 14) + ' ...';
+									}
+									if(pname.length>=4){
+										tempTitle = pname.substr(0, 4) + ' ...';
 									}
 									let target = 'target="_blank"'
 									$('#fileLocation').append(
@@ -197,7 +205,7 @@ input::placeholder {
 										'<img id="" width="100px" height="100px" style="margin: 1%; display: block; margin-left: auto; margin-right: auto"'+
 										'src="<c:url value="'+data.message.img+'" />" onError="this.src='+"'resources/images/logo/ScoopTitle.png'"+'">'+
 						        		'</a><p style="font-size: 15px; text-align: center">'+
-						        		data.message.title+'<br>'+list.pname+
+						        		data.message.title+'<br>'+pname+
 						         		'</p></div>'		
 									)
 								},

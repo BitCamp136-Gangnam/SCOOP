@@ -126,7 +126,7 @@ public class FileController {
 		
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		
-		List<Link> link = dao.getTLink(tseq, email);
+		List<Link> link = dao.getTLink(tseq);
 		JSONArray jsonlist = JSONArray.fromObject(link);
 		System.out.println(link);
 		model.addAttribute("ajax", jsonlist);

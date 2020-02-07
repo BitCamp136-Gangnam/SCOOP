@@ -152,5 +152,5 @@ public interface TissueDao {
 	public int teamLinkInsert(int tseq, String link, String email);
 	
 	//팀 링크 리스트
-	public List<Link> getTLink(int tseq, String email);
+	public List<Link> getTLink(int tseq);
 }
