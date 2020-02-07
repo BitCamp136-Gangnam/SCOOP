@@ -24,6 +24,15 @@
 $(function(){
 	$('#commentMain').scrollTop($('#commentMain')[0].scrollHeight);
 	$('#teamCommentBtn').click(function(){
+		if($("#teamComment").val()==''){
+			Swal.fire({
+				  title: '댓글을 작성해주세요!',
+				  showConfirmButton: false,
+				  icon: 'warning',
+				  timer: 1000
+			})
+			return;
+		}
 		var tiseqq = ${tissue.tiseq};
 		$.ajax({
 			
@@ -71,7 +80,12 @@ $(function(){
 							);
 						$('#teamComment').val("");
 						$('#commentMain').scrollTop($('#commentMain')[0].scrollHeight);
-						
+						Swal.fire({
+							  title: '댓글작성 완료!',
+							  showConfirmButton: false,
+							  icon: 'success',
+							  timer: 1000
+						})
 						
 						})
 						
@@ -88,7 +102,7 @@ $(function(){
 									
 									temp.closest(".row").remove();
 									Swal.fire({
-						 				  title: '댓글삭제완료!',
+						 				  title: '댓글삭제 완료!',
 						 				  showConfirmButton: false,
 						 				  icon: 'success',
 						 				  timer: 1000
@@ -256,8 +270,8 @@ border-radius: 5px;
 		<div class="myissueDetail" id="myissueDate" style="font-size: 15px;margin-left: 3%;margin-bottom:2%;margin-top: 2%;"><i class="far fa-calendar-check"style="margin-right:1%;color:#abb335;"></i>등록된 일정이 없습니다.</div>
 		</c:otherwise>
 		</c:choose>
-		
-		<div style="height:100px;overflow: auto;margin-left: 5px; margin-right: 5px;">
+		<c:if test="${mentions!='[]' || files!='[]' || gdrive!='[]' || dowork!='[]'}">
+		<div style="height:135px;overflow: auto;margin-left: 12px; margin-right: 5px;padding-top:1%;padding-bottom:1%;width: 824px;border: 1px solid rgba(0, 0, 0, 0.5); border-radius: 0.5rem">
 		<c:forEach items="${mentions}" var="m">
 		<div class="myissueDetail" id="myissueMention">
 		<sup><i class="fas fa-quote-left" style="color:#ca0000; font-size: 7px"></i></sup> @${m.name} <sup><i class="fas fa-quote-right"style="color:#ca0000;font-size: 7px"></i></sup>
@@ -277,8 +291,6 @@ border-radius: 5px;
 			<br>
 		</div>
 		</c:forEach>
-		</div>
-		<br>
 		<c:forEach items="${dowork}" var="work">
 		<div class="myissueDetail" id="myissueTodo">
 		<i class="far fa-check-circle"style="padding-right: 5px;"></i>${work.fromname}
@@ -287,8 +299,11 @@ border-radius: 5px;
 		<br>
 		</div>
 		</c:forEach> 
+		</div>
+		</c:if>
+		<br>
 		<div class="row" style="margin-right: 0;width:900px;">
-        <div class="myissueDetail col-sm-11" id="myissueContent">
+        <div class="myissueDetail col-sm-11" id="myissueContent" style="height:100px;overflow: auto;">
         ${tissue.ticontent}
         </div>
         <!-- <div class="col-sm-2"><span>네이버</span><br><img alt="logo" src="https://s.pstatic.net/static/www/mobile/edit/2016/0705/mobile_212852414260.png" style="width: 50%"></div> -->

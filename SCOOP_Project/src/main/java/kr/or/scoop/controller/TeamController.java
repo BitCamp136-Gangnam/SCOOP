@@ -174,7 +174,7 @@ public class TeamController {
 					return "utils/fileSizeFail"; //무료회원은 20mb 넘어가면 이슈작성 실패
 				}
 			}else if(role.getRname().equals("ROLE_CHARGE")) {
-				if(fullSize>=52428800) {
+				if(fullSize>=104857600) {
 					return "utils/chargeFileSizeFail"; //유료회원은 50mb 넘어가면 이슈작성 실패
 				}
 			}
@@ -260,6 +260,8 @@ public class TeamController {
 					 }
 				 }
 				if(result >0) {
+					int piseq = teamservice.getMaxMyTiseq();
+					model.addAttribute("piseq", piseq);
 					path = "utils/makeMyIssueSwal";
 				}else {
 					path = "utils/makeMyIssueFailSwal";
@@ -323,8 +325,8 @@ public class TeamController {
 					 }
 				 }
 				if(result >0) {
-					tseq = Integer.parseInt(selectTeam);
-					model.addAttribute("tseq", tseq);
+					int tiseq = teamservice.getMaxTiseq();
+					model.addAttribute("tiseq", tiseq);
 					path = "utils/makeTeamIssueSwal";
 				}else {
 					tseq = Integer.parseInt(selectTeam);

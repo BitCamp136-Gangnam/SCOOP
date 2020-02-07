@@ -101,6 +101,7 @@ public class BoardController {
 		List<Mention> mentions = dao.getMentions(tiseq); // 멘션 리스트 불러오기
 		List<GoogleDrive> googledrive = dao.getGoogleDrive(tiseq); //구글드라이브 리스트 불러오기
 		List<DoWork> dowork = dao.getDoWork(tiseq); // 할일 리스트 불러오기
+		System.out.println(tiseq);
 		List<FileDrive> files = dao.getFiles(tiseq); // 파일 드라이브 리스트 불러오기
 		model.addAttribute("tissue", tissue);
 		model.addAttribute("reply",reply);
@@ -115,6 +116,9 @@ public class BoardController {
 	public String noticeJoin(Notice notice, Model model) {
 		NoticeDao dao = sqlSession.getMapper(NoticeDao.class);
 		List<Notice> n = dao.getNotice();
+		for(int i=0; i<n.size();i++) {
+			n.get(i).setBncontent(n.get(i).getBncontent().replace("<br>", " ")); //<br>을 띄어쓰기로 치환해서 보여줌
+		}
 		model.addAttribute("notice",n);
 		return "issue/notice";
 	}
@@ -123,6 +127,7 @@ public class BoardController {
 	public String noticeWrite(Notice notice) {
 		int result = 0;
 		String viewpage;
+		notice.setBncontent(notice.getBncontent().replace("\r\n", "<br>"));
 		result = service.insertNotice(notice);//공지사항 작성
 		
 		if(result > 0) {
@@ -228,7 +233,7 @@ public class BoardController {
 		String viewpage = "";
 		NoticeDao dao = sqlSession.getMapper(NoticeDao.class);
 		Notice n = dao.detailNotice(bnseq);
-				
+		n.setBncontent(n.getBncontent().replace("<br>", "\n"));
 		model.addAttribute("n",n);
 				
 	viewpage = "issue/noticeEdit";
@@ -241,7 +246,7 @@ public class BoardController {
 	public String noticeUpdateCheck(int bnseq,Notice notice,Model model) {
 		int result = 0;
 		String viewpage = "";
-	
+		notice.setBncontent(notice.getBncontent().replace("\r\n", "<br>"));
 		result = service.updateNotice(notice);
 		if(result > 0) {
 			model.addAttribute("notice",notice);
@@ -425,6 +430,12 @@ public class BoardController {
 	public String myissueEdit(int piseq, Model model) {
 		MyIssueDao dao = sqlSession.getMapper(MyIssueDao.class);
 		MyIssue myissue = dao.myissueDetail(piseq);
+		if(myissue.getPicontent().contains("<a href=")) {
+			int start = myissue.getPicontent().indexOf("<a href=");
+			int end = myissue.getPicontent().indexOf("target='_blank'>");
+			myissue.setPicontent(myissue.getPicontent().replace(myissue.getPicontent().substring(start, end+16), ""));
+			myissue.setPicontent(myissue.getPicontent().replace("</a>", ""));
+		}
 		myissue.setPicontent(myissue.getPicontent().replace("<br>", "\n")); //textarea <br>치환
 		try {
 			List<Mention> mentions = dao.getMyMentions(piseq);
@@ -493,7 +504,7 @@ public class BoardController {
 				return "utils/fileSizeFail"; //만약 무료회원이 20mb이상 업로드라면 이슈작성 실패
 			}
 		}else if(role.getRname().equals("ROLE_CHARGE")) {
-			if(fullSize>=52428800) {
+			if(fullSize>=104857600) {
 				return "utils/chargeFileSizeFail"; //만약 유료회원이 50mb이상 업로드라면 이슈작성 실패
 			}
 		}
@@ -502,8 +513,31 @@ public class BoardController {
 		tissue.setPiseq(piseq);
 		tissue.setEmail(email);
 		tissue.setPititle(title);
-		editIssuecontent = editIssuecontent.replace("\r\n", "<br>"); //\r\n <br>로 치환
-		tissue.setPicontent(editIssuecontent);
+		String[] contentline = editIssuecontent.split("\n");
+		String content = "";
+		String link = "";
+		for(int i = 0; i < contentline.length; i++) {
+			if(contentline[i].indexOf("http") != -1 || contentline[i].indexOf("www") != -1) {
+				String[] url = contentline[i].split(" ");
+				for(int j = 0; j < url.length; j++) {
+					if(url[j].indexOf("http") != -1 || url[j].indexOf("www") != -1) {
+						if(url[j].indexOf("http") == -1) {
+							link += "http://" + url[j] + ",";
+						}else {
+							link += url[j] + ",";
+						}
+						content += "<a href= "+ url[j] + " target='_blank'>" + url[j] + "</a> ";
+					}else {
+						content += url[j] + " ";
+					}
+				}
+				content += "<br>";
+			}else {
+				content += contentline[i]+"<br>";
+			}
+		}
+		content = content.replace("\r\n", "<br>"); //\r\n <br>로 치환
+		tissue.setPicontent(content);
 		if(!editFrom.equals("")) { //일정이 비지 않았다면 수정
 			tissue.setPistart(java.sql.Timestamp.valueOf(editFrom+" 00:00:00"));
 			tissue.setPiend(java.sql.Timestamp.valueOf(editTo+" 00:00:00"));
@@ -609,7 +643,7 @@ public class BoardController {
 				return "utils/fileSizeFail"; //만약 무료회원이 20mb이상 업로드라면 이슈작성 실패
 			}
 		}else if(role.getRname().equals("ROLE_CHARGE")) {
-			if(fullSize>=52428800) {
+			if(fullSize>=104857600) {
 				return "utils/chargeFileSizeFail"; //만약 유료회원이 50mb이상 업로드라면 이슈작성 실패
 			}
 		}
@@ -619,7 +653,30 @@ public class BoardController {
 		tissue.setTiseq(tiseq);
 		tissue.setEmail(email);
 		tissue.setTititle(title);
-		editIssuecontent = editIssuecontent.replace("\r\n", "<br>"); // \r\n을 <br>로 치환
+		String[] contentline = editIssuecontent.split("\n");
+		String content = "";
+		String link = "";
+		for(int i = 0; i < contentline.length; i++) {
+			if(contentline[i].indexOf("http") != -1 || contentline[i].indexOf("www") != -1) {
+				String[] url = contentline[i].split(" ");
+				for(int j = 0; j < url.length; j++) {
+					if(url[j].indexOf("http") != -1 || url[j].indexOf("www") != -1) {
+						if(url[j].indexOf("http") == -1) {
+							link += "http://" + url[j] + ",";
+						}else {
+							link += url[j] + ",";
+						}
+						content += "<a href= "+ url[j] + " target='_blank'>" + url[j] + "</a> ";
+					}else {
+						content += url[j] + " ";
+					}
+				}
+				content += "<br>";
+			}else {
+				content += contentline[i]+"<br>";
+			}
+		}
+		editIssuecontent = content.replace("\r\n", "<br>"); // \r\n을 <br>로 치환
 		tissue.setTicontent(editIssuecontent);
 		if(!editFrom.equals("")) { //만약 일정이 비어있지 않다면 수정
 			 tissue.setTistart(java.sql.Timestamp.valueOf(editFrom+" 00:00:00"));

@@ -61,8 +61,9 @@ border-radius: 5px;
         <%-- <input type="hidden" name="tseq" value="${tissue.tseq}"> --%>
         <input type="hidden" name="bnseq" value="${n.bnseq}">
 		<div class="row"style="margin:2% 2% 0 2%" >
+		<span class="iconify" style="font-size: 40px;margin-bottom: 5px;color: #E71D36;" data-icon="ant-design:notification-outlined" data-inline="false"></span>
 		<div class="col-sm-6">
-			<input type="text" class="form-control" name="bntitle" value="${n.bntitle}" style="border: 0px; border-bottom: 1px solid #ced4da; font-size: 20px;padding-left: 0px;">
+			<input type="text" class="form-control" name="bntitle" value="${n.bntitle}" style="border: 0px;font-size: 20px;padding-left: 0px;padding-bottom: 12px;">
 		</div>
 		<div class="col-sm-1">
 		</div>
@@ -73,10 +74,12 @@ border-radius: 5px;
 			<input type="button" class="form-control editdelete" value="돌아가기" id="returnIssue">
 		</div>
 		</div>
+		<hr>
 		<div id="edittodoresult">
 		</div>
-        <div class="myissueDetail" style="margin-top: 2%">
-        <textarea rows="5" style="width:50%;border: 0; border-bottom: 1px solid #ced4da;" id="editIssuecontent" name="bncontent">${n.bncontent}</textarea>
+        <div class="myissueDetail" style="height:520px;margin: 2%;padding:1%; border: 1px solid rgba(0,0,0,0.5);border-radius: 0.5rem;">
+        <textarea rows="5" style="width:100%;border: 0; border-bottom: 1px solid #ced4da; padding: 1%;" id="editIssuecontent" name="bncontent">${n.bncontent}</textarea>
+        <img src="resources/images/logo/ScoopTitle.png" style="width:500px;height: auto;opacity:0.5;position:absolute;left: 30%;margin-top: 5%;">
         </div>
             </form>
             </div> 
@@ -146,247 +149,5 @@ $('.divDelete2').click(function(){
 	$(this).parent().remove();
 })
 
-var tar = 0;
-var tar2 = 1;
-$('.menli').keydown(function(event) {
-	   var key = event.keyCode;
-	    switch (key) {
-	    case 38:
-	       console.log("위");
-	       tar2--;
-	       break;
-	    case 40:
-	       tar2++;
-	       break;
-	    case 39:
-	       break;
-	    case 37:
-	       break;
-	    }
-	    console.log(tar2);
-	    if (tar2 < 0) {
-	       tar2 = 0;
-	    }
-	    if (tar2 > 4) {
-	       tar2 = 4;
-	    }
-	    $('#editMen' + tar2).focus();
-	    if ($('#editMen' + tar2).focus()) {
-	       $('.menli').css('background-color', '#fff');
-	       $('#editMen' + tar2).css(
-	             'background-color',
-	             'rgba(225, 225, 225,0.5)');
-	    }
-	    if(event.keyCode == 13){
-	       $(this).click();
-	    }
-	});
-	$('#editIssuecontent').keydown(
-			function(event) {
-				if($('#editMentionlist').css('display')==('flex')){
-					console.log('여기서라면?');
-					console.log(event.keyCode);
-					var key = event.keyCode;
-		               switch (key) {
-		               case 38:
-		                  console.log("위");
-		                  tar--;
-		                  break;
-		               case 40:
-		                  tar++;
-		                  break;
-		               case 39:
-		                  break;
-		               case 37:
-		                  break;
-		               }
-		               if (tar < 1) {
-		                  tar = 1;
-		               }
-		               if (tar > 9) {
-		                  tar = 9;
-		               }
-		               $('#editMen' + tar).focus();
-		               if ($('#editMen' + tar).focus()) {
-		                  $('.editMenli').css('background-color', '#fff');
-		                  $('#editMen' + tar).css(
-		                        'background-color',
-		                        'rgba(225, 225, 225,0.5)');
-		               }
-		               if(event.keyCode == 13){
-		               	$(this).click();
-		               }
-				}
-				var top = ($('#editIssuecontent').offset().top);
-				var left = ($('#editIssuecontent').offset().left + 490);
-				if (event.shiftKey && event.keyCode == 50) {
-					console.log("top&left" + top + ", " + left);
-					$('#editMentionlist').attr(
-							'style',
-							'position:fixed; width:20%;top:' + top + 'px;left:'
-									+ left + 'px; z-index:4');
-					$('#editMentionlist').show();
-					$('div').not('#editMentionlist').click(function() {
-						$('#editMentionlist').hide();
-					});
-				}
-			});
-	$('#editMen1').click(
-			function() {
-				var top = ($('#editIssuecontent').offset().top);
-				var left = ($('#editIssuecontent').offset().left + 490);
-				$('#editMentionlist').hide();
-				$('#editMemlist').attr(
-						'style',
-						'position:fixed; width:20%;top:' + top + 'px;left:'
-								+ left + 'px; z-index:4');
-				$('#editMemlist').show();
-				$('#editMemlist').attr('class', 'list-group mem');
-			});
-	/* $('#men2').click(function() {
-		$('#mentionlist').hide();
-		$('#issuecontent').empty();
-		$('#issuecontent').hide();
-		var textarea = document.getElementById('codemirrorarea');
-		var editor = CodeMirror.fromTextArea(textarea, {
-			mode : "javascript",
-			lineNumbers : true,
-			lineWrapping : true,
-			theme : "eclipse",
-			val : textarea.value
-		});
-	}); */
-	$('#editMen2').click(function() {
-		$('#editMentionlist').hide();
-		var text = "";
-		text = $('#editIssuecontent').val().replace("@", "");
-		$('#editIssuecontent').val(text);
-		$('#auth').click();
-		$('#editIssuecontent').append($('.picker-dialog'));
-
-	});
-	$('#editMen3').click(function() {
-		$('#editMentionlist').hide();
-		$('#fileclick2').click();
-	});
-	function readURL(input) {
-		if (input.files && input.files[0]) {
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				$('#imgpreview').attr('src', e.target.result);
-				if (e.target.result.substring(5, 10) == 'image') {
-					//$('#imgpreview').show();
-				} else {
-					$('#imgpreview').hide();
-				}
-			}
-			reader.readAsDataURL(input.files[0]);
-		}
-	}
-	$("#fileclick2").change(function() {
-		readURL(this);
-		console.log($("#fileclick2")[0].files);
-		var files = $("#fileclick2")[0].files;
-		$('#filename').empty();
-		//$('#filename').append($("#fileclick2").val().substring(12));
-		var text = "";
-		text = $('#editIssuecontent').val().replace("@", "");
-		//$('#issuecontent').val(text);
-		for(let i=0; i<$("#fileclick2")[0].files.length;i++){
-		$('#edittodoresult').append('<div class="myissueDetail" id="myissueMention">'+
-				'<a href="fileDownload.do?fileName='+files[i].name+'"><span class="iconify" data-icon="si-glyph:file-box" data-inline="false"></span>'+files[i].name+'</a>'+
-				'<span class="divDelete" style="cursor:pointer;"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span>'+
-				//'<input type="file" multiple="multiple" hidden="" name="editFile" value="'+files[i].name+'">'+
-				'<br>'+
-				'</div>')
-				$('.divDelete').click(function(){
-	$(this).parent().remove();
-})
-		}
-$('#todoresult').show();
-		
-	});
-	$('#editMen4').click(
-			function() {
-				var text = "";
-				text = $('#editIssuecontent').val().replace("@", "");
-				$('#editIssuecontent').val(text);
-				var top = ($('#editIssuecontent').offset().top);
-				var left = ($('#editIssuecontent').offset().left + 490);
-				$('#editMentionlist').hide();
-				$('#editMemlist').attr(
-						'style',
-						'position:fixed; width:20%;top:' + top + 'px;left:'
-								+ left + 'px; z-index:4');
-				$('#editMmemlist').show();
-			});
-	$('.todo')
-			.click(
-					function() {
-						var top = ($('#editIssuecontent').offset().top);
-						var left = ($('#editIssuecontent').offset().left + 490);
-						if ($(this).parents('#editMemlist').attr('class') == 'list-group mem') {
-							console.log("if");
-							var text = "";
-							text = $('#editIssuecontent').val().replace("@", "");
-							$('#editIssuecontent').val(text);
-							$('#edittodoresult').append('<div class="myissueDetail" id="myissueMention">'+
-									'<sup><i class="fas fa-quote-left" style="color:#ca0000; font-size: 7px"></i></sup> @'+ $(this).text() + ' <sup><i class="fas fa-quote-right"style="color:#ca0000;font-size: 7px"></i></sup>'+
-									'<span class="divDelete" style="cursor:pointer;"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span>'+
-									'<input type="hidden" name="editMention" value="'+$(this).attr('id').split('/')[1]+'">'+
-									'<br>');
-							$('#edittodoresult').append('<input type="hidden" name="mentions" value="'+ $(this).attr('id').split('/')[1] + '">');
-							console.log($(this).text());
-							$('#edittodoresult').show();
-							$('#editMemlist').hide();
-							$('#editMemlist').attr('class', 'list-group');
-							$('.divDelete').click(function(){
-								$(this).parent().remove();
-							})
-						} else {
-							console.log("else");
-							$('#editMemlist').hide();
-							$('#edittodo')
-									.attr(
-											'style',
-											'border-radius:0.25em;padding:1%;position:fixed; width:20%;top:'
-													+ (top - 208)
-													+ 'px;left:'
-													+ left
-													+ 'px; z-index:4;background-color:white');
-							$('#edittodo').show();
-							$('#edittodomem').val($(this).text());
-							$('#edittodomem').attr('name', $(this).attr('id'));
-						}
-					});
-	$('#edittodomake')
-			.click(
-					function() {
-						$('#edittodo').hide();
-						var text = "";
-						text = $('#editIssuecontent').val().replace("@", "");
-						$('#editIssuecontent').val(text);
-						$('#edittodoresult').append('<div class="myissueDetail" id="myissueTodo">'+
-								'<i class="far fa-check-circle"style="padding-right: 5px;"></i>${sessionScope.name}'+
-								'<i class="fas fa-long-arrow-alt-right" style="margin-left:5px;margin-right: 5px;"></i>'+ $('#edittodomem').val()+'<br>'+
-								': '+$('#edittodolist').val()+
-								'<span class="divDelete" style="cursor:pointer;"><span class="iconify" style="font-size: 20px" data-icon="octicon:x" data-inline="false"></span></span>'+
-								'<input type="hidden" name="editToname" value="'+$('#edittodomem').attr('name').split("/")[1]+'">'+
-								'<input type="hidden" name="editDowork" value="'+$('#edittodolist').val()+'">'+
-								'<br>'+
-								'</div>')
-						$('#edittodoresult').show();
-						$('#edittodolist').val('');
-						$('.divDelete').click(function(){
-							$(this).parent().remove();
-						})
-					})
-	$('#edittodocancle').click(function() {
-		$('#edittodo').hide();
-		var text = "";
-		text = $('#editIssuecontent').val().replace("@", "");
-		$('#editIssuecontent').val(text);
-		$('#edittodolist').val('');
-	});
 </script>
 </html>

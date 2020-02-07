@@ -575,7 +575,7 @@ function idOver(a) {
      </div>
      <div class="modal-body p-4 p-lg-5">
       <img class="img-responsive center-block" alt="Scoop로고" src="resources/images/logo/ScoopBig.png" style="width:100%;height:auto;padding-right:15%;padding-left:15%;"/>
-      <form onsubmit="return checkz()" action="frontpage.do" class="login-form text-left" method="post">
+      <form onsubmit="return checkz()" action="index.do" class="login-form text-left" method="post">
         <h4><spring:message code="register.title" /></h4>
         <div class="form-group mb-4">
          <label>Email address</label>
@@ -830,7 +830,7 @@ function idOver(a) {
            <div class="form-group" style="border: 1px solid #656a6f; border-radius: 0.25rem;">
             <label>Email</label>
             <input type="email" name="email" placeholder="E-mail@company.com" class="form-control">
-            <button type="submit" class="btn btn-primary"><spring:message code="register" /></button>
+            <button type="button" data-toggle="modal" data-target="#signUp"class="btn btn-primary"><spring:message code="register" /></button>
            </div>
          </form>
         </div>

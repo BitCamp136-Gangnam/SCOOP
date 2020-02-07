@@ -465,7 +465,7 @@ $(function(){
                   <div class="row" style="overflow: auto;height: 150px;">
                   <c:forEach items="${projectmember}" var="pm" varStatus="status">
                      <div class="search_NameEmail col-sm-6">
-                        <span class="nav-text finalsearch" id="member_Name${status.index}" style="color: #4d4d46;font-size: 13px;padding-bottom:5px;padding-top: 10px;"> &nbsp;${pm.name}</span>
+                        <span class="nav-text finalsearch" id="member_Name${status.index}" style="color: #4d4d46;font-size: 13px;padding-top: 10px;"> &nbsp;${pm.name}</span>
                         <span class="log-user" id="iconAdd${status.index}" data-toggle="dropdown" style="float: right;top: 0px;padding-top: 10px;">
                         <c:choose>
                         	<c:when test="${pm.pjuserrank==100}"><i class="fas fa-user-cog" style="font-size: 20px;color:#195ac2;"></i></c:when>
@@ -489,8 +489,8 @@ $(function(){
                         </ul> 
                         </div>
                         </div>
-                        
-                        <span class="nav-text finalsearch" id="member_Email${status.index}" style="padding-bottom: 1%; padding-top:5px; font-weight: normal;"> &nbsp;${pm.email}</span>
+                        <br>
+                        <span class="nav-text finalsearch" id="member_Email${status.index}" style="padding-bottom: 1%;font-weight: normal;"> &nbsp;${pm.email}</span>
 			            <input type="hidden" name="email" value="${pm.email}">
                         
                      </div>
