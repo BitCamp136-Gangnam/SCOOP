@@ -126,6 +126,9 @@ DROP TABLE PDOWORK
 DROP TABLE PMENTION 
 	CASCADE CONSTRAINTS;
 
+/* 알림 */
+DROP TABLE SETTING
+	CASCADE CONSTRAINTS;
 /* 맴버 */
 CREATE TABLE Member (
 	email VARCHAR2(100) NOT NULL, /* 이메일 */
@@ -1037,6 +1040,27 @@ ALTER TABLE TEAMDOWORK
 		PRIMARY KEY (
 			tdseq
 		);
+/* 알림 설정 */
+CREATE TABLE SETTING (
+   email VARCHAR2(100) NOT NULL, /* 이메일 */
+   isalarm NUMBER NOT NULL /* 전체알림 */
+
+);
+
+COMMENT ON TABLE SETTING IS '알림 설정';
+
+COMMENT ON COLUMN SETTING.email IS '이메일';
+
+
+
+COMMENT ON COLUMN SETTING.isalarm IS '전체알림';
+
+
+
+CREATE UNIQUE INDEX PK_SETTING
+   ON SETTING (
+      email ASC
+   );
 
 /* 개인할일 */
 CREATE TABLE PDOWORK (
@@ -1527,6 +1551,16 @@ ALTER TABLE PMENTION
 		REFERENCES MYISSUE (
 			piseq
 		)ON DELETE CASCADE;
+
+ALTER TABLE SETTING
+   ADD
+      CONSTRAINT FK_Member_TO_SETTING
+      FOREIGN KEY (
+         email
+      )
+      REFERENCES Member (
+         email
+      )ON DELETE CASCADE;
 
 
 
