@@ -109,7 +109,8 @@ public class FileController {
 		MyIssueDao dao = sqlsession.getMapper(MyIssueDao.class);
 		
 		List<Link> link = dao.getMyLink(email);
-		model.addAttribute("link", link);
+		JSONArray jsonlist = JSONArray.fromObject(link);
+		model.addAttribute("ajax", jsonlist);
 		
 		return "utils/ajax";
 	}
@@ -119,10 +120,16 @@ public class FileController {
 	public String getTLink(HttpSession session, Model model, HttpServletRequest request) {
 		String email = (String)session.getAttribute("email");
 		int tseq = Integer.parseInt(request.getParameter("tseq"));
+		
+		System.out.println("email : " + email);
+		System.out.println("tseq : " + tseq);
+		
 		TissueDao dao = sqlsession.getMapper(TissueDao.class);
 		
 		List<Link> link = dao.getTLink(tseq, email);
-		model.addAttribute("link", link);
+		JSONArray jsonlist = JSONArray.fromObject(link);
+		System.out.println(link);
+		model.addAttribute("ajax", jsonlist);
 		
 		return "utils/ajax";
 	}

@@ -192,6 +192,7 @@ public class TeamController {
 							}else {
 								link += url[j] + ",";
 							}
+							
 							content += "<a href= "+ url[j] + " target='_blank'>" + url[j] + "</a> ";
 						}else {
 							content += url[j] + " ";

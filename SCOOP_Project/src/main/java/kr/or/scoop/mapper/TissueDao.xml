@@ -233,8 +233,8 @@ where tseq = #{tseq}
 	insert into tlink(tlinkseq, tseq, tlink, email, tlinkdate)
 	values (TLINKSEQ_TLINK_SEQ.nextval, #{param1}, #{param2}, #{param3}, sysdate)
 </insert>
-<select id="getTlink" resultType="kr.or.scoop.dto.Link">
-	select tlinkseq, tseq, tlink from tlink where tseq=#{tseq} and email=#{email}
+<select id="getTLink" resultType="kr.or.scoop.dto.Link">
+	select tlinkseq, tseq, tlink from tlink where tseq=#{param1} and email=#{param2}
 </select>
 <select id="getMaxTiseq" resultType="Integer">
 	select max(tiseq) from tissue
