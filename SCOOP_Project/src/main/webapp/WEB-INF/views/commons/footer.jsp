@@ -309,7 +309,7 @@
 </div> -->
 <!-- chat 시작 -->
 			<div id="chatdivopen" class="true">
-				<div class="card" style="border-radius: 10px; margin-bottom: 0;border : 1px solid #ced4da;min-height: 400px;">
+				<div class="card" style="border-radius: 10px; margin-bottom: 0;border : 1px solid #ced4da;min-height: 400px;box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.5)">
 					<div class="card-header">
 						<i class="fas fa-comments"></i> 실시간 채팅(Ctrl + ,)
 						<!-- <button id="createChat" class="btn btn-primary" type="button" style="margin-bottom: 0; margin-left: 45px">채팅방	만들기</button> -->

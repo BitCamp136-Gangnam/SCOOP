@@ -83,17 +83,18 @@ border-radius: 5px;
         ***********************************-->
         <div class="content-body">
         <div class="container-fluid">
-        <div class="card">
+        <div class="card" >
 		<div class="row"style="margin:2% 2% 0 2%" >
 		<div class="col-sm-10">
-		<h3 id="noticeSubject" style="padding-top: 2%;">${notice.bntitle}</h3>
+		<span class="iconify" style="font-size: 40px;margin-bottom: 5px;color: #E71D36;" data-icon="ant-design:notification-outlined" data-inline="false"></span>
+		<span id="noticeSubject" style="font-size: 25px;padding-top: 2%;">${notice.bntitle}</span>
 		</div>
 		<c:if test="${role == 'ROLE_ADMIN'}">
 		<div class="col-sm-2" style="padding-top: 2%;padding-left: 8%;">
 		<span data-toggle="tooltip" data-placement="top" title="프라이빗 이슈 수정" >
         	<span class="fas fa-cog"  id="editIssue" style="margin-left: 5px;cursor: pointer; font-size: 25px"   ></span>
          </span>
-         <span data-toggle="tooltip" data-placement="top" title="프라이빗 이슈 삭제" >
+         <span data-toggle="tooltip" data-placement="top" title="프라이빗 이슈 삭제">
 			<span class="iconify" id="deleteIssue" data-icon="octicon:x" data-inline="false" style="cursor: pointer;font-size: 30px;margin-bottom: 12px;margin-left: 20px;"></span>
 		</span>
 		</div>
@@ -101,36 +102,16 @@ border-radius: 5px;
 		</c:if>
 		</div>	
 		<hr>
-        <div class="myissueDetail">
-        ${notice.bncontent}
-        </div>    
+		<div style="height:520px ;border: 1px solid rgba(0,0,0,0.5);margin-left: 2%;margin-right: 2%;border-radius: 0.5rem;padding: 1% 2% 1% 2%;">
+	        <div class="myissueDetail" style="margin-left: 0px;margin-bottom: 0px;font-size: 17px;">
+	        ${notice.bncontent}
+	        <img src="resources/images/logo/ScoopTitle.png" style="width:500px;height: auto;opacity:0.5;position:absolute;left: 30%;">
+	        </div>    
+		</div>
             <!-- #/ container -->
             </div> 
-            <!-- <div class="card" style="float:right;background-color: #fff;margin-left:10px;padding-left: 0px;padding-right: 0px;width:400px;">
-            <div class="card" style="min-height:430px;padding-left: 3%;padding-top: 5%;padding-right: 3%;padding-bottom: 5%;overflow: auto;">
-            
-            <div class="row" style="margin-left: 3%;margin-right: 3%;">
-            <div class="col-sm-1" style="margin-top: 10px;margin-right:10px;padding-left:0;">
-            <img id="memberImage" class="img-circle" alt="멤버 프로필 사진 넣는 곳" src="resources/images/avatar/avatar.png" style="width:40px;height: auto;padding-top: 1%;margin-left: 10px;margin-right: 10px;">
-            </div>
-            <div class="col-sm-10">
-            <div id="commentMain" style="margin: 3% 5% 3% 5%;" >
-            <div style="margin-bottom: 1%;">
-            <span>도연(이름)</span><span style="padding-left:3%"><i class="far fa-clock" style="color:#E71D36 "></i>오후 16:03(시간)</span>
-            <br>
-            <div>보쌈 먹고 시퍼요(댓글 내용)</div>
-            </div>
-            </div>
-            </div>
             
             
-            
-            <img src="resources/images/logo/ScoopTitle.png" style="width:150px;height: auto;opacity:0.3;position:absolute;top:25%;left: 32%;">
-            </div>
-            </div>
-            <textarea id="myissueComment" rows="5" placeholder="말하지 않아도 아는것은 초코파이뿐입니다                        댓글 입력 후 저장을 클릭해주세요" style="resize: none;height:180px;width:auto;border: 1px solid #c8c8c8;border-radius: 0.5rem;margin-left: 15px;margin-bottom: 20px;margin-right: 15px;overflow:auto;padding: 4%"></textarea>
-            <input id="myissueCommentBtn" type="button" value="저장" style="width: 90px;border-radius:0.5rem ;padding-top:7px;padding-bottom:7px; background-color: #E71D36;color: #fff; cursor: pointer;position: absolute;top:590px;left: 290px;">
-            </div> -->
             </div>
         </div>
         <!--**********************************
