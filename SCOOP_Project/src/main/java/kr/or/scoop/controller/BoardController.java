@@ -430,6 +430,12 @@ public class BoardController {
 	public String myissueEdit(int piseq, Model model) {
 		MyIssueDao dao = sqlSession.getMapper(MyIssueDao.class);
 		MyIssue myissue = dao.myissueDetail(piseq);
+		if(myissue.getPicontent().contains("<a href=")) {
+			int start = myissue.getPicontent().indexOf("<a href=");
+			int end = myissue.getPicontent().indexOf("target='_blank'>");
+			myissue.setPicontent(myissue.getPicontent().replace(myissue.getPicontent().substring(start, end+16), ""));
+			myissue.setPicontent(myissue.getPicontent().replace("</a>", ""));
+		}
 		myissue.setPicontent(myissue.getPicontent().replace("<br>", "\n")); //textarea <br>치환
 		try {
 			List<Mention> mentions = dao.getMyMentions(piseq);
@@ -507,8 +513,31 @@ public class BoardController {
 		tissue.setPiseq(piseq);
 		tissue.setEmail(email);
 		tissue.setPititle(title);
-		editIssuecontent = editIssuecontent.replace("\r\n", "<br>"); //\r\n <br>로 치환
-		tissue.setPicontent(editIssuecontent);
+		String[] contentline = editIssuecontent.split("\n");
+		String content = "";
+		String link = "";
+		for(int i = 0; i < contentline.length; i++) {
+			if(contentline[i].indexOf("http") != -1 || contentline[i].indexOf("www") != -1) {
+				String[] url = contentline[i].split(" ");
+				for(int j = 0; j < url.length; j++) {
+					if(url[j].indexOf("http") != -1 || url[j].indexOf("www") != -1) {
+						if(url[j].indexOf("http") == -1) {
+							link += "http://" + url[j] + ",";
+						}else {
+							link += url[j] + ",";
+						}
+						content += "<a href= "+ url[j] + " target='_blank'>" + url[j] + "</a> ";
+					}else {
+						content += url[j] + " ";
+					}
+				}
+				content += "<br>";
+			}else {
+				content += contentline[i]+"<br>";
+			}
+		}
+		content = content.replace("\r\n", "<br>"); //\r\n <br>로 치환
+		tissue.setPicontent(content);
 		if(!editFrom.equals("")) { //일정이 비지 않았다면 수정
 			tissue.setPistart(java.sql.Timestamp.valueOf(editFrom+" 00:00:00"));
 			tissue.setPiend(java.sql.Timestamp.valueOf(editTo+" 00:00:00"));
@@ -624,7 +653,30 @@ public class BoardController {
 		tissue.setTiseq(tiseq);
 		tissue.setEmail(email);
 		tissue.setTititle(title);
-		editIssuecontent = editIssuecontent.replace("\r\n", "<br>"); // \r\n을 <br>로 치환
+		String[] contentline = editIssuecontent.split("\n");
+		String content = "";
+		String link = "";
+		for(int i = 0; i < contentline.length; i++) {
+			if(contentline[i].indexOf("http") != -1 || contentline[i].indexOf("www") != -1) {
+				String[] url = contentline[i].split(" ");
+				for(int j = 0; j < url.length; j++) {
+					if(url[j].indexOf("http") != -1 || url[j].indexOf("www") != -1) {
+						if(url[j].indexOf("http") == -1) {
+							link += "http://" + url[j] + ",";
+						}else {
+							link += url[j] + ",";
+						}
+						content += "<a href= "+ url[j] + " target='_blank'>" + url[j] + "</a> ";
+					}else {
+						content += url[j] + " ";
+					}
+				}
+				content += "<br>";
+			}else {
+				content += contentline[i]+"<br>";
+			}
+		}
+		editIssuecontent = content.replace("\r\n", "<br>"); // \r\n을 <br>로 치환
 		tissue.setTicontent(editIssuecontent);
 		if(!editFrom.equals("")) { //만약 일정이 비어있지 않다면 수정
 			 tissue.setTistart(java.sql.Timestamp.valueOf(editFrom+" 00:00:00"));

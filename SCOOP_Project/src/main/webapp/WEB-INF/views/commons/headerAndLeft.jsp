@@ -12,6 +12,9 @@
 input::placeholder {
    color: #fff;
 }
+.card{
+	box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.5);
+}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <%-- <link rel="stylesheet" href="<c:url value="/resources/lib/codemirror.css" />">
