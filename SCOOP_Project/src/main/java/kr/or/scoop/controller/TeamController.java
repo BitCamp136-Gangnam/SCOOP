@@ -51,7 +51,6 @@ import net.sf.json.JSONObject;
 @Controller
 public class TeamController {
 	
-	
     @Autowired
     private SqlSession sqlsession;
 	
