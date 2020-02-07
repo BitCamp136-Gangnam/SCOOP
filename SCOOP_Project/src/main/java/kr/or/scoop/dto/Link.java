@@ -4,9 +4,16 @@ public class Link {
 	private int tlinkseq;
 	private int mylinkseq;
 	private int tseq;
+	private String pname;
 	private String plink;
 	private String tlink;
 	
+	public String getPname() {
+		return pname;
+	}
+	public void setPname(String pname) {
+		this.pname = pname;
+	}
 	public int getTlinkseq() {
 		return tlinkseq;
 	}
@@ -40,7 +47,7 @@ public class Link {
 	
 	@Override
 	public String toString() {
-		return "Link [tlinkseq=" + tlinkseq + ", mylinkseq=" + mylinkseq + ", tseq=" + tseq + ", plink=" + plink
-				+ ", tlink=" + tlink + "]";
+		return "Link [tlinkseq=" + tlinkseq + ", mylinkseq=" + mylinkseq + ", tseq=" + tseq + ", pname=" + pname
+				+ ", plink=" + plink + ", tlink=" + tlink + "]";
 	}
 }

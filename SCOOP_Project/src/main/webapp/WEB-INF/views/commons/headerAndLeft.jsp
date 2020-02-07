@@ -157,6 +157,7 @@ input::placeholder {
 				}
 			}); 
 	   })
+	/* 파일함 링크 데이터 띄우기 */
 	$('#selectLink').change(function(){
 		let tseq = $(this).val()
 		if(tseq == 'myLink'){
@@ -171,8 +172,10 @@ input::placeholder {
 			success: function(data){
 				console.log(data.toString())
 				$('#fileLocation').empty()
+				let tseq = '';
 				$.each(data, function(index, list){
 					let link = list.tlink.split(',')
+					tseq = list.tseq;
 					for(let i = 0; i < link.length - 1; i++){
 						if(link[i] != "" || link[i] != null || link[i] != undefined){
 							$.ajax({
