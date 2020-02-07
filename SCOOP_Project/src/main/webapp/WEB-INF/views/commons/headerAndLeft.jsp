@@ -172,29 +172,32 @@ input::placeholder {
 			success: function(data){
 				console.log(data.toString())
 				$('#fileLocation').empty()
-				let tseq = '';
+				
 				$.each(data, function(index, list){
 					let link = list.tlink.split(',')
-					tseq = list.tseq;
+					let pname = list.pname
+					console.log(pname)
 					for(let i = 0; i < link.length - 1; i++){
 						if(link[i] != "" || link[i] != null || link[i] != undefined){
+							console.log(link[i])
 							$.ajax({
 								url: 'http://192.168.6.45:8091/index',
 								type: 'GET',
 								data: 'url='+link[i],
 								dataType: 'json',
+								async: true,
 								success: function(data){
-									console.log(data.message.title)
-									console.log(data.message.img)
-									console.log(data.message.url)
-
+									if(data.message.url == undefined || data.message.url == null){
+										data.message.url = "userindex.do"
+									}
+									let target = 'target="_blank"'
 									$('#fileLocation').append(
 										'<div class="fileDown" id="" style="width: 150px; height:150px; margin: 1%;">'+
-						      			'<a href="'+data.message.url+'">'+
+						      			'<a href="'+data.message.url+'" '+ target + '>'+
 										'<img id="" width="100px" height="100px" style="margin: 1%; display: block; margin-left: auto; margin-right: auto"'+
-										'src="<c:url value="'+data.message.img+'" />" onError="this.src=''">'+
+										'src="<c:url value="'+data.message.img+'" />" onError="this.src='+"'resources/images/logo/ScoopTitle.png'"+'">'+
 						        		'</a><p style="font-size: 15px; text-align: center">'+
-						        		data.message.title+'<br>'+'프라이빗 공간'+
+						        		data.message.title+'<br>'+list.pname+
 						         		'</p></div>'		
 									)
 								},
@@ -237,9 +240,9 @@ input::placeholder {
 										'<div class="fileDown" id="" style="width: 150px; height:150px; margin: 1%;">'+
 						      			'<a href="'+data.message.url+'">'+
 										'<img id="" width="100px" height="100px" style="margin: 1%; display: block; margin-left: auto; margin-right: auto"'+
-										'src="<c:url value="'+data.message.img+'" />" onError="this.src=''">'+
+										'src="<c:url value="'+data.message.img+'" />" onError="defaultImg()">'+
 						        		'</a><p style="font-size: 15px; text-align: center">'+
-						        		data.message.title+'<br>'+'프라이빗 공간'+
+						        		data.message.title+'<br>프라이빗 공간'+
 						         		'</p></div>'		
 									)
 								},
@@ -254,7 +257,10 @@ input::placeholder {
 			}
 		})
 	}
-	   
+
+	   function defaultImg(){
+			return "/SCOOP/resources/images/logo/ScoopBig.png";
+	   }
 	   $('#searchSubmitIcon').click(function(){ //이슈 전체 키워드 검색 돋보기 클릭
 		   $('#searchSubmit').submit();
 	   })

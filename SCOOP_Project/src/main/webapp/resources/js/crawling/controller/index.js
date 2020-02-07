@@ -66,13 +66,11 @@ let controller = {
         app.get('/index', function(req, res){
             
             getUrl = req.param('url')
-            console.log(getUrl)
             let resultData = {
                 message: ''
             }
             if(getUrl.indexOf('http') < 0 && getUrl !== null){
                 getUrl = 'http://' + getUrl
-                console.log(getUrl)
             }else if(getUrl === null || getUrl === undefined){
                 res.status(400).end()
             }
@@ -84,7 +82,6 @@ let controller = {
             let message = '';
             controller.getBody(options, (result) => {
                 controller.convertCheerio(result, (data) => {
-                    console.log(data)
                     let resData = data
                     if(getUrl !== null && getUrl !== undefined){
                         resultData.message = resData
