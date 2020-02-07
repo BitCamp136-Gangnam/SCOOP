@@ -366,7 +366,7 @@ border-radius: 5px;
         Scripts
     ***********************************-->
    
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
 		$(function(){
 			console.log('start')
 			let content = $('#myissueContent').text()
@@ -407,7 +407,7 @@ border-radius: 5px;
 		})
 		
 		
-	</script>
+	</script> -->
 	
     <script src="<c:url value="/resources/plugins/common/common.min.js" />"></script>
     <script src="<c:url value="/resources/js/custom.min.js" />"></script>
