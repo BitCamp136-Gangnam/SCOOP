@@ -68,7 +68,7 @@ public interface MemberDao {
 	public List<FileDrive> searchMyFileDrive(String email, String word);
 	
 	//파일함 불러오기
-	public List<FileDrive> getFileProject(String email, int tseq);
+	public List<FileDrive> getFileProject(int tseq);
 	
 	//내 파일함 불러오기
 	public List<PrivateFileDrive> getMyFile(String email);

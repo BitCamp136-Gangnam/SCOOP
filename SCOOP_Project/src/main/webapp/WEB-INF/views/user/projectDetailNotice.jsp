@@ -61,8 +61,8 @@
 }
 .myissueDetail{
 	font-size: 15px;
-	margin-left: 3%;
-	margin-bottom:1%;
+	margin-left: 1%;
+	margin-right: 1%;
 }
 </style>
 <body>
@@ -85,7 +85,9 @@
         <div class="card" style="padding-left: 15px;padding-right: 15px; padding-top:1%;width:100%;height: auto;overflow: auto;">
 		<div class="row"style="margin:2% 2% 0 2%" >
 				<div class="col-sm-9"style="padding-left: 0px;">
-				<h3 id="myissueSubject" style="padding-top: 2%;padding-left: 1%;">${detail.pntitle}</h3>
+				<span class="iconify" style="font-size: 30px;margin-bottom: 5px;color: #E71D36;" data-icon="ant-design:notification-outlined" data-inline="false"></span>
+				<span id="myissueSubject" style="font-size: 23px;">${detail.pntitle}</span>
+				<br>
 				<span style="padding-right: 5%;padding-top:1%;">${detail.name}&nbsp;&nbsp;${fn:substring(detail.pntime,0,16)}</span>
 				</div>
 				<c:if test="${rank == 100}">
@@ -99,18 +101,26 @@
 					<span class="iconify" data-icon="topcoat:delete" data-inline="false" style="cursor: pointer;font-size: 25px;margin-bottom: 5px;margin-top: 15px"></span>
 					</span>
 					</div>
-				</c:if>	
-					<div class="col-sm-2" style="text-align: right; padding: 0">
-					</div>
-					<div class="col-sm-1" style="padding-left: 40px;">
+					<div class="col-sm-1" style="padding-left: 0px;">
 					<span id="pjNoticeBack">
 					<span class="iconify" data-icon="entypo:back" data-inline="false" style="cursor: pointer; font-size: 25px;margin-bottom: 5px;margin-top: 15px"></span>
 					</span>
-					</div>			
+					</div>
+				</c:if>
+				<c:if test="${rank == 300}">
+					<div class="col-sm-2" style="padding-left: 0px;">
+					</div>
+					<div class="col-sm-1" style="padding-left: 0px;">
+					<span id="pjNoticeBack">
+					<span class="iconify" data-icon="entypo:back" data-inline="false" style="cursor: pointer; font-size: 25px;margin-bottom: 5px;margin-top: 15px"></span>
+					</span>
+					</div>
+				</c:if>		
 		</div>
-		<br>
-        <div class="myissueDetail">
+		<hr>
+        <div class="myissueDetail" style="height:500px ;border: 1px solid rgba(0,0,0,0.5); border-radius: 0.5rem;padding: 1%; overflow: auto;font-size: 17px;">
         ${detail.pncontent}
+       	<img src="resources/images/logo/ScoopTitle.png" style="width:500px;height: auto;opacity:0.5;position:absolute;left: 30%;margin-top: 5%;">
         </div>    
             <!-- #/ container -->
             </div> 

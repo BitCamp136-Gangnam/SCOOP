@@ -342,6 +342,19 @@
 	<h4 style="margin: 15%; margin-bottom: 5%; color: white">도움센터(Ctrl+/)</h4>
 	<h5 style="color: white; padding-top: 15px;">추천 팁</h5>
 	<p style="border-bottom: 1px solid rgba(255, 255, 255, 0.3); margin-bottom: 0px; color: #fff; font-size: 12px; padding: 10px 0px 5px 0px;">
+	단축키</p>
+	<span class="iconify" data-icon="ion:file-tray-full-sharp" data-inline="false" style="color: #fff;"></span>
+	<span style="font-size: 13px;color: #fff;">파일함</span><span class="iconify" data-icon="vaadin:ctrl-a" data-inline="false"style="color: #fff;margin-left:40%;"></span>
+	<span class="iconify" data-icon="bx:bx-plus" data-inline="false" style="color: #fff;"></span>
+	<span class="iconify" data-icon="entypo:dot-single" data-inline="false" style="color: #fff;"></span><br>
+	<span class="iconify" data-icon="cil:chat-bubble" data-inline="false" style="color: #fff;"></span>
+	<span style="font-size: 13px;color: #fff;">채팅방</span><span class="iconify" data-icon="vaadin:ctrl-a" data-inline="false"style="color: #fff;margin-left: 40%;"></span>
+	<span class="iconify" data-icon="bx:bx-plus" data-inline="false" style="color: #fff;"></span>
+	<span class="iconify" data-icon="mdi:comma" data-inline="false" style="color: #fff;"></span>
+	<p style="border-bottom: 1px solid rgba(255, 255, 255, 0.3); margin-bottom: 0px; color: #fff; font-size: 12px; padding: 10px 0px 5px 0px;">
+	가격 및 결제</p>
+	<p style="font-size: 11px;color: #fff;">오른쪽 상단 내정보에 가격및결제를 클릭하면 결제가능합니다</p>
+	<p style="border-bottom: 1px solid rgba(255, 255, 255, 0.3); margin-bottom: 0px; color: #fff; font-size: 12px; padding: 10px 0px 5px 0px;">
 	새로운 소식</p>
 	<button class="accordion"><span class="iconify" data-icon="ic:twotone-autorenew" data-inline="false" style="width:17px;height: auto;"></span>&nbsp;이슈 업데이트</button>
 	<div class="panel">

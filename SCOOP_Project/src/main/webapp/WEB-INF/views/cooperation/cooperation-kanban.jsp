@@ -269,6 +269,8 @@ function drop(ev) {
  
 
   console.log(document.getElementById(data).getAttribute("name"));
+  console.log(ev.target.parentElement);
+  console.log(ev.target.parentElement.parentElement);
   if(ev.target.parentElement.getAttribute("id")=="todolist"){
 	  if(document.getElementById(data).getAttribute("name")!=0){
 	    ev.target.appendChild(document.getElementById(data));
@@ -298,7 +300,125 @@ function drop(ev) {
 		    }
 		});
 	  }
-	} else if(ev.target.parentElement.getAttribute("id")=="doing"){
+	}else if(ev.target.parentElement.parentElement.getAttribute("id")=="todolist"){
+		if(document.getElementById(data).getAttribute("name")!=0){
+		    ev.target.parentElement.appendChild(document.getElementById(data));
+		    $.ajax({
+			    url:'kanbanEdit.do', //request 보낼 서버의 경로
+			    type:'post', // 메소드(get, post, put 등)
+			    data:{'tiseq':document.getElementById(data).getAttribute("id"),
+			    	'isprocess':0,
+			    	'tseq':tseq
+			    	}, //보낼 데이터
+			    success: function(data) {
+			    	Swal.fire({
+			    		  title: "변경 성공",
+			    		  text: "변경 성공",
+			    		  icon: "success",
+			    		  button: "확인"
+			    		})
+			    	
+			    },
+			    error: function(err) {
+			    	Swal.fire({
+			    		  title: "변경 실패",
+			    		  text: "변경 실패",
+			    		  icon: "error",
+			    		  button: "확인"
+			    		})
+			    }
+			});
+		  }
+		}else if(ev.target.parentElement.parentElement.parentElement.getAttribute("id")=="todolist"){
+			if(document.getElementById(data).getAttribute("name")!=0){
+			    ev.target.parentElement.parentElement.appendChild(document.getElementById(data));
+			    $.ajax({
+				    url:'kanbanEdit.do', //request 보낼 서버의 경로
+				    type:'post', // 메소드(get, post, put 등)
+				    data:{'tiseq':document.getElementById(data).getAttribute("id"),
+				    	'isprocess':0,
+				    	'tseq':tseq
+				    	}, //보낼 데이터
+				    success: function(data) {
+				    	Swal.fire({
+				    		  title: "변경 성공",
+				    		  text: "변경 성공",
+				    		  icon: "success",
+				    		  button: "확인"
+				    		})
+				    	
+				    },
+				    error: function(err) {
+				    	Swal.fire({
+				    		  title: "변경 실패",
+				    		  text: "변경 실패",
+				    		  icon: "error",
+				    		  button: "확인"
+				    		})
+				    }
+				});
+			  }
+			} 
+	 else if(ev.target.parentElement.parentElement.getAttribute("id")=="doing"){
+		if(document.getElementById(data).getAttribute("name")!=1){
+		    ev.target.parentElement.appendChild(document.getElementById(data));
+		    $.ajax({
+			    url:'kanbanEdit.do', //request 보낼 서버의 경로
+			    type:'post', // 메소드(get, post, put 등)
+			    data:{'tiseq':document.getElementById(data).getAttribute("id"),
+			    	'isprocess':1,
+			    	'tseq':tseq
+			    	}, //보낼 데이터
+			    success: function(data) {
+			    	Swal.fire({
+			    		  title: "변경 성공",
+			    		  text: "변경 성공",
+			    		  icon: "success",
+			    		  button: "확인"
+			    		})
+			    		
+			    },
+			    error: function(err) {
+			    	Swal.fire({
+			    		  title: "변경 실패",
+			    		  text: "변경 실패",
+			    		  icon: "error",
+			    		  button: "확인"
+			    		})
+			    }
+			});
+		  }
+	} else if(ev.target.parentElement.parentElement.parentElement.getAttribute("id")=="doing"){
+		if(document.getElementById(data).getAttribute("name")!=1){
+		    ev.target.parentElement.parentElement.appendChild(document.getElementById(data));
+		    $.ajax({
+			    url:'kanbanEdit.do', //request 보낼 서버의 경로
+			    type:'post', // 메소드(get, post, put 등)
+			    data:{'tiseq':document.getElementById(data).getAttribute("id"),
+			    	'isprocess':1,
+			    	'tseq':tseq
+			    	}, //보낼 데이터
+			    success: function(data) {
+			    	Swal.fire({
+			    		  title: "변경 성공",
+			    		  text: "변경 성공",
+			    		  icon: "success",
+			    		  button: "확인"
+			    		})
+			    		
+			    },
+			    error: function(err) {
+			    	Swal.fire({
+			    		  title: "변경 실패",
+			    		  text: "변경 실패",
+			    		  icon: "error",
+			    		  button: "확인"
+			    		})
+			    }
+			});
+		  }
+	}
+		else if(ev.target.parentElement.getAttribute("id")=="doing"){
 		if(document.getElementById(data).getAttribute("name")!=1){
 		    ev.target.appendChild(document.getElementById(data));
 		    $.ajax({
@@ -327,7 +447,8 @@ function drop(ev) {
 			    }
 			});
 		  }
-	} else if(ev.target.parentElement.getAttribute("id")=="validate"){
+	}
+		else if(ev.target.parentElement.getAttribute("id")=="validate"){
 		if(document.getElementById(data).getAttribute("name")!=2){
 		    ev.target.appendChild(document.getElementById(data));
 		    $.ajax({
@@ -355,9 +476,123 @@ function drop(ev) {
 			    }
 			});
 		  }
-	} else if(ev.target.parentElement.getAttribute("id")=="complete"){
+	}else if(ev.target.parentElement.parentElement.getAttribute("id")=="validate"){
+		if(document.getElementById(data).getAttribute("name")!=2){
+		    ev.target.parentElement.appendChild(document.getElementById(data));
+		    $.ajax({
+			    url:'kanbanEdit.do', //request 보낼 서버의 경로
+			    type:'post', // 메소드(get, post, put 등)
+			    data:{'tiseq':document.getElementById(data).getAttribute("id"),
+			    	'isprocess':2,
+			    	'tseq':tseq
+			    	}, //보낼 데이터
+			    success: function(data) {
+			    	Swal.fire({
+			    		  title: "변경 성공",
+			    		  text: "변경 성공",
+			    		  icon: "success",
+			    		  button: "확인"
+			    		})
+			    },
+			    error: function(err) {
+			    	Swal.fire({
+			    		  title: "변경 실패",
+			    		  text: "변경 실패",
+			    		  icon: "error",
+			    		  button: "확인"
+			    		})
+			    }
+			});
+		  }
+	}else if(ev.target.parentElement.parentElement.parentElement.getAttribute("id")=="validate"){
+		if(document.getElementById(data).getAttribute("name")!=2){
+		    ev.target.parentElement.parentElement.appendChild(document.getElementById(data));
+		    $.ajax({
+			    url:'kanbanEdit.do', //request 보낼 서버의 경로
+			    type:'post', // 메소드(get, post, put 등)
+			    data:{'tiseq':document.getElementById(data).getAttribute("id"),
+			    	'isprocess':2,
+			    	'tseq':tseq
+			    	}, //보낼 데이터
+			    success: function(data) {
+			    	Swal.fire({
+			    		  title: "변경 성공",
+			    		  text: "변경 성공",
+			    		  icon: "success",
+			    		  button: "확인"
+			    		})
+			    },
+			    error: function(err) {
+			    	Swal.fire({
+			    		  title: "변경 실패",
+			    		  text: "변경 실패",
+			    		  icon: "error",
+			    		  button: "확인"
+			    		})
+			    }
+			});
+		  }
+	}
+	
+		 else if(ev.target.parentElement.getAttribute("id")=="complete"){
 		if(document.getElementById(data).getAttribute("name")!=3){
 		    ev.target.appendChild(document.getElementById(data));
+		    $.ajax({
+			    url:'kanbanEdit.do', //request 보낼 서버의 경로
+			    type:'post', // 메소드(get, post, put 등)
+			    data:{'tiseq':document.getElementById(data).getAttribute("id"),
+			    	'isprocess':3,
+			    	'tseq':tseq
+			    	}, //보낼 데이터
+			    success: function(data) {
+			    	Swal.fire({
+			    		  title: "변경 성공",
+			    		  text: "변경 성공",
+			    		  icon: "success",
+			    		  button: "확인"
+			    		})
+			    },
+			    error: function(err) {
+			    	Swal.fire({
+			    		  title: "변경 실패",
+			    		  text: "변경 실패",
+			    		  icon: "error",
+			    		  button: "확인"
+			    		})
+			    }
+			});
+		  }
+	}else if(ev.target.parentElement.parentElement.getAttribute("id")=="complete"){
+		if(document.getElementById(data).getAttribute("name")!=3){
+		    ev.target.parentElement.appendChild(document.getElementById(data));
+		    $.ajax({
+			    url:'kanbanEdit.do', //request 보낼 서버의 경로
+			    type:'post', // 메소드(get, post, put 등)
+			    data:{'tiseq':document.getElementById(data).getAttribute("id"),
+			    	'isprocess':3,
+			    	'tseq':tseq
+			    	}, //보낼 데이터
+			    success: function(data) {
+			    	Swal.fire({
+			    		  title: "변경 성공",
+			    		  text: "변경 성공",
+			    		  icon: "success",
+			    		  button: "확인"
+			    		})
+			    },
+			    error: function(err) {
+			    	Swal.fire({
+			    		  title: "변경 실패",
+			    		  text: "변경 실패",
+			    		  icon: "error",
+			    		  button: "확인"
+			    		})
+			    }
+			});
+		  }
+	}else if(ev.target.parentElement.parentElement.parentElement.getAttribute("id")=="complete"){
+		if(document.getElementById(data).getAttribute("name")!=3){
+		    ev.target.parentElement.parentElement.appendChild(document.getElementById(data));
 		    $.ajax({
 			    url:'kanbanEdit.do', //request 보낼 서버의 경로
 			    type:'post', // 메소드(get, post, put 등)
@@ -468,10 +703,10 @@ function drop(ev) {
 			  	  <div draggable="true" ondragstart="drag(event)" id="${tl.tiseq }" name="${tl.isprocess }" class="drags" style="margin-bottom: 5%;" >
 			  	   <c:choose>
            				<c:when test="${fn:length(tl.tititle) > 15}">
-			  	  			<a href="teamissueDetail.do?tiseq=${tl.tiseq}" >${fn:substring(tl.tititle,0,15)}...</a>
+			  	  			<a name="${tl.tiseq }" href="teamissueDetail.do?tiseq=${tl.tiseq}" >${fn:substring(tl.tititle,0,15)}...</a>
                			</c:when>
                		<c:otherwise>
-               				<a href="teamissueDetail.do?tiseq=${tl.tiseq}" >${tl.tititle}</a>
+               				<a name="${tl.tiseq }" href="teamissueDetail.do?tiseq=${tl.tiseq}" >${tl.tititle}</a>
            			</c:otherwise> 
           			</c:choose>     
 			      </div>
@@ -491,10 +726,10 @@ function drop(ev) {
 			  	  <div draggable="true" ondragstart="drag(event)" id="${tl.tiseq }" name="${tl.isprocess }" class="drags" style="margin-bottom: 5%;">
 			  	  	  	   <c:choose>
            				<c:when test="${fn:length(tl.tititle) > 15}">
-			  	  			<a href="teamissueDetail.do?tiseq=${tl.tiseq}" >${fn:substring(tl.tititle,0,15)}...</a>
+			  	  			<a name="${tl.tiseq }" href="teamissueDetail.do?tiseq=${tl.tiseq}" >${fn:substring(tl.tititle,0,15)}...</a>
                			</c:when>
                		<c:otherwise>
-               				<a href="teamissueDetail.do?tiseq=${tl.tiseq}" >${tl.tititle}</a>
+               				<a name="${tl.tiseq }" href="teamissueDetail.do?tiseq=${tl.tiseq}" >${tl.tititle}</a>
            			</c:otherwise> 
           			</c:choose>  
 			      </div>
@@ -514,10 +749,10 @@ function drop(ev) {
 			  	  <div draggable="true" ondragstart="drag(event)" id="${tl.tiseq }" name="${tl.isprocess }" class="drags" style="margin-bottom: 5%;">
 			  	  	  	   <c:choose>
            				<c:when test="${fn:length(tl.tititle) > 15}">
-			  	  			<a href="teamissueDetail.do?tiseq=${tl.tiseq}" >${fn:substring(tl.tititle,0,15)}...</a>
+			  	  			<a name="${tl.tiseq }" href="teamissueDetail.do?tiseq=${tl.tiseq}" >${fn:substring(tl.tititle,0,15)}...</a>
                			</c:when>
                		<c:otherwise>
-               				<a href="teamissueDetail.do?tiseq=${tl.tiseq}" >${tl.tititle}</a>
+               				<a name="${tl.tiseq }" href="teamissueDetail.do?tiseq=${tl.tiseq}" >${tl.tititle}</a>
            			</c:otherwise> 
           			</c:choose>  
 			      </div>
@@ -537,10 +772,10 @@ function drop(ev) {
 			  	  <div draggable="true" ondragstart="drag(event)" id="${tl.tiseq }" name="${tl.isprocess }" class="drags" style="margin-bottom: 5%;">
 			  	  	  	   <c:choose>
            				<c:when test="${fn:length(tl.tititle) > 15}">
-			  	  			<a href="teamissueDetail.do?tiseq=${tl.tiseq}" >${fn:substring(tl.tititle,0,15)}...</a>
+			  	  			<a name="${tl.tiseq }" href="teamissueDetail.do?tiseq=${tl.tiseq}" >${fn:substring(tl.tititle,0,15)}...</a>
                			</c:when>
                		<c:otherwise>
-               				<a href="teamissueDetail.do?tiseq=${tl.tiseq}" >${tl.tititle}</a>
+               				<a name="${tl.tiseq }" href="teamissueDetail.do?tiseq=${tl.tiseq}" >${tl.tititle}</a>
            			</c:otherwise> 
           			</c:choose>  
 			      </div>

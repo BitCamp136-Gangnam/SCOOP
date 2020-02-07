@@ -63,7 +63,7 @@ public class FileController {
 			JSONArray jsonlist = JSONArray.fromObject(filedrive);
 			model.addAttribute("ajax",jsonlist);
 		}else {
-			List<FileDrive> filedrive = memberdao.getFileProject(email, tseq);
+			List<FileDrive> filedrive = memberdao.getFileProject(tseq);
 			JSONArray jsonlist = JSONArray.fromObject(filedrive);
 			model.addAttribute("ajax",jsonlist);
 		}
