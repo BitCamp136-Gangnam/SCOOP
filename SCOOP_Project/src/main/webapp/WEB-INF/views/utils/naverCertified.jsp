@@ -18,7 +18,7 @@
   function naverSignInCallback() {
     $.ajax({
 	    url:'naverLogin.do?email='+naver_id_login.getProfileData('email')+"?name="+naver_id_login.getProfileData('name'), //request 보낼 서버의 경로
-	    type:'get', // 메소드(get, post, put 등)
+	    type:'post', // 메소드(get, post, put 등)
 	    success:function(data) {
 		    if(data=="실패"){
 	    	Swal.fire(
