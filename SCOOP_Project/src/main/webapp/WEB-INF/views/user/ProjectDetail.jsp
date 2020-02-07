@@ -467,7 +467,7 @@ $(function(){
                      <div class="search_NameEmail col-sm-6">
                         <span class="nav-text finalsearch" id="member_Name${status.index}" style="color: #4d4d46;font-size: 13px;padding-top: 10px;"> &nbsp;${pm.name}</span>
                         <c:choose>
-                        	<c:when test="${pm.pjuserrank==100}"><span style="float: right"><i class="fas fa-user-cog" style="font-size: 20px;color:#195ac2;"></i></span></c:when>
+                        	<c:when test="${pm.pjuserrank==100}"><span style="float: right"><i class="fas fa-user-cog" style="font-size: 18px;color:#195ac2;"></i></span></c:when>
                         	<%-- <c:when test="${pm.pjuserrank==200}">매니저</c:when> --%>
                         </c:choose>
                         <c:if test="${rank == 100}">
