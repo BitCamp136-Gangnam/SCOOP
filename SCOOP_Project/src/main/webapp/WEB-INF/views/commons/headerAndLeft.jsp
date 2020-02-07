@@ -22,7 +22,7 @@ input::placeholder {
 <%-- <link rel="stylesheet"
    href="<c:url value="/resources/dist/summernote.css" />">
 <script src="<c:url value="/resources/dist/summernote.min.js" />"></script> --%>
-
+<meta property="og:title" content>
 <meta name="google-signin-client_id" content="806433148370-o0ss3i4kp8dhj6p0d2cvkdjfus8kivds.apps.googleusercontent.com">
 <script src="https://apis.google.com/js/platform.js?onload=loadAuthClient" async defer></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
@@ -178,6 +178,7 @@ input::placeholder {
 					let pname = list.pname
 					console.log(pname)
 					for(let i = 0; i < link.length - 1; i++){
+						var url = link[i];
 						if(link[i] != "" || link[i] != null || link[i] != undefined){
 							console.log(link[i])
 							$.ajax({
@@ -187,16 +188,18 @@ input::placeholder {
 								dataType: 'json',
 								async: true,
 								success: function(data){
+									console.log('url : ' + url)
 									let pname = $('#selectLink option:checked').text()
-									console.log('팀이름 : ' + pname)
+									tempTitle = data.message.title
+									tempPname = pname
 									if(data.message.url == undefined || data.message.url == null){
-										data.message.url = "userindex.do"
+										data.message.url = url;
 									}
 									if(data.message.title.length>=14){
 										tempTitle = data.message.title.substr(0, 14) + ' ...';
 									}
 									if(pname.length>=4){
-										tempTitle = pname.substr(0, 4) + ' ...';
+										tempPname = pname.substr(0, 4) + ' ...';
 									}
 									let target = 'target="_blank"'
 									$('#fileLocation').append(
@@ -205,7 +208,7 @@ input::placeholder {
 										'<img id="" width="100px" height="100px" style="margin: 1%; display: block; margin-left: auto; margin-right: auto"'+
 										'src="<c:url value="'+data.message.img+'" />" onError="this.src='+"'resources/images/logo/ScoopTitle.png'"+'">'+
 						        		'</a><p style="font-size: 15px; text-align: center">'+
-						        		data.message.title+'<br>'+pname+
+						        		tempTitle+'<br>'+tempPname+
 						         		'</p></div>'		
 									)
 								},
@@ -233,6 +236,7 @@ input::placeholder {
 				$.each(resData, function(index, list){
 					let link = list.plink.split(',')
 					for(let i = 0; i < link.length-1; i++){
+						var url = link[i];
 						if(link[i] != "" || link[i] != null || link[i] != undefined){
 							$.ajax({
 								url: 'http://192.168.6.45:8091/index',
@@ -240,17 +244,20 @@ input::placeholder {
 								data: 'url='+link[i],
 								dataType: 'json',
 								success: function(data){
-									console.log(data.message.title)
-									console.log(data.message.img)
-									console.log(data.message.url)
-
+									if(data.message.url == '' || data.message.url == undefined || data.message.url == null){
+										data.message.url = url;
+									}
+									tempTitle = data.message.title
+									if(data.message.title.length>=14){
+										tempTitle = data.message.title.substr(0, 14) + ' ...';
+									}
 									$('#fileLocation').append(
 										'<div class="fileDown" id="" style="width: 150px; height:150px; margin: 1%;">'+
 						      			'<a href="'+data.message.url+'">'+
 										'<img id="" width="100px" height="100px" style="margin: 1%; display: block; margin-left: auto; margin-right: auto"'+
 										'src="<c:url value="'+data.message.img+'" />" onError="defaultImg()">'+
 						        		'</a><p style="font-size: 15px; text-align: center">'+
-						        		data.message.title+'<br>프라이빗 공간'+
+						        		tempTitle+'<br>프라이빗 공간'+
 						         		'</p></div>'		
 									)
 								},
