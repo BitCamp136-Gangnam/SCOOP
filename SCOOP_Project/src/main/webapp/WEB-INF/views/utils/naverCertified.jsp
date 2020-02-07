@@ -20,7 +20,6 @@
 	    url:'naverLogin.do?email='+naver_id_login.getProfileData('email')+"?name="+naver_id_login.getProfileData('name'), //request 보낼 서버의 경로
 	    type:'post', // 메소드(get, post, put 등)
 	    success:function(data) {
-		    if(data=="실패"){
 	    	Swal.fire(
 	    			  '네이버 로그인',
 	    			  '네이버 로그인 성공',
@@ -29,17 +28,7 @@
 	    window.setTimeout(function() {
 	    	location.href='userindex.do';	
 	    }, 1500);
-	    }
-	    }else{
-	    	Swal.fire(
-	    			  '에러발생!',
-	    			  '이미 가입된 아이디가 있습니다',
-	    			  'warning'
-	    			)
-	    			window.setTimeout(function() {
-	    				location.href='index.do';	
-	    			}, 1500);
-	    }   
+	       
 		    },
 	    error:function(data) {
 	    	Swal.fire(
