@@ -466,17 +466,17 @@ $(function(){
                   <c:forEach items="${projectmember}" var="pm" varStatus="status">
                      <div class="search_NameEmail col-sm-6">
                         <span class="nav-text finalsearch" id="member_Name${status.index}" style="color: #4d4d46;font-size: 13px;padding-top: 10px;"> &nbsp;${pm.name}</span>
-                        <span class="log-user" id="iconAdd${status.index}" data-toggle="dropdown" style="float: right;top: 0px;padding-top: 10px;">
                         <c:choose>
-                        	<c:when test="${pm.pjuserrank==100}"><i class="fas fa-user-cog" style="font-size: 20px;color:#195ac2;"></i></c:when>
+                        	<c:when test="${pm.pjuserrank==100}"><span style="float: right"><i class="fas fa-user-cog" style="font-size: 20px;color:#195ac2;"></i></span></c:when>
                         	<%-- <c:when test="${pm.pjuserrank==200}">매니저</c:when> --%>
                         </c:choose>
                         <c:if test="${rank == 100}">
                         <c:if test="${pm.pjuserrank==300}">
+                        <span class="log-user" id="iconAdd${status.index}" data-toggle="dropdown" style="float: right;top: 0px;padding-top: 10px;">
                            <i class="fas fa-cog admin_EditIcon" id="admin_EditIcon${status.index}" style="cursor: pointer;font-size: 20px;color:black;"></i>
-                        </c:if>
-                        </c:if>
                         </span>
+                        </c:if>
+                        </c:if>
                         <div class="drop-down dropdown-language animated fadeIn  dropdown-menu"  id="admindrop">
                         <div class="dropdown-content-body">
                         <ul style="margin-bottom: 0px; padding-bottom: 0px;padding-top: 0px;">
