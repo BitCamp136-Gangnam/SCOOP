@@ -659,8 +659,8 @@ function idOver(a) {
          </ul>
         </div>
       </div>
-      <div class="col-lg-6 d-none d-lg-block">
-          <img src="resources/img/AppleiMac.png" alt="..." class="img-fluid">
+      <div class="col-lg-6 d-none d-lg-block" style="background-image: url('resources/img/iMac.png');width:1000px;height: 500px;background-size: 500px;background-repeat: no-repeat;">
+          <iframe src="https://www.youtube.com/embed/lz6lfRrLYLc"  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen frameborder="0" style="width: 470px; height: 280px; padding-top: 0px;margin-top: 3%; margin-bottom: 3%;"></iframe>
       </div>
      </div>
    </div>
