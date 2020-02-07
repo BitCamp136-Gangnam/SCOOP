@@ -101,13 +101,21 @@
 					<span class="iconify" data-icon="topcoat:delete" data-inline="false" style="cursor: pointer;font-size: 25px;margin-bottom: 5px;margin-top: 15px"></span>
 					</span>
 					</div>
-				</c:if>	
-					
 					<div class="col-sm-1" style="padding-left: 0px;">
 					<span id="pjNoticeBack">
 					<span class="iconify" data-icon="entypo:back" data-inline="false" style="cursor: pointer; font-size: 25px;margin-bottom: 5px;margin-top: 15px"></span>
 					</span>
-					</div>			
+					</div>
+				</c:if>
+				<c:if test="${rank == 300}">
+					<div class="col-sm-2" style="padding-left: 0px;">
+					</div>
+					<div class="col-sm-1" style="padding-left: 0px;">
+					<span id="pjNoticeBack">
+					<span class="iconify" data-icon="entypo:back" data-inline="false" style="cursor: pointer; font-size: 25px;margin-bottom: 5px;margin-top: 15px"></span>
+					</span>
+					</div>
+				</c:if>		
 		</div>
 		<hr>
         <div class="myissueDetail" style="height:500px ;border: 1px solid rgba(0,0,0,0.5); border-radius: 0.5rem;padding: 1%; overflow: auto;font-size: 17px;">
