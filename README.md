@@ -11,14 +11,14 @@ SCOOP은 https://www.collabee.co (콜라비)를 모티브로 하는 사이트로
 ## 주제선정배경
 기존에 사용되는 여러 가지 협업툴들은 각기 다른 강점들을 가지고 있지만 몇 가지 아쉬운 점들이 있었습니다.<br><br>
 
-- <콜라비 – 채팅 기능이 없어서 실시간 커뮤니케이션이 힘들다.><br>
+- <콜라비 – 채팅 기능이 없어서 실시간 커뮤니케이션이 힘들다.>
 예를 들어, 콜라비의 경우 멘션 기능을 제공하기 때문에 편리하게 카테고리 분류가 가능했지만 채팅 기능이 없어서 팀원들과 실시간 커뮤니케이션을 하기에는 무리가 있습니다.<br><br>
-- <Trello – 다양한 업무의 기한들을 한 번에 파악하기 힘들다><br>
+- <Trello – 다양한 업무의 기한들을 한 번에 파악하기 힘들다>
 Trello의 경우 칸반 형식을 제공하기 때문에 직관적으로 업무의 상황들을 파악하긴 쉽습니다. 하지만 일정관리 부분에 있어서는 사용자들에게 익숙한 캘린더 이미지가 아닌 텍스트 형식을 제공하고 있습니다.<br>
 
 그렇기에 여러 가지 업무들을 마감 기한을 기준으로 업무를 파악하여 사용자가 원하는 대로 업무를 수정하기란 쉽지 않습니다. <br><br>
 
-- <Slack - 사이드 바에 업무들이 정렬되어 업무간 관계 파악이 힘들다><br>
+- <Slack - 사이드 바에 업무들이 정렬되어 업무간 관계 파악이 힘들다>
 또 다른 예시로는 Slack이 있습니다. Slack은 기본적으로 동료간 의사소통에 큰 강점을 가지고 있지만 업무들의 정보나 업무들 간의 관계를 파악하는 것은 제한적입니다.<br>
 
 이렇듯 많이 사용되는 대표적인 협업툴인 콜라비와 Trello, Slack은 각각의 협업툴이 취하고 있는 형태에서 그 강점이 나오고 있으나 반대로 그 형태로 인한 단점들이 존재합니다.<br>
@@ -38,12 +38,6 @@ SCOOP은 이러한 점에 착안하여 콜라비, Trello에서 가능한 직관�
 - 기본 폰트 : font-family : "BinggraeMelona"
 - DB설정 : Document폴더 안에 DB폴더 안에 DDL.txt의 DDL문을 실행시키고 난 뒤 Trigger.txt의 Trigger을 하나씩 실행시킨다.
 <br> 그리고 root-context.xml파일의 url, username, password를 알맞게 변경한다.
-<br>
-
-## E-R 모델링
-![1](https://user-images.githubusercontent.com/54266124/74016777-59676a00-49d6-11ea-9b5b-753bf9a714d5.PNG)
-![2](https://user-images.githubusercontent.com/54266124/74016788-5bc9c400-49d6-11ea-8212-8a38d73dd31e.PNG)
-
 <br>
 
 ## SCOOP 메인화면<br>
@@ -67,3 +61,28 @@ SCOOP은 이러한 점에 착안하여 콜라비, Trello에서 가능한 직관�
 ### 4. 채팅 <br>
 ![chatting](https://user-images.githubusercontent.com/54266124/74080193-a7d34200-4a84-11ea-9939-8418da602bdd.png)
 - 네번째는 채팅으로 자신이 속해있는 협업공간 별로 채팅방이 존재하고 입장하면 같은 협업공간 멤버들끼리 채팅을 나눌 수 있어 실시간 커뮤니케이션을 가능하게 하였습니다. 채팅은 SpringWebsocket을 사용하여 구현하였습니다.<br>
+
+## SCOOP 설계
+### 1. E-R 모델링
+![1](https://user-images.githubusercontent.com/54266124/74016777-59676a00-49d6-11ea-9b5b-753bf9a714d5.PNG)
+![2](https://user-images.githubusercontent.com/54266124/74016788-5bc9c400-49d6-11ea-8212-8a38d73dd31e.PNG)
+
+<br>
+
+### 2. Oracle Trigger
+![trigger](https://user-images.githubusercontent.com/54266124/74080680-1e267300-4a8a-11ea-9e0c-ebf2ca248446.png)
+- INSERT_TRI_ROLE : 새로운 회원이 가입할 경우 자동으로 'ROLE_UESR'라는 권한을 줌
+- INSERT_TRI_SETTING : 새로운 회원이 가입할 경우 알람기능은 꺼져있는 상태를 줌
+- INSERT_TRI_TPMEMBER : 회원이 새로운 협업공간을 만들면 협업공간의 멤버로 등록하게 해줌
+- INSERT_TISSUE_ALERT : 회원이 협업공간에서 새로운 이슈를 작성할 경우 같은 협업공간의 멤버들에게 새로운 이슈로 등록되게 해줌
+- INSERT_REPLY_ALERT : 회원이 이슈에서 댓글을 작성할 경우 같은 협업공간의 멤버들에게 새로운 댓글로 등록되게 해줌
+- INSERT_PJNOTICE_ALERT : 협업공간의 팀장이 새로운 협업공간 공지사항을 작성할 경우 같은 협업공간의 멤버들에게 새로운 공지사항으로 등록되게 해줌
+<br>
+
+### 3. Class Diagram
+- 회원가입, 로그인
+![login](https://user-images.githubusercontent.com/54266124/74080902-123bb080-4a8c-11ea-99a2-b3f93f5dd6fb.PNG)
+- 협업공간
+![project](https://user-images.githubusercontent.com/54266124/74080905-14057400-4a8c-11ea-91c7-63f7b051648b.PNG)
+- 이슈작성
+![issue](https://user-images.githubusercontent.com/54266124/74080908-149e0a80-4a8c-11ea-87fa-91d8c11ec916.PNG)
