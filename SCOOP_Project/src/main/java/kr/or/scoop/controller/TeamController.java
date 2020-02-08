@@ -266,7 +266,7 @@ public class TeamController {
 					path = "utils/makeMyIssueFailSwal";
 				}
 				if(link != null && link.length() > 0) {
-					privateservice.myLinkInsert(link, email);
+					privateservice.myLinkInsert(link, email); // 링크가 있다면 DB insert
 				}
 				return path;
 			} else { //tseq가 존재한다면 협업공간 이슈 작성
@@ -334,7 +334,7 @@ public class TeamController {
 				}
 				if(link != null && link.length() > 0) {
 					tseq = Integer.parseInt(selectTeam);
-					teamservice.teamLinkInsert(tseq, link, email);
+					teamservice.teamLinkInsert(tseq, link, email); // 링크가 있다면 DB insert
 				}
 			}
 			return path;

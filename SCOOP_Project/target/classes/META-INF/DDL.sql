@@ -126,6 +126,9 @@ DROP TABLE PDOWORK
 DROP TABLE PMENTION 
 	CASCADE CONSTRAINTS;
 
+/* 알림 */
+DROP TABLE SETTING
+	CASCADE CONSTRAINTS;
 /* 맴버 */
 CREATE TABLE Member (
 	email VARCHAR2(100) NOT NULL, /* 이메일 */
@@ -1037,6 +1040,27 @@ ALTER TABLE TEAMDOWORK
 		PRIMARY KEY (
 			tdseq
 		);
+/* 알림 설정 */
+CREATE TABLE SETTING (
+   email VARCHAR2(100) NOT NULL, /* 이메일 */
+   isalarm NUMBER NOT NULL /* 전체알림 */
+
+);
+
+COMMENT ON TABLE SETTING IS '알림 설정';
+
+COMMENT ON COLUMN SETTING.email IS '이메일';
+
+
+
+COMMENT ON COLUMN SETTING.isalarm IS '전체알림';
+
+
+
+CREATE UNIQUE INDEX PK_SETTING
+   ON SETTING (
+      email ASC
+   );
 
 /* 개인할일 */
 CREATE TABLE PDOWORK (
@@ -1528,6 +1552,16 @@ ALTER TABLE PMENTION
 			piseq
 		)ON DELETE CASCADE;
 
+ALTER TABLE SETTING
+   ADD
+      CONSTRAINT FK_Member_TO_SETTING
+      FOREIGN KEY (
+         email
+      )
+      REFERENCES Member (
+         email
+      )ON DELETE CASCADE;
+
 
 
 
@@ -1850,7 +1884,13 @@ BEGIN
   insert INTO pnalert VALUES (:NEW.pntitle, 0,:NEW.pnseq,:NEW.email);
 END;
 
-
+--member setting trigger
+create or replace trigger insert_tri_setting
+after insert on member
+for each row
+BEGIN
+  insert INTO setting VALUES (:NEW.email, 0);
+END;
 
 insert into login values (1,'NORMAL');
 insert into login values (2,'NAVER');
