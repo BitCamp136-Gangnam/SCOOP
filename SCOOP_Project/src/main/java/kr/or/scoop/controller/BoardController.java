@@ -438,12 +438,12 @@ public class BoardController {
 	public String myissueEdit(int piseq, Model model) {
 		MyIssueDao dao = sqlSession.getMapper(MyIssueDao.class);
 		MyIssue myissue = dao.myissueDetail(piseq);
-		if(myissue.getPicontent().contains("<a href=")) {
+		/*if(myissue.getPicontent().contains("<a href=")) {
 			int start = myissue.getPicontent().indexOf("<a href=");
 			int end = myissue.getPicontent().indexOf("target='_blank'>");
 			myissue.setPicontent(myissue.getPicontent().replace(myissue.getPicontent().substring(start, end+16), ""));
 			myissue.setPicontent(myissue.getPicontent().replace("</a>", ""));
-		}
+		}*/
 		myissue.setPicontent(myissue.getPicontent().replace("<br>", "\n")); //textarea <br>치환
 		try {
 			List<Mention> mentions = dao.getMyMentions(piseq);

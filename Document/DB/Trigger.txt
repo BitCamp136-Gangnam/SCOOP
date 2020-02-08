@@ -1,0 +1,77 @@
+-- 회원가입 시 롤 추가 삭제
+drop trigger insert_tri_role;
+
+-- 팀프로젝트 생성 시 맴버 등급 추가 삭제
+drop trigger insert_tri_tpmember;
+
+-- tissue trigger delete
+drop trigger insert_tissue_alert;
+
+-- reply alert
+drop trigger insert_reply_alert;
+
+-- vote trigger delete
+drop trigger insert_vote_alert;
+
+-- pjnotice trigger delete
+drop trigger insert_pjnotice_alert;
+
+-- 회원가입 시 롤 생성
+create or replace trigger insert_tri_role
+after insert on member
+for each row
+BEGIN
+  insert INTO role VALUES (:NEW.email, 'ROLE_USER');
+END;
+
+
+-- 팀프로잭트 생성시 맴버생성
+create or replace trigger insert_tri_tpmember
+after insert on teampjt
+for each row
+BEGIN
+  if :NEW.tseq is null then
+  insert INTO tpmember VALUES (:NEW.tseq,:NEW.email, 300,systimestamp);
+  else
+  insert INTO tpmember VALUES (:NEW.tseq,:NEW.email, 100,systimestamp);
+  END if;
+END;
+
+-- tissue trigger
+create or replace trigger insert_tissue_alert
+after insert on tissue
+for each row
+BEGIN
+  insert INTO tialert VALUES (:NEW.tititle, 0,:NEW.email,:NEW.tiseq);
+END;
+
+-- reply trigger
+create or replace trigger insert_reply_alert
+after insert on reply
+for each row
+BEGIN
+  insert INTO replyalert VALUES (:NEW.email, :NEW.rcontent,0,:NEW.replyseq);
+END;
+
+-- vote trigger
+create or replace trigger insert_vote_alert
+after insert on vote
+for each row
+BEGIN
+  insert INTO votealert VALUES (:NEW.email, :NEW.vcontent,0,:NEW.vseq);
+END;
+-- pjnotice trigger
+create or replace trigger insert_pjnotice_alert
+after insert on pjnotice
+for each row
+BEGIN
+  insert INTO pnalert VALUES (:NEW.pntitle, 0,:NEW.pnseq,:NEW.email);
+END;
+
+--member setting trigger
+create or replace trigger insert_tri_setting
+after insert on member
+for each row
+BEGIN
+  insert INTO setting VALUES (:NEW.email, 0);
+END;
