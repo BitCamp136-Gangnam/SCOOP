@@ -87,6 +87,29 @@ SCOOP은 이러한 점에 착안하여 콜라비, Trello에서 가능한 직관�
 #### 이슈작성
 ![issue](https://user-images.githubusercontent.com/54266124/74080908-149e0a80-4a8c-11ea-87fa-91d8c11ec916.PNG)
 
+## 사용기술
+### Front
+- JavaScript, HTML, CSS
+- jQuery, Ajax, Bootstrap
+- EL, JSTL
+- Chart.js, FullCalendar, Flatpickr
+- SweetAlert, FontAwesome
+### Back
+- Java
+- SpringFramework, Mybatis, Spring Security, Spring Websocket, Spring Locale
+- Node.js, Jackson-Core
+- Velocity, JavaMailSender
+### Server
+- Apache Tomcat, aws
+### DB
+- Oracle
+### OpenAPI
+- 네이버 로그인 API, 구글 로그인 API
+- GooglePicker API, 카카오주소API
+- 아임포트 API, 데이터크롤링RestAPI, 채널톡 API
+### Tool
+- SpringToolSuite4, Eclipse, VisualStudioCode
+- exERD, SourceTree
 ## 형상관리 및 도구
 ### Git : SourceTree, GitBash
 ![sourcetree](https://user-images.githubusercontent.com/54266124/74081116-ba527900-4a8e-11ea-9ea5-a1feea5197fb.png)
