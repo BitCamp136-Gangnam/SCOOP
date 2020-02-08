@@ -53,12 +53,12 @@ public class PrivateController {
 		MyIssueDao myissuedao = sqlsession.getMapper(MyIssueDao.class);
 		List<MyIssue> myissuelist = myissuedao.getMyissue(email); //나의 이슈목록 불러오기
 		for(int i=0; i<myissuelist.size();i++) {
-			if(myissuelist.get(i).getPicontent().contains("<a href=")&&myissuelist.get(i).getPicontent().contains("target='_blank'>")&&myissuelist.get(i).getPicontent().contains("</a>")) {
+			/*if(myissuelist.get(i).getPicontent().contains("<a href=")&&myissuelist.get(i).getPicontent().contains("target='_blank'>")&&myissuelist.get(i).getPicontent().contains("</a>")) {
 				int start = myissuelist.get(i).getPicontent().indexOf("<a href=");
 				int end = myissuelist.get(i).getPicontent().indexOf("target='_blank'>");
 				myissuelist.get(i).setPicontent(myissuelist.get(i).getPicontent().replace(myissuelist.get(i).getPicontent().substring(start, end+16), ""));
 				myissuelist.get(i).setPicontent(myissuelist.get(i).getPicontent().replace("</a>", ""));
-			}
+			}*/
 			myissuelist.get(i).setPicontent(myissuelist.get(i).getPicontent().replace("<br>", " ")); //<br>을 띄어쓰기로 치환해서 보여줌
 		}
 		List<BookMark> bookMark = myissuedao.getBookMark(email); //북마크 목록 불러오기

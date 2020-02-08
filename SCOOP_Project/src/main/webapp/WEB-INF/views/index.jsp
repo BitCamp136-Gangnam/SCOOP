@@ -709,7 +709,7 @@ function idOver(a) {
 								</div>
 								<ul class="list-unstyled pricing-list">
 									<li>-</li>
-									<li>3개</li>
+									<li><spring:message code="payment.ea" /></li>
 									<li>20MB</li>
 									<li><span class="iconify" data-icon="bx:bx-check"
 										data-inline="false" style="color: #E71D36;"></span></li>
@@ -725,7 +725,7 @@ function idOver(a) {
 							<div class="card-body">
 								<h4 class="card-title text-primary pt-3">Premium</h4>
 								<h2 class="card-title text-primary pt-4">$4</h2>
-								<div class="text-muted mt-4">per month</div>
+								<div class="text-muted mt-4"><spring:message code="payment.period" /></div>
 								<ul class="list-unstyled pricing-list">
 									<li><spring:message code="payment.unlimited" /></li>
 									<li><spring:message code="payment.unlimited" /></li>
@@ -734,7 +734,7 @@ function idOver(a) {
 										data-inline="false" style="color: #E71D36;"></span></li>
 									<li><span class="iconify" data-icon="bx:bx-check"
 										data-inline="false" style="color: #E71D36;"></span></li>
-									<li>구글 드라이브</li>
+									<li><spring:message code="payment.googledrive" /></li>
 								</ul>
 								<a href="requestPay" data-toggle="modal" data-target="#login" class="btn btn-primary"> <spring:message code="payment.start" /> </a>
 
@@ -751,29 +751,29 @@ function idOver(a) {
 						<div class="col-sm-12" style="text-align: center;padding-bottom: 5%;">
 						<h2><spring:message code="qna" /></h2>
 						</div>
-						<button class="accordion" style="font-size: 23px;color: #000;">1. 스쿱은 어떤 협업툴인가요?</button>
+						<button class="accordion" style="font-size: 23px;color: #000;">1. <spring:message code="qna.title1" /></button>
 						<div class="panel"  style="width: 1000px;">
-						  <p>- 스쿱은 하나의 페이지에서 할 일, 파일 공유, 의사결정, 일정 및 커뮤니케이션을 모두 담아내어, 이슈를 함께 해결하는 '이슈기반 협업툴' 입니다.<br><br>
-						     - 스쿱은 제품/서비스 개선 프로젝트, 예산 관리, 마케팅 컨텐츠 제작, 채용&인사 관리, 사내 공지 등 각 회사의 프로세스를 모두 적용할 수 있습니다.</p>
+						  <p>- <spring:message code="qna.fircontent1" /><br><br>
+						     - <spring:message code="qna.fircontent2" /></p>
 						</div>
 						
-						<button class="accordion" style="font-size: 23px;color: #000;">2. 스쿱으로 어떻게 일을 진행할 수 있나요?</button>
+						<button class="accordion" style="font-size: 23px;color: #000;">2. <spring:message code="qna.title2" /></button>
 						<div class="panel"  style="width: 1000px;">
-						<p><span style="color:#ca1e4d;">스쿱으로 동료와 어떻게 일을 진행할 수 있는지 알려드릴게요.</span><br><br>
-							<b>1) 협업공간 만들기 & 멤버초대</b><br>
-							- 먼저, 협업을 할 수 있는 협업공간을 팀별공간, 프로젝트용공간 등 만들어 보세요. 그리고, 함께 협업할 동료를 협업공간에 초대해 보세요. 협업공간의 관리자가 초대하면 바로 참여할 수 있습니다. <br><br>
-							<b>2) 이슈 공유하기</b><br>
-							- 공유할 이슈를 먼저 간단하게 작성해서 동료에게 공유해 주세요.<br> 
-							'@' 을 입력하여 동료를 호출할 수 있으며, 원하는 멘션 / 할 일 / 파일 / 일정 / 구글드라이브를 추가할 수 있어요.	<br><br>
-							<b>3) 댓글로 협의하기</b><br>
-							- 할 일이나 일정 같이 협의가 필요한 사항이나, 의견을 주고 받을 사항은 댓글로 남겨보세요.<br><br>
-							<b>4) 손쉽게 파일, 링크 찾기</b><br>
-							- 동료가 공유한 파일과 링크가 한 곳에 모아져 있어 기억나는 키워드 하나만 있으면 빠르게 찾아볼 수 있습니다. 
+						<p><span style="color:#ca1e4d;"><spring:message code="qna.sub" /></span><br><br>
+							<b>1) <spring:message code="qna.sec1" /></b><br>
+							- <spring:message code="qna.seccontent1" /> <br><br>
+							<b>2) <spring:message code="qna.sec2" /></b><br>
+							- <spring:message code="qna.seccontent2" /><br> 
+							<spring:message code="qna.seccontent2.1" />	<br><br>
+							<b>3) <spring:message code="qna.sec3" /></b><br>
+							- <spring:message code="qna.seccontent3" /><br><br>
+							<b>4) <spring:message code="qna.sec4" /></b><br>
+							- <spring:message code="qna.seccontent4" /> 
 						</p>
 						</div>
-						<button class="accordion" style="font-size: 23px;color: #000;">3. 더 궁금한 사항이 있으시다면?</button>
+						<button class="accordion" style="font-size: 23px;color: #000;">3. <spring:message code="qna.title3" /></button>
 						<div class="panel" style="width: 1000px;">
-						  <p>- 오른쪽 하단 채팅 버튼을 클릭해주세요! 스쿱 CS팀이 친절하게 상담해드립니다^ㅁ^</p>
+						  <p>- <spring:message code="qna.tircontent" /></p>
 						</div>
 					</div>
 				</div>
@@ -792,31 +792,31 @@ function idOver(a) {
      <div class="section-header">
       <div class="row">
         <div class="col-lg-10 mx-auto">
-         <h3>모든 팀의 업무 프로세스를 함께할 수 있어요</h3>
-         <p class="lead">한 가지 업무 방식이 아닐거에요.다양한 팀과 함께 일하는 프로세스를 <span style="color:#E71D36;">스쿱</span>과 함께 하세요.</p>
+         <h3><spring:message code="intro.title" /></h3>
+         <p class="lead"><spring:message code="intro.sub1" /> <span style="color:#E71D36;"><spring:message code="scoop" /></span><spring:message code="intro.sub2" /></p>
          <div class="row" style="padding-left: 20%; padding-top: 5%;">
          <div class="col-sm-3">
           <img src="resources/images/icon/idea.png" style="width: 100px;height: auto;">
-          <p style="padding-top: 10px;">서비스 개발</p>
+          <p style="padding-top: 10px;"><spring:message code="intro.cont1" /></p>
          </div>
          <div class="col-sm-3">
          <img src="resources/images/icon/presentation.png" style="width: 110px;height: auto;">
-         <p>제품 마케팅</p>
+         <p><spring:message code="intro.cont2" /></p>
          </div>
          <div class="col-sm-3">
          <img src="resources/images/icon/technical-support.png" style="width: 80px;height: auto;padding-top:10px; ">
-         <p style="padding-top:20px;">품질 관리</p>
+         <p style="padding-top:20px;"><spring:message code="intro.cont3" /></p>
          </div>
          </div>
          
          <div class="row" style="padding-left: 30%; padding-top: 3%;">
          <div class="col-sm-4" style="padding-left: 0px;" >
          	<img src="resources/images/icon/pass.png" style="width: 80px;height: auto;">
-         	<p style="padding-top: 15px;">채용 & 인사관리</p>
+         	<p style="padding-top: 15px;"><spring:message code="intro.cont4" /></p>
          </div>
          <div class="col-sm-4"style=" padding-right: 70px;padding-left: 0px;">
          	<img src="resources/images/icon/message.png" style="width: 80px;height: auto;padding-top:10px;">
-         	<p style="padding-top:3px;">회의 및 협업</p>
+         	<p style="padding-top:3px;"><spring:message code="intro.cont5" /></p>
          </div>
          </div>
          

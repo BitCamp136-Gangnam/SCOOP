@@ -1,4 +1,4 @@
-<img src="https://user-images.githubusercontent.com/54266124/74009492-a2afbd80-49c6-11ea-836f-4f312af87f02.png" width="500px" height="400px" title="SCOOP logo" alt="SCOOP Logo"></img>
+![logo](https://user-images.githubusercontent.com/54266124/74079985-1fec3880-4a82-11ea-9679-62d269bf151b.png)
 # SCOOP
  SCOOP은 약 6주간 준비한 비트캠프 2조(팀명: 400과 500사이)의 파이널 프로젝트입니다. 6개월 간의 배운 것을 총 활용해서 만든 프로젝트이며, 6명의 팀원이 함께 만들었습니다.
 <br><br>
@@ -43,3 +43,24 @@ SCOOP은 이러한 점에 착안하여 콜라비, Trello에서 가능한 직관�
 ## E-R 모델링
 ![1](https://user-images.githubusercontent.com/54266124/74016777-59676a00-49d6-11ea-9b5b-753bf9a714d5.PNG)
 ![2](https://user-images.githubusercontent.com/54266124/74016788-5bc9c400-49d6-11ea-8212-8a38d73dd31e.PNG)
+
+<br>
+
+## SCOOP 메인화면<br>
+![main](https://user-images.githubusercontent.com/54266124/74079444-fb409280-4a7a-11ea-8ef1-34fad0c11a08.png)
+- SCOOP의 메인 화면에서는 자신이 속한 협업공간의 새로운 이슈가 올라온 순서대로 보여주고, 협업공간들의 일정 진행도를 한눈에 볼 수 있게 Chart js를 이용하여 데이터를 보여주고 있습니다.
+
+## SCOOP 주요기능<br>
+### 1. 이슈작성 <br>
+![issuemake](https://user-images.githubusercontent.com/54266124/74079596-ecf37600-4a7c-11ea-8161-307e5aff01a4.png)
+- 첫번째는 이슈 작성으로 이슈 설명을 입력하는 부분에서 @를 입력하면 멘션, 구글드라이브, 파일, 할 일, 일정을 사용할 수 있게 됩니다. 그리고 또한 이슈 설명에 링크를 작성하면 자동으로 <a>태그를 달아 링크로 이동할 수 있게하였으며 이는 파일함(Ctrl + .)에 저장되게 됩니다.
+- 멘션은 선택한 협업공간의 멤버를 언급하여 알람을 줄 수 있고, 구글 드라이브는 GooglePicker API를 사용하여 파일들을 업로드할 수 있게 하였고, 파일은 여러 파일들을 업로드하고 다운로드 받을 수 있게 구현하였고 파일도 파일함(Ctrl + .)에 저장됩니다. 할 일은 협업공간의 멤버를 선택하여 할 일을 주어 알람이 가게하였고, 일정은 DatePicker를 사용하여 날짜를 선택할 수 있게 하였습니다.<br>
+ 
+### 2. 캘린더 <br>
+![calendar](https://user-images.githubusercontent.com/54266124/74079840-35f8f980-4a80-11ea-94e0-0fd5b70c6d6a.png)
+- 두번째는 캘린더로 FullCalendar를 사용했습니다. 이슈작성에서 일정을 선택하여 글을 작성하면 캘린더에 자동으로 반영이되고 또한 캘린더에서 일정을 추가 할 경우에도 이는 새로운 이슈작성과 동일하게 됩니다.
+- 캘린더는 모든 협업공간에서 일어나는 일정을 한눈에 볼 수 있어 편리하고, 마우스를 갖다 대면 이슈의 상세설명을 볼 수 있으며 클릭하면 내용을 수정할 수 있는 모달이 나와 편리합니다. 또한 캘린더의 이슈를 Drag&Drop만 해도 비동기로 일정을 변경할 수 있고 이슈를 늘리거나 줄여서 비동기로 일정을 변경할 수도 있습니다. <br>
+
+### 3. 칸반 <br>
+![kanban](https://user-images.githubusercontent.com/54266124/74079944-7d33ba00-4a81-11ea-987b-97522f2c86cc.png)
+- 세번째는 칸반으로 현재 협업공간에서 일어나는 이슈들의 진행도를 한 눈에 볼 수 있어 편리합니다. 이슈들을 Drag&Drop만 해도 이슈의 진행도를 비동기로 변환할 수 있어 간단하고 이슈를 클릭하면 상세페이지로 이동하게 했습니다. 또한 메인페이지의 차트의 데이터는 칸반과 연동이 됩니다.
