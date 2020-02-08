@@ -86,3 +86,7 @@ SCOOP은 이러한 점에 착안하여 콜라비, Trello에서 가능한 직관�
 ![project](https://user-images.githubusercontent.com/54266124/74080905-14057400-4a8c-11ea-91c7-63f7b051648b.PNG)
 - 이슈작성
 ![issue](https://user-images.githubusercontent.com/54266124/74080908-149e0a80-4a8c-11ea-87fa-91d8c11ec916.PNG)
+
+## 형상관리 및 도구
+- Git : SourceTree, GitBash
+![sourcetree](https://user-images.githubusercontent.com/54266124/74081116-ba527900-4a8e-11ea-9ea5-a1feea5197fb.png)
