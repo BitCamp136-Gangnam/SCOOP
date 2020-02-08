@@ -144,7 +144,13 @@ public class MemberController {
 		member.setPwd((String)session.getAttribute("checkpwd"));
 		member.setEmail((String)session.getAttribute("checkemail"));
 		member.setName((String)session.getAttribute("checkname"));
-		result = service.insertMember(member);
+		
+		int emailcheck = service.idCheck((String)session.getAttribute("checkemail"));
+		
+		if(emailcheck == 0) {
+			result = service.insertMember(member);
+		}
+		
 
 		if (result > 0) {
 
