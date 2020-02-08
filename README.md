@@ -43,3 +43,8 @@ SCOOP은 이러한 점에 착안하여 콜라비, Trello에서 가능한 직관�
 ## E-R 모델링
 ![1](https://user-images.githubusercontent.com/54266124/74016777-59676a00-49d6-11ea-9b5b-753bf9a714d5.PNG)
 ![2](https://user-images.githubusercontent.com/54266124/74016788-5bc9c400-49d6-11ea-8212-8a38d73dd31e.PNG)
+
+<br>
+## SCOOP 메인화면
+![메인화면](https://user-images.githubusercontent.com/54266124/74079053-5c656780-4a75-11ea-8fd9-58c9c4ace286.png)
+
