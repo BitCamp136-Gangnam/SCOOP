@@ -46,5 +46,6 @@ SCOOP은 이러한 점에 착안하여 콜라비, Trello에서 가능한 직관�
 
 <br>
 ## SCOOP <br>
-![main](https://user-images.githubusercontent.com/54266124/74079444-fb409280-4a7a-11ea-8ef1-34fad0c11a08.png)
+<img src="https://user-images.githubusercontent.com/54266124/74079444-fb409280-4a7a-11ea-8ef1-34fad0c11a08.png" width="500px" height="400px" title="SCOOP main" alt="SCOOP main"></img>
+
 
