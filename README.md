@@ -63,13 +63,13 @@ SCOOP은 이러한 점에 착안하여 콜라비, Trello에서 가능한 직관�
 - 네번째는 채팅으로 자신이 속해있는 협업공간 별로 채팅방이 존재하고 입장하면 같은 협업공간 멤버들끼리 채팅을 나눌 수 있어 실시간 커뮤니케이션을 가능하게 하였습니다. 채팅은 SpringWebsocket을 사용하여 구현하였습니다.<br>
 
 ## SCOOP 설계
-### 1. E-R 모델링
+### E-R 모델링
 ![1](https://user-images.githubusercontent.com/54266124/74016777-59676a00-49d6-11ea-9b5b-753bf9a714d5.PNG)
 ![2](https://user-images.githubusercontent.com/54266124/74016788-5bc9c400-49d6-11ea-8212-8a38d73dd31e.PNG)
 
 <br>
 
-### 2. Oracle Trigger
+### Oracle Trigger
 ![trigger](https://user-images.githubusercontent.com/54266124/74080680-1e267300-4a8a-11ea-9e0c-ebf2ca248446.png)
 - INSERT_TRI_ROLE : 새로운 회원이 가입할 경우 자동으로 'ROLE_UESR'라는 권한을 줌
 - INSERT_TRI_SETTING : 새로운 회원이 가입할 경우 알람기능은 꺼져있는 상태를 줌
@@ -79,12 +79,12 @@ SCOOP은 이러한 점에 착안하여 콜라비, Trello에서 가능한 직관�
 - INSERT_PJNOTICE_ALERT : 협업공간의 팀장이 새로운 협업공간 공지사항을 작성할 경우 같은 협업공간의 멤버들에게 새로운 공지사항으로 등록되게 해줌
 <br>
 
-### 3. Class Diagram
-- 회원가입, 로그인
+### Class Diagram
+#### 회원가입, 로그인
 ![login](https://user-images.githubusercontent.com/54266124/74080902-123bb080-4a8c-11ea-99a2-b3f93f5dd6fb.PNG)
-- 협업공간
+#### 협업공간
 ![project](https://user-images.githubusercontent.com/54266124/74080905-14057400-4a8c-11ea-91c7-63f7b051648b.PNG)
-- 이슈작성
+#### 이슈작성
 ![issue](https://user-images.githubusercontent.com/54266124/74080908-149e0a80-4a8c-11ea-87fa-91d8c11ec916.PNG)
 
 ## 형상관리 및 도구
