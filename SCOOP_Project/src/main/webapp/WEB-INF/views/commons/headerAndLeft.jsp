@@ -1373,10 +1373,28 @@ span {
    <div class="row" id="fileLocation" style="margin: 2%; overflow: auto; height: 600px">
    <c:forEach items="${filed}" var="f">
       <div class="fileDown" id="${f.fdname}" style="width: 150px; height:150px; margin: 1%;">
+      <c:if test="${fn:substring(f.fdname,fn:length(f.fdname)-4,fn:length(f.fdname))=='.jpg'}">
       	<a href="fileDownload.do?fileName=${f.fdname}">
          <img id="${f.tseq}" width="100px" height="100px" style="margin: 1%; display: block; margin-left: auto; margin-right: auto"
             src="<c:url value="/upload/${f.fdname}" />">
         </a>
+        </c:if>
+      <c:if test="${fn:substring(f.fdname,fn:length(f.fdname)-5,fn:length(f.fdname))=='.jpeg'}">
+      	<a href="fileDownload.do?fileName=${f.fdname}">
+         <img id="${f.tseq}" width="100px" height="100px" style="margin: 1%; display: block; margin-left: auto; margin-right: auto"
+            src="<c:url value="/upload/${f.fdname}" />">
+        </a>
+        </c:if>
+      <c:if test="${fn:substring(f.fdname,fn:length(f.fdname)-4,fn:length(f.fdname))=='.png'}">
+      	<a href="fileDownload.do?fileName=${f.fdname}">
+         <img id="${f.tseq}" width="100px" height="100px" style="margin: 1%; display: block; margin-left: auto; margin-right: auto"
+            src="<c:url value="/upload/${f.fdname}" />">
+        </a>
+        </c:if>
+        <c:if test="${fn:substring(f.fdname,fn:length(f.fdname)-4,fn:length(f.fdname))=='.zip'}">
+         <img id="${f.tseq}" width="100px" height="100px" style="margin: 1%; display: block; margin-left: auto; margin-right: auto"
+            src="<c:url value="/resources/images/logo/ScoopSmall.png" />">
+        </c:if>
          <p style="font-size: 15px; text-align: center">
             <c:choose>
            <c:when test="${fn:length(f.fdname) > 12 || fn:length(f.pname) > 12}">
