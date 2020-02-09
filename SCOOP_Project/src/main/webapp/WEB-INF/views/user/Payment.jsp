@@ -227,7 +227,7 @@ function getOutMember(){
 												<ul class="list-unstyled pricing-list">
 													<li><spring:message code="payment.unlimited" /></li>
 													<li><spring:message code="payment.unlimited" /></li>
-													<li>50MB</li>
+													<li>100MB</li>
 													<li><span class="iconify" data-icon="bx:bx-check"
 														data-inline="false" style="color: #E71D36;"></span></li>
 													<li><span class="iconify" data-icon="bx:bx-check"
@@ -252,7 +252,7 @@ function getOutMember(){
 												<ul class="list-unstyled pricing-list">
 													<li><spring:message code="payment.unlimited" /></li>
 													<li><spring:message code="payment.unlimited" /></li>
-													<li>50MB</li>
+													<li>100MB</li>
 													<li><span class="iconify" data-icon="bx:bx-check"
 														data-inline="false" style="color: #E71D36;"></span></li>
 													<li><span class="iconify" data-icon="bx:bx-check"
