@@ -166,15 +166,15 @@ public class BoardController {
 		int result = 0;
 		
 		
-		// 북마크 추가/제거
+		// 북마크 추가, 제거
 		if(status.equals("bookoff")) {
-			result = dao.addPBookMark(piseq, email);
+			result = dao.addPBookMark(piseq, email); 
 		}else if(status.equals("bookon")) {
 			result = dao.delPBookMark(piseq, email);
 		}
 		
 		
-		// 북마크 성공시 북마크 상태 변경
+		// 북마크 추가, 제거 성공시 북마크 상태 변경
 		if(status.equals("bookoff") && result > 0) {
 			status = "bookon";
 			viewpage = "redirect:private.do";
@@ -203,7 +203,7 @@ public class BoardController {
 			result = dao.delTBookMark(tiseq, email);
 		}
 		
-		
+		// 북마크 추가, 제거 성공시 북마크 상태 변경
 		if(status.equals("bookoff") && result > 0) {
 			status = "bookon";
 			viewpage = "redirect:projectDetail.do?tseq="+tseq;
@@ -226,6 +226,7 @@ public class BoardController {
 		MyIssueDao pidao = sqlSession.getMapper(MyIssueDao.class);
 		TissueDao tidao = sqlSession.getMapper(TissueDao.class);
 		
+		// 팀이슈, 개인이슈 판별후 삭제 
 		if(tiseq > 0) {
 			result = tidao.delTBookMark(tiseq, email);
 		}else if(piseq > 0) {
@@ -521,12 +522,14 @@ public class BoardController {
 		tissue.setPiseq(piseq);
 		tissue.setEmail(email);
 		tissue.setPititle(title);
-		String[] contentline = editIssuecontent.split("\n");
+		
+		//링크에 a tag 붙이기
+		String[] contentline = editIssuecontent.split("\n"); 
 		String content = "";
 		String link = "";
 		for(int i = 0; i < contentline.length; i++) {
 			if(contentline[i].indexOf("http") != -1 || contentline[i].indexOf("www") != -1) {
-				String[] url = contentline[i].split(" ");
+				String[] url = contentline[i].split(" "); 
 				for(int j = 0; j < url.length; j++) {
 					if(url[j].indexOf("http") != -1 || url[j].indexOf("www") != -1) {
 						if(url[j].indexOf("http") == -1) {
