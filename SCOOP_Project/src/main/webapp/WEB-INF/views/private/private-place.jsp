@@ -164,7 +164,7 @@
 			<c:choose>
 			<c:when test="${fn:length(m.picontent) > 40}">
 			<div class="col-sm-6 newissue">
-				<a href="myissueDetail.do?piseq=${m.piseq}"><c:out value="${fn:substring(m.picontent,0,40)}"/>...</a>
+				<a href="myissueDetail.do?piseq=${m.piseq}"><c:out value="${fn:substring(m.picontent,0,40)}" escapeXml="false"  />...</a>
 			</div>
 			</c:when>
 			<c:otherwise>
