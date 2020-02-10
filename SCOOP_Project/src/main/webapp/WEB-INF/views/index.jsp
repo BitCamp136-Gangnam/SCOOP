@@ -168,13 +168,7 @@ function signOut() {
 							data : {"email":email},
 							async : false,
 							success: function(data){
-								Swal.fire({
-					 				  title: '이메일 전송 완료!.',
-					 				  showConfirmButton: false,
-					 				  icon: 'success',
-					 				  timer: 2000
-					 			})
-					 			location.reload();
+					 			location.href="successPwd.do";
 							},
 							error: function(data){
 								Swal.fire({

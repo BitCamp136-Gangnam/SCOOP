@@ -54,17 +54,21 @@ input::placeholder {
 						$.each(data,function(index,object){
 							tempFname = object.fdname;
 							tempPname = object.pname;
+							src = '/upload/'+object.fdname;
 							if(object.fdname.length>=14){
 								tempFname = object.fdname.substr(0, 14) + ' ...';
 							}
 							if(object.pname.length>=4){
 								tempPname = object.pname.substr(0, 4) + ' ...';
 							}
+							if(object.fdname.substring(object.fdname.length-4, object.fdname.length)=='.zip'){
+								src = '/SCOOP/resources/images/logo/ScoopSmall.png';
+							}
 							$('#fileLocation').append(
 									'<div class="fileDown" id="'+object.fdname+'" style="width: 150px; height:150px; margin: 1%;">'+
 							      	'<a href="fileDownload.do?fileName='+object.fdname+'">'+
 							         '<img id="'+object.tseq+'" width="100px" height="100px" style="margin: 1%; display: block; margin-left: auto; margin-right: auto"'+
-							            'src="<c:url value="/upload/'+object.fdname+'" />">'+
+							            'src="<c:url value="'+src+'" />">'+
 							        '</a><p style="font-size: 15px; text-align: center">'+
 							        tempFname+'<br>'+tempPname+
 							         '</p></div>'		
