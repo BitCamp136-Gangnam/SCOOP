@@ -673,9 +673,9 @@ public class MemberController {
 		
 		String viewpage = "";
 		if(result > 0) {
-			viewpage = "index";
+			viewpage = "utils/pwdOk";
 		}else {
-			viewpage = "index";
+			viewpage = "utils/pwdFail";
 		}
 		
 		session.removeAttribute("email");
