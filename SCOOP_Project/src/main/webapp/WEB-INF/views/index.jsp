@@ -168,13 +168,7 @@ function signOut() {
 							data : {"email":email},
 							async : false,
 							success: function(data){
-								Swal.fire({
-					 				  title: '이메일 전송 완료!.',
-					 				  showConfirmButton: false,
-					 				  icon: 'success',
-					 				  timer: 2000
-					 			})
-					 			location.reload();
+					 			location.href="successPwd.do";
 							},
 							error: function(data){
 								Swal.fire({
@@ -729,7 +723,7 @@ function idOver(a) {
 								<ul class="list-unstyled pricing-list">
 									<li><spring:message code="payment.unlimited" /></li>
 									<li><spring:message code="payment.unlimited" /></li>
-									<li>50MB</li>
+									<li>100MB</li>
 									<li><span class="iconify" data-icon="bx:bx-check"
 										data-inline="false" style="color: #E71D36;"></span></li>
 									<li><span class="iconify" data-icon="bx:bx-check"

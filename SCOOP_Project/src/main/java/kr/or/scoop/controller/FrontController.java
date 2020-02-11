@@ -37,12 +37,10 @@ public class FrontController {
 		session.setAttribute("language", language);
 		return "index";
 	}
-	
-	@ResponseBody
-	@RequestMapping(value="/test.do", method = RequestMethod.POST, consumes = "application/json")
-	public String startApp(@RequestBody String body) {
-		System.out.println(body);
-		return "";
+	@RequestMapping("/successPwd.do")
+	public String successPwd() {
+		
+		return "utils/forgotPwd";
 	}
 	
 }
