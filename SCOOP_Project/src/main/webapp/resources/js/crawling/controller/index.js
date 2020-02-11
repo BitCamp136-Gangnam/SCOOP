@@ -1,4 +1,4 @@
-const { request, cheerio, http, express } = require('../lib/modules')
+const { request, cheerio, express } = require('../lib/modules')
 
 
 
@@ -32,12 +32,12 @@ let controller = {
         let url = $('head > meta[property="og:url"]').attr('content')
         let title2 = $('head > title').text()
         let gimage = $('head > meta[itemprop="image"]').attr('content')
-        //$('#PM_ID_ct > .header > .special_bg > .area_flex > .area_logo > h1 > a > span').text()
+        
         console.log(title1)
-        console.log(title2)
         console.log(image)
         console.log(url)
-        
+        console.log(title2)
+
         if(title1 !== null && title1 !== undefined){
             title = title1
         }else{
@@ -89,7 +89,6 @@ let controller = {
                 method: 'GET',
                 timeout: 3000
             }
-            let message = '';
             controller.getBody(options, (result) => {
                 controller.convertCheerio(result, (data) => {
                     let resData = data
